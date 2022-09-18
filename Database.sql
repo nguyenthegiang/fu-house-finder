@@ -223,10 +223,7 @@ CREATE TABLE [dbo].[Room] (
 	PricePerMonth money,		--giá theo tháng
 	Information nvarchar(MAX),	--thông tin thêm & tiện ích đi kèm
 	MaxAmountOfPeople int,		--số người ở tối đa trong phòng
-
-	LengthByMeters float,		--chiều dài theo mét
-	WidthByMeters float,		--chiều rộng theo mét
-	--từ 2 chỉ số này có thể tính ra diện tích
+	AreaByMeters float,			--diện tích, tính theo m2
 
 	BuildingNumber int,			--tòa nhà
 	FloorNumber int,			--tầng
@@ -240,7 +237,7 @@ CREATE TABLE [dbo].[Room] (
 ) ON [PRIMARY]
 GO
 
-INSERT INTO [dbo].[Room] VALUES (N'101', 3000000, N'Gạch sàn nhà có họa tiết hình con cá', 2, 3, 5, 1, 1, 1, 1, 1);
+INSERT INTO [dbo].[Room] VALUES (N'101', 3000000, N'Gạch sàn nhà có họa tiết hình con cá', 2, 5, 1, 1, 1, 1, 1);
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
