@@ -13,3 +13,8 @@ Khởi động lại máy tinh Nếu vẫn không được thì vào Messenger c
 
 ## File Appsettings.json cho ai Clone lại Project:
 https://fptuniversity-my.sharepoint.com/:u:/g/personal/giangnthe153046_fpt_edu_vn/EYbpNPxQyC1LuEFFKksI2H8B_im-qXB8JedoIzOnWR5Yng?e=0pbZbf
+
+## Hướng dẫn Clone lại Project:
+### Những việc cần làm sau khi Clone Project:
+ - Copy lại file appsettings.json (trên kia)
+ - Mở project Angular và chạy lệnh: npm install
