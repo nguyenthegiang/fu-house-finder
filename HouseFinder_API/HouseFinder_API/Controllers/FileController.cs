@@ -23,11 +23,11 @@ namespace HouseFinder_API.Controllers
             if (!checkXlsxMimeType(File))
                 return BadRequest("Invalid File Type");
             XSSFWorkbook wb = new XSSFWorkbook(fs);
-            await GetDataAsync(wb);
+            await LoadDataAsync(wb);
             return Ok();
         }
 
-        public Task GetDataAsync(XSSFWorkbook wb)
+        private Task LoadDataAsync(XSSFWorkbook wb)
         {
             return Task.Run(() =>
             {
