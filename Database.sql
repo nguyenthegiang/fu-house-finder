@@ -29,7 +29,10 @@ GO
 
 INSERT INTO [dbo].[UserRole] VALUES (N'Student');
 INSERT INTO [dbo].[UserRole] VALUES (N'Landlord');
-INSERT INTO [dbo].[UserRole] VALUES (N'Staff');
+INSERT INTO [dbo].[UserRole] VALUES (N'Head of Admission Department');
+INSERT INTO [dbo].[UserRole] VALUES (N'Head of Student Service Department');
+INSERT INTO [dbo].[UserRole] VALUES (N'Staff of Admission Department');
+INSERT INTO [dbo].[UserRole] VALUES (N'Staff of Student Service Department');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -40,6 +43,11 @@ CREATE TABLE [dbo].[User] (
 	Email nvarchar(100),
 	Active bit,		--chuyển thành false nếu User bị Disable
 
+	--Những thông tin riêng của Landlord
+	PhoneNumber nvarchar(50) NULL,
+	FacebookURL nvarchar(300) NULL,
+	IdentityCardImageLink nvarchar(500) NULL,	--Link ảnh Căn cước công dân
+
 	RoleId int,
 	CampusId int,
 	CONSTRAINT RoleId_in_UserRole FOREIGN KEY(RoleId) REFERENCES UserRole(RoleId),
@@ -47,84 +55,12 @@ CREATE TABLE [dbo].[User] (
 ) ON [PRIMARY]
 GO
 
-INSERT INTO [dbo].[User] VALUES (N'HE153046', N'nguyenthegiang', N'nguyenthegiang', N'giangnthe153046@fpt.edu.vn', 1, 1, 1);
-INSERT INTO [dbo].[User] VALUES (N'LA000001', N'tamle', N'tamle', N'tamle@gmail.com', 1, 2, 1);
-INSERT INTO [dbo].[User] VALUES (N'SA000001', N'thanhle', N'thanhle', N'thanhle@gmail.com', 1, 3, 1);
-
--------------------------------------------------------------------------------------------------------------------------------------------
-
---Những thông tin chi tiết chỉ Chủ trọ mới có (quan hệ 1-1 với Table User)
-CREATE TABLE [dbo].[LandlordDetail] (
-	LandlordId nchar(30) NOT NULL PRIMARY KEY FOREIGN KEY REFERENCES [dbo].[User](UserId),
-	PhoneNumber nvarchar(50),
-	FacebookURL nvarchar(300),
-	IdentityCardImageLink nvarchar(500)		--Link ảnh Căn cước công dân
-) ON [PRIMARY]
-GO
-
-INSERT INTO [dbo].[LandlordDetail] VALUES (N'LA000001', N'0987654321', N'facebook.com/tamle123', N'identity_card_image.jpg');
-
--------------------------------------------------------------------------------------------------------------------------------------------
-
---Phòng ban (dùng cho StaffDetail)
-CREATE TABLE [dbo].[StaffDepartment] (
-	DepartmentId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	DepartmentName nvarchar(500)
-) ON [PRIMARY]
-GO
-
-INSERT INTO [dbo].[StaffDepartment] VALUES (N'Admission Department');
-INSERT INTO [dbo].[StaffDepartment] VALUES (N'Student Service Department');
-
--------------------------------------------------------------------------------------------------------------------------------------------
-
---Chức vụ (dùng cho StaffDetail)
-CREATE TABLE [dbo].[StaffPosition] (
-	PositionId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	PositiontName nvarchar(500)
-) ON [PRIMARY]
-GO
-
-INSERT INTO [dbo].[StaffPosition] VALUES (N'Manager');
-INSERT INTO [dbo].[StaffPosition] VALUES (N'Member');
-
--------------------------------------------------------------------------------------------------------------------------------------------
-
---Những thông tin chi tiết chỉ Nhân viên nhà trường mới có (quan hệ 1-1 với Table User)
-CREATE TABLE [dbo].[StaffDetail] (
-	StaffId nchar(30) NOT NULL PRIMARY KEY FOREIGN KEY REFERENCES [dbo].[User](UserId),
-	DepartmentId int,
-	PositionId int,
-	CONSTRAINT DepartmentId_in_Department FOREIGN KEY(DepartmentId) REFERENCES StaffDepartment(DepartmentId),
-	CONSTRAINT PositionId_in_Position FOREIGN KEY(PositionId) REFERENCES StaffPosition(PositionId),
-) ON [PRIMARY]
-GO
-
-INSERT INTO [dbo].[StaffDetail] VALUES (N'SA000001', 1, 1);
-
--------------------------------------------------------------------------------------------------------------------------------------------
-
---Thông tin đơn vị hành chính: Quận/Huyện, Phường/Xã, Thôn/Xóm
-CREATE TABLE [dbo].[AdministrativeUnit] (
-	UnitCode int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	UnitName nvarchar(500),	--Tên đơn vị
-	UnitLevel int,			--Level của đơn vị: 1 là Quận/Huyện; 2 là Phường/Xã; 3 là Thôn/Xóm
-	ParentCode int			--UnitCode của đơn vị hành chính cha của nó: những đơn vị có Level là 1 thì ParentCode là 0
-) ON [PRIMARY]
-GO
-
---Huyện
-INSERT INTO [dbo].[AdministrativeUnit] VALUES (N'Huyện Thạch Thất', 1, 0);
-INSERT INTO [dbo].[AdministrativeUnit] VALUES (N'Huyện Quốc Oai', 1, 0);
-INSERT INTO [dbo].[AdministrativeUnit] VALUES (N'Thị xã Sơn Tây', 1, 0);
---Xã
-INSERT INTO [dbo].[AdministrativeUnit] VALUES (N'Thị trấn Liên Quan', 2, 1);
-INSERT INTO [dbo].[AdministrativeUnit] VALUES (N'Xã Bình Phú', 2, 1);
-INSERT INTO [dbo].[AdministrativeUnit] VALUES (N'Xã Bình Yên', 2, 1);
---Thôn
-INSERT INTO [dbo].[AdministrativeUnit] VALUES (N'Chi Quan 1', 3, 1);
-INSERT INTO [dbo].[AdministrativeUnit] VALUES (N'Chi Quan 2', 3, 1);
-INSERT INTO [dbo].[AdministrativeUnit] VALUES (N'Đồng Cam', 3, 1);
+--Students
+INSERT INTO [dbo].[User] VALUES (N'HE153046', N'nguyenthegiang', N'nguyenthegiang', N'giangnthe153046@fpt.edu.vn', 1, null, null, null, 1, 1);
+--Landlords
+INSERT INTO [dbo].[User] VALUES (N'LA000001', N'tamle', N'tamle', N'tamle@gmail.com', 1, '0987654321', 'facebook.com/tamle12', 'identity_card.jpg', 2, 1);
+--Staffs
+INSERT INTO [dbo].[User] VALUES (N'SA000001', N'thanhle', N'thanhle', N'thanhle@gmail.com', 1, null, null, null, 3, 1);
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -179,19 +115,17 @@ CREATE TABLE [dbo].[House] (
 	Information nvarchar(MAX),			--thông tin thêm
 
 	VillageId int,						--thôn/xóm -> phường/xã -> quận/huyện
-	UnitCode int,			--đơn vị hành chính
 	LandlordId nchar(30),				--chủ nhà
 	CONSTRAINT LandlordId_in_User FOREIGN KEY(LandlordId) REFERENCES [dbo].[User](UserId),
 	CONSTRAINT VillageId_in_Village FOREIGN KEY(VillageId) REFERENCES [dbo].[Village](VillageId),
-	CONSTRAINT UnitCode_in_AdministrativeUnit FOREIGN KEY(UnitCode) REFERENCES [dbo].[AdministrativeUnit](UnitCode),
 ) ON [PRIMARY]
 GO
 
-INSERT INTO [dbo].[House] VALUES (N'Trọ Tâm Lê', N'Gần Bún bò Huế', N'someStringGeneratedByGoogleMap', N'Rất đẹp', 3, 7, N'LA000001');
+INSERT INTO [dbo].[House] VALUES (N'Trọ Tâm Lê', N'Gần Bún bò Huế', N'someStringGeneratedByGoogleMap', N'Rất đẹp', 3, N'LA000001');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
---Trạng thái của 1 phòng
+--Trạng thái của 1 phòng (dùng cho Room)
 CREATE TABLE [dbo].[Status] (
 	StatusId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
 	StatusName nvarchar(300)
@@ -204,7 +138,7 @@ INSERT INTO [dbo].[Status] VALUES (N'Disabled');	--ko dùng dc vì lý do nào �
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
---Loại phòng
+--Loại phòng (dùng cho Room)
 CREATE TABLE [dbo].[RoomType] (
 	RoomTypeId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
 	RoomTypeName nvarchar(300)
@@ -222,8 +156,10 @@ CREATE TABLE [dbo].[Room] (
 	RoomName nvarchar(50),
 	PricePerMonth money,		--giá theo tháng
 	Information nvarchar(MAX),	--thông tin thêm & tiện ích đi kèm
-	MaxAmountOfPeople int,		--số người ở tối đa trong phòng
 	AreaByMeters float,			--diện tích, tính theo m2
+
+	MaxAmountOfPeople int,		--số người ở tối đa trong phòng
+	CurrentAmountOfPeople int,	--số người ở hiện tại trong phòng (cho tính năng update thông tin phòng 1/2)
 
 	BuildingNumber int,			--tòa nhà
 	FloorNumber int,			--tầng
@@ -237,7 +173,7 @@ CREATE TABLE [dbo].[Room] (
 ) ON [PRIMARY]
 GO
 
-INSERT INTO [dbo].[Room] VALUES (N'101', 3000000, N'Gạch sàn nhà có họa tiết hình con cá', 2, 5, 1, 1, 1, 1, 1);
+INSERT INTO [dbo].[Room] VALUES (N'101', 3000000, N'Gạch sàn nhà có họa tiết hình con cá', 5, 2, 1, 1, 1, 1, 2, 1);
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
