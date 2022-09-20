@@ -16,8 +16,9 @@ namespace HouseFinder_API.Models
         public string RoomName { get; set; }
         public decimal? PricePerMonth { get; set; }
         public string Information { get; set; }
-        public int? MaxAmountOfPeople { get; set; }
         public double? AreaByMeters { get; set; }
+        public int? MaxAmountOfPeople { get; set; }
+        public int? CurrentAmountOfPeople { get; set; }
         public int? BuildingNumber { get; set; }
         public int? FloorNumber { get; set; }
         public int? StatusId { get; set; }

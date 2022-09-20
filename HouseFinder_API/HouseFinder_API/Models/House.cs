@@ -20,11 +20,9 @@ namespace HouseFinder_API.Models
         public string GoogleMapLocation { get; set; }
         public string Information { get; set; }
         public int? VillageId { get; set; }
-        public int? UnitCode { get; set; }
         public string LandlordId { get; set; }
 
         public virtual User Landlord { get; set; }
-        public virtual AdministrativeUnit UnitCodeNavigation { get; set; }
         public virtual Village Village { get; set; }
         public virtual ICollection<ImageOfHouse> ImageOfHouses { get; set; }
         public virtual ICollection<Rate> Rates { get; set; }

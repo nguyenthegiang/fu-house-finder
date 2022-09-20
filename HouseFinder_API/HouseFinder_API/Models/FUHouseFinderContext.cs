@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.Extensions.Configuration;
 
 #nullable disable
 
@@ -18,20 +17,15 @@ namespace HouseFinder_API.Models
         {
         }
 
-        public virtual DbSet<AdministrativeUnit> AdministrativeUnits { get; set; }
         public virtual DbSet<Campus> Campuses { get; set; }
         public virtual DbSet<Commune> Communes { get; set; }
         public virtual DbSet<District> Districts { get; set; }
         public virtual DbSet<House> Houses { get; set; }
         public virtual DbSet<ImageOfHouse> ImageOfHouses { get; set; }
         public virtual DbSet<ImageOfRoom> ImageOfRooms { get; set; }
-        public virtual DbSet<LandlordDetail> LandlordDetails { get; set; }
         public virtual DbSet<Rate> Rates { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<RoomType> RoomTypes { get; set; }
-        public virtual DbSet<StaffDepartment> StaffDepartments { get; set; }
-        public virtual DbSet<StaffDetail> StaffDetails { get; set; }
-        public virtual DbSet<StaffPosition> StaffPositions { get; set; }
         public virtual DbSet<Status> Statuses { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
@@ -41,25 +35,14 @@ namespace HouseFinder_API.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //Read JSON File -> ConnectionString
-                var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-                optionsBuilder.UseSqlServer(config.GetConnectionString("DBContext"));
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+                optionsBuilder.UseSqlServer("server=MSI\\SQLEXPRESS;database=FUHouseFinder;uid=sa;pwd=sa");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
-
-            modelBuilder.Entity<AdministrativeUnit>(entity =>
-            {
-                entity.HasKey(e => e.UnitCode)
-                    .HasName("PK__Administ__0665E6D81FD0A2CE");
-
-                entity.ToTable("AdministrativeUnit");
-
-                entity.Property(e => e.UnitName).HasMaxLength(500);
-            });
 
             modelBuilder.Entity<Campus>(entity =>
             {
@@ -104,11 +87,6 @@ namespace HouseFinder_API.Models
                     .HasForeignKey(d => d.LandlordId)
                     .HasConstraintName("LandlordId_in_User");
 
-                entity.HasOne(d => d.UnitCodeNavigation)
-                    .WithMany(p => p.Houses)
-                    .HasForeignKey(d => d.UnitCode)
-                    .HasConstraintName("UnitCode_in_AdministrativeUnit");
-
                 entity.HasOne(d => d.Village)
                     .WithMany(p => p.Houses)
                     .HasForeignKey(d => d.VillageId)
@@ -118,7 +96,7 @@ namespace HouseFinder_API.Models
             modelBuilder.Entity<ImageOfHouse>(entity =>
             {
                 entity.HasKey(e => e.ImageId)
-                    .HasName("PK__ImageOfH__7516F70C28B98430");
+                    .HasName("PK__ImageOfH__7516F70C6ACC96D6");
 
                 entity.ToTable("ImageOfHouse");
 
@@ -133,7 +111,7 @@ namespace HouseFinder_API.Models
             modelBuilder.Entity<ImageOfRoom>(entity =>
             {
                 entity.HasKey(e => e.ImageId)
-                    .HasName("PK__ImageOfR__7516F70C161C1D78");
+                    .HasName("PK__ImageOfR__7516F70C19E6EA71");
 
                 entity.ToTable("ImageOfRoom");
 
@@ -143,32 +121,6 @@ namespace HouseFinder_API.Models
                     .WithMany(p => p.ImageOfRooms)
                     .HasForeignKey(d => d.RoomId)
                     .HasConstraintName("RoomId_in_Room");
-            });
-
-            modelBuilder.Entity<LandlordDetail>(entity =>
-            {
-                entity.HasKey(e => e.LandlordId)
-                    .HasName("PK__Landlord__8EC79DA3CF085D8A");
-
-                entity.ToTable("LandlordDetail");
-
-                entity.Property(e => e.LandlordId)
-                    .HasMaxLength(30)
-                    .IsFixedLength(true);
-
-                entity.Property(e => e.FacebookUrl)
-                    .HasMaxLength(300)
-                    .HasColumnName("FacebookURL");
-
-                entity.Property(e => e.IdentityCardImageLink).HasMaxLength(500);
-
-                entity.Property(e => e.PhoneNumber).HasMaxLength(50);
-
-                entity.HasOne(d => d.Landlord)
-                    .WithOne(p => p.LandlordDetail)
-                    .HasForeignKey<LandlordDetail>(d => d.LandlordId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__LandlordD__Landl__2C3393D0");
             });
 
             modelBuilder.Entity<Rate>(entity =>
@@ -221,54 +173,6 @@ namespace HouseFinder_API.Models
                 entity.Property(e => e.RoomTypeName).HasMaxLength(300);
             });
 
-            modelBuilder.Entity<StaffDepartment>(entity =>
-            {
-                entity.HasKey(e => e.DepartmentId)
-                    .HasName("PK__StaffDep__B2079BED23621451");
-
-                entity.ToTable("StaffDepartment");
-
-                entity.Property(e => e.DepartmentName).HasMaxLength(500);
-            });
-
-            modelBuilder.Entity<StaffDetail>(entity =>
-            {
-                entity.HasKey(e => e.StaffId)
-                    .HasName("PK__StaffDet__96D4AB17D841BCEB");
-
-                entity.ToTable("StaffDetail");
-
-                entity.Property(e => e.StaffId)
-                    .HasMaxLength(30)
-                    .IsFixedLength(true);
-
-                entity.HasOne(d => d.Department)
-                    .WithMany(p => p.StaffDetails)
-                    .HasForeignKey(d => d.DepartmentId)
-                    .HasConstraintName("DepartmentId_in_Department");
-
-                entity.HasOne(d => d.Position)
-                    .WithMany(p => p.StaffDetails)
-                    .HasForeignKey(d => d.PositionId)
-                    .HasConstraintName("PositionId_in_Position");
-
-                entity.HasOne(d => d.Staff)
-                    .WithOne(p => p.StaffDetail)
-                    .HasForeignKey<StaffDetail>(d => d.StaffId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK__StaffDeta__Staff__32E0915F");
-            });
-
-            modelBuilder.Entity<StaffPosition>(entity =>
-            {
-                entity.HasKey(e => e.PositionId)
-                    .HasName("PK__StaffPos__60BB9A79739F9EA1");
-
-                entity.ToTable("StaffPosition");
-
-                entity.Property(e => e.PositiontName).HasMaxLength(500);
-            });
-
             modelBuilder.Entity<Status>(entity =>
             {
                 entity.ToTable("Status");
@@ -286,7 +190,15 @@ namespace HouseFinder_API.Models
 
                 entity.Property(e => e.Email).HasMaxLength(100);
 
+                entity.Property(e => e.FacebookUrl)
+                    .HasMaxLength(300)
+                    .HasColumnName("FacebookURL");
+
+                entity.Property(e => e.IdentityCardImageLink).HasMaxLength(500);
+
                 entity.Property(e => e.Password).HasMaxLength(100);
+
+                entity.Property(e => e.PhoneNumber).HasMaxLength(50);
 
                 entity.Property(e => e.Username).HasMaxLength(100);
 
@@ -304,7 +216,7 @@ namespace HouseFinder_API.Models
             modelBuilder.Entity<UserRole>(entity =>
             {
                 entity.HasKey(e => e.RoleId)
-                    .HasName("PK__UserRole__8AFACE1A67FF2543");
+                    .HasName("PK__UserRole__8AFACE1A534AAE26");
 
                 entity.ToTable("UserRole");
 
