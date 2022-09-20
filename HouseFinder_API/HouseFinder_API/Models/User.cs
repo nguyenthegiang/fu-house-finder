@@ -18,13 +18,14 @@ namespace HouseFinder_API.Models
         public string Password { get; set; }
         public string Email { get; set; }
         public bool? Active { get; set; }
+        public string PhoneNumber { get; set; }
+        public string FacebookUrl { get; set; }
+        public string IdentityCardImageLink { get; set; }
         public int? RoleId { get; set; }
         public int? CampusId { get; set; }
 
         public virtual Campus Campus { get; set; }
         public virtual UserRole Role { get; set; }
-        public virtual LandlordDetail LandlordDetail { get; set; }
-        public virtual StaffDetail StaffDetail { get; set; }
         public virtual ICollection<House> Houses { get; set; }
         public virtual ICollection<Rate> Rates { get; set; }
     }
