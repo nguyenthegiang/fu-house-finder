@@ -3,14 +3,14 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace HouseFinder_API.Models
+namespace BusinessObjects
 {
-    public partial class ImageOfRoom
+    public partial class ImageOfHouse
     {
         public int ImageId { get; set; }
         public string ImageLink { get; set; }
-        public int? RoomId { get; set; }
+        public int? HouseId { get; set; }
 
-        public virtual Room Room { get; set; }
+        public virtual House House { get; set; }
     }
 }

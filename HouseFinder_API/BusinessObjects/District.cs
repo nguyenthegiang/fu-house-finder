@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace HouseFinder_API.Models
+namespace BusinessObjects
 {
     public partial class District
     {

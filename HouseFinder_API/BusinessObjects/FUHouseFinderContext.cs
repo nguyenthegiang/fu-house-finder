@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 
 #nullable disable
 
-namespace HouseFinder_API.Models
+namespace BusinessObjects
 {
     public partial class FUHouseFinderContext : DbContext
     {
