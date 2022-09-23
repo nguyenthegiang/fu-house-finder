@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace HouseFinder_API.Models
+namespace BusinessObjects
 {
-    public partial class Campus
+    public partial class UserRole
     {
-        public Campus()
+        public UserRole()
         {
             Users = new HashSet<User>();
         }
 
-        public int CampusId { get; set; }
-        public string CampusName { get; set; }
+        public int RoleId { get; set; }
+        public string RoleName { get; set; }
 
         public virtual ICollection<User> Users { get; set; }
     }
