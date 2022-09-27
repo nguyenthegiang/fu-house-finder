@@ -47,20 +47,17 @@ CREATE TABLE [dbo].[User] (
 	PhoneNumber nvarchar(50) NULL,
 	FacebookURL nvarchar(300) NULL,
 	IdentityCardImageLink nvarchar(500) NULL,	--Link ảnh Căn cước công dân
-
 	RoleId int,
-	CampusId int,
 	CONSTRAINT RoleId_in_UserRole FOREIGN KEY(RoleId) REFERENCES UserRole(RoleId),
-	CONSTRAINT CampusId_in_Campus FOREIGN KEY(CampusId) REFERENCES Campus(CampusId),
 ) ON [PRIMARY]
 GO
 
 --Students
-INSERT INTO [dbo].[User] VALUES (N'HE153046', N'nguyenthegiang', N'nguyenthegiang', N'giangnthe153046@fpt.edu.vn', 1, null, null, null, 1, 1);
+INSERT INTO [dbo].[User] VALUES (N'HE153046', N'nguyenthegiang', N'nguyenthegiang', N'giangnthe153046@fpt.edu.vn', 1, null, null, null, 1);
 --Landlords
-INSERT INTO [dbo].[User] VALUES (N'LA000001', N'tamle', N'tamle', N'tamle@gmail.com', 1, '0987654321', 'facebook.com/tamle12', 'identity_card.jpg', 2, 1);
+INSERT INTO [dbo].[User] VALUES (N'LA000001', N'tamle', N'tamle', N'tamle@gmail.com', 1, '0987654321', 'facebook.com/tamle12', 'identity_card.jpg', 2);
 --Staffs
-INSERT INTO [dbo].[User] VALUES (N'SA000001', N'thanhle', N'thanhle', N'thanhle@gmail.com', 1, null, null, null, 3, 1);
+INSERT INTO [dbo].[User] VALUES (N'SA000001', N'thanhle', N'thanhle', N'thanhle@gmail.com', 1, null, null, null, 3);
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -116,12 +113,14 @@ CREATE TABLE [dbo].[House] (
 
 	VillageId int,						--thôn/xóm -> phường/xã -> quận/huyện
 	LandlordId nchar(30),				--chủ nhà
+	CampusId int,						--Campus mà nhà này thuộc về
 	CONSTRAINT LandlordId_in_User FOREIGN KEY(LandlordId) REFERENCES [dbo].[User](UserId),
 	CONSTRAINT VillageId_in_Village FOREIGN KEY(VillageId) REFERENCES [dbo].[Village](VillageId),
+	CONSTRAINT CampusId_in_Campus FOREIGN KEY(CampusId) REFERENCES Campus(CampusId),
 ) ON [PRIMARY]
 GO
 
-INSERT INTO [dbo].[House] VALUES (N'Trọ Tâm Lê', N'Gần Bún bò Huế', N'someStringGeneratedByGoogleMap', N'Rất đẹp', 3, N'LA000001');
+INSERT INTO [dbo].[House] VALUES (N'Trọ Tâm Lê', N'Gần Bún bò Huế', N'someStringGeneratedByGoogleMap', N'Rất đẹp', 3, N'LA000001', 1);
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -220,3 +219,19 @@ CREATE TABLE [dbo].[ImageOfRoom] (
 GO
 
 INSERT INTO [dbo].[ImageOfRoom] VALUES (N'link_of_image2.jpg', 1);
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+--Report của sinh viên đối với nhà trọ
+CREATE TABLE [dbo].[Report] (
+	ReportId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	ReportContent nvarchar(MAX),
+
+	StudentId nchar(30),
+	HouseId int,
+	CONSTRAINT HouseId_in_House4 FOREIGN KEY(HouseId) REFERENCES [dbo].[House](HouseId),
+	CONSTRAINT StudentId_in_User3 FOREIGN KEY(StudentId) REFERENCES [dbo].[User](UserId)
+) ON [PRIMARY]
+GO
+
+INSERT INTO [dbo].[Report] VALUES ('Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 1);
