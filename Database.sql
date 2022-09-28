@@ -38,6 +38,11 @@ INSERT INTO [dbo].[UserRole] VALUES (N'Staff of Student Service Department');
 
 CREATE TABLE [dbo].[User] (
 	UserId nchar(30) NOT NULL PRIMARY KEY,
+
+	--Dành cho người Login = Facebook/Google
+	FacebookUserId nchar(300) NULL,
+	GoogleUserId nchar(300) NULL,
+
 	Username nvarchar(100),
 	Password nvarchar(100),
 	Email nvarchar(100),
@@ -67,13 +72,13 @@ CREATE TABLE [dbo].[User] (
 GO
 
 --Students
-INSERT INTO [dbo].[User] VALUES (N'HE153046', N'nguyenthegiang', N'nguyenthegiang', N'giangnthe153046@fpt.edu.vn', 1, null , null, null, null, null, 1, 
+INSERT INTO [dbo].[User] VALUES (N'HE153046', null, null, N'nguyenthegiang', N'nguyenthegiang', N'giangnthe153046@fpt.edu.vn', 1, null , null, null, null, null, 1, 
 '2022-09-28', '2022-09-28', N'HE153046', N'HE153046');
 --Staffs
-INSERT INTO [dbo].[User] VALUES (N'SA000001', N'thanhle', N'thanhle', N'thanhle@gmail.com', 1, 'Lê Thành', null, null, null, null, 3, 
+INSERT INTO [dbo].[User] VALUES (N'SA000001', null, null, N'thanhle', N'thanhle', N'thanhle@gmail.com', 1, 'Lê Thành', null, null, null, null, 3, 
 '2022-09-28', '2022-09-28', N'SA000001', N'SA000001');
 --Landlords
-INSERT INTO [dbo].[User] VALUES (N'LA000001', N'tamle', N'tamle', N'tamle@gmail.com', 1, 'Tâm Lê', '0987654321', 'facebook.com/tamle12', 'identity_card_front.jpg', 'identity_card_back.jpg', 2, 
+INSERT INTO [dbo].[User] VALUES (N'LA000001', null, null, N'tamle', N'tamle', N'tamle@gmail.com', 1, 'Tâm Lê', '0987654321', 'facebook.com/tamle12', 'identity_card_front.jpg', 'identity_card_back.jpg', 2, 
 '2022-09-28', '2022-09-28', N'SA000001', N'SA000001');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
@@ -94,7 +99,7 @@ INSERT INTO [dbo].[District] VALUES (N'Thị xã Sơn Tây');
 --Phường/Xã
 CREATE TABLE [dbo].[Commune] (
 	CommuneId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	CommunetName nvarchar(100),
+	CommuneName nvarchar(100),
 	DistrictId int,
 	CONSTRAINT DistrictId_in_District FOREIGN KEY(DistrictId) REFERENCES District(DistrictId),
 ) ON [PRIMARY]
