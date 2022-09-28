@@ -43,21 +43,38 @@ CREATE TABLE [dbo].[User] (
 	Email nvarchar(100),
 	Active bit,		--chuyển thành false nếu User bị Disable
 
+	--Dành cho Staff & Landlord
+	FullName nvarchar(500) NULL,
+
 	--Những thông tin riêng của Landlord
 	PhoneNumber nvarchar(50) NULL,
 	FacebookURL nvarchar(300) NULL,
-	IdentityCardImageLink nvarchar(500) NULL,	--Link ảnh Căn cước công dân
+	IdentityCardFrontSideImageLink nvarchar(500) NULL,	--Link ảnh Căn cước công dân, mặt trước
+	IdentityCardBackSideImageLink nvarchar(500) NULL,	--Link ảnh Căn cước công dân, mặt sau
+
 	RoleId int,
+
+	--Dành cho những Table CRUD dc -> History
+	createdDate datetime,
+	updatedDate datetime,
+	createdUser nchar(30),
+	updatedUser nchar(30),
+
 	CONSTRAINT RoleId_in_UserRole FOREIGN KEY(RoleId) REFERENCES UserRole(RoleId),
+	CONSTRAINT createdUser_in_User FOREIGN KEY(createdUser) REFERENCES [dbo].[User](UserId),
+	CONSTRAINT updatedUser_in_User FOREIGN KEY(updatedUser) REFERENCES [dbo].[User](UserId),
 ) ON [PRIMARY]
 GO
 
 --Students
-INSERT INTO [dbo].[User] VALUES (N'HE153046', N'nguyenthegiang', N'nguyenthegiang', N'giangnthe153046@fpt.edu.vn', 1, null, null, null, 1);
---Landlords
-INSERT INTO [dbo].[User] VALUES (N'LA000001', N'tamle', N'tamle', N'tamle@gmail.com', 1, '0987654321', 'facebook.com/tamle12', 'identity_card.jpg', 2);
+INSERT INTO [dbo].[User] VALUES (N'HE153046', N'nguyenthegiang', N'nguyenthegiang', N'giangnthe153046@fpt.edu.vn', 1, null , null, null, null, null, 1, 
+'2022-09-28', '2022-09-28', N'HE153046', N'HE153046');
 --Staffs
-INSERT INTO [dbo].[User] VALUES (N'SA000001', N'thanhle', N'thanhle', N'thanhle@gmail.com', 1, null, null, null, 3);
+INSERT INTO [dbo].[User] VALUES (N'SA000001', N'thanhle', N'thanhle', N'thanhle@gmail.com', 1, 'Lê Thành', null, null, null, null, 3, 
+'2022-09-28', '2022-09-28', N'SA000001', N'SA000001');
+--Landlords
+INSERT INTO [dbo].[User] VALUES (N'LA000001', N'tamle', N'tamle', N'tamle@gmail.com', 1, 'Tâm Lê', '0987654321', 'facebook.com/tamle12', 'identity_card_front.jpg', 'identity_card_back.jpg', 2, 
+'2022-09-28', '2022-09-28', N'SA000001', N'SA000001');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -114,13 +131,24 @@ CREATE TABLE [dbo].[House] (
 	VillageId int,						--thôn/xóm -> phường/xã -> quận/huyện
 	LandlordId nchar(30),				--chủ nhà
 	CampusId int,						--Campus mà nhà này thuộc về
+
+	--Dành cho những Table CRUD dc -> History
+	createdDate datetime,
+	updatedDate datetime,
+	createdUser nchar(30),
+	updatedUser nchar(30),
+
 	CONSTRAINT LandlordId_in_User FOREIGN KEY(LandlordId) REFERENCES [dbo].[User](UserId),
 	CONSTRAINT VillageId_in_Village FOREIGN KEY(VillageId) REFERENCES [dbo].[Village](VillageId),
 	CONSTRAINT CampusId_in_Campus FOREIGN KEY(CampusId) REFERENCES Campus(CampusId),
+
+	CONSTRAINT createdUser_in_User2 FOREIGN KEY(createdUser) REFERENCES [dbo].[User](UserId),
+	CONSTRAINT updatedUser_in_User2 FOREIGN KEY(updatedUser) REFERENCES [dbo].[User](UserId),
 ) ON [PRIMARY]
 GO
 
-INSERT INTO [dbo].[House] VALUES (N'Trọ Tâm Lê', N'Gần Bún bò Huế', N'someStringGeneratedByGoogleMap', N'Rất đẹp', 3, N'LA000001', 1);
+INSERT INTO [dbo].[House] VALUES (N'Trọ Tâm Lê', N'Gần Bún bò Huế', N'someStringGeneratedByGoogleMap', N'Rất đẹp', 3, N'LA000001', 1,
+'2022-09-28', '2022-09-28', N'LA000001', N'LA000001');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -166,13 +194,24 @@ CREATE TABLE [dbo].[Room] (
 	StatusId int,
 	RoomTypeId int,
 	HouseId int,
+
+	--Dành cho những Table CRUD dc -> History
+	createdDate datetime,
+	updatedDate datetime,
+	createdUser nchar(30),
+	updatedUser nchar(30),
+
 	CONSTRAINT StatusId_in_Status FOREIGN KEY(StatusId) REFERENCES [dbo].[Status](StatusId),
 	CONSTRAINT RoomTypeId_in_RoomType FOREIGN KEY(RoomTypeId) REFERENCES [dbo].[RoomType](RoomTypeId),
 	CONSTRAINT HouseId_in_House FOREIGN KEY(HouseId) REFERENCES [dbo].[House](HouseId),
+
+	CONSTRAINT createdUser_in_User3 FOREIGN KEY(createdUser) REFERENCES [dbo].[User](UserId),
+	CONSTRAINT updatedUser_in_User3 FOREIGN KEY(updatedUser) REFERENCES [dbo].[User](UserId),
 ) ON [PRIMARY]
 GO
 
-INSERT INTO [dbo].[Room] VALUES (N'101', 3000000, N'Gạch sàn nhà có họa tiết hình con cá', 5, 2, 1, 1, 1, 1, 2, 1);
+INSERT INTO [dbo].[Room] VALUES (N'101', 3000000, N'Gạch sàn nhà có họa tiết hình con cá', 5, 2, 1, 1, 1, 1, 2, 1, 
+'2022-09-28', '2022-09-28', N'LA000001', N'LA000001');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -185,12 +224,23 @@ CREATE TABLE [dbo].[Rate] (
 
 	HouseId int,						--Cái nhà dc Comment
 	StudentId nchar(30),				--Người viết Comment
+
+	--Dành cho những Table CRUD dc -> History
+	createdDate datetime,
+	updatedDate datetime,
+	createdUser nchar(30),
+	updatedUser nchar(30),
+
 	CONSTRAINT HouseId_in_House2 FOREIGN KEY(HouseId) REFERENCES [dbo].[House](HouseId),
 	CONSTRAINT StudentId_in_User FOREIGN KEY(StudentId) REFERENCES [dbo].[User](UserId),
+
+	CONSTRAINT createdUser_in_User4 FOREIGN KEY(createdUser) REFERENCES [dbo].[User](UserId),
+	CONSTRAINT updatedUser_in_User4 FOREIGN KEY(updatedUser) REFERENCES [dbo].[User](UserId),
 ) ON [PRIMARY]
 GO
 
-INSERT INTO [dbo].[Rate] VALUES (5, N'Rất tuyệt vời, gần trường nữa', N'Cảm ơn bạn', 1, N'HE153046');
+INSERT INTO [dbo].[Rate] VALUES (5, N'Rất tuyệt vời, gần trường nữa', N'Cảm ơn bạn', 1, N'HE153046', 
+'2022-09-28', '2022-09-28', N'HE153046', N'HE153046');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -200,11 +250,22 @@ CREATE TABLE [dbo].[ImageOfHouse] (
 	ImageLink nvarchar(500),
 
 	HouseId int,
+
+	--Dành cho những Table CRUD dc -> History
+	createdDate datetime,
+	updatedDate datetime,
+	createdUser nchar(30),
+	updatedUser nchar(30),
+
 	CONSTRAINT HouseId_in_House3 FOREIGN KEY(HouseId) REFERENCES [dbo].[House](HouseId),
+
+	CONSTRAINT createdUser_in_User5 FOREIGN KEY(createdUser) REFERENCES [dbo].[User](UserId),
+	CONSTRAINT updatedUser_in_User5 FOREIGN KEY(updatedUser) REFERENCES [dbo].[User](UserId),
 ) ON [PRIMARY]
 GO
 
-INSERT INTO [dbo].[ImageOfHouse] VALUES (N'link_of_image.jpg', 1);
+INSERT INTO [dbo].[ImageOfHouse] VALUES (N'link_of_image.jpg', 1,
+'2022-09-28', '2022-09-28', N'LA000001', N'LA000001');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -214,11 +275,22 @@ CREATE TABLE [dbo].[ImageOfRoom] (
 	ImageLink nvarchar(500),
 
 	RoomId int,
+
+	--Dành cho những Table CRUD dc -> History
+	createdDate datetime,
+	updatedDate datetime,
+	createdUser nchar(30),
+	updatedUser nchar(30),
+
 	CONSTRAINT RoomId_in_Room FOREIGN KEY(RoomId) REFERENCES [dbo].[Room](RoomId),
+
+	CONSTRAINT createdUser_in_User6 FOREIGN KEY(createdUser) REFERENCES [dbo].[User](UserId),
+	CONSTRAINT updatedUser_in_User6 FOREIGN KEY(updatedUser) REFERENCES [dbo].[User](UserId),
 ) ON [PRIMARY]
 GO
 
-INSERT INTO [dbo].[ImageOfRoom] VALUES (N'link_of_image2.jpg', 1);
+INSERT INTO [dbo].[ImageOfRoom] VALUES (N'link_of_image2.jpg', 1,
+'2022-09-28', '2022-09-28', N'LA000001', N'LA000001');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -229,9 +301,20 @@ CREATE TABLE [dbo].[Report] (
 
 	StudentId nchar(30),
 	HouseId int,
+
+	--Dành cho những Table CRUD dc -> History
+	createdDate datetime,
+	updatedDate datetime,
+	createdUser nchar(30),
+	updatedUser nchar(30),
+
 	CONSTRAINT HouseId_in_House4 FOREIGN KEY(HouseId) REFERENCES [dbo].[House](HouseId),
-	CONSTRAINT StudentId_in_User3 FOREIGN KEY(StudentId) REFERENCES [dbo].[User](UserId)
+	CONSTRAINT StudentId_in_User3 FOREIGN KEY(StudentId) REFERENCES [dbo].[User](UserId),
+
+	CONSTRAINT createdUser_in_User7 FOREIGN KEY(createdUser) REFERENCES [dbo].[User](UserId),
+	CONSTRAINT updatedUser_in_User7 FOREIGN KEY(updatedUser) REFERENCES [dbo].[User](UserId),
 ) ON [PRIMARY]
 GO
 
-INSERT INTO [dbo].[Report] VALUES ('Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 1);
+INSERT INTO [dbo].[Report] VALUES ('Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 1,
+'2022-09-28', '2022-09-28', N'HE153046', N'HE153046');
