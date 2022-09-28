@@ -213,16 +213,16 @@ INSERT INTO [dbo].[Village] VALUES (N'9', 4);
 INSERT INTO [dbo].[Village] VALUES (N'10', 4);
 INSERT INTO [dbo].[Village] VALUES (N'11', 4);
 
-INSERT INTO [dbo].[Commune] VALUES (N'Cẩm Bào', 5);
-INSERT INTO [dbo].[Commune] VALUES (N'Kinh Đạ', 5);
-INSERT INTO [dbo].[Commune] VALUES (N'Yên Lỗ', 5);
+INSERT INTO [dbo].[Village] VALUES (N'Cẩm Bào', 5);
+INSERT INTO [dbo].[Village] VALUES (N'Kinh Đạ', 5);
+INSERT INTO [dbo].[Village] VALUES (N'Yên Lỗ', 5);
 
-INSERT INTO [dbo].[Commune] VALUES (N'Phú Đa 1', 6);
-INSERT INTO [dbo].[Commune] VALUES (N'Phú Đa 2', 6);
-INSERT INTO [dbo].[Commune] VALUES (N'Phú Lễ', 6);
-INSERT INTO [dbo].[Commune] VALUES (N'Yên Lạc 1', 6);
-INSERT INTO [dbo].[Commune] VALUES (N'Yên Lạc 2', 6);
-INSERT INTO [dbo].[Commune] VALUES (N'Yên Lạc 3', 6);
+INSERT INTO [dbo].[Village] VALUES (N'Phú Đa 1', 6);
+INSERT INTO [dbo].[Village] VALUES (N'Phú Đa 2', 6);
+INSERT INTO [dbo].[Village] VALUES (N'Phú Lễ', 6);
+INSERT INTO [dbo].[Village] VALUES (N'Yên Lạc 1', 6);
+INSERT INTO [dbo].[Village] VALUES (N'Yên Lạc 2', 6);
+INSERT INTO [dbo].[Village] VALUES (N'Yên Lạc 3', 6);
 
 INSERT INTO [dbo].[Village] VALUES (N'1', 7);
 INSERT INTO [dbo].[Village] VALUES (N'2', 7);
@@ -232,12 +232,12 @@ INSERT INTO [dbo].[Village] VALUES (N'5', 7);
 INSERT INTO [dbo].[Village] VALUES (N'6', 7);
 INSERT INTO [dbo].[Village] VALUES (N'7', 7);
 
-INSERT INTO [dbo].[Commune] VALUES (N'Tam Nông 1', 8);
-INSERT INTO [dbo].[Commune] VALUES (N'Tam Nông 2', 8);
-INSERT INTO [dbo].[Commune] VALUES (N'Hòa Bình 1', 8);
-INSERT INTO [dbo].[Commune] VALUES (N'Hòa Bình 2', 8);
-INSERT INTO [dbo].[Commune] VALUES (N'Đoàn Kết 1', 8);
-INSERT INTO [dbo].[Commune] VALUES (N'Đoàn Kết 2', 8);
+INSERT INTO [dbo].[Village] VALUES (N'Tam Nông 1', 8);
+INSERT INTO [dbo].[Village] VALUES (N'Tam Nông 2', 8);
+INSERT INTO [dbo].[Village] VALUES (N'Hòa Bình 1', 8);
+INSERT INTO [dbo].[Village] VALUES (N'Hòa Bình 2', 8);
+INSERT INTO [dbo].[Village] VALUES (N'Đoàn Kết 1', 8);
+INSERT INTO [dbo].[Village] VALUES (N'Đoàn Kết 2', 8);
 
 INSERT INTO [dbo].[Village] VALUES (N'Minh Nghĩa', 9);
 INSERT INTO [dbo].[Village] VALUES (N'Minh Đức', 9);
