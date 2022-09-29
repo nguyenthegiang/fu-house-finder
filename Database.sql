@@ -43,8 +43,8 @@ CREATE TABLE [dbo].[Addresses] (
 	Addresses nvarchar(1000) NOT NULL,
 
 	--Dành cho những Table CRUD dc -> History
-	createdDate datetime,
-	updatedDate datetime,
+	CreatedDate datetime,
+	LastModifiedDate datetime,
 ) ON [PRIMARY]
 GO
 
@@ -66,6 +66,7 @@ CREATE TABLE [dbo].[Users] (
 
 	--Dành cho Staff & Landlord
 	FullName nvarchar(500) NULL,
+	ProfileImageLink nvarchar(500) NULL,	--Link ảnh profile
 
 	--Những thông tin riêng của Landlord
 	PhoneNumber nvarchar(50) NULL,
@@ -76,25 +77,25 @@ CREATE TABLE [dbo].[Users] (
 	RoleId int,
 
 	--Dành cho những Table CRUD dc -> History
-	createdDate datetime,
-	updatedDate datetime,
-	createdUser nchar(30),
-	updatedUser nchar(30),
+	CreatedDate datetime,
+	LastModifiedDate datetime,
+	CreatedBy nchar(30),
+	LastModifiedBy nchar(30),
 
 	CONSTRAINT RoleId_in_UserRole FOREIGN KEY(RoleId) REFERENCES UserRoles(RoleId),
-	CONSTRAINT createdUser_in_User FOREIGN KEY(createdUser) REFERENCES [dbo].[Users](UserId),
-	CONSTRAINT updatedUser_in_User FOREIGN KEY(updatedUser) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT createdUser_in_User FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT updatedUser_in_User FOREIGN KEY(LastModifiedBy) REFERENCES [dbo].[Users](UserId),
 ) ON [PRIMARY]
 GO
 
 --Students
-INSERT INTO [dbo].[Users] VALUES (N'HE153046', null, null, N'nguyenthegiang', N'nguyenthegiang', N'giangnthe153046@fpt.edu.vn', 1, null , null, null, null, null, 1, 
+INSERT INTO [dbo].[Users] VALUES (N'HE153046', null, null, N'nguyenthegiang', N'nguyenthegiang', N'giangnthe153046@fpt.edu.vn', 1, null, null , null, null, null, null, 1, 
 '2022-09-28', '2022-09-28', N'HE153046', N'HE153046');
 --Staffs
-INSERT INTO [dbo].[Users] VALUES (N'SA000001', null, null, N'thanhle', N'thanhle', N'thanhle@gmail.com', 1, 'Lê Thành', null, null, null, null, 3, 
+INSERT INTO [dbo].[Users] VALUES (N'SA000001', null, null, N'thanhle', N'thanhle', N'thanhle@gmail.com', 1, 'Lê Thành', 'image_profile_1.jpg', null, null, null, null, 3, 
 '2022-09-28', '2022-09-28', N'SA000001', N'SA000001');
 --Landlords
-INSERT INTO [dbo].[Users] VALUES (N'LA000001', null, null, N'tamle', N'tamle', N'tamle@gmail.com', 1, 'Tâm Lê', '0987654321', 'facebook.com/tamle12', 'identity_card_front.jpg', 'identity_card_back.jpg', 2, 
+INSERT INTO [dbo].[Users] VALUES (N'LA000001', null, null, N'tamle', N'tamle', N'tamle@gmail.com', 1, 'Tâm Lê', 'image_profile_1.jpg', '0987654321', 'facebook.com/tamle12', 'identity_card_front.jpg', 'identity_card_back.jpg', 2, 
 '2022-09-28', '2022-09-28', N'SA000001', N'SA000001');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
@@ -714,17 +715,17 @@ CREATE TABLE [dbo].[Houses] (
 	CampusId int,						--Campus mà nhà này thuộc về
 
 	--Dành cho những Table CRUD dc -> History
-	createdDate datetime,
-	updatedDate datetime,
-	createdUser nchar(30),
-	updatedUser nchar(30),
+	CreatedDate datetime,
+	LastModifiedDate datetime,
+	CreatedBy nchar(30),
+	LastModifiedBy nchar(30),
 
 	CONSTRAINT LandlordId_in_User FOREIGN KEY(LandlordId) REFERENCES [dbo].[Users](UserId),
 	CONSTRAINT VillageId_in_Village FOREIGN KEY(VillageId) REFERENCES [dbo].[Villages](VillageId),
 	CONSTRAINT CampusId_in_Campus FOREIGN KEY(CampusId) REFERENCES Campuses(CampusId),
 
-	CONSTRAINT createdUser_in_User2 FOREIGN KEY(createdUser) REFERENCES [dbo].[Users](UserId),
-	CONSTRAINT updatedUser_in_User2 FOREIGN KEY(updatedUser) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT createdUser_in_User2 FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT updatedUser_in_User2 FOREIGN KEY(LastModifiedBy) REFERENCES [dbo].[Users](UserId),
 ) ON [PRIMARY]
 GO
 
@@ -777,17 +778,17 @@ CREATE TABLE [dbo].[Rooms] (
 	HouseId int,
 
 	--Dành cho những Table CRUD dc -> History
-	createdDate datetime,
-	updatedDate datetime,
-	createdUser nchar(30),
-	updatedUser nchar(30),
+	CreatedDate datetime,
+	LastModifiedDate datetime,
+	CreatedBy nchar(30),
+	LastModifiedBy nchar(30),
 
 	CONSTRAINT StatusId_in_Status FOREIGN KEY(StatusId) REFERENCES [dbo].[Statuses](StatusId),
 	CONSTRAINT RoomTypeId_in_RoomType FOREIGN KEY(RoomTypeId) REFERENCES [dbo].[RoomTypes](RoomTypeId),
 	CONSTRAINT HouseId_in_House FOREIGN KEY(HouseId) REFERENCES [dbo].[Houses](HouseId),
 
-	CONSTRAINT createdUser_in_User3 FOREIGN KEY(createdUser) REFERENCES [dbo].[Users](UserId),
-	CONSTRAINT updatedUser_in_User3 FOREIGN KEY(updatedUser) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT createdUser_in_User3 FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT updatedUser_in_User3 FOREIGN KEY(LastModifiedBy) REFERENCES [dbo].[Users](UserId),
 ) ON [PRIMARY]
 GO
 
@@ -807,16 +808,16 @@ CREATE TABLE [dbo].[Rates] (
 	StudentId nchar(30),				--Người viết Comment
 
 	--Dành cho những Table CRUD dc -> History
-	createdDate datetime,
-	updatedDate datetime,
-	createdUser nchar(30),
-	updatedUser nchar(30),
+	CreatedDate datetime,
+	LastModifiedDate datetime,
+	CreatedBy nchar(30),
+	LastModifiedBy nchar(30),
 
 	CONSTRAINT HouseId_in_House2 FOREIGN KEY(HouseId) REFERENCES [dbo].[Houses](HouseId),
 	CONSTRAINT StudentId_in_User FOREIGN KEY(StudentId) REFERENCES [dbo].[Users](UserId),
 
-	CONSTRAINT createdUser_in_User4 FOREIGN KEY(createdUser) REFERENCES [dbo].[Users](UserId),
-	CONSTRAINT updatedUser_in_User4 FOREIGN KEY(updatedUser) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT createdUser_in_User4 FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT updatedUser_in_User4 FOREIGN KEY(LastModifiedBy) REFERENCES [dbo].[Users](UserId),
 ) ON [PRIMARY]
 GO
 
@@ -833,15 +834,15 @@ CREATE TABLE [dbo].[ImagesOfHouse] (
 	HouseId int,
 
 	--Dành cho những Table CRUD dc -> History
-	createdDate datetime,
-	updatedDate datetime,
-	createdUser nchar(30),
-	updatedUser nchar(30),
+	CreatedDate datetime,
+	LastModifiedDate datetime,
+	CreatedBy nchar(30),
+	LastModifiedBy nchar(30),
 
 	CONSTRAINT HouseId_in_House3 FOREIGN KEY(HouseId) REFERENCES [dbo].[Houses](HouseId),
 
-	CONSTRAINT createdUser_in_User5 FOREIGN KEY(createdUser) REFERENCES [dbo].[Users](UserId),
-	CONSTRAINT updatedUser_in_User5 FOREIGN KEY(updatedUser) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT createdUser_in_User5 FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT updatedUser_in_User5 FOREIGN KEY(LastModifiedBy) REFERENCES [dbo].[Users](UserId),
 ) ON [PRIMARY]
 GO
 
@@ -858,15 +859,15 @@ CREATE TABLE [dbo].[ImagesOfRoom] (
 	RoomId int,
 
 	--Dành cho những Table CRUD dc -> History
-	createdDate datetime,
-	updatedDate datetime,
-	createdUser nchar(30),
-	updatedUser nchar(30),
+	CreatedDate datetime,
+	LastModifiedDate datetime,
+	CreatedBy nchar(30),
+	LastModifiedBy nchar(30),
 
 	CONSTRAINT RoomId_in_Room FOREIGN KEY(RoomId) REFERENCES [dbo].[Rooms](RoomId),
 
-	CONSTRAINT createdUser_in_User6 FOREIGN KEY(createdUser) REFERENCES [dbo].[Users](UserId),
-	CONSTRAINT updatedUser_in_User6 FOREIGN KEY(updatedUser) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT createdUser_in_User6 FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT updatedUser_in_User6 FOREIGN KEY(LastModifiedBy) REFERENCES [dbo].[Users](UserId),
 ) ON [PRIMARY]
 GO
 
@@ -884,16 +885,16 @@ CREATE TABLE [dbo].[Reports] (
 	HouseId int,
 
 	--Dành cho những Table CRUD dc -> History
-	createdDate datetime,
-	updatedDate datetime,
-	createdUser nchar(30),
-	updatedUser nchar(30),
+	CreatedDate datetime,
+	LastModifiedDate datetime,
+	CreatedBy nchar(30),
+	LastModifiedBy nchar(30),
 
 	CONSTRAINT HouseId_in_House4 FOREIGN KEY(HouseId) REFERENCES [dbo].[Houses](HouseId),
 	CONSTRAINT StudentId_in_User3 FOREIGN KEY(StudentId) REFERENCES [dbo].[Users](UserId),
 
-	CONSTRAINT createdUser_in_User7 FOREIGN KEY(createdUser) REFERENCES [dbo].[Users](UserId),
-	CONSTRAINT updatedUser_in_User7 FOREIGN KEY(updatedUser) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT createdUser_in_User7 FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT updatedUser_in_User7 FOREIGN KEY(LastModifiedBy) REFERENCES [dbo].[Users](UserId),
 ) ON [PRIMARY]
 GO
 
