@@ -10,11 +10,11 @@ export class AppComponent implements OnInit {
   title = 'FU House Finder';
   campuses: any = [];
 
-  constructor(private campusService: CampusService) {}
+  constructor(private campusService: CampusService) { }
 
   ngOnInit(): void {
-    this.campusService.getAllCampuses().subscribe(data => {
-      this.campuses = data;
-    });
+    // this.campusService.getAllCampuses().subscribe(data => {
+    //   this.campuses = data;
+    // });
   }
 }
