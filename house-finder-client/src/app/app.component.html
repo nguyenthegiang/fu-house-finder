@@ -1,6 +1,58 @@
-<h1>{{title}}</h1>
-<router-outlet></router-outlet>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nav</title>
+  <link rel="stylesheet" href="app.component.scss">
+</head>
+
+<body>
+  <nav class="navbar navbar-light d-flex justify-content-between text-center text-white"
+    style="background-color: orangered;">
+    <div>
+      <img src="/src/image/DonEstridge.png" alt="" width="50" height="50">
+      <div>FU House Finder</div>
+    </div>
+
+    <div>
+      <h1>TIM TRO SINH VIEN FPT</h1>
+      <div>
+        <a href="" class="text-white text-decoration-none mx-2">Trang chu</a>|
+        <a href="" class="text-white text-decoration-none mx-2">Chia se</a>|
+        <a href="" class="text-white text-decoration-none mx-2">Lien he</a>|
+        <a href="" class="text-white text-decoration-none mx-2">Gioi thieu</a>
+      </div>
+    </div>
+
+    <div>
+      <button type="button" class="btn btn-light ">Dang nhap</button>
+    </div>
+  </nav>
+
+  <app-homepage></app-homepage>
+
+  <div class="container-fluit d-flex justify-content-between text-center text-white p-4 fixed-bottom"
+    style="background-color: orangered;">
+    <div>
+      <img src="/src/image/DonEstridge.png" alt="" width="50" height="50">
+    </div>
+
+    <div>
+      FPT Education
+    </div>
+  </div>
+</body>
+
+</html>
+
+
+<!-- <router-outlet></router-outlet>
+
+
 
 <li *ngFor="let data of campuses">
   {{data.campusName}}
-</li>
+</li> -->

@@ -10,7 +10,7 @@ export class AppComponent {
   title = 'FU House Finder';
   campuses: any = [];
 
-  constructor(private campusService: CampusService) {}
+  constructor(private campusService: CampusService) { }
 
   ngOnInit(): void {
     this.campusService.getAllCampuses().subscribe(data => {
