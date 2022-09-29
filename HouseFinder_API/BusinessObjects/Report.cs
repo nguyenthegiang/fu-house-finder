@@ -5,14 +5,12 @@ using System.Collections.Generic;
 
 namespace BusinessObjects
 {
-    public partial class Rate
+    public partial class Report
     {
-        public int RateId { get; set; }
-        public int? Star { get; set; }
-        public string Comment { get; set; }
-        public string LandlordReply { get; set; }
-        public int? HouseId { get; set; }
+        public int ReportId { get; set; }
+        public string ReportContent { get; set; }
         public string StudentId { get; set; }
+        public int? HouseId { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? UpdatedDate { get; set; }
         public string CreatedUser { get; set; }
