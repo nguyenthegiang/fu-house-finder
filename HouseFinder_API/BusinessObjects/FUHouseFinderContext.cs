@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.Extensions.Configuration;
 
 #nullable disable
 
@@ -37,8 +38,9 @@ namespace BusinessObjects
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("server=MSI\\SQLEXPRESS;database=FUHouseFinder;uid=sa;pwd=sa");
+                //Read JSON File -> ConnectionString
+                var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+                optionsBuilder.UseSqlServer(config.GetConnectionString("DBContext"));
             }
         }
 
@@ -138,7 +140,7 @@ namespace BusinessObjects
             modelBuilder.Entity<ImagesOfHouse>(entity =>
             {
                 entity.HasKey(e => e.ImageId)
-                    .HasName("PK__ImagesOf__7516F70C4E03FB3D");
+                    .HasName("PK__ImagesOf__7516F70CCB7C0C8E");
 
                 entity.ToTable("ImagesOfHouse");
 
@@ -181,7 +183,7 @@ namespace BusinessObjects
             modelBuilder.Entity<ImagesOfRoom>(entity =>
             {
                 entity.HasKey(e => e.ImageId)
-                    .HasName("PK__ImagesOf__7516F70CEB1E393C");
+                    .HasName("PK__ImagesOf__7516F70C53BBDDFC");
 
                 entity.ToTable("ImagesOfRoom");
 
@@ -440,7 +442,8 @@ namespace BusinessObjects
             modelBuilder.Entity<UserRole>(entity =>
             {
                 entity.HasKey(e => e.RoleId)
-                    .HasName("PK__UserRole__8AFACE1AEAE2D835");
+                    .HasName("PK__UserRole__8AFACE1A7CA6E4B8");
+
 
                 entity.Property(e => e.RoleName).HasMaxLength(100);
             });

@@ -1,15 +1,16 @@
+import { HomepageComponent } from './homepage/homepage.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomePageComponent } from './home-page/home-page.component';
-
 
 const routes: Routes = [
-  { path: 'home', component: HomePageComponent } // Wildcard route for a 404 page
+  { path: 'home', component: HomepageComponent },
+ 
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
 })
-export class AppRoutingModule { }
-export const routingComponents = [HomePageComponent]
+
+export class AppRoutingModule {}
+export const routingComponents = [HomepageComponent]

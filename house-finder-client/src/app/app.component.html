@@ -1,1 +1,6 @@
-<p>Hello</p>
+<h1>{{title}}</h1>
+<router-outlet></router-outlet>
+
+<li *ngFor="let data of campuses">
+  {{data.campusName}}
+</li>
