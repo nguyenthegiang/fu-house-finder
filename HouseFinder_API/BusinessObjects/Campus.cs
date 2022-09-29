@@ -9,12 +9,13 @@ namespace BusinessObjects
     {
         public Campus()
         {
-            Users = new HashSet<User>();
+            Houses = new HashSet<House>();
         }
 
         public int CampusId { get; set; }
         public string CampusName { get; set; }
+        public string GoogleMapLocation { get; set; }
 
-        public virtual ICollection<User> Users { get; set; }
+        public virtual ICollection<House> Houses { get; set; }
     }
 }
