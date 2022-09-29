@@ -13,8 +13,8 @@ export class AppComponent {
   constructor(private campusService: CampusService) { }
 
   ngOnInit(): void {
-    // this.campusService.getAllCampuses().subscribe(data => {
-    //   this.campuses = data;
-    // });
+    this.campusService.getAllCampuses().subscribe(data => {
+      this.campuses = data;
+    });
   }
 }
