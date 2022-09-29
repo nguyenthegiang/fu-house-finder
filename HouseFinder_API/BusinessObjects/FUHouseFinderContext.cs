@@ -138,7 +138,7 @@ namespace BusinessObjects
             modelBuilder.Entity<ImagesOfHouse>(entity =>
             {
                 entity.HasKey(e => e.ImageId)
-                    .HasName("PK__ImagesOf__7516F70C4E03FB3D");
+                    .HasName("PK__ImagesOf__7516F70CCB7C0C8E");
 
                 entity.ToTable("ImagesOfHouse");
 
@@ -181,7 +181,7 @@ namespace BusinessObjects
             modelBuilder.Entity<ImagesOfRoom>(entity =>
             {
                 entity.HasKey(e => e.ImageId)
-                    .HasName("PK__ImagesOf__7516F70CEB1E393C");
+                    .HasName("PK__ImagesOf__7516F70C53BBDDFC");
 
                 entity.ToTable("ImagesOfRoom");
 
@@ -440,7 +440,8 @@ namespace BusinessObjects
             modelBuilder.Entity<UserRole>(entity =>
             {
                 entity.HasKey(e => e.RoleId)
-                    .HasName("PK__UserRole__8AFACE1AEAE2D835");
+                    .HasName("PK__UserRole__8AFACE1A7CA6E4B8");
+
 
                 entity.Property(e => e.RoleName).HasMaxLength(100);
             });
