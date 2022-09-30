@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace HouseFinder_API.Models
+namespace BusinessObjects
 {
     public partial class Commune
     {
@@ -13,7 +13,7 @@ namespace HouseFinder_API.Models
         }
 
         public int CommuneId { get; set; }
-        public string CommunetName { get; set; }
+        public string CommuneName { get; set; }
         public int? DistrictId { get; set; }
 
         public virtual District District { get; set; }

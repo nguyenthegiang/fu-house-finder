@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace HouseFinder_API.Models
+namespace BusinessObjects
 {
     public partial class Room
     {
         public Room()
         {
-            ImageOfRooms = new HashSet<ImageOfRoom>();
+            ImagesOfRooms = new HashSet<ImagesOfRoom>();
         }
 
         public int RoomId { get; set; }
@@ -24,10 +24,16 @@ namespace HouseFinder_API.Models
         public int? StatusId { get; set; }
         public int? RoomTypeId { get; set; }
         public int? HouseId { get; set; }
+        public DateTime? CreatedDate { get; set; }
+        public DateTime? UpdatedDate { get; set; }
+        public string CreatedUser { get; set; }
+        public string UpdatedUser { get; set; }
 
+        public virtual User CreatedUserNavigation { get; set; }
         public virtual House House { get; set; }
         public virtual RoomType RoomType { get; set; }
         public virtual Status Status { get; set; }
-        public virtual ICollection<ImageOfRoom> ImageOfRooms { get; set; }
+        public virtual User UpdatedUserNavigation { get; set; }
+        public virtual ICollection<ImagesOfRoom> ImagesOfRooms { get; set; }
     }
 }
