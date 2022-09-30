@@ -7,21 +7,57 @@ GO
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
-CREATE TABLE [dbo].[Campuses] (
-	CampusId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	CampusName nvarchar(100),
-	GoogleMapLocation nvarchar(MAX),	--địa chỉ theo Google Map -> Sử dụng hỗ trợ search khoảng cách
+--Dùng để lưu địa chỉ của User, House & Campus
+CREATE TABLE [dbo].[Addresses] (
+	AddressId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	Addresses nvarchar(1000) NOT NULL,					--địa chỉ cụ thể
+	GoogleMapLocation nvarchar(MAX),					--địa chỉ theo Google Map -> Sử dụng hỗ trợ search khoảng cách
 
+	--Dành cho những Table CRUD dc -> History
 	CreatedDate datetime,
+	LastModifiedDate datetime,
 ) ON [PRIMARY]
 GO
 
 --Dữ liệu location này chỉ là tạm thời, sau này set up dc Google Map API sẽ sửa lại
-INSERT INTO [dbo].[Campuses] VALUES (N'FU - Hòa Lạc', N'21.018797378240844, 105.52740174223347', GETDATE());
-INSERT INTO [dbo].[Campuses] VALUES (N'FU - Hồ Chí Minh', N'10.841401563327102, 106.80989372598', GETDATE());
-INSERT INTO [dbo].[Campuses] VALUES (N'FU - Đà Nẵng', N'15.968692643142754, 108.2605889843167', GETDATE());
-INSERT INTO [dbo].[Campuses] VALUES (N'FU - Cần Thơ', N'10.014287955096187, 105.73169382835755', GETDATE());
-INSERT INTO [dbo].[Campuses] VALUES (N'FU - Quy Nhơn', N'13.804165702246436, 109.21920977019123', GETDATE());
+--fu hòa lạc
+INSERT INTO [dbo].[Addresses] VALUES (N'Đất Thổ Cư Hòa Lạc, Km29 Đường Cao Tốc 08, Thạch Hoà, Thạch Thất, Hà Nội', 
+N'21.018797378240844, 105.52740174223347', GETDATE(), GETDATE());
+--fu hcm
+INSERT INTO [dbo].[Addresses] VALUES (N'Lô E2a-7, Đường D1, Đ. D1, Long Thạnh Mỹ, Thành Phố Thủ Đức, Thành phố Hồ Chí Minh', 
+N'10.841401563327102, 106.80989372598', GETDATE(), GETDATE());
+--fu đà nẵng
+INSERT INTO [dbo].[Addresses] VALUES (N'Khu đô thị FPT City, Ngũ Hành Sơn, Đà Nẵng', 
+N'15.968692643142754, 108.2605889843167', GETDATE(), GETDATE());
+--fu cần thơ
+INSERT INTO [dbo].[Addresses] VALUES (N'Cầu Rau Răm, đường Đ. Nguyễn Văn Cừ, An Bình, Ninh Kiều, Cần Thơ', 
+N'10.014287955096187, 105.73169382835755', GETDATE(), GETDATE());
+--fu quy nhơn
+INSERT INTO [dbo].[Addresses] VALUES (N'R639+HM2, Khu đô thị mới, Thành phố Qui Nhơn, Bình Định', 
+N'13.804165702246436, 109.21920977019123', GETDATE(), GETDATE());
+--trọ tâm lê
+INSERT INTO [dbo].[Addresses] VALUES (N'Nhà số..., Đường...; Đối diện cổng sau Đại học FPT; Cạnh quán Bún bò Huế', 
+N'21.015951854163884, 105.51901041149311', GETDATE(), GETDATE());
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+CREATE TABLE [dbo].[Campuses] (
+	CampusId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	CampusName nvarchar(100),
+	
+	AddressId int NOT NULL,		--địa chỉ
+
+	CreatedDate datetime,
+
+	CONSTRAINT AddressId_in_Address FOREIGN KEY(AddressId) REFERENCES Addresses(AddressId),
+) ON [PRIMARY]
+GO
+
+INSERT INTO [dbo].[Campuses] VALUES (N'FU - Hòa Lạc', 1, GETDATE());
+INSERT INTO [dbo].[Campuses] VALUES (N'FU - Hồ Chí Minh', 2, GETDATE());
+INSERT INTO [dbo].[Campuses] VALUES (N'FU - Đà Nẵng', 3, GETDATE());
+INSERT INTO [dbo].[Campuses] VALUES (N'FU - Cần Thơ', 4, GETDATE());
+INSERT INTO [dbo].[Campuses] VALUES (N'FU - Quy Nhơn', 5, GETDATE());
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -42,20 +78,6 @@ INSERT INTO [dbo].[UserRoles] VALUES (N'Staff of Student Service Department', GE
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
-CREATE TABLE [dbo].[Addresses] (
-	AddressId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	Addresses nvarchar(1000) NOT NULL,
-
-	--Dành cho những Table CRUD dc -> History
-	CreatedDate datetime,
-	LastModifiedDate datetime,
-) ON [PRIMARY]
-GO
-
-INSERT INTO [dbo].[Addresses] VALUES (N'Nhà số..., Đường...; Đối diện cổng sau Đại học FPT; Cạnh quán Bún bò Huế', GETDATE(), GETDATE());
-
--------------------------------------------------------------------------------------------------------------------------------------------
-
 CREATE TABLE [dbo].[Users] (
 	UserId nchar(30) NOT NULL PRIMARY KEY,
 
@@ -63,20 +85,22 @@ CREATE TABLE [dbo].[Users] (
 	FacebookUserId nchar(300) NULL,
 	GoogleUserId nchar(300) NULL,
 
-	Username nvarchar(100),
+	--Dành cho người Login = Email & Password
+	Email nvarchar(100),								--và cũng dành cho chủ trọ
 	[Password] nvarchar(100),
-	Email nvarchar(100),
-	Active bit,		--chuyển thành false nếu User bị Disable
+
+	DisplayName nvarchar(500) NULL,						--Tên để hiển thị, lấy từ Google/Facebook API (nếu login = fb/gg) hoặc lấy khi đăng ký (nếu login = email)
+	Active bit,											--chuyển thành false nếu User bị Disable
 
 	--Dành cho Staff & Landlord
-	FullName nvarchar(500) NULL,
-	ProfileImageLink nvarchar(500) NULL,	--Link ảnh profile
+	ProfileImageLink nvarchar(500) NULL,				--Link ảnh profile
 
 	--Những thông tin riêng của Landlord
 	PhoneNumber nvarchar(50) NULL,
 	FacebookURL nvarchar(300) NULL,
 	IdentityCardFrontSideImageLink nvarchar(500) NULL,	--Link ảnh Căn cước công dân, mặt trước
 	IdentityCardBackSideImageLink nvarchar(500) NULL,	--Link ảnh Căn cước công dân, mặt sau
+	AddressId int NULL,									--địa chỉ
 
 	RoleId int,
 
@@ -89,17 +113,19 @@ CREATE TABLE [dbo].[Users] (
 	CONSTRAINT RoleId_in_UserRole FOREIGN KEY(RoleId) REFERENCES UserRoles(RoleId),
 	CONSTRAINT createdUser_in_User FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
 	CONSTRAINT updatedUser_in_User FOREIGN KEY(LastModifiedBy) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT AddressId_in_Address3 FOREIGN KEY(AddressId) REFERENCES Addresses(AddressId),
 ) ON [PRIMARY]
 GO
 
 --Students
-INSERT INTO [dbo].[Users] VALUES (N'HE153046', null, null, N'nguyenthegiang', N'nguyenthegiang', N'giangnthe153046@fpt.edu.vn', 1, null, null , null, null, null, null, 1, 
+--dữ liệu giả định, sau này cần sửa Fb UserId
+INSERT INTO [dbo].[Users] VALUES (N'HE153046', N'someFbUserid', null, null, null, 'Nguyen The Giang', 1, null , null, null, null, null, null, 1, 
 GETDATE(), GETDATE(), N'HE153046', N'HE153046');
 --Staffs
-INSERT INTO [dbo].[Users] VALUES (N'SA000001', null, null, N'thanhle', N'thanhle', N'thanhle@gmail.com', 1, 'Lê Thành', 'image_profile_1.jpg', null, null, null, null, 3, 
+INSERT INTO [dbo].[Users] VALUES (N'SA000001', null, null, N'thanhle@gmail.com', N'thanhle', 'Lê Thành', 1, 'image_profile_1.jpg', null, null, null, null, null, 3, 
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
 --Landlords
-INSERT INTO [dbo].[Users] VALUES (N'LA000001', null, null, N'tamle', N'tamle', N'tamle@gmail.com', 1, 'Tâm Lê', 'image_profile_1.jpg', '0987654321', 'facebook.com/tamle12', 'identity_card_front.jpg', 'identity_card_back.jpg', 2, 
+INSERT INTO [dbo].[Users] VALUES (N'LA000001', null, null, N'tamle@gmail.com', N'tamle', 'Tâm Lê', 1, 'image_profile_1.jpg', '0987654321', 'facebook.com/tamle12', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
@@ -716,10 +742,9 @@ INSERT INTO [dbo].[Villages] VALUES (N'Xóm Chằm', 59, GETDATE());
 CREATE TABLE [dbo].[Houses] (
 	HouseId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
 	HouseName nvarchar(100),
-	Address nvarchar(500),				--địa chỉ cụ thể 
-	GoogleMapLocation nvarchar(MAX),	--địa chỉ theo Google Map -> Sử dụng khi hiển thị Map & search khoảng cách
 	Information nvarchar(MAX),			--thông tin thêm
 
+	AddressId int NOT NULL,				--địa chỉ
 	VillageId int,						--thôn/xóm -> phường/xã -> quận/huyện
 	LandlordId nchar(30),				--chủ nhà
 	CampusId int,						--Campus mà nhà này thuộc về
@@ -730,6 +755,7 @@ CREATE TABLE [dbo].[Houses] (
 	CreatedBy nchar(30),
 	LastModifiedBy nchar(30),
 
+	CONSTRAINT AddressId_in_Address2 FOREIGN KEY(AddressId) REFERENCES Addresses(AddressId),
 	CONSTRAINT LandlordId_in_User FOREIGN KEY(LandlordId) REFERENCES [dbo].[Users](UserId),
 	CONSTRAINT VillageId_in_Village FOREIGN KEY(VillageId) REFERENCES [dbo].[Villages](VillageId),
 	CONSTRAINT CampusId_in_Campus FOREIGN KEY(CampusId) REFERENCES Campuses(CampusId),
@@ -739,7 +765,7 @@ CREATE TABLE [dbo].[Houses] (
 ) ON [PRIMARY]
 GO
 
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Lê', N'Gần Bún bò Huế', N'someStringGeneratedByGoogleMap', N'Rất đẹp', 3, N'LA000001', 1,
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Lê', N'Rất đẹp', 6, 3, N'LA000001', 1,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
