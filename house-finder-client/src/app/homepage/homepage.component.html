@@ -1,15 +1,220 @@
-<div class="container-fluit">
-    <div class="text-center p-4 d-flex justify-content-center">
-        <div class="input-group mb-3 w-25">
-            <input type="text" class="form-control" placeholder="Nhap ten tro, tu khoa tim kiem"
-                aria-label="Recipient's username" aria-describedby="button-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-outline-dark" type="button" id="button-addon2">Button</button>
+<div class="container-fluit my-4">
+  <div class="text-center pb-4 d-flex justify-content-center">
+      <div class="input-group w-25">
+          <input type="text" class="form-control" placeholder="Nhập tên trọ, từ khóa tìm kiếm"
+              aria-label="Recipient's username" aria-describedby="button-addon2">
+          <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button" id="button-addon2">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+          </div>
+      </div>
+  </div>
+
+  <div class="d-flex justify-content-between">
+    <div class="w-25 bg-light mx-5 rounded">
+      <div class="text-center text-white bg-secondary p-2 rounded-top">LỌC PHÒNG TRỌ</div>
+
+      <div class="container">
+        <div class="d-flex justify-content-between align-items-center pt-3">
+          <div class="font-weight-bold">Cơ sở</div>
+
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Chọn nơi muốn tìm
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
             </div>
+          </div>
+        </div><hr>
+
+        <div>
+          <div><span class="font-weight-bold">Bán kính:</span> 0 - 10km</div>
+          <div>
+            <div class="ranges-container">
+              <div class="range d-flex justify-content-between align-items-center">
+                <input type="range" min="0" max="10" label="Min" value="0" class="w-75">
+                <span>
+                  <span class="text-mute">Min: </span>
+                  <span>0</span>
+                </span>
+              </div>
+              <div class="range d-flex justify-content-between align-items-center">
+                <input type="range" min="0" max="10" label="Max" value="10" class="w-75">
+                <span>
+                  <span class="text-mute">Max: </span>
+                  <span>10</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div><hr>
+
+        <div>
+          <div><span class="font-weight-bold">Khoảng giá:</span> 0 - 20.000.000đ</div>
+          <div>
+            <div class="ranges-container">
+              <div class="range d-flex justify-content-between align-items-center">
+                <input type="range" min="0" max="20000000" label="Min" value="0" class="w-75">
+                <span>
+                  <span class="text-mute">Min: </span>
+                  <span>0</span>
+                </span>
+              </div>
+              <div class="range d-flex justify-content-between align-items-center">
+                <input type="range" min="0" max="20000000" label="Max" value="20000000" class="w-75">
+                <span>
+                  <span class="text-mute">Max: </span>
+                  <span>20</span>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div><hr>
+
+        <div>
+          <div class="font-weight-bold">Khu vực:</div>
+
+          <div class="d-flex justify-content-between align-items-center my-2">
+            <div>Huyện</div>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Chọn nơi muốn tìm
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <div>Xã</div>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Chọn nơi muốn tìm
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex justify-content-between align-items-center">
+            <div>Thôn</div>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Chọn nơi muốn tìm
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </div>
+          </div>
+        </div><hr>
+
+        <div class="pb-3">
+          <div class="font-weight-bold mb-2">Tiện ích khác:</div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+              Wifi
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+              Điều hòa
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+              Nóng lạnh
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+              Khóa vân tay
+            </label>
+          </div>
+
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+            <label class="form-check-label" for="defaultCheck1">
+              Camera an ninh
+            </label>
+          </div>
         </div>
+      </div>
     </div>
 
-    <div class="d-flex">
+    <div class="w-75 mr-5">
+      <div class="d-flex justify-content-between mb-3">
+        <div class="font-weight-bold">Tổng số phòng trống: 10</div>
 
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Sắp xếp theo
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-between">
+        <div class="card rounded" style="width: 18rem;" *ngFor="let dataItem of List">
+          <img class="card-img-top" src="https://static.vecteezy.com/system/resources/thumbnails/002/042/706/small/wooden-cartoon-country-house-vector.jpg" alt="Card image cap">
+          <div class="card-body bg-secondary text-white rounded-bottom">
+            <h5 class="card-title text-center font-weight-bold">Hòa Lạc Apartment</h5>
+            <div class="card-text"><i class="fa-solid fa-tag mr-2"></i>2.000.000đ - 5.000.000đ</div>
+            <div class="card-text"><i class="fa-solid fa-location-dot mr-2"></i>Thôn 8, Thạch Hòa, Thạch Thất</div>
+            <div class="card-text"><i class="fa-solid fa-road mr-2"></i>3.5km</div>
+            <div class="card-text"><i class="fa-solid fa-phone mr-2"></i>0987654321</div>
+            <a href="#" class="btn btn-primary mt-3">Xem chi tiết</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-flex justify-content-center align-items-center my-3">
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            <li class="page-item">
+              <a class="page-link text-dark" href="#" aria-label="Previous">
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+              </a>
+            </li>
+            <li class="page-item"><a class="page-link text-dark" href="#">1</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
+            <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
+            <li class="page-item">
+              <a class="page-link text-dark" href="#" aria-label="Next">
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </div>
+  </div>
 </div>
