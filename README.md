@@ -12,7 +12,7 @@ Chạy lại Database
 Khởi động lại máy tinh Nếu vẫn không được thì vào Messenger chia sẻ với mọi người nhé
 
 ## File Appsettings.json cho ai Clone lại Project:
-https://fptuniversity-my.sharepoint.com/:u:/g/personal/giangnthe153046_fpt_edu_vn/EYbpNPxQyC1LuEFFKksI2H8B_im-qXB8JedoIzOnWR5Yng?e=0pbZbf
+https://fptuniversity-my.sharepoint.com/:u:/g/personal/giangnthe153046_fpt_edu_vn/EYbpNPxQyC1LuEFFKksI2H8BsWzoY2B_cm1rhJX50nshfw?e=hwUUtO
 
 ## Hướng dẫn Clone lại Project:
 ### Những việc cần làm sau khi Clone Project:
