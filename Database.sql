@@ -749,6 +749,9 @@ CREATE TABLE [dbo].[Houses] (
 	LandlordId nchar(30),				--chủ nhà
 	CampusId int,						--Campus mà nhà này thuộc về
 
+	PowerPrice money NOT NULL,			--giá điện
+	WaterPrice money NOT NULL,			--giá nước
+
 	--Dành cho những Table CRUD dc -> History
 	CreatedDate datetime,
 	LastModifiedDate datetime,
@@ -765,7 +768,7 @@ CREATE TABLE [dbo].[Houses] (
 ) ON [PRIMARY]
 GO
 
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Lê', N'Rất đẹp', 6, 3, N'LA000001', 1,
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Lê', N'Rất đẹp', 6, 3, N'LA000001', 1, 700000, 1000000,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
@@ -788,15 +791,15 @@ INSERT INTO [dbo].[Statuses] VALUES (N'Disabled', GETDATE());	--ko dùng dc vì 
 --Loại phòng (dùng cho Room)
 CREATE TABLE [dbo].[RoomTypes] (
 	RoomTypeId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	RoomTypeName nvarchar(300),
+	RoomTypeName nvarchar(300) NOT NULL,
 
 	CreatedDate datetime,
 ) ON [PRIMARY]
 GO
 
-INSERT INTO [dbo].[RoomTypes] VALUES (N'Open', GETDATE());
-INSERT INTO [dbo].[RoomTypes] VALUES (N'Closed', GETDATE());
-INSERT INTO [dbo].[RoomTypes] VALUES (N'Mini flat', GETDATE());
+INSERT INTO [dbo].[RoomTypes] VALUES (N'Khép kín', GETDATE());
+INSERT INTO [dbo].[RoomTypes] VALUES (N'Không khép kín', GETDATE());
+INSERT INTO [dbo].[RoomTypes] VALUES (N'Chung cư mini', GETDATE());
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -806,6 +809,9 @@ CREATE TABLE [dbo].[Rooms] (
 	PricePerMonth money,		--giá theo tháng
 	Information nvarchar(MAX),	--thông tin thêm & tiện ích đi kèm
 	AreaByMeters float,			--diện tích, tính theo m2
+
+	--1 số tiện ích khác
+	Aircon bit NOT NULL,		--điều hòa (có/ko)
 
 	MaxAmountOfPeople int,		--số người ở tối đa trong phòng
 	CurrentAmountOfPeople int,	--số người ở hiện tại trong phòng (cho tính năng update thông tin phòng 1/2)
@@ -832,7 +838,7 @@ CREATE TABLE [dbo].[Rooms] (
 ) ON [PRIMARY]
 GO
 
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Gạch sàn nhà có họa tiết hình con cá', 5, 2, 1, 1, 1, 1, 2, 1, 
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Gạch sàn nhà có họa tiết hình con cá', 5, 1, 2, 1, 1, 1, 1, 2, 1, 
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
