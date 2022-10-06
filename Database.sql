@@ -946,3 +946,26 @@ GO
 
 INSERT INTO [dbo].[Reports] VALUES ('Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 1,
 GETDATE(), GETDATE(), N'HE153046', N'HE153046');
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+--Lịch sử người ở phòng trọ, dành cho chủ trọ tự nguyện thêm vào nếu có nhu cầu quản lý & theo dõi
+CREATE TABLE [dbo].[RoomHistories] (
+	RoomHistoryId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	CustomerName nvarchar(800),		--tên ng ở phòng
+	RoomId int,						--phòng
+
+	--Dành cho những Table CRUD dc -> History
+	CreatedDate datetime,
+	LastModifiedDate datetime,
+	CreatedBy nchar(30),
+	LastModifiedBy nchar(30),
+
+	CONSTRAINT RoomId_in_Room2 FOREIGN KEY(RoomId) REFERENCES [dbo].Rooms(RoomId),
+
+	CONSTRAINT createdUser_in_User8 FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT updatedUser_in_User8 FOREIGN KEY(LastModifiedBy) REFERENCES [dbo].[Users](UserId),
+) ON [PRIMARY]
+GO
+
+INSERT INTO [dbo].[RoomHistories] VALUES (N'Nguyễn Thế Giang', 1, GETDATE(), GETDATE(), N'LA000001', N'LA000001');
