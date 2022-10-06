@@ -9,7 +9,8 @@ Nếu bạn gặp lỗi hay vấn đề gì đó khi chạy chương trình, hã
  - Tắt Browser đi mở lại
  - Thử chạy bằng 1 Browser khác
  - Chạy lại Database
- - Khởi động lại máy tinh 
+ - Khởi động lại máy tính 
+
 Nếu vẫn không được thì vào Messenger chia sẻ với mọi người nhé
 
 ## File Appsettings.json cho ai Clone lại Project:
