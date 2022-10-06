@@ -14,6 +14,7 @@ namespace BusinessObjects
 
         public int StatusId { get; set; }
         public string StatusName { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
         public virtual ICollection<Room> Rooms { get; set; }
     }

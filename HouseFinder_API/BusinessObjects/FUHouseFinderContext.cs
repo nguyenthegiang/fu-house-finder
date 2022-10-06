@@ -28,6 +28,7 @@ namespace BusinessObjects
         public virtual DbSet<Rate> Rates { get; set; }
         public virtual DbSet<Report> Reports { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
+        public virtual DbSet<RoomHistory> RoomHistories { get; set; }
         public virtual DbSet<RoomType> RoomTypes { get; set; }
         public virtual DbSet<Status> Statuses { get; set; }
         public virtual DbSet<User> Users { get; set; }
@@ -54,23 +55,29 @@ namespace BusinessObjects
                     .IsRequired()
                     .HasMaxLength(1000);
 
-                entity.Property(e => e.CreatedDate)
-                    .HasColumnType("datetime")
-                    .HasColumnName("createdDate");
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updatedDate");
+                entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<Campus>(entity =>
             {
                 entity.Property(e => e.CampusName).HasMaxLength(100);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.HasOne(d => d.Address)
+                    .WithMany(p => p.Campuses)
+                    .HasForeignKey(d => d.AddressId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("AddressId_in_Address");
             });
 
             modelBuilder.Entity<Commune>(entity =>
             {
                 entity.Property(e => e.CommuneName).HasMaxLength(100);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.HasOne(d => d.District)
                     .WithMany(p => p.Communes)
@@ -80,21 +87,18 @@ namespace BusinessObjects
 
             modelBuilder.Entity<District>(entity =>
             {
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
                 entity.Property(e => e.DistrictName).HasMaxLength(100);
             });
 
             modelBuilder.Entity<House>(entity =>
             {
-                entity.Property(e => e.Address).HasMaxLength(500);
-
-                entity.Property(e => e.CreatedDate)
-                    .HasColumnType("datetime")
-                    .HasColumnName("createdDate");
-
-                entity.Property(e => e.CreatedUser)
+                entity.Property(e => e.CreatedBy)
                     .HasMaxLength(30)
-                    .HasColumnName("createdUser")
                     .IsFixedLength(true);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.HouseName).HasMaxLength(100);
 
@@ -102,23 +106,30 @@ namespace BusinessObjects
                     .HasMaxLength(30)
                     .IsFixedLength(true);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updatedDate");
-
-                entity.Property(e => e.UpdatedUser)
+                entity.Property(e => e.LastModifiedBy)
                     .HasMaxLength(30)
-                    .HasColumnName("updatedUser")
                     .IsFixedLength(true);
+
+                entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.PowerPrice).HasColumnType("money");
+
+                entity.Property(e => e.WaterPrice).HasColumnType("money");
+
+                entity.HasOne(d => d.Address)
+                    .WithMany(p => p.Houses)
+                    .HasForeignKey(d => d.AddressId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("AddressId_in_Address2");
 
                 entity.HasOne(d => d.Campus)
                     .WithMany(p => p.Houses)
                     .HasForeignKey(d => d.CampusId)
                     .HasConstraintName("CampusId_in_Campus");
 
-                entity.HasOne(d => d.CreatedUserNavigation)
-                    .WithMany(p => p.HouseCreatedUserNavigations)
-                    .HasForeignKey(d => d.CreatedUser)
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.HouseCreatedByNavigations)
+                    .HasForeignKey(d => d.CreatedBy)
                     .HasConstraintName("createdUser_in_User2");
 
                 entity.HasOne(d => d.Landlord)
@@ -126,9 +137,9 @@ namespace BusinessObjects
                     .HasForeignKey(d => d.LandlordId)
                     .HasConstraintName("LandlordId_in_User");
 
-                entity.HasOne(d => d.UpdatedUserNavigation)
-                    .WithMany(p => p.HouseUpdatedUserNavigations)
-                    .HasForeignKey(d => d.UpdatedUser)
+                entity.HasOne(d => d.LastModifiedByNavigation)
+                    .WithMany(p => p.HouseLastModifiedByNavigations)
+                    .HasForeignKey(d => d.LastModifiedBy)
                     .HasConstraintName("updatedUser_in_User2");
 
                 entity.HasOne(d => d.Village)
@@ -140,33 +151,27 @@ namespace BusinessObjects
             modelBuilder.Entity<ImagesOfHouse>(entity =>
             {
                 entity.HasKey(e => e.ImageId)
-                    .HasName("PK__ImagesOf__7516F70CCB7C0C8E");
+                    .HasName("PK__ImagesOf__7516F70C9C69FADC");
 
                 entity.ToTable("ImagesOfHouse");
 
-                entity.Property(e => e.CreatedDate)
-                    .HasColumnType("datetime")
-                    .HasColumnName("createdDate");
-
-                entity.Property(e => e.CreatedUser)
+                entity.Property(e => e.CreatedBy)
                     .HasMaxLength(30)
-                    .HasColumnName("createdUser")
                     .IsFixedLength(true);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.ImageLink).HasMaxLength(500);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updatedDate");
-
-                entity.Property(e => e.UpdatedUser)
+                entity.Property(e => e.LastModifiedBy)
                     .HasMaxLength(30)
-                    .HasColumnName("updatedUser")
                     .IsFixedLength(true);
 
-                entity.HasOne(d => d.CreatedUserNavigation)
-                    .WithMany(p => p.ImagesOfHouseCreatedUserNavigations)
-                    .HasForeignKey(d => d.CreatedUser)
+                entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
+
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.ImagesOfHouseCreatedByNavigations)
+                    .HasForeignKey(d => d.CreatedBy)
                     .HasConstraintName("createdUser_in_User5");
 
                 entity.HasOne(d => d.House)
@@ -174,82 +179,70 @@ namespace BusinessObjects
                     .HasForeignKey(d => d.HouseId)
                     .HasConstraintName("HouseId_in_House3");
 
-                entity.HasOne(d => d.UpdatedUserNavigation)
-                    .WithMany(p => p.ImagesOfHouseUpdatedUserNavigations)
-                    .HasForeignKey(d => d.UpdatedUser)
+                entity.HasOne(d => d.LastModifiedByNavigation)
+                    .WithMany(p => p.ImagesOfHouseLastModifiedByNavigations)
+                    .HasForeignKey(d => d.LastModifiedBy)
                     .HasConstraintName("updatedUser_in_User5");
             });
 
             modelBuilder.Entity<ImagesOfRoom>(entity =>
             {
                 entity.HasKey(e => e.ImageId)
-                    .HasName("PK__ImagesOf__7516F70C53BBDDFC");
+                    .HasName("PK__ImagesOf__7516F70CBA8ECD9C");
 
                 entity.ToTable("ImagesOfRoom");
 
-                entity.Property(e => e.CreatedDate)
-                    .HasColumnType("datetime")
-                    .HasColumnName("createdDate");
-
-                entity.Property(e => e.CreatedUser)
+                entity.Property(e => e.CreatedBy)
                     .HasMaxLength(30)
-                    .HasColumnName("createdUser")
                     .IsFixedLength(true);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.ImageLink).HasMaxLength(500);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updatedDate");
-
-                entity.Property(e => e.UpdatedUser)
+                entity.Property(e => e.LastModifiedBy)
                     .HasMaxLength(30)
-                    .HasColumnName("updatedUser")
                     .IsFixedLength(true);
 
-                entity.HasOne(d => d.CreatedUserNavigation)
-                    .WithMany(p => p.ImagesOfRoomCreatedUserNavigations)
-                    .HasForeignKey(d => d.CreatedUser)
+                entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
+
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.ImagesOfRoomCreatedByNavigations)
+                    .HasForeignKey(d => d.CreatedBy)
                     .HasConstraintName("createdUser_in_User6");
+
+                entity.HasOne(d => d.LastModifiedByNavigation)
+                    .WithMany(p => p.ImagesOfRoomLastModifiedByNavigations)
+                    .HasForeignKey(d => d.LastModifiedBy)
+                    .HasConstraintName("updatedUser_in_User6");
 
                 entity.HasOne(d => d.Room)
                     .WithMany(p => p.ImagesOfRooms)
                     .HasForeignKey(d => d.RoomId)
                     .HasConstraintName("RoomId_in_Room");
-
-                entity.HasOne(d => d.UpdatedUserNavigation)
-                    .WithMany(p => p.ImagesOfRoomUpdatedUserNavigations)
-                    .HasForeignKey(d => d.UpdatedUser)
-                    .HasConstraintName("updatedUser_in_User6");
             });
 
             modelBuilder.Entity<Rate>(entity =>
             {
-                entity.Property(e => e.CreatedDate)
-                    .HasColumnType("datetime")
-                    .HasColumnName("createdDate");
-
-                entity.Property(e => e.CreatedUser)
+                entity.Property(e => e.CreatedBy)
                     .HasMaxLength(30)
-                    .HasColumnName("createdUser")
                     .IsFixedLength(true);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.LastModifiedBy)
+                    .HasMaxLength(30)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.StudentId)
                     .HasMaxLength(30)
                     .IsFixedLength(true);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updatedDate");
-
-                entity.Property(e => e.UpdatedUser)
-                    .HasMaxLength(30)
-                    .HasColumnName("updatedUser")
-                    .IsFixedLength(true);
-
-                entity.HasOne(d => d.CreatedUserNavigation)
-                    .WithMany(p => p.RateCreatedUserNavigations)
-                    .HasForeignKey(d => d.CreatedUser)
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.RateCreatedByNavigations)
+                    .HasForeignKey(d => d.CreatedBy)
                     .HasConstraintName("createdUser_in_User4");
 
                 entity.HasOne(d => d.House)
@@ -257,44 +250,38 @@ namespace BusinessObjects
                     .HasForeignKey(d => d.HouseId)
                     .HasConstraintName("HouseId_in_House2");
 
+                entity.HasOne(d => d.LastModifiedByNavigation)
+                    .WithMany(p => p.RateLastModifiedByNavigations)
+                    .HasForeignKey(d => d.LastModifiedBy)
+                    .HasConstraintName("updatedUser_in_User4");
+
                 entity.HasOne(d => d.Student)
                     .WithMany(p => p.RateStudents)
                     .HasForeignKey(d => d.StudentId)
                     .HasConstraintName("StudentId_in_User");
-
-                entity.HasOne(d => d.UpdatedUserNavigation)
-                    .WithMany(p => p.RateUpdatedUserNavigations)
-                    .HasForeignKey(d => d.UpdatedUser)
-                    .HasConstraintName("updatedUser_in_User4");
             });
 
             modelBuilder.Entity<Report>(entity =>
             {
-                entity.Property(e => e.CreatedDate)
-                    .HasColumnType("datetime")
-                    .HasColumnName("createdDate");
-
-                entity.Property(e => e.CreatedUser)
+                entity.Property(e => e.CreatedBy)
                     .HasMaxLength(30)
-                    .HasColumnName("createdUser")
                     .IsFixedLength(true);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.LastModifiedBy)
+                    .HasMaxLength(30)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.StudentId)
                     .HasMaxLength(30)
                     .IsFixedLength(true);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updatedDate");
-
-                entity.Property(e => e.UpdatedUser)
-                    .HasMaxLength(30)
-                    .HasColumnName("updatedUser")
-                    .IsFixedLength(true);
-
-                entity.HasOne(d => d.CreatedUserNavigation)
-                    .WithMany(p => p.ReportCreatedUserNavigations)
-                    .HasForeignKey(d => d.CreatedUser)
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.ReportCreatedByNavigations)
+                    .HasForeignKey(d => d.CreatedBy)
                     .HasConstraintName("createdUser_in_User7");
 
                 entity.HasOne(d => d.House)
@@ -302,50 +289,49 @@ namespace BusinessObjects
                     .HasForeignKey(d => d.HouseId)
                     .HasConstraintName("HouseId_in_House4");
 
+                entity.HasOne(d => d.LastModifiedByNavigation)
+                    .WithMany(p => p.ReportLastModifiedByNavigations)
+                    .HasForeignKey(d => d.LastModifiedBy)
+                    .HasConstraintName("updatedUser_in_User7");
+
                 entity.HasOne(d => d.Student)
                     .WithMany(p => p.ReportStudents)
                     .HasForeignKey(d => d.StudentId)
                     .HasConstraintName("StudentId_in_User3");
-
-                entity.HasOne(d => d.UpdatedUserNavigation)
-                    .WithMany(p => p.ReportUpdatedUserNavigations)
-                    .HasForeignKey(d => d.UpdatedUser)
-                    .HasConstraintName("updatedUser_in_User7");
             });
 
             modelBuilder.Entity<Room>(entity =>
             {
-                entity.Property(e => e.CreatedDate)
-                    .HasColumnType("datetime")
-                    .HasColumnName("createdDate");
-
-                entity.Property(e => e.CreatedUser)
+                entity.Property(e => e.CreatedBy)
                     .HasMaxLength(30)
-                    .HasColumnName("createdUser")
                     .IsFixedLength(true);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.LastModifiedBy)
+                    .HasMaxLength(30)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.PricePerMonth).HasColumnType("money");
 
                 entity.Property(e => e.RoomName).HasMaxLength(50);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updatedDate");
-
-                entity.Property(e => e.UpdatedUser)
-                    .HasMaxLength(30)
-                    .HasColumnName("updatedUser")
-                    .IsFixedLength(true);
-
-                entity.HasOne(d => d.CreatedUserNavigation)
-                    .WithMany(p => p.RoomCreatedUserNavigations)
-                    .HasForeignKey(d => d.CreatedUser)
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.RoomCreatedByNavigations)
+                    .HasForeignKey(d => d.CreatedBy)
                     .HasConstraintName("createdUser_in_User3");
 
                 entity.HasOne(d => d.House)
                     .WithMany(p => p.Rooms)
                     .HasForeignKey(d => d.HouseId)
                     .HasConstraintName("HouseId_in_House");
+
+                entity.HasOne(d => d.LastModifiedByNavigation)
+                    .WithMany(p => p.RoomLastModifiedByNavigations)
+                    .HasForeignKey(d => d.LastModifiedBy)
+                    .HasConstraintName("updatedUser_in_User3");
 
                 entity.HasOne(d => d.RoomType)
                     .WithMany(p => p.Rooms)
@@ -356,20 +342,53 @@ namespace BusinessObjects
                     .WithMany(p => p.Rooms)
                     .HasForeignKey(d => d.StatusId)
                     .HasConstraintName("StatusId_in_Status");
+            });
 
-                entity.HasOne(d => d.UpdatedUserNavigation)
-                    .WithMany(p => p.RoomUpdatedUserNavigations)
-                    .HasForeignKey(d => d.UpdatedUser)
-                    .HasConstraintName("updatedUser_in_User3");
+            modelBuilder.Entity<RoomHistory>(entity =>
+            {
+                entity.Property(e => e.CreatedBy)
+                    .HasMaxLength(30)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.CustomerName).HasMaxLength(800);
+
+                entity.Property(e => e.LastModifiedBy)
+                    .HasMaxLength(30)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
+
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.RoomHistoryCreatedByNavigations)
+                    .HasForeignKey(d => d.CreatedBy)
+                    .HasConstraintName("createdUser_in_User8");
+
+                entity.HasOne(d => d.LastModifiedByNavigation)
+                    .WithMany(p => p.RoomHistoryLastModifiedByNavigations)
+                    .HasForeignKey(d => d.LastModifiedBy)
+                    .HasConstraintName("updatedUser_in_User8");
+
+                entity.HasOne(d => d.Room)
+                    .WithMany(p => p.RoomHistories)
+                    .HasForeignKey(d => d.RoomId)
+                    .HasConstraintName("RoomId_in_Room2");
             });
 
             modelBuilder.Entity<RoomType>(entity =>
             {
-                entity.Property(e => e.RoomTypeName).HasMaxLength(300);
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.RoomTypeName)
+                    .IsRequired()
+                    .HasMaxLength(300);
             });
 
             modelBuilder.Entity<Status>(entity =>
             {
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
                 entity.Property(e => e.StatusName).HasMaxLength(300);
             });
 
@@ -379,14 +398,13 @@ namespace BusinessObjects
                     .HasMaxLength(30)
                     .IsFixedLength(true);
 
-                entity.Property(e => e.CreatedDate)
-                    .HasColumnType("datetime")
-                    .HasColumnName("createdDate");
-
-                entity.Property(e => e.CreatedUser)
+                entity.Property(e => e.CreatedBy)
                     .HasMaxLength(30)
-                    .HasColumnName("createdUser")
                     .IsFixedLength(true);
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.DisplayName).HasMaxLength(500);
 
                 entity.Property(e => e.Email).HasMaxLength(100);
 
@@ -398,8 +416,6 @@ namespace BusinessObjects
                     .HasMaxLength(300)
                     .IsFixedLength(true);
 
-                entity.Property(e => e.FullName).HasMaxLength(500);
-
                 entity.Property(e => e.GoogleUserId)
                     .HasMaxLength(300)
                     .IsFixedLength(true);
@@ -408,48 +424,53 @@ namespace BusinessObjects
 
                 entity.Property(e => e.IdentityCardFrontSideImageLink).HasMaxLength(500);
 
+                entity.Property(e => e.LastModifiedBy)
+                    .HasMaxLength(30)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
+
                 entity.Property(e => e.Password).HasMaxLength(100);
 
                 entity.Property(e => e.PhoneNumber).HasMaxLength(50);
 
-                entity.Property(e => e.UpdatedDate)
-                    .HasColumnType("datetime")
-                    .HasColumnName("updatedDate");
+                entity.Property(e => e.ProfileImageLink).HasMaxLength(500);
 
-                entity.Property(e => e.UpdatedUser)
-                    .HasMaxLength(30)
-                    .HasColumnName("updatedUser")
-                    .IsFixedLength(true);
+                entity.HasOne(d => d.Address)
+                    .WithMany(p => p.Users)
+                    .HasForeignKey(d => d.AddressId)
+                    .HasConstraintName("AddressId_in_Address3");
 
-                entity.Property(e => e.Username).HasMaxLength(100);
-
-                entity.HasOne(d => d.CreatedUserNavigation)
-                    .WithMany(p => p.InverseCreatedUserNavigation)
-                    .HasForeignKey(d => d.CreatedUser)
+                entity.HasOne(d => d.CreatedByNavigation)
+                    .WithMany(p => p.InverseCreatedByNavigation)
+                    .HasForeignKey(d => d.CreatedBy)
                     .HasConstraintName("createdUser_in_User");
+
+                entity.HasOne(d => d.LastModifiedByNavigation)
+                    .WithMany(p => p.InverseLastModifiedByNavigation)
+                    .HasForeignKey(d => d.LastModifiedBy)
+                    .HasConstraintName("updatedUser_in_User");
 
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.Users)
                     .HasForeignKey(d => d.RoleId)
                     .HasConstraintName("RoleId_in_UserRole");
-
-                entity.HasOne(d => d.UpdatedUserNavigation)
-                    .WithMany(p => p.InverseUpdatedUserNavigation)
-                    .HasForeignKey(d => d.UpdatedUser)
-                    .HasConstraintName("updatedUser_in_User");
             });
 
             modelBuilder.Entity<UserRole>(entity =>
             {
                 entity.HasKey(e => e.RoleId)
-                    .HasName("PK__UserRole__8AFACE1A7CA6E4B8");
+                    .HasName("PK__UserRole__8AFACE1AC601907F");
 
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.RoleName).HasMaxLength(100);
             });
 
             modelBuilder.Entity<Village>(entity =>
             {
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
                 entity.Property(e => e.VillageName).HasMaxLength(100);
 
                 entity.HasOne(d => d.Commune)

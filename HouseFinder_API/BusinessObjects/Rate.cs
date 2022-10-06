@@ -14,13 +14,13 @@ namespace BusinessObjects
         public int? HouseId { get; set; }
         public string StudentId { get; set; }
         public DateTime? CreatedDate { get; set; }
-        public DateTime? UpdatedDate { get; set; }
-        public string CreatedUser { get; set; }
-        public string UpdatedUser { get; set; }
+        public DateTime? LastModifiedDate { get; set; }
+        public string CreatedBy { get; set; }
+        public string LastModifiedBy { get; set; }
 
-        public virtual User CreatedUserNavigation { get; set; }
+        public virtual User CreatedByNavigation { get; set; }
         public virtual House House { get; set; }
+        public virtual User LastModifiedByNavigation { get; set; }
         public virtual User Student { get; set; }
-        public virtual User UpdatedUserNavigation { get; set; }
     }
 }
