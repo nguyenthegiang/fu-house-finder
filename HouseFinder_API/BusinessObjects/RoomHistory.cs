@@ -5,10 +5,10 @@ using System.Collections.Generic;
 
 namespace BusinessObjects
 {
-    public partial class ImagesOfRoom
+    public partial class RoomHistory
     {
-        public int ImageId { get; set; }
-        public string ImageLink { get; set; }
+        public int RoomHistoryId { get; set; }
+        public string CustomerName { get; set; }
         public int? RoomId { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
