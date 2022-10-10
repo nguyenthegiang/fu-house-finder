@@ -14,24 +14,23 @@ namespace DataAccess
 {
     public class HouseDAO
     {
-        private readonly FUHouseFinderContext context;
         private MapperConfiguration config;
         private IMapper mapper;
 
         public HouseDAO()
         {
-            context = new FUHouseFinderContext();
             config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
             mapper = config.CreateMapper();
         }
         public List<HouseDTO> GetAllHouses()
         {
-            var listHouses = new List<HouseDTO>();
+            var listHouseDTOs = new List<HouseDTO>();
             try
             {
                 using (var context = new FUHouseFinderContext())
                 {
-                    listHouses = context.Houses.Include(h => h.Address).ProjectTo<HouseDTO>(config).ToList();
+                    List<House> listHouse = context.Houses.ToList();
+                    listHouseDTOs = listHouse.Select(m => mapper.Map<House, HouseDTO>(m)).ToList();
                 }
             }
             catch (Exception e)
@@ -39,7 +38,7 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
 
-            return listHouses;
+            return listHouseDTOs;
         }
         public static List<House> GetHouseByName(string name)
         {
