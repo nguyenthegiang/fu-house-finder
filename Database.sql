@@ -1,4 +1,4 @@
-﻿--DROP DATABASE FUHouseFinder
+﻿---DROP DATABASE FUHouseFinder
 CREATE DATABASE FUHouseFinder;
 
 GO
@@ -38,7 +38,40 @@ N'13.804165702246436, 109.21920977019123', GETDATE(), GETDATE());
 --trọ tâm lê
 INSERT INTO [dbo].[Addresses] VALUES (N'Nhà số..., Đường...; Đối diện cổng sau Đại học FPT; Cạnh quán Bún bò Huế', 
 N'21.015951854163884, 105.51901041149311', GETDATE(), GETDATE());
+--trọ tâm thảo
+INSERT INTO [dbo].[Addresses] VALUES (N'Nhách 75, thôn 4, Thạch Hoà, Thạch Thất, Hà Nội, Việt Nam', 
+N'21.05713376998603, 105.51922555580272', GETDATE(), GETDATE());
+--Trọ Hòa Lạc Yên Lạc Viên
+INSERT INTO [dbo].[Addresses] VALUES (N'Nhách 75, thôn 4, Thạch Hoà, Thạch Thất, Hà Nội, Việt Nam', 
+N'21.01521162432872, 105.51780510278459', GETDATE(), GETDATE());
+--Nhà trọ Bình Yên
+INSERT INTO [dbo].[Addresses] VALUES (N'7M3G+CR3, Kiền Sơn, Bình Xuyên, Vĩnh Phúc, Việt Nam', 
+N'21.290650589369935, 105.6636771590558', GETDATE(), GETDATE());
+--Nhà trọ Tiến Phương
+INSERT INTO [dbo].[Addresses] VALUES (N'Thôn 7 Thạch Hoà (cạnh gà Ri Huy Cường, cách gà Ri Phú Bình 2 100 m)', 
+N'21.00201027585428, 105.51971682638923', GETDATE(), GETDATE());
+--Nhà trọ Phương Duy
+INSERT INTO [dbo].[Addresses] VALUES (N'Thôn 8, cây xăng 39 Thạch Hòa', 
+N'21.01105532693077, 105.51712737057241', GETDATE(), GETDATE());
 
+--HOLA Campus (chưa có tọa độ, địa chỉ chính xác)
+INSERT INTO [dbo].[Addresses] VALUES (N'Nhách 75, thôn 4, Thạch Hoà, Thạch Thất, Hà Nội, Việt Nam', 
+N'21.011257155392272, 105.53775892925267', GETDATE(), GETDATE());
+--Trọ Hoàng Nam (chưa có tọa độ chính xác)
+INSERT INTO [dbo].[Addresses] VALUES (N'Thôn 3 (thôn 8 cũ), Thạch Hoà, Thạch Thất, Hà Nội', 
+N'21.05713376998603, 105.51922555580272', GETDATE(), GETDATE());
+--Kí túc xá Ông bà (chưa có tọa độ chính xác)
+INSERT INTO [dbo].[Addresses] VALUES (N'Cụm 4, thôn 8, mặt đường lộ Cu Ba, QL21A, Thạch Hoà, Thạch Thất, Hanoi, Vietnam', 
+N'21.05713376998603, 105.51922555580272', GETDATE(), GETDATE());
+--Nhà trọ Thái Hà
+INSERT INTO [dbo].[Addresses] VALUES (N'Mặt đường QL 21 thôn 7 Thạch Hòa', 
+N'21.05713376998603, 105.51922555580272', GETDATE(), GETDATE());
+--Trọ Việt Dũng
+INSERT INTO [dbo].[Addresses] VALUES (N'Gần cây xăng 39 (Cạnh Pizza91 - sau quán cắt tóc Mạnh Nguyễn)', 
+N'21.02793531455853, 105.51399518075671', GETDATE(), GETDATE());
+--Trọ Tuấn Cường
+INSERT INTO [dbo].[Addresses] VALUES (N'Công ty CP dịch vụ bảo vệ KCN Cao, Hòa Lạc, Thạch Thất, Hà Nội, Việt Nam', 
+N'21.001219979853115, 105.52098402638923', GETDATE(), GETDATE());
 -------------------------------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE [dbo].[Campuses] (
@@ -122,18 +155,34 @@ GO
 INSERT INTO [dbo].[Users] VALUES (N'HE153046', N'someFbUserid', null, null, null, 'Nguyen The Giang', 1, null , null, null, null, null, null, 1, 
 GETDATE(), GETDATE(), N'HE153046', N'HE153046');
 --Staffs
-INSERT INTO [dbo].[Users] VALUES (N'SA000001', null, null, N'thanhle@gmail.com', N'thanhle', 'Lê Thành', 1, 'image_profile_1.jpg', null, null, null, null, null, 3, 
+INSERT INTO [dbo].[Users] VALUES (N'SA000001', null, null, N'thanhle@gmail.com', N'thanhle', N'Lê Thành', 1, 'image_profile_1.jpg', null, null, null, null, null, 3, 
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
 --Landlords
-INSERT INTO [dbo].[Users] VALUES (N'LA000001', null, null, N'tamle@gmail.com', N'tamle', 'Tâm Lê', 1, 'image_profile_1.jpg', '0987654321', 'facebook.com/tamle12', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
+INSERT INTO [dbo].[Users] VALUES (N'LA000001', null, null, N'tamle@gmail.com', N'tamle', N'Tâm Lê', 1, 'image_profile_1.jpg', '0987654321', 'facebook.com/tamle12', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
-INSERT INTO [dbo].[Users] VALUES (N'LA000002', null, null, N'toanbui@gmail.com', N'toanbui', 'Toàn Bùi', 1, 'image_profile_1.jpg', '012345678', 'facebook.com/toanbui34', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
+INSERT INTO [dbo].[Users] VALUES (N'LA000002', null, null, N'dungnhung@gmail.com', N'dungnhung', N'Dũng Nhung', 1, 'image_profile_1.jpg', '0982298681', 'facebook.com/dungnhung34', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
-INSERT INTO [dbo].[Users] VALUES (N'LA000003', null, null, N'dohau@gmail.com', N'dohau', 'Đỗ Hậu', 1, 'image_profile_1.jpg', '033333345', 'facebook.com/dohau345', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
+INSERT INTO [dbo].[Users] VALUES (N'LA000003', null, null, N'ngahuong@gmail.com', N'ngahuong', N'Nga Hương', 1, 'image_profile_1.jpg', ' 0984530814', 'facebook.com/ngahuong12', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
-INSERT INTO [dbo].[Users] VALUES (N'LA000004', null, null, N'theanh@gmail.com', N'theanh', 'Thế Anh', 1, 'image_profile_1.jpg', '0987654321', 'facebook.com/anhthe347', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
+INSERT INTO [dbo].[Users] VALUES (N'LA000004', null, null, N'binhyen@gmail.com', N'binhyen', N'Bình Yên', 1, 'image_profile_1.jpg', '0973866690', 'facebook.com/binhyen56', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
-INSERT INTO [dbo].[Users] VALUES (N'LA000005', null, null, N'tamnhu@gmail.com', N'tamnhu', 'Tâm Như', 1, 'image_profile_1.jpg', '08888829', 'facebook.com/tamle12', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
+INSERT INTO [dbo].[Users] VALUES (N'LA000005', null, null, N'tienphuong@gmail.com', N'tienphuong', N'Tiến Phương', 1, 'image_profile_1.jpg', '0961602245', 'facebook.com/tienphuong88', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
+GETDATE(), GETDATE(), N'SA000001', N'SA000001');
+INSERT INTO [dbo].[Users] VALUES (N'LA000006', null, null, N'ngochuong@gmail.com', N'ngochuong', N'Ngọc Hương', 1, 'image_profile_1.jpg', '0981914814', 'facebook.com/ngochuong555', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
+GETDATE(), GETDATE(), N'SA000001', N'SA000001');
+INSERT INTO [dbo].[Users] VALUES (N'LA000007', null, null, N'mailinh@gmail.com', N'mailinh', N'Mai Linh', 1, 'image_profile_1.jpg', '0846821118', 'facebook.com/mailinh32132', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
+GETDATE(), GETDATE(), N'SA000001', N'SA000001');
+INSERT INTO [dbo].[Users] VALUES (N'LA000008', null, null, N'hoangkhanh@gmail.com', N'hoangkhanh', N'Hoàng Khánh', 1, 'image_profile_1.jpg', '0989639985', 'facebook.com/hoangkhanh11', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
+GETDATE(), GETDATE(), N'SA000001', N'SA000001');
+INSERT INTO [dbo].[Users] VALUES (N'LA000009', null, null, N'phuongoanh@gmail.com', N'phuongoanh', N'Phương Oanh', 1, 'image_profile_1.jpg', '0989639985', 'facebook.com/phuongoanh563112s', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
+GETDATE(), GETDATE(), N'SA000001', N'SA000001');
+INSERT INTO [dbo].[Users] VALUES (N'LA000010', null, null, N'thaiha@gmail.com', N'thaiha', N'Thái Hà', 1, 'image_profile_1.jpg', '0961602245', 'facebook.com/thaiha55tps', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
+GETDATE(), GETDATE(), N'SA000001', N'SA000001');
+INSERT INTO [dbo].[Users] VALUES (N'LA000011', null, null, N'vietdung@gmail.com', N'vietdung', N'Việt Dũng', 1, 'image_profile_1.jpg', '0363266546', 'facebook.com/vietdung223', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
+GETDATE(), GETDATE(), N'SA000001', N'SA000001');
+INSERT INTO [dbo].[Users] VALUES (N'LA000012', null, null, N'tuancuong@gmail.com', N'tuancuong', N'Tuấn Cường', 1, 'image_profile_1.jpg', '0363266546', 'facebook.com/tuancuong444', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
+GETDATE(), GETDATE(), N'SA000001', N'SA000001');
+INSERT INTO [dbo].[Users] VALUES (N'LA000013', null, null, N'phuongduy@gmail.com', N'phuongduy', N'Phương Duy', 1, 'image_profile_1.jpg', '0365928073', 'facebook.com/phuongduy9512', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
@@ -776,9 +825,19 @@ CREATE TABLE [dbo].[Houses] (
 ) ON [PRIMARY]
 GO
 
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Lê', N'Rất đẹp', 6, 3, N'LA000001', 1, 700000, 1000000,
-GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Lê', N'Rất đẹp', 6, 3, N'LA000001', 1, 3700, 1200, GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Thảo', N'Rất đẹp', 7, 3, N'LA000002', 1, 3500, 1300, GETDATE(), GETDATE(), N'LA000002', N'LA000002');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Hòa Lạc Yên Lạc Viên', N'Vị trí trung tâm khu giao lộ ngã tư Hòa Lạc. Cảnh quan trong lành, yên tĩnh', 8, 3, N'LA000003', 1, 3400, 1500, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+INSERT INTO [dbo].[Houses] VALUES (N'Nhà trọ Bình Yên', N'Không chung chủ, giờ giấc thoải mái', 9, 3, N'LA000004', 1, 3500, 1300, GETDATE(), GETDATE(), N'LA000004', N'LA000004');
+INSERT INTO [dbo].[Houses] VALUES (N'Nhà trọ Tiến Phương', N'Sân rộng rãi, chỗ để xe thuận tiện, đảm bảo an ninh', 10, 3, N'LA000005', 1, 3600, 1200, GETDATE(), GETDATE(), N'LA000005', N'LA000005');
+INSERT INTO [dbo].[Houses] VALUES (N'Nhà trọ Phương Duy', N' Phòng full nội thất, có chỗ nấu ăn riêng ', 11, 3, N'LA000006', 1, 3800, 1300, GETDATE(), GETDATE(), N'LA000006', N'LA000006');
+INSERT INTO [dbo].[Houses] VALUES (N'HOLA Campus', N'Điện nước theo khung giá nhà nước', 12, 3, N'LA000007', 1, 3200, 1500, GETDATE(), GETDATE(), N'LA000007', N'LA000007');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Hoàng Nam', N'Có siêu thị ngay tại tầng 1 cùng khuôn viên vui chơi rộng rãi.', 13, 3, N'LA000008', 1, 3400, 1250, GETDATE(), GETDATE(), N'LA000008', N'LA000008');
+INSERT INTO [dbo].[Houses] VALUES (N'Kí túc xá Ông bà', N'Có sân vườn, ao cá, hợp với các bạn thích chill và yêu thiên nhiên', 14, 3, N'LA000009', 1, 3600, 1400, GETDATE(), GETDATE(), N'LA000009', N'LA000009');
+INSERT INTO [dbo].[Houses] VALUES (N'Nhà trọ Thái Hà', N'Đồ dùng đã có đủ, chỉ việc xách Vali đến ở.', 15, 3, N'LA000010', 1, 3500, 1500, GETDATE(), GETDATE(), N'LA000010', N'LA000010');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Việt Dũng', N'Đã đầy đủ nội thất từ cái tăm cái đũa yên tâm toàn đồ đẹp tại vì mình sống như gia đình nên chỉ yêu cầu sạch sẽ biết giữ gìn tài sản.', 16, 3, N'LA000011', 1, 3500, 1700, GETDATE(), GETDATE(), N'LA000011', N'LA000011');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tuấn Cường 1', N'Rất đẹp', 17, 3, N'LA000012', 1, 3000, 1100, GETDATE(), GETDATE(), N'LA000012', N'LA000012');
 -------------------------------------------------------------------------------------------------------------------------------------------
 
 --Trạng thái của 1 phòng (dùng cho Room)
