@@ -23,7 +23,7 @@ namespace HouseFinder_API.Controllers
         public ActionResult<IEnumerable<HouseDTO>> GetAllHouses() => housesRepository.GetAllHouses();
 
         [HttpGet("search")]
-        public ActionResult<IEnumerable<House>> GetHouseByName(string name)
+        public ActionResult<IEnumerable<HouseDTO>> GetHouseByName(string name)
         {
             return housesRepository.GetHouseByName(name);
         }

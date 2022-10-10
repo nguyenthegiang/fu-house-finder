@@ -22,5 +22,6 @@ namespace DataAccess.DTO
         public string LastModifiedBy { get; set; }
 
         public virtual AddressDTO Address { get; set; }
+
     }
 }
