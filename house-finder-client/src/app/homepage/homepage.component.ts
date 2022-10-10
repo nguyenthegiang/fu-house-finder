@@ -1,3 +1,4 @@
+import { HouseService } from './../services/house.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,11 +7,14 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent implements OnInit {
-  List: any = [1, 2, 3];
+  //List of all houses
+  houses: any = [];
 
-  constructor() { }
+  constructor(private houseService: HouseService) { }
 
-  ngOnInit(): void
-  {
+  ngOnInit(): void {
+    this.houseService.getAllHouses().subscribe(data => {
+      this.houses = data;
+    });
   }
 }
