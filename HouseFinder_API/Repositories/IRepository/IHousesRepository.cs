@@ -11,6 +11,6 @@ namespace Repositories.IRepository
     public interface IHousesRepository
     {
         public List<HouseDTO> GetAllHouses();
-        public List<House> GetHouseByName(string name);
+        public List<HouseDTO> GetHouseByName(string name);
     }
 }
