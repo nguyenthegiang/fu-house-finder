@@ -14,23 +14,15 @@ namespace DataAccess
 {
     public class HouseDAO
     {
-        private readonly FUHouseFinderContext context;
-        private MapperConfiguration config;
-        private IMapper mapper;
-
-        public HouseDAO()
+        public static List<HouseDTO> GetAllHouses()
         {
-            context = new FUHouseFinderContext();
-            config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-            mapper = config.CreateMapper();
-        }
-        public List<HouseDTO> GetAllHouses()
-        {
-            var listHouses = new List<HouseDTO>();
+            List<HouseDTO> listHouses;
             try
             {
                 using (var context = new FUHouseFinderContext())
                 {
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
                     listHouses = context.Houses.Include(h => h.Address).ProjectTo<HouseDTO>(config).ToList();
                 }
             }

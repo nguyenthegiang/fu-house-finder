@@ -12,6 +12,7 @@ namespace DataAccess.DTO
         public MapperProfile()
         {
             CreateMap<House, HouseDTO>();
+            CreateMap<Address, AddressDTO>();
         }
     }
 }

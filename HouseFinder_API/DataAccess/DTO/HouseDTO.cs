@@ -20,6 +20,7 @@ namespace DataAccess.DTO
         public DateTime? LastModifiedDate { get; set; }
         public string CreatedBy { get; set; }
         public string LastModifiedBy { get; set; }
+
         public virtual AddressDTO Address { get; set; }
 
     }
