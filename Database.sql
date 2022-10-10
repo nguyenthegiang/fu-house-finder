@@ -53,7 +53,6 @@ N'21.00201027585428, 105.51971682638923', GETDATE(), GETDATE());
 --Nhà trọ Phương Duy
 INSERT INTO [dbo].[Addresses] VALUES (N'Thôn 8, cây xăng 39 Thạch Hòa', 
 N'21.01105532693077, 105.51712737057241', GETDATE(), GETDATE());
-
 --HOLA Campus (chưa có tọa độ, địa chỉ chính xác)
 INSERT INTO [dbo].[Addresses] VALUES (N'Nhách 75, thôn 4, Thạch Hoà, Thạch Thất, Hà Nội, Việt Nam', 
 N'21.011257155392272, 105.53775892925267', GETDATE(), GETDATE());
@@ -826,7 +825,6 @@ CREATE TABLE [dbo].[Houses] (
 GO
 
 INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Lê', N'Rất đẹp', 6, 3, N'LA000001', 1, 3700, 1200, GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-
 INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Thảo', N'Rất đẹp', 7, 3, N'LA000002', 1, 3500, 1300, GETDATE(), GETDATE(), N'LA000002', N'LA000002');
 INSERT INTO [dbo].[Houses] VALUES (N'Trọ Hòa Lạc Yên Lạc Viên', N'Vị trí trung tâm khu giao lộ ngã tư Hòa Lạc. Cảnh quan trong lành, yên tĩnh', 8, 3, N'LA000003', 1, 3400, 1500, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 INSERT INTO [dbo].[Houses] VALUES (N'Nhà trọ Bình Yên', N'Không chung chủ, giờ giấc thoải mái', 9, 3, N'LA000004', 1, 3500, 1300, GETDATE(), GETDATE(), N'LA000004', N'LA000004');
@@ -906,6 +904,10 @@ CREATE TABLE [dbo].[Rooms] (
 GO
 
 INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Gạch sàn nhà có họa tiết hình con cá', 5, 1, 2, 1, 1, 1, 1, 2, 1, 
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Rooms] VALUES (N'102', 2500000, N'Đã có Bếp từ, hút mùi và đầy đủ phụ kiện', 5, 1, 2, 1, 1, 1, 1, 2, 1, 
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Rooms] VALUES (N'103', 2000000, N'Tổng diện tích sử dụng: 20m2', 5, 1, 2, 1, 1, 1, 1, 2, 1, 
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
