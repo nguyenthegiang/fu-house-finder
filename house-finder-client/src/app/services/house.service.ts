@@ -6,7 +6,7 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class HouseService {
-  readonly APIUrl = "https://localhost:5001/api/House";
+  readonly APIUrl = "https://localhost:5001/api/Houses";
 
   constructor(private http: HttpClient) { }
 
