@@ -21,6 +21,11 @@ namespace DataAccess.DTO
         public string CreatedBy { get; set; }
         public string LastModifiedBy { get; set; }
 
+        //Price of the cheapest room & the most expensive room, to display in Home Page
+        public decimal LowestRoomPrice { get; set; }
+        public decimal HighestRoomPrice { get; set; }
+
+        //Address of the House
         public virtual AddressDTO Address { get; set; }
 
     }
