@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using BusinessObjects;
 
-namespace HouseFinder_API.DTO
+namespace DataAccess.DTO
 {
     public class MapperProfile: Profile
     {

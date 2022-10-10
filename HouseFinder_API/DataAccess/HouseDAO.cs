@@ -1,22 +1,36 @@
-﻿using BusinessObjects;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using BusinessObjects;
+using DataAccess.DTO;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace DataAccess
 {
     public class HouseDAO
     {
-        public static List<House> GetAllHouses()
+        private readonly FUHouseFinderContext context;
+        private MapperConfiguration config;
+        private IMapper mapper;
+
+        public HouseDAO()
         {
-            var listHouses = new List<House>();
+            config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+            mapper = config.CreateMapper();
+        }
+        public List<HouseDTO> GetAllHouses()
+        {
+            var listHouses = new List<HouseDTO>();
             try
             {
                 using (var context = new FUHouseFinderContext())
                 {
-                    listHouses = context.Houses.ToList();
+                    listHouses = context.Houses.Include(h => h.Address).ProjectTo<HouseDTO>(config).ToList();
                 }
             }
             catch (Exception e)
