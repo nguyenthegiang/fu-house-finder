@@ -14,6 +14,7 @@ namespace DataAccess
 {
     public class HouseDAO
     {
+        //Get list of houses, with Address
         public static List<HouseDTO> GetAllHouses()
         {
             List<HouseDTO> listHouses;
@@ -21,6 +22,7 @@ namespace DataAccess
             {
                 using (var context = new FUHouseFinderContext())
                 {
+                    //include address
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
                     listHouses = context.Houses.Include(h => h.Address).ProjectTo<HouseDTO>(config).ToList();
@@ -33,6 +35,8 @@ namespace DataAccess
 
             return listHouses;
         }
+
+        //Search house by name, with Address
         public static List<HouseDTO> GetHouseByName(string name)
         {
             List<HouseDTO> listHouses;
@@ -40,6 +44,7 @@ namespace DataAccess
             {
                 using (var context = new FUHouseFinderContext())
                 {
+                    //include address
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
                     listHouses = context.Houses.Include(h => h.Address).ProjectTo<HouseDTO>(config).Where(p => p.HouseName.Contains(name)).ToList();

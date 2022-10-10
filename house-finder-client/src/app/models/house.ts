@@ -1,7 +1,11 @@
+import { Address } from './address';
+
+//DTO: Houses
 export interface House {
     houseId: number;
     houseName: string;
     information: string;
-    address: string;
-    googleMapLocation: string;
+    powerPrice: number;
+    waterPrice: number;
+    address: Address;
 }
