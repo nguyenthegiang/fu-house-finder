@@ -183,10 +183,10 @@
       </div>
 
       <div class="d-flex justify-content-between">
-        <div class="card rounded" style="width: 18rem;" *ngFor="let dataItem of List">
+        <div class="card rounded" style="width: 18rem;" *ngFor="let dataItem of houses">
           <img class="card-img-top" src="https://static.vecteezy.com/system/resources/thumbnails/002/042/706/small/wooden-cartoon-country-house-vector.jpg" alt="Card image cap">
           <div class="card-body bg-secondary text-white rounded-bottom">
-            <h5 class="card-title text-center font-weight-bold">Hòa Lạc Apartment</h5>
+            <h5 class="card-title text-center font-weight-bold">{{dataItem.houseName}}</h5>
             <div class="card-text"><i class="fa-solid fa-tag mr-2"></i>2.000.000đ - 5.000.000đ</div>
             <div class="card-text"><i class="fa-solid fa-location-dot mr-2"></i>Thôn 8, Thạch Hòa, Thạch Thất</div>
             <div class="card-text"><i class="fa-solid fa-road mr-2"></i>3.5km</div>
