@@ -4,7 +4,7 @@ SEP490 - Capstone Project
 Chào bạn! Chúng ta làm việc theo nhóm, vì vậy mọi quyết định đều nên có sự đồng thuận của tất cả mọi người. Vì thế khi Code Hãy nhớ thông báo về công việc mình làm và nhớ viết Commit cho chi tiết và cụ thể nha (dùng tiếng Anh nữa) (❁´◡`❁)
 
 Nếu bạn gặp lỗi hay vấn đề gì đó khi chạy chương trình, hãy thử những cách dưới đây:
- - Update from Main
+ - Github Desktop: Fetch origin -> Update from Main
  - Clone lại Project
  - Tắt Browser đi mở lại
  - Thử chạy bằng 1 Browser khác
