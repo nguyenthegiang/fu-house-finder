@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace HouseFinder_API.DTO
+namespace DataAccess.DTO
 {
     public class HouseDTO
     {
@@ -20,5 +20,7 @@ namespace HouseFinder_API.DTO
         public DateTime? LastModifiedDate { get; set; }
         public string CreatedBy { get; set; }
         public string LastModifiedBy { get; set; }
+
+        public virtual AddressDTO Address { get; set; }
     }
 }
