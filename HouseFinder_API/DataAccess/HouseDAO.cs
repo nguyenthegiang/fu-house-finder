@@ -26,5 +26,21 @@ namespace DataAccess
 
             return listHouses;
         }
+        public static List<House> GetHouseByName(string name)
+        {
+            var listHouses = new List<House>();
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    listHouses = context.Houses.Where(p => p.HouseName.Contains(name)).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return listHouses;
+        }
     }
 }

@@ -12,5 +12,6 @@ namespace Repositories.Repositories
     public class HouseRepository : IHousesRepository
     {
         public List<House> GetAllHouses() => HouseDAO.GetAllHouses();
+        public List<House> GetHouseByName(string name) => HouseDAO.GetHouseByName(name);
     }
 }

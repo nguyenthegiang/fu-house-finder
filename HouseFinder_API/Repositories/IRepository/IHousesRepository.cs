@@ -10,5 +10,6 @@ namespace Repositories.IRepository
     public interface IHousesRepository
     {
         public List<House> GetAllHouses();
+        public List<House> GetHouseByName(string name);
     }
 }
