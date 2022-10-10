@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Repositories.Repositories;
+using DataAccess.DTO;
 
 namespace HouseFinder_API.Controllers
 {
@@ -19,7 +20,7 @@ namespace HouseFinder_API.Controllers
 
         //GET: api/Houses
         [HttpGet]
-        public ActionResult<IEnumerable<House>> GetAllHouses() => housesRepository.GetAllHouses();
+        public ActionResult<IEnumerable<HouseDTO>> GetAllHouses() => housesRepository.GetAllHouses();
 
         [HttpGet("search")]
         public ActionResult<IEnumerable<House>> GetHouseByName(string name)

@@ -1,4 +1,5 @@
 ﻿using BusinessObjects;
+using DataAccess.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace Repositories.IRepository
 {
     public interface IHousesRepository
     {
-        public List<House> GetAllHouses();
+        public List<HouseDTO> GetAllHouses();
         public List<House> GetHouseByName(string name);
     }
 }
