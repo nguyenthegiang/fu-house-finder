@@ -20,6 +20,7 @@ namespace DataAccess
 
         public HouseDAO()
         {
+            context = new FUHouseFinderContext();
             config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
             mapper = config.CreateMapper();
         }
