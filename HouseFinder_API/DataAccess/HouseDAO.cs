@@ -33,14 +33,16 @@ namespace DataAccess
 
             return listHouses;
         }
-        public static List<House> GetHouseByName(string name)
+        public static List<HouseDTO> GetHouseByName(string name)
         {
-            var listHouses = new List<House>();
+            List<HouseDTO> listHouses;
             try
             {
                 using (var context = new FUHouseFinderContext())
                 {
-                    listHouses = context.Houses.Where(p => p.HouseName.Contains(name)).ToList();
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    listHouses = context.Houses.Include(h => h.Address).ProjectTo<HouseDTO>(config).Where(p => p.HouseName.Contains(name)).ToList();
                 }
             }
             catch (Exception e)
