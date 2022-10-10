@@ -127,6 +127,14 @@ GETDATE(), GETDATE(), N'SA000001', N'SA000001');
 --Landlords
 INSERT INTO [dbo].[Users] VALUES (N'LA000001', null, null, N'tamle@gmail.com', N'tamle', 'Tâm Lê', 1, 'image_profile_1.jpg', '0987654321', 'facebook.com/tamle12', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
+INSERT INTO [dbo].[Users] VALUES (N'LA000002', null, null, N'toanbui@gmail.com', N'toanbui', 'Toàn Bùi', 1, 'image_profile_1.jpg', '012345678', 'facebook.com/toanbui34', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
+GETDATE(), GETDATE(), N'SA000001', N'SA000001');
+INSERT INTO [dbo].[Users] VALUES (N'LA000003', null, null, N'dohau@gmail.com', N'dohau', 'Đỗ Hậu', 1, 'image_profile_1.jpg', '033333345', 'facebook.com/dohau345', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
+GETDATE(), GETDATE(), N'SA000001', N'SA000001');
+INSERT INTO [dbo].[Users] VALUES (N'LA000004', null, null, N'theanh@gmail.com', N'theanh', 'Thế Anh', 1, 'image_profile_1.jpg', '0987654321', 'facebook.com/anhthe347', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
+GETDATE(), GETDATE(), N'SA000001', N'SA000001');
+INSERT INTO [dbo].[Users] VALUES (N'LA000005', null, null, N'tamnhu@gmail.com', N'tamnhu', 'Tâm Như', 1, 'image_profile_1.jpg', '08888829', 'facebook.com/tamle12', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
+GETDATE(), GETDATE(), N'SA000001', N'SA000001');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
