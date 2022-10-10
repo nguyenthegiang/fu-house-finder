@@ -14,16 +14,24 @@ namespace DataAccess
 {
     public class HouseDAO
     {
+        //Get list of houses, with Address
         public static List<HouseDTO> GetAllHouses()
         {
-            List<HouseDTO> listHouses;
+            List<HouseDTO> houseDTOs;
             try
             {
                 using (var context = new FUHouseFinderContext())
                 {
+                    //include address
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    listHouses = context.Houses.Include(h => h.Address).ProjectTo<HouseDTO>(config).ToList();
+                    houseDTOs = context.Houses.Include(h => h.Address).ProjectTo<HouseDTO>(config).ToList();
+
+                    //find lowest room price & highest room price
+                    for (int i = 0; i < houseDTOs.Count; i++)
+                    {
+                        houseDTOs[i] = RoomDAO.GetRoomPriceForHouseDTO(houseDTOs[i]);
+                    }
                 }
             }
             catch (Exception e)
@@ -31,25 +39,34 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
 
-            return listHouses;
+            return houseDTOs;
         }
+
+        //Search house by name, with Address
         public static List<HouseDTO> GetHouseByName(string name)
         {
-            List<HouseDTO> listHouses;
+            List<HouseDTO> houseDTOs;
             try
             {
                 using (var context = new FUHouseFinderContext())
                 {
+                    //include Address into Houses
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    listHouses = context.Houses.Include(h => h.Address).ProjectTo<HouseDTO>(config).Where(p => p.HouseName.Contains(name)).ToList();
+                    houseDTOs = context.Houses.Include(h => h.Address).ProjectTo<HouseDTO>(config).Where(p => p.HouseName.Contains(name)).ToList();
+
+                    //find lowest room price & highest room price
+                    for (int i = 0; i < houseDTOs.Count; i++)
+                    {
+                        houseDTOs[i] = RoomDAO.GetRoomPriceForHouseDTO(houseDTOs[i]);
+                    }
                 }
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-            return listHouses;
+            return houseDTOs;
         }
     }
 }

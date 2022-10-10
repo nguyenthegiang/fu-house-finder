@@ -1,5 +1,6 @@
 import { HouseService } from './../services/house.service';
 import { Component, OnInit } from '@angular/core';
+import { House } from '../models/house';
 
 @Component({
   selector: 'app-homepage',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomepageComponent implements OnInit {
   //List of all houses
-  houses: any = [];
+  houses: House[] = [];
 
   constructor(private houseService: HouseService) { }
 
