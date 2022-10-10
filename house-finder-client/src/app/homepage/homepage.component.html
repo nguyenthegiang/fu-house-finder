@@ -1,19 +1,23 @@
-
-<!--Header-->
-<div class="container-fluit my-4">
+<!-- Body -->
+<div class="container-fluid">
+  <br>
+  <!-- Search bar -->
   <div class="text-center pb-4 d-flex justify-content-center">
-      <div class="input-group w-25">
-          <input type="text" class="form-control" placeholder="Nhập tên trọ, từ khóa tìm kiếm"
-              aria-label="Recipient's username" aria-describedby="button-addon2">
-          <div class="input-group-append">
-              <button class="btn btn-outline-secondary" type="button" id="button-addon2">
-                <i class="fa-solid fa-magnifying-glass"></i>
-              </button>
-          </div>
+    <div class="input-group w-25">
+      <input type="text" class="form-control" placeholder="Nhập tên trọ, từ khóa tìm kiếm"
+        aria-label="Recipient's username" aria-describedby="button-addon2">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
       </div>
+    </div>
   </div>
+  <!-- End Search bar -->
 
+  <!-- Main Content -->
   <div class="d-flex justify-content-between">
+    <!-- Filter Column -->
     <div class="w-25 bg-light mx-5 rounded">
       <div class="text-center text-white bg-secondary p-2 rounded-top">LỌC PHÒNG TRỌ</div>
 
@@ -22,7 +26,8 @@
           <div class="font-weight-bold">Cơ sở</div>
 
           <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Chọn nơi muốn tìm
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -31,7 +36,8 @@
               <a class="dropdown-item" href="#">Something else here</a>
             </div>
           </div>
-        </div><hr>
+        </div>
+        <hr>
 
         <div>
           <div><span class="font-weight-bold">Bán kính:</span> 0 - 10km</div>
@@ -53,7 +59,8 @@
               </div>
             </div>
           </div>
-        </div><hr>
+        </div>
+        <hr>
 
         <div>
           <div><span class="font-weight-bold">Khoảng giá:</span> 0 - 20.000.000đ</div>
@@ -75,7 +82,8 @@
               </div>
             </div>
           </div>
-        </div><hr>
+        </div>
+        <hr>
 
         <div>
           <div class="font-weight-bold">Khu vực:</div>
@@ -83,7 +91,8 @@
           <div class="d-flex justify-content-between align-items-center my-2">
             <div>Huyện</div>
             <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Chọn nơi muốn tìm
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -97,7 +106,8 @@
           <div class="d-flex justify-content-between align-items-center mb-2">
             <div>Xã</div>
             <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Chọn nơi muốn tìm
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -111,7 +121,8 @@
           <div class="d-flex justify-content-between align-items-center">
             <div>Thôn</div>
             <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton"
+                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Chọn nơi muốn tìm
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -121,7 +132,8 @@
               </div>
             </div>
           </div>
-        </div><hr>
+        </div>
+        <hr>
 
         <div class="pb-3">
           <div class="font-weight-bold mb-2">Tiện ích khác:</div>
@@ -163,14 +175,18 @@
         </div>
       </div>
     </div>
+    <!-- End Filter Column -->
 
+    <!-- Display Houses -->
     <div class="w-75 mr-5">
+      <!-- Rooms Count Available -->
       <div class="d-flex justify-content-between mb-3">
         <div class="font-weight-bold">Tổng số phòng trống: 10</div>
 
         <div class="d-flex justify-content-between align-items-center mb-2">
           <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Sắp xếp theo
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -181,21 +197,33 @@
           </div>
         </div>
       </div>
+      <!-- End Rooms Count Available -->
 
-      <div class="d-flex justify-content-between">
-        <div class="card rounded" style="width: 18rem;" *ngFor="let dataItem of houses">
-          <img class="card-img-top" src="https://static.vecteezy.com/system/resources/thumbnails/002/042/706/small/wooden-cartoon-country-house-vector.jpg" alt="Card image cap">
-          <div class="card-body bg-secondary text-white rounded-bottom">
-            <h5 class="card-title text-center font-weight-bold">{{dataItem.houseName}}</h5>
-            <div class="card-text"><i class="fa-solid fa-tag mr-2"></i>2.000.000đ - 5.000.000đ</div>
-            <div class="card-text"><i class="fa-solid fa-location-dot mr-2"></i>Thôn 8, Thạch Hòa, Thạch Thất</div>
-            <div class="card-text"><i class="fa-solid fa-road mr-2"></i>{{dataItem.address.googleMapLocation}} 3.5km</div>
-            <div class="card-text"><i class="fa-solid fa-phone mr-2"></i>0987654321</div>
-            <a href="#" class="btn btn-primary mt-3">Xem chi tiết</a>
+      <!-- List of Houses -->
+      <div class="row">
+        <!-- House Item -->
+        <div class="col-4" *ngFor="let dataItem of houses">
+          <div class="card rounded">
+            <img class="card-img-top"
+              src="https://static.vecteezy.com/system/resources/thumbnails/002/042/706/small/wooden-cartoon-country-house-vector.jpg"
+              alt="Card image cap">
+            <div class="card-body bg-secondary text-white rounded-bottom">
+              <h5 class="card-title text-center font-weight-bold">{{dataItem.houseName}}</h5>
+              <div class="card-text"><i class="fa-solid fa-tag mr-2"></i>{{dataItem.lowestRoomPrice}}đ -
+                {{dataItem.highestRoomPrice}}đ</div>
+              <div class="card-text"><i class="fa-solid fa-location-dot mr-2"></i>Thôn 8, Thạch Hòa, Thạch Thất</div>
+              <div class="card-text"><i class="fa-solid fa-road mr-2"></i>{{dataItem.address.googleMapLocation}} 3.5km
+              </div>
+              <div class="card-text"><i class="fa-solid fa-phone mr-2"></i>0987654321</div>
+              <a href="#" class="btn btn-primary mt-3">Xem chi tiết</a>
+            </div>
           </div>
         </div>
+        <!-- End House Item -->
       </div>
+      <!-- End List of Houses -->
 
+      <!-- Paging -->
       <div class="d-flex justify-content-center align-items-center my-3">
         <nav aria-label="Page navigation example">
           <ul class="pagination">
@@ -217,6 +245,10 @@
           </ul>
         </nav>
       </div>
+      <!-- End Paging -->
     </div>
+    <!-- End Display Houses -->
   </div>
+  <!-- End Main content -->
 </div>
+<!-- End Body -->

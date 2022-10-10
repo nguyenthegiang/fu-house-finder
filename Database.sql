@@ -1,4 +1,4 @@
-﻿---DROP DATABASE FUHouseFinder
+﻿--DROP DATABASE FUHouseFinder
 CREATE DATABASE FUHouseFinder;
 
 GO

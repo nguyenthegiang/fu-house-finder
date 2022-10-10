@@ -7,5 +7,7 @@ export interface House {
     information: string;
     powerPrice: number;
     waterPrice: number;
+    lowestRoomPrice: number;
+    highestRoomPrice: number;
     address: Address;
 }
