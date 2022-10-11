@@ -25,6 +25,8 @@ namespace DataAccess.DTO
         public DateTime? LastModifiedDate { get; set; }
         public string CreatedBy { get; set; }
         public string LastModifiedBy { get; set; }
+
+        //List Image of this Room
         public virtual ICollection<ImagesOfRoomDTO> ImagesOfRooms { get; set; }
     }
 }
