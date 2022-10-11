@@ -10,7 +10,13 @@ export class HouseService {
 
   constructor(private http: HttpClient) { }
 
+  //[Home Page] Get List Houses
   getAllHouses(): Observable<any[]> {
     return this.http.get<any>(this.APIUrl);
+  }
+
+  //[Home Page] Search house by name
+  searchHouseByName(houseName: string): Observable<any[]> {
+    return this.http.get<any>(this.APIUrl + "/search?name=" + houseName);
   }
 }
