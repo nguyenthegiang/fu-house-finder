@@ -1092,6 +1092,83 @@ GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room3.jpg', 3,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room1.jpg', 4,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room2.jpg', 5,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room3.jpg', 6,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room1.jpg', 7,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room2.jpg', 8,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room3.jpg', 9,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room1.jpg', 10,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room2.jpg', 11,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room3.jpg', 12,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room1.jpg', 13,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room2.jpg', 14,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room3.jpg', 15,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room1.jpg', 16,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room2.jpg', 17,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room3.jpg', 18,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room1.jpg', 19,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room2.jpg', 20,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room3.jpg', 21,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room1.jpg', 22,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room2.jpg', 23,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room3.jpg', 24,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room1.jpg', 25,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room2.jpg', 26,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room3.jpg', 27,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room1.jpg', 28,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room2.jpg', 29,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room3.jpg', 30,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room1.jpg', 31,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room2.jpg', 32,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room3.jpg', 33,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room1.jpg', 34,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room2.jpg', 35,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room3.jpg', 36,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+
 -------------------------------------------------------------------------------------------------------------------------------------------
 
 --Report của sinh viên đối với nhà trọ
