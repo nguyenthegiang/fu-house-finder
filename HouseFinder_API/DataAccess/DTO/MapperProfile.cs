@@ -13,6 +13,8 @@ namespace DataAccess.DTO
         {
             CreateMap<House, HouseDTO>();
             CreateMap<Address, AddressDTO>();
+            CreateMap<Room, RoomDTO>();
+            CreateMap<ImagesOfRoom, ImagesOfRoomDTO>();
         }
     }
 }
