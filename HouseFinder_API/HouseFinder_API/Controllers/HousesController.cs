@@ -29,5 +29,18 @@ namespace HouseFinder_API.Controllers
             return housesRepository.GetHouseByName(name);
         }
 
+        [HttpGet("{id}")]
+        public IActionResult GetHouseById(int id)
+        {
+            HouseDTO houseDTO = housesRepository.GetHouseById(id);
+            if(houseDTO == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(houseDTO);
+            }
+        }
     }
 }
