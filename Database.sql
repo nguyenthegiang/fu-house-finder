@@ -1085,7 +1085,11 @@ CREATE TABLE [dbo].[ImagesOfRoom] (
 ) ON [PRIMARY]
 GO
 
-INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'link_of_image2.jpg', 1,
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room1.jpg', 1,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room2.jpg', 2,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'Image/Room/room3.jpg', 3,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
