@@ -14,5 +14,7 @@ namespace Repositories.Repositories
     {
         public List<HouseDTO> GetAllHouses() => HouseDAO.GetAllHouses();
         public List<HouseDTO> GetHouseByName(string name) => HouseDAO.GetHouseByName(name);
+
+        public HouseDTO GetHouseById(int id) => HouseDAO.GetHouseById(id);
     }
 }
