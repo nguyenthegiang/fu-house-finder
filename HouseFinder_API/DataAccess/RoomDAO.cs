@@ -21,9 +21,11 @@ namespace DataAccess
             {
                 using (var context = new FUHouseFinderContext())
                 {
+                    //Get by HouseID, include Images
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    rooms = context.Rooms.Where(r => r.HouseId == HouseId).Include(r => r.ImagesOfRooms).ProjectTo<RoomDTO>(config).ToList();
+                    rooms = context.Rooms.Where(r => r.HouseId == HouseId)
+                        .Include(r => r.ImagesOfRooms).ProjectTo<RoomDTO>(config).ToList();
                 }
             } catch (Exception e)
             {
