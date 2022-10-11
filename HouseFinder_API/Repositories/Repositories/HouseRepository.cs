@@ -13,8 +13,8 @@ namespace Repositories.Repositories
     public class HouseRepository : IHousesRepository
     {
         public List<HouseDTO> GetAllHouses() => HouseDAO.GetAllHouses();
-        public List<HouseDTO> GetHouseByName(string name) => HouseDAO.GetHouseByName(name);
+        public List<HouseDTO> GetHouseByName(string HouseName) => HouseDAO.GetHouseByName(HouseName);
 
-        public HouseDTO GetHouseById(int id) => HouseDAO.GetHouseById(id);
+        public HouseDTO GetHouseById(int HouseId) => HouseDAO.GetHouseById(HouseId);
     }
 }
