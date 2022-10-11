@@ -13,16 +13,19 @@ namespace DataAccess
 {
     public class UserDAO
     {
-        public static UserDTO GetUserById(string id)
+        //[House Detail] Get User detail information
+        public static UserDTO GetUserById(string UserId)
         {
             UserDTO userDTO;
             try
             {
                 using (var context = new FUHouseFinderContext())
                 {
+                    //Get by Id, include Address
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    userDTO = context.Users.Where(u => u.UserId.Equals(id)).Include(u => u.Address).ProjectTo<UserDTO>(config).FirstOrDefault();
+                    userDTO = context.Users.Where(u => u.UserId.Equals(UserId))
+                        .Include(u => u.Address).ProjectTo<UserDTO>(config).FirstOrDefault();
                 }
             }
             catch (Exception e)

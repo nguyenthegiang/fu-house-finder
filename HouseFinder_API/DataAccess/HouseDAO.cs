@@ -43,7 +43,7 @@ namespace DataAccess
         }
 
         //Search house by name, with Address
-        public static List<HouseDTO> GetHouseByName(string name)
+        public static List<HouseDTO> GetHouseByName(string houseName)
         {
             List<HouseDTO> houseDTOs;
             try
@@ -53,7 +53,7 @@ namespace DataAccess
                     //include Address into Houses
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    houseDTOs = context.Houses.Include(h => h.Address).ProjectTo<HouseDTO>(config).Where(p => p.HouseName.Contains(name)).ToList();
+                    houseDTOs = context.Houses.Include(h => h.Address).ProjectTo<HouseDTO>(config).Where(p => p.HouseName.Contains(houseName)).ToList();
 
                     //find lowest room price & highest room price
                     for (int i = 0; i < houseDTOs.Count; i++)
@@ -68,7 +68,9 @@ namespace DataAccess
             }
             return houseDTOs;
         }
-        public static HouseDTO GetHouseById(int id)          
+
+        //[House Detail] Get House Detail information
+        public static HouseDTO GetHouseById(int houseId)          
         {
             HouseDTO houseDTO;
             try
@@ -78,7 +80,9 @@ namespace DataAccess
                     //include Address into Houses
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    houseDTO = context.Houses.Include(h => h.Address).ProjectTo<HouseDTO>(config).Where(p => p.HouseId == id).FirstOrDefault();
+                    //Get by ID
+                    houseDTO = context.Houses.Include(h => h.Address).ProjectTo<HouseDTO>(config)
+                        .Where(p => p.HouseId == houseId).FirstOrDefault();
 
                 }
             }

@@ -15,10 +15,12 @@ namespace HouseFinder_API.Controllers
     public class RoomsController : ControllerBase
     {
         private IRoomsRepository roomsRepository = new RoomRepository();
-        [HttpGet("{id}")]
-        public IActionResult GetRoomByHouseId(int id)
+
+        //GET: api/Rooms/getByHouseId?HouseId=
+        [HttpGet("getByHouseId")]
+        public IActionResult GetRoomsByHouseId(int HouseId)
         {
-            List<RoomDTO> roomsDTO = roomsRepository.GetRoomsByHouseId(id);
+            List<RoomDTO> roomsDTO = roomsRepository.GetRoomsByHouseId(HouseId);
             if (roomsDTO == null)
             {
                 return NotFound();

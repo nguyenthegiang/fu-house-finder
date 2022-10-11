@@ -9,6 +9,6 @@ namespace Repositories.IRepository
 {
     public interface IUserReposiotry
     {
-        UserDTO GetUserByID(string id);
+        UserDTO GetUserByID(string UserId);
     }
 }

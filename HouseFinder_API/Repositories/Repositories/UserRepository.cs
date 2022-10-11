@@ -11,6 +11,6 @@ namespace Repositories.Repositories
 {
     public class UserRepository : IUserReposiotry
     {
-        public UserDTO GetUserByID(string id) => UserDAO.GetUserById(id);
+        public UserDTO GetUserByID(string UserId) => UserDAO.GetUserById(UserId);
     }
 }

@@ -27,6 +27,7 @@ namespace DataAccess.DTO
         public string CreatedBy { get; set; }
         public string LastModifiedBy { get; set; }
 
+        //Address of this User
         public virtual AddressDTO Address { get; set; }
     }
 }

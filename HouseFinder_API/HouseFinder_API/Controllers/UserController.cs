@@ -16,10 +16,10 @@ namespace HouseFinder_API.Controllers
     {
         private IUserReposiotry userReposiotry = new UserRepository();
 
-        [HttpGet("{id}")]
-        public IActionResult GetUserById(string id)
+        [HttpGet("{UserId}")]
+        public IActionResult GetUserById(string UserId)
         {
-            UserDTO userDTO = userReposiotry.GetUserByID(id);
+            UserDTO userDTO = userReposiotry.GetUserByID(UserId);
             if (userDTO == null)
             {
                 return NotFound();
