@@ -68,5 +68,25 @@ namespace DataAccess
             }
             return houseDTOs;
         }
+        public static HouseDTO GetHouseById(int id)          
+        {
+            HouseDTO houseDTO;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //include Address into Houses
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    houseDTO = context.Houses.Include(h => h.Address).ProjectTo<HouseDTO>(config).Where(p => p.HouseId == id).FirstOrDefault();
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return houseDTO;
+        }
     }
 }
