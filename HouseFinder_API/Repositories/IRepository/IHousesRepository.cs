@@ -12,5 +12,6 @@ namespace Repositories.IRepository
     {
         public List<HouseDTO> GetAllHouses();
         public List<HouseDTO> GetHouseByName(string name);
+        public HouseDTO GetHouseById(int id);
     }
 }
