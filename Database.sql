@@ -1038,7 +1038,29 @@ CREATE TABLE [dbo].[ImagesOfHouse] (
 ) ON [PRIMARY]
 GO
 
-INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'link_of_image.jpg', 1,
+INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'Image/House/house1.jpg', 1,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'Image/House/house2.jpg', 2,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'Image/House/house3.jpg', 3,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'Image/House/house4.jpg', 4,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'Image/House/house5.jpg', 5,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'Image/House/house6.jpg', 6,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'Image/House/house7.jpg', 7,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'Image/House/house8.jpg', 8,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'Image/House/house9.jpg', 9,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'Image/House/house10.jpg', 10,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'Image/House/house11.jpg', 11,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'Image/House/house12.jpg', 12,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
