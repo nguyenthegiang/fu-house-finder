@@ -1,5 +1,8 @@
-﻿using BusinessObjects;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using BusinessObjects;
 using DataAccess.DTO;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,14 +14,16 @@ namespace DataAccess
     public class RoomDAO
     {
         //Get list Rooms by House
-        public static List<Room> GetRoomsByHouseId(int HouseId)
+        public static List<RoomDTO> GetRoomsByHouseId(int HouseId)
         {
-            List<Room> rooms;
+            List<RoomDTO> rooms;
             try
             {
                 using (var context = new FUHouseFinderContext())
                 {
-                    rooms = context.Rooms.Where(r => r.HouseId == HouseId).ToList();
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    rooms = context.Rooms.Where(r => r.HouseId == HouseId).Include(r => r.ImagesOfRooms).ProjectTo<RoomDTO>(config).ToList();
                 }
             } catch (Exception e)
             {
@@ -33,13 +38,13 @@ namespace DataAccess
         public static HouseDTO GetRoomPriceForHouseDTO(HouseDTO houseDTO)
         {
             //Get list of its room
-            List<Room> roomsOfHouse = GetRoomsByHouseId(houseDTO.HouseId);
+            List<RoomDTO> roomsOfHouse = GetRoomsByHouseId(houseDTO.HouseId);
 
             //Find LowestRoomPrice & HighestRoomPrice
             decimal lowestRoomPrice = decimal.MaxValue;
             decimal highestRoomPrice = decimal.MinValue;
 
-            foreach (Room room in roomsOfHouse)
+            foreach (RoomDTO room in roomsOfHouse)
             {
                 if (room.PricePerMonth > highestRoomPrice)
                 {
