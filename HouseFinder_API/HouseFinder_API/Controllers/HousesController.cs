@@ -29,10 +29,11 @@ namespace HouseFinder_API.Controllers
             return housesRepository.GetHouseByName(name);
         }
 
-        [HttpGet("{id}")]
-        public IActionResult GetHouseById(int id)
+        //GET: api/Houses/HouseId
+        [HttpGet("{HouseId}")]
+        public IActionResult GetHouseById(int HouseId)
         {
-            HouseDTO houseDTO = housesRepository.GetHouseById(id);
+            HouseDTO houseDTO = housesRepository.GetHouseById(HouseId);
             if(houseDTO == null)
             {
                 return NotFound();
