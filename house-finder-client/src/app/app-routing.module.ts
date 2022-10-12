@@ -4,8 +4,9 @@ import { RouterModule, Routes } from '@angular/router';
 import { HouseDetailComponent} from './house-detail/house-detail.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomepageComponent },
-  { path: 'house-detail', component: HouseDetailComponent}
+  { path: 'house-detail/:id', component: HouseDetailComponent}
 
 ];
 
