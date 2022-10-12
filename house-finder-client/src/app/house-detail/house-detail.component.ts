@@ -19,8 +19,6 @@ export class HouseDetailComponent implements OnInit {
       this.houseDetail = data;
       alert(this.houseDetail?.houseName);
     });
-
-    
   }
 
 }
