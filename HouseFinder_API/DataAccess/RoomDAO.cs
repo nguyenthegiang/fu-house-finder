@@ -46,11 +46,11 @@ namespace DataAccess
                     //Find rooms of this house
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    var result = context.Rooms.Where(r => r.HouseId == HouseId).ProjectTo<RoomDTO>(config).ToList();
+                    var result = context.Rooms.Include(p => p.Status).Where(r => r.HouseId == HouseId).ProjectTo<RoomDTO>(config).ToList();
                     //Get only available rooms
                     foreach (RoomDTO r in result)
                     {
-                        if(r.StatusId == 1)
+                        if(r.Status.StatusName.Equals("Available"))
                         {
                             rooms.Add(r);
                         }
