@@ -35,7 +35,7 @@ namespace DataAccess
             return rooms;
         }
 
-        //Get list Available Rooms by House ID
+        //[HouseDetail] Get list Available Rooms by House ID
         public static List<RoomDTO> GetAvailableRoomsByHouseId(int HouseId)
         {
             List<RoomDTO> rooms = new List<RoomDTO>();
@@ -43,9 +43,11 @@ namespace DataAccess
             {
                 using(var context = new FUHouseFinderContext())
                 {
+                    //Find rooms of this house
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
                     var result = context.Rooms.Where(r => r.HouseId == HouseId).ProjectTo<RoomDTO>(config).ToList();
+                    //Get only available rooms
                     foreach (RoomDTO r in result)
                     {
                         if(r.StatusId == 1)
