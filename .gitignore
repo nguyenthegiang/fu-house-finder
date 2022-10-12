@@ -397,3 +397,7 @@ Thumbs.db
 
 # Settings Files
 **/appsettings.json
+
+# mkcert files
+**/localhost.pem
+**/localhost-key.pem
