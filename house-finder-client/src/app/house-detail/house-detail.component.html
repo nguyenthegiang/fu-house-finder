@@ -1,18 +1,27 @@
-<div class="container">
-  <div class="row">
+<!-- Display Loading Spinner when House Detail is not yet loaded -->
+<div class="container" *ngIf="houseDetail === undefined">
+  <div class="spinner-border text-danger" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
 
+<!-- Only Display when House Detail is loaded -->
+<div class="container" *ngIf="houseDetail">
+  <div class="row">
     <div class="col-8">
       <!-- House images -->
       <img id="houseImage" src="../../assets/image/HouseImage.jpg" alt="..." width="100%">
 
       <!-- House detail information-->
       <div class="house-information">
-        <h3>Hòa Lạc Apartment</h3>
-        <span><b>Giá điện: </b> 3500/khối</span>
+        <h3>{{houseDetail.houseName}}</h3>
+        <span><b>Giá điện: </b> {{houseDetail.powerPrice}}/kWh</span>
         <br>
-        <span><b>Giá nước: </b> 1200/km3</span>
+        <span><b>Giá nước: </b> {{houseDetail.waterPrice}}/m3</span>
         <br>
-        <span><b>Thông tin khác: </b></span>
+        <span><b>Địa chỉ: </b>{{houseDetail.address.addresses}}</span>
+        <br>
+        <span><b>Thông tin khác: </b>{{houseDetail.information}}</span>
       </div>
 
       <!-- List available rooms -->

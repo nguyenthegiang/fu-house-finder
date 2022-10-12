@@ -9,15 +9,17 @@ import { HouseService } from '../services/house.service';
   styleUrls: ['./house-detail.component.scss']
 })
 export class HouseDetailComponent implements OnInit {
+  //Detail information of this House
   houseDetail: House | undefined;
 
   constructor(private route: ActivatedRoute, private houseService: HouseService) { }
 
   ngOnInit(): void {
+    //Get id of House from Route
     const id = Number(this.route.snapshot.paramMap.get('id'));
+    //Call API: get House Detail information
     this.houseService.getHouseByHouseId(id).subscribe(data => {
       this.houseDetail = data;
-      alert(this.houseDetail?.houseName);
     });
   }
 
