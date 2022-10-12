@@ -204,8 +204,8 @@
       <div class="row">
         <!-- House Item -->
         <div class="col-4" *ngFor="let dataItem of houses">
-          <a routerLink="/house-detail/{{dataItem.houseId}}">click here</a>
-          <div class="card rounded">
+          <!-- Item onClick: to House Detail -->
+          <div class="card rounded houseCardItem" routerLink="/house-detail/{{dataItem.houseId}}">
             <img class="card-img-top"
               src="https://static.vecteezy.com/system/resources/thumbnails/002/042/706/small/wooden-cartoon-country-house-vector.jpg"
               alt="Card image cap">
@@ -217,7 +217,6 @@
               <div class="card-text"><i class="fa-solid fa-road mr-2"></i>{{dataItem.address.googleMapLocation}} 3.5km
               </div>
               <div class="card-text"><i class="fa-solid fa-phone mr-2"></i>0987654321</div>
-              <a href="#" class="btn btn-primary mt-3">Xem chi tiết</a>
             </div>
           </div>
         </div>
