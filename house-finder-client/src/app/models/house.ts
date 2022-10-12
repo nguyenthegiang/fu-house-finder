@@ -5,6 +5,7 @@ export interface House {
     houseId: number;
     houseName: string;
     information: string;
+    landlordId: string;
     powerPrice: number;
     waterPrice: number;
     lowestRoomPrice: number;
