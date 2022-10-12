@@ -1,3 +1,4 @@
+import { House } from './../models/house';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -18,5 +19,10 @@ export class HouseService {
   //[Home Page] Search house by name
   searchHouseByName(houseName: string): Observable<any[]> {
     return this.http.get<any>(this.APIUrl + "/search?name=" + houseName);
+  }
+
+  //[House Detail] Get House detail information
+  getHouseByHouseId(houseId: number): Observable<House> {
+    return this.http.get<House>(this.APIUrl + "/" + houseId);
   }
 }
