@@ -10,5 +10,7 @@ namespace Repositories.IRepository
     public interface IRoomsRepository
     {
         public List<RoomDTO> GetRoomsByHouseId(int HouseId);
+
+        public List<RoomDTO> GetAvailableRoomsByHouseId(int houseId);
      }
 }
