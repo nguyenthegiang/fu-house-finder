@@ -12,7 +12,8 @@ namespace DataAccess.DTO
         public string FacebookUserId { get; set; }
         public string GoogleUserId { get; set; }
         public string Email { get; set; }
-        public string Password { get; set; }
+        //Not show password when send API
+        //public string Password { get; set; }
         public string DisplayName { get; set; }
         public bool? Active { get; set; }
         public string ProfileImageLink { get; set; }
