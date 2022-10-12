@@ -1,12 +1,12 @@
 <!-- Display Loading Spinner when House Detail is not yet loaded -->
-<div class="container" *ngIf="houseDetail === undefined">
+<div class="container" *ngIf="houseDetail === undefined || landlordDetail === undefined">
   <div class="spinner-border text-danger" role="status">
     <span class="sr-only">Loading...</span>
   </div>
 </div>
 
 <!-- Only Display when House Detail is loaded -->
-<div class="container" *ngIf="houseDetail">
+<div class="container" *ngIf="houseDetail && landlordDetail">
   <div class="row">
     <div class="col-8">
       <!-- House images -->
@@ -50,22 +50,22 @@
         <!-- Other information -->
         <span>
           <b>Họ và tên: </b>
-          Nguyễn Mạnh Cường
+          {{landlordDetail.displayName}}
         </span>
         <br>
         <span>
           <b>Facebook: </b>
-          <a href="https://www.facebook.com/daihocfpt/photos/pcb.10166451901970062/10166451901825062">Nguyễn Mạnh Cường</a>
+          <a href="{{landlordDetail.facebookUrl}}">{{landlordDetail.facebookUrl}}</a>
         </span>
         <br>
         <span>
           <b>Số điện thoại: </b>
-          0346 0342 17
+          {{landlordDetail.phoneNumber}}
         </span>
         <br>
         <span>
           <b>Địa chỉ: </b>
-          Thôn 3, Thạch Hòa, Thạch Thất, Hà Nội
+          {{landlordDetail.address.addresses}}
         </span>
       </div>
 
