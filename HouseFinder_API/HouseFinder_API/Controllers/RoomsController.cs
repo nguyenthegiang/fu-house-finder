@@ -31,11 +31,11 @@ namespace HouseFinder_API.Controllers
             }
         }
 
-        //GET: api/Rooms/getAvailableRoomsByHouseId?HouseId=
-        [HttpGet("getAvailableRoomsByHouseId")]
-        public IActionResult GetAvailableRoomsByHouseId(int houseId)
+        //GET: api/Rooms/getAvailableRooms?HouseId=
+        [HttpGet("getAvailableRooms")]
+        public IActionResult GetAvailableRoomsByHouseId(int HouseId)
         {
-            List<RoomDTO> rooms = roomsRepository.GetAvailableRoomsByHouseId(houseId);
+            List<RoomDTO> rooms = roomsRepository.GetAvailableRoomsByHouseId(HouseId);
             if(rooms == null)
             {
                 return NotFound();
