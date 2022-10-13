@@ -1,5 +1,6 @@
 # fu-house-finder
 SEP490 - Capstone Project
+_(Nhớ pull main trước khi Code nhé)_
 
 Chào bạn! Chúng ta làm việc theo nhóm, vì vậy mọi quyết định đều nên có sự đồng thuận của tất cả mọi người. Vì thế khi Code Hãy nhớ thông báo về công việc mình làm và nhớ viết Commit cho chi tiết và cụ thể nha (dùng tiếng Anh nữa) (❁´◡`❁)
 
