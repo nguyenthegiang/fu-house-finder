@@ -20,7 +20,7 @@ import { ListRoomComponent } from './Landlord/list-room/list-room.component';
     AppComponent,
     routingComponents,
     HouseDetailComponent,
-    LoginComponent
+    LoginComponent,
     DashboardComponent,
     ListRoomComponent
   ],
