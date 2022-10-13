@@ -9,7 +9,7 @@ import { ListRoomComponent } from './Landlord/list-room/list-room.component';
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomepageComponent },
-  { path: 'login', component: LoginComponent}
+  { path: 'login', component: LoginComponent},
   { path: 'house-detail/:id', component: HouseDetailComponent},
   { path: 'house-detail', component: HouseDetailComponent},
   { path: 'Landlord/dashboard', component: DashboardComponent},
