@@ -5,6 +5,7 @@ Chào bạn! Chúng ta làm việc theo nhóm, vì vậy mọi quyết định �
 
 Nếu bạn gặp lỗi hay vấn đề gì đó khi chạy chương trình, hãy thử những cách dưới đây:
  - Github Desktop: Fetch origin -> Update from Main
+ - Chạy CMD ở Angular Project: npm install
  - Tắt Browser đi mở lại
  - Thử chạy bằng 1 Browser khác
  - Chạy lại Database
@@ -19,4 +20,4 @@ https://fptuniversity-my.sharepoint.com/:u:/g/personal/giangnthe153046_fpt_edu_v
 ## Hướng dẫn Clone lại Project:
 ### Những việc cần làm sau khi Clone Project:
  - Copy lại file appsettings.json (trên kia)
- - Mở project Angular và chạy lệnh: npm install
+ - Chạy CMD ở Angular Project: npm install
