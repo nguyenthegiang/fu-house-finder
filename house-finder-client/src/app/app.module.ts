@@ -12,7 +12,8 @@ import {
   GoogleLoginProvider,
   FacebookLoginProvider
 } from 'angularx-social-login';
-
+import { DashboardComponent } from './Landlord/dashboard/dashboard.component';
+import { ListRoomComponent } from './Landlord/list-room/list-room.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,8 @@ import {
     routingComponents,
     HouseDetailComponent,
     LoginComponent
+    DashboardComponent,
+    ListRoomComponent
   ],
   imports: [
     BrowserModule,

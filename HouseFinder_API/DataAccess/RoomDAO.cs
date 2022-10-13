@@ -35,6 +35,35 @@ namespace DataAccess
             return rooms;
         }
 
+        //[HouseDetail] Get list Available Rooms by House ID
+        public static List<RoomDTO> GetAvailableRoomsByHouseId(int HouseId)
+        {
+            List<RoomDTO> rooms = new List<RoomDTO>();
+            try
+            {
+                using(var context = new FUHouseFinderContext())
+                {
+                    //Find rooms of this house
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    var result = context.Rooms.Include(p => p.Status).Where(r => r.HouseId == HouseId).ProjectTo<RoomDTO>(config).ToList();
+                    //Get only available rooms
+                    foreach (RoomDTO r in result)
+                    {
+                        if(r.Status.StatusName.Equals("Available"))
+                        {
+                            rooms.Add(r);
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return rooms;
+        }
+
         //Get LowestRoomPrice & LowestRoomPrice for HouseDTO (used to display in Home Page)
         //Used in: HouseDAO.GetAllHouses();
         public static HouseDTO GetRoomPriceForHouseDTO(HouseDTO houseDTO)

@@ -5,11 +5,11 @@ Chào bạn! Chúng ta làm việc theo nhóm, vì vậy mọi quyết định �
 
 Nếu bạn gặp lỗi hay vấn đề gì đó khi chạy chương trình, hãy thử những cách dưới đây:
  - Github Desktop: Fetch origin -> Update from Main
- - Clone lại Project
  - Tắt Browser đi mở lại
  - Thử chạy bằng 1 Browser khác
  - Chạy lại Database
  - Khởi động lại máy tính 
+ - Clone lại Project
 
 Nếu vẫn không được thì vào Messenger chia sẻ với mọi người nhé
 

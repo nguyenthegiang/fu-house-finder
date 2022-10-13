@@ -23,22 +23,6 @@
       <div class="text-center text-white bg-secondary p-2 rounded-top">LỌC PHÒNG TRỌ</div>
 
       <div class="container">
-        <div class="d-flex justify-content-between align-items-center pt-3">
-          <div class="font-weight-bold">Cơ sở</div>
-
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton"
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Chọn nơi muốn tìm
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </div>
-        </div>
-        <hr>
 
         <div>
           <div><span class="font-weight-bold">Bán kính:</span> 0 - 10km</div>
@@ -56,29 +40,6 @@
                 <span>
                   <span class="text-mute">Max: </span>
                   <span>10</span>
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <hr>
-
-        <div>
-          <div><span class="font-weight-bold">Khoảng giá:</span> 0 - 20.000.000đ</div>
-          <div>
-            <div class="ranges-container">
-              <div class="range d-flex justify-content-between align-items-center">
-                <input type="range" min="0" max="20000000" label="Min" value="0" class="w-75">
-                <span>
-                  <span class="text-mute">Min: </span>
-                  <span>0</span>
-                </span>
-              </div>
-              <div class="range d-flex justify-content-between align-items-center">
-                <input type="range" min="0" max="20000000" label="Max" value="20000000" class="w-75">
-                <span>
-                  <span class="text-mute">Max: </span>
-                  <span>20</span>
                 </span>
               </div>
             </div>
@@ -135,45 +96,6 @@
           </div>
         </div>
         <hr>
-
-        <div class="pb-3">
-          <div class="font-weight-bold mb-2">Tiện ích khác:</div>
-
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
-              Wifi
-            </label>
-          </div>
-
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
-              Điều hòa
-            </label>
-          </div>
-
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
-              Nóng lạnh
-            </label>
-          </div>
-
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
-              Khóa vân tay
-            </label>
-          </div>
-
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
-              Camera an ninh
-            </label>
-          </div>
-        </div>
       </div>
     </div>
     <!-- End Filter Column -->
@@ -181,22 +103,9 @@
     <!-- Display Houses -->
     <div class="w-75 mr-5">
       <!-- Rooms Count Available -->
-      <div class="d-flex justify-content-between mb-3">
-        <div class="font-weight-bold">Tổng số phòng trống: 10</div>
-
-        <div class="d-flex justify-content-between align-items-center mb-2">
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton"
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Sắp xếp theo
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </div>
-        </div>
+      <div class="text-center mb-3">
+        <div class="font-weight-bold">Tổng số tòa: 10 tòa</div>
+        <div class="font-weight-bold">Số phòng trống/Tổng số phòng: 10/100 phòng</div>
       </div>
       <!-- End Rooms Count Available -->
 
@@ -204,8 +113,7 @@
       <div class="row">
         <!-- House Item -->
         <div class="col-4" *ngFor="let dataItem of houses">
-          <!-- Item onClick: to House Detail -->
-          <div class="card rounded houseCardItem" routerLink="/house-detail/{{dataItem.houseId}}">
+          <div class="card rounded">
             <img class="card-img-top"
               src="https://static.vecteezy.com/system/resources/thumbnails/002/042/706/small/wooden-cartoon-country-house-vector.jpg"
               alt="Card image cap">
@@ -217,6 +125,7 @@
               <div class="card-text"><i class="fa-solid fa-road mr-2"></i>{{dataItem.address.googleMapLocation}} 3.5km
               </div>
               <div class="card-text"><i class="fa-solid fa-phone mr-2"></i>0987654321</div>
+              <a href="#" class="btn btn-primary mt-3">Xem chi tiết</a>
             </div>
           </div>
         </div>

@@ -11,6 +11,11 @@ namespace Repositories.Repositories
 {
     public class RoomRepository : IRoomsRepository
     {
+        public List<RoomDTO> GetAvailableRoomsByHouseId(int houseId) => RoomDAO.GetAvailableRoomsByHouseId(houseId);
+
         public List<RoomDTO> GetRoomsByHouseId(int HouseId) => RoomDAO.GetRoomsByHouseId(HouseId);
+
+        
+
     }
 }
