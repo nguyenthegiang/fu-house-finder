@@ -10,5 +10,7 @@ namespace Repositories.IRepository
     public interface IUserReposiotry
     {
         UserDTO GetUserByID(string UserId);
+        public ResponseDTO Login(LoginDTO login);
+        public ResponseDTO Register(RegisterDTO register);
     }
 }
