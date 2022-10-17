@@ -1,10 +1,9 @@
-import { Component, ElementRef, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { SocialAuthService, SocialUser } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
-import { CredentialResponse, PromptMomentNotification } from 'google-one-tap';
-
+import { CredentialResponse } from 'google-one-tap';
 
 
 @Component({
@@ -13,7 +12,7 @@ import { CredentialResponse, PromptMomentNotification } from 'google-one-tap';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
+  @ViewChild('ggDiv') ggDiv: ElementRef | undefined;
   socialUser: SocialUser | undefined;
   user: User | undefined;
   constructor(
@@ -37,22 +36,36 @@ export class LoginComponent implements OnInit {
         client_id: '919349682446-etrauq4d5cluclesaifkcr4bnh4gru2j.apps.googleusercontent.com',
         callback: this.handleCredentialResponse.bind(this), // Whatever function you want to trigger...
         auto_select: false,
-        cancel_on_tap_outside: false
+        cancel_on_tap_outside: true,
       });
+
+      // @ts-ignore
+      google.accounts.id.renderButton(
+        parent=this.ggDiv?.nativeElement,
+        {
+          type: 'standard',
+          theme: 'outline',
+          size: 'large',
+          text: 'signin_with',
+          shape: 'rectangular',
+          logo_alignment: 'left'
+        }
+      );
     
       // OPTIONAL: In my case I want to redirect the user to an specific path.
       // @ts-ignore
-      google.accounts.id.prompt((notification: PromptMomentNotification) => {
-        console.log('Google prompt event triggered...');
+      // google.accounts.id.prompt((notification: PromptMomentNotification) => {
+      //   console.log('Google prompt event triggered...');
     
-        if (notification.getDismissedReason() === 'credential_returned') {
-            console.log('Welcome back!');
-        }
-      });
+      //   if (notification.getDismissedReason() === 'credential_returned') {
+      //       console.log('Welcome back!');
+      //   }
+      // });
     };
     
   }
   handleCredentialResponse(response: CredentialResponse) {
+    console.log(response?.credential);
     // Decoding  JWT token...
       let decodedToken: any | null = null;
       try {
