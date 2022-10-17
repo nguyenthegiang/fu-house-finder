@@ -25,7 +25,7 @@ namespace DataAccess
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
                     rooms = context.Rooms.Where(r => r.HouseId == HouseId)
-                        .Include(r => r.ImagesOfRooms).ProjectTo<RoomDTO>(config).ToList();
+                        .Include(r => r.ImagesOfRooms).Include(r => r.RoomType).ProjectTo<RoomDTO>(config).ToList();
                 }
             } catch (Exception e)
             {

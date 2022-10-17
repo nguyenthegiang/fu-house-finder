@@ -19,7 +19,7 @@ namespace DataAccess.DTO
         public int? BuildingNumber { get; set; }
         public int? FloorNumber { get; set; }
         public virtual StatusDTO Status { get; set; }
-        public int? RoomTypeId { get; set; }
+        public virtual RoomTypeDTO RoomType { get; set; }
         public int? HouseId { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
