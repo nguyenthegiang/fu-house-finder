@@ -29,7 +29,6 @@
 
   <ItemGroup>
     <Folder Include="Authentication\" />
-    <Folder Include="Helper\" />
     <Folder Include="wwwroot\Image\" />
     <Folder Include="wwwroot\Video\" />
   </ItemGroup>

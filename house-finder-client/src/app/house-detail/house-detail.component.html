@@ -35,6 +35,15 @@
             <th>Đang ở</th>
             <th>Ghi chủ</th>
           </thead>
+          <tbody>
+            <tr *ngFor="let dataItem of availableRooms">
+              <td>{{dataItem.roomName}}</td>
+              <td>{{dataItem.price}}</td>
+              <td>{{dataItem.price}}</td>
+              <td>{{dataItem.currentAmountOfPeople}}</td>
+              <td>{{dataItem.information}}</td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
