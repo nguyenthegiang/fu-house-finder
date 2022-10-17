@@ -93,7 +93,7 @@ namespace DataAccess
             return houseDTO;
         }
         //Get House Count By User id
-        public static int GetHouseCountByUserId(string landlordId)
+        public static int GetHouseCountByLandlordId(string landlordId)
         {
             int count;
             try
