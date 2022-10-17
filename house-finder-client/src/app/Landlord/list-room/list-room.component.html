@@ -1,14 +1,14 @@
-<p>list-room works!</p>
-
-<div class="row">
-  <button>Thêm phòng</button>
-  <div></div>
+<div class="row add-button">
+  <!-- Search bar -->
+  <input type="text" placeholder="Search..">
+  <!-- Add room button -->
+  <button id="addRoom">Thêm phòng</button>
 </div>
 
-<div class="row">
+<div class="row filter">
   <!-- Loại phòng -->
   <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Loại phòng
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -20,7 +20,7 @@
 
   <!-- Tầng -->
   <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Tầng
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -32,7 +32,7 @@
 
   <!-- Tình trạng -->
   <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Tình trạng
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -41,17 +41,34 @@
       </ul>
     </div>
   </div>
+
+  <!-- Button -->
+  <button id="filter-button">Lọc</button>
 </div>
 
 <!-- List of rooms  -->
-<div class="row">
+<div class="row room-table">
   <h3>Danh sách phòng trống</h3>
   <table>
     <thead>
       <th>Tên phòng</th>
       <th>Giá phòng</th>
       <th>Diện tích</th>
+      <th>Điều hòa</th>
+      <th>Số người tối đa</th>
+      <th>Số người đang ở</th>
       <th>Trạng thái</th>
     </thead>
+    <tbody>
+      <tr>
+        <td>101</td>
+        <td>2.000.000 VNĐ</td>
+        <td>12 m2</td>
+        <td>Có</td>
+        <td>4</td>
+        <td>2</td>
+        <td>Trống</td>
+      </tr>
+    </tbody>
   </table>
 </div>

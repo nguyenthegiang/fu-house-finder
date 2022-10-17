@@ -14,14 +14,14 @@
 
       <!-- House detail information-->
       <div class="house-information">
-        <h3>{{houseDetail.houseName}}</h3>
-        <span><b>Giá điện: </b> {{houseDetail.powerPrice}}/kWh</span>
+        <h3>{{houseDetail!.houseName}}</h3>
+        <span><b>Giá điện: </b> {{houseDetail!.powerPrice}}/kWh</span>
         <br>
-        <span><b>Giá nước: </b> {{houseDetail.waterPrice}}/m3</span>
+        <span><b>Giá nước: </b> {{houseDetail!.waterPrice}}/m3</span>
         <br>
-        <span><b>Địa chỉ: </b>{{houseDetail.address.addresses}}</span>
+        <span><b>Địa chỉ: </b>{{houseDetail!.address!.addresses}}</span>
         <br>
-        <span><b>Thông tin khác: </b>{{houseDetail.information}}</span>
+        <span><b>Thông tin khác: </b>{{houseDetail!.information}}</span>
       </div>
 
       <!-- List available rooms -->
@@ -59,22 +59,22 @@
         <!-- Other information -->
         <span>
           <b>Họ và tên: </b>
-          {{landlordDetail.displayName}}
+          {{landlordDetail?.displayName}}
         </span>
         <br>
         <span>
           <b>Facebook: </b>
-          <a href="{{landlordDetail.facebookUrl}}">{{landlordDetail.facebookUrl}}</a>
+          <a href="{{landlordDetail!.facebookUrl}}">{{landlordDetail!.facebookUrl}}</a>
         </span>
         <br>
         <span>
           <b>Số điện thoại: </b>
-          {{landlordDetail.phoneNumber}}
+          {{landlordDetail!.phoneNumber}}
         </span>
         <br>
         <span>
           <b>Địa chỉ: </b>
-          {{landlordDetail.address.addresses}}
+          {{landlordDetail!.address.addresses}}
         </span>
       </div>
 
