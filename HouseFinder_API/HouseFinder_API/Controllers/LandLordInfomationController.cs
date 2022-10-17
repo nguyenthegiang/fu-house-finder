@@ -15,18 +15,19 @@ namespace HouseFinder_API.Controllers
     public class LandLordInfomationController : ControllerBase
     {
         private ILandlordInfomationRepository landlordInfomationRepository = new LandlordInfomationRepository();
+
         //GET: api/Hoses/LandlordInfo?LandlordId=
         [HttpGet("LandlordInfo")]
         public IActionResult GetLandlordInfomationByLandlordId(string LandlordId)
         {
-            LandlordDasboardInformationDTO l = landlordInfomationRepository.GetLandLordInfomationByLandlordId(LandlordId);
-            if (l == null)
+            LandlordDasboardInformationDTO landlordInfo = landlordInfomationRepository.GetLandLordInfomationByLandlordId(LandlordId);
+            if (landlordInfo == null)
             {
                 return NotFound();
             }
             else
             {
-                return Ok(l);
+                return Ok(landlordInfo);
             }
         }
     }
