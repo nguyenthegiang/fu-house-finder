@@ -15,7 +15,7 @@ Nếu bạn gặp lỗi hay vấn đề gì đó khi chạy chương trình, hã
 
 Nếu vẫn không được thì vào Messenger chia sẻ với mọi người nhé
 
-## File Appsettings.json cho ai Clone lại Project:
+## File Appsettings.json cho ai Clone lại Project: (Nhớ sửa ConnectionString nhé!!!)
 https://fptuniversity-my.sharepoint.com/:u:/g/personal/giangnthe153046_fpt_edu_vn/EYbpNPxQyC1LuEFFKksI2H8BsWzoY2B_cm1rhJX50nshfw?e=hwUUtO
 
 ## Hướng dẫn Clone lại Project:
