@@ -16,4 +16,9 @@ export class RoomService {
   getAvailableRooms(houseId: number): Observable<any[]> {
     return this.http.get<any[]>(this.APIUrl + "/getAvailableRooms?HouseId=" + houseId);
   }
+
+  //[Landlord: List Room] Get List of Rooms by HouseId
+  getRooms(houseId: number) : Observable<any[]>{
+    return this.http.get<any[]>(this.APIUrl + "/getByHouseId?HouseId=" + houseId);
+  }
 }

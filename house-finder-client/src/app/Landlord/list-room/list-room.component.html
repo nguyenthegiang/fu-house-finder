@@ -60,14 +60,20 @@
       <th>Trạng thái</th>
     </thead>
     <tbody>
-      <tr>
-        <td>101</td>
-        <td>2.000.000 VNĐ</td>
-        <td>12 m2</td>
-        <td>Có</td>
-        <td>4</td>
-        <td>2</td>
-        <td>Trống</td>
+      <tr *ngFor="let dataItem of rooms">
+        <td>{{dataItem.roomName}}</td>
+        <td>{{dataItem.pricePerMonth}} VNĐ</td>
+        <td>{{dataItem.areaByMeters}} m2</td>
+        <!-- Air conditioner -->
+        <td *ngIf="dataItem.aircon === false">
+          <img src="../../../assets/image/cancel.png">
+        </td>
+        <td *ngIf="dataItem.aircon === true">
+          <img src="../../../assets/image/tick.png">
+        </td>
+        <td>{{dataItem.maxAmountOfPeople}}</td>
+        <td>{{dataItem.currentAmountOfPeople}}</td>
+        <td>{{dataItem.status.statusName}}</td>
       </tr>
     </tbody>
   </table>
