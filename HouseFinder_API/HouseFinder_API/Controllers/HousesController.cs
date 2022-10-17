@@ -34,7 +34,7 @@ namespace HouseFinder_API.Controllers
         public IActionResult GetHouseById(int HouseId)
         {
             HouseDTO houseDTO = housesRepository.GetHouseById(HouseId);
-            if(houseDTO == null)
+            if (houseDTO == null)
             {
                 return NotFound();
             }
@@ -43,5 +43,6 @@ namespace HouseFinder_API.Controllers
                 return Ok(houseDTO);
             }
         }
+        
     }
 }
