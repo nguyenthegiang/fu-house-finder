@@ -5,9 +5,9 @@ import { Status } from './status';
 export interface Room {
     roomId: number;
     roomName: string;
-    price: number;
+    pricePerMonth: number;
     information: string;
-    area: number;
+    areaByMeters: number;
     aircon: boolean;
     maxAmountOfPeople: number;
     currentAmountOfPeople: number;
