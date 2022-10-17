@@ -1,3 +1,4 @@
+import { RoomType } from './roomType';
 import { Status } from './status';
 
 //DTO: Rooms
@@ -13,4 +14,5 @@ export interface Room {
     buildingNumber: number;
     floorNumber: number;
     status: Status;
+    roomType: RoomType;
 }
