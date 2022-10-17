@@ -92,27 +92,6 @@ namespace DataAccess
             }
             return houseDTO;
         }
-        //Get House Count By User id
-        public static int GetHouseCountByLandlordId(string landlordId)
-        {
-            int count;
-            try
-            {
-                using (var context = new FUHouseFinderContext())
-                {
-                    //include Address into Houses
-                    MapperConfiguration config;
-                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    //Get by ID
-                    count = context.Houses.Where(p => p.LandlordId == landlordId).ToList().Count;
-
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-            return count;
-        }
+        
     }
 }
