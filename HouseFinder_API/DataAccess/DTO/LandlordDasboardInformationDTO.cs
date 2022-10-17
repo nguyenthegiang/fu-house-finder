@@ -6,10 +6,14 @@ using System.Threading.Tasks;
 
 namespace DataAccess.DTO
 {
+    //Detail information that got displayed in Landlord Dashboard
     public class LandlordDasboardInformationDTO
     {
+        //Total Houses of 1 Landlord
         public int HouseCount { get; set; }
+        //Total Rooms of 1 Landlord 
         public int RoomCount { get; set; }
+        //Total Available Rooms of 1 Landlord
         public int RoomAvailableCount { get; set; }
     }
 }

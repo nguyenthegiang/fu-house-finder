@@ -10,42 +10,32 @@ namespace DataAccess.DTO
 {
     public class LandlordInfoDAO
     {
+        //Get Detail information that got displayed in Landlord Dashboard
         public static LandlordDasboardInformationDTO GetLandLordInfomationByLandlordId(string landlordId)
         {
-            LandlordDasboardInformationDTO landLord = new LandlordDasboardInformationDTO();
-            int houseCount=0;
-            int roomCount=0;
-            int roomAvailableCount=0;
+            LandlordDasboardInformationDTO landLordInfo = new LandlordDasboardInformationDTO();
             try
             {
                 using (var context = new FUHouseFinderContext())
                 {
-                    //include Address into Houses
-                    MapperConfiguration config;
-                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
                     //Get infomation of LandLord
-                    
-                    houseCount = context.Houses.Where(p => p.LandlordId == landlordId).ToList().Count;
-                    List<House> houses = context.Houses.Where(h => h.LandlordId == landlordId).ToList();
-                    foreach(House h in houses)
-                    {
-                        int r = context.Rooms.Where(r => r.HouseId == h.HouseId).ToList().Count;
-                        roomCount = roomCount + r;
-                        int ra = context.Rooms.Where(r => r.HouseId == h.HouseId && r.StatusId == 1).ToList().Count;
-                        roomAvailableCount = roomAvailableCount + ra;
-                    }
-                    landLord.HouseCount = houseCount;
-                    landLord.RoomCount = roomCount;
-                    landLord.RoomAvailableCount = roomAvailableCount;
-                    
+                    List<House> housesOfLandlord = context.Houses.Where(h => h.LandlordId == landlordId).ToList();
+                    //Count total houses
+                    landLordInfo.HouseCount = housesOfLandlord.Count;
 
+                    //count total rooms & available rooms
+                    foreach(House house in housesOfLandlord)
+                    {
+                        landLordInfo.RoomCount += context.Rooms.Where(r => r.HouseId == house.HouseId).ToList().Count;
+                        landLordInfo.RoomAvailableCount += context.Rooms.Where(r => r.HouseId == house.HouseId && r.StatusId == 1).ToList().Count;
+                    }
                 }
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-            return landLord;
+            return landLordInfo;
         }
     }
 }
