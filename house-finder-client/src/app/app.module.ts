@@ -20,7 +20,7 @@ import { ListRoomComponent } from './Landlord/list-room/list-room.component';
     AppComponent,
     routingComponents,
     HouseDetailComponent,
-    LoginComponent
+    LoginComponent,
     DashboardComponent,
     ListRoomComponent
   ],
@@ -36,12 +36,6 @@ import { ListRoomComponent } from './Landlord/list-room/list-room.component';
     useValue: {
       autoLogin: false,
       providers: [
-        {
-          id: GoogleLoginProvider.PROVIDER_ID,
-          provider: new GoogleLoginProvider(
-            'clientId'
-          )
-        },
         {
           id: FacebookLoginProvider.PROVIDER_ID,
           provider: new FacebookLoginProvider('790258838897169')

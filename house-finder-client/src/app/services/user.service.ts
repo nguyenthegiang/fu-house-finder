@@ -15,4 +15,16 @@ export class UserService {
   getUserByUserId(userId: string): Observable<User> {
     return this.http.get<User>(this.APIUrl + "/" + userId);
   }
+
+  loginFacebook(facebookUserId: string): Observable<User> {
+    return this.http.post<User>(this.APIUrl + "/login", {"facebookUserId": facebookUserId});
+  }
+
+  loginGoogle(googleUserId: string): Observable<User>{
+    return this.http.post<User>(this.APIUrl + "/login", {"googleUserId": googleUserId});
+  }
+
+  loginEmailPassword(email: string, password: string): Observable<User>{
+    return this.http.post<User>(this.APIUrl + "/login", {"email": email, "password": password});
+  }
 }
