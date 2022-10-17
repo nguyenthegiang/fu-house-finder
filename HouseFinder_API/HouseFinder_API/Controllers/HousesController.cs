@@ -43,22 +43,6 @@ namespace HouseFinder_API.Controllers
                 return Ok(houseDTO);
             }
         }
-        //GET: api/Hoses/LandlordInfo?LandlordId=
-        [HttpGet("LandlordInfo")]
-        public IActionResult GetLandlordInfomationByLandlordId(string LandlordId)
-        {
-            LandlordDasboardInformationDTO l = new LandlordDasboardInformationDTO();
-            l.HouseCount = housesRepository.GetHouseCountByLandlordId(LandlordId);
-            l.RoomAvailableCount = 0;
-            l.RoomCount = 0;
-            if (l == null)
-            {            
-                return NotFound();
-            }
-            else
-            {
-                return Ok(l);
-            }           
-        }
+        
     }
 }
