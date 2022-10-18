@@ -13,6 +13,7 @@ namespace Repositories.IRepository
         public List<HouseDTO> GetAllHouses();
         public List<HouseDTO> GetHouseByName(string HouseName);
         public HouseDTO GetHouseById(int HouseId);
-       
+
+        public List<HouseDTO> GetListHousesByLandlordId(string LandlordId);
     }
 }
