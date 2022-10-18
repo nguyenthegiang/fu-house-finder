@@ -61,8 +61,6 @@ export class HouseDetailComponent implements OnInit {
       studentId: 'HE153046',   //Fake data, fix later when have Login
       houseId: this.houseDetail!.houseId,
       reportContent: inputReportContent,
-      createdDate: '',
-      lastModifiedDate: '',
       createdBy: 'HE153046',
       lastModifiedBy: 'HE153046'
     };
