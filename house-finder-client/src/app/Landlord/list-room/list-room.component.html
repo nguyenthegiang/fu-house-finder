@@ -2,7 +2,7 @@
   <!-- Search bar -->
   <input type="text" placeholder="Search..">
   <!-- Add room button -->
-  <button id="addRoom">Thêm phòng</button>
+  <button id="addRoom">+ Thêm phòng</button>
 </div>
 
 <div class="row filter">
@@ -71,13 +71,13 @@
       <tr *ngFor="let dataItem of rooms">
         <td>{{dataItem.roomName}}</td>
         <td>{{dataItem.pricePerMonth|currency:'VND':'symbol':'3.0'}}</td>
-        <td>{{dataItem.areaByMeters}} m<sup>2</sup></td>
+        <td style="text-align: center;">{{dataItem.areaByMeters}} m<sup>2</sup></td>
 
         <!-- Air conditioner -->
-        <td *ngIf="dataItem.aircon === false">
+        <td *ngIf="dataItem.aircon === false" style="text-align: center;">
           <img src="../../../assets/image/cancel.png">
         </td>
-        <td *ngIf="dataItem.aircon === true">
+        <td *ngIf="dataItem.aircon === true" style="text-align: center;">
           <img src="../../../assets/image/tick.png">
         </td>
 
