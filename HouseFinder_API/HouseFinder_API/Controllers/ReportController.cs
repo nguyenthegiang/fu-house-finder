@@ -15,12 +15,14 @@ namespace HouseFinder_API.Controllers
     public class ReportController : ControllerBase
     {
         private IReportRepository reportRepository = new ReportRepository();
+
+        //[Report] Add Report
         [HttpPost]
         public IActionResult Post([FromBody] Report report)
         {
             try
             {
-                reportRepository.InsertReport(report);
+                reportRepository.AddReport(report);
                 return Ok();
             }
             catch (Exception)
