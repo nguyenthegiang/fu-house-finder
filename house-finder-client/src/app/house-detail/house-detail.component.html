@@ -104,12 +104,14 @@
           <form>
             <div class="form-group">
               <label for="message-text" class="col-form-label" style="color: #FF6F3D;">Lý do:</label>
-              <textarea class="form-control" id="message-text" style="border-color: #FF6F3D;"></textarea>
+              <textarea class="form-control" id="message-text" style="border-color: #FF6F3D;"
+                #inputReportContent></textarea>
             </div>
           </form>
         </div>
         <div class="modal-footer d-flex justify-content-center text-white" style="border-color: none;">
-          <button (click)="report()" type="button" class="btn text-white" style="background-color: #FF6F3D;">Báo
+          <button (click)="sendReport(inputReportContent.value)" type="button" class="btn text-white"
+            style="background-color: #FF6F3D;">Báo
             cáo</button>
         </div>
       </div>
