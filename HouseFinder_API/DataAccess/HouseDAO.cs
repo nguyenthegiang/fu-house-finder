@@ -93,6 +93,7 @@ namespace DataAccess
             return houseDTO;
         }
 
+        //Get list of houses by landlordId, with Address
         public static List<HouseDTO> GetListHousesByLandlordId(string LandlordId)
         {
             List<HouseDTO> houseDTOs;
@@ -103,6 +104,7 @@ namespace DataAccess
                     //include address
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    //Get by LandlordId
                     houseDTOs = context.Houses.Include(h => h.Address).ProjectTo<HouseDTO>(config).Where(h => h.LandlordId.Equals(LandlordId)).ToList();
                 }
             }
