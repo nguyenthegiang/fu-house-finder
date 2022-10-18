@@ -8,12 +8,15 @@ import { HouseService } from '../services/house.service';
 import { RoomService } from '../services/room.service';
 import { Observable } from 'rxjs';
 import { Room } from '../models/room';
+import { ReportService } from '../services/report.service';
+import { Report } from '../models/report';
 
 @Component({
   selector: 'app-house-detail',
   templateUrl: './house-detail.component.html',
   styleUrls: ['./house-detail.component.scss']
 })
+
 export class HouseDetailComponent implements OnInit {
   //Detail information of this House
   houseDetail: House | undefined;
@@ -27,6 +30,7 @@ export class HouseDetailComponent implements OnInit {
     private houseService: HouseService,
     private userService: UserService,
     private roomService: RoomService,
+    private reportService: ReportService
   ) { }
 
   ngOnInit(): void {
@@ -48,7 +52,21 @@ export class HouseDetailComponent implements OnInit {
     });
   }
 
-  report() {
-    alert("a");
+  //Send the Report for House
+  sendReport(inputReportContent: string) {
+    inputReportContent = inputReportContent.trim();
+
+    //Create Report
+    const report: Report = {
+      studentId: 'HE153046',   //Fake data, fix later when have Login
+      houseId: this.houseDetail!.houseId,
+      reportContent: inputReportContent,
+      createdDate: '',
+      lastModifiedDate: '',
+      createdBy: 'HE153046',
+      lastModifiedBy: 'HE153046'
+    };
+
+    this.reportService.addReport(report).subscribe();
   }
 }
