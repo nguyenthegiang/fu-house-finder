@@ -11,6 +11,6 @@ namespace Repositories.Repositories
 {
     public class ReportRepository: IReportRepository
     {
-        public void InsertReport(Report report) => ReportDAO.InsertReport(report);
+        public void AddReport(Report report) => ReportDAO.AddReport(report);
     }
 }

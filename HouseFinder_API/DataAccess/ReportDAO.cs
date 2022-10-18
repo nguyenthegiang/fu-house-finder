@@ -13,7 +13,7 @@ namespace DataAccess
 {
     public class ReportDAO
     {
-        public static void InsertReport(Report report)
+        public static void AddReport(Report report)
         {
             try
             {

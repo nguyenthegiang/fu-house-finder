@@ -9,6 +9,6 @@ namespace Repositories.IRepository
 {
     public interface IReportRepository
     {
-        public void InsertReport(Report report);
+        public void AddReport(Report report);
     }
 }
