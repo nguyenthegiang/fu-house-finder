@@ -22,6 +22,8 @@ namespace HouseFinder_API.Controllers
         {
             try
             {
+                report.CreatedDate = DateTime.Now;
+                report.LastModifiedDate = DateTime.Now;
                 reportRepository.AddReport(report);
                 return Ok();
             }
