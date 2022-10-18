@@ -44,7 +44,8 @@ namespace HouseFinder_API.Controllers
             }
         }
 
-        [HttpGet("LandlordId")]
+        //GET: api/Houses/GetHousesByLandlord?LandlordId=
+        [HttpGet("GetHousesByLandlord")]
         public IActionResult GetListHousesByLandlordId(string LandlordId)
         {
             List<HouseDTO> houseDTOs = housesRepository.GetListHousesByLandlordId(LandlordId);
