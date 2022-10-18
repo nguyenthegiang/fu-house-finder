@@ -92,6 +92,26 @@ namespace DataAccess
             }
             return houseDTO;
         }
-        
+
+        public static List<HouseDTO> GetListHousesByLandlordId(string LandlordId)
+        {
+            List<HouseDTO> houseDTOs;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //include address
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    houseDTOs = context.Houses.Include(h => h.Address).ProjectTo<HouseDTO>(config).Where(h => h.LandlordId.Equals(LandlordId)).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return houseDTOs;
+        }
+
     }
 }
