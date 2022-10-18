@@ -25,4 +25,9 @@ export class HouseService {
   getHouseByHouseId(houseId: number): Observable<House> {
     return this.http.get<House>(this.APIUrl + "/" + houseId);
   }
+
+  //[Dashboard] Get List Houses by Landlord Id
+  getListHousesByLandlordId(landlordId: string): Observable<any[]> {
+    return this.http.get<any>(this.APIUrl + "/GetHousesByLandlord?LandlordId=" + landlordId);
+  }
 }

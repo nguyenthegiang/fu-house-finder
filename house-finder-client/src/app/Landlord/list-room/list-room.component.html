@@ -62,8 +62,8 @@
     <tbody>
       <tr *ngFor="let dataItem of rooms">
         <td>{{dataItem.roomName}}</td>
-        <td>{{dataItem.pricePerMonth}} VNĐ</td>
-        <td>{{dataItem.areaByMeters}} m2</td>
+        <td>{{dataItem.pricePerMonth|currency:'VND':'symbol':'3.0'}}</td>
+        <td>{{dataItem.areaByMeters}} m<sup>2</sup></td>
         <!-- Air conditioner -->
         <td *ngIf="dataItem.aircon === false">
           <img src="../../../assets/image/cancel.png">

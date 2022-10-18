@@ -9,21 +9,28 @@
   }
 
   table{
-    border: solid 1px #3E4F3C;
+    border: solid 0.5px #3E4F3C;
+    border-collapse: separate;
+    border-spacing: 0px;
     color: #3E4F3C;
     thead{
       width: 100%;
       background-color: #9DB49A;
       th{
         text-align: center;
-        border: solid 1px #3E4F3C;
+        border: solid 1px #7F886B;
       }
     }
 
     tbody{
       td{
-        border: solid 1px #3E4F3C;
+        border: solid 1px #7F886B;
         padding: 0 20px;
+
+        img{
+          width: 30px;
+          padding: 5px 0;
+        }
       }
     }
   }
