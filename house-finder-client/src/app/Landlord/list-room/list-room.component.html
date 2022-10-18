@@ -49,14 +49,22 @@
 <!-- List of rooms  -->
 <div class="row room-table">
   <h3>Danh sách phòng trống</h3>
+
+  <!-- Note -->
+  <div style="display: flex; justify-content: flex-end;">
+    <i class="fa-solid fa-user" style="margin: 5px 5px;"></i>
+    <span>Đã ở</span>
+    <i class="fa-regular fa-user" style="margin: 5px 5px;"></i>
+    <span>Chưa ở</span>
+  </div>
+
   <table>
     <thead>
       <th>Tên phòng</th>
       <th>Giá phòng</th>
       <th>Diện tích</th>
       <th>Điều hòa</th>
-      <th>Số người tối đa</th>
-      <th>Số người đang ở</th>
+      <th>Số người ở</th>
       <th>Trạng thái</th>
     </thead>
     <tbody>
@@ -64,6 +72,7 @@
         <td>{{dataItem.roomName}}</td>
         <td>{{dataItem.pricePerMonth|currency:'VND':'symbol':'3.0'}}</td>
         <td>{{dataItem.areaByMeters}} m<sup>2</sup></td>
+
         <!-- Air conditioner -->
         <td *ngIf="dataItem.aircon === false">
           <img src="../../../assets/image/cancel.png">
@@ -71,9 +80,28 @@
         <td *ngIf="dataItem.aircon === true">
           <img src="../../../assets/image/tick.png">
         </td>
-        <td>{{dataItem.maxAmountOfPeople}}</td>
-        <td>{{dataItem.currentAmountOfPeople}}</td>
-        <td>{{dataItem.status.statusName}}</td>
+
+        <!-- Amount of people -->
+        <td style="display: flex;">
+          <ul id="list-people">
+            <li *ngFor='let in of counter(dataItem.currentAmountOfPeople); let i = index'>
+              <i class="fa-solid fa-user"></i>
+            </li>
+            <li *ngFor='let in of counter(dataItem.maxAmountOfPeople - dataItem.currentAmountOfPeople); let i = index'>
+              <i class="fa-regular fa-user"></i>
+            </li>
+          </ul>
+        </td>
+
+        <!-- Room status -->
+        <td>
+          <label class="switch">
+            <input *ngIf="dataItem.status.statusName === 'Occupied' || dataItem.status.statusName === 'Disabled'" type="checkbox">
+            <input *ngIf="dataItem.status.statusName === 'Available'" type="checkbox" checked>
+            <span class="slider round"></span>
+          </label>
+          {{dataItem.status.statusName}}
+        </td>
       </tr>
     </tbody>
   </table>
