@@ -43,6 +43,20 @@ namespace HouseFinder_API.Controllers
                 return Ok(houseDTO);
             }
         }
-        
+
+        [HttpGet("LandlordId")]
+        public IActionResult GetListHousesByLandlordId(string LandlordId)
+        {
+            List<HouseDTO> houseDTOs = housesRepository.GetListHousesByLandlordId(LandlordId);
+            if (houseDTOs == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(houseDTOs);
+            }
+        }
+
     }
 }
