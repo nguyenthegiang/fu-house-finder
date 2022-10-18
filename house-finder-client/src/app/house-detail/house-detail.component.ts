@@ -38,7 +38,7 @@ export class HouseDetailComponent implements OnInit {
 
       //Call API: get this House's Landlord detail information (after get house detail info)
       this.userService.getUserByUserId(this.houseDetail?.landlordId).subscribe(data => {
-          this.landlordDetail = data;
+        this.landlordDetail = data;
       });
 
       //Call API: get available rooms of this house
@@ -48,4 +48,7 @@ export class HouseDetailComponent implements OnInit {
     });
   }
 
+  report() {
+    alert("a");
+  }
 }
