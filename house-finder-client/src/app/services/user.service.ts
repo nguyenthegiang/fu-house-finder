@@ -21,6 +21,7 @@ export class UserService {
   }
 
   loginGoogle(googleUserId: string): Observable<User>{
+    console.log("api called");
     return this.http.post<User>(this.APIUrl + "/login", {"googleUserId": googleUserId});
   }
 
