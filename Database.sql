@@ -904,11 +904,23 @@ CREATE TABLE [dbo].[Rooms] (
 GO
 
 --AreaByMeters, Aircon, MaxAmountOfPeople, CurrentAmountOfPeople, BuildingNumber,  FloorNumber, StatusId, RoomTypeId, HouseId
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Gạch sàn nhà có họa tiết hình con cá', 5, 1, 2, 1, 1, 1, 1, 2, 1, 
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Gạch sàn nhà có họa tiết hình con cá', 5, 1, 3, 1, 1, 1, 1, 2, 1, 
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'102', 2500000, N'Đã có Bếp từ, hút mùi và đầy đủ phụ kiện', 5, 1, 2, 1, 1, 1, 1, 2, 1, 
+INSERT INTO [dbo].[Rooms] VALUES (N'102', 2500000, N'Đã có Bếp từ, hút mùi và đầy đủ phụ kiện', 5, 0, 2, 1, 1, 1, 3, 2, 1, 
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'103', 2000000, N'Tổng diện tích sử dụng: 20m2', 5, 1, 2, 1, 1, 1, 2, 2, 1, 
+INSERT INTO [dbo].[Rooms] VALUES (N'103', 2000000, N'Tổng diện tích sử dụng: 20m2', 5, 1, 4, 1, 1, 1, 2, 2, 1, 
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Rooms] VALUES (N'201', 3000000, N'Gạch sàn nhà có họa tiết hình con cá', 5, 0, 4, 2, 1, 1, 3, 2, 1, 
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Rooms] VALUES (N'202', 2500000, N'Đã có Bếp từ, hút mùi và đầy đủ phụ kiện', 5, 1, 4, 4, 1, 1, 1, 2, 1, 
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Rooms] VALUES (N'203', 2000000, N'Tổng diện tích sử dụng: 20m2', 5, 0, 4, 3, 1, 1, 2, 2, 1, 
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Rooms] VALUES (N'301', 3000000, N'Gạch sàn nhà có họa tiết hình con cá', 5, 0, 2, 1, 1, 1, 1, 2, 1, 
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Rooms] VALUES (N'302', 2500000, N'Đã có Bếp từ, hút mùi và đầy đủ phụ kiện', 5, 1, 2, 1, 1, 1, 1, 2, 1, 
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Rooms] VALUES (N'303', 2000000, N'Tổng diện tích sử dụng: 20m2', 5, 1, 2, 1, 1, 1, 2, 2, 1, 
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 
 INSERT INTO [dbo].[Rooms] VALUES (N'101', 4000000, N'Vệ sinh khép kín', 6, 1, 2, 1, 1, 1, 1, 2, 2, 
