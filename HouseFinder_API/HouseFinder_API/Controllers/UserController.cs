@@ -50,6 +50,7 @@ namespace HouseFinder_API.Controllers
                 };
                 var payload = await GoogleJsonWebSignature.ValidateAsync(login.GoogleUserId, validationSettings);
                 login.GoogleUserId = payload.Subject;
+                Console.WriteLine(payload.Subject);
             }
             ResponseDTO user = userReposiotry.Login(login);
             if (login.Email != null && login.Password != null && user == null)
