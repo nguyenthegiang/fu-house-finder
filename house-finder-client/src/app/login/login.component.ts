@@ -4,6 +4,7 @@ import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-logi
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
 import { CredentialResponse } from 'google-one-tap';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,11 +16,11 @@ export class LoginComponent implements OnInit {
   @ViewChild('ggDiv') ggDiv: ElementRef | undefined;
   socialUser: SocialUser | undefined;
   user: User | undefined;
-  router: any;
   constructor(
     private authService: SocialAuthService, 
-    private userService: 
-    UserService,private elementRef: ElementRef,
+    private userService: UserService,
+    private elementRef: ElementRef,
+    private router: Router
     ) { }
 
   ngOnInit(): void {
@@ -74,7 +75,15 @@ export class LoginComponent implements OnInit {
       } catch (e) {
         console.error('Error while trying to decode token', e);
       }
-      let user = this.userService.loginGoogle(response?.credential).subscribe();
+      let user = this.userService.loginGoogle(response?.credential).subscribe(
+        response => {
+          this.router.navigate(['/home']);
+        },
+        error => {
+          console.log(error);
+        }
+      );
+
     }
     
   signInWithFB(): void {
