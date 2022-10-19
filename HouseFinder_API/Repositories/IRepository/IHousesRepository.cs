@@ -14,5 +14,7 @@ namespace Repositories.IRepository
         public List<HouseDTO> GetHouseByName(string HouseName);
         public HouseDTO GetHouseById(int HouseId);
         public List<HouseDTO> GetListHousesByLandlordId(string LandlordId);
+
+        public decimal? GetMoneyForNotRentedRooms(int HouseId);
     }
 }
