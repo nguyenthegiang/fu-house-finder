@@ -211,12 +211,11 @@
               alt="Card image cap">
             <div class="card-body bg-secondary text-white rounded-bottom">
               <h5 class="card-title text-center font-weight-bold">{{dataItem.houseName}}</h5>
-              <div class="card-text"><i class="fa-solid fa-tag mr-2"></i>{{dataItem.lowestRoomPrice}}đ -
-                {{dataItem.highestRoomPrice}}đ</div>
+              <div class="card-text"><i class="fa-solid fa-tag mr-2"></i>{{dataItem.lowestRoomPrice|currency:'VND':'symbol':'3.0'}} -
+                {{dataItem.highestRoomPrice|currency:'VND':'symbol':'3.0'}}</div>
               <div class="card-text"><i class="fa-solid fa-location-dot mr-2"></i>Thôn 8, Thạch Hòa, Thạch Thất</div>
-              <div class="card-text"><i class="fa-solid fa-road mr-2"></i>{{dataItem.address.googleMapLocation}} 3.5km
+              <div class="card-text"><i class="fa-solid fa-road mr-2"></i>{{dataItem.address.googleMapLocation}}
               </div>
-              <div class="card-text"><i class="fa-solid fa-phone mr-2"></i>0987654321</div>
             </div>
           </div>
         </div>
