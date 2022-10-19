@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { SocialAuthService, SocialUser } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { User } from '../models/user';
@@ -20,7 +20,8 @@ export class LoginComponent implements OnInit {
     private authService: SocialAuthService, 
     private userService: UserService,
     private elementRef: ElementRef,
-    private router: Router
+    private router: Router,
+    private ngZone: NgZone
     ) { }
 
   ngOnInit(): void {
@@ -77,7 +78,7 @@ export class LoginComponent implements OnInit {
       }
       let user = this.userService.loginGoogle(response?.credential).subscribe(
         response => {
-          this.router.navigate(['/home']);
+          this.ngZone.run(()=>{this.router.navigate(['/home']);});
         },
         error => {
           console.log(error);
