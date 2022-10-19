@@ -16,7 +16,7 @@ namespace Repositories.Repositories
             }
             else if (login.GoogleUserId != null)
             {
-                user = UserDAO.LoginGoogle(login.FacebookUserId);
+                user = UserDAO.LoginGoogle(login.GoogleUserId);
             }
             else
             {

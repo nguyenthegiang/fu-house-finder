@@ -74,7 +74,7 @@ export class LoginComponent implements OnInit {
       } catch (e) {
         console.error('Error while trying to decode token', e);
       }
-      let user = this.userService.loginGoogle(response?.credential);
+      let user = this.userService.loginGoogle(response?.credential).subscribe();
     }
     
   signInWithFB(): void {

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using HouseFinder_API.Helper;
 using HouseFinder_API.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Google.Apis.Auth;
 
 namespace HouseFinder_API.Controllers
 {
@@ -38,9 +39,18 @@ namespace HouseFinder_API.Controllers
             }
         }
         [HttpPost("login")]
-        public IActionResult Login(LoginDTO login)
+        public async Task<IActionResult> Login(LoginDTO login)
         {
             login.Password = Hashing.Encrypt(login.Password);
+            if (login.GoogleUserId != null)
+            {
+                var validationSettings = new GoogleJsonWebSignature.ValidationSettings
+                {
+                    Audience = new string[] { "919349682446-etrauq4d5cluclesaifkcr4bnh4gru2j.apps.googleusercontent.com" }
+                };
+                var payload = await GoogleJsonWebSignature.ValidateAsync(login.GoogleUserId, validationSettings);
+                login.GoogleUserId = payload.Subject;
+            }
             ResponseDTO user = userReposiotry.Login(login);
             if (login.Email != null && login.Password != null && user == null)
                 return Forbid();
