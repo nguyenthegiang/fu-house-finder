@@ -14,6 +14,9 @@ namespace DataAccess.DTO
         public string Information { get; set; }
         public double? AreaByMeters { get; set; }
         public bool Aircon { get; set; }
+        public bool Wifi { get; set; }
+        public bool WaterHeater { get; set; }
+        public bool Furniture { get; set; }
         public int? MaxAmountOfPeople { get; set; }
         public int? CurrentAmountOfPeople { get; set; }
         public int? BuildingNumber { get; set; }

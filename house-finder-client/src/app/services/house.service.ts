@@ -30,4 +30,9 @@ export class HouseService {
   getListHousesByLandlordId(landlordId: string): Observable<any[]> {
     return this.http.get<any>(this.APIUrl + "/GetHousesByLandlord?LandlordId=" + landlordId);
   }
+
+  //[Landlord][List room] Get total money for not rented rooms
+  getMoneyForNotRentedRooms(houseId: number): Observable<any>{
+    return this.http.get<any>(this.APIUrl + "/GetMoneyForNotRentedRooms?HouseId=" + houseId);
+  }
 }
