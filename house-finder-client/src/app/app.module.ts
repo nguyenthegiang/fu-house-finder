@@ -14,6 +14,10 @@ import {
 } from 'angularx-social-login';
 import { DashboardComponent } from './Landlord/dashboard/dashboard.component';
 import { ListRoomComponent } from './Landlord/list-room/list-room.component';
+import { ListReportComponent } from './Staff/list-report/list-report.component';
+import { ListUserComponent } from './Staff/list-user/list-user.component';
+import { ListHouseComponent } from './Staff/list-house/list-house.component';
+import { DashboardStaffComponent } from './Staff/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,11 @@ import { ListRoomComponent } from './Landlord/list-room/list-room.component';
     HouseDetailComponent,
     LoginComponent,
     DashboardComponent,
-    ListRoomComponent
+    DashboardStaffComponent,
+    ListRoomComponent,
+    ListReportComponent,
+    ListUserComponent,
+    ListHouseComponent
   ],
   imports: [
     BrowserModule,
