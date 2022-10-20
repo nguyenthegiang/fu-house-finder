@@ -50,13 +50,21 @@
 <div class="row room-table">
   <h3>Danh sách phòng trống</h3>
 
-  <!-- Note -->
-  <div style="display: flex; justify-content: flex-end;">
-    <i class="fa-solid fa-user" style="margin: 5px 5px;"></i>
-    <span>Đã ở</span>
-    <i class="fa-regular fa-user" style="margin: 5px 5px;"></i>
-    <span>Chưa ở</span>
+  <div style="display: flex; justify-content: space-between;">
+    <!-- Total money for not rented rooms -->
+    <div style="color: red; font-weight: 500; font-size: 20px; padding: 20px 0;">
+      <span>Tổng tiền phòng chưa cho thuê: </span>
+      <span>{{money|currency:'VND':'symbol':'3.0'}}</span>
+    </div>
+    <!-- Note -->
+    <div style="display: flex; justify-content: flex-end;">
+      <i class="fa-solid fa-user" style="margin: 5px 5px;"></i>
+      <span>Đã ở</span>
+      <i class="fa-regular fa-user" style="margin: 5px 5px;"></i>
+      <span>Chưa ở</span>
+    </div>
   </div>
+
 
   <table>
     <thead>

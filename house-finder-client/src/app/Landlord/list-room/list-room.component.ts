@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Room } from 'src/app/models/room';
+import { HouseService } from 'src/app/services/house.service';
 import { RoomService } from 'src/app/services/room.service';
 
 @Component({
@@ -10,9 +11,12 @@ import { RoomService } from 'src/app/services/room.service';
 export class ListRoomComponent implements OnInit {
   //List of rooms
   rooms: Room[] = [];
+  //Money of not rented rooms
+  money:number = 0;
 
   constructor(
     private roomService: RoomService,
+    private houseService: HouseService,
   ) { }
 
   ngOnInit(): void {
@@ -22,6 +26,10 @@ export class ListRoomComponent implements OnInit {
     this.roomService.getRooms(id).subscribe(data => {
       this.rooms = data;
     });
+    //Call API: get total money for not rented rooms of this house
+    this.houseService.getMoneyForNotRentedRooms(id).subscribe(data => {
+         this.money = data;
+    })
   }
 
   counter(i: number) {
