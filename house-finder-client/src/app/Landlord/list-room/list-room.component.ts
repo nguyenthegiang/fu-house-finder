@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Room } from 'src/app/models/room';
 import { HouseService } from 'src/app/services/house.service';
 import { RoomService } from 'src/app/services/room.service';
@@ -15,13 +16,14 @@ export class ListRoomComponent implements OnInit {
   money:number = 0;
 
   constructor(
+    private route: ActivatedRoute,
     private roomService: RoomService,
     private houseService: HouseService,
   ) { }
 
   ngOnInit(): void {
     //Get id of House from Route
-    const id = 1;
+    const id = Number(this.route.snapshot.paramMap.get('id'));
     //Call API: get available rooms of this house
     this.roomService.getRooms(id).subscribe(data => {
       this.rooms = data;
