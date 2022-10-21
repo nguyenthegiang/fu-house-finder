@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Room } from 'src/app/models/room';
+import { RoomType } from 'src/app/models/roomType';
 import { HouseService } from 'src/app/services/house.service';
+import { RoomTypeService } from 'src/app/services/room-type.service';
 import { RoomService } from 'src/app/services/room.service';
 
 @Component({
@@ -14,11 +16,14 @@ export class ListRoomComponent implements OnInit {
   rooms: Room[] = [];
   //Money of not rented rooms
   money:number = 0;
+  //List of room types
+  roomTypes: RoomType[] = [];
 
   constructor(
     private route: ActivatedRoute,
     private roomService: RoomService,
     private houseService: HouseService,
+    private roomTypeService: RoomTypeService,
   ) { }
 
   ngOnInit(): void {
@@ -31,6 +36,10 @@ export class ListRoomComponent implements OnInit {
     //Call API: get total money for not rented rooms of this house
     this.houseService.getMoneyForNotRentedRooms(id).subscribe(data => {
          this.money = data;
+    });
+    //Call API: get Room types
+    this.roomTypeService.getRoomTypes().subscribe(data => {
+      this.roomTypes = data;
     })
   }
 

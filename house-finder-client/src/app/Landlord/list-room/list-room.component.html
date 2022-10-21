@@ -12,8 +12,8 @@
       Loại phòng
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <ul>
-        <li>Khép kín</li>
+      <ul *ngFor="let dataItem of roomTypes">
+        <li>{{dataItem.RoomTypeName}}</li>
       </ul>
     </div>
   </div>
