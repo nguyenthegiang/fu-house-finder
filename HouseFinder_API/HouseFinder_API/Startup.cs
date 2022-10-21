@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -37,7 +38,8 @@ namespace HouseFinder_API
                 cfg.IdleTimeout = new TimeSpan(0, 60, 0);
             });
             services.AddCors();
-            services.AddControllers();
+            //Configure OData service
+            services.AddControllers().AddOData(option => option.Select().Filter().Count().OrderBy().Expand());
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HouseFinder_API", Version = "v1" });
