@@ -24,7 +24,8 @@
 
     tbody{
       td{
-        border: solid 1px #7F886B;
+        border-top: solid 1px #7F886B;
+        border-collapse: collapse;
         padding: 0 20px;
         height: 40px;
 

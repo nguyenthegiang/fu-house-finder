@@ -1,3 +1,4 @@
+using BusinessObjects;
 using HouseFinder_API.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -5,11 +6,15 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OData.Edm;
+using Microsoft.OData.ModelBuilder;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
@@ -37,7 +42,12 @@ namespace HouseFinder_API
                 cfg.IdleTimeout = new TimeSpan(0, 60, 0);
             });
             services.AddCors();
-            services.AddControllers();
+            //Configure OData service
+            services.AddDbContext<FUHouseFinderContext>(option =>
+            {
+                option.UseSqlServer(Configuration.GetConnectionString("DBContext"));
+            });
+            services.AddControllers().AddOData(option => option.Select().Filter().Count().OrderBy().Expand());
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HouseFinder_API", Version = "v1" });
@@ -104,6 +114,13 @@ namespace HouseFinder_API
             {
                 endpoints.MapControllers();
             });
+        }
+
+        public static IEdmModel GetEdmModel()
+        {
+            ODataConventionModelBuilder modelBuilder = new ODataConventionModelBuilder();
+            modelBuilder.EntitySet<RoomType>("RoomTypeOdata");
+            return modelBuilder.GetEdmModel();
         }
     }
 }

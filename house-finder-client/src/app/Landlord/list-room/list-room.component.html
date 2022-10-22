@@ -12,8 +12,8 @@
       Loại phòng
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <ul>
-        <li>Khép kín</li>
+      <ul *ngFor="let dataItem of roomTypes">
+        <li>{{dataItem.RoomTypeName}}</li>
       </ul>
     </div>
   </div>
@@ -122,7 +122,7 @@
         </td>
 
         <!-- Amount of people -->
-        <td style="display: flex; height: max-content;">
+        <td style="display: flex; height:100%;">
           <ul id="list-people">
             <li *ngFor='let in of counter(dataItem.currentAmountOfPeople); let i = index'>
               <i class="fa-solid fa-user"></i>
