@@ -10,19 +10,8 @@ import { CampusService } from './services/campus.service';
 })
 export class AppComponent {
   title = 'FU House Finder';
-  route: string = "";
+  
+  constructor() { }
 
-  constructor(location: Location, router: Router) {
-    router.events.subscribe((val) => {
-      if(location.path() != ''){
-        this.route = location.path();
-      } else {
-        this.route = 'Home'
-      }
-    });
-  }
-
-  ngOnInit() {
-    console.log("Router link:" + this.route);
-}
+  ngOnInit() { }
 }
