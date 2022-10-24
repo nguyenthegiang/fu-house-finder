@@ -5,4 +5,5 @@ export interface Report {
     houseId: number;
     createdBy: string;
     lastModifiedBy: string;
+    //no need for createdDate & lastModifiedDate
 }

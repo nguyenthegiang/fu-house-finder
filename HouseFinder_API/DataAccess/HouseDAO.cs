@@ -115,10 +115,10 @@ namespace DataAccess
             return houseDTOs;
         }
 
-        //Get total amount of money of rooms that has not been rented
+        //[Landlord - List Rooms] Get total amount of money of rooms that has not been rented
         public static decimal? GetMoneyForNotRentedRooms(int HouseId)
         {
-            decimal? total = 0;
+            decimal? totalMoney = 0;
             try
             {
                 using (var context = new FUHouseFinderContext())
@@ -130,9 +130,11 @@ namespace DataAccess
                         .Where(r => r.HouseId == HouseId)
                         .Where(r => r.Status.StatusName.Equals("Available") || r.Status.StatusName.Equals("Disabled"))
                         .ProjectTo<RoomDTO>(config).ToList();
+
+                    //Count total money
                     foreach (RoomDTO r in rooms)
                     {
-                            total += r.PricePerMonth;
+                            totalMoney += r.PricePerMonth;
                     }
                 }
             }
@@ -140,7 +142,7 @@ namespace DataAccess
             {
                 throw new Exception(e.Message);
             }
-            return total;
+            return totalMoney;
         }
 
     }

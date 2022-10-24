@@ -16,14 +16,17 @@ namespace HouseFinder_API.Controllers
     {
         private IReportRepository reportRepository = new ReportRepository();
 
-        //[Report] Add Report
+        //[Report] POST: Add Report
         [HttpPost]
         public IActionResult Post([FromBody] Report report)
         {
             try
             {
+                //Set default date
                 report.CreatedDate = DateTime.Now;
                 report.LastModifiedDate = DateTime.Now;
+
+                //Add to DB
                 reportRepository.AddReport(report);
                 return Ok();
             }

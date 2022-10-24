@@ -15,7 +15,7 @@ export class ListRoomComponent implements OnInit {
   //List of rooms
   rooms: Room[] = [];
   //Money of not rented rooms
-  money:number = 0;
+  moneyForNotRentedRooms:number = 0;
   //List of room types
   roomTypes: RoomType[] = [];
 
@@ -29,14 +29,17 @@ export class ListRoomComponent implements OnInit {
   ngOnInit(): void {
     //Get id of House from Route
     const id = Number(this.route.snapshot.paramMap.get('id'));
+
     //Call API: get available rooms of this house
     this.roomService.getRooms(id).subscribe(data => {
       this.rooms = data;
     });
+
     //Call API: get total money for not rented rooms of this house
     this.houseService.getMoneyForNotRentedRooms(id).subscribe(data => {
-         this.money = data;
+         this.moneyForNotRentedRooms = data;
     });
+    
     //Call API: get Room types
     this.roomTypeService.getRoomTypes().subscribe(data => {
       this.roomTypes = data;

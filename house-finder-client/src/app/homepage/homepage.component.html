@@ -6,7 +6,8 @@
     <div class="input-group w-25">
       <!-- Press enter to search  -->
       <input type="text" class="form-control" placeholder="Nhập tên trọ, từ khóa tìm kiếm"
-        aria-label="Recipient's username" aria-describedby="button-addon2" [(ngModel)]="searchHouseName" (keydown.enter)="searchHouseByName()">
+        aria-label="Recipient's username" aria-describedby="button-addon2" [(ngModel)]="searchHouseName"
+        (keydown.enter)="searchHouseByName()">
       <div class="input-group-append">
         <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="searchHouseByName()">
           <i class="fa-solid fa-magnifying-glass"></i>
@@ -20,7 +21,7 @@
   <div class="d-flex justify-content-between">
     <!-- Filter Column -->
     <div class="w-25 bg-light mx-5 rounded">
-      <div class="text-center text-white p-2 rounded-top" style="background-color: #3E4F3C;">LỌC PHÒNG TRỌ</div>
+      <div class="text-center text-white p-2 rounded-top" id="roomFilterTitle">LỌC PHÒNG TRỌ</div>
 
       <div class="container">
         <div class="d-flex justify-content-between align-items-center pt-3">
@@ -207,9 +208,11 @@
               alt="Card image cap">
             <div class="card-body text-white rounded-bottom">
               <h5 class="card-title text-center font-weight-bold">{{dataItem.houseName}}</h5>
-              <div class="card-text"><i class="fa-solid fa-tag mr-2"></i>{{dataItem.lowestRoomPrice|currency:'VND':'symbol':'3.0'}} -
-                {{dataItem.highestRoomPrice|currency:'VND':'symbol':'3.0'}}</div>
-              <div class="card-text"><i class="fa-solid fa-location-dot mr-2"></i>Thôn 8, Thạch Hòa, Thạch Thất</div>
+              <!-- Price with VND format -->
+              <div class="card-text"><i class="fa-solid fa-tag mr-2"></i>{{dataItem.lowestRoomPrice |
+                currency:'VND':'symbol':'3.0'}} -
+                {{dataItem.highestRoomPrice | currency:'VND':'symbol':'3.0'}}</div>
+              <div class="card-text"><i class="fa-solid fa-location-dot mr-2"></i>{{dataItem.address.addresses}}</div>
               <div class="card-text"><i class="fa-solid fa-road mr-2"></i>{{dataItem.address.googleMapLocation}}
               </div>
             </div>

@@ -36,23 +36,30 @@ namespace HouseFinder_API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            //Add Session
             services.AddDistributedMemoryCache();
             services.AddSession(cfg => {
                 cfg.Cookie.Name = "HomeFinder";
                 cfg.IdleTimeout = new TimeSpan(0, 60, 0);
             });
+            
+            //Add CORS policy
             services.AddCors();
+
             //Configure OData service
             services.AddDbContext<FUHouseFinderContext>(option =>
             {
                 option.UseSqlServer(Configuration.GetConnectionString("DBContext"));
             });
             services.AddControllers().AddOData(option => option.Select().Filter().Count().OrderBy().Expand());
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HouseFinder_API", Version = "v1" });
             });
             var key = Configuration.GetSection("AppSettings").GetSection("Secret").Value;
+
+            //JWT Authentication
             services.AddAuthentication(auth =>
             {
                 auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -102,6 +109,7 @@ namespace HouseFinder_API
 
             app.UseRouting();
 
+            //CORS policy
             app.UseCors(builder =>
             {
                 builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
