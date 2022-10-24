@@ -18,5 +18,9 @@ namespace Repositories.Repositories
 
         public void UpdateRoomByRoomId(Room room) => RoomDAO.UpdateRoomByRoomId(room);
 
+        public void CreateRoom(Room room) => RoomDAO.CreateRoom(room);
+
+        public void DeleteRoom(int roomId) => RoomDAO.DeleteRoom(roomId);
+
     }
 }
