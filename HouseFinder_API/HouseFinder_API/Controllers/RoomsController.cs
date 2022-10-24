@@ -37,7 +37,7 @@ namespace HouseFinder_API.Controllers
         public IActionResult GetAvailableRoomsByHouseId(int HouseId)
         {
             List<RoomDTO> rooms = roomsRepository.GetAvailableRoomsByHouseId(HouseId);
-            if(rooms == null)
+            if (rooms == null)
             {
                 return NotFound();
             }
@@ -47,6 +47,24 @@ namespace HouseFinder_API.Controllers
             }
         }
 
+        //POST: api/Rooms
+        [HttpPost]
+        public IActionResult CreateRoom(Room room)
+        {
+            try
+            {
+                room.CreatedDate = DateTime.Now;
+                room.LastModifiedDate = DateTime.Now;
+                roomsRepository.CreateRoom(room);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        //PUT: api/Rooms
         [HttpPut]
         public IActionResult UpdateRoomByRoomId(Room room)
         {
@@ -55,7 +73,25 @@ namespace HouseFinder_API.Controllers
                 room.LastModifiedDate = DateTime.Now;
                 roomsRepository.UpdateRoomByRoomId(room);
                 return Ok();
-            }catch(Exception)
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+
+
+        //DELETE: api/Rooms?roomId=
+        [HttpDelete]
+        public IActionResult DeleteRoom(int roomId)
+        {
+            try
+            {
+                roomsRepository.DeleteRoom(roomId);
+                return Ok();
+            }
+            catch (Exception)
             {
                 return BadRequest();
             }
