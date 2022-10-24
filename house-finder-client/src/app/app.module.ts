@@ -14,11 +14,12 @@ import {
 } from 'angularx-social-login';
 import { DashboardComponent } from './Landlord/dashboard/dashboard.component';
 import { ListRoomComponent } from './Landlord/list-room/list-room.component';
-import { UpdateRoomComponent } from './update-room/update-room.component';
 import { ListReportComponent } from './Staff/list-report/list-report.component';
-import { ListUserComponent } from './Staff/list-user/list-user.component';
 import { ListHouseComponent } from './Staff/list-house/list-house.component';
 import { DashboardStaffComponent } from './Staff/dashboard/dashboard.component';
+import { UpdateRoomComponent } from './Landlord/update-room/update-room.component';
+import { ListLandlordComponent } from './Staff/list-landlord/list-landlord.component';
+import { ListLandlordSignupRequestComponent } from './Staff/list-landlord-signup-request/list-landlord-signup-request.component';
 
 @NgModule({
   declarations: [
@@ -28,12 +29,13 @@ import { DashboardStaffComponent } from './Staff/dashboard/dashboard.component';
     LoginComponent,
     DashboardComponent,
     ListRoomComponent,
-    UpdateRoomComponent,
     DashboardStaffComponent,
     ListRoomComponent,
     ListReportComponent,
-    ListUserComponent,
-    ListHouseComponent
+    ListHouseComponent,
+    UpdateRoomComponent,
+    ListLandlordComponent,
+    ListLandlordSignupRequestComponent
   ],
   imports: [
     BrowserModule,
