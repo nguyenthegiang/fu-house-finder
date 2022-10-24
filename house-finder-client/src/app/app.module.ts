@@ -14,6 +14,7 @@ import {
 } from 'angularx-social-login';
 import { DashboardComponent } from './Landlord/dashboard/dashboard.component';
 import { ListRoomComponent } from './Landlord/list-room/list-room.component';
+import { UpdateRoomComponent } from './update-room/update-room.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { ListRoomComponent } from './Landlord/list-room/list-room.component';
     HouseDetailComponent,
     LoginComponent,
     DashboardComponent,
-    ListRoomComponent
+    ListRoomComponent,
+    UpdateRoomComponent
   ],
   imports: [
     BrowserModule,
