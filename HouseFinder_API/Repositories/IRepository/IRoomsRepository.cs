@@ -15,5 +15,7 @@ namespace Repositories.IRepository
         public List<RoomDTO> GetAvailableRoomsByHouseId(int houseId);
 
         public void UpdateRoomByRoomId(Room room);
-     }
+        public void CreateRoom(Room room);
+        public void DeleteRoom(int roomId);
+    }
 }
