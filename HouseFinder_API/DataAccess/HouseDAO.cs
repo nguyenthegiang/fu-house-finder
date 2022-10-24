@@ -115,5 +115,35 @@ namespace DataAccess
             return houseDTOs;
         }
 
+        //[Landlord - List Rooms] Get total amount of money of rooms that has not been rented
+        public static decimal? GetMoneyForNotRentedRooms(int HouseId)
+        {
+            decimal? totalMoney = 0;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Get rooms by HouseID, include Images
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    List<RoomDTO>  rooms = context.Rooms
+                        .Where(r => r.HouseId == HouseId)
+                        .Where(r => r.Status.StatusName.Equals("Available") || r.Status.StatusName.Equals("Disabled"))
+                        .ProjectTo<RoomDTO>(config).ToList();
+
+                    //Count total money
+                    foreach (RoomDTO r in rooms)
+                    {
+                            totalMoney += r.PricePerMonth;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return totalMoney;
+        }
+
     }
 }

@@ -97,7 +97,8 @@
       <!-- List of Houses -->
       <div class="row">
         <!-- House Item -->
-        <div class="col-4" *ngFor="let dataItem of houses">
+        <!-- Link to List Rooms -->
+        <div class="col-4" *ngFor="let dataItem of houses" routerLink="/Landlord/list-room/{{dataItem.houseId}}">
           <div class="card rounded">
             <img class="card-img-top"
               src="https://static.vecteezy.com/system/resources/thumbnails/002/042/706/small/wooden-cartoon-country-house-vector.jpg"

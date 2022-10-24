@@ -9,6 +9,9 @@ export interface Room {
     information: string;
     areaByMeters: number;
     aircon: boolean;
+    wifi: boolean;
+    waterHeater: boolean;
+    furniture: boolean;
     maxAmountOfPeople: number;
     currentAmountOfPeople: number;
     buildingNumber: number;

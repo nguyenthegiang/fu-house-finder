@@ -1,4 +1,17 @@
 //House Card Item on Hover -> Clickable
 .houseCardItem {
     cursor: pointer;
+
+    .card-body{
+      background-color: #3E4F3C;
+    }
+}
+
+.houseCardItem:hover{
+  scale: 1.1;
+  z-index: 99;
+}
+
+#roomFilterTitle {
+  background-color: #3E4F3C;
 }

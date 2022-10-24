@@ -6,7 +6,8 @@
     <div class="input-group w-25">
       <!-- Press enter to search  -->
       <input type="text" class="form-control" placeholder="Nhập tên trọ, từ khóa tìm kiếm"
-        aria-label="Recipient's username" aria-describedby="button-addon2" [(ngModel)]="searchHouseName" (keydown.enter)="searchHouseByName()">
+        aria-label="Recipient's username" aria-describedby="button-addon2" [(ngModel)]="searchHouseName"
+        (keydown.enter)="searchHouseByName()">
       <div class="input-group-append">
         <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="searchHouseByName()">
           <i class="fa-solid fa-magnifying-glass"></i>
@@ -20,7 +21,7 @@
   <div class="d-flex justify-content-between">
     <!-- Filter Column -->
     <div class="w-25 bg-light mx-5 rounded">
-      <div class="text-center text-white bg-secondary p-2 rounded-top">LỌC PHÒNG TRỌ</div>
+      <div class="text-center text-white p-2 rounded-top" id="roomFilterTitle">LỌC PHÒNG TRỌ</div>
 
       <div class="container">
         <div class="d-flex justify-content-between align-items-center pt-3">
@@ -41,31 +42,27 @@
         <hr>
 
         <div>
-          <div><span class="font-weight-bold">Bán kính:</span> 0 - 10km</div>
-          <div>
-            <div class="ranges-container">
-              <div class="range d-flex justify-content-between align-items-center">
-                <input type="range" min="0" max="10" label="Min" value="0" class="w-75">
-                <span>
-                  <span class="text-mute">Min: </span>
-                  <span>0</span>
-                </span>
-              </div>
-              <div class="range d-flex justify-content-between align-items-center">
-                <input type="range" min="0" max="10" label="Max" value="10" class="w-75">
-                <span>
-                  <span class="text-mute">Max: </span>
-                  <span>10</span>
-                </span>
-              </div>
-            </div>
+          <span class="font-weight-bold">Bán kính:</span>
+          <div style="display: flex;">
+            <input type="number" style="width: 50%;" min="0">
+            -
+            <input type="number" style="width: 50%;">
           </div>
         </div>
         <hr>
 
         <div>
-          <div><span class="font-weight-bold">Khoảng giá:</span> 0 - 20.000.000đ</div>
           <div>
+            <span class="font-weight-bold">Khoảng giá:</span>
+            <div style="display: flex;">
+              <input type="number" style="width: 50%;" min="0">
+              -
+              <input type="number" style="width: 50%;">
+            </div>
+          </div>
+
+
+          <!-- <div>
             <div class="ranges-container">
               <div class="range d-flex justify-content-between align-items-center">
                 <input type="range" min="0" max="20000000" label="Min" value="0" class="w-75">
@@ -82,7 +79,7 @@
                 </span>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
         <hr>
 
@@ -209,14 +206,15 @@
             <img class="card-img-top"
               src="https://static.vecteezy.com/system/resources/thumbnails/002/042/706/small/wooden-cartoon-country-house-vector.jpg"
               alt="Card image cap">
-            <div class="card-body bg-secondary text-white rounded-bottom">
+            <div class="card-body text-white rounded-bottom">
               <h5 class="card-title text-center font-weight-bold">{{dataItem.houseName}}</h5>
-              <div class="card-text"><i class="fa-solid fa-tag mr-2"></i>{{dataItem.lowestRoomPrice}}đ -
-                {{dataItem.highestRoomPrice}}đ</div>
-              <div class="card-text"><i class="fa-solid fa-location-dot mr-2"></i>Thôn 8, Thạch Hòa, Thạch Thất</div>
-              <div class="card-text"><i class="fa-solid fa-road mr-2"></i>{{dataItem.address.googleMapLocation}} 3.5km
+              <!-- Price with VND format -->
+              <div class="card-text"><i class="fa-solid fa-tag mr-2"></i>{{dataItem.lowestRoomPrice |
+                currency:'VND':'symbol':'3.0'}} -
+                {{dataItem.highestRoomPrice | currency:'VND':'symbol':'3.0'}}</div>
+              <div class="card-text"><i class="fa-solid fa-location-dot mr-2"></i>{{dataItem.address.addresses}}</div>
+              <div class="card-text"><i class="fa-solid fa-road mr-2"></i>{{dataItem.address.googleMapLocation}}
               </div>
-              <div class="card-text"><i class="fa-solid fa-phone mr-2"></i>0987654321</div>
             </div>
           </div>
         </div>

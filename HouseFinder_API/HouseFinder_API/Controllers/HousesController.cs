@@ -59,5 +59,13 @@ namespace HouseFinder_API.Controllers
             }
         }
 
+        //GET: api/Houses/GetMoneyForNotRentedRooms?HouseId=
+        [HttpGet("GetMoneyForNotRentedRooms")]
+        public Decimal? GetMoneyForNotRentedRooms(int HouseId)
+        {
+            Decimal? total = housesRepository.GetMoneyForNotRentedRooms(HouseId);
+            return total;
+        }
+
     }
 }
