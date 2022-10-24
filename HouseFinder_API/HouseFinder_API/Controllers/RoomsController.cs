@@ -1,4 +1,5 @@
-﻿using DataAccess.DTO;
+﻿using BusinessObjects;
+using DataAccess.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repositories.IRepository;
@@ -43,6 +44,20 @@ namespace HouseFinder_API.Controllers
             else
             {
                 return Ok(rooms);
+            }
+        }
+
+        [HttpPut]
+        public IActionResult UpdateRoomByRoomId(Room room)
+        {
+            try
+            {
+                room.LastModifiedDate = DateTime.Now;
+                roomsRepository.UpdateRoomByRoomId(room);
+                return Ok();
+            }catch(Exception)
+            {
+                return BadRequest();
             }
         }
     }

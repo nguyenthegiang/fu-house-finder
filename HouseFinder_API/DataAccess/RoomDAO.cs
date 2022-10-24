@@ -93,5 +93,29 @@ namespace DataAccess
 
             return houseDTO;
         }
+
+        //Update Room by id
+        public static void UpdateRoomByRoomId(Room room)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Find rooms of this house
+                    Room room1 = context.Rooms.FirstOrDefault(r => r.RoomId == room.RoomId);
+                    if(room1 == null)
+                    {
+                        throw new Exception();
+                    }
+                    context.Entry<Room>(room1).State = EntityState.Detached;
+                    context.Rooms.Update(room);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using DataAccess.DTO;
+﻿using BusinessObjects;
+using DataAccess.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,5 +13,7 @@ namespace Repositories.IRepository
         public List<RoomDTO> GetRoomsByHouseId(int HouseId);
 
         public List<RoomDTO> GetAvailableRoomsByHouseId(int houseId);
+
+        public void UpdateRoomByRoomId(Room room);
      }
 }
