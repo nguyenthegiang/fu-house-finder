@@ -1,5 +1,5 @@
 //DTO: RoomTypes
 export interface RoomType {
-  RoomTypeId: number;
-  RoomTypeName: string;
+  roomTypeId: number;
+  roomTypeName: string;
 }

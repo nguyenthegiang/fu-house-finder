@@ -47,10 +47,10 @@ namespace HouseFinder_API
             services.AddCors();
 
             //Configure OData service
-            services.AddDbContext<FUHouseFinderContext>(option =>
-            {
-                option.UseSqlServer(Configuration.GetConnectionString("DBContext"));
-            });
+            //services.AddDbContext<FUHouseFinderContext>(option =>
+            //{
+            //    option.UseSqlServer(Configuration.GetConnectionString("DBContext"));
+            //});
             services.AddControllers().AddOData(option => option.Select().Filter().Count().OrderBy().Expand());
             
             services.AddSwaggerGen(c =>
@@ -122,13 +122,6 @@ namespace HouseFinder_API
             {
                 endpoints.MapControllers();
             });
-        }
-
-        public static IEdmModel GetEdmModel()
-        {
-            ODataConventionModelBuilder modelBuilder = new ODataConventionModelBuilder();
-            modelBuilder.EntitySet<RoomType>("RoomTypeOdata");
-            return modelBuilder.GetEdmModel();
         }
     }
 }

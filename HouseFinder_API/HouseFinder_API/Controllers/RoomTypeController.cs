@@ -1,7 +1,10 @@
 ﻿using BusinessObjects;
+using DataAccess.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
+using Repositories.IRepository;
+using Repositories.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,22 +12,25 @@ using System.Threading.Tasks;
 
 namespace HouseFinder_API.Controllers
 {
-    [Route("roomType")]
+    [Route("api/[controller]")]
     [ApiController]
     public class RoomTypeController : ControllerBase
     {
-        private readonly FUHouseFinderContext _FUHouseFinderContext;
+        private IRoomTypeRepository roomTypeRepository = new RoomTypeRepository();
 
-        public RoomTypeController(FUHouseFinderContext FUHouseFinderContext)
+        //GET: api/RoomType
+        [HttpGet]
+        public IActionResult GetRoomTypes()
         {
-            _FUHouseFinderContext = FUHouseFinderContext;
-        }
-
-        [EnableQuery]
-        [HttpGet("Get")]
-        public IActionResult Get()
-        {
-            return Ok(_FUHouseFinderContext.RoomTypes.AsQueryable());
+            List<RoomTypeDTO> roomsDTO = roomTypeRepository.GetRoomTypes();
+            if (roomsDTO == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(roomsDTO);
+            }
         }
     }
 }
