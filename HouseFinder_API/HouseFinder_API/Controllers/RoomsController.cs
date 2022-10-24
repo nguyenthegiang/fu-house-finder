@@ -1,4 +1,5 @@
-﻿using DataAccess.DTO;
+﻿using BusinessObjects;
+using DataAccess.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repositories.IRepository;
@@ -36,13 +37,63 @@ namespace HouseFinder_API.Controllers
         public IActionResult GetAvailableRoomsByHouseId(int HouseId)
         {
             List<RoomDTO> rooms = roomsRepository.GetAvailableRoomsByHouseId(HouseId);
-            if(rooms == null)
+            if (rooms == null)
             {
                 return NotFound();
             }
             else
             {
                 return Ok(rooms);
+            }
+        }
+
+        //POST: api/Rooms
+        [HttpPost]
+        public IActionResult CreateRoom(Room room)
+        {
+            try
+            {
+                room.CreatedDate = DateTime.Now;
+                room.LastModifiedDate = DateTime.Now;
+                roomsRepository.CreateRoom(room);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+        //PUT: api/Rooms
+        [HttpPut]
+        public IActionResult UpdateRoomByRoomId(Room room)
+        {
+            try
+            {
+                room.LastModifiedDate = DateTime.Now;
+                roomsRepository.UpdateRoomByRoomId(room);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
+
+
+        //DELETE: api/Rooms?roomId=
+        [HttpDelete]
+        public IActionResult DeleteRoom(int roomId)
+        {
+            try
+            {
+                roomsRepository.DeleteRoom(roomId);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
             }
         }
     }
