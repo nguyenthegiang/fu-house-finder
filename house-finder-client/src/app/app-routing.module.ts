@@ -10,13 +10,14 @@ import { ListLandlordComponent } from './Staff/list-landlord/list-landlord.compo
 import { ListReportComponent } from './Staff/list-report/list-report.component';
 import { ListHouseComponent } from './Staff/list-house/list-house.component';
 import { ListLandlordSignupRequestComponent } from './Staff/list-landlord-signup-request/list-landlord-signup-request.component';
+import { RoomDetailComponent } from './Guest/room-detail/room-detail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomepageComponent },
   { path: 'login', component: LoginComponent},
   { path: 'house-detail/:id', component: HouseDetailComponent},
-  { path: 'house-detail', component: HouseDetailComponent},
+  { path: 'room-detail/:id', component: RoomDetailComponent},
   { path: 'Landlord/dashboard', component: DashboardComponent},
   { path: 'Landlord/list-room/:id', component: ListRoomComponent},
   { path: 'Staff/dashboard', component: DashboardStaffComponent},
