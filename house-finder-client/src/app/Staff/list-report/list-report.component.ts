@@ -5,11 +5,19 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './list-report.component.html',
   styleUrls: ['./list-report.component.scss']
 })
-export class ListReportComponent implements OnInit {
 
-  constructor() { }
+export class ListReportComponent implements OnInit
+{
+  //{Search} input value
+  searchLandlordName: any;
 
-  ngOnInit(): void {
+  constructor()
+  { }
+
+  ngOnInit(): void
+  {
   }
 
+  searchLandlordByName()
+  {}
 }
