@@ -27,6 +27,5 @@ namespace DataAccess.DTO
 
         //Address of the House
         public virtual AddressDTO Address { get; set; }
-
     }
 }
