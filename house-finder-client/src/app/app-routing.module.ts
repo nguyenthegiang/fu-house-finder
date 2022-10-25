@@ -10,7 +10,6 @@ import { ListLandlordComponent } from './Staff/list-landlord/list-landlord.compo
 import { ListReportComponent } from './Staff/list-report/list-report.component';
 import { ListHouseComponent } from './Staff/list-house/list-house.component';
 import { ListLandlordSignupRequestComponent } from './Staff/list-landlord-signup-request/list-landlord-signup-request.component';
-import { UpdateRoomComponent } from './Landlord/update-room/update-room.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -25,7 +24,6 @@ const routes: Routes = [
   { path: 'Staff/list-report', component: ListReportComponent },
   { path: 'Staff/list-house', component: ListHouseComponent },
   { path: 'Staff/list-signup', component: ListLandlordSignupRequestComponent },
-  { path: 'Landlord/update-room/1', component: UpdateRoomComponent }
 ];
 
 @NgModule({
