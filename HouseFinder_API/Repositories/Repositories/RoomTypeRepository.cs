@@ -12,5 +12,7 @@ namespace Repositories.Repositories
     public class RoomTypeRepository : IRoomTypeRepository
     {
         public List<RoomTypeDTO> GetRoomTypes() => RoomTypeDAO.GetRoomTypes();
+
+        public List<RoomTypeDTO> GetRoomTypesByHouseId(int houseId) => RoomTypeDAO.GetRoomTypesByHouseId(houseId);
     }
 }
