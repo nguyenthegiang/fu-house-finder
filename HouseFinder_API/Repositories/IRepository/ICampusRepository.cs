@@ -1,4 +1,5 @@
 ﻿using BusinessObjects;
+using DataAccess.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,6 @@ namespace Repositories
 {
     public interface ICampusRepository
     {
-        List<Campus> GetAllCampuses();
+        List<CampusDTO> GetAllCampuses();
     }
 }

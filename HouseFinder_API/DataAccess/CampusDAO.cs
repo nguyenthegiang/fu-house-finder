@@ -1,4 +1,7 @@
-﻿using BusinessObjects;
+﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
+using BusinessObjects;
+using DataAccess.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,21 +12,26 @@ namespace DataAccess
 {
     public class CampusDAO
     {
-        public static List<Campus> GetAllCampuses()
+        //[Home Page] Get List Campuses to choose to filter
+        public static List<CampusDTO> GetAllCampuses()
         {
-            var listCampus = new List<Campus>();
+            var campusDTOs = new List<CampusDTO>();
             try
             {
                 using (var context = new FUHouseFinderContext())
                 {
-                    listCampus = context.Campuses.ToList();
+                    //Map to DTO
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    //Get list of all Campuses
+                    campusDTOs = context.Campuses.ProjectTo<CampusDTO>(config).ToList();
                 }
             } catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
 
-            return listCampus;
+            return campusDTOs;
         }
     }
 }
