@@ -217,8 +217,8 @@
           <!-- Item onClick: to House Detail -->
           <div class="card rounded houseCardItem" routerLink="/house-detail/{{dataItem.houseId}}">
             <img class="card-img-top"
-              src="https://static.vecteezy.com/system/resources/thumbnails/002/042/706/small/wooden-cartoon-country-house-vector.jpg"
-              alt="Card image cap">
+              src="../assets/image/House/{{dataItem.imagesOfHouses[0].imageLink}}"
+              alt="House Image">
             <div class="card-body text-white rounded-bottom">
               <h5 class="card-title text-center font-weight-bold">{{dataItem.houseName}}</h5>
               <!-- Price with VND format -->
