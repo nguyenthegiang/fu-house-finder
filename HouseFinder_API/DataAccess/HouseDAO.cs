@@ -14,7 +14,7 @@ namespace DataAccess
 {
     public class HouseDAO
     {
-        //Get list of houses, with Address
+        //Get list of houses, with Address & Images
         public static List<HouseDTO> GetAllHouses()
         {
             List<HouseDTO> houseDTOs;
@@ -22,10 +22,14 @@ namespace DataAccess
             {
                 using (var context = new FUHouseFinderContext())
                 {
-                    //include address
+                    //include address, images
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    houseDTOs = context.Houses.Include(h => h.Address).ProjectTo<HouseDTO>(config).ToList();
+                    houseDTOs = context.Houses
+                        //unnecessary includes
+                        //.Include(house => house.Address)
+                        //.Include(house => house.ImagesOfHouses)
+                        .ProjectTo<HouseDTO>(config).ToList();
 
                     //find lowest room price & highest room price
                     for (int i = 0; i < houseDTOs.Count; i++)
