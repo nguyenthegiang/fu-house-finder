@@ -14,6 +14,9 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   @ViewChild('ggDiv') ggDiv: ElementRef | undefined;
+  @ViewChild('registerModal') registerModal: any;
+  @ViewChild('roleModal') roleModal: any;
+
   socialUser: SocialUser | undefined;
   user: User | undefined;
   constructor(
@@ -54,16 +57,6 @@ export class LoginComponent implements OnInit {
           logo_alignment: 'left'
         }
       );
-    
-      // OPTIONAL: In my case I want to redirect the user to an specific path.
-      // @ts-ignore
-      // google.accounts.id.prompt((notification: PromptMomentNotification) => {
-      //   console.log('Google prompt event triggered...');
-    
-      //   if (notification.getDismissedReason() === 'credential_returned') {
-      //       console.log('Welcome back!');
-      //   }
-      // });
     };
     
   }
@@ -73,6 +66,7 @@ export class LoginComponent implements OnInit {
       let decodedToken: any | null = null;
       try {
         decodedToken = JSON.parse(atob(response?.credential.split('.')[1]));
+        console.log(decodedToken.sub);
       } catch (e) {
         console.error('Error while trying to decode token', e);
       }
@@ -81,7 +75,7 @@ export class LoginComponent implements OnInit {
           this.ngZone.run(()=>{this.router.navigate(['/home']);});
         },
         error => {
-          console.log(error);
+          this.triggerRoleModal();
         }
       );
 
@@ -105,6 +99,20 @@ export class LoginComponent implements OnInit {
   refreshToken(): void {
     this.authService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);
   }
-  
 
+  registerStudent(): void {
+
+  }
+
+  registerLandlord(): void {
+
+  }
+  
+  triggerRegisterModal(): void {
+    this.registerModal.open();
+  }
+
+  triggerRoleModal(): void {
+    this.roleModal.open();
+  }
 }

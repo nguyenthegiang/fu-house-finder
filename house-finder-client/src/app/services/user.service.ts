@@ -28,4 +28,12 @@ export class UserService {
   loginEmailPassword(email: string, password: string): Observable<User>{
     return this.http.post<User>(this.APIUrl + "/login", {"email": email, "password": password});
   }
+
+  registerStudentGoogle(googleIdToken: string){
+    return this.http.post<User>(this.APIUrl + "/register", {"googleIdToken": googleIdToken, "roleId": 1});
+  }
+
+  registerLandlordGoogle(googleIdToken: string){
+    return this.http.post<User>(this.APIUrl + "/register", {"googleIdToken": googleIdToken, "roleId": 2});
+  }
 }
