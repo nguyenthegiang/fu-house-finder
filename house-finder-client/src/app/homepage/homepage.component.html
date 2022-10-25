@@ -8,6 +8,7 @@
       <input type="text" class="form-control" placeholder="Nhập tên trọ, từ khóa tìm kiếm"
         aria-label="Recipient's username" aria-describedby="button-addon2" [(ngModel)]="searchHouseName"
         (keydown.enter)="searchHouseByName()">
+      <!-- Click button to search -->
       <div class="input-group-append">
         <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="searchHouseByName()">
           <i class="fa-solid fa-magnifying-glass"></i>
@@ -27,15 +28,15 @@
         <div class="d-flex justify-content-between align-items-center pt-3">
           <div class="font-weight-bold">Cơ sở</div>
 
+          <!-- Campus -->
           <div class="dropdown">
             <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton"
               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Chọn nơi muốn tìm
+              Chọn cơ sở muốn tìm
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+              <!-- List of Campuses to choose -->
+              <a *ngFor="let campus of campuses" class="dropdown-item" href="#">{{campus.campusName}}</a>
             </div>
           </div>
         </div>
@@ -60,7 +61,6 @@
               <input type="number" style="width: 50%;">
             </div>
           </div>
-
 
           <!-- <div>
             <div class="ranges-container">
