@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using BusinessObjects;
 using Repositories;
+using DataAccess.DTO;
 
 namespace HouseFinder_API.Controllers
 {
@@ -16,7 +17,8 @@ namespace HouseFinder_API.Controllers
         private ICampusRepository campusRepository = new CampusRepository();
 
         //GET: api/Campus
+        //[Home Page] Get List Campuses to choose to filter
         [HttpGet]
-        public ActionResult<IEnumerable<Campus>> GetAllCampuses() => campusRepository.GetAllCampuses();
+        public ActionResult<IEnumerable<CampusDTO>> GetAllCampuses() => campusRepository.GetAllCampuses();
     }
 }

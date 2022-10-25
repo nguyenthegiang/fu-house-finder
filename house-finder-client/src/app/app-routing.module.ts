@@ -1,4 +1,3 @@
-import { ListLandlordRequestComponent } from './Staff/list-landlord-request/list-landlord-request.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -15,16 +14,16 @@ import { ListLandlordSignupRequestComponent } from './Staff/list-landlord-signup
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomepageComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'house-detail/:id', component: HouseDetailComponent },
-  { path: 'house-detail', component: HouseDetailComponent },
-  { path: 'Landlord/dashboard', component: DashboardComponent },
-  { path: 'Landlord/list-room/:id', component: ListRoomComponent },
-  { path: 'Staff/dashboard', component: DashboardStaffComponent },
-  { path: 'Staff/list-landlord', component: ListLandlordComponent },
-  { path: 'Staff/list-report', component: ListReportComponent },
-  { path: 'Staff/list-house', component: ListHouseComponent },
-  { path: 'Staff/list-landlord-request', component: ListLandlordRequestComponent },
+  { path: 'login', component: LoginComponent},
+  { path: 'house-detail/:id', component: HouseDetailComponent},
+  { path: 'house-detail', component: HouseDetailComponent},
+  { path: 'Landlord/dashboard', component: DashboardComponent},
+  { path: 'Landlord/list-room/:id', component: ListRoomComponent},
+  { path: 'Staff/dashboard', component: DashboardStaffComponent},
+  { path: 'Staff/list-landlord', component: ListLandlordComponent},
+  { path: 'Staff/list-report', component: ListReportComponent},
+  { path: 'Staff/list-house', component: ListHouseComponent},
+  { path: 'Staff/list-landlord-signup-request', component: ListLandlordSignupRequestComponent},
 ];
 
 @NgModule({
