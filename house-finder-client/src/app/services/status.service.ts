@@ -11,7 +11,7 @@ export class StatusService {
 
   constructor(private http: HttpClient) { }
 
-  //[Landlord][List room] Get List of Room Types by HouseId
+  //[Landlord][List room] Get List of Statuses by HouseId
   getStatusesByHouseId(houseId: number): Observable<any[]>{
     return this.http.get<any[]>(this.APIUrl + "/getByHouseId?HouseId=" + houseId);
   }
