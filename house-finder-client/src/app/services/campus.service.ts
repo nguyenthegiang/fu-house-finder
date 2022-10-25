@@ -10,6 +10,7 @@ export class CampusService {
 
   constructor(private http: HttpClient) { }
 
+  //[Home Page] Get List of all Campuses for Filter
   getAllCampuses(): Observable<any[]> {
     return this.http.get<any>(this.APIUrl);
   }

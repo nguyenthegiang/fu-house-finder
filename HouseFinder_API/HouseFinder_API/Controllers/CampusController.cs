@@ -17,6 +17,7 @@ namespace HouseFinder_API.Controllers
         private ICampusRepository campusRepository = new CampusRepository();
 
         //GET: api/Campus
+        //[Home Page] Get List Campuses to choose to filter
         [HttpGet]
         public ActionResult<IEnumerable<CampusDTO>> GetAllCampuses() => campusRepository.GetAllCampuses();
     }
