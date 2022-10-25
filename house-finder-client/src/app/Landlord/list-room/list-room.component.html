@@ -151,7 +151,7 @@
           <span *ngIf="dataItem.status.statusName === 'Disabled'">Không dùng được</span>
         </td>
         <td>
-          <app-update-room></app-update-room>
+          <app-update-room [roomId]="dataItem.roomId"></app-update-room>
         </td>
       </tr>
     </tbody>
