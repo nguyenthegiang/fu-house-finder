@@ -22,14 +22,29 @@ namespace HouseFinder_API.Controllers
         [HttpGet]
         public IActionResult GetRoomTypes()
         {
-            List<RoomTypeDTO> roomsDTO = roomTypeRepository.GetRoomTypes();
-            if (roomsDTO == null)
+            List<RoomTypeDTO> roomTypesDTO = roomTypeRepository.GetRoomTypes();
+            if (roomTypesDTO == null)
             {
                 return NotFound();
             }
             else
             {
-                return Ok(roomsDTO);
+                return Ok(roomTypesDTO);
+            }
+        }
+
+        //GET: api/RoomType/getByHouseId?HouseId=
+        [HttpGet("getByHouseId")]
+        public IActionResult GetRoomTypesByHouseId(int HouseId)
+        {
+            List<RoomTypeDTO> roomTypesDTO = roomTypeRepository.GetRoomTypesByHouseId(HouseId);
+            if (roomTypesDTO == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(roomTypesDTO);
             }
         }
     }
