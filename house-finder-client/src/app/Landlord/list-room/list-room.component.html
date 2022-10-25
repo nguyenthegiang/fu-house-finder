@@ -39,8 +39,13 @@
       Tình trạng
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <ul>
-        <li>Trống</li>
+      <ul *ngFor="let dataItem of statuses" style="padding: 0 10px; width: fit-content;">
+        <li>
+          <input type="checkbox" value="{{dataItem.statusName}}">
+          <span *ngIf="dataItem.statusName === 'Available'">Trống</span>
+          <span *ngIf="dataItem.statusName === 'Occupied'">Đã cho thuê</span>
+          <span *ngIf="dataItem.statusName === 'Disabled'">Không dùng được</span>
+        </li>
       </ul>
     </div>
   </div>
