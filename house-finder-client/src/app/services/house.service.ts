@@ -11,9 +11,9 @@ export class HouseService {
 
   constructor(private http: HttpClient) { }
 
-  //[Home Page] Get List Houses
-  getAllHouses(): Observable<any[]> {
-    return this.http.get<any>(this.APIUrl);
+  //[Home Page] Get List of all Houses
+  getAllHouses(): Observable<House[]> {
+    return this.http.get<House[]>(this.APIUrl);
   }
 
   //[Home Page] Search house by name
