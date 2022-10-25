@@ -43,7 +43,7 @@ export class RoomService {
 
   //[Landlord: Get Room] Get room by roomId
   getRoomByRoomId(roomId: number): Observable<Room> {
-    return this.http.get<Room>(this.APIUrl + "/Rooms?roomId=" + roomId);
+    return this.http.get<Room>(this.APIUrl + "/getByRoomId?RoomId=" + roomId);
   }
 }
 
