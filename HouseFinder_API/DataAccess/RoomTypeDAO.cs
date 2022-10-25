@@ -39,9 +39,6 @@ namespace DataAccess
             List<RoomTypeDTO> roomTypesOfHouse = new List<RoomTypeDTO>();
             List<RoomDTO> rooms = RoomDAO.GetRoomsByHouseId(houseId);
 
-            //Get list of all roomTypes to search in
-            List<RoomTypeDTO> allRoomTypes = GetRoomTypes();
-
             try
             {
                 //using (var context = new FUHouseFinderContext())
