@@ -8,6 +8,7 @@
       <input type="text" class="form-control" placeholder="Nhập tên trọ, từ khóa tìm kiếm"
         aria-label="Recipient's username" aria-describedby="button-addon2" [(ngModel)]="searchHouseName"
         (keydown.enter)="searchHouseByName()">
+      <!-- Click button to search -->
       <div class="input-group-append">
         <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="searchHouseByName()">
           <i class="fa-solid fa-magnifying-glass"></i>
@@ -60,7 +61,6 @@
               <input type="number" style="width: 50%;">
             </div>
           </div>
-
 
           <!-- <div>
             <div class="ranges-container">
