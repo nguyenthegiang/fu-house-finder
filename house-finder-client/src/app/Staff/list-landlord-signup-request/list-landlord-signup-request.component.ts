@@ -7,9 +7,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListLandlordSignupRequestComponent implements OnInit {
 
-  constructor() { }
+  //{Search} input value
+  searchLandlordName: any;
 
-  ngOnInit(): void {
+  constructor()
+  { }
+
+  ngOnInit(): void
+  {
   }
 
+  searchLandlordByName()
+  {}
 }

@@ -1,3 +1,4 @@
+import { Campus } from './../models/campus';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -11,7 +12,7 @@ export class CampusService {
   constructor(private http: HttpClient) { }
 
   //[Home Page] Get List of all Campuses for Filter
-  getAllCampuses(): Observable<any[]> {
-    return this.http.get<any>(this.APIUrl);
+  getAllCampuses(): Observable<Campus[]> {
+    return this.http.get<Campus[]>(this.APIUrl);
   }
 }

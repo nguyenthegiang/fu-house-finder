@@ -1,4 +1,3 @@
-import { ListLandlordRequestComponent } from './Staff/list-landlord-request/list-landlord-request.component';
 import { HomepageComponent } from './homepage/homepage.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -24,7 +23,7 @@ const routes: Routes = [
   { path: 'Staff/list-landlord', component: ListLandlordComponent},
   { path: 'Staff/list-report', component: ListReportComponent},
   { path: 'Staff/list-house', component: ListHouseComponent},
-  { path: 'Staff/list-landlord-request', component: ListLandlordRequestComponent},
+  { path: 'Staff/list-landlord-signup-request', component: ListLandlordSignupRequestComponent},
 ];
 
 @NgModule({
