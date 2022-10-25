@@ -11,7 +11,13 @@ export class RoomTypeService {
 
   constructor(private http: HttpClient) { }
 
-  //[Landlord][List room] Get List of Room Types
+  //[Landlord][List room] Get List of Room Types by HouseId
+  getRoomTypesByHouseId(houseId: number): Observable<any[]>{
+    return this.http.get<any[]>(this.APIUrl + "RoomType/getByHouseId?HouseId=" + houseId);
+  }
+
+
+  //[Homepage] Get List of Room Types
   getRoomTypes(): Observable<any[]> {
     return this.http.get<any[]>(this.APIUrl + "roomType");
   }
