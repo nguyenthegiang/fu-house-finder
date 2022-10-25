@@ -22,5 +22,7 @@ namespace Repositories.Repositories
 
         public void DeleteRoom(int roomId) => RoomDAO.DeleteRoom(roomId);
 
+        public RoomDTO GetRoomByRoomId(int roomId) => RoomDAO.GetRoomByRoomId(roomId);
+
     }
 }

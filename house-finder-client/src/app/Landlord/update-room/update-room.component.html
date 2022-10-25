@@ -1,1 +1,73 @@
-<p>update-room works!</p>
+<button type="button" class="btn btn-warning" data-toggle="modal" data-target="#{{roomDetail?.roomName}}"
+    data-whatever="@getbootstrap" (click)="getRoomByRoomId()">Chỉnh sửa</button>
+<button type=" button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal"
+    data-whatever="@getbootstrap">Xóa</button>
+
+<div class="modal fade bd-example-modal-lg" id="{{roomDetail?.roomName}}" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog  modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Chỉnh sửa phòng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <div class="col-md-5">Tên Phòng
+                            <br>
+                            <input type="text" class="form-control" id="exampleFormControlInput1"
+                                value="{{roomDetail?.roomName}}">
+                        </div>
+                        <div class="col-md-5 ml-auto">Diện tích
+                            <br>
+                            <input type="text" class="form-control" id="exampleFormControlInput1"
+                                value="{{roomDetail?.areaByMeters}}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">Giá tiền
+                            <br>
+                            <input type="text" class="form-control" id="exampleFormControlInput1"
+                                value="{{roomDetail?.pricePerMonth}}">
+                        </div>
+                        <div class="col-md-5 ml-auto">Tòa
+                            <br>
+                            <input type="text" class="form-control" id="exampleFormControlInput1"
+                                value="{{roomDetail?.buildingNumber}}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">Thông tin
+                            <br>
+                            <input type="text" class="form-control" id="exampleFormControlInput1"
+                                value="{{roomDetail?.information}}">
+                        </div>
+                        <div class="col-md-5 ml-auto">Tầng
+                            <br>
+                            <input type="text" class="form-control" id="exampleFormControlInput1"
+                                value="{{roomDetail?.floorNumber}}">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-5">Số người ở
+                            <br>
+                            <input type="text" class="form-control" id="currentAmountOfPeople"
+                                value="{{roomDetail?.currentAmountOfPeople}}">
+                        </div>
+                        <div class="col-md-5 ml-auto">Trạng thái
+                            <br>
+                            <input type="text" class="form-control" id="status" value="{{roomDetail?.status}}">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+        </div>
+    </div>
+</div>

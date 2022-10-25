@@ -1,7 +1,7 @@
 import { HomepageComponent } from './homepage/homepage.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HouseDetailComponent} from './house-detail/house-detail.component';
+import { HouseDetailComponent } from './house-detail/house-detail.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './Landlord/dashboard/dashboard.component';
 import { ListRoomComponent } from './Landlord/list-room/list-room.component';
@@ -31,5 +31,5 @@ const routes: Routes = [
   exports: [RouterModule],
 })
 
-export class AppRoutingModule {}
+export class AppRoutingModule { }
 export const routingComponents = [HomepageComponent]
