@@ -19,7 +19,7 @@ import { ListHouseComponent } from './Staff/list-house/list-house.component';
 import { DashboardStaffComponent } from './Staff/dashboard/dashboard.component';
 import { UpdateRoomComponent } from './Landlord/update-room/update-room.component';
 import { ListLandlordComponent } from './Staff/list-landlord/list-landlord.component';
-import { ListLandlordSignupRequestComponent } from './Staff/list-landlord-signup-request/list-landlord-signup-request.component';
+import { ListLandlordRequestComponent } from './Staff/list-landlord-request/list-landlord-request.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,7 @@ import { ListLandlordSignupRequestComponent } from './Staff/list-landlord-signup
     ListHouseComponent,
     UpdateRoomComponent,
     ListLandlordComponent,
-    ListLandlordSignupRequestComponent
+    ListLandlordRequestComponent
   ],
   imports: [
     BrowserModule,
