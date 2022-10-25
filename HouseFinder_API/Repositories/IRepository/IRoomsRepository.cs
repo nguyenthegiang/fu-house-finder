@@ -17,5 +17,6 @@ namespace Repositories.IRepository
         public void UpdateRoomByRoomId(Room room);
         public void CreateRoom(Room room);
         public void DeleteRoom(int roomId);
+        public RoomDTO GetRoomByRoomId(int roomId);
     }
 }
