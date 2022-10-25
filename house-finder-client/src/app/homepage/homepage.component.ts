@@ -15,9 +15,6 @@ export class HomepageComponent implements OnInit {
   //List of houses to display in Main Content
   houses: House[] = [];
 
-  //{Search by Name} input value
-  searchHouseName: any;
-
   //Data for Filter column
   roomTypes: RoomType[] = [];   //Room types
   campuses: Campus[] = [];
@@ -48,10 +45,14 @@ export class HomepageComponent implements OnInit {
   }
 
   //Search House by Name
-  searchHouseByName() {
-    var value = this.searchHouseName;
+  searchHouseByName(searchHouseName: string) {
+    //not perform search for empty input
+    if (!searchHouseName.trim()) {
+      return;
+    }
+    
     //call API
-    this.houseService.searchHouseByName(value).subscribe(data => {
+    this.houseService.searchHouseByName(searchHouseName).subscribe(data => {
       this.houses = data;
     });
   }
