@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Room } from '../models/room';
-import { RoomService } from '../services/room.service';
+import { Room } from 'src/app/models/room';
+import { RoomService } from 'src/app/services/room.service';
 
 @Component({
   selector: 'app-update-room',
@@ -18,11 +18,13 @@ export class UpdateRoomComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getRoomByRoomId();
   }
   getRoomByRoomId() {
     //Get id of room from router
-    const roomId = Number(this.route.snapshot.paramMap.get('roomId'));
-    this.roomService.getRoomByRoomId(roomId).subscribe(data => {
+    const roomId = Number(this.route.snapshot.paramMap.get('id'));
+    console.log(roomId);
+    this.roomService.getRoomByRoomId(1).subscribe(data => {
       this.roomDetail = data;
     })
   }
