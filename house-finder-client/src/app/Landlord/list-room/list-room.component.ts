@@ -43,7 +43,7 @@ export class ListRoomComponent implements OnInit {
     });
 
     //Call API: get Room types
-    this.roomTypeService.getRoomTypes().subscribe(data => {
+    this.roomTypeService.getRoomTypesByHouseId(id).subscribe(data => {
       this.roomTypes = data;
     })
   }

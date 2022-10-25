@@ -13,8 +13,11 @@
       Loại phòng
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <ul *ngFor="let dataItem of roomTypes">
-        <li>{{dataItem.roomTypeName}}</li>
+      <ul *ngFor="let dataItem of roomTypes" style="padding: 0 10px;">
+        <li>
+          <input type="checkbox" value="{{dataItem.roomTypeName}}">
+          {{dataItem.roomTypeName}}
+        </li>
       </ul>
     </div>
   </div>

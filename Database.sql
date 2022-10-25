@@ -935,16 +935,16 @@ GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 
 INSERT INTO [dbo].[Rooms] VALUES (N'101', 4000000, N'Vệ sinh khép kín', 6, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 2, 
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'102', 3500000, N'Vệ sinh khép kín', 6, 1, 0, 0, 1, 2, 1, 1, 1, 3, 2, 2, 
+INSERT INTO [dbo].[Rooms] VALUES (N'102', 3500000, N'Vệ sinh khép kín', 6, 1, 0, 0, 1, 2, 1, 1, 1, 3, 3, 2, 
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 INSERT INTO [dbo].[Rooms] VALUES (N'103', 3000000, N'Vệ sinh khép kín', 6, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 2, 
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 3500000, N'Giao thông thuận lợi', 7, 1, 0, 0, 1, 2, 1, 1, 1, 2, 2, 3, 
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3500000, N'Giao thông thuận lợi', 7, 1, 0, 0, 1, 2, 1, 1, 1, 2, 1, 3, 
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 INSERT INTO [dbo].[Rooms] VALUES (N'102', 2600000, N'Giao thông thuận lợi', 7, 1, 0, 0, 1, 2, 1, 1, 1, 3, 2, 3, 
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'103', 2100000, N'Giao thông thuận lợi', 7, 1, 0, 0, 1, 2, 1, 1, 1, 2, 2, 3, 
+INSERT INTO [dbo].[Rooms] VALUES (N'103', 2100000, N'Giao thông thuận lợi', 7, 1, 0, 0, 1, 2, 1, 1, 1, 2, 3, 3, 
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 
 INSERT INTO [dbo].[Rooms] VALUES (N'101', 3100000, N'Trật tự an ninh tốt', 4, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 4, 
