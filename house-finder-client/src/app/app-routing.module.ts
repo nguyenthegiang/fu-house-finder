@@ -10,6 +10,7 @@ import { DashboardStaffComponent } from './Staff/dashboard/dashboard.component';
 import { ListLandlordComponent } from './Staff/list-landlord/list-landlord.component';
 import { ListReportComponent } from './Staff/list-report/list-report.component';
 import { ListHouseComponent } from './Staff/list-house/list-house.component';
+import { ListLandlordSignupRequestComponent } from './Staff/list-landlord-signup-request/list-landlord-signup-request.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
