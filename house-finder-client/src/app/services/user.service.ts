@@ -16,6 +16,11 @@ export class UserService {
     return this.http.get<User>(this.APIUrl + "/" + userId);
   }
 
+  //[Staff][Dashboard] get list of landlords
+  getLandlords(): Observable<User[]> {
+    return this.http.get<User[]>(this.APIUrl + "/landlord");
+  }
+
   loginFacebook(facebookUserId: string): Observable<User> {
     return this.http.post<User>(this.APIUrl + "/login", {"facebookUserId": facebookUserId});
   }
@@ -35,16 +40,16 @@ export class UserService {
   }
 
   registerLandlordGoogle(
-      googleIdToken: string, 
-      phonenumber: string, 
-      identityCardFrontSideImageLink: string, 
-      identityCardBackSideImageLink: string, 
+      googleIdToken: string,
+      phonenumber: string,
+      identityCardFrontSideImageLink: string,
+      identityCardBackSideImageLink: string,
       facebookUrl: string
     ){
     return this.http.post<User>(
-      this.APIUrl + "/register", 
+      this.APIUrl + "/register",
       {
-        "googleIdToken": googleIdToken, 
+        "googleIdToken": googleIdToken,
         "phonenumber": phonenumber,
         "identityCardFrontSideImageLink": identityCardFrontSideImageLink,
         "identityCardBackSideImageLink": identityCardBackSideImageLink,

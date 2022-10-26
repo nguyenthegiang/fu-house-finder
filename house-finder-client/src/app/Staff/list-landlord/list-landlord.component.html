@@ -18,7 +18,6 @@
   <table class="table table-striped">
     <thead>
       <tr>
-        <th scope="col">#</th>
         <th scope="col">Id</th>
         <th scope="col">Họ Tên</th>
         <th scope="col">Email</th>
@@ -31,41 +30,16 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <th scope="row">1</th>
-        <td>Mark</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-        <td>Otto</td>
-        <td>@mdo</td>
-      </tr>
-      <tr>
-        <th scope="row">2</th>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>@fat</td>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>Jacob</td>
-        <td>Thornton</td>
-      </tr>
-      <tr>
-        <th scope="row">3</th>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>@twitter</td>
-        <td>Jacob</td>
-        <td>Thornton</td>
-        <td>Larry</td>
-        <td>the Bird</td>
-        <td>Larry</td>
-        <td>the Bird</td>
+      <tr *ngFor="let dataItem of landlords">
+        <td>{{dataItem.userId}}</td>
+        <td>{{dataItem.displayName}}</td>
+        <td>{{dataItem.email}}</td>
+        <td>{{dataItem.phoneNumber}}</td>
+        <td>{{dataItem.displayName}}</td>
+        <td>{{dataItem.displayName}}</td>
+        <td>{{dataItem.displayName}}</td>
+        <td>{{dataItem.displayName}}</td>
+        <td>{{dataItem.displayName}}</td>
       </tr>
     </tbody>
   </table>
