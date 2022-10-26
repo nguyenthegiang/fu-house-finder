@@ -16,7 +16,7 @@ namespace Repositories.Repositories
             }
             else if (login.GoogleUserId != null)
             {
-                user = UserDAO.LoginGoogle(login.FacebookUserId);
+                user = UserDAO.LoginGoogle(login.GoogleUserId);
             }
             else
             {
@@ -30,8 +30,12 @@ namespace Repositories.Repositories
                 register.FacebookUserId, 
                 register.GoogleUserId, 
                 register.Email, 
-                register.DisplayName, 
-                (int)register.RoleId
+                register.DisplayName,
+                (int)register.RoleId,
+                register.IdentityCardFrontSideImageLink,
+                register.IdentityCardBackSideImageLink, 
+                register.PhoneNumber,
+                register.FacebookUrl
             );
             return user;
         }
