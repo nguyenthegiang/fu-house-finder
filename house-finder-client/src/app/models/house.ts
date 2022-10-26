@@ -1,4 +1,5 @@
 import { Address } from './address';
+import { ImagesOfHouse } from './imagesOfHouse';
 
 //DTO: Houses
 export interface House {
@@ -11,4 +12,5 @@ export interface House {
     lowestRoomPrice: number;
     highestRoomPrice: number;
     address: Address;
+    imagesOfHouses: ImagesOfHouse[];
 }

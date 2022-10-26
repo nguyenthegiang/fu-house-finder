@@ -34,7 +34,7 @@ namespace HouseFinder_API.Controllers
         public IActionResult GetHouseById(int HouseId)
         {
             HouseDTO houseDTO = housesRepository.GetHouseById(HouseId);
-            if(houseDTO == null)
+            if (houseDTO == null)
             {
                 return NotFound();
             }
@@ -43,5 +43,29 @@ namespace HouseFinder_API.Controllers
                 return Ok(houseDTO);
             }
         }
+
+        //GET: api/Houses/GetHousesByLandlord?LandlordId=
+        [HttpGet("GetHousesByLandlord")]
+        public IActionResult GetListHousesByLandlordId(string LandlordId)
+        {
+            List<HouseDTO> houseDTOs = housesRepository.GetListHousesByLandlordId(LandlordId);
+            if (houseDTOs == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(houseDTOs);
+            }
+        }
+
+        //GET: api/Houses/GetMoneyForNotRentedRooms?HouseId=
+        [HttpGet("GetMoneyForNotRentedRooms")]
+        public Decimal? GetMoneyForNotRentedRooms(int HouseId)
+        {
+            Decimal? total = housesRepository.GetMoneyForNotRentedRooms(HouseId);
+            return total;
+        }
+
     }
 }

@@ -5,6 +5,7 @@
   </div>
 </div>
 
+
 <!-- Only Display when House Detail is loaded -->
 <div class="container" *ngIf="houseDetail && landlordDetail">
   <div class="row">
@@ -14,14 +15,14 @@
 
       <!-- House detail information-->
       <div class="house-information">
-        <h3>{{houseDetail.houseName}}</h3>
-        <span><b>Giá điện: </b> {{houseDetail.powerPrice}}/kWh</span>
+        <h3>{{houseDetail!.houseName}}</h3>
+        <span><b>Giá điện: </b> {{houseDetail!.powerPrice}}/kWh</span>
         <br>
-        <span><b>Giá nước: </b> {{houseDetail.waterPrice}}/m3</span>
+        <span><b>Giá nước: </b> {{houseDetail!.waterPrice}}/m3</span>
         <br>
-        <span><b>Địa chỉ: </b>{{houseDetail.address.addresses}}</span>
+        <span><b>Địa chỉ: </b>{{houseDetail!.address!.addresses}}</span>
         <br>
-        <span><b>Thông tin khác: </b>{{houseDetail.information}}</span>
+        <span><b>Thông tin khác: </b>{{houseDetail!.information}}</span>
       </div>
 
       <!-- List available rooms -->
@@ -35,6 +36,15 @@
             <th>Đang ở</th>
             <th>Ghi chủ</th>
           </thead>
+          <tbody>
+            <tr *ngFor="let dataItem of availableRooms">
+              <td>{{dataItem.roomName}}</td>
+              <td>{{dataItem.pricePerMonth}}</td>
+              <td>{{dataItem.areaByMeters}}</td>
+              <td>{{dataItem.currentAmountOfPeople}}</td>
+              <td>{{dataItem.information}}</td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>
@@ -55,26 +65,55 @@
         <br>
         <span>
           <b>Facebook: </b>
-          <a href="{{landlordDetail.facebookUrl}}">{{landlordDetail.facebookUrl}}</a>
+          <a href="{{landlordDetail!.facebookUrl}}">{{landlordDetail!.facebookUrl}}</a>
         </span>
         <br>
         <span>
           <b>Số điện thoại: </b>
-          {{landlordDetail.phoneNumber}}
+          {{landlordDetail!.phoneNumber}}
         </span>
         <br>
         <span>
           <b>Địa chỉ: </b>
-          {{landlordDetail.address.addresses}}
+          {{landlordDetail!.address.addresses}}
         </span>
       </div>
 
       <!-- Google map -->
       <iframe id="googleMap"
-      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.995814709238!2d105.51943301488284!3d20.992804886017904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345bae7a5f0d39%3A0xec177bce6cdc3a46!2zSG_DoCBM4bqhYyBBcGFydG1lbnQ!5e0!3m2!1svi!2s!4v1665457315377!5m2!1svi!2s"
-      allowfullscreen=""
-      loading="lazy"
-      referrerpolicy="no-referrer-when-downgrade">
-    </iframe>
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.995814709238!2d105.51943301488284!3d20.992804886017904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345bae7a5f0d39%3A0xec177bce6cdc3a46!2zSG_DoCBM4bqhYyBBcGFydG1lbnQ!5e0!3m2!1svi!2s!4v1665457315377!5m2!1svi!2s"
+        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
     </div>
-</div>
+  </div>
+  <button type="button" class="floating-btn" data-toggle="modal" data-target="#exampleModal"
+    data-whatever="@getbootstrap">
+    <i class="fa-solid fa-flag"></i>
+  </button>
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #FF6F3D;">
+          <h5 class="modal-title text-white" id="exampleModalLabel">Báo cáo nhà trọ</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="form-group">
+              <label for="message-text" class="col-form-label" style="color: #FF6F3D;">Lý do:</label>
+              <textarea class="form-control" id="message-text" style="border-color: #FF6F3D;"
+                #inputReportContent></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer d-flex justify-content-center text-white" style="border-color: none;">
+          <button (click)="sendReport(inputReportContent.value)" type="button" class="btn text-white"
+            style="background-color: #FF6F3D;" data-dismiss="modal">Báo
+            cáo</button>
+        </div>
+      </div>
+    </div>
+  </div>

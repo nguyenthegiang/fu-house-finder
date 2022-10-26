@@ -1,26 +1,31 @@
-<p>list-room works!</p>
-
-<div class="row">
-  <button>Thêm phòng</button>
-  <div></div>
+<div class="row add-button">
+  <!-- Search bar -->
+  <input type="text" placeholder="Search..">
+  <!-- Add room button -->
+  <button id="addRoom">+ Thêm phòng</button>
 </div>
 
-<div class="row">
+<div class="row filter">
   <!-- Loại phòng -->
   <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
       Loại phòng
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <ul>
-        <li>Khép kín</li>
+      <ul *ngFor="let dataItem of roomTypes" style="padding: 0 10px;">
+        <li>
+          <input type="checkbox" value="{{dataItem.roomTypeName}}">
+          {{dataItem.roomTypeName}}
+        </li>
       </ul>
     </div>
   </div>
 
   <!-- Tầng -->
   <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
       Tầng
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -32,62 +37,131 @@
 
   <!-- Tình trạng -->
   <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <button class="btn dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown"
+      aria-haspopup="true" aria-expanded="false">
       Tình trạng
     </button>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <ul>
-        <li>Khép kín</li>
+      <ul *ngFor="let dataItem of statuses" style="padding: 0 10px; width: fit-content;">
+        <li>
+          <input type="checkbox" value="{{dataItem.statusName}}">
+          <span *ngIf="dataItem.statusName === 'Available'">Trống</span>
+          <span *ngIf="dataItem.statusName === 'Occupied'">Đã cho thuê</span>
+          <span *ngIf="dataItem.statusName === 'Disabled'">Không dùng được</span>
+        </li>
       </ul>
     </div>
   </div>
 
-  <!-- Tình trạng -->
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Tình trạng
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <ul>
-        <li>Khép kín</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Tình trạng -->
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Tình trạng
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <ul>
-        <li>Khép kín</li>
-      </ul>
-    </div>
-  </div>
-
-  <!-- Tình trạng -->
-  <div class="dropdown">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-      Tình trạng
-    </button>
-    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-      <ul>
-        <li>Khép kín</li>
-      </ul>
-    </div>
-  </div>
+  <!-- Button -->
+  <button id="filter-button">Lọc</button>
 </div>
 
 <!-- List of rooms  -->
-<div class="row">
+<div class="row room-table">
   <h3>Danh sách phòng trống</h3>
+
+  <div style="display: flex; justify-content: space-between;">
+    <!-- Total money for not rented rooms -->
+    <div style="color: red; font-weight: 500; font-size: 20px; padding: 20px 0;">
+      <span>Tổng tiền phòng chưa cho thuê: </span>
+      <span>{{ moneyForNotRentedRooms | currency:'VND':'symbol':'3.0' }}</span>
+    </div>
+    <!-- Note -->
+    <div style="display: flex; justify-content: flex-end;">
+      <i class="fa-solid fa-user" style="margin: 5px 5px;"></i>
+      <span>Đã ở</span>
+      <i class="fa-regular fa-user" style="margin: 5px 5px;"></i>
+      <span>Chưa ở</span>
+    </div>
+  </div>
+
+
   <table>
     <thead>
       <th>Tên phòng</th>
       <th>Giá phòng</th>
       <th>Diện tích</th>
+      <th>Điều hòa</th>
+      <th>Wifi</th>
+      <th>Nóng lạnh</th>
+      <th>Nội thất</th>
+      <th>Số người ở</th>
       <th>Trạng thái</th>
+      <th>Thao tác</th>
     </thead>
+    <tbody>
+      <tr *ngFor="let dataItem of rooms">
+        <!-- Room name -->
+        <td>{{dataItem.roomName}}</td>
+
+        <!-- Price -->
+        <td>{{dataItem.pricePerMonth|currency:'VND':'symbol':'3.0'}}</td>
+
+        <!-- Area -->
+        <td style="text-align: center;">{{dataItem.areaByMeters}} m<sup>2</sup></td>
+
+        <!-- Air conditioner -->
+        <td *ngIf="dataItem.aircon === false" style="text-align: center;">
+          <img src="../../../assets/image/cancel.png">
+        </td>
+        <td *ngIf="dataItem.aircon === true" style="text-align: center;">
+          <img src="../../../assets/image/tick.png">
+        </td>
+
+        <!-- Wifi -->
+        <td *ngIf="dataItem.wifi === false" style="text-align: center;">
+          <img src="../../../assets/image/cancel.png">
+        </td>
+        <td *ngIf="dataItem.wifi === true" style="text-align: center;">
+          <img src="../../../assets/image/tick.png">
+        </td>
+
+        <!-- Water Heater -->
+        <td *ngIf="dataItem.waterHeater === false" style="text-align: center;">
+          <img src="../../../assets/image/cancel.png">
+        </td>
+        <td *ngIf="dataItem.waterHeater === true" style="text-align: center;">
+          <img src="../../../assets/image/tick.png">
+        </td>
+
+        <!-- Furniture -->
+        <td *ngIf="dataItem.furniture === false" style="text-align: center;">
+          <img src="../../../assets/image/cancel.png">
+        </td>
+        <td *ngIf="dataItem.furniture === true" style="text-align: center;">
+          <img src="../../../assets/image/tick.png">
+        </td>
+
+        <!-- Amount of people -->
+        <td style="display: flex; height:100%;">
+          <ul id="list-people">
+            <li *ngFor='let in of counter(dataItem.currentAmountOfPeople); let i = index'>
+              <i class="fa-solid fa-user"></i>
+            </li>
+            <li *ngFor='let in of counter(dataItem.maxAmountOfPeople - dataItem.currentAmountOfPeople); let i = index'>
+              <i class="fa-regular fa-user"></i>
+            </li>
+          </ul>
+        </td>
+
+        <!-- Room status -->
+        <td>
+          <label class="switch">
+            <input *ngIf="dataItem.status.statusName === 'Occupied' || dataItem.status.statusName === 'Disabled'"
+              type="checkbox">
+            <input *ngIf="dataItem.status.statusName === 'Available'" type="checkbox" checked>
+            <span class="slider round"></span>
+          </label>
+          <br>
+          <span *ngIf="dataItem.status.statusName === 'Available'">Còn trống</span>
+          <span *ngIf="dataItem.status.statusName === 'Occupied'">Đã thuê</span>
+          <span *ngIf="dataItem.status.statusName === 'Disabled'">Không dùng được</span>
+        </td>
+        <td>
+          <app-update-room [roomId]="dataItem.roomId"></app-update-room>
+        </td>
+      </tr>
+    </tbody>
   </table>
 </div>

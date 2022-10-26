@@ -28,5 +28,7 @@ namespace DataAccess.DTO
         //Address of the House
         public virtual AddressDTO Address { get; set; }
 
+        //List Images of this House
+        public virtual ICollection<ImagesOfHouseDTO> ImagesOfHouses { get; set; }
     }
 }

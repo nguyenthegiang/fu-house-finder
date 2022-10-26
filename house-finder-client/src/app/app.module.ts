@@ -15,6 +15,13 @@ import {
 import { DashboardComponent } from './Landlord/dashboard/dashboard.component';
 import { ListRoomComponent } from './Landlord/list-room/list-room.component';
 import { UploadHouseInfoSingleComponent } from './upload-house-info-single/upload-house-info-single.component';
+import { ListReportComponent } from './Staff/list-report/list-report.component';
+import { ListHouseComponent } from './Staff/list-house/list-house.component';
+import { DashboardStaffComponent } from './Staff/dashboard/dashboard.component';
+import { UpdateRoomComponent } from './Landlord/update-room/update-room.component';
+import { ListLandlordComponent } from './Staff/list-landlord/list-landlord.component';
+import { ListLandlordSignupRequestComponent } from './Staff/list-landlord-signup-request/list-landlord-signup-request.component';
+import { RoomDetailComponent } from './Guest/room-detail/room-detail.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +31,15 @@ import { UploadHouseInfoSingleComponent } from './upload-house-info-single/uploa
     LoginComponent,
     DashboardComponent,
     ListRoomComponent,
-    UploadHouseInfoSingleComponent
+    UploadHouseInfoSingleComponent,
+    DashboardStaffComponent,
+    ListRoomComponent,
+    ListReportComponent,
+    ListHouseComponent,
+    UpdateRoomComponent,
+    ListLandlordComponent,
+    ListLandlordSignupRequestComponent,
+    RoomDetailComponent,
   ],
   imports: [
     BrowserModule,
@@ -32,7 +47,7 @@ import { UploadHouseInfoSingleComponent } from './upload-house-info-single/uploa
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    SocialLoginModule
+    SocialLoginModule,
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',

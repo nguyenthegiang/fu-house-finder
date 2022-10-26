@@ -1,0 +1,39 @@
+﻿using BusinessObjects;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Repositories.IRepository;
+using Repositories.Repositories;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace HouseFinder_API.Controllers
+{
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ReportController : ControllerBase
+    {
+        private IReportRepository reportRepository = new ReportRepository();
+
+        //[Report] POST: Add Report
+        [HttpPost]
+        public IActionResult Post([FromBody] Report report)
+        {
+            try
+            {
+                //Set default date
+                report.CreatedDate = DateTime.Now;
+                report.LastModifiedDate = DateTime.Now;
+
+                //Add to DB
+                reportRepository.AddReport(report);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+    }
+}

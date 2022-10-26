@@ -25,9 +25,10 @@ namespace DataAccess
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
                     rooms = context.Rooms.Where(r => r.HouseId == HouseId)
-                        .Include(r => r.ImagesOfRooms).ProjectTo<RoomDTO>(config).ToList();
+                        .Include(r => r.ImagesOfRooms).Include(r => r.RoomType).ProjectTo<RoomDTO>(config).ToList();
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
@@ -41,7 +42,7 @@ namespace DataAccess
             List<RoomDTO> rooms = new List<RoomDTO>();
             try
             {
-                using(var context = new FUHouseFinderContext())
+                using (var context = new FUHouseFinderContext())
                 {
                     //Find rooms of this house
                     MapperConfiguration config;
@@ -50,7 +51,7 @@ namespace DataAccess
                     //Get only available rooms
                     foreach (RoomDTO r in result)
                     {
-                        if(r.Status.StatusName.Equals("Available"))
+                        if (r.Status.StatusName.Equals("Available"))
                         {
                             rooms.Add(r);
                         }
@@ -92,6 +93,97 @@ namespace DataAccess
             houseDTO.HighestRoomPrice = highestRoomPrice;
 
             return houseDTO;
+        }
+
+        //Create room
+        public static void CreateRoom(Room room)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    context.Rooms.Add(room);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        //Update Room by id
+        public static void UpdateRoomByRoomId(Room room)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Find rooms of this house
+                    Room updatedRoom = context.Rooms.FirstOrDefault(r => r.RoomId == room.RoomId);
+                    if (updatedRoom == null)
+                    {
+                        throw new Exception();
+                    }
+
+                    //Update
+                    context.Entry<Room>(updatedRoom).State = EntityState.Detached;
+                    context.Rooms.Update(room);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public static void DeleteRoom(int roomId)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    Room updatedRoom = context.Rooms.FirstOrDefault(r => r.RoomId == roomId);
+                    if(updatedRoom == null)
+                    {
+                        throw new Exception();
+                    }
+
+                    //Delete by changing Status to Disabled
+                    updatedRoom.StatusId = 3;
+                    context.Entry<Room>(updatedRoom).State = EntityState.Detached;
+                    context.Rooms.Update(updatedRoom);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public static RoomDTO GetRoomByRoomId(int roomId)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    RoomDTO room = context.Rooms.Include(p => p.Status).Where(r => r.RoomId == roomId).ProjectTo<RoomDTO>(config).FirstOrDefault();
+                    if (room == null)
+                    {
+                        throw new Exception();
+                    }
+                    return room;
+                }
+                
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }

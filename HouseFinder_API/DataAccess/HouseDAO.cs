@@ -14,7 +14,7 @@ namespace DataAccess
 {
     public class HouseDAO
     {
-        //Get list of houses, with Address
+        //Get list of houses, with Address & Images
         public static List<HouseDTO> GetAllHouses()
         {
             List<HouseDTO> houseDTOs;
@@ -22,10 +22,14 @@ namespace DataAccess
             {
                 using (var context = new FUHouseFinderContext())
                 {
-                    //include address
+                    //include address, images
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    houseDTOs = context.Houses.Include(h => h.Address).ProjectTo<HouseDTO>(config).ToList();
+                    houseDTOs = context.Houses
+                        //unnecessary includes
+                        //.Include(house => house.Address)
+                        //.Include(house => house.ImagesOfHouses)
+                        .ProjectTo<HouseDTO>(config).ToList();
 
                     //find lowest room price & highest room price
                     for (int i = 0; i < houseDTOs.Count; i++)
@@ -92,5 +96,58 @@ namespace DataAccess
             }
             return houseDTO;
         }
+
+        //Get list of houses by landlordId, with Address
+        public static List<HouseDTO> GetListHousesByLandlordId(string LandlordId)
+        {
+            List<HouseDTO> houseDTOs;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //include address
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    //Get by LandlordId
+                    houseDTOs = context.Houses.Include(h => h.Address).ProjectTo<HouseDTO>(config).Where(h => h.LandlordId.Equals(LandlordId)).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return houseDTOs;
+        }
+
+        //[Landlord - List Rooms] Get total amount of money of rooms that has not been rented
+        public static decimal? GetMoneyForNotRentedRooms(int HouseId)
+        {
+            decimal? totalMoney = 0;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Get rooms by HouseID, include Images
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    List<RoomDTO>  rooms = context.Rooms
+                        .Where(r => r.HouseId == HouseId)
+                        .Where(r => r.Status.StatusName.Equals("Available") || r.Status.StatusName.Equals("Disabled"))
+                        .ProjectTo<RoomDTO>(config).ToList();
+
+                    //Count total money
+                    foreach (RoomDTO r in rooms)
+                    {
+                            totalMoney += r.PricePerMonth;
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return totalMoney;
+        }
+
     }
 }

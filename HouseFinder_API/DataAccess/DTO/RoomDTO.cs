@@ -14,12 +14,15 @@ namespace DataAccess.DTO
         public string Information { get; set; }
         public double? AreaByMeters { get; set; }
         public bool Aircon { get; set; }
+        public bool Wifi { get; set; }
+        public bool WaterHeater { get; set; }
+        public bool Furniture { get; set; }
         public int? MaxAmountOfPeople { get; set; }
         public int? CurrentAmountOfPeople { get; set; }
         public int? BuildingNumber { get; set; }
         public int? FloorNumber { get; set; }
         public virtual StatusDTO Status { get; set; }
-        public int? RoomTypeId { get; set; }
+        public virtual RoomTypeDTO RoomType { get; set; }
         public int? HouseId { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }

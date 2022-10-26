@@ -1,21 +1,6 @@
 <!-- Body -->
 <div class="container-fluid">
   <br>
-  <!-- Search bar -->
-  <div class="text-center pb-4 d-flex justify-content-center">
-    <div class="input-group w-25">
-      <!-- Press enter to search  -->
-      <input type="text" class="form-control" placeholder="Nhập tên trọ, từ khóa tìm kiếm"
-        aria-label="Recipient's username" aria-describedby="button-addon2" [(ngModel)]="searchHouseName" (keydown.enter)="searchHouseByName()">
-      <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="searchHouseByName()">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-      </div>
-    </div>
-  </div>
-  <!-- End Search bar -->
-
   <!-- Main Content -->
   <div class="d-flex justify-content-between">
     <!-- Filter Column -->
@@ -104,28 +89,22 @@
     <div class="w-75 mr-5">
       <!-- Rooms Count Available -->
       <div class="text-center mb-3">
-        <div class="font-weight-bold">Tổng số tòa: 10 tòa</div>
-        <div class="font-weight-bold">Số phòng trống/Tổng số phòng: 10/100 phòng</div>
+        <div class="font-weight-bold">Tổng số tòa: {{houseCount}} tòa</div>
+        <div class="font-weight-bold">Số phòng trống/Tổng số phòng: {{roomAvailableCount}}/{{roomCount}} phòng</div>
       </div>
       <!-- End Rooms Count Available -->
 
       <!-- List of Houses -->
       <div class="row">
         <!-- House Item -->
-        <div class="col-4" *ngFor="let dataItem of houses">
+        <!-- Link to List Rooms -->
+        <div class="col-4" *ngFor="let dataItem of houses" routerLink="/Landlord/list-room/{{dataItem.houseId}}">
           <div class="card rounded">
             <img class="card-img-top"
               src="https://static.vecteezy.com/system/resources/thumbnails/002/042/706/small/wooden-cartoon-country-house-vector.jpg"
               alt="Card image cap">
             <div class="card-body bg-secondary text-white rounded-bottom">
               <h5 class="card-title text-center font-weight-bold">{{dataItem.houseName}}</h5>
-              <div class="card-text"><i class="fa-solid fa-tag mr-2"></i>{{dataItem.lowestRoomPrice}}đ -
-                {{dataItem.highestRoomPrice}}đ</div>
-              <div class="card-text"><i class="fa-solid fa-location-dot mr-2"></i>Thôn 8, Thạch Hòa, Thạch Thất</div>
-              <div class="card-text"><i class="fa-solid fa-road mr-2"></i>{{dataItem.address.googleMapLocation}} 3.5km
-              </div>
-              <div class="card-text"><i class="fa-solid fa-phone mr-2"></i>0987654321</div>
-              <a href="#" class="btn btn-primary mt-3">Xem chi tiết</a>
             </div>
           </div>
         </div>

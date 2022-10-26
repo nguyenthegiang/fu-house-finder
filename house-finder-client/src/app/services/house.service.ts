@@ -11,9 +11,9 @@ export class HouseService {
 
   constructor(private http: HttpClient) { }
 
-  //[Home Page] Get List Houses
-  getAllHouses(): Observable<any[]> {
-    return this.http.get<any>(this.APIUrl);
+  //[Home Page] Get List of all Houses
+  getAllHouses(): Observable<House[]> {
+    return this.http.get<House[]>(this.APIUrl);
   }
 
   //[Home Page] Search house by name
@@ -24,5 +24,15 @@ export class HouseService {
   //[House Detail] Get House detail information
   getHouseByHouseId(houseId: number): Observable<House> {
     return this.http.get<House>(this.APIUrl + "/" + houseId);
+  }
+
+  //[Dashboard] Get List Houses by Landlord Id
+  getListHousesByLandlordId(landlordId: string): Observable<any[]> {
+    return this.http.get<any>(this.APIUrl + "/GetHousesByLandlord?LandlordId=" + landlordId);
+  }
+
+  //[Landlord][List room] Get total money for not rented rooms
+  getMoneyForNotRentedRooms(houseId: number): Observable<any>{
+    return this.http.get<any>(this.APIUrl + "/GetMoneyForNotRentedRooms?HouseId=" + houseId);
   }
 }

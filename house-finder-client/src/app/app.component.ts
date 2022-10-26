@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { Location } from '@angular/common';
 import { CampusService } from './services/campus.service';
 
 @Component({
@@ -8,6 +10,8 @@ import { CampusService } from './services/campus.service';
 })
 export class AppComponent {
   title = 'FU House Finder';
-
+  
   constructor() { }
+
+  ngOnInit() { }
 }
