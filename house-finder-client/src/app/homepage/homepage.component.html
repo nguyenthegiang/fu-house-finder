@@ -44,7 +44,8 @@
 
         <!-- Distance to university -->
         <div>
-          <h6 class="font-weight-bold mb-2">Khoảng cách đến trường: <span class="badge bg-secondary text-white">km</span></h6>
+          <h6 class="font-weight-bold mb-2">Khoảng cách đến trường: <span
+              class="badge bg-secondary text-white">km</span></h6>
           <div style="display: flex;">
             <input type="number" style="width: 50%;" min="0">
             &nbsp;-&nbsp;
@@ -56,7 +57,8 @@
         <!-- Price -->
         <div>
           <div>
-            <h6 class="font-weight-bold mb-2">Giá tiền: <span class="badge bg-secondary text-white">VND/Tháng</span></h6>
+            <h6 class="font-weight-bold mb-2">Giá tiền: <span class="badge bg-secondary text-white">VND/Tháng</span>
+            </h6>
             <div style="display: flex;">
               <input type="number" style="width: 50%;" min="0">
               &nbsp;-&nbsp;
@@ -90,7 +92,8 @@
           <h6 class="font-weight-bold mb-2">Loại phòng:</h6>
           <div>
             <div class="form-check" *ngFor="let dataItem of roomTypes" id="listRoomType">
-              <input class="form-check-input" type="checkbox" value="{{dataItem.roomTypeName}}" id="{{dataItem.roomTypeName}}">
+              <input class="form-check-input" type="checkbox" value="{{dataItem.roomTypeName}}"
+                id="{{dataItem.roomTypeName}}">
               <label class="form-check-label" for="{{dataItem.roomTypeName}}">
                 {{dataItem.roomTypeName}}
               </label>
@@ -154,40 +157,14 @@
         <div>
           <h6 class="font-weight-bold mb-2">Tiện ích khác:</h6>
 
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="wifi">
-            <label class="form-check-label" for="wifi">
-              Wifi
+          <div class="form-check" *ngFor="let roomUtility of roomUtilities" id="listOtherUtility">
+            <input class="form-check-input" type="checkbox" value="{{roomUtility.utilityName}}"
+              id="{{roomUtility.utilityName}}">
+            <label class="form-check-label" for="{{roomUtility.utilityName}}">
+              {{roomUtility.displayName}}
             </label>
           </div>
 
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
-              Điều hòa
-            </label>
-          </div>
-
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
-              Nóng lạnh
-            </label>
-          </div>
-
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
-              Khóa vân tay
-            </label>
-          </div>
-
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
-              Camera an ninh
-            </label>
-          </div>
         </div>
       </div>
     </div>

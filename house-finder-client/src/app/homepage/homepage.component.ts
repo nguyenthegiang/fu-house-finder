@@ -19,7 +19,7 @@ export class HomepageComponent implements OnInit {
   //Data for Filter column
   roomTypes: RoomType[] = [];   //Room types
   campuses: Campus[] = [];
-  otherUtilities: RoomUtility[] = [];  //List of utilities of Rooms
+  roomUtilities: RoomUtility[] = [];  //List of utilities of Rooms
 
   constructor(
     private houseService: HouseService,
@@ -50,7 +50,7 @@ export class HomepageComponent implements OnInit {
     //Generate data:
 
     //(Filter) Other utilities
-    this.otherUtilities = [
+    this.roomUtilities = [
       { "utilityName": "aircon", "displayName": "Điều hòa" },
       { "utilityName": "wifi", "displayName": "Wifi" },
       { "utilityName": "waterHeater", "displayName": "Bình nóng lạnh" },
