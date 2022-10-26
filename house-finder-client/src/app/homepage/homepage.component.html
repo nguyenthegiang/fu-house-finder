@@ -91,11 +91,11 @@
         <div>
           <h6 class="font-weight-bold mb-2">Loại phòng:</h6>
           <div>
-            <div class="form-check" *ngFor="let dataItem of roomTypes" id="listRoomType">
-              <input class="form-check-input" type="checkbox" value="{{dataItem.roomTypeName}}"
-                id="{{dataItem.roomTypeName}}">
-              <label class="form-check-label" for="{{dataItem.roomTypeName}}">
-                {{dataItem.roomTypeName}}
+            <div class="form-check" *ngFor="let roomType of roomTypes" id="listRoomType">
+              <input class="form-check-input" type="checkbox" value="{{roomType.roomTypeName}}"
+                id="{{roomType.roomTypeName}}">
+              <label class="form-check-label" for="{{roomType.roomTypeName}}">
+                {{roomType.roomTypeName}}
               </label>
             </div>
           </div>
@@ -107,7 +107,7 @@
           <h6 class="font-weight-bold mb-2">Khu vực:</h6>
 
           <div class="d-flex justify-content-between align-items-center my-2">
-            <div>Huyện</div>
+            <div>Huyện/Quận</div>
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -122,7 +122,7 @@
           </div>
 
           <div class="d-flex justify-content-between align-items-center mb-2">
-            <div>Xã</div>
+            <div>Phường/Xã</div>
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -137,7 +137,7 @@
           </div>
 
           <div class="d-flex justify-content-between align-items-center">
-            <div>Thôn</div>
+            <div>Thôn/Xóm</div>
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -164,7 +164,6 @@
               {{roomUtility.displayName}}
             </label>
           </div>
-
         </div>
       </div>
     </div>
