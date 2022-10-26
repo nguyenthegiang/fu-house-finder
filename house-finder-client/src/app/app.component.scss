@@ -18,3 +18,35 @@
   text-decoration: none;
 }
 
+#app-name:active{
+  text-decoration: none;
+}
+
+.footer{
+  background-color: #FF6F3D;
+
+  .news, .admission, .internationalStudent{
+    ul{
+      list-style: none;
+      text-align: left;
+    }
+  }
+
+  .copyright{
+    text-align: left;
+    border-left: white solid 1px;
+    padding: 0 20px;
+
+    i{
+      color: #FF6F3D;
+      background-color: white;
+      margin-right: 10px;
+      width: 40px;
+      text-align: center;
+      padding: 8px;
+      border: solid 1px white;
+      border-radius: 8px;
+    }
+  }
+}
+
