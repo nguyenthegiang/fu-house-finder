@@ -42,8 +42,8 @@ export class RoomService {
   }
 
   //[Landlord: Get Room] Get room by roomId
-  getRoom(roomId: number): Observable<Room> {
-    return this.http.get<Room>(this.APIUrl + "/Rooms?roomId=" + roomId);
+  getRoomByRoomId(roomId: number): Observable<Room> {
+    return this.http.get<Room>(this.APIUrl + "/getByRoomId?RoomId=" + roomId);
   }
 }
 

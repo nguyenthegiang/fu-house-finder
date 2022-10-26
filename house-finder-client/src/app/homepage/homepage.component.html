@@ -5,12 +5,12 @@
   <div class="text-center pb-4 d-flex justify-content-center">
     <div class="input-group w-25">
       <!-- Press enter to search  -->
-      <input type="text" class="form-control" placeholder="Nhập tên trọ, từ khóa tìm kiếm"
-        aria-label="Recipient's username" aria-describedby="button-addon2" [(ngModel)]="searchHouseName"
-        (keydown.enter)="searchHouseByName()">
+      <input type="text" class="form-control" placeholder="Nhập tên trọ"
+        aria-label="Recipient's username" aria-describedby="button-addon2" #searchHouseName
+        (keydown.enter)="searchHouseByName(searchHouseName.value)">
       <!-- Click button to search -->
       <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="searchHouseByName()">
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="searchHouseByName(searchHouseName.value)">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
       </div>
@@ -217,8 +217,8 @@
           <!-- Item onClick: to House Detail -->
           <div class="card rounded houseCardItem" routerLink="/house-detail/{{dataItem.houseId}}">
             <img class="card-img-top"
-              src="https://static.vecteezy.com/system/resources/thumbnails/002/042/706/small/wooden-cartoon-country-house-vector.jpg"
-              alt="Card image cap">
+              src="../assets/image/House/{{dataItem.imagesOfHouses[0].imageLink}}"
+              alt="House Image">
             <div class="card-body text-white rounded-bottom">
               <h5 class="card-title text-center font-weight-bold">{{dataItem.houseName}}</h5>
               <!-- Price with VND format -->

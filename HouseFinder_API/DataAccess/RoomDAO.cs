@@ -162,5 +162,28 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
         }
+
+        public static RoomDTO GetRoomByRoomId(int roomId)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    RoomDTO room = context.Rooms.Include(p => p.Status).Where(r => r.RoomId == roomId).ProjectTo<RoomDTO>(config).FirstOrDefault();
+                    if (room == null)
+                    {
+                        throw new Exception();
+                    }
+                    return room;
+                }
+                
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

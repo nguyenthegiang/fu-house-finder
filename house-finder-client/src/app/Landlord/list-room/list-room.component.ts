@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Room } from 'src/app/models/room';
 import { RoomType } from 'src/app/models/roomType';
@@ -23,6 +23,7 @@ export class ListRoomComponent implements OnInit {
   //List of statuses
   statuses: Status[] = [];
 
+
   constructor(
     private route: ActivatedRoute,
     private roomService: RoomService,
@@ -33,6 +34,7 @@ export class ListRoomComponent implements OnInit {
 
   ngOnInit(): void {
     //Get id of House from Route
+
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
     //Call API: get available rooms of this house
