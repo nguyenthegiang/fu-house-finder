@@ -1,3 +1,5 @@
+import { District } from './../models/district';
+import { DistrictService } from './../services/district.service';
 import { RoomUtility } from './../models/roomUtilities';
 import { CampusService } from './../services/campus.service';
 import { Campus } from './../models/campus';
@@ -20,11 +22,13 @@ export class HomepageComponent implements OnInit {
   roomTypes: RoomType[] = [];   //Room types
   campuses: Campus[] = [];
   roomUtilities: RoomUtility[] = [];  //List of utilities of Rooms
+  districts: District[] = [];
 
   constructor(
     private houseService: HouseService,
     private campusService: CampusService,
     private roomTypeService: RoomTypeService,
+    private districtService: DistrictService,
   ) { }
 
   ngOnInit(): void {
@@ -43,6 +47,11 @@ export class HomepageComponent implements OnInit {
     //(Filter) Get all Room types
     this.roomTypeService.getRoomTypes().subscribe(data => {
       this.roomTypes = data;
+    });
+
+    //(Filter) Get all Districts, Communes, Villages
+    this.districtService.getAllDistricts().subscribe(data => {
+      this.districts = data;
     });
 
     //--------------------------------
