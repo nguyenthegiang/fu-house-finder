@@ -12,5 +12,6 @@ namespace Repositories.IRepository
         UserDTO GetUserByID(string UserId);
         public ResponseDTO Login(LoginDTO login);
         public ResponseDTO Register(RegisterDTO register);
+        public List<UserDTO> GetLandlords();
     }
 }

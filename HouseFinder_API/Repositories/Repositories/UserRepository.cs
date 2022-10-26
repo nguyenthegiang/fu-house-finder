@@ -1,11 +1,15 @@
 ﻿using DataAccess;
 using DataAccess.DTO;
 using Repositories.IRepository;
+using System.Collections.Generic;
 
 namespace Repositories.Repositories
 {
     public class UserRepository : IUserReposiotry
     {
+        //Get list of landlords
+        public List<UserDTO> GetLandlords() => UserDAO.GetLandlords();
+
         public UserDTO GetUserByID(string UserId) => UserDAO.GetUserById(UserId);
         public ResponseDTO Login(LoginDTO login)
         {

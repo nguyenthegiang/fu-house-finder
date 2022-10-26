@@ -35,6 +35,26 @@ namespace DataAccess
             return userDTO;
         }
 
+        //[Staff][Dashboard] Get list of landlords 
+         public static List<UserDTO> GetLandlords()
+        {
+            List<UserDTO> landlords;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    landlords = context.Users.ProjectTo<UserDTO>(config).Where(u => u.Role.RoleName.Equals("Landlord")).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return landlords;
+        }
+
         public static ResponseDTO LoginUsername(string email, string password)
         {
             ResponseDTO userDTO;

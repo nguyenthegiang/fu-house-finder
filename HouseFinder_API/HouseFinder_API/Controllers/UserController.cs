@@ -92,5 +92,20 @@ namespace HouseFinder_API.Controllers
             HttpContext.Session.Remove("Token");
             return Ok();
         }
+
+        //[Staff][Dashboard] Get list of all landlords
+        [HttpGet("landlord")]
+        public IActionResult GetLandlords()
+        {
+            List<UserDTO> landlords = userReposiotry.GetLandlords();
+            if (landlords == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(landlords);
+            }
+        }
     }
 }
