@@ -76,6 +76,8 @@ namespace HouseFinder_API.Controllers
             register.Email = payload.Email;
             register.DisplayName = payload.Name;
             ResponseDTO user = userReposiotry.Register(register);
+            string token = this.auth.Authenticate(user);
+            HttpContext.Session.SetString("Token", token);
             return Ok(user);
         }
         [Authorize]
