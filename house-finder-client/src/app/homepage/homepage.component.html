@@ -44,7 +44,7 @@
 
         <!-- Distance to university -->
         <div>
-          <h6>Khoảng cách đến trường: <span class="badge bg-secondary text-white">km</span></h6>
+          <h6 class="font-weight-bold mb-2">Khoảng cách đến trường: <span class="badge bg-secondary text-white">km</span></h6>
           <div style="display: flex;">
             <input type="number" style="width: 50%;" min="0">
             &nbsp;-&nbsp;
@@ -56,11 +56,11 @@
         <!-- Price -->
         <div>
           <div>
-            <h6>Giá tiền: <span class="badge bg-secondary text-white">VND/Tháng</span></h6>
+            <h6 class="font-weight-bold mb-2">Giá tiền: <span class="badge bg-secondary text-white">VND/Tháng</span></h6>
             <div style="display: flex;">
               <input type="number" style="width: 50%;" min="0">
               &nbsp;-&nbsp;
-              <input type="number" style="width: 50%;">
+              <input type="number" style="width: 50%;" min="0">
             </div>
           </div>
         </div>
@@ -85,21 +85,23 @@
             </div>
         </div> -->
 
+        <!-- Room Types -->
         <div>
-          <span class="font-weight-bold">Loại phòng:</span>
+          <h6 class="font-weight-bold mb-2">Loại phòng:</h6>
           <div>
-            <ul *ngFor="let dataItem of roomTypes" id="listRoomType">
-              <li>
-                <input type="checkbox" value="{{dataItem.roomTypeName}}">
+            <div class="form-check" *ngFor="let dataItem of roomTypes" id="listRoomType">
+              <input class="form-check-input" type="checkbox" value="{{dataItem.roomTypeName}}" id="{{dataItem.roomTypeName}}">
+              <label class="form-check-label" for="{{dataItem.roomTypeName}}">
                 {{dataItem.roomTypeName}}
-              </li>
-            </ul>
+              </label>
+            </div>
           </div>
         </div>
         <hr>
 
+        <!-- Regions -->
         <div>
-          <div class="font-weight-bold">Khu vực:</div>
+          <h6 class="font-weight-bold mb-2">Khu vực:</h6>
 
           <div class="d-flex justify-content-between align-items-center my-2">
             <div>Huyện</div>
@@ -148,12 +150,13 @@
         </div>
         <hr>
 
-        <div class="pb-3">
-          <div class="font-weight-bold mb-2">Tiện ích khác:</div>
+        <!-- Other utilities -->
+        <div>
+          <h6 class="font-weight-bold mb-2">Tiện ích khác:</h6>
 
           <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
+            <input class="form-check-input" type="checkbox" value="" id="wifi">
+            <label class="form-check-label" for="wifi">
               Wifi
             </label>
           </div>

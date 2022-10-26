@@ -1,3 +1,4 @@
+import { RoomUtility } from './../models/roomUtilities';
 import { CampusService } from './../services/campus.service';
 import { Campus } from './../models/campus';
 import { HouseService } from './../services/house.service';
@@ -18,6 +19,7 @@ export class HomepageComponent implements OnInit {
   //Data for Filter column
   roomTypes: RoomType[] = [];   //Room types
   campuses: Campus[] = [];
+  otherUtilities: RoomUtility[] = [];  //List of utilities of Rooms
 
   constructor(
     private houseService: HouseService,
@@ -28,20 +30,33 @@ export class HomepageComponent implements OnInit {
   ngOnInit(): void {
     //Call APIs:
 
-    //Get List of all Houses
+    //(List) Get all Houses
     this.houseService.getAllHouses().subscribe(data => {
       this.houses = data;
     });
 
-    //Get Campuses
+    //(Filter) Get all Campuses
     this.campusService.getAllCampuses().subscribe(data => {
       this.campuses = data;
     });
 
-    //Get Room types
+    //(Filter) Get all Room types
     this.roomTypeService.getRoomTypes().subscribe(data => {
       this.roomTypes = data;
     });
+
+    //--------------------------------
+
+    //Generate data:
+
+    //(Filter) Other utilities
+    this.otherUtilities = [
+      { "utilityName": "aircon", "displayName": "Điều hòa" },
+      { "utilityName": "wifi", "displayName": "Wifi" },
+      { "utilityName": "waterHeater", "displayName": "Bình nóng lạnh" },
+      { "utilityName": "furniture", "displayName": "Nội thất" },
+    ];
+
   }
 
   //Search House by Name
