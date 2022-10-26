@@ -19,10 +19,11 @@ export class HomepageComponent implements OnInit {
   houses: House[] = [];
 
   //Data for Filter column
-  roomTypes: RoomType[] = [];   //Room types
+  roomTypes: RoomType[] = [];         //Room types
   campuses: Campus[] = [];
   roomUtilities: RoomUtility[] = [];  //List of utilities of Rooms
-  districts: District[] = [];
+  districts: District[] = [];         //(Regions) All Districts
+  
 
   constructor(
     private houseService: HouseService,
