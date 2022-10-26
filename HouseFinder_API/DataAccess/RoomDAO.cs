@@ -185,5 +185,47 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
         }
+
+        //[Staff - Dashboard] Count available rooms
+        public static int CountAvailableRoom()
+        {
+            int availableRoom = 0;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Count available rooms
+                    availableRoom = context.Rooms.Where(r => r.Status.StatusName.Equals("Available")).Count();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return availableRoom;
+        }
+
+        //[Staff - Dashboard] Count capacity of available rooms
+        public static int? CountAvailableCapacity()
+        {
+            int? capacity;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Get list of rooms
+                    List<Room> rooms = context.Rooms.ToList();
+                    //Calculate
+                    int? maxPeople = (from r in rooms select r.MaxAmountOfPeople).Sum();
+                    int? currentPeople = (from r in rooms select r.CurrentAmountOfPeople).Sum();
+                    capacity = maxPeople - currentPeople;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return capacity;
+        }
     }
 }

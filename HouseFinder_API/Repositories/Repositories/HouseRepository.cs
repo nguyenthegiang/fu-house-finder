@@ -18,5 +18,9 @@ namespace Repositories.Repositories
         public List<HouseDTO> GetListHousesByLandlordId(string LandlordId) => HouseDAO.GetListHousesByLandlordId(LandlordId);
 
         public decimal? GetMoneyForNotRentedRooms(int HouseId) => HouseDAO.GetMoneyForNotRentedRooms(HouseId);
+
+        public int CountTotalHouse() => HouseDAO.CountTotalHouse();
+
+        public int CountAvailableHouse() => HouseDAO.CountAvailableHouse();
     }
 }

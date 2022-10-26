@@ -1,14 +1,15 @@
 <!-- Body -->
-<div class="container-fluid">
-  <br>
+<div class="container-fluid mb-5 d-flex justify-content-center">
   <!-- Main Content -->
-  <div class="d-flex justify-content-between">
+  <div class="row w-100 d-flex justify-content-between">
     <!-- Filter Column -->
-    <div class="w-25 bg-light mx-5 rounded">
-      <div class="text-center text-white bg-secondary p-2 rounded-top">LỌC PHÒNG TRỌ</div>
+    <div class="col-12 col-lg-3 col-md-4 bg-light rounded mt-5">
+      <div class="row">
+        <div class="col-12 text-center text-white bg-secondary p-2 rounded-top">LỌC PHÒNG TRỌ</div>
+      </div>
 
-      <div class="container">
 
+      <div class="mt-2">
         <div>
           <div><span class="font-weight-bold">Bán kính:</span> 0 - 10km</div>
           <div>
@@ -36,11 +37,11 @@
           <div class="font-weight-bold">Khu vực:</div>
 
           <div class="d-flex justify-content-between align-items-center my-2">
-            <div>Huyện</div>
+            <div class="mr-2">Huyện</div>
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Chọn nơi muốn tìm
+                Chọn nơi cần tìm
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="#">Action</a>
@@ -51,11 +52,11 @@
           </div>
 
           <div class="d-flex justify-content-between align-items-center mb-2">
-            <div>Xã</div>
+            <div class="mr-2">Xã</div>
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Chọn nơi muốn tìm
+                Chọn nơi cần tìm
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="#">Action</a>
@@ -66,11 +67,11 @@
           </div>
 
           <div class="d-flex justify-content-between align-items-center">
-            <div>Thôn</div>
+            <div class="mr-2">Thôn</div>
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Chọn nơi muốn tìm
+                Chọn nơi cần tìm
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <a class="dropdown-item" href="#">Action</a>
@@ -86,20 +87,20 @@
     <!-- End Filter Column -->
 
     <!-- Display Houses -->
-    <div class="w-75 mr-5">
+    <div class="col-12 col-lg-8 col-md-7 mt-5">
       <!-- Rooms Count Available -->
-      <div class="text-center mb-3">
+      <div class="text-center">
         <div class="font-weight-bold">Tổng số tòa: {{houseCount}} tòa</div>
         <div class="font-weight-bold">Số phòng trống/Tổng số phòng: {{roomAvailableCount}}/{{roomCount}} phòng</div>
       </div>
       <!-- End Rooms Count Available -->
 
       <!-- List of Houses -->
-      <div class="row">
+      <div class="row mb-3">
         <!-- House Item -->
         <!-- Link to List Rooms -->
-        <div class="col-4" *ngFor="let dataItem of houses" routerLink="/Landlord/list-room/{{dataItem.houseId}}">
-          <div class="card rounded">
+        <div class="col-12 col-md-4 col-sm-6 mt-3" *ngFor="let dataItem of houses" routerLink="/Landlord/list-room/{{dataItem.houseId}}">
+          <div class="card rounded h-100">
             <img class="card-img-top"
               src="https://static.vecteezy.com/system/resources/thumbnails/002/042/706/small/wooden-cartoon-country-house-vector.jpg"
               alt="Card image cap">
@@ -113,7 +114,7 @@
       <!-- End List of Houses -->
 
       <!-- Paging -->
-      <div class="d-flex justify-content-center align-items-center my-3">
+      <div class="d-flex justify-content-center align-items-center">
         <nav aria-label="Page navigation example">
           <ul class="pagination">
             <li class="page-item">
