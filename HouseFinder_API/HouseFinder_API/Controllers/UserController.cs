@@ -107,5 +107,20 @@ namespace HouseFinder_API.Controllers
                 return Ok(landlords);
             }
         }
+        //[Head][Dashboard] Get list of all landlords
+        [HttpGet("staff")]
+        public IActionResult GetStaffs()
+        {
+            List<UserDTO> staffs = userReposiotry.GetStaffs();
+            if (staffs == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(staffs);
+            }
+        }
+
     }
 }

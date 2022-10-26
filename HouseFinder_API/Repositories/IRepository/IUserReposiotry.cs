@@ -13,5 +13,6 @@ namespace Repositories.IRepository
         public ResponseDTO Login(LoginDTO login);
         public ResponseDTO Register(RegisterDTO register);
         public List<UserDTO> GetLandlords();
+        public List<UserDTO> GetStaffs();
     }
 }
