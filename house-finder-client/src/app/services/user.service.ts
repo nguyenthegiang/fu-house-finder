@@ -30,10 +30,26 @@ export class UserService {
   }
 
   registerStudentGoogle(googleIdToken: string){
+    console.log("called");
     return this.http.post<User>(this.APIUrl + "/register", {"googleIdToken": googleIdToken, "roleId": 1});
   }
 
-  registerLandlordGoogle(googleIdToken: string){
-    return this.http.post<User>(this.APIUrl + "/register", {"googleIdToken": googleIdToken, "roleId": 2});
+  registerLandlordGoogle(
+      googleIdToken: string, 
+      phonenumber: string, 
+      identityCardFrontSideImageLink: string, 
+      identityCardBackSideImageLink: string, 
+      facebookUrl: string
+    ){
+    return this.http.post<User>(
+      this.APIUrl + "/register", 
+      {
+        "googleIdToken": googleIdToken, 
+        "phonenumber": phonenumber,
+        "identityCardFrontSideImageLink": identityCardFrontSideImageLink,
+        "identityCardBackSideImageLink": identityCardBackSideImageLink,
+        "facebookUrl": facebookUrl,
+        "roleId": 2
+      });
   }
 }

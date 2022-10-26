@@ -30,8 +30,12 @@ namespace Repositories.Repositories
                 register.FacebookUserId, 
                 register.GoogleUserId, 
                 register.Email, 
-                register.DisplayName, 
-                (int)register.RoleId
+                register.DisplayName,
+                (int)register.RoleId,
+                register.IdentityCardFrontSideImageLink,
+                register.IdentityCardBackSideImageLink, 
+                register.PhoneNumber,
+                register.FacebookUrl
             );
             return user;
         }

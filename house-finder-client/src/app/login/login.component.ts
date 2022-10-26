@@ -1,10 +1,11 @@
-import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { SocialAuthService, SocialUser } from "angularx-social-login";
 import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
 import { CredentialResponse } from 'google-one-tap';
 import { Router } from '@angular/router';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 
 
 @Component({
@@ -14,17 +15,27 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   @ViewChild('ggDiv') ggDiv: ElementRef | undefined;
-  @ViewChild('registerModal') registerModal: any;
-  @ViewChild('roleModal') roleModal: any;
+  @ViewChild('registerModal') registerModal: ElementRef | undefined;
+  @ViewChild('roleModal') roleModal: ElementRef | undefined;
 
   socialUser: SocialUser | undefined;
   user: User | undefined;
+  googleIdToken: string | any;
+  registerForm = this.formBuilder.group({
+    phonenumber: "", 
+    identityCardFrontSideImageLink: "", 
+    identityCardBackSideImageLink: "", 
+    facebookUrl: ""
+  });
+
   constructor(
     private authService: SocialAuthService, 
     private userService: UserService,
     private elementRef: ElementRef,
     private router: Router,
-    private ngZone: NgZone
+    private ngZone: NgZone,
+    private formBuilder: FormBuilder,
+    private renderer: Renderer2
     ) { }
 
   ngOnInit(): void {
@@ -61,12 +72,10 @@ export class LoginComponent implements OnInit {
     
   }
   handleCredentialResponse(response: CredentialResponse) {
-    console.log(response?.credential);
     // Decoding  JWT token...
       let decodedToken: any | null = null;
       try {
         decodedToken = JSON.parse(atob(response?.credential.split('.')[1]));
-        console.log(decodedToken.sub);
       } catch (e) {
         console.error('Error while trying to decode token', e);
       }
@@ -75,6 +84,7 @@ export class LoginComponent implements OnInit {
           this.ngZone.run(()=>{this.router.navigate(['/home']);});
         },
         error => {
+          this.googleIdToken = response?.credential;
           this.triggerRoleModal();
         }
       );
@@ -100,19 +110,55 @@ export class LoginComponent implements OnInit {
     this.authService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);
   }
 
-  registerStudent(): void {
-
+  onSubmit(): void {
+    this.registerLandlord(
+      this.registerForm.controls['phonenumber'].value,
+      this.registerForm.controls['identityCardFrontSideImageLink'].value,
+      this.registerForm.controls['identityCardBackSideImageLink'].value,
+      this.registerForm.controls['facebookUrl'].value
+    );
   }
 
-  registerLandlord(): void {
 
+  registerStudent(): void {
+    this.userService.registerStudentGoogle(this.googleIdToken).subscribe(data => {
+      this.user = data;
+      this.dismissRoleModal();
+      this.router.navigate(['/home']);
+    });
+  }
+
+  registerLandlord(
+    phonenumber: string, 
+    identityCardFrontSideImageLink: string, 
+    identityCardBackSideImageLink: string, 
+    facebookUrl: string
+    ): void {
+    this.userService.registerLandlordGoogle(this.googleIdToken, phonenumber, identityCardFrontSideImageLink, identityCardBackSideImageLink, facebookUrl).subscribe(data => {
+      this.user = data;
+      this.dismissRegisterModal();
+      this.router.navigate(['/home']);
+    });
   }
   
   triggerRegisterModal(): void {
-    this.registerModal.open();
+    this.dismissRegisterModal();
+    this.renderer.setStyle(this.registerModal?.nativeElement, "display", "block")
+    this.registerModal?.nativeElement.classList.add('show');
   }
 
   triggerRoleModal(): void {
-    this.roleModal.open();
+    this.renderer.setStyle(this.roleModal?.nativeElement, "display", "block");
+    this.roleModal?.nativeElement.classList.add('show');
+  }
+
+  dismissRegisterModal(): void {
+    this.renderer.setStyle(this.registerModal?.nativeElement, "display", "none")
+    this.registerModal?.nativeElement.classList.remove('show');
+  }
+
+  dismissRoleModal(): void {
+    this.renderer.setStyle(this.roleModal?.nativeElement, "display", "none");
+    this.roleModal?.nativeElement.classList.remove('show');
   }
 }

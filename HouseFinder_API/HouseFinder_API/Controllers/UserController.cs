@@ -66,6 +66,7 @@ namespace HouseFinder_API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDTO register)
         {
+            Console.WriteLine("called");
             var validationSettings = new GoogleJsonWebSignature.ValidationSettings
             {
                 Audience = new string[] { "919349682446-etrauq4d5cluclesaifkcr4bnh4gru2j.apps.googleusercontent.com" }
