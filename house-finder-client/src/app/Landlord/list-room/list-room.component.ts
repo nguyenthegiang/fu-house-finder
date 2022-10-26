@@ -23,6 +23,8 @@ export class ListRoomComponent implements OnInit {
   //List of statuses
   statuses: Status[] = [];
 
+  //[Update] roomId to pass into <update-room>
+  updateRoomId: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -34,7 +36,6 @@ export class ListRoomComponent implements OnInit {
 
   ngOnInit(): void {
     //Get id of House from Route
-
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
     //Call API: get available rooms of this house
@@ -58,7 +59,13 @@ export class ListRoomComponent implements OnInit {
     });
   }
 
-  counter(i: number) {
+  //for displaying 'Amount of People'
+  peopleCounter(i: number) {
     return new Array(i);
+  }
+
+  //[Update] pass roomId to <update-room> component to call API
+  editRoom(roomId: number) {
+    this.updateRoomId = roomId;
   }
 }
