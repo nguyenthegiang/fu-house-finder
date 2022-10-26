@@ -13,16 +13,17 @@ export class UpdateRoomComponent implements OnInit {
   roomDetail: Room | undefined;
 
   constructor(
-    private route: ActivatedRoute,
     private roomService: RoomService
   ) { }
 
   @Input() roomId!: number;
-  ngOnInit(): void {
 
+  ngOnInit(): void {
   }
+
+  //Call API: Get Room Detail info from ID
   getRoomByRoomId() {
-    //Get id of room from router
+    //Get id of room from Input
     const roomId = this.roomId;
     console.log(roomId)
     this.roomService.getRoomByRoomId(roomId).subscribe(data => {
