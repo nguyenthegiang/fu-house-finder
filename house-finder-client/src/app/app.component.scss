@@ -30,6 +30,15 @@
       list-style: none;
       text-align: left;
     }
+
+    a{
+      color: white;
+    }
+
+    a:hover{
+      color: white;
+      text-decoration: none;
+    }
   }
 
   .copyright{
@@ -46,6 +55,10 @@
       padding: 8px;
       border: solid 1px white;
       border-radius: 8px;
+    }
+    i:hover{
+      background-color: black;
+      border: solid 1px black;
     }
   }
 }
