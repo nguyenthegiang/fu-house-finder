@@ -159,9 +159,17 @@
           <span *ngIf="dataItem.status.statusName === 'Disabled'">Không dùng được</span>
         </td>
         <td>
-          <app-update-room [roomId]="dataItem.roomId"></app-update-room>
+          <!-- Update button -->
+          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateModal"
+            data-whatever="@getbootstrap">Chỉnh sửa</button>
+
+          <!-- Delete button -->
+          <button type=" button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"
+            data-whatever="@getbootstrap">Xóa</button>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
+
+<app-update-room [roomId]="1"></app-update-room>

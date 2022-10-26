@@ -5,12 +5,12 @@
   <div class="text-center pb-4 d-flex justify-content-center">
     <div class="input-group w-25">
       <!-- Press enter to search  -->
-      <input type="text" class="form-control" placeholder="Nhập tên trọ"
-        aria-label="Recipient's username" aria-describedby="button-addon2" #searchHouseName
-        (keydown.enter)="searchHouseByName(searchHouseName.value)">
+      <input type="text" class="form-control" placeholder="Nhập tên trọ" aria-label="Recipient's username"
+        aria-describedby="button-addon2" #searchHouseName (keydown.enter)="searchHouseByName(searchHouseName.value)">
       <!-- Click button to search -->
       <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="searchHouseByName(searchHouseName.value)">
+        <button class="btn btn-outline-secondary" type="button" id="button-addon2"
+          (click)="searchHouseByName(searchHouseName.value)">
           <i class="fa-solid fa-magnifying-glass"></i>
         </button>
       </div>
@@ -42,27 +42,33 @@
         </div>
         <hr>
 
+        <!-- Distance to university -->
         <div>
-          <span class="font-weight-bold">Bán kính:</span>
+          <h6 class="font-weight-bold mb-2">Khoảng cách đến trường: <span
+              class="badge bg-secondary text-white">km</span></h6>
           <div style="display: flex;">
             <input type="number" style="width: 50%;" min="0">
-            -
-            <input type="number" style="width: 50%;">
+            &nbsp;-&nbsp;
+            <input type="number" style="width: 50%;" min="0">
           </div>
         </div>
         <hr>
 
+        <!-- Price -->
         <div>
           <div>
-            <span class="font-weight-bold">Khoảng giá:</span>
+            <h6 class="font-weight-bold mb-2">Giá tiền: <span class="badge bg-secondary text-white">VND/Tháng</span>
+            </h6>
             <div style="display: flex;">
               <input type="number" style="width: 50%;" min="0">
-              -
-              <input type="number" style="width: 50%;">
+              &nbsp;-&nbsp;
+              <input type="number" style="width: 50%;" min="0">
             </div>
           </div>
+        </div>
+        <hr>
 
-          <!-- <div>
+        <!-- <div>
             <div class="ranges-container">
               <div class="range d-flex justify-content-between align-items-center">
                 <input type="range" min="0" max="20000000" label="Min" value="0" class="w-75">
@@ -79,43 +85,43 @@
                 </span>
               </div>
             </div>
-          </div> -->
-        </div>
-        <hr>
+        </div> -->
 
+        <!-- Room Types -->
         <div>
-          <span class="font-weight-bold">Loại phòng:</span>
+          <h6 class="font-weight-bold mb-2">Loại phòng:</h6>
           <div>
-            <ul *ngFor="let dataItem of roomTypes" id="listRoomType">
-              <li>
-                <input type="checkbox" value="{{dataItem.roomTypeName}}">
-                {{dataItem.roomTypeName}}
-              </li>
-            </ul>
+            <div class="form-check" *ngFor="let roomType of roomTypes" id="listRoomType">
+              <input class="form-check-input" type="checkbox" value="{{roomType.roomTypeName}}"
+                id="{{roomType.roomTypeName}}">
+              <label class="form-check-label" for="{{roomType.roomTypeName}}">
+                {{roomType.roomTypeName}}
+              </label>
+            </div>
           </div>
         </div>
         <hr>
 
+        <!-- Regions -->
         <div>
-          <div class="font-weight-bold">Khu vực:</div>
+          <h6 class="font-weight-bold mb-2">Khu vực:</h6>
 
           <div class="d-flex justify-content-between align-items-center my-2">
-            <div>Huyện</div>
+            <div>Huyện/Quận</div>
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Chọn nơi muốn tìm
               </button>
+              <!-- List all Districts -->
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <a *ngFor="let district of districts" class="dropdown-item" href="#">{{district.districtName}}</a>
               </div>
             </div>
           </div>
 
           <div class="d-flex justify-content-between align-items-center mb-2">
-            <div>Xã</div>
+            <div>Phường/Xã</div>
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -130,7 +136,7 @@
           </div>
 
           <div class="d-flex justify-content-between align-items-center">
-            <div>Thôn</div>
+            <div>Thôn/Xóm</div>
             <div class="dropdown">
               <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton"
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -146,41 +152,15 @@
         </div>
         <hr>
 
-        <div class="pb-3">
-          <div class="font-weight-bold mb-2">Tiện ích khác:</div>
+        <!-- Other utilities -->
+        <div>
+          <h6 class="font-weight-bold mb-2">Tiện ích khác:</h6>
 
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
-              Wifi
-            </label>
-          </div>
-
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
-              Điều hòa
-            </label>
-          </div>
-
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
-              Nóng lạnh
-            </label>
-          </div>
-
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
-              Khóa vân tay
-            </label>
-          </div>
-
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-            <label class="form-check-label" for="defaultCheck1">
-              Camera an ninh
+          <div class="form-check" *ngFor="let roomUtility of roomUtilities" id="listOtherUtility">
+            <input class="form-check-input" type="checkbox" value="{{roomUtility.utilityName}}"
+              id="{{roomUtility.utilityName}}">
+            <label class="form-check-label" for="{{roomUtility.utilityName}}">
+              {{roomUtility.displayName}}
             </label>
           </div>
         </div>
@@ -216,12 +196,14 @@
         <div class="col-4" *ngFor="let dataItem of houses">
           <!-- Item onClick: to House Detail -->
           <div class="card rounded houseCardItem" routerLink="/house-detail/{{dataItem.houseId}}">
+
             <img class="card-img-top"
               src="../assets/image/House/{{dataItem.imagesOfHouses[0].imageLink}}"
               alt="House Image" style="width: 100%;
               height: 200px;
               background-position: center center;
               background-repeat: no-repeat;">
+
             <div class="card-body text-white rounded-bottom">
               <h5 class="card-title text-center font-weight-bold">{{dataItem.houseName}}</h5>
               <!-- View -->
