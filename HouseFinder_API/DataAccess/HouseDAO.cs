@@ -149,5 +149,42 @@ namespace DataAccess
             return totalMoney;
         }
 
+        //[Staff - Dashboard] Count total houses
+        public static int CountTotalHouse()
+        {
+            int totalHouse;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Count total houses
+                    totalHouse = context.Houses.Count();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return totalHouse;
+        }
+        //[Staff - Dashboard] Count available houses
+        public static int CountAvailableHouse()
+        {
+            int availableHouse;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Count available houses: houses having at least 1 room available
+                    availableHouse = context.Rooms.Where(r => r.Status.StatusName.Equals("Available")).GroupBy(r => r.HouseId).Count();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return availableHouse;
+        }
+
     }
 }

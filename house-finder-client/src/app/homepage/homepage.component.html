@@ -224,6 +224,11 @@
               background-repeat: no-repeat;">
             <div class="card-body text-white rounded-bottom">
               <h5 class="card-title text-center font-weight-bold">{{dataItem.houseName}}</h5>
+              <!-- View -->
+              <div style="text-align: right; font-size: 12px;">
+                <i class="fa-solid fa-eye" style="margin-right: 10px;"></i>
+                <span>3,459</span>
+              </div>
               <!-- Price with VND format -->
               <div class="card-text"><i class="fa-solid fa-tag mr-2"></i>{{dataItem.lowestRoomPrice |
                 currency:'VND':'symbol':'3.0'}} -
