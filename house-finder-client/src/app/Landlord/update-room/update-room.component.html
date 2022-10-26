@@ -12,47 +12,55 @@
             <div class="modal-body">
                 <form>
                     <div class="row">
+                        <!-- roomName -->
                         <div class="col-md-5">Tên Phòng
                             <br>
-                            <input type="text" class="form-control" id="exampleFormControlInput1"
+                            <input type="text" class="form-control" id="roomName"
                                 value="{{roomDetail?.roomName}}">
                         </div>
+                        <!-- area -->
                         <div class="col-md-5 ml-auto">Diện tích
                             <br>
-                            <input type="text" class="form-control" id="exampleFormControlInput1"
+                            <input type="text" class="form-control" id="areaByMeters"
                                 value="{{roomDetail?.areaByMeters}}">
                         </div>
                     </div>
                     <div class="row">
+                        <!-- price -->
                         <div class="col-md-5">Giá tiền
                             <br>
-                            <input type="text" class="form-control" id="exampleFormControlInput1"
+                            <input type="text" class="form-control" id="pricePerMonth"
                                 value="{{roomDetail?.pricePerMonth}}">
                         </div>
+                        <!-- building -->
                         <div class="col-md-5 ml-auto">Tòa
                             <br>
-                            <input type="text" class="form-control" id="exampleFormControlInput1"
+                            <input type="text" class="form-control" id="buildingNumber"
                                 value="{{roomDetail?.buildingNumber}}">
                         </div>
                     </div>
                     <div class="row">
+                        <!-- info -->
                         <div class="col-md-5">Thông tin
                             <br>
-                            <input type="text" class="form-control" id="exampleFormControlInput1"
+                            <input type="text" class="form-control" id="information"
                                 value="{{roomDetail?.information}}">
                         </div>
+                        <!-- floor -->
                         <div class="col-md-5 ml-auto">Tầng
                             <br>
-                            <input type="text" class="form-control" id="exampleFormControlInput1"
+                            <input type="text" class="form-control" id="floorNumber"
                                 value="{{roomDetail?.floorNumber}}">
                         </div>
                     </div>
                     <div class="row">
+                        <!-- current amount -->
                         <div class="col-md-5">Số người ở
                             <br>
                             <input type="text" class="form-control" id="currentAmountOfPeople"
                                 value="{{roomDetail?.currentAmountOfPeople}}">
                         </div>
+                        <!-- status -->
                         <div class="col-md-5 ml-auto">Trạng thái
                             <br>
                             <input type="text" class="form-control" id="status" value="{{roomDetail?.status}}">
@@ -61,8 +69,8 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Send message</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-primary">Lưu</button>
             </div>
         </div>
     </div>
