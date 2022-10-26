@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Room } from 'src/app/models/room';
 import { RoomService } from 'src/app/services/room.service';
@@ -8,7 +8,7 @@ import { RoomService } from 'src/app/services/room.service';
   templateUrl: './update-room.component.html',
   styleUrls: ['./update-room.component.scss']
 })
-export class UpdateRoomComponent implements OnInit {
+export class UpdateRoomComponent implements OnInit, OnChanges {
   //Infomation of this room
   roomDetail: Room | undefined;
 
@@ -21,11 +21,15 @@ export class UpdateRoomComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    this.getRoomByRoomId();
+  }
+
   //Call API: Get Room Detail info from ID
   getRoomByRoomId() {
     //Get id of room from Input
     const roomId = this.roomId;
-    console.log(roomId)
+    console.log('gogo: ' + roomId);
     this.roomService.getRoomByRoomId(roomId).subscribe(data => {
       this.roomDetail = data;
     })
