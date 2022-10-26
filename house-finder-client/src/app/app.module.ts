@@ -1,7 +1,7 @@
 import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +14,7 @@ import {
 } from 'angularx-social-login';
 import { DashboardComponent } from './Landlord/dashboard/dashboard.component';
 import { ListRoomComponent } from './Landlord/list-room/list-room.component';
+import { UploadHouseInfoSingleComponent } from './upload-house-info-single/upload-house-info-single.component';
 import { ListReportComponent } from './Staff/list-report/list-report.component';
 import { ListHouseComponent } from './Staff/list-house/list-house.component';
 import { DashboardStaffComponent } from './Staff/dashboard/dashboard.component';
@@ -30,6 +31,7 @@ import { RoomDetailComponent } from './Guest/room-detail/room-detail.component';
     LoginComponent,
     DashboardComponent,
     ListRoomComponent,
+    UploadHouseInfoSingleComponent,
     DashboardStaffComponent,
     ListRoomComponent,
     ListReportComponent,
@@ -37,26 +39,21 @@ import { RoomDetailComponent } from './Guest/room-detail/room-detail.component';
     UpdateRoomComponent,
     ListLandlordComponent,
     ListLandlordSignupRequestComponent,
-    RoomDetailComponent
+    RoomDetailComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    SocialLoginModule
+    ReactiveFormsModule,
+    SocialLoginModule,
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',
     useValue: {
       autoLogin: false,
       providers: [
-        {
-          id: GoogleLoginProvider.PROVIDER_ID,
-          provider: new GoogleLoginProvider(
-            'clientId'
-          )
-        },
         {
           id: FacebookLoginProvider.PROVIDER_ID,
           provider: new FacebookLoginProvider('790258838897169')

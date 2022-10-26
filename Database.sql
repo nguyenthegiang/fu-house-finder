@@ -153,6 +153,8 @@ GO
 --dữ liệu giả định, sau này cần sửa Fb UserId
 INSERT INTO [dbo].[Users] VALUES (N'HE153046', N'someFbUserid', null, null, null, 'Nguyen The Giang', 1, null , null, null, null, null, null, 1, 
 GETDATE(), GETDATE(), N'HE153046', N'HE153046');
+INSERT INTO [dbo].[Users] VALUES (N'HE150432', null, N'108412035069598134567', null, null, 'Nguyen Thu An', 1, null , null, null, null, null, null, 1, 
+GETDATE(), GETDATE(), N'HE150432', N'HE150432');
 --Staffs
 INSERT INTO [dbo].[Users] VALUES (N'SA000001', null, null, N'thanhle@gmail.com', N'thanhle', N'Lê Thành', 1, 'image_profile_1.jpg', null, null, null, null, null, 3, 
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
