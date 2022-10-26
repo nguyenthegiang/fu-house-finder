@@ -113,10 +113,9 @@
                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Chọn nơi muốn tìm
               </button>
+              <!-- List all Districts -->
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
+                <a *ngFor="let district of districts" class="dropdown-item" href="#">{{district.districtName}}</a>
               </div>
             </div>
           </div>
