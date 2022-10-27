@@ -80,7 +80,7 @@ namespace HouseFinder_API.Controllers
             HttpContext.Session.SetString("Token", token);
             return Ok(user);
         }
-        [Authorize]
+        [Authorize(Roles = "Staff")]
         [HttpGet("test")]
         public IActionResult TestAuthorize()
         {
