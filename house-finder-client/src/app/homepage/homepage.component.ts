@@ -1,3 +1,5 @@
+import { Village } from './../models/village';
+import { Commune } from './../models/commune';
 import { District } from './../models/district';
 import { DistrictService } from './../services/district.service';
 import { RoomUtility } from './../models/roomUtilities';
@@ -23,7 +25,8 @@ export class HomepageComponent implements OnInit {
   campuses: Campus[] = [];
   roomUtilities: RoomUtility[] = [];  //List of utilities of Rooms
   districts: District[] = [];         //(Regions) All Districts
-  
+  communesOfSelectedDistrict: Commune[] = []; //(Regions) all Communes of 1 selected District (only display after user has selected 1 District)
+  villagesOfSelectedCommune: Village[] = [];  //(Regions) all Villages of 1 selected Commune (only display after user has selected 1 Commune)
 
   constructor(
     private houseService: HouseService,
@@ -66,6 +69,20 @@ export class HomepageComponent implements OnInit {
       { "utilityName": "waterHeater", "displayName": "Bình nóng lạnh" },
       { "utilityName": "furniture", "displayName": "Nội thất" },
     ];
+  }
+
+  //[Filter] Change list of Communes after user selected District
+  onDistrictSelected(selectedDistrictId: number) {
+    //find the selected district
+    this.districts.forEach((district) => {
+      //assign the list of Commune as the communes of this District
+      if (district.districtId == selectedDistrictId) {
+        this.communesOfSelectedDistrict = district.communes;
+      }
+    });
+  }
+
+  onCommuneSelected(selectedCommuneId: number) {
 
   }
 
@@ -75,7 +92,7 @@ export class HomepageComponent implements OnInit {
     if (!searchHouseName.trim()) {
       return;
     }
-    
+
     //call API
     this.houseService.searchHouseByName(searchHouseName).subscribe(data => {
       this.houses = data;
