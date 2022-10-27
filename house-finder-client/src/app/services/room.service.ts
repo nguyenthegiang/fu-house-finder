@@ -16,6 +16,11 @@ export class RoomService {
 
   constructor(private http: HttpClient) { }
 
+  //[Home Page] Count total available rooms
+  countAvailableRoom(): Observable<number> {
+    return this.http.get<number>(this.APIUrl + "/CountAvailableRoom");
+  }
+
   //[House Detail] Get List Available Rooms by HouseId
   getAvailableRooms(houseId: number): Observable<any[]> {
     return this.http.get<any[]>(this.APIUrl + "/getAvailableRooms?HouseId=" + houseId);
