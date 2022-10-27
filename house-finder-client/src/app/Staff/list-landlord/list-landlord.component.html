@@ -1,117 +1,140 @@
-<div class="container my-5">
-  <!-- Search bar -->
-  <div class="text-center pb-5 d-flex justify-content-center">
-    <div class="input-group w-50">
-      <!-- Press enter to search  -->
-      <input type="text" class="form-control" placeholder="Nhập tên chủ trọ, từ khóa tìm kiếm"
-        aria-label="Recipient's username" aria-describedby="button-addon2" [(ngModel)]="searchLandlordName"
-        (keydown.enter)="searchLandlordByName()">
-      <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="searchLandlordByName()">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
+<div class="row" style="overflow-x: hidden;">
+  <div class="col-3" style="margin: 0;">
+      <div class="sidebar">
+        <a class="active" href="#home">Home</a>
+        <a href="#news">Quản lý người dùng</a>
+        <a href="#contact">Quản lý nhà trọ</a>
+        <a href="#about">Quản lý báo cáo vi phạm</a>
+        <a href="#about">Nguyện vọng đăng ký nhà ở của sinh viên</a>
       </div>
+  </div>
+  <div class="col-9" style="margin: 0; padding:0; overflow-x: hidden;">
+    <!-- Page content -->
+    <div class="content" style="padding: 20px;">
+
+        <!-- Search bar -->
+        <div class="text-center pb-5 d-flex justify-content-center">
+          <div class="input-group w-50">
+            <!-- Press enter to search  -->
+            <input type="text" class="form-control" placeholder="Nhập tên chủ trọ, từ khóa tìm kiếm"
+              aria-label="Recipient's username" aria-describedby="button-addon2" [(ngModel)]="searchLandlordName"
+              (keydown.enter)="searchLandlordByName()">
+            <div class="input-group-append">
+              <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="searchLandlordByName()">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- End Search bar -->
+
+        <!-- Heading -->
+        <h3 style="text-align: center; color: #3E4F3C; margin-bottom: 20px;">Danh sách chủ trọ</h3>
+
+        <!-- List of landlords -->
+        <table class="table landlordtable">
+          <thead>
+            <tr>
+              <th scope="col">Id</th>
+              <th scope="col">Họ Tên</th>
+              <th scope="col">Email</th>
+              <th scope="col">Số Điện Thoại</th>
+              <th scope="col">Địa Chỉ</th>
+              <th scope="col">Facebook</th>
+              <th scope="col">Ảnh</th>
+              <th scope="col">Căn cước</th>
+              <th scope="col">Trạng thái</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let dataItem of landlords">
+              <td>{{dataItem.userId}}</td>
+              <td>{{dataItem.displayName}}</td>
+              <td>{{dataItem.email}}</td>
+              <td>{{dataItem.phoneNumber}}</td>
+              <td>{{dataItem.address.addresses}}</td>
+              <td><a target="_blank" href="{{dataItem.facebookUrl}}">{{dataItem.facebookUrl}}</a></td>
+
+              <!-- Xem ảnh chủ trọ -->
+              <td>
+                <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+                  Xem ảnh
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <img src="../../../assets/image/LandlordAvatar.jpg">
+                  </div>
+                </div>
+              </td>
+
+              <!-- Ảnh chứng minh thư -->
+              <td>
+                <!-- Xem ảnh mặt trước -->
+                <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+                  Xem ảnh mặt trước
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <img src="../../../assets/image/LandlordAvatar.jpg">
+                  </div>
+                </div>
+
+                <!-- Xem ảnh mặt sau -->
+                <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+                  Xem ảnh mặt sau
+                </button>
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <img src="../../../assets/image/LandlordAvatar.jpg">
+                  </div>
+                </div>
+              </td>
+
+              <!-- Room status -->
+              <td>
+                <label class="switch">
+                  <input *ngIf="dataItem.active === true" type="checkbox" checked>
+                  <input *ngIf="dataItem.active === false" type="checkbox">
+                  <span class="slider round"></span>
+                </label>
+                <br>
+                <span *ngIf="dataItem.active === true">Hoạt động</span>
+                <span *ngIf="dataItem.active === false">Không hoạt động</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Paging -->
+        <div class="d-flex justify-content-center align-items-center mt-5">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item">
+                <a class="page-link text-dark" href="#" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                  <span class="sr-only">Previous</span>
+                </a>
+              </li>
+              <li class="page-item"><a class="page-link text-dark" href="#">1</a></li>
+              <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
+              <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link text-dark" href="#" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <!-- End Paging -->
     </div>
   </div>
-  <!-- End Search bar -->
-
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th scope="col">Id</th>
-        <th scope="col">Họ Tên</th>
-        <th scope="col">Email</th>
-        <th scope="col">Số Điện Thoại</th>
-        <th scope="col">Địa Chỉ</th>
-        <th scope="col">Facebook</th>
-        <th scope="col">Ảnh</th>
-        <th scope="col">Căn cước</th>
-        <th scope="col">Trạng thái</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let dataItem of landlords">
-        <td>{{dataItem.userId}}</td>
-        <td>{{dataItem.displayName}}</td>
-        <td>{{dataItem.email}}</td>
-        <td>{{dataItem.phoneNumber}}</td>
-        <td>{{dataItem.address.addresses}}</td>
-        <td><a target="_blank" href="{{dataItem.facebookUrl}}">{{dataItem.facebookUrl}}</a></td>
-
-        <!-- Xem ảnh chủ trọ -->
-        <td>
-          <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
-            Xem ảnh
-          </button>
-          <!-- Modal -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <img src="../../../assets/image/LandlordAvatar.jpg">
-            </div>
-          </div>
-        </td>
-
-        <!-- Ảnh chứng minh thư -->
-        <td>
-          <!-- Xem ảnh mặt trước -->
-          <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
-            Xem ảnh mặt trước
-          </button>
-          <!-- Modal -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <img src="../../../assets/image/LandlordAvatar.jpg">
-            </div>
-          </div>
-
-          <!-- Xem ảnh mặt sau -->
-          <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
-            Xem ảnh mặt sau
-          </button>
-          <!-- Modal -->
-          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-              <img src="../../../assets/image/LandlordAvatar.jpg">
-            </div>
-          </div>
-        </td>
-
-        <!-- Room status -->
-        <td>
-          <label class="switch">
-            <input *ngIf="dataItem.active === true" type="checkbox">
-            <input *ngIf="dataItem.active === false" type="checkbox" checked>
-            <span class="slider round"></span>
-          </label>
-          <br>
-          <span *ngIf="dataItem.active === true">Hoạt động</span>
-          <span *ngIf="dataItem.active === false">Không hoạt động</span>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- Paging -->
-  <div class="d-flex justify-content-center align-items-center mt-5">
-    <nav aria-label="Page navigation example">
-      <ul class="pagination">
-        <li class="page-item">
-          <a class="page-link text-dark" href="#" aria-label="Previous">
-            <span aria-hidden="true">&laquo;</span>
-            <span class="sr-only">Previous</span>
-          </a>
-        </li>
-        <li class="page-item"><a class="page-link text-dark" href="#">1</a></li>
-        <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
-        <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
-        <li class="page-item">
-          <a class="page-link text-dark" href="#" aria-label="Next">
-            <span aria-hidden="true">&raquo;</span>
-            <span class="sr-only">Next</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </div>
-  <!-- End Paging -->
 </div>
+
+
+
+
