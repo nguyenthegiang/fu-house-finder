@@ -12,9 +12,12 @@ import { StatusService } from 'src/app/services/status.service';
 export class DashboardStaffComponent implements OnInit {
   //Total of available rooms
   availabelRoomsNum: number = 0;
-
   //Total of available capacity
   availableCapNum: number = 0;
+  //Total of houses
+  totalHouses: number = 0;
+  //Total of available houses
+  availableHouseNum: number = 0;
 
   constructor(
     private roomService: RoomService,
@@ -32,6 +35,16 @@ export class DashboardStaffComponent implements OnInit {
     //Call API: get total of available capacity
     this.roomService.countAvailableCapacity().subscribe(data => {
       this.availableCapNum = data;
+    });
+
+    //Call API: get total houses
+    this.houseService.getTotalHouse().subscribe(data => {
+      this.totalHouses = data;
+    });
+
+    //Call API: get total of available houses
+    this.houseService.getTotalAvailableHouse().subscribe(data => {
+      this.availableHouseNum = data;
     });
   }
 
