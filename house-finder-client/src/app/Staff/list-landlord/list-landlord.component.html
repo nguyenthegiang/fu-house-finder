@@ -1,12 +1,12 @@
 <div class="row" style="overflow-x: hidden;">
   <div class="col-3" style="margin: 0;">
-      <div class="sidebar">
-        <a class="active" href="#home">Home</a>
-        <a href="#news">Quản lý người dùng</a>
-        <a href="#contact">Quản lý nhà trọ</a>
-        <a href="#about">Quản lý báo cáo vi phạm</a>
-        <a href="#about">Nguyện vọng đăng ký nhà ở của sinh viên</a>
-      </div>
+    <div class="sidebar">
+      <a class="active" href="/Staff/dashboard">Home</a>
+      <a href="/Staff/list-landlord">Quản lý chủ trọ</a>
+      <a href="/Staff/list-house">Quản lý nhà trọ</a>
+      <a href="/Staff/list-report">Quản lý báo cáo vi phạm</a>
+      <a href="">Nguyện vọng đăng ký nhà ở của sinh viên</a>
+    </div>
   </div>
   <div class="col-9" style="margin: 0; padding:0; overflow-x: hidden;">
     <!-- Page content -->
@@ -53,13 +53,13 @@
               <td>{{dataItem.email}}</td>
               <td>{{dataItem.phoneNumber}}</td>
               <td>{{dataItem.address.addresses}}</td>
-              <td><a target="_blank" href="{{dataItem.facebookUrl}}">{{dataItem.facebookUrl}}</a></td>
+              <td><a target="_blank" href="{{dataItem.facebookUrl}}">{{dataItem.displayName}}</a></td>
 
               <!-- Xem ảnh chủ trọ -->
               <td>
-                <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+                <a data-toggle="modal" data-target="#exampleModal">
                   Xem ảnh
-                </button>
+                </a>
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
@@ -71,9 +71,9 @@
               <!-- Ảnh chứng minh thư -->
               <td>
                 <!-- Xem ảnh mặt trước -->
-                <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+                <a data-toggle="modal" data-target="#exampleModal">
                   Xem ảnh mặt trước
-                </button>
+                </a>
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">
@@ -81,10 +81,12 @@
                   </div>
                 </div>
 
+                <br>
+
                 <!-- Xem ảnh mặt sau -->
-                <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+                <a data-toggle="modal" data-target="#exampleModal">
                   Xem ảnh mặt sau
-                </button>
+                </a>
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog" role="document">

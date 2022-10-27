@@ -1,22 +1,38 @@
 .sidebar{
   position: relative;
   background-color: #7F886B;
-  padding: 10px;
+  padding: 0;
+  height: 100%;
 
   a{
     color: white;
     display: block;
-    padding: 15px 20px;
-    margin: 10px;
+    padding: 15px;
     text-decoration: none;
-    border: #7F886B 1px solid;
-    border-radius: 8px;
   }
 
   a:hover{
     background-color: #3E4F3C;
-    border: #3E4F3C 1px solid;
-    border-radius: 8px;
     color: white;
+  }
+}
+
+.content{
+  .statistics{
+    background-color: #7F886B;
+    border: #7F886B 1px solid;
+    border-radius: 8px;
+    height: 120px;
+    margin: 20px;
+    padding: 15px;
+    text-align: center;
+
+    b{
+      text-align: center;
+    }
+    span{
+
+      font-size: 50px;
+    }
   }
 }

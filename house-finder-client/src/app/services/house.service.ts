@@ -35,4 +35,14 @@ export class HouseService {
   getMoneyForNotRentedRooms(houseId: number): Observable<any>{
     return this.http.get<any>(this.APIUrl + "/GetMoneyForNotRentedRooms?HouseId=" + houseId);
   }
+
+  //[Staff][Dashboard] Get total of houses
+  getTotalHouse():Observable<any>{
+    return this.http.get<any>(this.APIUrl + "/CountTotalHouse");
+  }
+
+  //[Staff][Dashboard] Get total of available houses
+  getTotalAvailableHouse():Observable<any>{
+    return this.http.get<any>(this.APIUrl + "/CountAvailableHouse");
+  }
 }

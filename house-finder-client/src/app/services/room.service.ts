@@ -50,5 +50,15 @@ export class RoomService {
   getRoomByRoomId(roomId: number): Observable<Room> {
     return this.http.get<Room>(this.APIUrl + "/getByRoomId?RoomId=" + roomId);
   }
+
+  //[Staff/Dashboard] Count available rooms
+  countAvailableRooms(): Observable<any>{
+    return this.http.get<Room>(this.APIUrl + "/CountAvailableRoom");
+  }
+
+  //[Staff/Dashboard] Count available capacity
+  countAvailableCapacity(): Observable<any>{
+    return this.http.get<Room>(this.APIUrl + "/CountAvailableCapacity");
+  }
 }
 
