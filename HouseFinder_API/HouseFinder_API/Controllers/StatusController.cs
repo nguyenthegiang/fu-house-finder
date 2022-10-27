@@ -30,5 +30,18 @@ namespace HouseFinder_API.Controllers
                 return Ok(statusDTO);
             }
         }
+        [HttpGet]
+        public IActionResult GetAllStatus()
+        {
+            List <StatusDTO> status = statusRepository.GetAllStatus();
+            if(status == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(status);
+            }
+        }
     }
 }
