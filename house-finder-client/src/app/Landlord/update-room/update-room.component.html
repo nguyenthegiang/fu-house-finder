@@ -15,13 +15,14 @@
                         <!-- roomName -->
                         <div class="col-md-5">Tên Phòng
                             <br>
-                            <input type="text" class="form-control" id="roomName" value="{{roomDetail?.roomName}}">
+                            <input type="text" class="form-control" id="roomName" [(ngModel)]="roomDetail.roomName"
+                                name="roomName">
                         </div>
                         <!-- area -->
                         <div class="col-md-5 ml-auto">Diện tích
                             <br>
                             <input type="text" class="form-control" id="areaByMeters"
-                                value="{{roomDetail?.areaByMeters}}">
+                                [(ngModel)]="roomDetail.areaByMeters" name="areaByMeters">
                         </div>
                     </div>
                     <div class="row">
@@ -29,13 +30,13 @@
                         <div class="col-md-5">Giá tiền
                             <br>
                             <input type="text" class="form-control" id="pricePerMonth"
-                                value="{{roomDetail?.pricePerMonth}}">
+                                [(ngModel)]="roomDetail.pricePerMonth" name="pricePerMonth">
                         </div>
                         <!-- building -->
                         <div class="col-md-5 ml-auto">Tòa
                             <br>
                             <input type="text" class="form-control" id="buildingNumber"
-                                value="{{roomDetail?.buildingNumber}}">
+                                [(ngModel)]="roomDetail.buildingNumber" name="buildingNumber">
                         </div>
                     </div>
                     <div class="row">
@@ -43,13 +44,13 @@
                         <div class="col-md-5">Thông tin
                             <br>
                             <input type="text" class="form-control" id="information"
-                                value="{{roomDetail?.information}}">
+                                [(ngModel)]="roomDetail.information" name="information">
                         </div>
                         <!-- floor -->
                         <div class="col-md-5 ml-auto">Tầng
                             <br>
                             <input type="text" class="form-control" id="floorNumber"
-                                value="{{roomDetail?.floorNumber}}">
+                                [(ngModel)]="roomDetail.floorNumber" name="floorNumber">
                         </div>
                     </div>
                     <div class="row">
@@ -57,7 +58,44 @@
                         <div class="col-md-5">Số người ở
                             <br>
                             <input type="text" class="form-control" id="currentAmountOfPeople"
-                                value="{{roomDetail?.currentAmountOfPeople}}">
+                                value="{{roomDetail.currentAmountOfPeople}}" name="currentAmountOfPeople">
+                        </div>
+                        <div class="col-md-5 ml-auto "> Tiện ích
+                            <div class="form-check">
+                                <div class="row">
+                                    <div class="col">
+                                        <input class="form-check-input" type="checkbox" [(ngModel)]="roomDetail.wifi"
+                                            name="wifi" id="wifiChecked" [checked]="roomDetail.wifi">
+                                        <label class="form-check-label" for="wifiChecked">
+                                            Wifi
+                                        </label>
+                                        <br>
+                                        <input class="form-check-input" type="checkbox"
+                                            [(ngModel)]="roomDetail.waterHeater" id="waterHeaterChecked"
+                                            name="waterHeaterChecked" [checked]="roomDetail.waterHeater">
+                                        <label class="form-check-label" for="waterHeaterChecked">
+                                            Nóng lạnh
+                                        </label>
+                                        <br>
+                                    </div>
+                                    <div class="col">
+                                        <input class="form-check-input" type="checkbox" [(ngModel)]="roomDetail.aircon"
+                                            id="airconChecked" name="airconChecked" checked>
+                                        <label class="form-check-label" for="airconChecked">
+                                            Điều hòa
+                                        </label>
+                                        <br>
+                                        <input class="form-check-input" type="checkbox"
+                                            [(ngModel)]="roomDetail.furniture" id="furnitureChecked"
+                                            name="furnitureChecked" checked>
+                                        <label class="form-check-label" for="furnitureChecked">
+                                            Nội thất
+                                        </label>
+                                        <br>
+                                    </div>
+                                </div>
+                            </div>
+
                         </div>
                         <!-- status -->
 
@@ -76,7 +114,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary">Lưu</button>
+                <button type="button" class="btn btn-primary" (click)="updateRoom()">Lưu</button>
             </div>
         </div>
     </div>
