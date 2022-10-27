@@ -24,5 +24,8 @@ namespace Repositories.Repositories
 
         public RoomDTO GetRoomByRoomId(int roomId) => RoomDAO.GetRoomByRoomId(roomId);
 
+        public int CountAvailableRoom() => RoomDAO.CountAvailableRoom();
+
+        public int? CountAvailableCapacity() => RoomDAO.CountAvailableCapacity();
     }
 }

@@ -94,8 +94,6 @@ namespace HouseFinder_API.Controllers
             }
         }
 
-
-
         //DELETE: api/Rooms?roomId=
         [HttpDelete]
         public IActionResult DeleteRoom(int roomId)
@@ -110,5 +108,22 @@ namespace HouseFinder_API.Controllers
                 return BadRequest();
             }
         }
+
+        //GET: api/Rooms/CountTotalHouse
+        [HttpGet("CountAvailableRoom")]
+        public int CountAvailableRoom()
+        {
+            int availableRoom = roomsRepository.CountAvailableRoom();
+            return availableRoom;
+        }
+
+        //GET: api/Rooms/CountTotalHouse
+        [HttpGet("CountAvailableCapacity")]
+        public int? CountAvailableCapacity()
+        {
+            int? capacity = roomsRepository.CountAvailableCapacity();
+            return capacity;
+        }
+
     }
 }

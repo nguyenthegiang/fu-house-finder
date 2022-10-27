@@ -67,5 +67,21 @@ namespace HouseFinder_API.Controllers
             return total;
         }
 
+        //GET: api/Houses/CountTotalHouse
+        [HttpGet("CountTotalHouse")]
+        public int CountTotalHouse()
+        {
+            int totalHouse = housesRepository.CountTotalHouse();
+            return totalHouse;
+        }
+
+        //GET: api/Houses/CountAvailableHouse
+        [HttpGet("CountAvailableHouse")]
+        public int CountAvailableHouse()
+        {
+            int availableHouse = housesRepository.CountAvailableHouse();
+            return availableHouse;
+        }
+
     }
 }
