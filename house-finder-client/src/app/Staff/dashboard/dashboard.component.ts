@@ -13,6 +13,9 @@ export class DashboardStaffComponent implements OnInit {
   //Total of available rooms
   availabelRoomsNum: number = 0;
 
+  //Total of available capacity
+  availableCapNum: number = 0;
+
   constructor(
     private roomService: RoomService,
     private houseService: HouseService,
@@ -24,6 +27,11 @@ export class DashboardStaffComponent implements OnInit {
     //Call API: get total of available rooms
     this.roomService.countAvailableRooms().subscribe(data => {
       this.availabelRoomsNum = data;
+    });
+
+    //Call API: get total of available capacity
+    this.roomService.countAvailableCapacity().subscribe(data => {
+      this.availableCapNum = data;
     });
   }
 
