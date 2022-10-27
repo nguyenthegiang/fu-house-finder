@@ -12,5 +12,6 @@ namespace Repositories.Repositories
     public class StatusRepository : IStatusRepository
     {
         public List<StatusDTO> GetStatusesByHouseId(int houseId) => StatusDAO.GetStatusesByHouseId(houseId);
+        public List<StatusDTO> GetAllStatus() => StatusDAO.GetAllListStatus();
     }
 }

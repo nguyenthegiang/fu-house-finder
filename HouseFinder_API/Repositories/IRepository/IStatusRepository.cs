@@ -10,5 +10,6 @@ namespace Repositories.IRepository
     public interface IStatusRepository
     {
         public List<StatusDTO> GetStatusesByHouseId(int houseId);
+        public List<StatusDTO> GetAllStatus();
     }
 }

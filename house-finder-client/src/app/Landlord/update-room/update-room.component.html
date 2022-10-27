@@ -15,8 +15,7 @@
                         <!-- roomName -->
                         <div class="col-md-5">Tên Phòng
                             <br>
-                            <input type="text" class="form-control" id="roomName"
-                                value="{{roomDetail?.roomName}}">
+                            <input type="text" class="form-control" id="roomName" value="{{roomDetail?.roomName}}">
                         </div>
                         <!-- area -->
                         <div class="col-md-5 ml-auto">Diện tích
@@ -61,10 +60,17 @@
                                 value="{{roomDetail?.currentAmountOfPeople}}">
                         </div>
                         <!-- status -->
-                        <div class="col-md-5 ml-auto">Trạng thái
+
+                        <!-- <div class="col-md-5 ml-auto">Trạng thái
                             <br>
-                            <input type="text" class="form-control" id="status" value="{{roomDetail?.status}}">
-                        </div>
+
+                            <select class="form-select" [(ngModel)]="statusSelected" name="Something">
+                                <option selected *ngFor="let status of listStatus">{{status.statusName}}
+                                </option>
+                            </select>
+
+                          
+                        </div> -->
                     </div>
                 </form>
             </div>
