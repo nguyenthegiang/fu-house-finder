@@ -22,10 +22,10 @@
         <th scope="col">Họ Tên</th>
         <th scope="col">Email</th>
         <th scope="col">Số Điện Thoại</th>
+        <th scope="col">Địa Chỉ</th>
         <th scope="col">Facebook</th>
         <th scope="col">Ảnh</th>
-        <th scope="col">Ảnh Chứng Minh Thư</th>
-        <th scope="col">Địa Chỉ</th>
+        <th scope="col">Căn cước</th>
         <th scope="col">Trạng thái</th>
       </tr>
     </thead>
@@ -35,11 +35,58 @@
         <td>{{dataItem.displayName}}</td>
         <td>{{dataItem.email}}</td>
         <td>{{dataItem.phoneNumber}}</td>
-        <td>{{dataItem.displayName}}</td>
-        <td>{{dataItem.displayName}}</td>
-        <td>{{dataItem.displayName}}</td>
-        <td>{{dataItem.displayName}}</td>
-        <td>{{dataItem.displayName}}</td>
+        <td>{{dataItem.address.addresses}}</td>
+        <td><a target="_blank" href="{{dataItem.facebookUrl}}">{{dataItem.facebookUrl}}</a></td>
+
+        <!-- Xem ảnh chủ trọ -->
+        <td>
+          <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+            Xem ảnh
+          </button>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <img src="../../../assets/image/LandlordAvatar.jpg">
+            </div>
+          </div>
+        </td>
+
+        <!-- Ảnh chứng minh thư -->
+        <td>
+          <!-- Xem ảnh mặt trước -->
+          <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+            Xem ảnh mặt trước
+          </button>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <img src="../../../assets/image/LandlordAvatar.jpg">
+            </div>
+          </div>
+
+          <!-- Xem ảnh mặt sau -->
+          <button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">
+            Xem ảnh mặt sau
+          </button>
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <img src="../../../assets/image/LandlordAvatar.jpg">
+            </div>
+          </div>
+        </td>
+
+        <!-- Room status -->
+        <td>
+          <label class="switch">
+            <input *ngIf="dataItem.active === true" type="checkbox">
+            <input *ngIf="dataItem.active === false" type="checkbox" checked>
+            <span class="slider round"></span>
+          </label>
+          <br>
+          <span *ngIf="dataItem.active === true">Hoạt động</span>
+          <span *ngIf="dataItem.active === false">Không hoạt động</span>
+        </td>
       </tr>
     </tbody>
   </table>
