@@ -1,6 +1,7 @@
 .sidebar{
   position: relative;
   background-color: #7F886B;
+  padding: 10px;
 
   a{
     color: white;
@@ -11,6 +12,7 @@
     border: #7F886B 1px solid;
     border-radius: 8px;
   }
+
   a:hover{
     background-color: #3E4F3C;
     border: #3E4F3C 1px solid;

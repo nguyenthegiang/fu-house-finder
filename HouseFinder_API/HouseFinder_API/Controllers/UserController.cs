@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using HouseFinder_API.Helper;
 using HouseFinder_API.Authentication;
 using Microsoft.AspNetCore.Authorization;
+using Google.Apis.Auth;
 
 namespace HouseFinder_API.Controllers
 {
@@ -38,9 +39,19 @@ namespace HouseFinder_API.Controllers
             }
         }
         [HttpPost("login")]
-        public IActionResult Login(LoginDTO login)
+        public async Task<IActionResult> Login(LoginDTO login)
         {
             login.Password = Hashing.Encrypt(login.Password);
+            if (login.GoogleUserId != null)
+            {
+                var validationSettings = new GoogleJsonWebSignature.ValidationSettings
+                {
+                    Audience = new string[] { "919349682446-etrauq4d5cluclesaifkcr4bnh4gru2j.apps.googleusercontent.com" }
+                };
+                var payload = await GoogleJsonWebSignature.ValidateAsync(login.GoogleUserId, validationSettings);
+                login.GoogleUserId = payload.Subject;
+                Console.WriteLine(payload.Subject);
+            }
             ResponseDTO user = userReposiotry.Login(login);
             if (login.Email != null && login.Password != null && user == null)
                 return Forbid();
@@ -53,9 +64,20 @@ namespace HouseFinder_API.Controllers
             return Ok(user);
         }
         [HttpPost("register")]
-        public IActionResult Register(RegisterDTO register)
+        public async Task<IActionResult> Register(RegisterDTO register)
         {
+            Console.WriteLine("called");
+            var validationSettings = new GoogleJsonWebSignature.ValidationSettings
+            {
+                Audience = new string[] { "919349682446-etrauq4d5cluclesaifkcr4bnh4gru2j.apps.googleusercontent.com" }
+            };
+            var payload = await GoogleJsonWebSignature.ValidateAsync(register.GoogleIdToken, validationSettings);
+            register.GoogleUserId = payload.Subject;
+            register.Email = payload.Email;
+            register.DisplayName = payload.Name;
             ResponseDTO user = userReposiotry.Register(register);
+            string token = this.auth.Authenticate(user);
+            HttpContext.Session.SetString("Token", token);
             return Ok(user);
         }
         [Authorize]
@@ -70,5 +92,35 @@ namespace HouseFinder_API.Controllers
             HttpContext.Session.Remove("Token");
             return Ok();
         }
+
+        //[Staff][Dashboard] Get list of all landlords
+        [HttpGet("landlord")]
+        public IActionResult GetLandlords()
+        {
+            List<UserDTO> landlords = userReposiotry.GetLandlords();
+            if (landlords == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(landlords);
+            }
+        }
+        //[Head][Dashboard] Get list of all landlords
+        [HttpGet("staff")]
+        public IActionResult GetStaffs()
+        {
+            List<UserDTO> staffs = userReposiotry.GetStaffs();
+            if (staffs == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(staffs);
+            }
+        }
+
     }
 }

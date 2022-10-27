@@ -5,6 +5,7 @@ import { HouseDetailComponent } from './house-detail/house-detail.component';
 import { LoginComponent } from './login/login.component';
 import { DashboardComponent } from './Landlord/dashboard/dashboard.component';
 import { ListRoomComponent } from './Landlord/list-room/list-room.component';
+import { UploadHouseInfoSingleComponent } from './upload-house-info-single/upload-house-info-single.component';
 import { DashboardStaffComponent } from './Staff/dashboard/dashboard.component';
 import { ListLandlordComponent } from './Staff/list-landlord/list-landlord.component';
 import { ListReportComponent } from './Staff/list-report/list-report.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'house-detail/:id', component: HouseDetailComponent},
   { path: 'room-detail/:id', component: RoomDetailComponent},
   { path: 'Landlord/dashboard', component: DashboardComponent},
+  { path: 'Landlord/upload/single', component: UploadHouseInfoSingleComponent},
   { path: 'Landlord/list-room/:id', component: ListRoomComponent},
   { path: 'Staff/dashboard', component: DashboardStaffComponent},
   { path: 'Staff/list-landlord', component: ListLandlordComponent},

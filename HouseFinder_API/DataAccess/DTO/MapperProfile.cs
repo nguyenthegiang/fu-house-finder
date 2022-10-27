@@ -21,6 +21,10 @@ namespace DataAccess.DTO
             CreateMap<UserRole, RoleDTO>();
             CreateMap<RoomType, RoomTypeDTO>();
             CreateMap<Campus, CampusDTO>();
+            CreateMap<ImagesOfHouse, ImagesOfHouseDTO>();
+            CreateMap<Village, VillageDTO>();
+            CreateMap<Commune, CommuneDTO>();
+            CreateMap<District, DistrictDTO>();
         }
     }
 }

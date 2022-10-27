@@ -35,6 +35,46 @@ namespace DataAccess
             return userDTO;
         }
 
+        //[Staff][Dashboard] Get list of landlords 
+         public static List<UserDTO> GetLandlords()
+        {
+            List<UserDTO> landlords;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    landlords = context.Users.ProjectTo<UserDTO>(config).Where(u => u.Role.RoleName.Equals("Landlord")).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return landlords;
+        }
+
+        //[Head][Dashboard] Get list of staffs
+        public static List<UserDTO> GetStaffs()
+        {
+            List<UserDTO> staffs;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    staffs = context.Users.ProjectTo<UserDTO>(config).Where(u => u.Role.RoleName.Contains("Staff")).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return staffs;
+        }
+
         public static ResponseDTO LoginUsername(string email, string password)
         {
             ResponseDTO userDTO;
@@ -95,7 +135,7 @@ namespace DataAccess
             }
             return userDTO;
         }
-        public static ResponseDTO Register(string fid, string gid, string email, string name, int role)
+        public static ResponseDTO Register(string fid, string gid, string email, string name, int role, string identityCardFrontSideImageLink, string identityCardBackSideImageLink, string phonenumber, string facebookUrl)
         {
             ResponseDTO userDTO;
             try
@@ -105,18 +145,29 @@ namespace DataAccess
                     //Get by Id, include Address
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    userDTO = context.Users.Where(u => u.FacebookUserId.Equals(fid))
+                    userDTO = context.Users.Where(u => u.FacebookUserId.Equals(fid) && u.GoogleUserId.Equals(gid))
                         .Include(u => u.Address).ProjectTo<ResponseDTO>(config).FirstOrDefault();
                     if (userDTO == null)
                     {
+                        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+                        Random random = new Random();
+
                         User user = new User();
+                        user.UserId = new string(Enumerable.Repeat(chars, 10)
+                            .Select(s => s[random.Next(s.Length)]).ToArray());
+
                         user.FacebookUserId = fid;
                         user.GoogleUserId = gid;
                         user.Email = email;
                         user.DisplayName = name;
+                        user.IdentityCardFrontSideImageLink = identityCardFrontSideImageLink;
+                        user.IdentityCardBackSideImageLink = identityCardBackSideImageLink;
+                        user.FacebookUrl = facebookUrl;
+                        user.PhoneNumber = phonenumber;
                         user.RoleId = role;
                         user.Password = "";
                         context.Users.Add(user);
+                        context.SaveChanges();
                         userDTO = config.CreateMapper().Map<ResponseDTO>(user);
                     }
                 }

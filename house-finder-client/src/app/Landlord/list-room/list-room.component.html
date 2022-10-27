@@ -136,10 +136,10 @@
         <!-- Amount of people -->
         <td style="display: flex; height:100%;">
           <ul id="list-people">
-            <li *ngFor='let in of counter(dataItem.currentAmountOfPeople); let i = index'>
+            <li *ngFor='let in of peopleCounter(dataItem.currentAmountOfPeople); let i = index'>
               <i class="fa-solid fa-user"></i>
             </li>
-            <li *ngFor='let in of counter(dataItem.maxAmountOfPeople - dataItem.currentAmountOfPeople); let i = index'>
+            <li *ngFor='let in of peopleCounter(dataItem.maxAmountOfPeople - dataItem.currentAmountOfPeople); let i = index'>
               <i class="fa-regular fa-user"></i>
             </li>
           </ul>
@@ -159,9 +159,17 @@
           <span *ngIf="dataItem.status.statusName === 'Disabled'">Không dùng được</span>
         </td>
         <td>
-          <app-update-room [roomId]="dataItem.roomId"></app-update-room>
+          <!-- Update button -->
+          <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateModal"
+            data-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId)">Chỉnh sửa</button>
+
+          <!-- Delete button -->
+          <button type=" button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"
+            data-whatever="@getbootstrap">Xóa</button>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
+
+<app-update-room [roomId]="updateRoomId"></app-update-room>

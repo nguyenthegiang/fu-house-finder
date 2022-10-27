@@ -14,7 +14,7 @@ namespace DataAccess
 {
     public class HouseDAO
     {
-        //Get list of houses, with Address
+        //Get list of houses, with Address & Images
         public static List<HouseDTO> GetAllHouses()
         {
             List<HouseDTO> houseDTOs;
@@ -22,10 +22,14 @@ namespace DataAccess
             {
                 using (var context = new FUHouseFinderContext())
                 {
-                    //include address
+                    //include address, images
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    houseDTOs = context.Houses.Include(h => h.Address).ProjectTo<HouseDTO>(config).ToList();
+                    houseDTOs = context.Houses
+                        //unnecessary includes
+                        //.Include(house => house.Address)
+                        //.Include(house => house.ImagesOfHouses)
+                        .ProjectTo<HouseDTO>(config).ToList();
 
                     //find lowest room price & highest room price
                     for (int i = 0; i < houseDTOs.Count; i++)
@@ -143,6 +147,43 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
             return totalMoney;
+        }
+
+        //[Staff - Dashboard] Count total houses
+        public static int CountTotalHouse()
+        {
+            int totalHouse;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Count total houses
+                    totalHouse = context.Houses.Count();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return totalHouse;
+        }
+        //[Staff - Dashboard] Count available houses
+        public static int CountAvailableHouse()
+        {
+            int availableHouse;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Count available houses: houses having at least 1 room available
+                    availableHouse = context.Rooms.Where(r => r.Status.StatusName.Equals("Available")).GroupBy(r => r.HouseId).Count();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return availableHouse;
         }
 
     }
