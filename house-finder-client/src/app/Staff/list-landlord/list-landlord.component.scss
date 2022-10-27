@@ -3,24 +3,50 @@
   border-collapse: separate;
   border-spacing: 0px;
   color: #3E4F3C;
-  table-layout:fixed;
-  width:100%;
+  table-layout: auto;
+  width: 98%;
 
   thead{
     background-color: #9DB49A;
     th{
       text-align: center;
       border: solid 1px #7F886B;
+      width: fit-content;
+      white-space: nowrap;
     }
   }
   tbody{
     td{
       border-top: solid 1px #7F886B;
       border-collapse: collapse;
-      padding: 0 20px;
+      padding: 20px 10px;
       height: 40px;
       border: solid 1px #7F886B;
       word-wrap: break-word;
+
+      a{
+        text-decoration: underline;
+      }
+
+      a:hover{
+        cursor: pointer;
+      }
+
+      .modal-dialog{
+        // Center the popup image
+        width: 400px;
+        left: 50%;
+        margin-left: -200px;
+
+        height: 400px;
+        top: 50%;
+        margin-top: -200px;
+        // End
+
+        img{
+          width: 400px; //popup image width
+        }
+      }
     }
   }
 }
