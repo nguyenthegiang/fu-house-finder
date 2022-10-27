@@ -1,14 +1,14 @@
 //House Card Item on Hover -> Clickable
 .houseCardItem {
-    cursor: pointer;
-    margin: 10px 0;
+  cursor: pointer;
+  margin: 10px 0;
 
-    .card-body{
-      background-color: #3E4F3C;
-    }
+  .card-body {
+    background-color: #3E4F3C;
+  }
 }
 
-.houseCardItem:hover{
+.houseCardItem:hover {
   scale: 1.1;
   z-index: 99;
 }
@@ -17,6 +17,11 @@
   background-color: #3E4F3C;
 }
 
-#listRoomType{
+#listRoomType {
   list-style: none;
+}
+
+//set fixed width for <select> of Regions in [Filter]
+.selectRegion {
+  width: 14vw;
 }

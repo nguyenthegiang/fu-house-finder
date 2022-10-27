@@ -7,15 +7,15 @@
 
 
 <!-- Only Display when House Detail is loaded -->
-<div class="container" *ngIf="houseDetail && landlordDetail">
-  <div class="row">
-    <div class="col-8">
+<div class="container-fluid my-5 d-flex justify-content-center" *ngIf="houseDetail && landlordDetail">
+  <div class="row w-100 d-flex justify-content-between">
+    <div class="col-12 col-md-7">
       <!-- House images -->
-      <img id="houseImage" src="../../assets/image/HouseImage.jpg" alt="..." width="100%">
+      <img id="houseImage" src="../../assets/image/HouseImage.jpg" alt="..." width="100%" class="rounded">
 
       <!-- House detail information-->
-      <div class="house-information">
-        <h3>{{houseDetail!.houseName}}</h3>
+      <div class="house-information border border-secondary rounded my-5 p-2">
+        <h3 class="text-center">{{houseDetail!.houseName}}</h3>
         <span><b>Giá điện: </b> {{houseDetail!.powerPrice}}/kWh</span>
         <br>
         <span><b>Giá nước: </b> {{houseDetail!.waterPrice}}/m3</span>
@@ -26,9 +26,9 @@
       </div>
 
       <!-- List available rooms -->
-      <div class="availableRooms">
-        <h5>Danh sách phòng trống</h5>
-        <table>
+      <div class="availableRooms border border-secondary rounded">
+        <h3 class="text-center my-3">Danh sách phòng trống</h3>
+        <table class="table table-striped">
           <thead>
             <th>Phòng</th>
             <th>Giá phòng</th>
@@ -50,13 +50,14 @@
     </div>
 
 
-    <div class="col-4">
+    <div class="col-12 col-md-4">
       <!-- Landlord information -->
-      <div class="landlordInformation">
-        <h4>Thông tin chủ trọ</h4>
+      <div class="landlordInformation border border-secondary rounded p-2">
+        <h3 class="text-center">Thông tin chủ trọ</h3>
         <!-- Landlord's avatar -->
-        <img src="../../assets/image/LandlordAvatar.jpg" alt="Landlord's avatar" width="250px" height="200px">
-        <br>
+        <div class="d-flex justify-content-center align-items-center my-3">
+          <img src="../../assets/image/LandlordAvatar.jpg" alt="Landlord's avatar" width="250px" height="200px" class="rounded">
+        </div>
         <!-- Other information -->
         <span>
           <b>Họ và tên: </b>
@@ -80,7 +81,7 @@
       </div>
 
       <!-- Google map -->
-      <iframe id="googleMap"
+      <iframe id="googleMap" class="w-100 h-25 my-5 border border-secondary rounded"
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.995814709238!2d105.51943301488284!3d20.992804886017904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345bae7a5f0d39%3A0xec177bce6cdc3a46!2zSG_DoCBM4bqhYyBBcGFydG1lbnQ!5e0!3m2!1svi!2s!4v1665457315377!5m2!1svi!2s"
         allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
       </iframe>
@@ -103,8 +104,8 @@
         <div class="modal-body">
           <form>
             <div class="form-group">
-              <label for="message-text" class="col-form-label" style="color: #FF6F3D;">Lý do:</label>
-              <textarea class="form-control" id="message-text" style="border-color: #FF6F3D;"
+              <label for="message-text" class="col-form-label">Lý do:</label>
+              <textarea class="form-control" id="message-text"
                 #inputReportContent></textarea>
             </div>
           </form>

@@ -1,3 +1,6 @@
+import { RoomService } from 'src/app/services/room.service';
+import { Village } from './../models/village';
+import { Commune } from './../models/commune';
 import { District } from './../models/district';
 import { DistrictService } from './../services/district.service';
 import { RoomUtility } from './../models/roomUtilities';
@@ -18,17 +21,23 @@ export class HomepageComponent implements OnInit {
   //List of houses to display in Main Content
   houses: House[] = [];
 
+  //to display in Main Content
+  countAvailableRooms: number = 0;
+
   //Data for Filter column
-  roomTypes: RoomType[] = [];   //Room types
+  roomTypes: RoomType[] = [];         //Room types
   campuses: Campus[] = [];
   roomUtilities: RoomUtility[] = [];  //List of utilities of Rooms
-  districts: District[] = [];
+  districts: District[] = [];         //(Regions) All Districts
+  communesOfSelectedDistrict: Commune[] = []; //(Regions) all Communes of 1 selected District (only display after user has selected 1 District)
+  villagesOfSelectedCommune: Village[] = [];  //(Regions) all Villages of 1 selected Commune (only display after user has selected 1 Commune)
 
   constructor(
     private houseService: HouseService,
     private campusService: CampusService,
     private roomTypeService: RoomTypeService,
     private districtService: DistrictService,
+    private roomService: RoomService,
   ) { }
 
   ngOnInit(): void {
@@ -37,6 +46,11 @@ export class HomepageComponent implements OnInit {
     //(List) Get all Houses
     this.houseService.getAllHouses().subscribe(data => {
       this.houses = data;
+    });
+
+    //(List) Count available Rooms
+    this.roomService.countAvailableRoom().subscribe(data => {
+      this.countAvailableRooms = data;
     });
 
     //(Filter) Get all Campuses
@@ -65,6 +79,44 @@ export class HomepageComponent implements OnInit {
       { "utilityName": "waterHeater", "displayName": "Bình nóng lạnh" },
       { "utilityName": "furniture", "displayName": "Nội thất" },
     ];
+  }
+
+  //[Filter] Change list of Communes after user selected District
+  onDistrictSelected(selectedDistrictId: string) {
+    // convert string to number
+    var numberDistrictId: number = +selectedDistrictId;
+
+    // find the selected district
+    this.districts.forEach((district) => {
+      // assign the list of Commune as the communes of this District
+      if (district.districtId == numberDistrictId) {
+        this.communesOfSelectedDistrict = district.communes;
+        return;
+      }
+    });
+
+    //TODO: call API to search for houses with this District
+  }
+
+  //[Filter] Change list of Villages after user selected Commune
+  onCommuneSelected(selectedCommuneId: string) {
+    // convert string to number
+    var numberCommuneId: number = +selectedCommuneId;
+
+    // find the selected commune
+    this.communesOfSelectedDistrict.forEach((commune) => {
+      // assign the list of Villages as the villages of this Commune
+      if (commune.communeId == numberCommuneId) {
+        this.villagesOfSelectedCommune = commune.villages;
+        return;
+      }
+    });
+
+    //TODO: call API to search for houses with this Commune
+  }
+
+  //[Filter] TODO: call API to search for houses with this Village
+  onVillageSelected(selectedVillageId: string) {
 
   }
 
@@ -74,7 +126,7 @@ export class HomepageComponent implements OnInit {
     if (!searchHouseName.trim()) {
       return;
     }
-    
+
     //call API
     this.houseService.searchHouseByName(searchHouseName).subscribe(data => {
       this.houses = data;

@@ -26,18 +26,16 @@
 
       <div class="container">
         <div class="d-flex justify-content-between align-items-center pt-3">
-          <div class="font-weight-bold">Cơ sở</div>
-
           <!-- Campus -->
-          <div class="dropdown">
-            <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton"
-              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Chọn cơ sở muốn tìm
-            </button>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <h6 class="font-weight-bold">Cơ sở</h6>
+          <div>
+            <!-- List of Campuses to choose -->
+            <select #selectCampus class="form-select" aria-label="select-campus">
+              <option selected>--Chọn cơ sở--</option>
               <!-- List of Campuses to choose -->
-              <a *ngFor="let campus of campuses" class="dropdown-item" href="#">{{campus.campusName}}</a>
-            </div>
+              <option *ngFor=" let campus of campuses" value="{{campus.campusId}}">
+                {{campus.campusName}}</option>
+            </select>
           </div>
         </div>
         <hr>
@@ -106,47 +104,48 @@
         <div>
           <h6 class="font-weight-bold mb-2">Khu vực:</h6>
 
+          <!-- District -->
           <div class="d-flex justify-content-between align-items-center my-2">
             <div>Huyện/Quận</div>
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Chọn nơi muốn tìm
-              </button>
-              <!-- List all Districts -->
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a *ngFor="let district of districts" class="dropdown-item" href="#">{{district.districtName}}</a>
-              </div>
+            <div>
+              <!-- When select 1 District -> change list of Communes accordingly -->
+              <select #selectDistrict class="form-select selectRegion" aria-label="select-district"
+                (change)="onDistrictSelected(selectDistrict.value)">
+                <option selected>--Chọn quận/huyện--</option>
+                <!-- List all Districts -->
+                <option *ngFor=" let district of districts" value="{{district.districtId}}">
+                  {{district.districtName}}</option>
+              </select>
             </div>
           </div>
 
+          <!-- Commune -->
           <div class="d-flex justify-content-between align-items-center mb-2">
             <div>Phường/Xã</div>
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Chọn nơi muốn tìm
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
+            <div>
+              <!-- When select 1 Communes -> change list of Villages accordingly -->
+              <select #selectCommune class="form-select selectRegion" aria-label="select-commune"
+                (change)="onCommuneSelected(selectCommune.value)">
+                <option selected>--Chọn phường/xã--</option>
+                <!-- List all Communes of selected District -->
+                <option *ngFor="let commune of communesOfSelectedDistrict" value="{{commune.communeId}}">
+                  {{commune.communeName}}</option>
+              </select>
             </div>
           </div>
 
+          <!-- Village -->
           <div class="d-flex justify-content-between align-items-center">
             <div>Thôn/Xóm</div>
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Chọn nơi muốn tìm
-              </button>
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
+            <div>
+              <!-- When select 1 Village -> call API -->
+              <select #selectVillage class="form-select selectRegion" aria-label="select-village"
+                (change)="onVillageSelected(selectVillage.value)">
+                <option selected>--Chọn thôn/xóm--</option>
+                <!-- List all Villages of selected Commune -->
+                <option *ngFor="let village of villagesOfSelectedCommune" value="{{village.villageId}}">
+                  {{village.villageName}}</option>
+              </select>
             </div>
           </div>
         </div>
@@ -172,7 +171,7 @@
     <div class="w-75 mr-5">
       <!-- Rooms Count Available -->
       <div class="d-flex justify-content-between mb-3">
-        <div class="font-weight-bold">Tổng số phòng trống: 10</div>
+        <h6 class="font-weight-bold">Tổng số phòng trống: {{countAvailableRooms}}</h6>
 
         <div class="d-flex justify-content-between align-items-center mb-2">
           <div class="dropdown">
@@ -197,8 +196,7 @@
           <!-- Item onClick: to House Detail -->
           <div class="card rounded houseCardItem" routerLink="/house-detail/{{dataItem.houseId}}">
 
-            <img class="card-img-top"
-              src="../assets/image/House/{{dataItem.imagesOfHouses[0].imageLink}}"
+            <img class="card-img-top" src="../assets/image/House/{{dataItem.imagesOfHouses[0].imageLink}}"
               alt="House Image" style="width: 100%;
               height: 200px;
               background-position: center center;
@@ -215,8 +213,10 @@
               <div class="card-text"><i class="fa-solid fa-tag mr-2"></i>{{dataItem.lowestRoomPrice |
                 currency:'VND':'symbol':'3.0'}} -
                 {{dataItem.highestRoomPrice | currency:'VND':'symbol':'3.0'}}</div>
-              <div class="card-text d-inline-block text-truncate" style="max-width: 100%;"><i class="fa-solid fa-location-dot mr-2"></i>{{dataItem.address.addresses}}</div>
-              <div class="card-text d-inline-block text-truncate" style="max-width: 100%;"><i class="fa-solid fa-road mr-2"></i>3.5km</div>
+              <div class="card-text d-inline-block text-truncate" style="max-width: 100%;"><i
+                  class="fa-solid fa-location-dot mr-2"></i>{{dataItem.address.addresses}}</div>
+              <div class="card-text d-inline-block text-truncate" style="max-width: 100%;"><i
+                  class="fa-solid fa-road mr-2"></i>3.5km</div>
             </div>
           </div>
         </div>
