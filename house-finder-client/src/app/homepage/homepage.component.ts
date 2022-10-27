@@ -1,3 +1,4 @@
+import { RoomService } from 'src/app/services/room.service';
 import { Village } from './../models/village';
 import { Commune } from './../models/commune';
 import { District } from './../models/district';
@@ -20,6 +21,9 @@ export class HomepageComponent implements OnInit {
   //List of houses to display in Main Content
   houses: House[] = [];
 
+  //to display in Main Content
+  countAvailableRooms: number = 0;
+
   //Data for Filter column
   roomTypes: RoomType[] = [];         //Room types
   campuses: Campus[] = [];
@@ -33,6 +37,7 @@ export class HomepageComponent implements OnInit {
     private campusService: CampusService,
     private roomTypeService: RoomTypeService,
     private districtService: DistrictService,
+    private roomService: RoomService,
   ) { }
 
   ngOnInit(): void {
@@ -41,6 +46,11 @@ export class HomepageComponent implements OnInit {
     //(List) Get all Houses
     this.houseService.getAllHouses().subscribe(data => {
       this.houses = data;
+    });
+
+    //(List) Count available Rooms
+    this.roomService.countAvailableRoom().subscribe(data => {
+      this.countAvailableRooms = data;
     });
 
     //(Filter) Get all Campuses
