@@ -20,3 +20,8 @@
 #listRoomType {
   list-style: none;
 }
+
+//set fixed width for <select> of Regions in [Filter]
+.selectRegion {
+  width: 14vw;
+}

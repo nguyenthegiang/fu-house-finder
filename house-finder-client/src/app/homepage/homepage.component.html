@@ -111,9 +111,9 @@
             <div>Huyện/Quận</div>
             <div>
               <!-- When select 1 District -> change list of Communes accordingly -->
-              <select #selectDistrict class="form-select" aria-label="select-district"
+              <select #selectDistrict class="form-select selectRegion" aria-label="select-district"
                 (change)="onDistrictSelected(selectDistrict.value)">
-                <option selected>Chọn nơi muốn tìm</option>
+                <option selected>--Chọn quận/huyện--</option>
                 <!-- List all Districts -->
                 <option *ngFor=" let district of districts" value="{{district.districtId}}">
                   {{district.districtName}}</option>
@@ -126,9 +126,9 @@
             <div>Phường/Xã</div>
             <div>
               <!-- When select 1 Communes -> change list of Villages accordingly -->
-              <select #selectCommune class="form-select" aria-label="select-commune"
+              <select #selectCommune class="form-select selectRegion" aria-label="select-commune"
                 (change)="onCommuneSelected(selectCommune.value)">
-                <option selected>Chọn nơi muốn tìm</option>
+                <option selected>--Chọn phường/xã--</option>
                 <!-- List all Communes of selected District -->
                 <option *ngFor="let commune of communesOfSelectedDistrict" value="{{commune.communeId}}">
                   {{commune.communeName}}</option>
@@ -141,9 +141,9 @@
             <div>Thôn/Xóm</div>
             <div>
               <!-- When select 1 Village -> call API -->
-              <select #selectVillage class="form-select" aria-label="select-village"
+              <select #selectVillage class="form-select selectRegion" aria-label="select-village"
                 (change)="onVillageSelected(selectVillage.value)">
-                <option selected>Chọn nơi muốn tìm</option>
+                <option selected>--Chọn thôn/xóm--</option>
                 <!-- List all Villages of selected Commune -->
                 <option *ngFor="let village of villagesOfSelectedCommune" value="{{village.villageId}}">
                   {{village.villageName}}</option>
