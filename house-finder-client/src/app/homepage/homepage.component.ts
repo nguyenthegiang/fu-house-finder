@@ -75,17 +75,38 @@ export class HomepageComponent implements OnInit {
   onDistrictSelected(selectedDistrictId: string) {
     // convert string to number
     var numberDistrictId: number = +selectedDistrictId;
-    
+
     // find the selected district
     this.districts.forEach((district) => {
       // assign the list of Commune as the communes of this District
       if (district.districtId == numberDistrictId) {
         this.communesOfSelectedDistrict = district.communes;
+        return;
       }
     });
+
+    //TODO: call API to search for houses with this District
   }
 
+  //[Filter] Change list of Villages after user selected Commune
   onCommuneSelected(selectedCommuneId: string) {
+    // convert string to number
+    var numberCommuneId: number = +selectedCommuneId;
+
+    // find the selected commune
+    this.communesOfSelectedDistrict.forEach((commune) => {
+      // assign the list of Villages as the villages of this Commune
+      if (commune.communeId == numberCommuneId) {
+        this.villagesOfSelectedCommune = commune.villages;
+        return;
+      }
+    });
+
+    //TODO: call API to search for houses with this Commune
+  }
+
+  //[Filter] TODO: call API to search for houses with this Village
+  onVillageSelected(selectedVillageId: string) {
 
   }
 

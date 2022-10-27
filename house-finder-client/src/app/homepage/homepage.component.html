@@ -139,17 +139,15 @@
           <!-- Village -->
           <div class="d-flex justify-content-between align-items-center">
             <div>Thôn/Xóm</div>
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button" id="dropdownMenuButton"
-                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Chọn nơi muốn tìm
-              </button>
-              <!-- List of Villages of the selected Commune -->
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item" href="#">Another action</a>
-                <a class="dropdown-item" href="#">Something else here</a>
-              </div>
+            <div>
+              <!-- When select 1 Village -> call API -->
+              <select #selectVillage class="form-select" aria-label="select-village"
+                (change)="onVillageSelected(selectVillage.value)">
+                <option selected>Chọn nơi muốn tìm</option>
+                <!-- List all Villages of selected Commune -->
+                <option *ngFor="let village of villagesOfSelectedCommune" value="{{village.villageId}}">
+                  {{village.villageName}}</option>
+              </select>
             </div>
           </div>
         </div>
