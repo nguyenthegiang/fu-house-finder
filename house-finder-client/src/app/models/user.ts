@@ -12,7 +12,7 @@ export interface User {
     phoneNumber: string;
     facebookUrl: string;
     identityCardFrontSideImageLink: string;
-    identityCardBackSideImageLink: string; 
+    identityCardBackSideImageLink: string;
     roleId: number;
     createdDate: Date;
     lastModifiedDate: Date;
