@@ -22,14 +22,17 @@
     background-color: #7F886B;
     border: #7F886B 1px solid;
     border-radius: 8px;
-    height: 100px;
+    height: 120px;
     margin: 20px;
+    padding: 15px;
+    text-align: center;
 
     b{
       text-align: center;
     }
     span{
-      text-align: center;
+
+      font-size: 50px;
     }
   }
 }
