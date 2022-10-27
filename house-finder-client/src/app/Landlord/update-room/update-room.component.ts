@@ -2,6 +2,7 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/cor
 import { ActivatedRoute } from '@angular/router';
 import { Room } from 'src/app/models/room';
 import { RoomService } from 'src/app/services/room.service';
+import { Location } from '@angular/common';
 //import { StatusService } from 'src/app/services/status.service';
 //import { Status } from 'src/app/models/status';
 
@@ -14,13 +15,36 @@ import { RoomService } from 'src/app/services/room.service';
 })
 export class UpdateRoomComponent implements OnInit, OnChanges {
   //Infomation of this room
-  roomDetail: Room | undefined;
+  roomDetail: Room = {
+    roomId: 0,
+    roomName: '',
+    pricePerMonth: 0,
+    information: '',
+    areaByMeters: 0,
+    aircon: false,
+    wifi: false,
+    waterHeater: false,
+    furniture: false,
+    maxAmountOfPeople: 0,
+    currentAmountOfPeople: 0,
+    buildingNumber: 0,
+    floorNumber: 0,
+    status: {
+      statusId: 1,
+      statusName: 'Available'
+    },
+    roomType: {
+      roomTypeId: 1,
+      roomTypeName: 'Khép kín'
+    }
+  };
   //listStatus: Status[] = [];
   //test string
-  statusSelected: string = "";
+  // statusSelected: string = "";
 
   constructor(
     private roomService: RoomService,
+    private location: Location
     //demo status selected
     //private statusService: StatusService,
 
@@ -39,6 +63,14 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
 
     //call API to get detail info of room
     this.getRoomByRoomId();
+  }
+  goBack(): void {
+    window.location.reload();
+  }
+
+  //Call API: update room
+  updateRoom() {
+    this.roomService.updateRoom(this.roomDetail).subscribe(() => this.goBack());
   }
 
   //Call API: Get Room Detail info from ID
