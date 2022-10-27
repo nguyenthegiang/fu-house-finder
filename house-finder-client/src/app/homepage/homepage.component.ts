@@ -72,17 +72,20 @@ export class HomepageComponent implements OnInit {
   }
 
   //[Filter] Change list of Communes after user selected District
-  onDistrictSelected(selectedDistrictId: number) {
-    //find the selected district
+  onDistrictSelected(selectedDistrictId: string) {
+    // convert string to number
+    var numberDistrictId: number = +selectedDistrictId;
+    
+    // find the selected district
     this.districts.forEach((district) => {
-      //assign the list of Commune as the communes of this District
-      if (district.districtId == selectedDistrictId) {
+      // assign the list of Commune as the communes of this District
+      if (district.districtId == numberDistrictId) {
         this.communesOfSelectedDistrict = district.communes;
       }
     });
   }
 
-  onCommuneSelected(selectedCommuneId: number) {
+  onCommuneSelected(selectedCommuneId: string) {
 
   }
 

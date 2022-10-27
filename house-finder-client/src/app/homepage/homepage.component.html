@@ -109,38 +109,30 @@
           <!-- District -->
           <div class="d-flex justify-content-between align-items-center my-2">
             <div>Huyện/Quận</div>
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button"
-                id="dropdownMenuButtonDistrict" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Chọn nơi muốn tìm
-              </button>
-              <!-- List all Districts -->
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonDistrict">
-                <!-- When select 1 District -> change list of Communes accordingly -->
-                <a *ngFor="let district of districts" class="dropdown-item"
-                  (click)="onDistrictSelected(district.districtId)">
-                  {{district.districtName}}
-                </a>
-              </div>
+            <div>
+              <!-- When select 1 District -> change list of Communes accordingly -->
+              <select #selectDistrict class="form-select" aria-label="select-district"
+                (change)="onDistrictSelected(selectDistrict.value)">
+                <option selected>Chọn nơi muốn tìm</option>
+                <!-- List all Districts -->
+                <option *ngFor=" let district of districts" value="{{district.districtId}}">
+                  {{district.districtName}}</option>
+              </select>
             </div>
           </div>
 
           <!-- Commune -->
           <div class="d-flex justify-content-between align-items-center mb-2">
             <div>Phường/Xã</div>
-            <div class="dropdown">
-              <button class="btn btn-secondary dropdown-toggle bg-light text-dark" type="button"
-                id="dropdownMenuButtonCommune" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Chọn nơi muốn tìm
-              </button>
-              <!-- List all Communes -->
-              <div class="dropdown-menu" aria-labelledby="dropdownMenuButtonCommune">
-                <!-- When select 1 Communes -> change list of Villages accordingly -->
-                <a *ngFor="let commune of communesOfSelectedDistrict" class="dropdown-item"
-                  (click)="onCommuneSelected(commune.communeId)">
-                  {{commune.communeName}}
-                </a>
-              </div>
+            <div>
+              <!-- When select 1 Communes -> change list of Villages accordingly -->
+              <select #selectCommune class="form-select" aria-label="select-commune"
+                (change)="onCommuneSelected(selectCommune.value)">
+                <option selected>Chọn nơi muốn tìm</option>
+                <!-- List all Communes of selected District -->
+                <option *ngFor="let commune of communesOfSelectedDistrict" value="{{commune.communeId}}">
+                  {{commune.communeName}}</option>
+              </select>
             </div>
           </div>
 
