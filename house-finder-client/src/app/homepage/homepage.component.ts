@@ -81,6 +81,65 @@ export class HomepageComponent implements OnInit {
     ];
   }
 
+  //[Filter] Filter by Campus
+  onCampusSelected(selectedCampusId: string) {
+    // convert string to number
+    var numberCampusId: number = +selectedCampusId;
+
+    // Call API to update list houses with the campus user chose
+    alert(numberCampusId);
+  }
+
+  //[Filter] Filter by Distance
+  onDistanceSelected(minDistance: string, maxDistance: string) {
+    // convert string to number
+    var numMinDistance: number = +minDistance;
+    var numMaxDistance: number = +maxDistance;
+
+    // (special case) 0 or empty input -> not handle
+    if (numMinDistance == 0 || numMaxDistance == 0) {
+      return;
+    }
+
+    /* (special case) -> alert:
+        min > max
+        negative number
+    */
+    if (numMinDistance > numMaxDistance || numMinDistance < 0 || numMaxDistance < 0) {
+      alert('Giá trị nhập vào không hợp lệ!');
+      return;
+    }
+
+    // Call API to update list houses with the distance user chose
+    alert('distance: ' + numMinDistance + ' ' + numMaxDistance);
+  }
+
+  //[Filter] Filter by Price
+  onPriceSelected(minPrice: string, maxPrice: string) {
+    // convert string to number
+    var numMinPrice: number = +minPrice;
+    var numMaxPrice: number = +maxPrice;
+
+    // (special case) 0 or empty input -> not handle
+    if (numMinPrice == 0 || numMaxPrice == 0) {
+      return;
+    }
+
+    /* (special case) -> alert:
+        min > max
+        negative number
+    */
+    if (numMinPrice > numMaxPrice || numMinPrice < 0 || numMaxPrice < 0) {
+      alert('Giá trị nhập vào không hợp lệ!');
+      return;
+    }
+
+    // Call API to update list houses with the price user chose
+    alert('price: ' + numMinPrice + ' ' + numMaxPrice);
+  }
+
+  
+
   //[Filter] Change list of Communes after user selected District
   onDistrictSelected(selectedDistrictId: string) {
     // convert string to number

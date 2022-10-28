@@ -16,6 +16,11 @@ export class HouseService {
     return this.http.get<House[]>(this.APIUrl);
   }
 
+  //[Home Page] Filter Houses using OData
+  filterHouses(): Observable<House[]> {
+    return this.http.get<House[]>(this.APIUrl + "?$filter=HouseName eq 'Trọ Tâm Lê'");
+  }
+
   //[Home Page] Search house by name
   searchHouseByName(houseName: string): Observable<any[]> {
     return this.http.get<any>(this.APIUrl + "/search?name=" + houseName);
