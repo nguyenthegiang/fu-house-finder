@@ -95,7 +95,7 @@ namespace HouseFinder_API.Controllers
         }
 
         //DELETE: api/Rooms?roomId=
-        [HttpDelete]
+        [HttpDelete("Rooms")]
         public IActionResult DeleteRoom(int roomId)
         {
             try

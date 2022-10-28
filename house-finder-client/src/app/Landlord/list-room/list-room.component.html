@@ -139,7 +139,8 @@
             <li *ngFor='let in of peopleCounter(dataItem.currentAmountOfPeople); let i = index'>
               <i class="fa-solid fa-user"></i>
             </li>
-            <li *ngFor='let in of peopleCounter(dataItem.maxAmountOfPeople - dataItem.currentAmountOfPeople); let i = index'>
+            <li
+              *ngFor='let in of peopleCounter(dataItem.maxAmountOfPeople - dataItem.currentAmountOfPeople); let i = index'>
               <i class="fa-regular fa-user"></i>
             </li>
           </ul>
@@ -161,15 +162,15 @@
         <td>
           <!-- Update button -->
           <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#updateModal"
-            data-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId)">Chỉnh sửa</button>
+            data-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId,1)">Chỉnh sửa</button>
 
           <!-- Delete button -->
           <button type=" button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal"
-            data-whatever="@getbootstrap">Xóa</button>
+            data-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId,2)">Xóa</button>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
 
-<app-update-room [roomId]="updateRoomId"></app-update-room>
+<app-update-room [roomId]="updateRoomId" [statusCheck]="statusChecked"></app-update-room>

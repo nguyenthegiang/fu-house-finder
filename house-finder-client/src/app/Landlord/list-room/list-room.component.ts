@@ -25,6 +25,9 @@ export class ListRoomComponent implements OnInit {
 
   //[Update] roomId to pass into <update-room>
   updateRoomId: number = 0;
+  //To check update or delete 
+  //1 is update, 2 is delete
+  statusChecked: number = 0;
 
   constructor(
     private route: ActivatedRoute,
@@ -64,8 +67,9 @@ export class ListRoomComponent implements OnInit {
     return new Array(i);
   }
 
-  //[Update] pass roomId to <update-room> component to call API
-  editRoom(roomId: number) {
+  //[Update] pass roomId and status check to <update-room> component to call API
+  editRoom(roomId: number, statusCheck: number) {
     this.updateRoomId = roomId;
+    this.statusChecked = statusCheck;
   }
 }
