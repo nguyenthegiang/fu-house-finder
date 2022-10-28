@@ -5,15 +5,13 @@
   <div class="text-center pb-4 d-flex justify-content-center">
     <div class="input-group w-25">
       <!-- Press enter to search  -->
-      <input type="text" class="form-control" placeholder="Nhập tên trọ" aria-label="Recipient's username"
+      <input type="text" class="form-control" placeholder="Nhập tên trọ" aria-label="search_house_by_name"
         aria-describedby="button-addon2" #searchHouseName (keydown.enter)="searchHouseByName(searchHouseName.value)">
       <!-- Click button to search -->
-      <div class="input-group-append">
-        <button class="btn btn-outline-secondary" type="button" id="button-addon2"
-          (click)="searchHouseByName(searchHouseName.value)">
-          <i class="fa-solid fa-magnifying-glass"></i>
-        </button>
-      </div>
+      <button class="btn btn-outline-secondary" type="button" id="button-addon2"
+        (click)="searchHouseByName(searchHouseName.value)">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </button>
     </div>
   </div>
   <!-- End Search bar -->
@@ -169,8 +167,8 @@
 
     <!-- Display Houses -->
     <div class="w-75 mr-5">
-      <!-- Rooms Count Available -->
       <div class="d-flex justify-content-between mb-3">
+        <!-- Rooms Count Available -->
         <h6 class="font-weight-bold">Tổng số phòng trống: {{countAvailableRooms}}</h6>
 
         <div class="d-flex justify-content-between align-items-center mb-2">
@@ -210,13 +208,13 @@
                 <span>3,459</span>
               </div>
               <!-- Price with VND format -->
-              <div class="card-text"><i class="fa-solid fa-tag mr-2"></i>{{dataItem.lowestRoomPrice |
+              <div class="card-text"><i class="fa-solid fa-tag mr-2"></i>&nbsp;{{dataItem.lowestRoomPrice |
                 currency:'VND':'symbol':'3.0'}} -
                 {{dataItem.highestRoomPrice | currency:'VND':'symbol':'3.0'}}</div>
               <div class="card-text d-inline-block text-truncate" style="max-width: 100%;"><i
-                  class="fa-solid fa-location-dot mr-2"></i>{{dataItem.address.addresses}}</div>
+                  class="fa-solid fa-location-dot mr-2"></i>&nbsp;{{dataItem.address.addresses}}</div>
               <div class="card-text d-inline-block text-truncate" style="max-width: 100%;"><i
-                  class="fa-solid fa-road mr-2"></i>3.5km</div>
+                  class="fa-solid fa-road mr-2"></i>&nbsp;3.5km</div>
             </div>
           </div>
         </div>
