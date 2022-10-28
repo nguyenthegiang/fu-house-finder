@@ -5,9 +5,9 @@ GO
 USE [FUHouseFinder]
 GO
 
--------------------------------------------------------------------------------------------------------------------------------------------
+--------------------------------------------------[Database Design]----------------------------------------------------------------------------------
 
---Dùng để lưu địa chỉ của User, House & Campus
+--Địa chỉ của User, House & Campus
 CREATE TABLE [dbo].[Addresses] (
 	AddressId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
 	Addresses nvarchar(1000) NOT NULL,					--địa chỉ cụ thể
@@ -18,6 +18,294 @@ CREATE TABLE [dbo].[Addresses] (
 	LastModifiedDate datetime,
 ) ON [PRIMARY]
 GO
+
+--Cơ sở của FPT
+CREATE TABLE [dbo].[Campuses] (
+	CampusId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	CampusName nvarchar(100),
+	
+	AddressId int NOT NULL,		--địa chỉ
+
+	CreatedDate datetime,
+
+	CONSTRAINT AddressId_in_Address FOREIGN KEY(AddressId) REFERENCES Addresses(AddressId),
+) ON [PRIMARY]
+GO
+
+--Vai trò người dùng
+CREATE TABLE [dbo].[UserRoles] (
+	RoleId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	RoleName nvarchar(100),
+
+	CreatedDate datetime,
+) ON [PRIMARY]
+GO
+
+--Người dùng
+CREATE TABLE [dbo].[Users] (
+	UserId nchar(30) NOT NULL PRIMARY KEY,
+
+	--Dành cho người Login = Facebook/Google
+	FacebookUserId nchar(300) NULL,
+	GoogleUserId nchar(300) NULL,
+
+	--Dành cho người Login = Email & Password
+	Email nvarchar(100),								--và cũng dành cho chủ trọ
+	[Password] nvarchar(100),
+
+	DisplayName nvarchar(500) NULL,						--Tên để hiển thị, lấy từ Google/Facebook API (nếu login = fb/gg) hoặc lấy khi đăng ký (nếu login = email)
+	Active bit,											--chuyển thành false nếu User bị Disable
+
+	--Dành cho Staff & Landlord
+	ProfileImageLink nvarchar(500) NULL,				--Link ảnh profile
+
+	--Những thông tin riêng của Landlord
+	PhoneNumber nvarchar(50) NULL,
+	FacebookURL nvarchar(300) NULL,
+	IdentityCardFrontSideImageLink nvarchar(500) NULL,	--Link ảnh Căn cước công dân, mặt trước
+	IdentityCardBackSideImageLink nvarchar(500) NULL,	--Link ảnh Căn cước công dân, mặt sau
+	AddressId int NULL,									--địa chỉ
+
+	RoleId int,
+
+	--Dành cho những Table CRUD dc -> History
+	CreatedDate datetime,
+	LastModifiedDate datetime,
+	CreatedBy nchar(30),
+	LastModifiedBy nchar(30),
+
+	CONSTRAINT RoleId_in_UserRole FOREIGN KEY(RoleId) REFERENCES UserRoles(RoleId),
+	CONSTRAINT createdUser_in_User FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT updatedUser_in_User FOREIGN KEY(LastModifiedBy) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT AddressId_in_Address3 FOREIGN KEY(AddressId) REFERENCES Addresses(AddressId),
+) ON [PRIMARY]
+GO
+
+--Huyện/Quận
+CREATE TABLE [dbo].[Districts] (
+	DistrictId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	DistrictName nvarchar(100),
+
+	CreatedDate datetime,
+) ON [PRIMARY]
+GO
+
+--Phường/Xã
+CREATE TABLE [dbo].[Communes] (
+	CommuneId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	CommuneName nvarchar(100),
+	DistrictId int,
+
+	CreatedDate datetime,
+	CONSTRAINT DistrictId_in_District FOREIGN KEY(DistrictId) REFERENCES Districts(DistrictId),
+) ON [PRIMARY]
+GO
+
+--Thôn/Xóm
+CREATE TABLE [dbo].[Villages] (
+	VillageId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	VillageName nvarchar(100),
+	CommuneId int,
+
+	CreatedDate datetime,
+	CONSTRAINT CommuneId_in_Commune FOREIGN KEY(CommuneId) REFERENCES Communes(CommuneId),
+) ON [PRIMARY]
+GO
+
+--Nhà trọ
+CREATE TABLE [dbo].[Houses] (
+	HouseId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	HouseName nvarchar(100),
+	Information nvarchar(MAX),			--thông tin thêm
+
+	AddressId int NOT NULL,				--địa chỉ
+	VillageId int,						--thôn/xóm -> phường/xã -> quận/huyện
+	LandlordId nchar(30),				--chủ nhà
+	CampusId int,						--Campus mà nhà này thuộc về
+
+	PowerPrice money NOT NULL,			--giá điện
+	WaterPrice money NOT NULL,			--giá nước
+
+	--Dành cho những Table CRUD dc -> History
+	CreatedDate datetime,
+	LastModifiedDate datetime,
+	CreatedBy nchar(30),
+	LastModifiedBy nchar(30),
+
+	CONSTRAINT AddressId_in_Address2 FOREIGN KEY(AddressId) REFERENCES Addresses(AddressId),
+	CONSTRAINT LandlordId_in_User FOREIGN KEY(LandlordId) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT VillageId_in_Village FOREIGN KEY(VillageId) REFERENCES [dbo].[Villages](VillageId),
+	CONSTRAINT CampusId_in_Campus FOREIGN KEY(CampusId) REFERENCES Campuses(CampusId),
+
+	CONSTRAINT createdUser_in_User2 FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT updatedUser_in_User2 FOREIGN KEY(LastModifiedBy) REFERENCES [dbo].[Users](UserId),
+) ON [PRIMARY]
+GO
+
+--Trạng thái của 1 phòng (dùng cho Room)
+CREATE TABLE [dbo].[Statuses] (
+	StatusId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	StatusName nvarchar(300),
+
+	CreatedDate datetime,
+) ON [PRIMARY]
+GO
+
+--Loại phòng (dùng cho Room)
+CREATE TABLE [dbo].[RoomTypes] (
+	RoomTypeId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	RoomTypeName nvarchar(300) NOT NULL,
+
+	CreatedDate datetime,
+) ON [PRIMARY]
+GO
+
+--Phòng trọ
+CREATE TABLE [dbo].[Rooms] (
+	RoomId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	RoomName nvarchar(50),
+	PricePerMonth money,		--giá theo tháng
+	Information nvarchar(MAX),	--thông tin thêm & tiện ích đi kèm
+	AreaByMeters float,			--diện tích, tính theo m2
+
+	--1 số tiện ích khác
+	Aircon bit NOT NULL,		--điều hòa (có/ko)
+	Wifi bit NOT NULL,           --wifi (có/không)
+	WaterHeater bit NOT NULL,    --bình nóng lạnh (có/không)
+	Furniture bit NOT NULL,      --nội thất (có/không)
+
+
+	MaxAmountOfPeople int,		--số người ở tối đa trong phòng
+	CurrentAmountOfPeople int,	--số người ở hiện tại trong phòng (cho tính năng update thông tin phòng 1/2)
+
+	BuildingNumber int,			--tòa nhà
+	FloorNumber int,			--tầng
+
+	StatusId int,
+	RoomTypeId int,
+	HouseId int,
+
+	--Dành cho những Table CRUD dc -> History
+	CreatedDate datetime,
+	LastModifiedDate datetime,
+	CreatedBy nchar(30),
+	LastModifiedBy nchar(30),
+
+	CONSTRAINT StatusId_in_Status FOREIGN KEY(StatusId) REFERENCES [dbo].[Statuses](StatusId),
+	CONSTRAINT RoomTypeId_in_RoomType FOREIGN KEY(RoomTypeId) REFERENCES [dbo].[RoomTypes](RoomTypeId),
+	CONSTRAINT HouseId_in_House FOREIGN KEY(HouseId) REFERENCES [dbo].[Houses](HouseId),
+
+	CONSTRAINT createdUser_in_User3 FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT updatedUser_in_User3 FOREIGN KEY(LastModifiedBy) REFERENCES [dbo].[Users](UserId),
+) ON [PRIMARY]
+GO
+
+--Đánh giá & Comment của 1 người dùng
+CREATE TABLE [dbo].[Rates] (
+	RateId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	Star int,							--Số sao Rate
+	Comment nvarchar(MAX),				--Nội dung Comment
+	LandlordReply nvarchar(MAX),		--Phản hồi của chủ nhà
+
+	HouseId int,						--Cái nhà dc Comment
+	StudentId nchar(30),				--Người viết Comment
+
+	--Dành cho những Table CRUD dc -> History
+	CreatedDate datetime,
+	LastModifiedDate datetime,
+	CreatedBy nchar(30),
+	LastModifiedBy nchar(30),
+
+	CONSTRAINT HouseId_in_House2 FOREIGN KEY(HouseId) REFERENCES [dbo].[Houses](HouseId),
+	CONSTRAINT StudentId_in_User FOREIGN KEY(StudentId) REFERENCES [dbo].[Users](UserId),
+
+	CONSTRAINT createdUser_in_User4 FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT updatedUser_in_User4 FOREIGN KEY(LastModifiedBy) REFERENCES [dbo].[Users](UserId),
+) ON [PRIMARY]
+GO
+
+--Ảnh nhà trọ
+CREATE TABLE [dbo].[ImagesOfHouse] (
+	ImageId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	ImageLink nvarchar(500),
+
+	HouseId int,
+
+	--Dành cho những Table CRUD dc -> History
+	CreatedDate datetime,
+	LastModifiedDate datetime,
+	CreatedBy nchar(30),
+	LastModifiedBy nchar(30),
+
+	CONSTRAINT HouseId_in_House3 FOREIGN KEY(HouseId) REFERENCES [dbo].[Houses](HouseId),
+
+	CONSTRAINT createdUser_in_User5 FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT updatedUser_in_User5 FOREIGN KEY(LastModifiedBy) REFERENCES [dbo].[Users](UserId),
+) ON [PRIMARY]
+GO
+
+--Ảnh phòng trọ
+CREATE TABLE [dbo].[ImagesOfRoom] (
+	ImageId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	ImageLink nvarchar(500),
+
+	RoomId int,
+
+	--Dành cho những Table CRUD dc -> History
+	CreatedDate datetime,
+	LastModifiedDate datetime,
+	CreatedBy nchar(30),
+	LastModifiedBy nchar(30),
+
+	CONSTRAINT RoomId_in_Room FOREIGN KEY(RoomId) REFERENCES [dbo].[Rooms](RoomId),
+
+	CONSTRAINT createdUser_in_User6 FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT updatedUser_in_User6 FOREIGN KEY(LastModifiedBy) REFERENCES [dbo].[Users](UserId),
+) ON [PRIMARY]
+GO
+
+--Report của sinh viên đối với nhà trọ
+CREATE TABLE [dbo].[Reports] (
+	ReportId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	ReportContent nvarchar(MAX),
+
+	StudentId nchar(30),
+	HouseId int,
+
+	--Dành cho những Table CRUD dc -> History
+	CreatedDate datetime,
+	LastModifiedDate datetime,
+	CreatedBy nchar(30),
+	LastModifiedBy nchar(30),
+
+	CONSTRAINT HouseId_in_House4 FOREIGN KEY(HouseId) REFERENCES [dbo].[Houses](HouseId),
+	CONSTRAINT StudentId_in_User3 FOREIGN KEY(StudentId) REFERENCES [dbo].[Users](UserId),
+
+	CONSTRAINT createdUser_in_User7 FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT updatedUser_in_User7 FOREIGN KEY(LastModifiedBy) REFERENCES [dbo].[Users](UserId),
+) ON [PRIMARY]
+GO
+
+--Lịch sử người ở phòng trọ, dành cho chủ trọ tự nguyện thêm vào nếu có nhu cầu quản lý & theo dõi
+CREATE TABLE [dbo].[RoomHistories] (
+	RoomHistoryId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	CustomerName nvarchar(800),		--tên ng ở phòng
+	RoomId int,						--phòng
+
+	--Dành cho những Table CRUD dc -> History
+	CreatedDate datetime,
+	LastModifiedDate datetime,
+	CreatedBy nchar(30),
+	LastModifiedBy nchar(30),
+
+	CONSTRAINT RoomId_in_Room2 FOREIGN KEY(RoomId) REFERENCES [dbo].Rooms(RoomId),
+
+	CONSTRAINT createdUser_in_User8 FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT updatedUser_in_User8 FOREIGN KEY(LastModifiedBy) REFERENCES [dbo].[Users](UserId),
+) ON [PRIMARY]
+GO
+
+--------------------------------------------------[Database Population]----------------------------------------------------------------------------------
 
 --Dữ liệu location này chỉ là tạm thời, sau này set up dc Google Map API sẽ sửa lại
 --fu hòa lạc
@@ -71,19 +359,8 @@ N'21.02793531455853, 105.51399518075671', GETDATE(), GETDATE());
 --Trọ Tuấn Cường
 INSERT INTO [dbo].[Addresses] VALUES (N'Công ty CP dịch vụ bảo vệ KCN Cao, Hòa Lạc, Thạch Thất, Hà Nội, Việt Nam', 
 N'21.001219979853115, 105.52098402638923', GETDATE(), GETDATE());
+
 -------------------------------------------------------------------------------------------------------------------------------------------
-
-CREATE TABLE [dbo].[Campuses] (
-	CampusId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	CampusName nvarchar(100),
-	
-	AddressId int NOT NULL,		--địa chỉ
-
-	CreatedDate datetime,
-
-	CONSTRAINT AddressId_in_Address FOREIGN KEY(AddressId) REFERENCES Addresses(AddressId),
-) ON [PRIMARY]
-GO
 
 INSERT INTO [dbo].[Campuses] VALUES (N'FU - Hòa Lạc', 1, GETDATE());
 INSERT INTO [dbo].[Campuses] VALUES (N'FU - Hồ Chí Minh', 2, GETDATE());
@@ -93,14 +370,6 @@ INSERT INTO [dbo].[Campuses] VALUES (N'FU - Quy Nhơn', 5, GETDATE());
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
-CREATE TABLE [dbo].[UserRoles] (
-	RoleId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	RoleName nvarchar(100),
-
-	CreatedDate datetime,
-) ON [PRIMARY]
-GO
-
 INSERT INTO [dbo].[UserRoles] VALUES (N'Student', GETDATE());
 INSERT INTO [dbo].[UserRoles] VALUES (N'Landlord', GETDATE());
 INSERT INTO [dbo].[UserRoles] VALUES (N'Head of Admission Department', GETDATE());
@@ -109,45 +378,6 @@ INSERT INTO [dbo].[UserRoles] VALUES (N'Staff of Admission Department', GETDATE(
 INSERT INTO [dbo].[UserRoles] VALUES (N'Staff of Student Service Department', GETDATE());
 
 -------------------------------------------------------------------------------------------------------------------------------------------
-
-CREATE TABLE [dbo].[Users] (
-	UserId nchar(30) NOT NULL PRIMARY KEY,
-
-	--Dành cho người Login = Facebook/Google
-	FacebookUserId nchar(300) NULL,
-	GoogleUserId nchar(300) NULL,
-
-	--Dành cho người Login = Email & Password
-	Email nvarchar(100),								--và cũng dành cho chủ trọ
-	[Password] nvarchar(100),
-
-	DisplayName nvarchar(500) NULL,						--Tên để hiển thị, lấy từ Google/Facebook API (nếu login = fb/gg) hoặc lấy khi đăng ký (nếu login = email)
-	Active bit,											--chuyển thành false nếu User bị Disable
-
-	--Dành cho Staff & Landlord
-	ProfileImageLink nvarchar(500) NULL,				--Link ảnh profile
-
-	--Những thông tin riêng của Landlord
-	PhoneNumber nvarchar(50) NULL,
-	FacebookURL nvarchar(300) NULL,
-	IdentityCardFrontSideImageLink nvarchar(500) NULL,	--Link ảnh Căn cước công dân, mặt trước
-	IdentityCardBackSideImageLink nvarchar(500) NULL,	--Link ảnh Căn cước công dân, mặt sau
-	AddressId int NULL,									--địa chỉ
-
-	RoleId int,
-
-	--Dành cho những Table CRUD dc -> History
-	CreatedDate datetime,
-	LastModifiedDate datetime,
-	CreatedBy nchar(30),
-	LastModifiedBy nchar(30),
-
-	CONSTRAINT RoleId_in_UserRole FOREIGN KEY(RoleId) REFERENCES UserRoles(RoleId),
-	CONSTRAINT createdUser_in_User FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
-	CONSTRAINT updatedUser_in_User FOREIGN KEY(LastModifiedBy) REFERENCES [dbo].[Users](UserId),
-	CONSTRAINT AddressId_in_Address3 FOREIGN KEY(AddressId) REFERENCES Addresses(AddressId),
-) ON [PRIMARY]
-GO
 
 --Students
 --dữ liệu giả định, sau này cần sửa Fb UserId
@@ -188,31 +418,11 @@ GETDATE(), GETDATE(), N'SA000001', N'SA000001');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
---Huyện/Quận
-CREATE TABLE [dbo].[Districts] (
-	DistrictId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	DistrictName nvarchar(100),
-
-	CreatedDate datetime,
-) ON [PRIMARY]
-GO
-
 INSERT INTO [dbo].[Districts] VALUES (N'Huyện Thạch Thất', GETDATE());
 INSERT INTO [dbo].[Districts] VALUES (N'Huyện Quốc Oai', GETDATE());
 INSERT INTO [dbo].[Districts] VALUES (N'Thị xã Sơn Tây', GETDATE());
 
 -------------------------------------------------------------------------------------------------------------------------------------------
-
---Phường/Xã
-CREATE TABLE [dbo].[Communes] (
-	CommuneId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	CommuneName nvarchar(100),
-	DistrictId int,
-
-	CreatedDate datetime,
-	CONSTRAINT DistrictId_in_District FOREIGN KEY(DistrictId) REFERENCES Districts(DistrictId),
-) ON [PRIMARY]
-GO
 
 INSERT INTO [dbo].[Communes] VALUES (N'Thị trấn Liên Quan', 1, GETDATE());
 INSERT INTO [dbo].[Communes] VALUES (N'Xã Bình Phú', 1, GETDATE());
@@ -277,17 +487,6 @@ INSERT INTO [dbo].[Communes] VALUES (N'Xã Thanh Mỹ', 3, GETDATE());
 INSERT INTO [dbo].[Communes] VALUES (N'Xã Xuân Sơn', 3, GETDATE());
 
 -------------------------------------------------------------------------------------------------------------------------------------------
-
---Thôn/Xóm
-CREATE TABLE [dbo].[Villages] (
-	VillageId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	VillageName nvarchar(100),
-	CommuneId int,
-
-	CreatedDate datetime,
-	CONSTRAINT CommuneId_in_Commune FOREIGN KEY(CommuneId) REFERENCES Communes(CommuneId),
-) ON [PRIMARY]
-GO
 
 INSERT INTO [dbo].[Villages] VALUES (N'Chi Quan 1', 1, GETDATE());
 INSERT INTO [dbo].[Villages] VALUES (N'Chi Quan 2', 1, GETDATE());
@@ -797,35 +996,6 @@ INSERT INTO [dbo].[Villages] VALUES (N'Xóm Chằm', 59, GETDATE());
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
-CREATE TABLE [dbo].[Houses] (
-	HouseId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	HouseName nvarchar(100),
-	Information nvarchar(MAX),			--thông tin thêm
-
-	AddressId int NOT NULL,				--địa chỉ
-	VillageId int,						--thôn/xóm -> phường/xã -> quận/huyện
-	LandlordId nchar(30),				--chủ nhà
-	CampusId int,						--Campus mà nhà này thuộc về
-
-	PowerPrice money NOT NULL,			--giá điện
-	WaterPrice money NOT NULL,			--giá nước
-
-	--Dành cho những Table CRUD dc -> History
-	CreatedDate datetime,
-	LastModifiedDate datetime,
-	CreatedBy nchar(30),
-	LastModifiedBy nchar(30),
-
-	CONSTRAINT AddressId_in_Address2 FOREIGN KEY(AddressId) REFERENCES Addresses(AddressId),
-	CONSTRAINT LandlordId_in_User FOREIGN KEY(LandlordId) REFERENCES [dbo].[Users](UserId),
-	CONSTRAINT VillageId_in_Village FOREIGN KEY(VillageId) REFERENCES [dbo].[Villages](VillageId),
-	CONSTRAINT CampusId_in_Campus FOREIGN KEY(CampusId) REFERENCES Campuses(CampusId),
-
-	CONSTRAINT createdUser_in_User2 FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
-	CONSTRAINT updatedUser_in_User2 FOREIGN KEY(LastModifiedBy) REFERENCES [dbo].[Users](UserId),
-) ON [PRIMARY]
-GO
-
 INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Lê', N'Rất đẹp', 6, 3, N'LA000001', 1, 3700, 1200, GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Thảo', N'Rất đẹp', 7, 3, N'LA000002', 1, 3500, 1300, GETDATE(), GETDATE(), N'LA000002', N'LA000002');
 INSERT INTO [dbo].[Houses] VALUES (N'Trọ Hòa Lạc Yên Lạc Viên', N'Vị trí trung tâm khu giao lộ ngã tư Hòa Lạc. Cảnh quan trong lành, yên tĩnh', 8, 3, N'LA000003', 1, 3400, 1500, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
@@ -844,16 +1014,8 @@ INSERT INTO [dbo].[Houses] VALUES (N'Trọ Thu Thảo', N'Không chung chủ', 7
 INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Lê', N'Chỗ để xe rộng rãi', 7, 3, N'LA000002', 1, 3500, 1300, GETDATE(), GETDATE(), N'LA000002', N'LA000002');
 INSERT INTO [dbo].[Houses] VALUES (N'Trọ 123', N'Cảnh quan trong lành, yên tĩnh', 8, 3, N'LA000003', 1, 3400, 1500, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 INSERT INTO [dbo].[Houses] VALUES (N'Trọ Chương Văn', N'Không chung chủ', 8, 3, N'LA000003', 1, 3400, 1500, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+
 -------------------------------------------------------------------------------------------------------------------------------------------
-
---Trạng thái của 1 phòng (dùng cho Room)
-CREATE TABLE [dbo].[Statuses] (
-	StatusId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	StatusName nvarchar(300),
-
-	CreatedDate datetime,
-) ON [PRIMARY]
-GO
 
 INSERT INTO [dbo].[Statuses] VALUES (N'Available', GETDATE());	--có thể thuê	-> hiển thị khi search
 INSERT INTO [dbo].[Statuses] VALUES (N'Occupied', GETDATE());	--đã có ng thuê	-> ko hiển thị khi search
@@ -861,59 +1023,11 @@ INSERT INTO [dbo].[Statuses] VALUES (N'Disabled', GETDATE());	--ko dùng dc vì 
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
---Loại phòng (dùng cho Room)
-CREATE TABLE [dbo].[RoomTypes] (
-	RoomTypeId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	RoomTypeName nvarchar(300) NOT NULL,
-
-	CreatedDate datetime,
-) ON [PRIMARY]
-GO
-
 INSERT INTO [dbo].[RoomTypes] VALUES (N'Khép kín', GETDATE());
 INSERT INTO [dbo].[RoomTypes] VALUES (N'Không khép kín', GETDATE());
 INSERT INTO [dbo].[RoomTypes] VALUES (N'Chung cư mini', GETDATE());
 
 -------------------------------------------------------------------------------------------------------------------------------------------
-
-CREATE TABLE [dbo].[Rooms] (
-	RoomId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	RoomName nvarchar(50),
-	PricePerMonth money,		--giá theo tháng
-	Information nvarchar(MAX),	--thông tin thêm & tiện ích đi kèm
-	AreaByMeters float,			--diện tích, tính theo m2
-
-	--1 số tiện ích khác
-	Aircon bit NOT NULL,		--điều hòa (có/ko)
-	Wifi bit NOT NULL,           --wifi (có/không)
-	WaterHeater bit NOT NULL,    --bình nóng lạnh (có/không)
-	Furniture bit NOT NULL,      --nội thất (có/không)
-
-
-	MaxAmountOfPeople int,		--số người ở tối đa trong phòng
-	CurrentAmountOfPeople int,	--số người ở hiện tại trong phòng (cho tính năng update thông tin phòng 1/2)
-
-	BuildingNumber int,			--tòa nhà
-	FloorNumber int,			--tầng
-
-	StatusId int,
-	RoomTypeId int,
-	HouseId int,
-
-	--Dành cho những Table CRUD dc -> History
-	CreatedDate datetime,
-	LastModifiedDate datetime,
-	CreatedBy nchar(30),
-	LastModifiedBy nchar(30),
-
-	CONSTRAINT StatusId_in_Status FOREIGN KEY(StatusId) REFERENCES [dbo].[Statuses](StatusId),
-	CONSTRAINT RoomTypeId_in_RoomType FOREIGN KEY(RoomTypeId) REFERENCES [dbo].[RoomTypes](RoomTypeId),
-	CONSTRAINT HouseId_in_House FOREIGN KEY(HouseId) REFERENCES [dbo].[Houses](HouseId),
-
-	CONSTRAINT createdUser_in_User3 FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
-	CONSTRAINT updatedUser_in_User3 FOREIGN KEY(LastModifiedBy) REFERENCES [dbo].[Users](UserId),
-) ON [PRIMARY]
-GO
 
 --AreaByMeters, Aircon, Wifi, WaterHeater, Furniture, MaxAmountOfPeople, CurrentAmountOfPeople, BuildingNumber,  FloorNumber, StatusId, RoomTypeId, HouseId
 INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Gạch sàn nhà có họa tiết hình con cá', 20, 1, 1, 0, 0, 3, 1, 1, 1, 1, 2, 1, 
@@ -1056,60 +1170,28 @@ GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
---Đánh giá & Comment của 1 người dùng
-CREATE TABLE [dbo].[Rates] (
-	RateId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	Star int,							--Số sao Rate
-	Comment nvarchar(MAX),				--Nội dung Comment
-	LandlordReply nvarchar(MAX),		--Phản hồi của chủ nhà
-
-	HouseId int,						--Cái nhà dc Comment
-	StudentId nchar(30),				--Người viết Comment
-
-	--Dành cho những Table CRUD dc -> History
-	CreatedDate datetime,
-	LastModifiedDate datetime,
-	CreatedBy nchar(30),
-	LastModifiedBy nchar(30),
-
-	CONSTRAINT HouseId_in_House2 FOREIGN KEY(HouseId) REFERENCES [dbo].[Houses](HouseId),
-	CONSTRAINT StudentId_in_User FOREIGN KEY(StudentId) REFERENCES [dbo].[Users](UserId),
-
-	CONSTRAINT createdUser_in_User4 FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
-	CONSTRAINT updatedUser_in_User4 FOREIGN KEY(LastModifiedBy) REFERENCES [dbo].[Users](UserId),
-) ON [PRIMARY]
-GO
-
 INSERT INTO [dbo].[Rates] VALUES (5, N'Rất tuyệt vời, gần trường nữa', N'Cảm ơn bạn', 1, N'HE153046', 
 GETDATE(), GETDATE(), N'HE153046', N'HE153046');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
---Ảnh nhà
-CREATE TABLE [dbo].[ImagesOfHouse] (
-	ImageId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	ImageLink nvarchar(500),
-
-	HouseId int,
-
-	--Dành cho những Table CRUD dc -> History
-	CreatedDate datetime,
-	LastModifiedDate datetime,
-	CreatedBy nchar(30),
-	LastModifiedBy nchar(30),
-
-	CONSTRAINT HouseId_in_House3 FOREIGN KEY(HouseId) REFERENCES [dbo].[Houses](HouseId),
-
-	CONSTRAINT createdUser_in_User5 FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
-	CONSTRAINT updatedUser_in_User5 FOREIGN KEY(LastModifiedBy) REFERENCES [dbo].[Users](UserId),
-) ON [PRIMARY]
-GO
-
 INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house1.jpg', 1,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house1(1).jpg', 1,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house1(2).jpg', 1,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house2.jpg', 2,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house2(1).jpg', 2,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house2(2).jpg', 2,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house3.jpg', 3,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house3(1).jpg', 3,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house3(2).jpg', 3,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house4.jpg', 4,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
@@ -1143,26 +1225,6 @@ INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house18.jpg', 18,
 GETDATE(), GETDATE(), N'LA000001', N'LA000003');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
-
---Ảnh phòng
-CREATE TABLE [dbo].[ImagesOfRoom] (
-	ImageId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	ImageLink nvarchar(500),
-
-	RoomId int,
-
-	--Dành cho những Table CRUD dc -> History
-	CreatedDate datetime,
-	LastModifiedDate datetime,
-	CreatedBy nchar(30),
-	LastModifiedBy nchar(30),
-
-	CONSTRAINT RoomId_in_Room FOREIGN KEY(RoomId) REFERENCES [dbo].[Rooms](RoomId),
-
-	CONSTRAINT createdUser_in_User6 FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
-	CONSTRAINT updatedUser_in_User6 FOREIGN KEY(LastModifiedBy) REFERENCES [dbo].[Users](UserId),
-) ON [PRIMARY]
-GO
 
 INSERT INTO [dbo].[ImagesOfRoom] VALUES (N'room1.jpg', 1,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
@@ -1544,50 +1606,9 @@ GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
---Report của sinh viên đối với nhà trọ
-CREATE TABLE [dbo].[Reports] (
-	ReportId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	ReportContent nvarchar(MAX),
-
-	StudentId nchar(30),
-	HouseId int,
-
-	--Dành cho những Table CRUD dc -> History
-	CreatedDate datetime,
-	LastModifiedDate datetime,
-	CreatedBy nchar(30),
-	LastModifiedBy nchar(30),
-
-	CONSTRAINT HouseId_in_House4 FOREIGN KEY(HouseId) REFERENCES [dbo].[Houses](HouseId),
-	CONSTRAINT StudentId_in_User3 FOREIGN KEY(StudentId) REFERENCES [dbo].[Users](UserId),
-
-	CONSTRAINT createdUser_in_User7 FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
-	CONSTRAINT updatedUser_in_User7 FOREIGN KEY(LastModifiedBy) REFERENCES [dbo].[Users](UserId),
-) ON [PRIMARY]
-GO
-
 INSERT INTO [dbo].[Reports] VALUES ('Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 1,
 GETDATE(), GETDATE(), N'HE153046', N'HE153046');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
-
---Lịch sử người ở phòng trọ, dành cho chủ trọ tự nguyện thêm vào nếu có nhu cầu quản lý & theo dõi
-CREATE TABLE [dbo].[RoomHistories] (
-	RoomHistoryId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	CustomerName nvarchar(800),		--tên ng ở phòng
-	RoomId int,						--phòng
-
-	--Dành cho những Table CRUD dc -> History
-	CreatedDate datetime,
-	LastModifiedDate datetime,
-	CreatedBy nchar(30),
-	LastModifiedBy nchar(30),
-
-	CONSTRAINT RoomId_in_Room2 FOREIGN KEY(RoomId) REFERENCES [dbo].Rooms(RoomId),
-
-	CONSTRAINT createdUser_in_User8 FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
-	CONSTRAINT updatedUser_in_User8 FOREIGN KEY(LastModifiedBy) REFERENCES [dbo].[Users](UserId),
-) ON [PRIMARY]
-GO
 
 INSERT INTO [dbo].[RoomHistories] VALUES (N'Nguyễn Thế Giang', 1, GETDATE(), GETDATE(), N'LA000001', N'LA000001');
