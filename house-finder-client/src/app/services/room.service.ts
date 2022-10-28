@@ -16,11 +16,6 @@ export class RoomService {
 
   constructor(private http: HttpClient) { }
 
-  //[Home Page] Count total available rooms
-  countAvailableRoom(): Observable<number> {
-    return this.http.get<number>(this.APIUrl + "/CountAvailableRoom");
-  }
-
   //[House Detail] Get List Available Rooms by HouseId
   getAvailableRooms(houseId: number): Observable<any[]> {
     return this.http.get<any[]>(this.APIUrl + "/getAvailableRooms?HouseId=" + houseId);
@@ -49,6 +44,16 @@ export class RoomService {
   //[Landlord: Get Room] Get room by roomId
   getRoomByRoomId(roomId: number): Observable<Room> {
     return this.http.get<Room>(this.APIUrl + "/getByRoomId?RoomId=" + roomId);
+  }
+
+  //[Home Page] [Staff/Dashboard] Count total available rooms
+  countAvailableRooms(): Observable<any>{
+    return this.http.get<Room>(this.APIUrl + "/CountAvailableRoom");
+  }
+
+  //[Staff/Dashboard] Count available capacity
+  countAvailableCapacity(): Observable<any>{
+    return this.http.get<Room>(this.APIUrl + "/CountAvailableCapacity");
   }
 }
 

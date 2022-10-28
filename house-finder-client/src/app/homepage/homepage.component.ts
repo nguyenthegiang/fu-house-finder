@@ -49,7 +49,7 @@ export class HomepageComponent implements OnInit {
     });
 
     //(List) Count available Rooms
-    this.roomService.countAvailableRoom().subscribe(data => {
+    this.roomService.countAvailableRooms().subscribe(data => {
       this.countAvailableRooms = data;
     });
 
