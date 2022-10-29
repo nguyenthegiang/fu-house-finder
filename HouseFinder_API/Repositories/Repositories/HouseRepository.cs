@@ -22,5 +22,6 @@ namespace Repositories.Repositories
         public int CountTotalHouse() => HouseDAO.CountTotalHouse();
 
         public int CountAvailableHouse() => HouseDAO.CountAvailableHouse();
+        public List<HouseDTO> GetAvailableHouses() => HouseDAO.GetAvailableHouses();
     }
 }

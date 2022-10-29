@@ -46,6 +46,49 @@ namespace DataAccess
             return houseDTOs;
         }
 
+        /*[Home Page] Get list of available houses, with Address & Images
+            Availabe house: house with at least 1 available room */
+        public static List<HouseDTO> GetAvailableHouses()
+        {
+            List<HouseDTO> houseDTOs;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //include address, images
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    houseDTOs = context.Houses
+                        //unnecessary includes
+                        //.Include(house => house.Address)
+                        //.Include(house => house.ImagesOfHouses)
+                        .ProjectTo<HouseDTO>(config).ToList();
+
+                    //find lowest room price & highest room price
+                    for (int i = 0; i < houseDTOs.Count; i++)
+                    {
+                        houseDTOs[i] = RoomDAO.GetRoomPriceForHouseDTO(houseDTOs[i]);
+                    }
+                }
+
+                /*for each house: check to see if it has available room
+                if not, remove from list*/
+                for (int i = 0; i < houseDTOs.Count; i++)
+                {
+                    if (!(RoomDAO.CountAvailableRoomByHouseId(houseDTOs[i].HouseId) > 0))
+                    {
+                        houseDTOs.RemoveAt(i);
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return houseDTOs;
+        }
+
         //Search house by name, with Address
         public static List<HouseDTO> GetHouseByName(string houseName)
         {

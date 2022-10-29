@@ -11,9 +11,19 @@ export class HouseService {
 
   constructor(private http: HttpClient) { }
 
-  //[Home Page] Get List of all Houses
+  //Get List of all Houses
   getAllHouses(): Observable<House[]> {
     return this.http.get<House[]>(this.APIUrl);
+  }
+
+  //[Home Page] Get List of available Houses
+  getAvailableHouses(): Observable<House[]> {
+    return this.http.get<House[]>(this.APIUrl + "/availableHouses");
+  }
+
+  //[Home Page] Filter Houses using OData
+  filterHouses(): Observable<House[]> {
+    return this.http.get<House[]>(this.APIUrl + "?$filter=HouseName eq 'Trọ Tâm Lê'");
   }
 
   //[Home Page] Search house by name

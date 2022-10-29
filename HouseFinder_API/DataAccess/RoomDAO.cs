@@ -145,7 +145,7 @@ namespace DataAccess
                 using (var context = new FUHouseFinderContext())
                 {
                     Room updatedRoom = context.Rooms.FirstOrDefault(r => r.RoomId == roomId);
-                    if(updatedRoom == null)
+                    if (updatedRoom == null)
                     {
                         throw new Exception();
                     }
@@ -178,7 +178,7 @@ namespace DataAccess
                     }
                     return room;
                 }
-                
+
             }
             catch (Exception e)
             {
@@ -226,6 +226,28 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
             return capacity;
+        }
+
+        //[Home Page] for HouseDAO.GetAvailableHouses()
+        public static int CountAvailableRoomByHouseId(int HouseId)
+        {
+            int countAvailableRoom = 0;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Count available rooms of 1 house
+                    countAvailableRoom = context.Rooms
+                        .Where(room => room.HouseId == HouseId)
+                        .Where(room => room.Status.StatusName.Equals("Available"))
+                        .Count();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return countAvailableRoom;
         }
     }
 }

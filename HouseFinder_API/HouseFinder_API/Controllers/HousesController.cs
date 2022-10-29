@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Repositories.Repositories;
 using DataAccess.DTO;
+using Microsoft.AspNetCore.OData.Query;
 
 namespace HouseFinder_API.Controllers
 {
@@ -21,6 +22,12 @@ namespace HouseFinder_API.Controllers
         //GET: api/Houses
         [HttpGet]
         public ActionResult<IEnumerable<HouseDTO>> GetAllHouses() => housesRepository.GetAllHouses();
+
+        //GET: api/Houses/availableHouses
+        //[Home Page] List available Houses
+        //[EnableQuery(PageSize = 6)]
+        [HttpGet("availableHouses")]
+        public ActionResult<IEnumerable<HouseDTO>> GetAvailableHouses() => housesRepository.GetAvailableHouses();
 
         //GET: api/Houses/search?name=
         [HttpGet("search")]
