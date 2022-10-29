@@ -18,7 +18,7 @@ import { RoomTypeService } from '../services/room-type.service';
   styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent implements OnInit {
-  //List of houses to display in Main Content
+  //List of available houses to display in Main Content
   houses: House[] = [];
 
   //to display in Main Content
@@ -43,8 +43,8 @@ export class HomepageComponent implements OnInit {
   ngOnInit(): void {
     //Call APIs:
 
-    //(List) Get all Houses
-    this.houseService.getAllHouses().subscribe(data => {
+    //(List) Get available Houses
+    this.houseService.getAvailableHouses().subscribe(data => {
       this.houses = data;
     });
 

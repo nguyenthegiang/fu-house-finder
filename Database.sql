@@ -1227,6 +1227,8 @@ INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house17.jpg', 17,
 GETDATE(), GETDATE(), N'LA000001', N'LA000003');
 INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house18.jpg', 18,
 GETDATE(), GETDATE(), N'LA000001', N'LA000003');
+INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house18.jpg', 19,
+GETDATE(), GETDATE(), N'LA000001', N'LA000003');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
