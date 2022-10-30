@@ -11,22 +11,38 @@ export class HouseService {
 
   constructor(private http: HttpClient) { }
 
+  //Unused
   //Get List of all Houses
   getAllHouses(): Observable<House[]> {
     return this.http.get<House[]>(this.APIUrl);
   }
 
-  //[Home Page] Get List of available Houses
+  //Unused
+  //Get List of available Houses
   getAvailableHouses(): Observable<House[]> {
     return this.http.get<House[]>(this.APIUrl + "/availableHouses");
   }
 
-  //[Home Page] Filter Houses using OData
-  filterHouses(): Observable<House[]> {
-    return this.http.get<House[]>(this.APIUrl + "?$filter=HouseName eq 'Trọ Tâm Lê'");
+  //[Home Page] Filter available Houses using OData
+  filterAvailableHouses(pageSize: number, pageNumber: number, searchName?: string): Observable<House[]> {
+    //define API here to append query options into it later
+    var filterAPIUrl = this.APIUrl + `/availableHouses?`;
+
+    //count Skip and Top from pageSize & pageNumber
+    const skip = pageSize * (pageNumber - 1);
+    const top = pageSize;
+    filterAPIUrl += `$skip=${skip}&$top=${top}`;
+
+    //add filter by name if has (contains name)
+    if (searchName != undefined && searchName != '') {
+      filterAPIUrl += `&$filter=contains(HouseName,'${searchName}')`;
+    }
+    
+    return this.http.get<House[]>(filterAPIUrl);
   }
 
-  //[Home Page] Search house by name
+  //Unused
+  //Search house by name
   searchHouseByName(houseName: string): Observable<any[]> {
     return this.http.get<any>(this.APIUrl + "/search?name=" + houseName);
   }
@@ -42,17 +58,18 @@ export class HouseService {
   }
 
   //[Landlord][List room] Get total money for not rented rooms
-  getMoneyForNotRentedRooms(houseId: number): Observable<any>{
+  getMoneyForNotRentedRooms(houseId: number): Observable<any> {
     return this.http.get<any>(this.APIUrl + "/GetMoneyForNotRentedRooms?HouseId=" + houseId);
   }
 
   //[Staff][Dashboard] Get total of houses
-  getTotalHouse():Observable<any>{
+  getTotalHouse(): Observable<any> {
     return this.http.get<any>(this.APIUrl + "/CountTotalHouse");
   }
 
   //[Staff][Dashboard] Get total of available houses
-  getTotalAvailableHouse():Observable<any>{
+  //[Home Page] For Paging
+  countTotalAvailableHouse(): Observable<any> {
     return this.http.get<any>(this.APIUrl + "/CountAvailableHouse");
   }
 }

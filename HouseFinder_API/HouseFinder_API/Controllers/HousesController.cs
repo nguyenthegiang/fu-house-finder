@@ -24,8 +24,8 @@ namespace HouseFinder_API.Controllers
         public ActionResult<IEnumerable<HouseDTO>> GetAllHouses() => housesRepository.GetAllHouses();
 
         //GET: api/Houses/availableHouses
-        //[Home Page] List available Houses
-        //[EnableQuery(PageSize = 6)]
+        //[Home Page] List available Houses (using OData)
+        [EnableQuery]
         [HttpGet("availableHouses")]
         public ActionResult<IEnumerable<HouseDTO>> GetAvailableHouses() => housesRepository.GetAvailableHouses();
 
@@ -83,12 +83,10 @@ namespace HouseFinder_API.Controllers
         }
 
         //GET: api/Houses/CountAvailableHouse
+        //[Home Page] For Paging
+        //[Staff - Dashboard] For statistic report
         [HttpGet("CountAvailableHouse")]
-        public int CountAvailableHouse()
-        {
-            int availableHouse = housesRepository.CountAvailableHouse();
-            return availableHouse;
-        }
+        public int CountAvailableHouse() => housesRepository.CountAvailableHouse();
 
     }
 }
