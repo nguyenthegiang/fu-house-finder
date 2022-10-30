@@ -67,7 +67,7 @@ namespace DataAccess
 
         //Get LowestRoomPrice & LowestRoomPrice for HouseDTO (used to display in Home Page)
         //Used in: HouseDAO.GetAllHouses();
-        public static HouseDTO GetRoomPriceForHouseDTO(HouseDTO houseDTO)
+        public static HouseDTO GetRoomPriceById(HouseDTO houseDTO)
         {
             //Get list of its room
             List<RoomDTO> roomsOfHouse = GetRoomsByHouseId(houseDTO.HouseId);

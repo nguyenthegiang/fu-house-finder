@@ -34,7 +34,7 @@ namespace DataAccess
                     //find lowest room price & highest room price
                     for (int i = 0; i < houseDTOs.Count; i++)
                     {
-                        houseDTOs[i] = RoomDAO.GetRoomPriceForHouseDTO(houseDTOs[i]);
+                        houseDTOs[i] = RoomDAO.GetRoomPriceById(houseDTOs[i]);
                     }
                 }
             }
@@ -46,7 +46,7 @@ namespace DataAccess
             return houseDTOs;
         }
 
-        /*[Home Page] Get list of available houses, with Address & Images
+        /*[Home Page] Get list of available houses, with Address, Images & Rooms
             Availabe house: house with at least 1 available room */
         public static List<HouseDTO> GetAvailableHouses()
         {
@@ -67,7 +67,7 @@ namespace DataAccess
                     //find lowest room price & highest room price
                     for (int i = 0; i < houseDTOs.Count; i++)
                     {
-                        houseDTOs[i] = RoomDAO.GetRoomPriceForHouseDTO(houseDTOs[i]);
+                        houseDTOs[i] = RoomDAO.GetRoomPriceById(houseDTOs[i]);
                     }
                 }
 
@@ -105,7 +105,7 @@ namespace DataAccess
                     //find lowest room price & highest room price
                     for (int i = 0; i < houseDTOs.Count; i++)
                     {
-                        houseDTOs[i] = RoomDAO.GetRoomPriceForHouseDTO(houseDTOs[i]);
+                        houseDTOs[i] = RoomDAO.GetRoomPriceById(houseDTOs[i]);
                     }
                 }
             }

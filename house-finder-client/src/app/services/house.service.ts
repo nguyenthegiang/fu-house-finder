@@ -11,6 +11,7 @@ export class HouseService {
 
   constructor(private http: HttpClient) { }
 
+  //Unused
   //Get List of all Houses
   getAllHouses(): Observable<House[]> {
     return this.http.get<House[]>(this.APIUrl);
