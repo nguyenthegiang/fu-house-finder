@@ -24,8 +24,11 @@ export class HomepageComponent implements OnInit {
   //to display in Main Content
   countAvailableRooms: number = 0;
 
-  //For Paging
-  countAvailableHouses: number = 0;
+  //(Paging)
+  countAvailableHouses = 0; //items count
+  pageSize = 9; //number of items per page
+  pageNumber = 1; //starts at page 1
+
 
   //Data for Filter column
   roomTypes: RoomType[] = [];         //Room types
@@ -47,7 +50,7 @@ export class HomepageComponent implements OnInit {
     //Call APIs:
 
     //(List) Get available Houses - default: page 1, 9 items
-    this.houseService.filterAvailableHouses().subscribe(data => {
+    this.houseService.filterAvailableHouses(this.pageSize, this.pageNumber).subscribe(data => {
       this.houses = data;
     });
 
@@ -187,15 +190,15 @@ export class HomepageComponent implements OnInit {
 
   }
 
-  //Search House by Name
+  //Search House by Name (contains)
   searchHouseByName(searchHouseName: string) {
     //not perform search for empty input
     if (!searchHouseName.trim()) {
       return;
     }
 
-    //call API
-    this.houseService.searchHouseByName(searchHouseName).subscribe(data => {
+    //call API (filter by name contains)
+    this.houseService.filterAvailableHouses(this.pageSize, this.pageNumber, searchHouseName).subscribe(data => {
       this.houses = data;
     });
   }

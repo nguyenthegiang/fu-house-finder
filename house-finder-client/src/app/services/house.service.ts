@@ -24,15 +24,25 @@ export class HouseService {
   }
 
   //[Home Page] Filter available Houses using OData
-  filterAvailableHouses(pageSize: number = 9, pageNumber: number = 1, searchName?: string): Observable<House[]> {
+  filterAvailableHouses(pageSize: number, pageNumber: number, searchName?: string): Observable<House[]> {
+    //define API here to append query options into it later
+    var filterAPIUrl = this.APIUrl + `/availableHouses?`;
+
     //count Skip and Top from pageSize & pageNumber
     const skip = pageSize * (pageNumber - 1);
     const top = pageSize;
+    filterAPIUrl += `$skip=${skip}&$top=${top}`;
+
+    //add filter by name if has (contains name)
+    if (searchName != undefined && searchName != '') {
+      filterAPIUrl += `&$filter=contains(HouseName,'${searchName}')`;
+    }
     
-    return this.http.get<House[]>(this.APIUrl + `/availableHouses?$skip=${skip}&$top=${top}`);
+    return this.http.get<House[]>(filterAPIUrl);
   }
 
-  //[Home Page] Search house by name
+  //Unused
+  //Search house by name
   searchHouseByName(houseName: string): Observable<any[]> {
     return this.http.get<any>(this.APIUrl + "/search?name=" + houseName);
   }
