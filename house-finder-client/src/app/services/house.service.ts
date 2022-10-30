@@ -24,7 +24,7 @@ export class HouseService {
 
   //[Home Page] Filter Houses using OData
   filterHouses(): Observable<House[]> {
-    return this.http.get<House[]>(this.APIUrl + "?$filter=HouseName eq 'Trọ Tâm Lê'");
+    return this.http.get<House[]>(this.APIUrl + "/availableHouses??$skip=2&$top=3");
   }
 
   //[Home Page] Search house by name

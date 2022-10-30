@@ -44,7 +44,7 @@ export class HomepageComponent implements OnInit {
     //Call APIs:
 
     //(List) Get available Houses
-    this.houseService.getAvailableHouses().subscribe(data => {
+    this.houseService.filterHouses().subscribe(data => {
       this.houses = data;
     });
 

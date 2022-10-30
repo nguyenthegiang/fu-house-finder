@@ -24,7 +24,8 @@ namespace HouseFinder_API.Controllers
         public ActionResult<IEnumerable<HouseDTO>> GetAllHouses() => housesRepository.GetAllHouses();
 
         //GET: api/Houses/availableHouses
-        //[Home Page] List available Houses
+        //[Home Page] List available Houses (using OData)
+        [EnableQuery]
         [HttpGet("availableHouses")]
         public ActionResult<IEnumerable<HouseDTO>> GetAvailableHouses() => housesRepository.GetAvailableHouses();
 
