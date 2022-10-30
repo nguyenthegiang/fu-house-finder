@@ -17,13 +17,14 @@ export class HouseService {
     return this.http.get<House[]>(this.APIUrl);
   }
 
-  //[Home Page] Get List of available Houses
+  //Unused
+  //Get List of available Houses
   getAvailableHouses(): Observable<House[]> {
     return this.http.get<House[]>(this.APIUrl + "/availableHouses");
   }
 
-  //[Home Page] Filter Houses using OData
-  filterHouses(): Observable<House[]> {
+  //[Home Page] Filter available Houses using OData
+  filterAvailableHouses(): Observable<House[]> {
     return this.http.get<House[]>(this.APIUrl + "/availableHouses??$skip=2&$top=3");
   }
 
@@ -53,7 +54,8 @@ export class HouseService {
   }
 
   //[Staff][Dashboard] Get total of available houses
-  getTotalAvailableHouse():Observable<any>{
+  //[Home Page] For Paging
+  countTotalAvailableHouse():Observable<any>{
     return this.http.get<any>(this.APIUrl + "/CountAvailableHouse");
   }
 }

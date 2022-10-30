@@ -24,6 +24,9 @@ export class HomepageComponent implements OnInit {
   //to display in Main Content
   countAvailableRooms: number = 0;
 
+  //For Paging
+  countAvailableHouses: number = 0;
+
   //Data for Filter column
   roomTypes: RoomType[] = [];         //Room types
   campuses: Campus[] = [];
@@ -44,8 +47,13 @@ export class HomepageComponent implements OnInit {
     //Call APIs:
 
     //(List) Get available Houses
-    this.houseService.filterHouses().subscribe(data => {
+    this.houseService.filterAvailableHouses().subscribe(data => {
       this.houses = data;
+    });
+
+    //(Paging) Count available Houses for total number of pages
+    this.houseService.countTotalAvailableHouse().subscribe(data => {
+      this.countAvailableHouses = data;
     });
 
     //(List) Count available Rooms

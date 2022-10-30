@@ -43,7 +43,7 @@ export class DashboardStaffComponent implements OnInit {
     });
 
     //Call API: get total of available houses
-    this.houseService.getTotalAvailableHouse().subscribe(data => {
+    this.houseService.countTotalAvailableHouse().subscribe(data => {
       this.availableHouseNum = data;
     });
   }
