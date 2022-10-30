@@ -210,7 +210,8 @@ namespace DataAccess
             }
             return totalHouse;
         }
-        //[Staff - Dashboard] Count available houses
+
+        //[Staff - Dashboard] [Home Page] Count available houses
         public static int CountAvailableHouse()
         {
             int availableHouse;

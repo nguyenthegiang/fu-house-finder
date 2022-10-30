@@ -47,12 +47,12 @@ namespace HouseFinder_API
             services.AddCors();
 
             //Configure OData service
+            services.AddControllers().AddOData(option => option.Select().Filter().Count().OrderBy().Expand());
             //services.AddDbContext<FUHouseFinderContext>(option =>
             //{
             //    option.UseSqlServer(Configuration.GetConnectionString("DBContext"));
             //});
-            services.AddControllers().AddOData(option => option.Select().Filter().Count().OrderBy().Expand());
-            
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "HouseFinder_API", Version = "v1" });

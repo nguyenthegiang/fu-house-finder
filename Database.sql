@@ -169,7 +169,7 @@ CREATE TABLE [dbo].[Rooms] (
 	AreaByMeters float,			--diện tích, tính theo m2
 
 	--1 số tiện ích khác
-	Aircon bit NOT NULL,		--điều hòa (có/ko)
+	Aircon bit NOT NULL,		 --điều hòa (có/ko)
 	Wifi bit NOT NULL,           --wifi (có/không)
 	WaterHeater bit NOT NULL,    --bình nóng lạnh (có/không)
 	Furniture bit NOT NULL,      --nội thất (có/không)
