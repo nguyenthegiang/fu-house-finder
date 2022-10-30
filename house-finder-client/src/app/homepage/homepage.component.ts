@@ -46,7 +46,7 @@ export class HomepageComponent implements OnInit {
   ngOnInit(): void {
     //Call APIs:
 
-    //(List) Get available Houses
+    //(List) Get available Houses - default: page 1, 9 items
     this.houseService.filterAvailableHouses().subscribe(data => {
       this.houses = data;
     });

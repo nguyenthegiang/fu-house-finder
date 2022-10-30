@@ -24,8 +24,12 @@ export class HouseService {
   }
 
   //[Home Page] Filter available Houses using OData
-  filterAvailableHouses(): Observable<House[]> {
-    return this.http.get<House[]>(this.APIUrl + "/availableHouses??$skip=2&$top=3");
+  filterAvailableHouses(pageSize: number = 9, pageNumber: number = 1, searchName?: string): Observable<House[]> {
+    //count Skip and Top from pageSize & pageNumber
+    const skip = pageSize * (pageNumber - 1);
+    const top = pageSize;
+    
+    return this.http.get<House[]>(this.APIUrl + `/availableHouses?$skip=${skip}&$top=${top}`);
   }
 
   //[Home Page] Search house by name
@@ -44,18 +48,18 @@ export class HouseService {
   }
 
   //[Landlord][List room] Get total money for not rented rooms
-  getMoneyForNotRentedRooms(houseId: number): Observable<any>{
+  getMoneyForNotRentedRooms(houseId: number): Observable<any> {
     return this.http.get<any>(this.APIUrl + "/GetMoneyForNotRentedRooms?HouseId=" + houseId);
   }
 
   //[Staff][Dashboard] Get total of houses
-  getTotalHouse():Observable<any>{
+  getTotalHouse(): Observable<any> {
     return this.http.get<any>(this.APIUrl + "/CountTotalHouse");
   }
 
   //[Staff][Dashboard] Get total of available houses
   //[Home Page] For Paging
-  countTotalAvailableHouse():Observable<any>{
+  countTotalAvailableHouse(): Observable<any> {
     return this.http.get<any>(this.APIUrl + "/CountAvailableHouse");
   }
 }
