@@ -97,7 +97,7 @@ export class HomepageComponent implements OnInit {
     // convert string to number
     var numberCampusId: number = +selectedCampusId;
 
-    // Call API to update list houses with the campus user chose
+    // Call API: update list houses with the campus user chose
     alert(numberCampusId);
   }
 

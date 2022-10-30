@@ -1,20 +1,34 @@
 <!-- Body -->
 <div class="container-fluid">
   <br>
-  <!-- Search bar -->
-  <div class="text-center pb-4 d-flex justify-content-center">
-    <div class="input-group w-25">
-      <!-- Press enter to search  -->
-      <input type="text" class="form-control" placeholder="Nhập tên trọ" aria-label="search_house_by_name"
-        aria-describedby="button-addon2" #searchHouseName (keydown.enter)="searchHouseByName(searchHouseName.value)">
-      <!-- Click button to search -->
-      <button class="btn btn-outline-secondary" type="button" id="button-addon2"
-        (click)="searchHouseByName(searchHouseName.value)">
-        <i class="fa-solid fa-magnifying-glass"></i>
-      </button>
+  <div class="row">
+    <div class="col-3"></div>
+    
+    <div class="col-6">
+      <!-- Search bar -->
+      <div class="text-center pb-4 d-flex justify-content-center">
+        <div class="input-group w-50">
+          <!-- Press enter to search  -->
+          <input type="text" class="form-control" placeholder="Nhập tên trọ" aria-label="search_house_by_name"
+            aria-describedby="button-addon2" #searchHouseName
+            (keydown.enter)="searchHouseByName(searchHouseName.value)">
+          <!-- Click button to search -->
+          <button class="btn btn-outline-secondary" type="button" id="button-addon2"
+            (click)="searchHouseByName(searchHouseName.value)">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </div>
+      </div>
+      <!-- End Search bar -->
+    </div>
+
+    <!-- Rooms Count Available -->
+    <div class="col-3">
+      <div class="d-flex justify-content-end">
+        <h6 class="font-weight-bold">Tổng số phòng trống: {{countAvailableRooms}}</h6>
+      </div>
     </div>
   </div>
-  <!-- End Search bar -->
 
   <!-- Main Content -->
   <div class="d-flex justify-content-between">
@@ -182,8 +196,8 @@
     <div class="w-75 me-5">
       <!-- Rooms Count Available -->
       <div class="d-flex justify-content-between mb-3">
-        <!-- Rooms Count Available -->
-        <h6 class="font-weight-bold">Tổng số phòng trống: {{countAvailableRooms}}</h6>
+        <!-- For Style -->
+        <div></div>
 
         <div class="d-flex justify-content-between align-items-center mb-2">
           <div class="dropdown">
