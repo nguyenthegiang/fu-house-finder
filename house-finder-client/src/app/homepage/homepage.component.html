@@ -256,21 +256,20 @@
       <div class="d-flex justify-content-center align-items-center my-3">
         <nav aria-label="Pagination-nav">
           <ul class="pagination">
-            <!-- Previous -->
-            <li class="page-item disabled">
+            <!-- Previous: Disabled if this is first page -->
+            <li class="page-item" [ngClass]="{'disabled': pageNumber == 1}">
               <a class="page-link" href="#" aria-label="Previous">
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
             <!-- Numbers -->
-            <!-- <li class="page-item" aria-current="page">
-              <a class="page-link active" href="#">0</a>
-            </li> -->
-            <li *ngFor="let numberPage of pageList" class="page-item">
-              <a class="page-link" routerLink="" (click)="goToPage(numberPage)">{{numberPage}}</a>
+            <li *ngFor="let page of pageList" class="page-item">
+              <!-- Display this as active if it's the chosen page -->
+              <a class="page-link" routerLink="" (click)="goToPage(page)"
+                [ngClass]="{'active': pageNumber == page}">{{page}}</a>
             </li>
-            <!-- Next -->
-            <li class="page-item">
+            <!-- Next: Disabled if this is last page -->
+            <li class="page-item" [ngClass]="{'disabled': pageNumber == pageCount}">
               <a class="page-link" href="#" aria-label="Next">
                 <span aria-hidden="true">&raquo;</span>
               </a>

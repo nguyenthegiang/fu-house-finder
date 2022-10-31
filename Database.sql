@@ -1015,6 +1015,9 @@ INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Lê', N'Chỗ để xe rộng r�
 INSERT INTO [dbo].[Houses] VALUES (N'Trọ 123', N'Cảnh quan trong lành, yên tĩnh', 8, 3, N'LA000003', 1, 3400, 1500, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 INSERT INTO [dbo].[Houses] VALUES (N'Trọ Chương Văn', N'Không chung chủ', 8, 3, N'LA000003', 1, 3400, 1500, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 INSERT INTO [dbo].[Houses] VALUES (N'Trọ test ko available', N'Không chung chủ', 8, 3, N'LA000003', 1, 3400, 1500, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ test paging', N'Không chung chủ', 8, 3, N'LA000003', 1, 3400, 1500, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ test paging 2', N'Không chung chủ', 8, 3, N'LA000003', 1, 3400, 1500, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ test paging 3', N'Không chung chủ', 8, 3, N'LA000003', 1, 3400, 1500, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -1228,6 +1231,12 @@ GETDATE(), GETDATE(), N'LA000001', N'LA000003');
 INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house18.jpg', 18,
 GETDATE(), GETDATE(), N'LA000001', N'LA000003');
 INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house18.jpg', 19,
+GETDATE(), GETDATE(), N'LA000001', N'LA000003');
+INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house18.jpg', 20,
+GETDATE(), GETDATE(), N'LA000001', N'LA000003');
+INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house18.jpg', 21,
+GETDATE(), GETDATE(), N'LA000001', N'LA000003');
+INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house18.jpg', 22,
 GETDATE(), GETDATE(), N'LA000001', N'LA000003');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
