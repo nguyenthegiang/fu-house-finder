@@ -258,7 +258,8 @@
           <ul class="pagination">
             <!-- Previous: Disabled if this is first page -->
             <li class="page-item" [ngClass]="{'disabled': pageNumber == 1}">
-              <a class="page-link" href="#" aria-label="Previous">
+              <!-- Go to previous page -->
+              <a class="page-link" aria-label="Previous" routerLink="" (click)="goToPage(pageNumber - 1)">
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
@@ -270,7 +271,8 @@
             </li>
             <!-- Next: Disabled if this is last page -->
             <li class="page-item" [ngClass]="{'disabled': pageNumber == pageCount}">
-              <a class="page-link" href="#" aria-label="Next">
+              <!-- Go to next page -->
+              <a class="page-link" aria-label="Next" routerLink="" (click)="goToPage(pageNumber + 1)">
                 <span aria-hidden="true">&raquo;</span>
               </a>
             </li>

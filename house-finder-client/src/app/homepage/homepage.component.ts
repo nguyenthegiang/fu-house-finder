@@ -60,7 +60,8 @@ export class HomepageComponent implements OnInit {
       this.countAvailableHouses = data;
 
       // (Paging) Calculate number of pages
-      this.pageCount = Math.round(this.countAvailableHouses / this.pageSize);
+      this.pageCount = Math.ceil(this.countAvailableHouses / this.pageSize);  //divide & round up
+      console.log(this.countAvailableHouses);
 
       // (Paging) Render pageList based on pageCount
       this.pageList = Array.from({ length: this.pageCount }, (_, i) => i + 1);
