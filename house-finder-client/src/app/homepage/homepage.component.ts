@@ -63,7 +63,7 @@ export class HomepageComponent implements OnInit {
       this.pageCount = Math.round(this.countAvailableHouses / this.pageSize);
 
       // (Paging) Render pageList based on pageCount
-      this.pageList = Array.from({length: this.pageCount}, (_, i) => i + 1);
+      this.pageList = Array.from({ length: this.pageCount }, (_, i) => i + 1);
       //pageList is now an array like {1, 2, 3, ..., n | n = pageCount} 
     });
 
@@ -100,9 +100,24 @@ export class HomepageComponent implements OnInit {
     ];
   }
 
+  //Go to top of Page: used whenever user filter/paging data -> refresh list data
+  scrollToTop() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
+
   //[Paging] User click on a Page number -> Go to that page
   goToPage(pageNumber: number) {
-    alert(pageNumber);
+    // Call API: go to Page Number
+    this.pageNumber = pageNumber;
+
+    this.houseService.filterAvailableHouses(this.pageSize, this.pageNumber).subscribe(data => {
+      this.houses = data;
+      this.scrollToTop();
+    });
   }
 
   //Search House by Name (contains)
@@ -112,7 +127,7 @@ export class HomepageComponent implements OnInit {
       return;
     }
 
-    //call API (filter by name contains)
+    // Call API (filter by name contains)
     this.houseService.filterAvailableHouses(this.pageSize, this.pageNumber, searchHouseName).subscribe(data => {
       this.houses = data;
     });

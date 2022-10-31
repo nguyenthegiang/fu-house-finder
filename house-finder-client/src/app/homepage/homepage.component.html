@@ -267,7 +267,7 @@
               <a class="page-link active" href="#">0</a>
             </li> -->
             <li *ngFor="let numberPage of pageList" class="page-item">
-              <a class="page-link" [routerLink]="" (click)="goToPage(numberPage)">{{numberPage}}</a>
+              <a class="page-link" routerLink="" (click)="goToPage(numberPage)">{{numberPage}}</a>
             </li>
             <!-- Next -->
             <li class="page-item">
