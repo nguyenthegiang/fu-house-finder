@@ -1,7 +1,7 @@
 #loginButton{
-  width: 150px;
+  width: 120px;
   height: 40px;
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 600;
   color: #FF6F3D;
   box-shadow: 0 8px 8px -4px rgb(0, 0, 0,0.5);
@@ -44,7 +44,7 @@
 
   .copyright{
     text-align: left;
-    border-left: white solid 1px;
+    //border-left: white solid 1px;
     padding: 0 20px;
 
     i{
@@ -68,4 +68,11 @@
 a:hover
 {
   opacity: 0.8;
+}
+
+@media only screen and (max-width: 768px) {
+  .logo
+  {
+    display: none;
+  }
 }

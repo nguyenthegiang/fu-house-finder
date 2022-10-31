@@ -9,42 +9,42 @@
 
 <body style="overflow-x: hidden;">
   <!--Header-->
-  <nav class="navbar nav d-flex justify-content-between text-center text-white"
+  <div class="navbar nav d-flex justify-content-between text-center text-white"
     style="background-color: #FF6F3D;">
-    <div class="col-12 col-md-2">
+    <div class="logo col-12 col-md-2 my-2">
       <!-- Link back to Home -->
       <a routerLink="/home" id="app-name">
-        <img src="/assets/image/Logo.png" alt="..." width="100px">
-        <h5>FU House Finder</h5>
+        <img src="/assets/image/Logo.png" alt="..." width="70px">
+        <h6>FU House Finder</h6>
       </a>
     </div>
 
-    <div class="col-12 col-md-8">
+    <div class="col-12 col-md-8 my-2">
       <h1>TÌM TRỌ SINH VIÊN FPT</h1>
       <div>
-        <a href="" class="text-white text-decoration-none mx-2">Trang chủ</a>|
-        <a href="" class="text-white text-decoration-none mx-2">Cơ sở</a>|
-        <a href="" class="text-white text-decoration-none mx-2">Liên hệ</a>|
-        <a href="" class="text-white text-decoration-none mx-2">Giới thiệu</a>
+        <a href="https://daihoc.fpt.edu.vn/" target="_blank" class="text-white text-decoration-none mx-2">Trang chủ</a>|
+        <a href="https://daihoc.fpt.edu.vn/tuyen-sinh/" target="_blank" class="text-white text-decoration-none mx-2">Tuyển sinh</a>|
+        <a href="https://daihoc.fpt.edu.vn/lien-he-voi-chung-toi/" target="_blank" class="text-white text-decoration-none mx-2">Liên hệ</a>|
+        <a href="https://daihoc.fpt.edu.vn/gioi-thieu-dai-hoc-fpt/" target="_blank" class="text-white text-decoration-none mx-2">Giới thiệu</a>
       </div>
     </div>
 
-    <div class="col-12 col-md-2">
+    <div class="col-12 col-md-2 my-2">
       <button id="loginButton">Đăng nhập</button>
     </div>
-  </nav>
+  </div>
 
   <!-- include -->
   <router-outlet></router-outlet>
 
 
   <!--Footer-->
-  <div class="container-fluit d-flex justify-content-between text-center text-white p-3 footer"
+  <div class=" container-fluit d-flex justify-content-between text-center text-white p-3 footer"
     style="background-color: #FF6F3D">
-    <div>
+    <div class="col-12 col-md-3">
       <img src="../assets/image/logo-fpt.png" alt="Logo FPT Education" height="70">
     </div>
-    <div class="news">
+    <div class="news col-12 col-md-3">
       <ul>
         <li><b>Tin tức</b></li>
         <li><a href="https://fpt.edu.vn/tin-tuc/hoc-tap-khac-biet" target="_blank">Học tập khác biệt</a></li>
@@ -58,7 +58,7 @@
       </ul>
     </div>
 
-    <div class="admission">
+    <div class="admission col-12 col-md-3">
       <ul>
         <li><b>Tuyển sinh</b></li>
         <li><a href="https://fpt.edu.vn/don-vi/dai-hoc-fpt.html" target="_blank">Đại học FPT</a></li>
@@ -68,9 +68,7 @@
         <li><a href="https://fpt.edu.vn/don-vi/vien-dao-tao-quoc-te.html" target="_blank">Viện Đào tạo Quốc tế FPT</a></li>
         <li><a href="https://fpt.edu.vn/don-vi/melbourne-polytechnic-vietnam.html" target="_blank">Melbourne Polytechnic Việt Nam</a></li>
       </ul>
-    </div>
 
-    <div class="internationalStudent">
       <ul>
         <li><b>Sinh viên quốc tế</b></li>
         <li><a href="https://fpt.edu.vn/don-vi/sinh-vien-quoc-te.html" target="_blank">Ngắn hạn</a></li>
@@ -78,21 +76,20 @@
       </ul>
     </div>
 
-    <div class="copyright" >
-      <div >
+    <div class="copyright col-12 col-md-3">
+      <div>
         <b>FPT Education</b>
         <br>
         <span>Hoa Lac High Tech Park, Hanoi, vietnam</span>
         <br>
         <span>Email: fpteducation@fe.edu.vn</span>
-      </div>
+      </div><br>
+
       <div>
         <a href="https://www.facebook.com/educationfpt/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
         <a href="https://www.youtube.com/user/FPTUniversityChannel" target="_blank"><i class="fa-brands fa-youtube"></i></a>
         <br>
         <a>Sitemap website</a>
-      </div>
-      <div>
         Copyright © 2017 FPT Education
       </div>
     </div>

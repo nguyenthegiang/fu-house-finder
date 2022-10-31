@@ -74,3 +74,22 @@
 .floating-btn:active{
   background: #990000;
 }
+
+.star
+{
+  cursor: pointer;
+}
+
+.star:hover
+{
+  opacity: 0.8;
+}
+
+.roomCardItem {
+  cursor: pointer;
+  margin: 10px 0;
+
+  .card-body {
+    background-color: #3E4F3C !important;
+  }
+}
