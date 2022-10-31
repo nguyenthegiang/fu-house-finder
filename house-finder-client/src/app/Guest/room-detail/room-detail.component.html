@@ -1,36 +1,47 @@
-<div class="container my-5">
+<div class="container my-5" *ngIf="roomDetail && landlordDetail">
   <div class="d-flex">
     <div class="w-50 d-flex flex-column me-3">
-      <img src="https://static.vecteezy.com/system/resources/thumbnails/002/042/706/small/wooden-cartoon-country-house-vector.jpg" alt=""
-      width="max" height="400" class="rounded">
+      <div class="rounded"></div>
+      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner rounded">
+          <div class="carousel-item active">
+            <img src="../assets/image/Room/{{roomDetail.imagesOfRooms[0].imageLink}}" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="../assets/image/Room/{{roomDetail.imagesOfRooms[1].imageLink}}" class="d-block w-100" alt="...">
+          </div>
+          <div class="carousel-item">
+            <img src="../assets/image/Room/{{roomDetail.imagesOfRooms[2].imageLink}}" class="d-block w-100" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
 
       <div class="border border-dark rounded mt-3 p-2">
         <h3 class="text-center mb-2">Thông tin chủ trọ</h3>
-        Tên: Lê Thanh Tâm <br>
-        Email: tamle@gmail.com <br>
-        Số điện thoại: 0987654321 <br>
-        Facebook: <a href="facebook.com/tamle12">facebook.com/tamle12</a>
+        Tên: {{landlordDetail.displayName}} <br>
+        Email: {{landlordDetail.email}} <br>
+        Số điện thoại: {{landlordDetail.phoneNumber}} <br>
+        Facebook: <a href="{{landlordDetail.facebookUrl}}" target="_blank">{{landlordDetail.facebookUrl}}</a>
       </div>
     </div>
 
     <div class="w-50 d-flex flex-column">
       <div class="border border-dark rounded p-2 h-100">
         <h3 class="text-center mb-2">Thông tin mô tả</h3>
-        Chi phí trọn gói, miễn phí hoàn toàn tiền điện, nước, gửi xe, Internet,…
-
-        Đầy đủ tiện nghi, mỗi phòng được trang bị đầy đủ điều hòa, giường, tủ quần áo, nóng lạnh, tủ lạnh,…Chỉ cần xách vali đến ở!
-
-        Có WC riêng cho từng phòng cùng nhiều WC dự phòng. Không lo cảnh chen chúc chờ đợi nhau vào mỗi buổi sáng.
-
-        Có khu vực nhà bếp và nhà ăn tách biệt khỏi phòng ngủ, sạch sẽ, rộng rãi.
-
-        Vị trí thuận lợi: gần trường Đại học Nông nghiệp, Vinhomes Ocean Park, gần chợ, các quán ăn uống, café,…
-
-        An ninh tuyệt đối: hệ thống camera 24/7, cửa khóa vân tay.
-
-        Dịch vụ dọn vệ sinh 2 tuần/lần miễn phí.
-
-        Môi trường thân thiện: bạn có thể kết bạn, giao lưu với những người bạn cùng nhà; cùng nhau học tập, làm việc và vui chơi.
+        {{roomDetail.information}}
       </div>
     </div>
   </div>
