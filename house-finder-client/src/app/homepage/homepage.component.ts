@@ -91,6 +91,19 @@ export class HomepageComponent implements OnInit {
     ];
   }
 
+  //Search House by Name (contains)
+  searchHouseByName(searchHouseName: string) {
+    //not perform search for empty input
+    if (!searchHouseName.trim()) {
+      return;
+    }
+
+    //call API (filter by name contains)
+    this.houseService.filterAvailableHouses(this.pageSize, this.pageNumber, searchHouseName).subscribe(data => {
+      this.houses = data;
+    });
+  }
+
   //[Filter] Filter by Campus
   onCampusSelected(selectedCampusId: string) {
     // convert string to number
@@ -196,16 +209,12 @@ export class HomepageComponent implements OnInit {
 
   }
 
-  //Search House by Name (contains)
-  searchHouseByName(searchHouseName: string) {
-    //not perform search for empty input
-    if (!searchHouseName.trim()) {
-      return;
-    }
+  //[Filter] Filter by Room Utility
+  onUtilitySelected(event: any, utilityName: string) {
+    //see if user just checked or unchecked the checkbox
+    const isChecked = (<HTMLInputElement>event.target).checked;
 
-    //call API (filter by name contains)
-    this.houseService.filterAvailableHouses(this.pageSize, this.pageNumber, searchHouseName).subscribe(data => {
-      this.houses = data;
-    });
+    // Call API to update list houses with the selected room type
+    alert('Event: ' + isChecked + ' Utility Name: ' + utilityName);
   }
 }
