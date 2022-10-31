@@ -26,8 +26,10 @@ export class HomepageComponent implements OnInit {
 
   //(Paging)
   countAvailableHouses = 0; //items count
-  pageSize = 9; //number of items per page
-  pageNumber = 1; //starts at page 1
+  pageSize = 9;             //number of items per page
+  pageNumber = 1;           //starts at page 1
+  pageCount = 0;            //number of pages
+  pageList: number[] = [];  //array to loop with *ngFor in HTML Template
 
   //Data for Filter column
   roomTypes: RoomType[] = [];         //Room types
@@ -56,6 +58,13 @@ export class HomepageComponent implements OnInit {
     //(Paging) Count available Houses for total number of pages
     this.houseService.countTotalAvailableHouse().subscribe(data => {
       this.countAvailableHouses = data;
+
+      // (Paging) Calculate number of pages
+      this.pageCount = Math.round(this.countAvailableHouses / this.pageSize);
+
+      // (Paging) Render pageList based on pageCount
+      this.pageList = Array.from(Array(this.pageCount).keys());
+      //pageList is now an array like {1, 2, 3, ..., n | n = pageCount} 
     });
 
     //(List) Count available Rooms
