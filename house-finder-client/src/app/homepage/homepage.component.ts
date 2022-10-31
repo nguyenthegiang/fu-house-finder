@@ -29,7 +29,6 @@ export class HomepageComponent implements OnInit {
   pageSize = 9; //number of items per page
   pageNumber = 1; //starts at page 1
 
-
   //Data for Filter column
   roomTypes: RoomType[] = [];         //Room types
   campuses: Campus[] = [];
@@ -149,7 +148,14 @@ export class HomepageComponent implements OnInit {
     alert('price: ' + numMinPrice + ' ' + numMaxPrice);
   }
 
-  
+  //[Filter] Filter by Room Type
+  onRoomTypeSelected(event: any, roomTypeId: number) {
+    //see if user just checked or unchecked the checkbox
+    const isChecked = (<HTMLInputElement>event.target).checked;
+
+    // Call API to update list houses with the selected room type
+    alert('Event: ' + isChecked + ' Room type: ' + roomTypeId);
+  }
 
   //[Filter] Change list of Communes after user selected District
   onDistrictSelected(selectedDistrictId: string) {
