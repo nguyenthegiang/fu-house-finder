@@ -1175,6 +1175,15 @@ GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Giao thông thuận lợi', 3, 1, 0, 0, 1, 2, 1, 1, 1, 2, 2, 19, 
 GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Giao thông thuận lợi', 3, 1, 0, 0, 1, 2, 1, 1, 1, 2, 2, 20, 
+GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Giao thông thuận lợi', 3, 1, 0, 0, 1, 2, 1, 1, 1, 2, 2, 21, 
+GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Giao thông thuận lợi', 3, 1, 0, 0, 1, 2, 1, 1, 1, 2, 2, 22, 
+GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+
 -------------------------------------------------------------------------------------------------------------------------------------------
 
 INSERT INTO [dbo].[Rates] VALUES (5, N'Rất tuyệt vời, gần trường nữa', N'Cảm ơn bạn', 1, N'HE153046', 
