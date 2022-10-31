@@ -63,7 +63,7 @@ export class HomepageComponent implements OnInit {
       this.pageCount = Math.round(this.countAvailableHouses / this.pageSize);
 
       // (Paging) Render pageList based on pageCount
-      this.pageList = Array.from(Array(this.pageCount).keys());
+      this.pageList = Array.from({length: this.pageCount}, (_, i) => i + 1);
       //pageList is now an array like {1, 2, 3, ..., n | n = pageCount} 
     });
 
@@ -98,6 +98,11 @@ export class HomepageComponent implements OnInit {
       { "utilityName": "waterHeater", "displayName": "Bình nóng lạnh" },
       { "utilityName": "furniture", "displayName": "Nội thất" },
     ];
+  }
+
+  //[Paging] User click on a Page number -> Go to that page
+  goToPage(pageNumber: number) {
+    alert(pageNumber);
   }
 
   //Search House by Name (contains)
