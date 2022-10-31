@@ -1,10 +1,9 @@
 <!-- Display Loading Spinner when House Detail is not yet loaded -->
-<div class="container" *ngIf="houseDetail === undefined || landlordDetail === undefined">
+<div class="container-fluid" *ngIf="houseDetail === undefined || landlordDetail === undefined">
   <div class="spinner-border text-danger" role="status">
     <span class="sr-only">Loading...</span>
   </div>
 </div>
-
 
 <!-- Only Display when House Detail is loaded -->
 <div class="container-fluid my-5 d-flex justify-content-center" *ngIf="houseDetail && landlordDetail">
@@ -14,7 +13,7 @@
       <img id="houseImage" src="../../assets/image/HouseImage.jpg" alt="..." width="100%" class="rounded">
 
       <!-- House detail information-->
-      <div class="house-information border border-secondary rounded my-5 p-2">
+      <div class="house-information border border-secondary rounded mt-5 p-2">
         <h3 class="text-center">{{houseDetail!.houseName}}</h3>
         <span><b>Giá điện: </b> {{houseDetail!.powerPrice}}/kWh</span>
         <br>
@@ -25,30 +24,14 @@
         <span><b>Thông tin khác: </b>{{houseDetail!.information}}</span>
       </div>
 
-      <!-- List available rooms -->
-      <div class="availableRooms border border-secondary rounded">
-        <h3 class="text-center my-3">Danh sách phòng trống</h3>
-        <table class="table table-striped">
-          <thead>
-            <th>Phòng</th>
-            <th>Giá phòng</th>
-            <th>Loại phòng</th>
-            <th>Đang ở</th>
-            <th>Ghi chủ</th>
-          </thead>
-          <tbody>
-            <tr *ngFor="let dataItem of availableRooms">
-              <td>{{dataItem.roomName}}</td>
-              <td>{{dataItem.pricePerMonth}}</td>
-              <td>{{dataItem.areaByMeters}}</td>
-              <td>{{dataItem.currentAmountOfPeople}}</td>
-              <td>{{dataItem.information}}</td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- Google map -->
+      <div>
+        <iframe id="googleMap" class="w-100 h-25 my-5 border border-secondary rounded"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.995814709238!2d105.51943301488284!3d20.992804886017904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345bae7a5f0d39%3A0xec177bce6cdc3a46!2zSG_DoCBM4bqhYyBBcGFydG1lbnQ!5e0!3m2!1svi!2s!4v1665457315377!5m2!1svi!2s"
+          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
       </div>
     </div>
-
 
     <div class="col-12 col-md-4">
       <!-- Landlord information -->
@@ -80,13 +63,51 @@
         </span>
       </div>
 
-      <!-- Google map -->
-      <iframe id="googleMap" class="w-100 h-25 my-5 border border-secondary rounded"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.995814709238!2d105.51943301488284!3d20.992804886017904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345bae7a5f0d39%3A0xec177bce6cdc3a46!2zSG_DoCBM4bqhYyBBcGFydG1lbnQ!5e0!3m2!1svi!2s!4v1665457315377!5m2!1svi!2s"
-        allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-      </iframe>
+      <!-- Rate and comment -->
+      <div class="my-5 border border-secondary rounded p-2">
+        <h3 class="text-center">Người dùng đánh giá</h3>
+        Bình luận:
+        <div class="bg-light border border-secondary rounded mb-2 p-2">
+          Nguyễn Văn A: Đẹp, gần trường (<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>)
+          <br> <i class="fa-solid fa-arrow-right"></i> Chủ trọ trả lời: Cảm ơn bạn nhiều
+        </div>
+        Viết bình luận:
+        <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+        <div class="my-2 d-flex">
+          Đánh giá:
+          <div class="ms-2">
+            <i class="star fa-regular fa-star"></i>
+            <i class="star fa-regular fa-star"></i>
+            <i class="star fa-regular fa-star"></i>
+            <i class="star fa-regular fa-star"></i>
+            <i class="star fa-regular fa-star"></i>
+          </div>
+        </div>
+
+        <button type="button" class="btn btn-secondary w-100">Đăng</button>
+      </div>
+    </div>
+
+    <!-- List available rooms -->
+    <div class="availableRooms col-12">
+      <h3 class="text-center">Danh sách phòng trống</h3>
+      <div class="row">
+        <!-- Room Item -->
+        <!-- Link to Room Detail -->
+        <div class="col-12 col-lg-4 col-sm-6 mt-3" *ngFor="let dataItem of availableRooms" routerLink="/Guest/room-detail/{{dataItem.roomId}}">
+          <div class="card rounded h-100">
+            <img class="card-img-top h-50" src="../assets/image/Room/{{dataItem.imagesOfRooms[0].imageLink}}">
+            <div class="card-body bg-secondary text-white rounded-bottom">
+              <h5 class="card-title text-center font-weight-bold">{{dataItem.roomName}}</h5>
+            </div>
+          </div>
+        </div>
+        <!-- End Room Item -->
+      </div>
+      <!-- End List of Houses -->
     </div>
   </div>
+
   <button type="button" class="floating-btn" data-toggle="modal" data-target="#exampleModal"
     data-whatever="@getbootstrap">
     <i class="fa-solid fa-flag"></i>
@@ -118,3 +139,4 @@
       </div>
     </div>
   </div>
+</div>

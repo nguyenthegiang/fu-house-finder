@@ -24,6 +24,10 @@ export class HouseDetailComponent implements OnInit {
   landlordDetail: User | undefined;
   //List of available rooms
   availableRooms: Room[] = [];
+  //(Paging)
+  countAvailableHouses = 0; //items count
+  pageSize = 9; //number of items per page
+  pageNumber = 1; //starts at page 1
 
   constructor(
     private route: ActivatedRoute,
@@ -49,6 +53,11 @@ export class HouseDetailComponent implements OnInit {
       this.roomService.getAvailableRooms(id).subscribe(data => {
         this.availableRooms = data;
       });
+    });
+
+    //(Paging) Count available Houses for total number of pages
+    this.houseService.countTotalAvailableHouse().subscribe(data => {
+      this.countAvailableHouses = data;
     });
   }
 

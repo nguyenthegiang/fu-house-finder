@@ -1,5 +1,6 @@
 import { RoomType } from './roomType';
 import { Status } from './status';
+import { ImagesOfRoom } from './imagesOfRoom';
 
 //DTO: Rooms
 export interface Room {
@@ -18,4 +19,5 @@ export interface Room {
     floorNumber: number;
     status: Status;
     roomType: RoomType;
+    imagesOfRooms: ImagesOfRoom[];
 }
