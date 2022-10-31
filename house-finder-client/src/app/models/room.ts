@@ -19,5 +19,10 @@ export interface Room {
     floorNumber: number;
     status: Status;
     roomType: RoomType;
+    houseId: number;
+    createdDate: Date;
+    lastModifiedDate: Date;
+    createdBy: string;
+    lastModifiedBy: string;
     imagesOfRooms: ImagesOfRoom[];
 }

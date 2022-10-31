@@ -3,7 +3,7 @@ import { CampusService } from './../services/campus.service';
 import { UserService } from './../services/user.service';
 import { House } from './../models/house';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HouseService } from '../services/house.service';
 import { RoomService } from '../services/room.service';
 import { Observable } from 'rxjs';
@@ -34,7 +34,8 @@ export class HouseDetailComponent implements OnInit {
     private houseService: HouseService,
     private userService: UserService,
     private roomService: RoomService,
-    private reportService: ReportService
+    private reportService: ReportService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -75,5 +76,10 @@ export class HouseDetailComponent implements OnInit {
     };
 
     this.reportService.addReport(report).subscribe();
+  }
+
+  GoToRoomDetail(id: number)
+  {
+    this.router.navigate(['/room-detail/' + id]);
   }
 }

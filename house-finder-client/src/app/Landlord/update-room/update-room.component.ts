@@ -36,7 +36,13 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
     roomType: {
       roomTypeId: 1,
       roomTypeName: 'Khép kín'
-    }
+    },
+    houseId: 0,
+    createdDate: new Date(),
+    lastModifiedDate: new Date(),
+    createdBy: "",
+    lastModifiedBy: "",
+    imagesOfRooms: []
   };
   //listStatus: Status[] = [];
   //test string
