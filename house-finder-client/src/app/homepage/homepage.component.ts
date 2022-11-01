@@ -31,13 +31,17 @@ export class HomepageComponent implements OnInit {
   pageCount = 0;            //number of pages
   pageList: number[] = [];  //array to loop with *ngFor in HTML Template
 
-  //Data for Filter column
+  //[Filter] Data for Filter column
   roomTypes: RoomType[] = [];         //Room types
   campuses: Campus[] = [];
   roomUtilities: RoomUtility[] = [];  //List of utilities of Rooms
   districts: District[] = [];         //(Regions) All Districts
   communesOfSelectedDistrict: Commune[] = []; //(Regions) all Communes of 1 selected District (only display after user has selected 1 District)
   villagesOfSelectedCommune: Village[] = [];  //(Regions) all Villages of 1 selected Commune (only display after user has selected 1 Commune)
+
+  //[Filter] Filter values for passing into API
+  searchName: string = '';
+  filterCampusId: number = 0;
 
   constructor(
     private houseService: HouseService,
@@ -55,7 +59,7 @@ export class HomepageComponent implements OnInit {
       this.houses = data;
     });
 
-    //(Paging) Count available Houses for total number of pages
+    // (Paging) Count available Houses for total number of pages
     this.houseService.countTotalAvailableHouse().subscribe(data => {
       this.countAvailableHouses = data;
 
@@ -101,7 +105,7 @@ export class HomepageComponent implements OnInit {
     ];
   }
 
-  //Go to top of Page: used whenever user filter/paging data -> refresh list data
+  // Go to top of Page: used whenever user filter/paging data -> refresh list data
   scrollToTop() {
     window.scroll({
       top: 0,
@@ -110,15 +114,24 @@ export class HomepageComponent implements OnInit {
     });
   }
 
+  // Call API to update list house with selected Filter value & Paging
+  filterHouse() {
+    this.houseService.filterAvailableHouses(
+      this.pageSize,
+      this.pageNumber,
+      this.searchName,
+      this.filterCampusId,
+    ).subscribe(data => {
+      this.houses = data;
+      this.scrollToTop();
+    });
+  }
+
   //[Paging] User click on a Page number -> Go to that page
   goToPage(pageNumber: number) {
     // Call API: go to Page Number
     this.pageNumber = pageNumber;
-
-    this.houseService.filterAvailableHouses(this.pageSize, this.pageNumber).subscribe(data => {
-      this.houses = data;
-      this.scrollToTop();
-    });
+    this.filterHouse();
   }
 
   //Search House by Name (contains)
@@ -129,10 +142,8 @@ export class HomepageComponent implements OnInit {
     }
 
     // Call API (filter by name contains)
-    this.houseService.filterAvailableHouses(this.pageSize, this.pageNumber, searchHouseName).subscribe(data => {
-      this.houses = data;
-      this.scrollToTop();
-    });
+    this.searchName = searchHouseName;
+    this.filterHouse();
   }
 
   //[Filter] Filter by Campus
@@ -141,10 +152,8 @@ export class HomepageComponent implements OnInit {
     var numberCampusId: number = +selectedCampusId;
 
     // Call API: update list houses with the campus user chose
-    this.houseService.filterAvailableHouses(this.pageSize, this.pageNumber, undefined, numberCampusId).subscribe(data => {
-      this.houses = data;
-      this.scrollToTop();
-    });
+    this.filterCampusId = numberCampusId;
+    this.filterHouse();
   }
 
   //[Filter] Filter by Distance
