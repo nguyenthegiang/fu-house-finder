@@ -14,6 +14,7 @@ namespace BusinessObjects
 
         public int RoomTypeId { get; set; }
         public string RoomTypeName { get; set; }
+        public bool? Deleted { get; set; }
         public DateTime? CreatedDate { get; set; }
 
         public virtual ICollection<Room> Rooms { get; set; }
