@@ -70,6 +70,7 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
 
     //call API to get detail info of room
     this.getRoomByRoomId();
+    console.log("hello");
 
 
   }
