@@ -86,12 +86,12 @@ namespace DataAccess
                 //Get list of ID of RoomTypes of all Rooms of each House -> For Filtering by RoomType
                 foreach (HouseDTO houseDTO in houseDTOs)
                 {
-                    houseDTO.RoomTypeIds = new List<int>();
+                    houseDTO.RoomTypeIds = "";
                     foreach (RoomDTO roomDTO in houseDTO.Rooms)
                     {
-                        if (!houseDTO.RoomTypeIds.Contains((int) roomDTO.RoomTypeId))
+                        if (!houseDTO.RoomTypeIds.Contains(roomDTO.RoomTypeId.ToString()))
                         {
-                            houseDTO.RoomTypeIds.Add((int) roomDTO.RoomTypeId);
+                            houseDTO.RoomTypeIds += roomDTO.RoomTypeId.ToString();
                         }
                     }
                 }

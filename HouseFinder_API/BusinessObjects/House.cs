@@ -26,6 +26,7 @@ namespace BusinessObjects
         public decimal WaterPrice { get; set; }
         public bool? FingerprintLock { get; set; }
         public bool? Camera { get; set; }
+        public bool? Parking { get; set; }
         public bool? Deleted { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }

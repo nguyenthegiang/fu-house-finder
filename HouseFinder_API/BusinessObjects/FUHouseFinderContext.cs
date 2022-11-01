@@ -36,18 +36,17 @@ namespace BusinessObjects
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<Village> Villages { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        if (!optionsBuilder.IsConfigured)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //Read JSON File -> ConnectionString
-            var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            optionsBuilder.UseSqlServer(config.GetConnectionString("DBContext"));
+            if (!optionsBuilder.IsConfigured)
+            {
+                //Read JSON File -> ConnectionString
+                var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+                optionsBuilder.UseSqlServer(config.GetConnectionString("DBContext"));
+            }
         }
-    }
 
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
@@ -153,7 +152,7 @@ namespace BusinessObjects
             modelBuilder.Entity<ImagesOfHouse>(entity =>
             {
                 entity.HasKey(e => e.ImageId)
-                    .HasName("PK__ImagesOf__7516F70C8F8B8D99");
+                    .HasName("PK__ImagesOf__7516F70C6E78064F");
 
                 entity.ToTable("ImagesOfHouse");
 
@@ -190,7 +189,7 @@ namespace BusinessObjects
             modelBuilder.Entity<ImagesOfRoom>(entity =>
             {
                 entity.HasKey(e => e.ImageId)
-                    .HasName("PK__ImagesOf__7516F70CA527FCB3");
+                    .HasName("PK__ImagesOf__7516F70C508DF7C0");
 
                 entity.ToTable("ImagesOfRoom");
 
@@ -484,7 +483,7 @@ namespace BusinessObjects
             modelBuilder.Entity<UserRole>(entity =>
             {
                 entity.HasKey(e => e.RoleId)
-                    .HasName("PK__UserRole__8AFACE1A24C722E2");
+                    .HasName("PK__UserRole__8AFACE1A7AAB8BA5");
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
