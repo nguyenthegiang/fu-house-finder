@@ -131,6 +131,7 @@ export class HomepageComponent implements OnInit {
     // Call API (filter by name contains)
     this.houseService.filterAvailableHouses(this.pageSize, this.pageNumber, searchHouseName).subscribe(data => {
       this.houses = data;
+      this.scrollToTop();
     });
   }
 
@@ -140,7 +141,10 @@ export class HomepageComponent implements OnInit {
     var numberCampusId: number = +selectedCampusId;
 
     // Call API: update list houses with the campus user chose
-    alert(numberCampusId);
+    this.houseService.filterAvailableHouses(this.pageSize, this.pageNumber, undefined, numberCampusId).subscribe(data => {
+      this.houses = data;
+      this.scrollToTop();
+    });
   }
 
   //[Filter] Filter by Distance

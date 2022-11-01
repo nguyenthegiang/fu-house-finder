@@ -2,6 +2,7 @@ import { House } from './../models/house';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
 
 @Injectable({
   providedIn: 'root'
@@ -24,7 +25,12 @@ export class HouseService {
   }
 
   //[Home Page] Filter available Houses using OData
-  filterAvailableHouses(pageSize: number, pageNumber: number, searchName?: string): Observable<House[]> {
+  filterAvailableHouses(
+    pageSize: number,
+    pageNumber: number,
+    searchName?: string,
+    campusId?: number,
+  ): Observable<House[]> {
     //define API here to append query options into it later
     var filterAPIUrl = this.APIUrl + `/availableHouses?`;
 
@@ -37,7 +43,12 @@ export class HouseService {
     if (searchName != undefined && searchName != '') {
       filterAPIUrl += `&$filter=contains(HouseName,'${searchName}')`;
     }
-    
+
+    //add filter by campus if has
+    if (campusId != undefined && campusId != 0) {
+      filterAPIUrl += `&$filter=CampusId eq ${campusId}`;
+    }
+
     return this.http.get<House[]>(filterAPIUrl);
   }
 
