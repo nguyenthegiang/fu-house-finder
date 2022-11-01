@@ -59,9 +59,7 @@ export class HomepageComponent implements OnInit {
     //Call APIs:
 
     //(List) Get available Houses - default: page 1, 9 items
-    this.houseService.filterAvailableHouses(this.pageSize, this.pageNumber).subscribe(data => {
-      this.houses = data;
-    });
+    this.filterHouse();
 
     // (Paging) Count available Houses for total number of pages
     this.houseService.countTotalAvailableHouse().subscribe(data => {
@@ -123,11 +121,11 @@ export class HomepageComponent implements OnInit {
     this.houseService.filterAvailableHouses(
       this.pageSize,
       this.pageNumber,
+      this.selectedRoomTypeIds,
       this.searchName,
       this.filterCampusId,
       this.maxPrice,
       this.minPrice,
-      this.selectedRoomTypeIds,
     ).subscribe(data => {
       this.houses = data;
       this.scrollToTop();

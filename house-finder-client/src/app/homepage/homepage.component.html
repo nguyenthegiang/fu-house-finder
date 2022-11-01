@@ -224,7 +224,7 @@
           <!-- Item onClick: to House Detail -->
           <div class="card rounded houseCardItem" routerLink="/house-detail/{{house.houseId}}">
 
-            <img class="card-img-top" src="../assets/image/House/{{house.imagesOfHouses[0].imageLink}}"
+            <img class="card-img-top" *ngIf="house.imagesOfHouses" src="../assets/image/House/{{house.imagesOfHouses[0].imageLink}}"
               alt="House Image" style="width: 100%;
                 height: 200px;
                 background-position: center center;

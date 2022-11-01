@@ -28,11 +28,11 @@ export class HouseService {
   filterAvailableHouses(
     pageSize: number,
     pageNumber: number,
+    selectedRoomTypeIds: number[],
     searchName?: string,
     campusId?: number,
     maxPrice?: number,
     minPrice?: number,
-    selectedRoomTypeIds?: number[],
   ): Observable<House[]> {
     //define API here to append query options into it later
     var filterAPIUrl = this.APIUrl + `/availableHouses?`;
@@ -43,7 +43,7 @@ export class HouseService {
     filterAPIUrl += `$skip=${skip}&$top=${top}`;
 
     //[Filter] check if user has at least 1 filter
-    if (searchName || campusId || maxPrice) {
+    if (searchName || campusId || maxPrice || selectedRoomTypeIds.length > 0) {
       //add filter to API
       filterAPIUrl += `&$filter=`;
     }
