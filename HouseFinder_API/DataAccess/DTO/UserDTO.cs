@@ -15,7 +15,7 @@ namespace DataAccess.DTO
         //Not show password when send API
         //public string Password { get; set; }
         public string DisplayName { get; set; }
-        public bool? Active { get; set; }
+        public int? Active { get; set; }
         public string ProfileImageLink { get; set; }
         public string PhoneNumber { get; set; }
         public string FacebookUrl { get; set; }
