@@ -135,6 +135,7 @@ CREATE TABLE [dbo].[Houses] (
 
 	FingerprintLock bit,				--khóa vân tay
 	Camera bit,							--camera an ninh
+	Parking bit,						--khu để xe
 
 	--Dành cho những Table CRUD dc -> History
 	Deleted bit,
@@ -182,11 +183,13 @@ CREATE TABLE [dbo].[Rooms] (
 	AreaByMeters float,			--diện tích, tính theo m2
 
 	--1 số tiện ích khác
-	Aircon bit NOT NULL,		 --điều hòa (có/ko)
-	Wifi bit NOT NULL,           --wifi (có/không)
-	WaterHeater bit NOT NULL,    --bình nóng lạnh (có/không)
-	Furniture bit NOT NULL,      --nội thất (có/không)
-
+	Fridge bit NOT NULL,		 --Tủ lạnh (có/ko)
+	Kitchen bit NOT NULL,        --Bếp (có/không)
+	WashingMachine bit NOT NULL, --Máy giặt (có/không)
+	Desk bit NOT NULL,			 --Bàn học (có/không)
+	LiveWithHost bit NOT NULL,   --Chung chủ (có/không)
+	Bed bit NOT NULL,			 --Giường (có/không)
+	ClosedToilet bit NOT NULL,   --Vệ sinh khép kín (có/không)
 
 	MaxAmountOfPeople int,		--số người ở tối đa trong phòng
 	CurrentAmountOfPeople int,	--số người ở hiện tại trong phòng (cho tính năng update thông tin phòng 1/2)
@@ -1032,27 +1035,36 @@ INSERT INTO [dbo].[Villages] VALUES (N'Xóm Chằm', 59, 0, GETDATE());
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
-
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Lê', N'Rất đẹp', 6, 3, N'LA000001', 1, 3700, 1200, 0, 0 ,1, GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Thảo', N'Rất đẹp', 7, 3, N'LA000002', 1, 3500, 1300, 0, 1, 1, GETDATE(), GETDATE(), N'LA000002', N'LA000002');
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ Hòa Lạc Yên Lạc Viên', N'Vị trí trung tâm khu giao lộ ngã tư Hòa Lạc. Cảnh quan trong lành, yên tĩnh', 8, 3, N'LA000003', 1, 3400, 1500, 0, 0 ,1, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
-INSERT INTO [dbo].[Houses] VALUES (N'Nhà trọ Bình Yên', N'Không chung chủ, giờ giấc thoải mái', 9, 3, N'LA000004', 1, 3500, 1300, 0, 0 ,1, GETDATE(), GETDATE(), N'LA000004', N'LA000004');
-INSERT INTO [dbo].[Houses] VALUES (N'Nhà trọ Tiến Phương', N'Sân rộng rãi, chỗ để xe thuận tiện, đảm bảo an ninh', 10, 3, N'LA000005', 1, 3600, 1200, 0, 1, 1, GETDATE(), GETDATE(), N'LA000005', N'LA000005');
-INSERT INTO [dbo].[Houses] VALUES (N'Nhà trọ Phương Duy', N' Phòng full nội thất, có chỗ nấu ăn riêng ', 11, 3, N'LA000006', 1, 3800, 1300, 0, 1, 1, GETDATE(), GETDATE(), N'LA000006', N'LA000006');
-INSERT INTO [dbo].[Houses] VALUES (N'HOLA Campus', N'Điện nước theo khung giá nhà nước', 12, 3, N'LA000007', 1, 3200, 1500, 0, 1, 1, GETDATE(), GETDATE(), N'LA000007', N'LA000007');
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ Hoàng Nam', N'Có siêu thị ngay tại tầng 1 cùng khuôn viên vui chơi rộng rãi.', 13, 3, N'LA000008', 1, 3400, 1250, 0, 0, 0, GETDATE(), GETDATE(), N'LA000008', N'LA000008');
-INSERT INTO [dbo].[Houses] VALUES (N'Kí túc xá Ông bà', N'Có sân vườn, ao cá, hợp với các bạn thích chill và yêu thiên nhiên', 14, 3, N'LA000009', 1, 3600, 1400, 0, 0, 0, GETDATE(), GETDATE(), N'LA000009', N'LA000009');
-INSERT INTO [dbo].[Houses] VALUES (N'Nhà trọ Thái Hà', N'Đồ dùng đã có đủ, chỉ việc xách Vali đến ở.', 15, 3, N'LA000010', 1, 3500, 1500, 0, 1, 1, GETDATE(), GETDATE(), N'LA000010', N'LA000010');
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ Việt Dũng', N'Đã đầy đủ nội thất từ cái tăm cái đũa yên tâm toàn đồ đẹp tại vì mình sống như gia đình nên chỉ yêu cầu sạch sẽ biết giữ gìn tài sản.', 16, 3, N'LA000011', 1, 3500, 1700, 0, 0, 0, GETDATE(), GETDATE(), N'LA000011', N'LA000011');
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tuấn Cường 1', N'Rất đẹp', 17, 3, N'LA000012', 1, 3000, 1100, 0, 0, 0, GETDATE(), GETDATE(), N'LA000012', N'LA000012');
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ Linh Lê', N'Không chung chủ', 6, 3, N'LA000001', 1, 3700, 1200, 0, 0, 0, GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Nguyễn', N'Vệ sinh khép kín', 6, 3, N'LA000001', 1, 3700, 1200, 0, 1, 0, GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ Thu Thảo', N'Không chung chủ', 7, 3, N'LA000002', 1, 3500, 1300, 0, 1, 0, GETDATE(), GETDATE(), N'LA000002', N'LA000002');
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Lê', N'Chỗ để xe rộng rãi', 7, 3, N'LA000002', 1, 3500, 1300, 0, 1, 0, GETDATE(), GETDATE(), N'LA000002', N'LA000002');
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ 123', N'Cảnh quan trong lành, yên tĩnh', 8, 3, N'LA000003', 1, 3400, 1500, 0, 0 ,1, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ Chương Văn', N'Không chung chủ', 8, 3, N'LA000003', 1, 3400, 1500, 0, 1, 0, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ test ko available', N'Không chung chủ', 8, 3, N'LA000003', 1, 3400, 1500, 0, 0 ,1, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
-
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Lê', N'Rất đẹp', 6, 3, N'LA000001', 1, 3700, 1200, 0, 0, 0 ,1, GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Thảo', N'Rất đẹp', 7, 3, N'LA000002', 1, 3500, 1300, 0, 1, 0, 1, GETDATE(), GETDATE(), N'LA000002', N'LA000002');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Hòa Lạc Yên Lạc Viên', N'Vị trí trung tâm khu giao lộ ngã tư Hòa Lạc. Cảnh quan trong lành, yên tĩnh', 8, 3, N'LA000003', 1, 3400, 1500, 0, 0, 0 ,1, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+INSERT INTO [dbo].[Houses] VALUES (N'Nhà trọ Bình Yên', N'Không chung chủ, giờ giấc thoải mái', 9, 3, N'LA000004', 1, 3500, 1300, 0, 0, 0 ,1 , GETDATE(), GETDATE(), N'LA000004', N'LA000004');
+INSERT INTO [dbo].[Houses] VALUES (N'Nhà trọ Tiến Phương', N'Sân rộng rãi, chỗ để xe thuận tiện, đảm bảo an ninh', 10, 3, N'LA000005', 1, 3600, 1200, 0, 1, 0, 1, GETDATE(), GETDATE(), N'LA000005', N'LA000005');
+INSERT INTO [dbo].[Houses] VALUES (N'Nhà trọ Phương Duy', N' Phòng full nội thất, có chỗ nấu ăn riêng ', 11, 3, N'LA000006', 1, 3800, 1300, 0, 1, 0, 1, GETDATE(), GETDATE(), N'LA000006', N'LA000006');
+INSERT INTO [dbo].[Houses] VALUES (N'HOLA Campus', N'Điện nước theo khung giá nhà nước', 12, 3, N'LA000007', 1, 3200, 1500, 0, 1, 1, 0, GETDATE(), GETDATE(), N'LA000007', N'LA000007');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Hoàng Nam', N'Có siêu thị ngay tại tầng 1 cùng khuôn viên vui chơi rộng rãi.', 13, 3, N'LA000008', 1, 3400, 1250, 0, 0, 0, 0, GETDATE(), GETDATE(), N'LA000008', N'LA000008');
+INSERT INTO [dbo].[Houses] VALUES (N'Kí túc xá Ông bà', N'Có sân vườn, ao cá, hợp với các bạn thích chill và yêu thiên nhiên', 14, 3, N'LA000009', 1, 3600, 1400, 0, 0, 0, 0, GETDATE(), GETDATE(), N'LA000009', N'LA000009');
+INSERT INTO [dbo].[Houses] VALUES (N'Nhà trọ Thái Hà', N'Đồ dùng đã có đủ, chỉ việc xách Vali đến ở.', 15, 3, N'LA000010', 1, 3500, 1500, 0, 0, 1, 1, GETDATE(), GETDATE(), N'LA000010', N'LA000010');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Việt Dũng', N'Đã đầy đủ nội thất từ cái tăm cái đũa yên tâm toàn đồ đẹp tại vì mình sống như gia đình nên chỉ yêu cầu sạch sẽ biết giữ gìn tài sản.', 16, 3, N'LA000011', 1, 3500, 1700, 0, 0, 0, 0, GETDATE(), GETDATE(), N'LA000011', N'LA000011');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tuấn Cường 1', N'Rất đẹp', 17, 3, N'LA000012', 1, 3000, 1100, 0, 0, 0, 0, GETDATE(), GETDATE(), N'LA000012', N'LA000012');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Linh Lê', N'Không chung chủ', 6, 3, N'LA000001', 1, 3700, 1200, 0, 0, 0, 0, GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Nguyễn', N'Vệ sinh khép kín', 6, 3, N'LA000001', 1, 3700, 1200, 0, 1, 0, 0, GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Thu Thảo', N'Không chung chủ', 7, 3, N'LA000002', 1, 3500, 1300, 0, 1, 0, 0, GETDATE(), GETDATE(), N'LA000002', N'LA000002');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Lê', N'Chỗ để xe rộng rãi', 7, 3, N'LA000002', 1, 3500, 1300, 0, 1, 0, 0, GETDATE(), GETDATE(), N'LA000002', N'LA000002');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ 123', N'Cảnh quan trong lành, yên tĩnh', 8, 3, N'LA000003', 1, 3400, 1500, 0, 0, 0 ,1, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Chương Văn', N'Không chung chủ', 8, 3, N'LA000003', 1, 3400, 1500, 0, 1, 0, 0, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ test ko available', N'Không chung chủ', 8, 3, N'LA000003', 1, 3400, 1500, 0, 0, 1 ,1, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Campus 1', N'Không chung chủ', 8, 3, N'LA000001', 1, 3400, 1500, 0, 0, 1 ,1, GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Campus 2', N'Không chung chủ', 8, 3, N'LA000002', 2, 3400, 1500, 0, 0, 1 ,1, GETDATE(), GETDATE(), N'LA000002', N'LA000002');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Campus 3', N'Không chung chủ', 8, 3, N'LA000003', 3, 3400, 1500, 0, 0, 1 ,1, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Campus 4', N'Không chung chủ', 8, 3, N'LA000004', 4, 3400, 1500, 0, 0, 1 ,1, GETDATE(), GETDATE(), N'LA000004', N'LA000004');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Campus 5', N'Không chung chủ', 8, 3, N'LA000005', 5, 3400, 1500, 0, 0, 1 ,1, GETDATE(), GETDATE(), N'LA000005', N'LA000005');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ RoomType 1', N'Không chung chủ', 8, 3, N'LA000003', 3, 3400, 1500, 0, 0, 1 ,1, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ RoomType 2', N'Không chung chủ', 8, 3, N'LA000004', 4, 3400, 1500, 0, 0, 1 ,1, GETDATE(), GETDATE(), N'LA000004', N'LA000004');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ RoomType 3', N'Không chung chủ', 8, 3, N'LA000005', 5, 3400, 1500, 0, 0, 1 ,1, GETDATE(), GETDATE(), N'LA000005', N'LA000005');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ District 1', N'Không chung chủ', 8, 1, N'LA000003', 3, 3400, 1500, 0, 0, 1 ,1, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ District 2', N'Không chung chủ', 8, 206, N'LA000004', 4, 3400, 1500, 0, 0, 1 ,1, GETDATE(), GETDATE(), N'LA000004', N'LA000004');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ District 3', N'Không chung chủ', 8, 303, N'LA000005', 5, 3400, 1500, 0, 0, 1 ,1, GETDATE(), GETDATE(), N'LA000005', N'LA000005');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -1069,145 +1081,169 @@ INSERT INTO [dbo].[RoomTypes] VALUES (N'Chung cư mini', 0, GETDATE());
 -------------------------------------------------------------------------------------------------------------------------------------------
 
 --AreaByMeters, Aircon, Wifi, WaterHeater, Furniture, MaxAmountOfPeople, CurrentAmountOfPeople, BuildingNumber,  FloorNumber, StatusId, RoomTypeId, HouseId
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Gạch sàn nhà có họa tiết hình con cá', 20, 1, 1, 0, 0, 3, 1, 1, 1, 1, 2, 1,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Gạch sàn nhà có họa tiết hình con cá', 20, 1, 1, 0, 0, 1, 1, 1, 3, 1, 1, 1, 1, 2, 1,  0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'102', 2500000, N'Đã có Bếp từ, hút mùi và đầy đủ phụ kiện', 15, 0, 1, 1, 0, 2, 1, 1, 1, 3, 2, 1,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'102', 2500000, N'Đã có Bếp từ, hút mùi và đầy đủ phụ kiện', 15, 0, 1, 1, 0, 1, 1, 1, 2, 1, 1, 1, 3, 2, 1,  0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'103', 2000000, N'Tổng diện tích sử dụng: 20m2', 30, 1, 1, 1, 0, 4, 1, 1, 1, 2, 2, 1,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'103', 2000000, N'Tổng diện tích sử dụng: 20m2', 30, 1, 1, 1, 0, 1, 1, 1, 4, 1, 1, 1, 2, 2, 1,  0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'201', 3000000, N'Gạch sàn nhà có họa tiết hình con cá', 25, 1, 0, 0, 0, 4, 2, 1, 1, 3, 2, 1,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'201', 3000000, N'Gạch sàn nhà có họa tiết hình con cá', 25, 1, 0, 0, 0, 1, 1, 1, 4, 2, 1, 1, 3, 2, 1,  0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'202', 2500000, N'Đã có Bếp từ, hút mùi và đầy đủ phụ kiện', 20, 1, 0, 0, 1, 4, 4, 1, 1, 1, 2, 1,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'202', 2500000, N'Đã có Bếp từ, hút mùi và đầy đủ phụ kiện', 20, 1, 0, 0, 1, 1, 1, 1, 4, 4, 1, 1, 1, 2, 1,  0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'203', 2000000, N'Tổng diện tích sử dụng: 20m2', 25, 1, 0, 0, 0, 4, 3, 1, 1, 2, 2, 1,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'203', 2000000, N'Tổng diện tích sử dụng: 20m2', 25, 1, 0, 0, 0, 1, 1, 1, 4, 3, 1, 1, 2, 2, 1,  0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'301', 3000000, N'Gạch sàn nhà có họa tiết hình con cá', 20, 1, 0, 0, 0, 2, 1, 1, 1, 1, 2, 1, 0,
+INSERT INTO [dbo].[Rooms] VALUES (N'301', 3000000, N'Gạch sàn nhà có họa tiết hình con cá', 20, 1, 0, 0, 0, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1, 0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'302', 2500000, N'Đã có Bếp từ, hút mùi và đầy đủ phụ kiện', 15, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 1,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'302', 2500000, N'Đã có Bếp từ, hút mùi và đầy đủ phụ kiện', 15, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 1,  0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'303', 2000000, N'Tổng diện tích sử dụng: 20m2', 25, 1, 0, 0, 1, 2, 1, 1, 1, 2, 2, 1,  0,
-GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 4000000, N'Vệ sinh khép kín', 6, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 2,  0,
-GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'102', 3500000, N'Vệ sinh khép kín', 6, 1, 0, 0, 1, 2, 1, 1, 1, 3, 3, 2,  0,
-GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'103', 3000000, N'Vệ sinh khép kín', 6, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 2,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'303', 2000000, N'Tổng diện tích sử dụng: 20m2', 25, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 1,  0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 3500000, N'Giao thông thuận lợi', 7, 1, 0, 0, 1, 2, 1, 1, 1, 2, 1, 3,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 4000000, N'Vệ sinh khép kín', 6, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 2,  0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'102', 2600000, N'Giao thông thuận lợi', 7, 1, 0, 0, 1, 2, 1, 1, 1, 3, 2, 3,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'102', 3500000, N'Vệ sinh khép kín', 6, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 3, 3, 2,  0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'103', 2100000, N'Giao thông thuận lợi', 7, 1, 0, 0, 1, 2, 1, 1, 1, 2, 3, 3,  0,
-GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 3100000, N'Trật tự an ninh tốt', 4, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 4,  0,
-GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'102', 2400000, N'Trật tự an ninh tốt', 4, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 4,  0,
-GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'103', 2200000, N'Trật tự an ninh tốt', 4, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 4,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'103', 3000000, N'Vệ sinh khép kín', 6, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 2,  0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 3200000, N'Đủ điều hòa, bình nóng lạnh', 5, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 5, 0, 
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3500000, N'Giao thông thuận lợi', 7, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 2, 1, 3,  0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'102', 2500000, N'Đủ điều hòa, bình nóng lạnh', 5, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 5,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'102', 2600000, N'Giao thông thuận lợi', 7, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 3, 2, 3,  0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'103', 2300000, N'Đủ điều hòa, bình nóng lạnh', 5, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 5,  0,
-GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 2000000, N'Có sân phơi trần thượng, và nhiều tiện ích khác', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 6,  0,
-GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'102', 2100000, N'Có sân phơi trần thượng, và nhiều tiện ích khác', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 6,  0,
-GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'103', 2200000, N'Có sân phơi trần thượng, và nhiều tiện ích khác', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 6,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'103', 2100000, N'Giao thông thuận lợi', 7, 1, 0, 0, 1, 1, 0, 1, 2, 1, 1, 1, 2, 3, 3,  0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 2400000, N'Nhà vệ sinh khép kín xịn, tiện nghi', 8, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 7, 0,
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3100000, N'Trật tự an ninh tốt', 4, 1, 0, 0, 1, 1, 0, 1, 2, 1, 1, 1, 1, 2, 4,  0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'102', 2500000, N'Nhà vệ sinh khép kín xịn, tiện nghi', 8, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 7,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'102', 2400000, N'Trật tự an ninh tốt', 4, 1, 0, 0, 1, 1, 0, 1, 2, 1, 1, 1, 1, 2, 4,  0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'103', 2600000, N'Nhà vệ sinh khép kín xịn, tiện nghi', 8, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 7,  0,
-GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 3700000, N'Có cáp Tivi, camera 24/24 yên tâm an ninh', 4, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 8, 0, 
-GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'102', 2500000, N'Có cáp Tivi, camera 24/24 yên tâm an ninh', 4, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 8,  0,
-GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'103', 2800000, N'Có cáp Tivi, camera 24/24 yên tâm an ninh', 4, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 8,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'103', 2200000, N'Trật tự an ninh tốt', 4, 1, 0, 0, 1, 1, 0, 1, 2, 1, 1, 1, 1, 2, 4,  0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 3200000, N'Để xe tầng 1 tiện lợi miễn phí, ô tô đỗ đón tận cửa', 7, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 9,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3200000, N'Đủ điều hòa, bình nóng lạnh', 5, 1, 0, 1, 0, 1, 0, 1, 2, 1, 1, 1, 1, 2, 5, 0, 
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'102', 3500000, N'Để xe tầng 1 tiện lợi miễn phí, ô tô đỗ đón tận cửa', 7, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 9,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'102', 2500000, N'Đủ điều hòa, bình nóng lạnh', 5, 1, 0, 1, 0, 1, 0, 1, 2, 1, 1, 1, 1, 2, 5,  0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'103', 3000000, N'Để xe tầng 1 tiện lợi miễn phí, ô tô đỗ đón tận cửa', 7, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 9,  0,
-GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 2500000, N'Điện, nước, internet giá rẻ, công tơ điện riêng', 2, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 10,  0,
-GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'102', 2500000, N'Điện, nước, internet giá rẻ, công tơ điện riêng', 2, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 10,  0,
-GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'103', 2500000, N'Điện, nước, internet giá rẻ, công tơ điện riêng', 2, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 10,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'103', 2300000, N'Đủ điều hòa, bình nóng lạnh', 5, 1, 0, 1, 0, 1, 0, 1, 2, 1, 1, 1, 1, 2, 5,  0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 2700000, N'Không gian sinh hoạt riêng tư độc lập', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 11,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 2000000, N'Có sân phơi trần thượng, và nhiều tiện ích khác', 3, 1, 0, 0, 1, 0, 1, 1, 2, 1, 1, 1, 1, 2, 6,  0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'102', 2700000, N'Không gian sinh hoạt riêng tư độc lập', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 11,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'102', 2100000, N'Có sân phơi trần thượng, và nhiều tiện ích khác', 3, 1, 0, 0, 1, 0, 1, 1, 2, 1, 1, 1, 1, 2, 6,  0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'103', 2700000, N'Không gian sinh hoạt riêng tư độc lập', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 11,  0,
-GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 2800000, N'Phòng mới đẹp thiết kế hài hòa đầy đủ các khu sinh hoạt như bêp và wc nên sinh hoạt rất thuận tiện', 9, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 12,  0,
-GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'102', 2800000, N'Phòng mới đẹp thiết kế hài hòa đầy đủ các khu sinh hoạt như bêp và wc nên sinh hoạt rất thuận tiện', 9, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 12,  0,
-GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'103', 2800000, N'Phòng mới đẹp thiết kế hài hòa đầy đủ các khu sinh hoạt như bêp và wc nên sinh hoạt rất thuận tiện', 9, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 12,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'103', 2200000, N'Có sân phơi trần thượng, và nhiều tiện ích khác', 3, 1, 0, 0, 1, 0, 1, 1, 2, 1, 1, 1, 1, 2, 6,  0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 2750000, N'Không gian sinh hoạt riêng tư độc lập', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 13,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 2400000, N'Nhà vệ sinh khép kín xịn, tiện nghi', 8, 1, 1, 0, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 7, 0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'102', 2750000, N'Không gian sinh hoạt riêng tư độc lập', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 13,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'102', 2500000, N'Nhà vệ sinh khép kín xịn, tiện nghi', 8, 1, 1, 0, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 7,  0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'103', 2750000, N'Không gian sinh hoạt riêng tư độc lập', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 13,  0,
-GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 2900000, N'Có cáp Tivi, camera 24/24 yên tâm an ninh', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 14, 0, 
-GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'102', 2900000, N'Có cáp Tivi, camera 24/24 yên tâm an ninh', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 14,  0,
-GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Rooms] VALUES (N'103', 2900000, N'Có cáp Tivi, camera 24/24 yên tâm an ninh', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 14,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'103', 2600000, N'Nhà vệ sinh khép kín xịn, tiện nghi', 8, 1, 1, 0, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 7,  0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Điện, nước, internet giá rẻ, công tơ điện riêng', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 15, 0, 
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3700000, N'Có cáp Tivi, camera 24/24 yên tâm an ninh', 4, 1, 0, 1, 0, 1, 0, 1, 2, 1, 1, 1, 1, 2, 8, 0, 
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Rooms] VALUES (N'102', 2500000, N'Có cáp Tivi, camera 24/24 yên tâm an ninh', 4, 1, 0, 1, 0, 1, 0, 1, 2, 1, 1, 1, 1, 2, 8,  0,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Rooms] VALUES (N'103', 2800000, N'Có cáp Tivi, camera 24/24 yên tâm an ninh', 4, 1, 0, 1, 0, 1, 0, 1, 2, 1, 1, 1, 1, 2, 8,  0,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3200000, N'Để xe tầng 1 tiện lợi miễn phí, ô tô đỗ đón tận cửa', 7, 1, 0, 0, 1, 1, 0, 1, 2, 1, 1, 1, 1, 2, 9,  0,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Rooms] VALUES (N'102', 3500000, N'Để xe tầng 1 tiện lợi miễn phí, ô tô đỗ đón tận cửa', 7, 1, 0, 0, 1, 1, 0, 1, 2, 1, 1, 1, 1, 2, 9,  0,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Rooms] VALUES (N'103', 3000000, N'Để xe tầng 1 tiện lợi miễn phí, ô tô đỗ đón tận cửa', 7, 1, 0, 0, 1, 1, 0, 1, 2, 1, 1, 1, 1, 2, 9,  0,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 2500000, N'Điện, nước, internet giá rẻ, công tơ điện riêng', 2, 1, 0, 0, 1, 0, 1, 1, 2, 1, 1, 1, 1, 2, 10,  0,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Rooms] VALUES (N'102', 2500000, N'Điện, nước, internet giá rẻ, công tơ điện riêng', 2, 1, 0, 0, 1, 0, 1, 1, 2, 1, 1, 1, 1, 2, 10,  0,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Rooms] VALUES (N'103', 2500000, N'Điện, nước, internet giá rẻ, công tơ điện riêng', 2, 1, 0, 0, 1, 0, 1, 1, 2, 1, 1, 1, 1, 2, 10,  0,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 2700000, N'Không gian sinh hoạt riêng tư độc lập', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 11,  0,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Rooms] VALUES (N'102', 2700000, N'Không gian sinh hoạt riêng tư độc lập', 3, 1, 1, 1, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 11,  0,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Rooms] VALUES (N'103', 2700000, N'Không gian sinh hoạt riêng tư độc lập', 3, 1, 1, 1, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 11,  0,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 2800000, N'Phòng mới đẹp thiết kế hài hòa đầy đủ các khu sinh hoạt như bêp và wc nên sinh hoạt rất thuận tiện', 9, 1, 0, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 2, 12,  0,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Rooms] VALUES (N'102', 2800000, N'Phòng mới đẹp thiết kế hài hòa đầy đủ các khu sinh hoạt như bêp và wc nên sinh hoạt rất thuận tiện', 9, 1, 0, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 2, 12,  0,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Rooms] VALUES (N'103', 2800000, N'Phòng mới đẹp thiết kế hài hòa đầy đủ các khu sinh hoạt như bêp và wc nên sinh hoạt rất thuận tiện', 9, 1, 0, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 2, 12,  0,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 2750000, N'Không gian sinh hoạt riêng tư độc lập', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 13,  0,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Rooms] VALUES (N'102', 2750000, N'Không gian sinh hoạt riêng tư độc lập', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 13,  0,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Rooms] VALUES (N'103', 2750000, N'Không gian sinh hoạt riêng tư độc lập', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 13,  0,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 2900000, N'Có cáp Tivi, camera 24/24 yên tâm an ninh', 3, 1, 1, 1, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 14, 0, 
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Rooms] VALUES (N'102', 2900000, N'Có cáp Tivi, camera 24/24 yên tâm an ninh', 3, 1, 1, 1, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 14,  0,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Rooms] VALUES (N'103', 2900000, N'Có cáp Tivi, camera 24/24 yên tâm an ninh', 3, 1, 1, 1, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 14,  0,
+GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Điện, nước, internet giá rẻ, công tơ điện riêng', 3, 1, 1, 1, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 15, 0, 
 GETDATE(), GETDATE(), N'LA000002', N'LA000002');
-INSERT INTO [dbo].[Rooms] VALUES (N'102', 3000000, N'Điện, nước, internet giá rẻ, công tơ điện riêng', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 15,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'102', 3000000, N'Điện, nước, internet giá rẻ, công tơ điện riêng', 3, 1, 1, 1, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 15,  0,
 GETDATE(), GETDATE(), N'LA000002', N'LA000002');
-INSERT INTO [dbo].[Rooms] VALUES (N'103', 3000000, N'Điện, nước, internet giá rẻ, công tơ điện riêng', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 15,  0,
-GETDATE(), GETDATE(), N'LA000002', N'LA000002');
-
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 2750000, N'Vệ sinh khép kín', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 16,  0,
-GETDATE(), GETDATE(), N'LA000002', N'LA000002');
-INSERT INTO [dbo].[Rooms] VALUES (N'102', 2750000, N'Vệ sinh khép kín', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 16,  0,
-GETDATE(), GETDATE(), N'LA000002', N'LA000002');
-INSERT INTO [dbo].[Rooms] VALUES (N'103', 2750000, N'Vệ sinh khép kín', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 16,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'103', 3000000, N'Điện, nước, internet giá rẻ, công tơ điện riêng', 3, 1, 1, 1, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 15,  0,
 GETDATE(), GETDATE(), N'LA000002', N'LA000002');
 
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 2900000, N'24/24 an ninh', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 17,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 2750000, N'Vệ sinh khép kín', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 16,  0,
+GETDATE(), GETDATE(), N'LA000002', N'LA000002');
+INSERT INTO [dbo].[Rooms] VALUES (N'102', 2750000, N'Vệ sinh khép kín', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 16,  0,
+GETDATE(), GETDATE(), N'LA000002', N'LA000002');
+INSERT INTO [dbo].[Rooms] VALUES (N'103', 2750000, N'Vệ sinh khép kín', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 16,  0,
+GETDATE(), GETDATE(), N'LA000002', N'LA000002');
+
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 2900000, N'24/24 an ninh', 3, 1, 1, 1, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 17,  0,
 GETDATE(), GETDATE(), N'LA000003', N'LA000003');
-INSERT INTO [dbo].[Rooms] VALUES (N'102', 2900000, N'24/24 an ninh', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 17,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'102', 2900000, N'24/24 an ninh', 3, 1, 1, 1, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 17,  0,
 GETDATE(), GETDATE(), N'LA000003', N'LA000003');
-INSERT INTO [dbo].[Rooms] VALUES (N'103', 2900000, N'24/24 an ninh', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 17,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'103', 2900000, N'24/24 an ninh', 3, 1, 1, 1, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 17,  0,
 GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Giao thông thuận lợi', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 18, 0, 
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Giao thông thuận lợi', 3, 1, 1, 1, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 18, 0, 
 GETDATE(), GETDATE(), N'LA000003', N'LA000003');
-INSERT INTO [dbo].[Rooms] VALUES (N'102', 3000000, N'Giao thông thuận lợi', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 18, 0,
+INSERT INTO [dbo].[Rooms] VALUES (N'102', 3000000, N'Giao thông thuận lợi', 3, 1, 1, 1, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 18, 0,
 GETDATE(), GETDATE(), N'LA000003', N'LA000003');
-INSERT INTO [dbo].[Rooms] VALUES (N'103', 3000000, N'Giao thông thuận lợi', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 18, 0,
+INSERT INTO [dbo].[Rooms] VALUES (N'103', 3000000, N'Giao thông thuận lợi', 3, 1, 1, 1, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 18, 0,
 GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Giao thông thuận lợi', 3, 1, 0, 0, 1, 2, 1, 1, 1, 2, 2, 19, 0,
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Giao thông thuận lợi', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 19, 0,
+GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 20, 0,
+GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 21, 0,
+GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 23, 0,
+GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 1, 1, 1, 0, 0, 1, 2, 1, 1, 1, 2, 2, 24, 0,
+GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 0, 1, 1, 1, 0, 1, 2, 1, 1, 1, 2, 2, 25, 0,
+GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 0, 1, 1, 1, 0, 1, 2, 1, 1, 1, 2, 1, 26, 0,
+GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 27, 0,
+GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 2, 3, 28, 0,
 GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
