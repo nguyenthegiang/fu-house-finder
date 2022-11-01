@@ -39,7 +39,8 @@
         <h3 class="text-center">Thông tin chủ trọ</h3>
         <!-- Landlord's avatar -->
         <div class="d-flex justify-content-center align-items-center my-3">
-          <img src="../../assets/image/LandlordAvatar.jpg" alt="Landlord's avatar" width="250px" height="200px" class="rounded">
+          <img src="../../assets/image/LandlordAvatar.jpg" alt="Landlord's avatar" width="250px" height="200px"
+            class="rounded">
         </div>
         <!-- Other information -->
         <span>
@@ -68,7 +69,8 @@
         <h3 class="text-center">Người dùng đánh giá</h3>
         Bình luận:
         <div class="bg-light border border-secondary rounded mb-2 p-2">
-          Nguyễn Văn A: Đẹp, gần trường (<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>)
+          Nguyễn Văn A: Đẹp, gần trường (<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>)
           <br> <i class="fa-solid fa-arrow-right"></i> Chủ trọ trả lời: Cảm ơn bạn nhiều
         </div>
         Viết bình luận:
@@ -98,26 +100,34 @@
           <div class="card rounded roomCardItem h-100">
             <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
               <div class="carousel-indicators">
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+                  aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                  aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                  aria-label="Slide 3"></button>
               </div>
               <div class="carousel-inner rounded">
                 <div class="carousel-item active">
-                  <img src="../assets/image/Room/{{dataItem.imagesOfRooms[0].imageLink}}" class="d-block w-100" alt="...">
+                  <img src="../assets/image/Room/{{dataItem.imagesOfRooms[0].imageLink}}" class="d-block w-100"
+                    alt="...">
                 </div>
                 <div class="carousel-item">
-                  <img src="../assets/image/Room/{{dataItem.imagesOfRooms[1].imageLink}}" class="d-block w-100" alt="...">
+                  <img src="../assets/image/Room/{{dataItem.imagesOfRooms[1].imageLink}}" class="d-block w-100"
+                    alt="...">
                 </div>
                 <div class="carousel-item">
-                  <img src="../assets/image/Room/{{dataItem.imagesOfRooms[2].imageLink}}" class="d-block w-100" alt="...">
+                  <img src="../assets/image/Room/{{dataItem.imagesOfRooms[2].imageLink}}" class="d-block w-100"
+                    alt="...">
                 </div>
               </div>
-              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+              <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Previous</span>
               </button>
-              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+              <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                data-bs-slide="next">
                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                 <span class="visually-hidden">Next</span>
               </button>
@@ -136,17 +146,18 @@
                   class="fa-solid fa-location-dot me-2"></i>{{dataItem.areaByMeters}}m2</div>
               <div class="card-text text-truncate" style="max-width: 100%;"><i
                   class="fa-solid fa-circle-info me-2"></i>{{dataItem.information}}</div>
-              <div class="card-text text-truncate" style="max-width: 100%;"><i
-                  class="fa-solid fa-user me-2"></i>Số người tối đa: {{dataItem.maxAmountOfPeople}} người</div>
-              <div class="card-text text-truncate" style="max-width: 100%;"><i
-                  class="fa-solid fa-user me-2"></i>Số người đang ở: {{dataItem.currentAmountOfPeople}} người</div>
-              <div class="card-text text-truncate" style="max-width: 100%;"><i
-                  class="fa-solid fa-house me-2"></i>Tòa nhà: {{dataItem.buildingNumber}} - Tầng: {{dataItem.floorNumber}}</div>
+              <div class="card-text text-truncate" style="max-width: 100%;"><i class="fa-solid fa-user me-2"></i>Số
+                người tối đa: {{dataItem.maxAmountOfPeople}} người</div>
+              <div class="card-text text-truncate" style="max-width: 100%;"><i class="fa-solid fa-user me-2"></i>Số
+                người đang ở: {{dataItem.currentAmountOfPeople}} người</div>
+              <div class="card-text text-truncate" style="max-width: 100%;"><i class="fa-solid fa-house me-2"></i>Tòa
+                nhà: {{dataItem.buildingNumber}} - Tầng: {{dataItem.floorNumber}}</div>
               <div class="card-text text-truncate" style="max-width: 100%;"><i
                   class="fa-solid fa-door-closed me-2"></i>Loại phòng: {{dataItem.roomType.roomTypeName}}</div>
               <div class="card-text text-truncate" style="max-width: 100%;"><i
                   class="fa-solid fa-calendar-days me-2"></i>Ngày tạo: {{dataItem.createdDate | date}}</div>
-              <button type="button" class="btn btn-light w-100 mt-4" (click)="GoToRoomDetail(dataItem.roomId)">Xem chi tiết</button>
+              <button type="button" class="btn btn-light w-100 mt-4" (click)="GoToRoomDetail(dataItem.roomId)">Xem chi
+                tiết</button>
             </div>
           </div>
         </div>
@@ -180,12 +191,38 @@
     </div>
   </div>
 
-  <button type="button" class="floating-btn" data-toggle="modal" data-target="#exampleModal"
+  <button type="button" class="floating-btn" data-bs-toggle="modal" data-bs-target="#reportModal"
+    data-bs-whatever="@getbootstrap"> <i class="fa-solid fa-flag"></i></button>
+
+  <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header" style="background-color: #FF6F3D;">
+          <h5 class="modal-title text-white" id="exampleModalLabel">Báo cáo nhà trọ</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="message-text" class="col-form-label">Lý do:</label>
+              <textarea class="form-control" id="message-text" #inputReportContent></textarea>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer d-flex justify-content-center text-white" style="border-color: none;">
+          <button (click)="sendReport(inputReportContent.value)" type="button" class="btn text-white"
+            style="background-color: #FF6F3D;" data-dismiss="modal">Báo
+            cáo</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <button type="button" class="floating-btn" data-toggle="modal" data-target="#reportModal"
     data-whatever="@getbootstrap">
     <i class="fa-solid fa-flag"></i>
   </button>
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+  <div class="modal fade" id="reportModal" tabindex="-1" role="dialog" aria-labelledby="reportModal" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header" style="background-color: #FF6F3D;">
@@ -198,8 +235,7 @@
           <form>
             <div class="form-group">
               <label for="message-text" class="col-form-label">Lý do:</label>
-              <textarea class="form-control" id="message-text"
-                #inputReportContent></textarea>
+              <textarea class="form-control" id="message-text" #inputReportContent></textarea>
             </div>
           </form>
         </div>
@@ -210,5 +246,5 @@
         </div>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>
