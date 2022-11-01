@@ -90,24 +90,24 @@ export class HouseService {
       filterAPIUrl += `LowestRoomPrice le ${maxPrice} and HighestRoomPrice ge ${minPrice}`;
     }
 
-    //[Expand] add filter by roomType if has
+    //[Filter] add filter by roomType if has
     if (selectedRoomTypeIds != undefined && selectedRoomTypeIds.length > 0) {
-      //this is not a filter so no need for checkFirstFilter
-
-      //start of query string
-      filterAPIUrl += '&$expand=Rooms($filter=';
+      //if is not the first filter -> need to add 'and' to API URL
+      if (!checkFirstFilter) {
+        filterAPIUrl += ` and `;
+      } else {
+        //if this one is the first filter -> mark it so others won't add 'and'
+        checkFirstFilter = false;
+      }
 
       //which each roomTypeId got selected -> append to query string
       for (let i = 0; i < selectedRoomTypeIds.length; i++) {
-        filterAPIUrl += `RoomId eq ${selectedRoomTypeIds[i]}`;
-        //if isn't last roomTypeId -> need an 'and'
+        filterAPIUrl += `contains(RoomTypeIds,'${selectedRoomTypeIds[i]}')`;
+        //if isn't last roomTypeId -> need an 'or'
         if (i < selectedRoomTypeIds.length - 1) {
           filterAPIUrl += ' or ';
         }
       }
-
-      //end of query string
-      filterAPIUrl += ')';
     }
 
     return this.http.get<House[]>(filterAPIUrl);

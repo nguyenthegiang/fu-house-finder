@@ -16,6 +16,9 @@ namespace DataAccess.DTO
         public int? CampusId { get; set; }
         public decimal PowerPrice { get; set; }
         public decimal WaterPrice { get; set; }
+        public bool? FingerprintLock { get; set; }
+        public bool? Camera { get; set; }
+        public bool? Parking { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
         public string CreatedBy { get; set; }

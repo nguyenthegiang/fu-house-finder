@@ -164,7 +164,7 @@ CREATE TABLE [dbo].[Statuses] (
 ) ON [PRIMARY]
 GO
 
---Loại phòng (dùng cho Room)
+--Loại phòng (dùng cho Room) (Không được quá 9 Record nếu không sẽ hỏng tính năng Filter ở Home)
 CREATE TABLE [dbo].[RoomTypes] (
 	RoomTypeId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
 	RoomTypeName nvarchar(300) NOT NULL,
