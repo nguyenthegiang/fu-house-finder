@@ -1,25 +1,23 @@
 <!-- Update Modal -->
-<div class="modal fade bd-example-modal-lg" id="updateModal" tabindex="-1" role="dialog"
-    aria-labelledby="updateModalLabel" aria-hidden="true">
+<div class="modal fade bd-example-modal-lg" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="updateModalLabel">Chỉnh sửa phòng</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form>
                     <div class="row">
                         <!-- roomName -->
-                        <div class="col-md-5">Tên Phòng
+                        <div class="col-md-6">Tên Phòng
                             <br>
                             <input type="text" class="form-control" id="roomName" [(ngModel)]="roomDetail.roomName"
                                 name="roomName">
                         </div>
                         <!-- area -->
-                        <div class="col-md-5 ml-auto">Diện tích
+                        <div class="col-md-6 ml-auto">Diện tích
                             <br>
                             <input type="text" class="form-control" id="areaByMeters"
                                 [(ngModel)]="roomDetail.areaByMeters" name="areaByMeters">
@@ -27,13 +25,13 @@
                     </div>
                     <div class="row">
                         <!-- price -->
-                        <div class="col-md-5">Giá tiền
+                        <div class="col-md-6">Giá tiền
                             <br>
                             <input type="text" class="form-control" id="pricePerMonth"
                                 [(ngModel)]="roomDetail.pricePerMonth" name="pricePerMonth">
                         </div>
                         <!-- building -->
-                        <div class="col-md-5 ml-auto">Tòa
+                        <div class="col-md-6 ml-auto">Tòa
                             <br>
                             <input type="text" class="form-control" id="buildingNumber"
                                 [(ngModel)]="roomDetail.buildingNumber" name="buildingNumber">
@@ -41,13 +39,13 @@
                     </div>
                     <div class="row">
                         <!-- info -->
-                        <div class="col-md-5">Thông tin
+                        <div class="col-md-6">Thông tin
                             <br>
                             <input type="text" class="form-control" id="information"
                                 [(ngModel)]="roomDetail.information" name="information">
                         </div>
                         <!-- floor -->
-                        <div class="col-md-5 ml-auto">Tầng
+                        <div class="col-md-6 ml-auto">Tầng
                             <br>
                             <input type="text" class="form-control" id="floorNumber"
                                 [(ngModel)]="roomDetail.floorNumber" name="floorNumber">
@@ -55,12 +53,12 @@
                     </div>
                     <div class="row">
                         <!-- current amount -->
-                        <div class="col-md-5">Số người ở
+                        <div class="col-md-6">Số người ở
                             <br>
                             <input type="text" class="form-control" id="currentAmountOfPeople"
                                 value="{{roomDetail.currentAmountOfPeople}}" name="currentAmountOfPeople">
                         </div>
-                        <div class="col-md-5 ml-auto "> Tiện ích
+                        <div class="col-md-6 ml-auto "> Tiện ích
                             <div class="form-check">
                                 <div class="row">
                                     <div class="col">
@@ -113,7 +111,7 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
                 <button type="button" class="btn btn-primary" (click)="updateRoom()">Lưu</button>
             </div>
         </div>
