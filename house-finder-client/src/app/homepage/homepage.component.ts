@@ -40,8 +40,8 @@ export class HomepageComponent implements OnInit {
   villagesOfSelectedCommune: Village[] = [];  //(Regions) all Villages of 1 selected Commune (only display after user has selected 1 Commune)
 
   //[Filter] Filter values for passing into API
-  searchName: string = '';
-  filterCampusId: number = 0;
+  searchName: string | undefined;
+  filterCampusId: number | undefined;
 
   constructor(
     private houseService: HouseService,
