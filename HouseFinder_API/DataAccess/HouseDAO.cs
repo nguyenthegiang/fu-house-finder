@@ -82,6 +82,19 @@ namespace DataAccess
                     }
                 }
                 houseDTOs = availableHouses;
+
+                //Get list of ID of RoomTypes of all Rooms of each House -> For Filtering by RoomType
+                foreach (HouseDTO houseDTO in houseDTOs)
+                {
+                    houseDTO.RoomTypeIds = new List<int>();
+                    foreach (RoomDTO roomDTO in houseDTO.Rooms)
+                    {
+                        if (!houseDTO.RoomTypeIds.Contains((int) roomDTO.RoomTypeId))
+                        {
+                            houseDTO.RoomTypeIds.Add((int) roomDTO.RoomTypeId);
+                        }
+                    }
+                }
             }
             catch (Exception e)
             {

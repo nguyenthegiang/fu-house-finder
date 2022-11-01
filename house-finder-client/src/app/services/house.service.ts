@@ -94,11 +94,20 @@ export class HouseService {
     if (selectedRoomTypeIds != undefined && selectedRoomTypeIds.length > 0) {
       //this is not a filter so no need for checkFirstFilter
 
-      // filterAPIUrl += '$expand=Rooms($filter=RoomId eq 10)'
+      //start of query string
+      filterAPIUrl += '&$expand=Rooms($filter=';
 
-      // selectedRoomTypeIds.forEach(roomTypeId => {
-        
-      // });
+      //which each roomTypeId got selected -> append to query string
+      for (let i = 0; i < selectedRoomTypeIds.length; i++) {
+        filterAPIUrl += `RoomId eq ${selectedRoomTypeIds[i]}`;
+        //if isn't last roomTypeId -> need an 'and'
+        if (i < selectedRoomTypeIds.length - 1) {
+          filterAPIUrl += ' or ';
+        }
+      }
+
+      //end of query string
+      filterAPIUrl += ')';
     }
 
     return this.http.get<House[]>(filterAPIUrl);
