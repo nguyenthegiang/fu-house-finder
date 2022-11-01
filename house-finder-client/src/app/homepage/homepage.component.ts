@@ -278,4 +278,10 @@ export class HomepageComponent implements OnInit {
     // Call API to update list houses with the selected room type
     alert('Event: ' + isChecked + ' Utility Name: ' + utilityName);
   }
+
+  //[Filter] Cancel all Filter values
+  onCancelFilter() {
+    //reload page
+    window.location.reload();
+  }
 }

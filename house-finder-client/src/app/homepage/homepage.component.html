@@ -190,6 +190,14 @@
             </label>
           </div>
         </div>
+
+        <hr>
+        <!-- Cancel Filter -->
+        <div>
+          <div class="d-grid gap-2">
+            <button class="btn btn-outline-secondary" type="button" (click)="onCancelFilter()">XÓA TẤT CẢ</button>
+          </div>
+        </div>
       </div>
     </div>
     <!-- End Filter Column -->
@@ -224,8 +232,8 @@
           <!-- Item onClick: to House Detail -->
           <div class="card rounded houseCardItem" routerLink="/house-detail/{{house.houseId}}">
 
-            <img class="card-img-top" *ngIf="house.imagesOfHouses" src="../assets/image/House/{{house.imagesOfHouses[0].imageLink}}"
-              alt="House Image" style="width: 100%;
+            <img class="card-img-top" *ngIf="house.imagesOfHouses"
+              src="../assets/image/House/{{house.imagesOfHouses[0].imageLink}}" alt="House Image" style="width: 100%;
                 height: 200px;
                 background-position: center center;
                 background-repeat: no-repeat;">
