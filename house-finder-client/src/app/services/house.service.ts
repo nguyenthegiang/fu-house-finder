@@ -32,6 +32,7 @@ export class HouseService {
     campusId?: number,
     maxPrice?: number,
     minPrice?: number,
+    selectedRoomTypeIds?: number[],
   ): Observable<House[]> {
     //define API here to append query options into it later
     var filterAPIUrl = this.APIUrl + `/availableHouses?`;
@@ -87,6 +88,17 @@ export class HouseService {
       }
 
       filterAPIUrl += `LowestRoomPrice le ${maxPrice} and HighestRoomPrice ge ${minPrice}`;
+    }
+
+    //[Expand] add filter by roomType if has
+    if (selectedRoomTypeIds != undefined && selectedRoomTypeIds.length > 0) {
+      //this is not a filter so no need for checkFirstFilter
+
+      // filterAPIUrl += '$expand=Rooms($filter=RoomId eq 10)'
+
+      // selectedRoomTypeIds.forEach(roomTypeId => {
+        
+      // });
     }
 
     return this.http.get<House[]>(filterAPIUrl);

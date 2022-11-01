@@ -45,6 +45,7 @@ export class HomepageComponent implements OnInit {
   filterCampusId: number | undefined;
   maxPrice: number | undefined;
   minPrice: number | undefined;
+  selectedRoomTypeIds: number[] = [];  //list of roomTypeId of roomTypes that got selected
 
   constructor(
     private houseService: HouseService,
@@ -126,6 +127,7 @@ export class HomepageComponent implements OnInit {
       this.filterCampusId,
       this.maxPrice,
       this.minPrice,
+      this.selectedRoomTypeIds,
     ).subscribe(data => {
       this.houses = data;
       this.scrollToTop();
@@ -216,8 +218,19 @@ export class HomepageComponent implements OnInit {
     //see if user just checked or unchecked the checkbox
     const isChecked = (<HTMLInputElement>event.target).checked;
 
+    //if user check -> add roomTypeId to the list
+    if (isChecked) {
+      this.selectedRoomTypeIds.push(roomTypeId);
+    } else {
+      //if user uncheck -> remove the roomTypeId from the list
+      const index = this.selectedRoomTypeIds.indexOf(roomTypeId, 0);
+      if (index > -1) {
+        this.selectedRoomTypeIds.splice(index, 1);
+      }
+    }
+
     // Call API to update list houses with the selected room type
-    alert('Event: ' + isChecked + ' Room type: ' + roomTypeId);
+    this.filterHouse();
   }
 
   //[Filter] Change list of Communes after user selected District
