@@ -57,7 +57,7 @@ CREATE TABLE [dbo].[Users] (
 	[Password] nvarchar(100),
 
 	DisplayName nvarchar(500) NULL,						--Tên để hiển thị, lấy từ Google/Facebook API (nếu login = fb/gg) hoặc lấy khi đăng ký (nếu login = email)
-	Active bit,											--chuyển thành false nếu User bị Disable
+	Active int,											--chuyển thành false nếu User bị Disable
 
 	--Dành cho Staff & Landlord
 	ProfileImageLink nvarchar(500) NULL,				--Link ảnh profile
@@ -132,6 +132,9 @@ CREATE TABLE [dbo].[Houses] (
 
 	PowerPrice money NOT NULL,			--giá điện
 	WaterPrice money NOT NULL,			--giá nước
+
+	FingerprintLock bit,				--khóa vân tay
+	Camera bit,							--camera an ninh
 
 	--Dành cho những Table CRUD dc -> History
 	Deleted bit,
@@ -318,6 +321,23 @@ CREATE TABLE [dbo].[RoomHistories] (
 
 	CONSTRAINT createdUser_in_User8 FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
 	CONSTRAINT updatedUser_in_User8 FOREIGN KEY(LastModifiedBy) REFERENCES [dbo].[Users](UserId),
+) ON [PRIMARY]
+GO
+
+--Vấn đề
+CREATE TABLE [dbo].[Issues] (
+	IssueId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	Description nvarchar(100),      --mô tả
+	RoomId int,						--phòng
+
+	--Dành cho những Table CRUD dc -> History
+	Deleted bit,
+	CreatedDate datetime,
+	LastModifiedDate datetime,
+	CreatedBy nchar(30),
+	LastModifiedBy nchar(30),
+
+	CONSTRAINT RoomId_in_Room3 FOREIGN KEY(RoomId) REFERENCES [dbo].Rooms(RoomId),
 ) ON [PRIMARY]
 GO
 
@@ -550,7 +570,7 @@ INSERT INTO [dbo].[Villages] VALUES (N'Yên Lỗ', 5, 0, GETDATE());
 
 INSERT INTO [dbo].[Villages] VALUES (N'Phú Đa 1', 6, 0, GETDATE());
 INSERT INTO [dbo].[Villages] VALUES (N'Phú Đa 2', 6, 0, GETDATE());
-INSERT INTO [dbo].[Villages] VALUES (N'Phú Lễ', 6, GETDATE());
+INSERT INTO [dbo].[Villages] VALUES (N'Phú Lễ', 6, 0, GETDATE());
 INSERT INTO [dbo].[Villages] VALUES (N'Yên Lạc 1', 6, 0, GETDATE());
 INSERT INTO [dbo].[Villages] VALUES (N'Yên Lạc 2', 6, 0, GETDATE());
 INSERT INTO [dbo].[Villages] VALUES (N'Yên Lạc 3', 6, 0, GETDATE());
@@ -1012,25 +1032,25 @@ INSERT INTO [dbo].[Villages] VALUES (N'Xóm Chằm', 59, 0, GETDATE());
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Lê', N'Rất đẹp', 6, 3, N'LA000001', 1, 3700, 1200, 0, GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Thảo', N'Rất đẹp', 7, 3, N'LA000002', 1, 3500, 1300, 0, GETDATE(), GETDATE(), N'LA000002', N'LA000002');
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ Hòa Lạc Yên Lạc Viên', N'Vị trí trung tâm khu giao lộ ngã tư Hòa Lạc. Cảnh quan trong lành, yên tĩnh', 8, 3, N'LA000003', 1, 3400, 1500, 0, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
-INSERT INTO [dbo].[Houses] VALUES (N'Nhà trọ Bình Yên', N'Không chung chủ, giờ giấc thoải mái', 9, 3, N'LA000004', 1, 3500, 1300, 0, GETDATE(), GETDATE(), N'LA000004', N'LA000004');
-INSERT INTO [dbo].[Houses] VALUES (N'Nhà trọ Tiến Phương', N'Sân rộng rãi, chỗ để xe thuận tiện, đảm bảo an ninh', 10, 3, N'LA000005', 1, 3600, 1200, 0, GETDATE(), GETDATE(), N'LA000005', N'LA000005');
-INSERT INTO [dbo].[Houses] VALUES (N'Nhà trọ Phương Duy', N' Phòng full nội thất, có chỗ nấu ăn riêng ', 11, 3, N'LA000006', 1, 3800, 1300, 0, GETDATE(), GETDATE(), N'LA000006', N'LA000006');
-INSERT INTO [dbo].[Houses] VALUES (N'HOLA Campus', N'Điện nước theo khung giá nhà nước', 12, 3, N'LA000007', 1, 3200, 1500, 0, GETDATE(), GETDATE(), N'LA000007', N'LA000007');
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ Hoàng Nam', N'Có siêu thị ngay tại tầng 1 cùng khuôn viên vui chơi rộng rãi.', 13, 3, N'LA000008', 1, 3400, 1250, 0, GETDATE(), GETDATE(), N'LA000008', N'LA000008');
-INSERT INTO [dbo].[Houses] VALUES (N'Kí túc xá Ông bà', N'Có sân vườn, ao cá, hợp với các bạn thích chill và yêu thiên nhiên', 14, 3, N'LA000009', 1, 3600, 1400, 0, GETDATE(), GETDATE(), N'LA000009', N'LA000009');
-INSERT INTO [dbo].[Houses] VALUES (N'Nhà trọ Thái Hà', N'Đồ dùng đã có đủ, chỉ việc xách Vali đến ở.', 15, 3, N'LA000010', 1, 3500, 1500, 0, GETDATE(), GETDATE(), N'LA000010', N'LA000010');
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ Việt Dũng', N'Đã đầy đủ nội thất từ cái tăm cái đũa yên tâm toàn đồ đẹp tại vì mình sống như gia đình nên chỉ yêu cầu sạch sẽ biết giữ gìn tài sản.', 16, 3, N'LA000011', 1, 3500, 1700, 0, GETDATE(), GETDATE(), N'LA000011', N'LA000011');
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tuấn Cường 1', N'Rất đẹp', 17, 3, N'LA000012', 1, 3000, 1100, 0, GETDATE(), GETDATE(), N'LA000012', N'LA000012');
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ Linh Lê', N'Không chung chủ', 6, 3, N'LA000001', 1, 3700, 1200, 0, GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Nguyễn', N'Vệ sinh khép kín', 6, 3, N'LA000001', 1, 3700, 1200, 0, GETDATE(), GETDATE(), N'LA000001', N'LA000001');
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ Thu Thảo', N'Không chung chủ', 7, 3, N'LA000002', 1, 3500, 1300, 0, GETDATE(), GETDATE(), N'LA000002', N'LA000002');
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Lê', N'Chỗ để xe rộng rãi', 7, 3, N'LA000002', 1, 3500, 1300, 0, GETDATE(), GETDATE(), N'LA000002', N'LA000002');
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ 123', N'Cảnh quan trong lành, yên tĩnh', 8, 3, N'LA000003', 1, 3400, 1500, 0, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ Chương Văn', N'Không chung chủ', 8, 3, N'LA000003', 1, 3400, 1500, 0, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ test ko available', N'Không chung chủ', 8, 3, N'LA000003', 1, 3400, 1500, 0, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Lê', N'Rất đẹp', 6, 3, N'LA000001', 1, 3700, 1200, 0, 0 ,1, GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Thảo', N'Rất đẹp', 7, 3, N'LA000002', 1, 3500, 1300, 0, 1, 1, GETDATE(), GETDATE(), N'LA000002', N'LA000002');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Hòa Lạc Yên Lạc Viên', N'Vị trí trung tâm khu giao lộ ngã tư Hòa Lạc. Cảnh quan trong lành, yên tĩnh', 8, 3, N'LA000003', 1, 3400, 1500, 0, 0 ,1, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+INSERT INTO [dbo].[Houses] VALUES (N'Nhà trọ Bình Yên', N'Không chung chủ, giờ giấc thoải mái', 9, 3, N'LA000004', 1, 3500, 1300, 0, 0 ,1, GETDATE(), GETDATE(), N'LA000004', N'LA000004');
+INSERT INTO [dbo].[Houses] VALUES (N'Nhà trọ Tiến Phương', N'Sân rộng rãi, chỗ để xe thuận tiện, đảm bảo an ninh', 10, 3, N'LA000005', 1, 3600, 1200, 0, 1, 1, GETDATE(), GETDATE(), N'LA000005', N'LA000005');
+INSERT INTO [dbo].[Houses] VALUES (N'Nhà trọ Phương Duy', N' Phòng full nội thất, có chỗ nấu ăn riêng ', 11, 3, N'LA000006', 1, 3800, 1300, 0, 1, 1, GETDATE(), GETDATE(), N'LA000006', N'LA000006');
+INSERT INTO [dbo].[Houses] VALUES (N'HOLA Campus', N'Điện nước theo khung giá nhà nước', 12, 3, N'LA000007', 1, 3200, 1500, 0, 1, 1, GETDATE(), GETDATE(), N'LA000007', N'LA000007');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Hoàng Nam', N'Có siêu thị ngay tại tầng 1 cùng khuôn viên vui chơi rộng rãi.', 13, 3, N'LA000008', 1, 3400, 1250, 0, 0, 0, GETDATE(), GETDATE(), N'LA000008', N'LA000008');
+INSERT INTO [dbo].[Houses] VALUES (N'Kí túc xá Ông bà', N'Có sân vườn, ao cá, hợp với các bạn thích chill và yêu thiên nhiên', 14, 3, N'LA000009', 1, 3600, 1400, 0, 0, 0, GETDATE(), GETDATE(), N'LA000009', N'LA000009');
+INSERT INTO [dbo].[Houses] VALUES (N'Nhà trọ Thái Hà', N'Đồ dùng đã có đủ, chỉ việc xách Vali đến ở.', 15, 3, N'LA000010', 1, 3500, 1500, 0, 1, 1, GETDATE(), GETDATE(), N'LA000010', N'LA000010');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Việt Dũng', N'Đã đầy đủ nội thất từ cái tăm cái đũa yên tâm toàn đồ đẹp tại vì mình sống như gia đình nên chỉ yêu cầu sạch sẽ biết giữ gìn tài sản.', 16, 3, N'LA000011', 1, 3500, 1700, 0, 0, 0, GETDATE(), GETDATE(), N'LA000011', N'LA000011');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tuấn Cường 1', N'Rất đẹp', 17, 3, N'LA000012', 1, 3000, 1100, 0, 0, 0, GETDATE(), GETDATE(), N'LA000012', N'LA000012');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Linh Lê', N'Không chung chủ', 6, 3, N'LA000001', 1, 3700, 1200, 0, 0, 0, GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Nguyễn', N'Vệ sinh khép kín', 6, 3, N'LA000001', 1, 3700, 1200, 0, 1, 0, GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Thu Thảo', N'Không chung chủ', 7, 3, N'LA000002', 1, 3500, 1300, 0, 1, 0, GETDATE(), GETDATE(), N'LA000002', N'LA000002');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Lê', N'Chỗ để xe rộng rãi', 7, 3, N'LA000002', 1, 3500, 1300, 0, 1, 0, GETDATE(), GETDATE(), N'LA000002', N'LA000002');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ 123', N'Cảnh quan trong lành, yên tĩnh', 8, 3, N'LA000003', 1, 3400, 1500, 0, 0 ,1, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Chương Văn', N'Không chung chủ', 8, 3, N'LA000003', 1, 3400, 1500, 0, 1, 0, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ test ko available', N'Không chung chủ', 8, 3, N'LA000003', 1, 3400, 1500, 0, 0 ,1, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
