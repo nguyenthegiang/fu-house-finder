@@ -83,7 +83,7 @@ namespace DataAccess
                 }
                 houseDTOs = availableHouses;
 
-                //Get list of ID of RoomTypes of all Rooms of each House -> For Filtering by RoomType
+                //Get list (as a string) of ID of RoomTypes of all Rooms of each House -> For Filtering by RoomType
                 foreach (HouseDTO houseDTO in houseDTOs)
                 {
                     houseDTO.RoomTypeIds = "";

@@ -13,10 +13,13 @@ namespace DataAccess.DTO
         public decimal? PricePerMonth { get; set; }
         public string Information { get; set; }
         public double? AreaByMeters { get; set; }
-        public bool Aircon { get; set; }
-        public bool Wifi { get; set; }
-        public bool WaterHeater { get; set; }
-        public bool Furniture { get; set; }
+        public bool Fridge { get; set; }
+        public bool Kitchen { get; set; }
+        public bool WashingMachine { get; set; }
+        public bool Desk { get; set; }
+        public bool LiveWithHost { get; set; }
+        public bool Bed { get; set; }
+        public bool ClosedToilet { get; set; }
         public int? MaxAmountOfPeople { get; set; }
         public int? CurrentAmountOfPeople { get; set; }
         public int? BuildingNumber { get; set; }
