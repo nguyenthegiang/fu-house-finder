@@ -220,29 +220,29 @@
       <!-- List of Houses -->
       <div class="row">
         <!-- House Item -->
-        <div class="col-4" *ngFor="let dataItem of houses">
+        <div class="col-4" *ngFor="let house of houses">
           <!-- Item onClick: to House Detail -->
-          <div class="card rounded houseCardItem" routerLink="/house-detail/{{dataItem.houseId}}">
+          <div class="card rounded houseCardItem" routerLink="/house-detail/{{house.houseId}}">
 
-            <img class="card-img-top" src="../assets/image/House/{{dataItem.imagesOfHouses[0].imageLink}}"
+            <img class="card-img-top" src="../assets/image/House/{{house.imagesOfHouses[0].imageLink}}"
               alt="House Image" style="width: 100%;
                 height: 200px;
                 background-position: center center;
                 background-repeat: no-repeat;">
 
             <div class="card-body text-white rounded-bottom">
-              <h5 class="card-title text-center font-weight-bold">{{dataItem.houseName}}</h5>
+              <h5 class="card-title text-center font-weight-bold">{{house.houseName}}</h5>
               <!-- View -->
               <div style="text-align: right; font-size: 12px;">
                 <i class="fa-solid fa-eye" style="margin-right: 10px;"></i>
                 <span>3,459</span>
               </div>
               <!-- Price with VND format -->
-              <div class="card-text"><i class="fa-solid fa-tag me-2"></i>{{dataItem.lowestRoomPrice |
+              <div class="card-text"><i class="fa-solid fa-tag me-2"></i>{{house.lowestRoomPrice |
                 currency:'VND':'symbol':'3.0'}} -
-                {{dataItem.highestRoomPrice | currency:'VND':'symbol':'3.0'}}</div>
+                {{house.highestRoomPrice | currency:'VND':'symbol':'3.0'}}</div>
               <div class="card-text d-inline-block text-truncate" style="max-width: 100%;"><i
-                  class="fa-solid fa-location-dot me-2"></i>{{dataItem.address.addresses}}</div>
+                  class="fa-solid fa-location-dot me-2"></i>{{house.address.addresses}}</div>
               <div class="card-text d-inline-block text-truncate" style="max-width: 100%;"><i
                   class="fa-solid fa-road me-2"></i>3.5km</div>
             </div>

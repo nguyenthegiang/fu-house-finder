@@ -10,6 +10,7 @@ namespace BusinessObjects
         public Room()
         {
             ImagesOfRooms = new HashSet<ImagesOfRoom>();
+            Issues = new HashSet<Issue>();
             RoomHistories = new HashSet<RoomHistory>();
         }
 
@@ -29,6 +30,7 @@ namespace BusinessObjects
         public int? StatusId { get; set; }
         public int? RoomTypeId { get; set; }
         public int? HouseId { get; set; }
+        public bool? Deleted { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
         public string CreatedBy { get; set; }
@@ -40,6 +42,7 @@ namespace BusinessObjects
         public virtual RoomType RoomType { get; set; }
         public virtual Status Status { get; set; }
         public virtual ICollection<ImagesOfRoom> ImagesOfRooms { get; set; }
+        public virtual ICollection<Issue> Issues { get; set; }
         public virtual ICollection<RoomHistory> RoomHistories { get; set; }
     }
 }

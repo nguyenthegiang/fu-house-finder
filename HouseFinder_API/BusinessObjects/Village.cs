@@ -15,6 +15,7 @@ namespace BusinessObjects
         public int VillageId { get; set; }
         public string VillageName { get; set; }
         public int? CommuneId { get; set; }
+        public bool? Deleted { get; set; }
         public DateTime? CreatedDate { get; set; }
 
         public virtual Commune Commune { get; set; }
