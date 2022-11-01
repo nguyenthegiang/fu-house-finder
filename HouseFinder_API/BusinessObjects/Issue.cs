@@ -5,19 +5,17 @@ using System.Collections.Generic;
 
 namespace BusinessObjects
 {
-    public partial class ImagesOfHouse
+    public partial class Issue
     {
-        public int ImageId { get; set; }
-        public string ImageLink { get; set; }
-        public int? HouseId { get; set; }
+        public int IssueId { get; set; }
+        public string Description { get; set; }
+        public int? RoomId { get; set; }
         public bool? Deleted { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
         public string CreatedBy { get; set; }
         public string LastModifiedBy { get; set; }
 
-        public virtual User CreatedByNavigation { get; set; }
-        public virtual House House { get; set; }
-        public virtual User LastModifiedByNavigation { get; set; }
+        public virtual Room Room { get; set; }
     }
 }

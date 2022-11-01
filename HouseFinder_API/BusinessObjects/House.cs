@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace BusinessObjects
+namespace BusinessObjects.
 {
     public partial class House
     {
@@ -24,6 +24,9 @@ namespace BusinessObjects
         public int? CampusId { get; set; }
         public decimal PowerPrice { get; set; }
         public decimal WaterPrice { get; set; }
+        public bool? FingerprintLock { get; set; }
+        public bool? Camera { get; set; }
+        public bool? Deleted { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
         public string CreatedBy { get; set; }

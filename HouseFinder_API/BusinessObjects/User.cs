@@ -36,7 +36,7 @@ namespace BusinessObjects
         public string Email { get; set; }
         public string Password { get; set; }
         public string DisplayName { get; set; }
-        public bool? Active { get; set; }
+        public int? Active { get; set; }
         public string ProfileImageLink { get; set; }
         public string PhoneNumber { get; set; }
         public string FacebookUrl { get; set; }
@@ -44,6 +44,7 @@ namespace BusinessObjects
         public string IdentityCardBackSideImageLink { get; set; }
         public int? AddressId { get; set; }
         public int? RoleId { get; set; }
+        public bool? Deleted { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
         public string CreatedBy { get; set; }
