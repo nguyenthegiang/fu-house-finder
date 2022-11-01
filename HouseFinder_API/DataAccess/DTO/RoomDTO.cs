@@ -31,5 +31,8 @@ namespace DataAccess.DTO
 
         //List Image of this Room
         public virtual ICollection<ImagesOfRoomDTO> ImagesOfRooms { get; set; }
+
+        //RoomTypeId, for Home Page - Filter available Rooms
+        public int? RoomTypeId { get; set; }
     }
 }

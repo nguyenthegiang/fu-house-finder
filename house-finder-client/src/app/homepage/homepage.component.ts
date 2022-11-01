@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { RoomService } from 'src/app/services/room.service';
 import { Village } from './../models/village';
 import { Commune } from './../models/commune';
@@ -42,6 +43,9 @@ export class HomepageComponent implements OnInit {
   //[Filter] Filter values for passing into API
   searchName: string | undefined;
   filterCampusId: number | undefined;
+  maxPrice: number | undefined;
+  minPrice: number | undefined;
+  selectedRoomTypeIds: number[] = [];  //list of roomTypeId of roomTypes that got selected
 
   constructor(
     private houseService: HouseService,
@@ -121,6 +125,9 @@ export class HomepageComponent implements OnInit {
       this.pageNumber,
       this.searchName,
       this.filterCampusId,
+      this.maxPrice,
+      this.minPrice,
+      this.selectedRoomTypeIds,
     ).subscribe(data => {
       this.houses = data;
       this.scrollToTop();
@@ -176,18 +183,18 @@ export class HomepageComponent implements OnInit {
       return;
     }
 
-    // Call API to update list houses with the distance user chose
+    // TODO: Call API to update list houses with the distance user chose
     alert('distance: ' + numMinDistance + ' ' + numMaxDistance);
   }
 
   //[Filter] Filter by Price
-  onPriceSelected(minPrice: string, maxPrice: string) {
+  onPriceSelected(minPriceString: string, maxPriceString: string) {
     // convert string to number
-    var numMinPrice: number = +minPrice;
-    var numMaxPrice: number = +maxPrice;
+    var numMinPrice: number = +minPriceString;
+    var numMaxPrice: number = +maxPriceString;
 
-    // (special case) 0 or empty input -> not handle
-    if (numMinPrice == 0 || numMaxPrice == 0) {
+    // (special case) 0 or empty input of Max -> not handle
+    if (numMaxPrice == 0) {
       return;
     }
 
@@ -201,7 +208,9 @@ export class HomepageComponent implements OnInit {
     }
 
     // Call API to update list houses with the price user chose
-    alert('price: ' + numMinPrice + ' ' + numMaxPrice);
+    this.maxPrice = numMaxPrice;
+    this.minPrice = numMinPrice;
+    this.filterHouse();
   }
 
   //[Filter] Filter by Room Type
@@ -209,8 +218,19 @@ export class HomepageComponent implements OnInit {
     //see if user just checked or unchecked the checkbox
     const isChecked = (<HTMLInputElement>event.target).checked;
 
+    //if user check -> add roomTypeId to the list
+    if (isChecked) {
+      this.selectedRoomTypeIds.push(roomTypeId);
+    } else {
+      //if user uncheck -> remove the roomTypeId from the list
+      const index = this.selectedRoomTypeIds.indexOf(roomTypeId, 0);
+      if (index > -1) {
+        this.selectedRoomTypeIds.splice(index, 1);
+      }
+    }
+
     // Call API to update list houses with the selected room type
-    alert('Event: ' + isChecked + ' Room type: ' + roomTypeId);
+    this.filterHouse();
   }
 
   //[Filter] Change list of Communes after user selected District
