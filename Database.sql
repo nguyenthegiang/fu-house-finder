@@ -1202,21 +1202,12 @@ GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 
 INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Giao thông thuận lợi', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 18, 0, 
 GETDATE(), GETDATE(), N'LA000003', N'LA000003');
-INSERT INTO [dbo].[Rooms] VALUES (N'102', 3000000, N'Giao thông thuận lợi', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 18,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'102', 3000000, N'Giao thông thuận lợi', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 18, 0,
 GETDATE(), GETDATE(), N'LA000003', N'LA000003');
-INSERT INTO [dbo].[Rooms] VALUES (N'103', 3000000, N'Giao thông thuận lợi', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 18,  0,
-GETDATE(), GETDATE(), N'LA000003', N'LA000003');
-
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Giao thông thuận lợi', 3, 1, 0, 0, 1, 2, 1, 1, 1, 2, 2, 19,  0,
+INSERT INTO [dbo].[Rooms] VALUES (N'103', 3000000, N'Giao thông thuận lợi', 3, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 18, 0,
 GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Giao thông thuận lợi', 3, 1, 0, 0, 1, 2, 1, 1, 1, 2, 2, 20, 
-GETDATE(), GETDATE(), N'LA000003', N'LA000003');
-
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Giao thông thuận lợi', 3, 1, 0, 0, 1, 2, 1, 1, 1, 2, 2, 21, 
-GETDATE(), GETDATE(), N'LA000003', N'LA000003');
-
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Giao thông thuận lợi', 3, 1, 0, 0, 1, 2, 1, 1, 1, 2, 2, 22, 
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Giao thông thuận lợi', 3, 1, 0, 0, 1, 2, 1, 1, 1, 2, 2, 19, 0,
 GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
@@ -1275,12 +1266,6 @@ GETDATE(), GETDATE(), N'LA000001', N'LA000003');
 INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house18.jpg', 18, 0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000003');
 INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house18.jpg', 19, 0,
-GETDATE(), GETDATE(), N'LA000001', N'LA000003');
-INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house18.jpg', 20,
-GETDATE(), GETDATE(), N'LA000001', N'LA000003');
-INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house18.jpg', 21,
-GETDATE(), GETDATE(), N'LA000001', N'LA000003');
-INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house18.jpg', 22,
 GETDATE(), GETDATE(), N'LA000001', N'LA000003');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
