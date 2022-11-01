@@ -2,6 +2,7 @@ import { House } from './../models/house';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
 
 @Injectable({
   providedIn: 'root'
@@ -24,20 +25,55 @@ export class HouseService {
   }
 
   //[Home Page] Filter available Houses using OData
-  filterAvailableHouses(pageSize: number, pageNumber: number, searchName?: string): Observable<House[]> {
+  filterAvailableHouses(
+    pageSize: number,
+    pageNumber: number,
+    searchName?: string,
+    campusId?: number,
+  ): Observable<House[]> {
     //define API here to append query options into it later
     var filterAPIUrl = this.APIUrl + `/availableHouses?`;
 
-    //count Skip and Top from pageSize & pageNumber
+    //[Paging] count Skip and Top from pageSize & pageNumber
     const skip = pageSize * (pageNumber - 1);
     const top = pageSize;
     filterAPIUrl += `$skip=${skip}&$top=${top}`;
 
-    //add filter by name if has (contains name)
-    if (searchName != undefined && searchName != '') {
-      filterAPIUrl += `&$filter=contains(HouseName,'${searchName}')`;
+    //[Filter] check if user has at least 1 filter
+    if (searchName || campusId) {
+      //add filter to API
+      filterAPIUrl += `&$filter=`;
     }
-    
+
+    //[Filter] flag to check if that filter is the first filter (if is first -> not have 'and')
+    var checkFirstFilter = true;
+
+    //[Filter] add filter by name if has (contains name)
+    if (searchName != undefined) {
+      //if is not the first filter -> need to add 'and' to API URL
+      if (!checkFirstFilter) {
+        filterAPIUrl += ` and `;
+      } else {
+        //if this one is the first filter -> mark it so others won't add 'and'
+        checkFirstFilter = false;
+      }
+
+      filterAPIUrl += `contains(HouseName,'${searchName}')`;
+    }
+
+    //[Filter] add filter by campus if has
+    if (campusId != undefined) {
+      //if is not the first filter -> need to add 'and' to API URL
+      if (!checkFirstFilter) {
+        filterAPIUrl += ` and `;
+      } else {
+        //if this one is the first filter -> mark it so others won't add 'and'
+        checkFirstFilter = false;
+      }
+      
+      filterAPIUrl += `CampusId eq ${campusId}`;
+    }
+
     return this.http.get<House[]>(filterAPIUrl);
   }
 

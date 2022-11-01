@@ -73,13 +73,15 @@ namespace DataAccess
 
                 /*for each house: check to see if it has available room
                 if not, remove from list*/
-                for (int i = 0; i < houseDTOs.Count; i++)
+                List<HouseDTO> availableHouses = new List<HouseDTO>();
+                foreach (HouseDTO houseDTO in houseDTOs)
                 {
-                    if (!(RoomDAO.CountAvailableRoomByHouseId(houseDTOs[i].HouseId) > 0))
+                    if (RoomDAO.CountAvailableRoomByHouseId(houseDTO.HouseId) > 0)
                     {
-                        houseDTOs.RemoveAt(i);
+                        availableHouses.Add(houseDTO);
                     }
                 }
+                houseDTOs = availableHouses;
             }
             catch (Exception e)
             {

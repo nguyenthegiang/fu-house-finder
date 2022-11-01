@@ -26,17 +26,22 @@ export class HomepageComponent implements OnInit {
 
   //(Paging)
   countAvailableHouses = 0; //items count
-  pageSize = 9; //number of items per page
-  pageNumber = 1; //starts at page 1
+  pageSize = 9;             //number of items per page
+  pageNumber = 1;           //starts at page 1
+  pageCount = 0;            //number of pages
+  pageList: number[] = [];  //array to loop with *ngFor in HTML Template
 
-
-  //Data for Filter column
+  //[Filter] Data for Filter column
   roomTypes: RoomType[] = [];         //Room types
   campuses: Campus[] = [];
   roomUtilities: RoomUtility[] = [];  //List of utilities of Rooms
   districts: District[] = [];         //(Regions) All Districts
   communesOfSelectedDistrict: Commune[] = []; //(Regions) all Communes of 1 selected District (only display after user has selected 1 District)
   villagesOfSelectedCommune: Village[] = [];  //(Regions) all Villages of 1 selected Commune (only display after user has selected 1 Commune)
+
+  //[Filter] Filter values for passing into API
+  searchName: string | undefined;
+  filterCampusId: number | undefined;
 
   constructor(
     private houseService: HouseService,
@@ -54,9 +59,17 @@ export class HomepageComponent implements OnInit {
       this.houses = data;
     });
 
-    //(Paging) Count available Houses for total number of pages
+    // (Paging) Count available Houses for total number of pages
     this.houseService.countTotalAvailableHouse().subscribe(data => {
       this.countAvailableHouses = data;
+
+      // (Paging) Calculate number of pages
+      this.pageCount = Math.ceil(this.countAvailableHouses / this.pageSize);  //divide & round up
+      console.log(this.countAvailableHouses);
+
+      // (Paging) Render pageList based on pageCount
+      this.pageList = Array.from({ length: this.pageCount }, (_, i) => i + 1);
+      //pageList is now an array like {1, 2, 3, ..., n | n = pageCount} 
     });
 
     //(List) Count available Rooms
@@ -92,13 +105,55 @@ export class HomepageComponent implements OnInit {
     ];
   }
 
+  // Go to top of Page: used whenever user filter/paging data -> refresh list data
+  scrollToTop() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  // Call API to update list house with selected Filter value & Paging
+  filterHouse() {
+    this.houseService.filterAvailableHouses(
+      this.pageSize,
+      this.pageNumber,
+      this.searchName,
+      this.filterCampusId,
+    ).subscribe(data => {
+      this.houses = data;
+      this.scrollToTop();
+    });
+  }
+
+  //[Paging] User click on a Page number -> Go to that page
+  goToPage(pageNumber: number) {
+    // Call API: go to Page Number
+    this.pageNumber = pageNumber;
+    this.filterHouse();
+  }
+
+  //Search House by Name (contains)
+  searchHouseByName(searchHouseName: string) {
+    //not perform search for empty input
+    if (!searchHouseName.trim()) {
+      return;
+    }
+
+    // Call API (filter by name contains)
+    this.searchName = searchHouseName;
+    this.filterHouse();
+  }
+
   //[Filter] Filter by Campus
   onCampusSelected(selectedCampusId: string) {
     // convert string to number
     var numberCampusId: number = +selectedCampusId;
 
-    // Call API to update list houses with the campus user chose
-    alert(numberCampusId);
+    // Call API: update list houses with the campus user chose
+    this.filterCampusId = numberCampusId;
+    this.filterHouse();
   }
 
   //[Filter] Filter by Distance
@@ -149,7 +204,14 @@ export class HomepageComponent implements OnInit {
     alert('price: ' + numMinPrice + ' ' + numMaxPrice);
   }
 
-  
+  //[Filter] Filter by Room Type
+  onRoomTypeSelected(event: any, roomTypeId: number) {
+    //see if user just checked or unchecked the checkbox
+    const isChecked = (<HTMLInputElement>event.target).checked;
+
+    // Call API to update list houses with the selected room type
+    alert('Event: ' + isChecked + ' Room type: ' + roomTypeId);
+  }
 
   //[Filter] Change list of Communes after user selected District
   onDistrictSelected(selectedDistrictId: string) {
@@ -190,16 +252,12 @@ export class HomepageComponent implements OnInit {
 
   }
 
-  //Search House by Name (contains)
-  searchHouseByName(searchHouseName: string) {
-    //not perform search for empty input
-    if (!searchHouseName.trim()) {
-      return;
-    }
+  //[Filter] Filter by Room Utility
+  onUtilitySelected(event: any, utilityName: string) {
+    //see if user just checked or unchecked the checkbox
+    const isChecked = (<HTMLInputElement>event.target).checked;
 
-    //call API (filter by name contains)
-    this.houseService.filterAvailableHouses(this.pageSize, this.pageNumber, searchHouseName).subscribe(data => {
-      this.houses = data;
-    });
+    // Call API to update list houses with the selected room type
+    alert('Event: ' + isChecked + ' Utility Name: ' + utilityName);
   }
 }
