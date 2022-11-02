@@ -190,8 +190,23 @@
             </label>
           </div>
         </div>
-
         <hr>
+
+        <!-- Filter by Rates -->
+        <div>
+          <h6 class="font-weight-bold mb-2">Tiện ích khác:</h6>
+
+          <div class="form-check" *ngFor="let roomUtility of roomUtilities" id="listOtherUtility">
+            <!-- Select utility -->
+            <input class="form-check-input" type="checkbox" value="{{roomUtility.utilityName}}"
+              id="{{roomUtility.utilityName}}" (change)="onUtilitySelected($event, roomUtility.utilityName)">
+            <label class="form-check-label" for="{{roomUtility.utilityName}}">
+              {{roomUtility.displayName}}
+            </label>
+          </div>
+        </div>
+        <hr>
+
         <!-- Cancel Filter -->
         <div>
           <div class="d-grid gap-2">

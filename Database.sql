@@ -1215,28 +1215,28 @@ GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Giao thông thuận lợi', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 19, 0,
 GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 20, 0,
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 20, 0,
 GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 21, 0,
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 21, 0,
 GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 23, 0,
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 23, 0,
 GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 1, 1, 1, 0, 0, 1, 2, 1, 1, 1, 2, 2, 24, 0,
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 1, 1, 1, 0, 0, 1, 2, 1, 1, 1, 1, 2, 24, 0,
 GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 0, 1, 1, 1, 0, 1, 2, 1, 1, 1, 2, 2, 25, 0,
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 0, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 2, 25, 0,
 GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 0, 1, 1, 1, 0, 1, 2, 1, 1, 1, 2, 1, 26, 0,
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 0, 1, 1, 1, 0, 1, 2, 1, 1, 1, 1, 1, 26, 0,
 GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 2, 2, 27, 0,
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1, 2, 27, 0,
 GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 
-INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 2, 3, 28, 0,
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1, 3, 28, 0,
 GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
