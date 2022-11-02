@@ -250,6 +250,29 @@ namespace DataAccess
             return countAvailableRoom;
         }
 
+        //[House Detail] Count total capacity by house id
+        public static int? CountAvailableCapacityByHouseId(int HouseId)
+        {
+            int? capacity;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Get list of available rooms
+                    List<Room> rooms = context.Rooms.Where(r => r.HouseId == HouseId).Where(r => r.Status.StatusName.Equals("Available")).ToList();
+                    //Calculate
+                    int? maxPeople = (from r in rooms select r.MaxAmountOfPeople).Sum();
+                    int? currentPeople = (from r in rooms select r.CurrentAmountOfPeople).Sum();
+                    capacity = maxPeople - currentPeople;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return capacity;
+        }
+
         //[Homepage] Count totally available room by house id
         public static int CountTotallyAvailableRoomByHouseId(int houseId)
         {
