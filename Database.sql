@@ -320,7 +320,7 @@ CREATE TABLE [dbo].[RoomHistories] (
 ) ON [PRIMARY]
 GO
 
---Vấn đề
+--Vấn đề của 1 phòng trọ -> student tạo ra, landlord có thể thấy được và xử lý
 CREATE TABLE [dbo].[Issues] (
 	IssueId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
 	Description nvarchar(100),      --mô tả
@@ -334,6 +334,16 @@ CREATE TABLE [dbo].[Issues] (
 	LastModifiedBy nchar(30),
 
 	CONSTRAINT RoomId_in_Room3 FOREIGN KEY(RoomId) REFERENCES [dbo].Rooms(RoomId),
+) ON [PRIMARY]
+GO
+
+--Wishlist của sinh viên, khi không tìm được phòng trọ theo mong muốn -> tạo -> tuyển sinh thấy được và xử lý
+CREATE TABLE [dbo].[Order] (
+	OrderId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	StudentId nchar(30),
+	OrderContent nvarchar(MAX),
+
+	CONSTRAINT StudentId_in_User4 FOREIGN KEY(StudentId) REFERENCES [dbo].[Users](UserId)
 ) ON [PRIMARY]
 GO
 
@@ -1821,3 +1831,7 @@ GETDATE(), GETDATE(), N'HE153046', N'HE153046');
 -------------------------------------------------------------------------------------------------------------------------------------------
 
 INSERT INTO [dbo].[RoomHistories] VALUES (N'Nguyễn Thế Giang', 1, 0, GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
+INSERT INTO [dbo].[Order] VALUES (N'HE153046', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.');
