@@ -78,8 +78,13 @@ export class HouseDetailComponent implements OnInit {
     this.reportService.addReport(report).subscribe();
   }
 
-  GoToRoomDetail(id: number)
+  viewRoom(id: number)
   {
     this.router.navigate(['/room-detail/' + id]);
+  }
+
+  //for displaying 'Amount of People'
+  peopleCounter(i: number) {
+    return new Array(i);
   }
 }
