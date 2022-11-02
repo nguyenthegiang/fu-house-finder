@@ -22,6 +22,7 @@ import { UpdateRoomComponent } from './Landlord/update-room/update-room.componen
 import { ListLandlordComponent } from './Staff/list-landlord/list-landlord.component';
 import { ListLandlordSignupRequestComponent } from './Staff/list-landlord-signup-request/list-landlord-signup-request.component';
 import { RoomDetailComponent } from './Guest/room-detail/room-detail.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { RoomDetailComponent } from './Guest/room-detail/room-detail.component';
     FormsModule,
     ReactiveFormsModule,
     SocialLoginModule,
+    NgbModule,
   ],
   providers: [{
     provide: 'SocialAuthServiceConfig',

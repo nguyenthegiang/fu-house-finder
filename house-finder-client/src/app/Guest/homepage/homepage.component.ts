@@ -71,7 +71,7 @@ export class HomepageComponent implements OnInit {
 
       // (Paging) Render pageList based on pageCount
       this.pageList = Array.from({ length: this.pageCount }, (_, i) => i + 1);
-      //pageList is now an array like {1, 2, 3, ..., n | n = pageCount} 
+      //pageList is now an array like {1, 2, 3, ..., n | n = pageCount}
     });
 
     //(List) Count available Rooms

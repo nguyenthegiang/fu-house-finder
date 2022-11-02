@@ -292,6 +292,24 @@
                 <i class="fa-solid fa-eye" style="margin-right: 10px;"></i>
                 <span>3,459</span>
               </div>
+              <!-- Number of available rooms -->
+                <i class="fa-solid fa-house"></i>
+                <ng-template #tipContent>
+                    <div>
+                      <span>Phòng chưa có người ở: {{countAvailableHouses}}</span>
+                      <br>
+                      <span>Phòng đã có người ở: {{countAvailableHouses}}</span>
+                    </div>
+                </ng-template>
+
+                <span placement="bottom" [ngbTooltip]="tipContent">
+                {{countAvailableHouses}} phòng trống
+                </span>
+
+                <!-- <button type="button" class="btn btn-outline-dark me-1" data-bs-toggle="tooltip" data-bs-placement="top" [title]="tipContent">
+                  <i class="fa-solid fa-bed"></i>
+                  {{countAvailableHouses}} phòng trống
+                </button> -->
               <!-- Price with VND format -->
               <div class="card-text"><i class="fa-solid fa-tag me-2"></i>{{house.lowestRoomPrice |
                 currency:'VND':'symbol':'3.0'}} -
@@ -341,3 +359,5 @@
   <!-- End Main content -->
 </div>
 <!-- End Body -->
+
+
