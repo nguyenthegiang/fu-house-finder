@@ -132,12 +132,12 @@
 
           <!-- District -->
           <div class="d-flex justify-content-between align-items-center my-2">
-            <div>Huyện/Quận</div>
+            <div class="me-2">Huyện/Quận</div>
             <div>
               <!-- When select 1 District -> change list of Communes accordingly -->
               <select #selectDistrict class="form-select selectRegion" aria-label="select-district"
                 (change)="onDistrictSelected(selectDistrict.value)">
-                <option selected>--Chọn quận/huyện--</option>
+                <option selected>Chọn quận/huyện</option>
                 <!-- List all Districts -->
                 <option *ngFor=" let district of districts" value="{{district.districtId}}">
                   {{district.districtName}}</option>
@@ -147,12 +147,12 @@
 
           <!-- Commune -->
           <div class="d-flex justify-content-between align-items-center mb-2">
-            <div>Phường/Xã</div>
+            <div class="me-2">Phường/Xã</div>
             <div>
               <!-- When select 1 Communes -> change list of Villages accordingly -->
               <select #selectCommune class="form-select selectRegion" aria-label="select-commune"
                 (change)="onCommuneSelected(selectCommune.value)">
-                <option selected>--Chọn phường/xã--</option>
+                <option selected>Chọn phường/xã</option>
                 <!-- List all Communes of selected District -->
                 <option *ngFor="let commune of communesOfSelectedDistrict" value="{{commune.communeId}}">
                   {{commune.communeName}}</option>
@@ -162,12 +162,12 @@
 
           <!-- Village -->
           <div class="d-flex justify-content-between align-items-center">
-            <div>Thôn/Xóm</div>
+            <div class="me-2">Thôn/Xóm</div>
             <div>
               <!-- When select 1 Village -> call API -->
               <select #selectVillage class="form-select selectRegion" aria-label="select-village"
                 (change)="onVillageSelected(selectVillage.value)">
-                <option selected>--Chọn thôn/xóm--</option>
+                <option selected>Chọn thôn/xóm</option>
                 <!-- List all Villages of selected Commune -->
                 <option *ngFor="let village of villagesOfSelectedCommune" value="{{village.villageId}}">
                   {{village.villageName}}</option>
