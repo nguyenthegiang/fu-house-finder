@@ -294,17 +294,21 @@
               </div>
               <!-- Number of available rooms -->
                 <i class="fa-solid fa-house"></i>
-                <ng-template #tipContent>
+                <!-- <ng-template #tipContent>
                     <div>
                       <span>Phòng chưa có người ở: {{countAvailableHouses}}</span>
                       <br>
                       <span>Phòng đã có người ở: {{countAvailableHouses}}</span>
                     </div>
                 </ng-template>
-
                 <span placement="bottom" [ngbTooltip]="tipContent">
                 {{countAvailableHouses}} phòng trống
-                </span>
+                </span> -->
+              <span data-bs-toggle="tooltip" data-bs-html="true" title="
+                Phòng chưa có người ở: {{countAvailableHouses}}
+                Phòng đã có người ở: {{countAvailableHouses}}">
+                {{countAvailableHouses}} phòng trống
+              </span>
 
                 <!-- <button type="button" class="btn btn-outline-dark me-1" data-bs-toggle="tooltip" data-bs-placement="top" [title]="tipContent">
                   <i class="fa-solid fa-bed"></i>
