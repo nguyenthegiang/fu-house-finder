@@ -19,5 +19,6 @@ namespace Repositories.IRepository
         public int CountAvailableRoom();
         public int? CountAvailableCapacity();
         public int CountTotallyAvailableRoomByHouseId(int houseId);
+        public int CountPatiallyyAvailableRoomByHouseId(int houseId);
     }
 }
