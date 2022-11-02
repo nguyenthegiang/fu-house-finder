@@ -18,5 +18,6 @@ namespace Repositories.IRepository
         public RoomDTO GetRoomByRoomId(int roomId);
         public int CountAvailableRoom();
         public int? CountAvailableCapacity();
+        public int CountTotallyAvailableRoomByHouseId(int houseId);
     }
 }

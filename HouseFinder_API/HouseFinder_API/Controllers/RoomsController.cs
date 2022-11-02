@@ -125,5 +125,14 @@ namespace HouseFinder_API.Controllers
             return capacity;
         }
 
+        //GET: api/Rooms/CountTotallyAvailableRoomByHouseId?HouseId=
+        [HttpGet("CountTotallyAvailableRoomByHouseId")]
+        public int? CountTotallyAvailableRoomByHouseId(int houseId)
+        {
+            int? availableRoom = roomsRepository.CountTotallyAvailableRoomByHouseId(houseId);
+            return availableRoom;
+        }
+
+
     }
 }
