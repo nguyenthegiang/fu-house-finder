@@ -20,6 +20,8 @@ import { Report } from '../../models/report';
 export class HouseDetailComponent implements OnInit {
   //Detail information of this House
   houseDetail: House | undefined;
+  //Detail image of this House
+  houseImage: string[] = [];
   //Landlord of this house
   landlordDetail: User | undefined;
   //List of available rooms
