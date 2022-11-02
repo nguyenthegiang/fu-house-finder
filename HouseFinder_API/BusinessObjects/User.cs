@@ -18,6 +18,7 @@ namespace BusinessObjects
             ImagesOfRoomLastModifiedByNavigations = new HashSet<ImagesOfRoom>();
             InverseCreatedByNavigation = new HashSet<User>();
             InverseLastModifiedByNavigation = new HashSet<User>();
+            Orders = new HashSet<Order>();
             RateCreatedByNavigations = new HashSet<Rate>();
             RateLastModifiedByNavigations = new HashSet<Rate>();
             RateStudents = new HashSet<Rate>();
@@ -62,6 +63,7 @@ namespace BusinessObjects
         public virtual ICollection<ImagesOfRoom> ImagesOfRoomLastModifiedByNavigations { get; set; }
         public virtual ICollection<User> InverseCreatedByNavigation { get; set; }
         public virtual ICollection<User> InverseLastModifiedByNavigation { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
         public virtual ICollection<Rate> RateCreatedByNavigations { get; set; }
         public virtual ICollection<Rate> RateLastModifiedByNavigations { get; set; }
         public virtual ICollection<Rate> RateStudents { get; set; }
