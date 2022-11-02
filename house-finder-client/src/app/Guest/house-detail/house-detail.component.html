@@ -100,7 +100,6 @@
             <th scope="col">Diện tích</th>
             <th scope="col">Số người ở</th>
             <th scope="col">Trạng thái</th>
-            <th scope="col">Ngày tạo</th>
           </tr>
         </thead>
         <tbody>
@@ -138,9 +137,6 @@
               <span *ngIf="dataItem.status.statusName === 'Occupied'">Đã thuê</span>
               <span *ngIf="dataItem.status.statusName === 'Disabled'">Không dùng được</span>
             </td>
-
-            <!-- Date -->
-            <td>{{dataItem.createdDate | date}}</td>
 
             <td>
               <!-- Detail button -->
