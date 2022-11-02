@@ -249,5 +249,47 @@ namespace DataAccess
             }
             return countAvailableRoom;
         }
+
+        //[Homepage] Count totally available room by house id
+        public static int CountTotallyAvailableRoomByHouseId(int houseId)
+        {
+            int total;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Get list totally available room by house id
+                    List<RoomDTO> availableRooms = GetAvailableRoomsByHouseId(houseId).Where(r => r.CurrentAmountOfPeople == 0).ToList();
+                    //Calculate the number of totally available rooms
+                    total = availableRooms.Count();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return total;
+        }
+
+        //[Homepage] Count partially available room by house Id
+        public static int CountPartiallyAvailableRoomByHouseId(int houseId)
+        {
+            int total;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Get list totally available room by house id
+                    List<RoomDTO> availableRooms = GetAvailableRoomsByHouseId(houseId).Where(r => r.CurrentAmountOfPeople > 0).ToList();
+                    //Calculate the number of partially available rooms
+                    total = availableRooms.Count();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return total;
+        }
     }
 }

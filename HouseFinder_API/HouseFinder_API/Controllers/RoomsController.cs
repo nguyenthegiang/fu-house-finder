@@ -125,5 +125,22 @@ namespace HouseFinder_API.Controllers
             return capacity;
         }
 
+        //GET: api/Rooms/CountTotallyAvailableRoomByHouseId?houseId=
+        [HttpGet("CountTotallyAvailableRoomByHouseId")]
+        public int? CountTotallyAvailableRoomByHouseId(int houseId)
+        {
+            int? availableRoom = roomsRepository.CountTotallyAvailableRoomByHouseId(houseId);
+            return availableRoom;
+        }
+
+        //GET: api/Rooms/CountPartiallyAvailableRoomByHouseId?houseId=
+        [HttpGet("CountPartiallyAvailableRoomByHouseId")]
+        public int? CountPartiallyAvailableRoomByHouseId(int houseId)
+        {
+            int? availableRoom = roomsRepository.CountPatiallyyAvailableRoomByHouseId(houseId);
+            return availableRoom;
+        }
+
+
     }
 }
