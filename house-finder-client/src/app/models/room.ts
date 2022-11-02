@@ -9,10 +9,13 @@ export interface Room {
     pricePerMonth: number;
     information: string;
     areaByMeters: number;
-    aircon: boolean;
-    wifi: boolean;
-    waterHeater: boolean;
-    furniture: boolean;
+    fridge: boolean;
+    kitchen: boolean;
+    washingMachine: boolean;
+    desk: boolean;
+    liveWithHost: boolean;
+    bed: boolean;
+    closedToilet: boolean;
     maxAmountOfPeople: number;
     currentAmountOfPeople: number;
     buildingNumber: number;
