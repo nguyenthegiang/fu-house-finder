@@ -1,15 +1,15 @@
-import { User } from './../models/user';
-import { CampusService } from './../services/campus.service';
-import { UserService } from './../services/user.service';
-import { House } from './../models/house';
+import { User } from '../../models/user';
+import { CampusService } from '../../services/campus.service';
+import { UserService } from '../../services/user.service';
+import { House } from '../../models/house';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HouseService } from '../services/house.service';
-import { RoomService } from '../services/room.service';
+import { HouseService } from '../../services/house.service';
+import { RoomService } from '../../services/room.service';
 import { Observable } from 'rxjs';
-import { Room } from '../models/room';
-import { ReportService } from '../services/report.service';
-import { Report } from '../models/report';
+import { Room } from '../../models/room';
+import { ReportService } from '../../services/report.service';
+import { Report } from '../../models/report';
 
 @Component({
   selector: 'app-house-detail',

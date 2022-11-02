@@ -1,17 +1,17 @@
 import { Router } from '@angular/router';
 import { RoomService } from 'src/app/services/room.service';
-import { Village } from './../models/village';
-import { Commune } from './../models/commune';
-import { District } from './../models/district';
-import { DistrictService } from './../services/district.service';
-import { RoomUtility } from './../models/roomUtilities';
-import { CampusService } from './../services/campus.service';
-import { Campus } from './../models/campus';
-import { HouseService } from './../services/house.service';
+import { Village } from '../../models/village';
+import { Commune } from '../../models/commune';
+import { District } from '../../models/district';
+import { DistrictService } from '../../services/district.service';
+import { RoomUtility } from '../../models/roomUtilities';
+import { CampusService } from '../../services/campus.service';
+import { Campus } from '../../models/campus';
+import { HouseService } from '../../services/house.service';
 import { Component, OnInit } from '@angular/core';
-import { House } from '../models/house';
-import { RoomType } from '../models/roomType';
-import { RoomTypeService } from '../services/room-type.service';
+import { House } from '../../models/house';
+import { RoomType } from '../../models/roomType';
+import { RoomTypeService } from '../../services/room-type.service';
 
 @Component({
   selector: 'app-homepage',
