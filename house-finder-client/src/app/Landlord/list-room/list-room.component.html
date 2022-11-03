@@ -162,15 +162,15 @@
         <td>
           <!-- Update button -->
           <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal"
-            data-bs-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId,1)">Chỉnh sửa</button>
+            data-bs-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId)">Chỉnh sửa</button>
 
           <!-- Delete button -->
-          <button type=" button" class="btn btn-danger" data-toggle="modal" data-bs-target="#deleteModal"
-            data-bs-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId,2)">Xóa</button>
+          <button type=" button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
+            data-bs-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId)">Xóa</button>
         </td>
       </tr>
     </tbody>
   </table>
 </div>
 
-<app-update-room [roomId]="updateRoomId" [statusCheck]="statusChecked"></app-update-room>
+<app-update-room [roomId]="updateRoomId"></app-update-room>
