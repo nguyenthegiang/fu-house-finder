@@ -24,7 +24,7 @@ namespace DataAccess
                     //Get by HouseID, include Images
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    rooms = context.Rooms.Where(r => r.HouseId == HouseId)
+                    rooms = context.Rooms.Where(r => r.HouseId == HouseId && r.Deleted==false)
                         .Include(r => r.ImagesOfRooms).Include(r => r.RoomType).ProjectTo<RoomDTO>(config).ToList();
                 }
             }
@@ -47,7 +47,7 @@ namespace DataAccess
                     //Find rooms of this house
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    var result = context.Rooms.Include(p => p.Status).Where(r => r.HouseId == HouseId).ProjectTo<RoomDTO>(config).ToList();
+                    var result = context.Rooms.Include(p => p.Status).Where(r => r.HouseId == HouseId && r.Deleted== false).ProjectTo<RoomDTO>(config).ToList();
                     //Get only available rooms
                     foreach (RoomDTO r in result)
                     {
@@ -151,7 +151,7 @@ namespace DataAccess
                     }
 
                     //Delete by changing Status to Disabled
-                    updatedRoom.StatusId = 3;
+                    updatedRoom.Deleted = true;
                     context.Entry<Room>(updatedRoom).State = EntityState.Detached;
                     context.Rooms.Update(updatedRoom);
                     context.SaveChanges();
@@ -171,7 +171,7 @@ namespace DataAccess
                 {
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    RoomDTO room = context.Rooms.Include(p => p.Status).Where(r => r.RoomId == roomId).ProjectTo<RoomDTO>(config).FirstOrDefault();
+                    RoomDTO room = context.Rooms.Include(p => p.Status).Where(r => r.RoomId == roomId && r.Deleted==false).ProjectTo<RoomDTO>(config).FirstOrDefault();
                     if (room == null)
                     {
                         throw new Exception();
