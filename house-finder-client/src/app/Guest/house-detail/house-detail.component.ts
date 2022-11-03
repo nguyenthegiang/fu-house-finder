@@ -20,6 +20,8 @@ import { Report } from '../../models/report';
 export class HouseDetailComponent implements OnInit {
   //Detail information of this House
   houseDetail: House | undefined;
+  //Detail image of this House
+  houseImage: string[] = [];
   //Landlord of this house
   landlordDetail: User | undefined;
   //List of available rooms
@@ -28,6 +30,7 @@ export class HouseDetailComponent implements OnInit {
   countAvailableHouses = 0; //items count
   pageSize = 9; //number of items per page
   pageNumber = 1; //starts at page 1
+  isOn = false;
 
   constructor(
     private route: ActivatedRoute,

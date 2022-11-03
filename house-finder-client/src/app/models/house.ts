@@ -9,6 +9,9 @@ export interface House {
     landlordId: string;
     powerPrice: number;
     waterPrice: number;
+    fingerprintLock: boolean;
+    camera: boolean;
+    parking: boolean;
     lowestRoomPrice: number;
     highestRoomPrice: number;
     address: Address;
