@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using AutoMapper.QueryableExtensions;
 using BusinessObjects;
+using DataAccess.DTO;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -7,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.DTO
+namespace DataAccess
 {
     public class OrderDAO
     {
@@ -60,6 +62,25 @@ namespace DataAccess.DTO
                 throw new Exception(e.Message);
             }
             return total;
+        }
+        //[Staff/Dashboard] Get list of order
+        public static List<OrderDTO> GetAllOrders()
+        {
+            List<OrderDTO> orders;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    orders = context.Orders.ProjectTo<OrderDTO>(config).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return orders;
         }
     }
 }
