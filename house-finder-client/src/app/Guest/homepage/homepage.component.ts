@@ -116,7 +116,7 @@ export class HomepageComponent implements OnInit {
       { "utilityName": "Kitchen", "displayName": "Bếp" },
       { "utilityName": "WashingMachine", "displayName": "Máy giặt" },
       { "utilityName": "Desk", "displayName": "Bàn học" },
-      { "utilityName": "LiveWithHost", "displayName": "Chung chủ" },
+      { "utilityName": "NoLiveWithHost", "displayName": "Không chung chủ" },
       { "utilityName": "Bed", "displayName": "Giường" },
       { "utilityName": "ClosedToilet", "displayName": "Vệ sinh khép kín" },
     ];

@@ -150,7 +150,7 @@ export class HouseService {
       filterAPIUrl += `DistrictId eq ${selectedDistrictId}`;
     }
 
-    //[Filter] add filter by houseUtility if has
+    //[Filter] add filter by houseUtility if has: select house with all of these houseUtility
     if (selectedHouseUtilities != undefined && selectedHouseUtilities.length > 0) {
       //if is not the first filter -> need to add 'and' to API URL
       if (!checkFirstFilter) {
@@ -163,32 +163,32 @@ export class HouseService {
       //with each houseUtility got selected -> append to query string
       for (let i = 0; i < selectedHouseUtilities.length; i++) {
         filterAPIUrl += `${selectedHouseUtilities[i]} eq true`;
-        //if isn't last houseUtility -> need an 'or'
-        if (i < selectedRoomTypeIds.length - 1) {
-          filterAPIUrl += ' or ';
+        //if isn't last houseUtility -> need an 'and'
+        if (i < selectedHouseUtilities.length - 1) {
+          filterAPIUrl += ' and ';
         }
       }
     }
 
-    // //[Filter] add filter by roomUtility if has
-    // if (selectedRoomUtilities != undefined && selectedRoomUtilities.length > 0) {
-    //   //if is not the first filter -> need to add 'and' to API URL
-    //   if (!checkFirstFilter) {
-    //     filterAPIUrl += ` and `;
-    //   } else {
-    //     //if this one is the first filter -> mark it so others won't add 'and'
-    //     checkFirstFilter = false;
-    //   }
+    //[Filter] add filter by roomUtility if has: select house with all of these roomUtility
+    if (selectedRoomUtilities != undefined && selectedRoomUtilities.length > 0) {
+      //if is not the first filter -> need to add 'and' to API URL
+      if (!checkFirstFilter) {
+        filterAPIUrl += ` and `;
+      } else {
+        //if this one is the first filter -> mark it so others won't add 'and'
+        checkFirstFilter = false;
+      }
 
-    //   //with each roomUtility got selected -> append to query string
-    //   for (let i = 0; i < selectedHouseUtilities.length; i++) {
-    //     filterAPIUrl += `${selectedHouseUtilities[i]} eq true`;
-    //     //if isn't last houseUtility -> need an 'or'
-    //     if (i < selectedRoomTypeIds.length - 1) {
-    //       filterAPIUrl += ' or ';
-    //     }
-    //   }
-    // }
+      //with each roomUtility got selected -> append to query string
+      for (let i = 0; i < selectedRoomUtilities.length; i++) {
+        filterAPIUrl += `${selectedRoomUtilities[i]} eq true`;
+        //if isn't last roomUtility -> need an 'and'
+        if (i < selectedRoomUtilities.length - 1) {
+          filterAPIUrl += ' and ';
+        }
+      }
+    }
 
     return this.http.get<House[]>(filterAPIUrl);
   }

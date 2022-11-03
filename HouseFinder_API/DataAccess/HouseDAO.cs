@@ -112,7 +112,7 @@ namespace DataAccess
                         if (roomDTO.Kitchen) houseDTO.Kitchen = true;
                         if (roomDTO.WashingMachine) houseDTO.WashingMachine = true;
                         if (roomDTO.Desk) houseDTO.Desk = true;
-                        if (roomDTO.LiveWithHost) houseDTO.LiveWithHost = true;
+                        if (roomDTO.NoLiveWithHost) houseDTO.NoLiveWithHost = true;
                         if (roomDTO.Bed) houseDTO.Bed = true;
                         if (roomDTO.ClosedToilet) houseDTO.ClosedToilet = true;
                     }
