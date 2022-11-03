@@ -127,7 +127,12 @@ export class HomepageComponent implements OnInit {
   }
 
   // Call API to update list house with selected Filter value & Paging
-  filterHouse() {
+  filterHouse(resetPaging: boolean = false) {
+    //if user filter -> reset Paging (back to page 1)
+    if (resetPaging) {
+      this.pageNumber = 1;
+    }
+
     this.houseService.filterAvailableHouses(
       this.pageSize,
       this.pageNumber,
@@ -158,7 +163,7 @@ export class HomepageComponent implements OnInit {
 
     // Call API (filter by name contains)
     this.searchName = searchHouseName;
-    this.filterHouse();
+    this.filterHouse(true);
   }
 
   //[Filter] Filter by Campus
@@ -168,7 +173,7 @@ export class HomepageComponent implements OnInit {
 
     // Call API: update list houses with the campus user chose
     this.filterCampusId = numberCampusId;
-    this.filterHouse();
+    this.filterHouse(true);
   }
 
   //[Filter] Filter by Distance
@@ -218,7 +223,7 @@ export class HomepageComponent implements OnInit {
     // Call API to update list houses with the price user chose
     this.maxPrice = numMaxPrice;
     this.minPrice = numMinPrice;
-    this.filterHouse();
+    this.filterHouse(true);
   }
 
   //[Filter] Filter by Room Type
@@ -238,7 +243,7 @@ export class HomepageComponent implements OnInit {
     }
 
     // Call API to update list houses with the selected room type
-    this.filterHouse();
+    this.filterHouse(true);
   }
 
   //[Filter] Change list of Communes after user selected District
