@@ -22,6 +22,7 @@ export class LandlordHouseDetailComponent implements OnInit {
   //List of available rooms
   availableRooms: Room[] = [];
   isOn = false;
+  replyOn = false;
 
   constructor(
     private route: ActivatedRoute,
