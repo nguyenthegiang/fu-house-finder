@@ -59,6 +59,8 @@ namespace DataAccess
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
                     houseDTOs = context.Houses
+                        //include this for finding DistrictId
+                        .Include(house => house.Village.Commune)
                         .ProjectTo<AvailableHouseDTO>(config).ToList();
 
                     //find lowest room price & highest room price
@@ -80,9 +82,12 @@ namespace DataAccess
                 }
                 houseDTOs = availableHouses;
 
-                //Get list (as a string) of ID of RoomTypes of all Rooms of each House -> For Filtering by RoomType
+                //Add data for DTO
                 foreach (AvailableHouseDTO houseDTO in houseDTOs)
                 {
+                    //(RoomTypeIds)
+                    /*Get list (as a string) of ID of RoomTypes of all Rooms of each House
+                    -> For Filtering by RoomType*/
                     houseDTO.RoomTypeIds = "";
                     foreach (RoomDTO roomDTO in houseDTO.Rooms)
                     {
@@ -91,6 +96,12 @@ namespace DataAccess
                             houseDTO.RoomTypeIds += roomDTO.RoomTypeId.ToString();
                         }
                     }
+
+                    //(Commune, District)
+                    /*Get CommuneId & DistrictId of the Village of this House
+                    -> For Filtering by Region*/
+                    houseDTO.CommuneId = houseDTO.Village.CommuneId;
+                    houseDTO.DistrictId = houseDTO.Village.Commune.DistrictId;
                 }
             }
             catch (Exception e)
@@ -102,6 +113,7 @@ namespace DataAccess
             houseDTOs.ForEach(delegate(AvailableHouseDTO houseDTO) 
             {
                 houseDTO.Rooms = null;
+                houseDTO.Village = null;
             });
 
             return houseDTOs;

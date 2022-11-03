@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,6 +17,11 @@ namespace DataAccess.DTO
         public string Information { get; set; }
         public int AddressId { get; set; }
         public int? VillageId { get; set; }
+
+        //[Home Page - Filter by Region]
+        public int? CommuneId { get; set; }
+        public int? DistrictId { get; set; }
+
         public string LandlordId { get; set; }
         public int? CampusId { get; set; }
         public decimal PowerPrice { get; set; }
@@ -35,10 +41,15 @@ namespace DataAccess.DTO
         //Address of the House
         public virtual AddressDTO Address { get; set; }
 
+        //[Home Page] Village of this House
+        //for getting Data in DAO, will be deleted before sending through API
+        public virtual VillageDTO Village { get; set; }
+
         //List Images of this House
         public virtual ICollection<ImagesOfHouseDTO> ImagesOfHouses { get; set; }
 
-        //List Rooms of this House
+        //[Home Page] List Rooms of this House
+        //for getting Data in DAO, will be deleted before sending through API
         public virtual ICollection<RoomDTO> Rooms { get; set; }
 
         //[Home Page - Filter by RoomType]
