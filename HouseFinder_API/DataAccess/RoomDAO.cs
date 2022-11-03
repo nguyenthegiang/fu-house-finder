@@ -299,10 +299,19 @@ namespace DataAccess
             {
                 using (var context = new FUHouseFinderContext())
                 {
-                    RoomDTO roomDTO = GetRoomByRoomId(roomId);
-                    roomDTO.Status.StatusId = statusId;
+                    Room updatedRoom = context.Rooms.FirstOrDefault(r => r.RoomId == roomId);
+                    if (updatedRoom == null)
+                    {
+                        throw new Exception();
+                    }
+                    updatedRoom.LastModifiedDate = DateTime.Now;
+                    updatedRoom.Status.StatusId = statusId;
+
+                    Room roomToUpdate = updatedRoom;
+
                     context.Entry<Room>(updatedRoom).State = EntityState.Detached;
-                    context.Rooms.Update(room);
+
+                    context.Rooms.Update(roomToUpdate);
                     context.SaveChanges();
                 }
             }
