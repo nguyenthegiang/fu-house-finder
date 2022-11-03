@@ -1,15 +1,15 @@
-import { User } from './../models/user';
-import { CampusService } from './../services/campus.service';
-import { UserService } from './../services/user.service';
-import { House } from './../models/house';
+import { User } from '../../models/user';
+import { CampusService } from '../../services/campus.service';
+import { UserService } from '../../services/user.service';
+import { House } from '../../models/house';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HouseService } from '../services/house.service';
-import { RoomService } from '../services/room.service';
+import { HouseService } from '../../services/house.service';
+import { RoomService } from '../../services/room.service';
 import { Observable } from 'rxjs';
-import { Room } from '../models/room';
-import { ReportService } from '../services/report.service';
-import { Report } from '../models/report';
+import { Room } from '../../models/room';
+import { ReportService } from '../../services/report.service';
+import { Report } from '../../models/report';
 
 @Component({
   selector: 'app-house-detail',
@@ -20,6 +20,8 @@ import { Report } from '../models/report';
 export class HouseDetailComponent implements OnInit {
   //Detail information of this House
   houseDetail: House | undefined;
+  //Detail image of this House
+  houseImage: string[] = [];
   //Landlord of this house
   landlordDetail: User | undefined;
   //List of available rooms
@@ -81,7 +83,12 @@ export class HouseDetailComponent implements OnInit {
     window.location.reload();
   }
 
-  GoToRoomDetail(id: number) {
+  viewRoom(id: number) {
     this.router.navigate(['/room-detail/' + id]);
+  }
+
+  //for displaying 'Amount of People'
+  peopleCounter(i: number) {
+    return new Array(i);
   }
 }

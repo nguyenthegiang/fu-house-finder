@@ -26,6 +26,7 @@ namespace BusinessObjects
         public virtual DbSet<ImagesOfHouse> ImagesOfHouses { get; set; }
         public virtual DbSet<ImagesOfRoom> ImagesOfRooms { get; set; }
         public virtual DbSet<Issue> Issues { get; set; }
+        public virtual DbSet<Order> Orders { get; set; }
         public virtual DbSet<Rate> Rates { get; set; }
         public virtual DbSet<Report> Reports { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
@@ -36,18 +37,17 @@ namespace BusinessObjects
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<Village> Villages { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    {
-        if (!optionsBuilder.IsConfigured)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //Read JSON File -> ConnectionString
-            var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            optionsBuilder.UseSqlServer(config.GetConnectionString("DBContext"));
+            if(!optionsBuilder.IsConfigured)
+            {
+                //Read JSON File -> ConnectionString
+                var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+                optionsBuilder.UseSqlServer(config.GetConnectionString("DBContext"));
+            }
         }
-    }
 
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
@@ -153,7 +153,7 @@ namespace BusinessObjects
             modelBuilder.Entity<ImagesOfHouse>(entity =>
             {
                 entity.HasKey(e => e.ImageId)
-                    .HasName("PK__ImagesOf__7516F70C8F8B8D99");
+                    .HasName("PK__ImagesOf__7516F70CD96AE7C0");
 
                 entity.ToTable("ImagesOfHouse");
 
@@ -190,7 +190,7 @@ namespace BusinessObjects
             modelBuilder.Entity<ImagesOfRoom>(entity =>
             {
                 entity.HasKey(e => e.ImageId)
-                    .HasName("PK__ImagesOf__7516F70CA527FCB3");
+                    .HasName("PK__ImagesOf__7516F70C7467F5B1");
 
                 entity.ToTable("ImagesOfRoom");
 
@@ -244,6 +244,20 @@ namespace BusinessObjects
                     .WithMany(p => p.Issues)
                     .HasForeignKey(d => d.RoomId)
                     .HasConstraintName("RoomId_in_Room3");
+            });
+
+            modelBuilder.Entity<Order>(entity =>
+            {
+                entity.ToTable("Order");
+
+                entity.Property(e => e.StudentId)
+                    .HasMaxLength(30)
+                    .IsFixedLength(true);
+
+                entity.HasOne(d => d.Student)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.StudentId)
+                    .HasConstraintName("StudentId_in_User4");
             });
 
             modelBuilder.Entity<Rate>(entity =>
@@ -484,7 +498,7 @@ namespace BusinessObjects
             modelBuilder.Entity<UserRole>(entity =>
             {
                 entity.HasKey(e => e.RoleId)
-                    .HasName("PK__UserRole__8AFACE1A24C722E2");
+                    .HasName("PK__UserRole__8AFACE1A2A27DD54");
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 

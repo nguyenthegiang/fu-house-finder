@@ -33,7 +33,7 @@
   <!-- Main Content -->
   <div class="d-flex justify-content-between">
     <!-- Filter Column -->
-    <div class="w-25 bg-light mx-5 rounded">
+    <div class="w-25 bg-light mx-5 rounded h-100">
       <h5 class="text-center text-white p-2 rounded-top" id="roomFilterTitle">LỌC PHÒNG TRỌ</h5>
 
       <div class="container">
@@ -132,12 +132,12 @@
 
           <!-- District -->
           <div class="d-flex justify-content-between align-items-center my-2">
-            <div>Huyện/Quận</div>
+            <div class="me-2">Huyện/Quận</div>
             <div>
               <!-- When select 1 District -> change list of Communes accordingly -->
               <select #selectDistrict class="form-select selectRegion" aria-label="select-district"
                 (change)="onDistrictSelected(selectDistrict.value)">
-                <option selected>--Chọn quận/huyện--</option>
+                <option selected>Chọn quận/huyện</option>
                 <!-- List all Districts -->
                 <option *ngFor=" let district of districts" value="{{district.districtId}}">
                   {{district.districtName}}</option>
@@ -147,12 +147,12 @@
 
           <!-- Commune -->
           <div class="d-flex justify-content-between align-items-center mb-2">
-            <div>Phường/Xã</div>
+            <div class="me-2">Phường/Xã</div>
             <div>
               <!-- When select 1 Communes -> change list of Villages accordingly -->
               <select #selectCommune class="form-select selectRegion" aria-label="select-commune"
                 (change)="onCommuneSelected(selectCommune.value)">
-                <option selected>--Chọn phường/xã--</option>
+                <option selected>Chọn phường/xã</option>
                 <!-- List all Communes of selected District -->
                 <option *ngFor="let commune of communesOfSelectedDistrict" value="{{commune.communeId}}">
                   {{commune.communeName}}</option>
@@ -162,12 +162,12 @@
 
           <!-- Village -->
           <div class="d-flex justify-content-between align-items-center">
-            <div>Thôn/Xóm</div>
+            <div class="me-2">Thôn/Xóm</div>
             <div>
               <!-- When select 1 Village -> call API -->
               <select #selectVillage class="form-select selectRegion" aria-label="select-village"
                 (change)="onVillageSelected(selectVillage.value)">
-                <option selected>--Chọn thôn/xóm--</option>
+                <option selected>Chọn thôn/xóm</option>
                 <!-- List all Villages of selected Commune -->
                 <option *ngFor="let village of villagesOfSelectedCommune" value="{{village.villageId}}">
                   {{village.villageName}}</option>
@@ -188,6 +188,61 @@
             <label class="form-check-label" for="{{roomUtility.utilityName}}">
               {{roomUtility.displayName}}
             </label>
+          </div>
+        </div>
+        <hr>
+
+        <!-- Filter by Rates -->
+        <div>
+          <h6 class="font-weight-bold mb-2">Đánh giá:</h6>
+
+          <!-- Select Rate (can only select 1) -->
+          <div class="form-check rateForm">
+            <input class="form-check-input" type="radio" name="filterRate" id="5star">
+            <label class="form-check-label" for="5star">
+              <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i>
+            </label>
+          </div>
+
+          <div class="form-check rateForm">
+            <input class="form-check-input" type="radio" name="filterRate" id="4star">
+            <label class="form-check-label" for="4star">
+              <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i>
+              <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i> trở lên
+            </label>
+          </div>
+
+          <div class="form-check rateForm">
+            <input class="form-check-input" type="radio" name="filterRate" id="3star">
+            <label class="form-check-label" for="3star">
+              <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i>
+              <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i> trở lên
+            </label>
+          </div>
+
+          <div class="form-check rateForm">
+            <input class="form-check-input" type="radio" name="filterRate" id="2star">
+            <label class="form-check-label" for="2star">
+              <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i> trở lên
+            </label>
+          </div>
+
+          <div class="form-check rateForm">
+            <input class="form-check-input" type="radio" name="filterRate" id="1star">
+            <label class="form-check-label" for="1star">
+              <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i>
+              <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i> trở lên
+            </label>
+          </div>
+        </div>
+        <hr>
+
+        <!-- Cancel Filter -->
+        <div>
+          <div class="d-grid gap-2 mb-2">
+            <button class="btn btn-outline-secondary" type="button" (click)="onCancelFilter()">XÓA TẤT CẢ</button>
           </div>
         </div>
       </div>
@@ -224,8 +279,8 @@
           <!-- Item onClick: to House Detail -->
           <div class="card rounded houseCardItem" routerLink="/house-detail/{{house.houseId}}">
 
-            <img class="card-img-top" src="../assets/image/House/{{house.imagesOfHouses[0].imageLink}}"
-              alt="House Image" style="width: 100%;
+            <img class="card-img-top" *ngIf="house.imagesOfHouses"
+              src="../assets/image/House/{{house.imagesOfHouses[0].imageLink}}" alt="House Image" style="width: 100%;
                 height: 200px;
                 background-position: center center;
                 background-repeat: no-repeat;">

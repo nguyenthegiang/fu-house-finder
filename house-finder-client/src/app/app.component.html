@@ -13,7 +13,7 @@
     style="background-color: #FF6F3D;">
     <div class="logo col-12 col-md-2 my-2">
       <!-- Link back to Home -->
-      <a routerLink="/home" id="app-name">
+      <a (click)="backHome()" id="app-name">
         <img src="/assets/image/Logo.png" alt="..." width="70px">
         <h6>FU House Finder</h6>
       </a>
@@ -22,7 +22,7 @@
     <div class="col-12 col-md-8 my-2">
       <h1>TÌM TRỌ SINH VIÊN FPT</h1>
       <div>
-        <a href="https://daihoc.fpt.edu.vn/" target="_blank" class="text-white text-decoration-none mx-2">Trang chủ</a>|
+        <a href="/home" class="text-white text-decoration-none mx-2">Trang chủ</a>|
         <a href="https://daihoc.fpt.edu.vn/tuyen-sinh/" target="_blank" class="text-white text-decoration-none mx-2">Tuyển sinh</a>|
         <a href="https://daihoc.fpt.edu.vn/lien-he-voi-chung-toi/" target="_blank" class="text-white text-decoration-none mx-2">Liên hệ</a>|
         <a href="https://daihoc.fpt.edu.vn/gioi-thieu-dai-hoc-fpt/" target="_blank" class="text-white text-decoration-none mx-2">Giới thiệu</a>
@@ -36,7 +36,6 @@
 
   <!-- include -->
   <router-outlet></router-outlet>
-
 
   <!--Footer-->
   <div class="navbar nav container-fluit d-flex justify-content-between align-items-start text-white footer"
@@ -58,7 +57,7 @@
         <a href="https://www.facebook.com/educationfpt/" target="_blank"><i class="fa-brands fa-facebook-f"></i></a>
         <a href="https://www.youtube.com/user/FPTUniversityChannel" target="_blank"><i class="fa-brands fa-youtube"></i></a>
         <br>
-        <a>Sitemap website</a>
+        Sitemap website<br>
         Copyright © 2017 FPT Education
       </div>
     </div>

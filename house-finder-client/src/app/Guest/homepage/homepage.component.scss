@@ -27,3 +27,32 @@
 .selectRegion {
   width: 14vw;
 }
+
+
+
+//rate
+.rateForm{
+  //style for fontawesome icons
+  i {
+    color: #ffce3d;
+    font-size: 15px;
+    margin: 0 2px;
+  }
+
+  input{
+    visibility: hidden;
+  }
+
+  label{
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 20px;
+  }
+
+  input:checked + label{
+    background: #ebebeb;
+  }
+}
+
+
+

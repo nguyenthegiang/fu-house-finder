@@ -76,16 +76,18 @@
     </div>
   </div>
 
-
   <table>
     <thead>
       <th>Tên phòng</th>
       <th>Giá phòng</th>
       <th>Diện tích</th>
-      <th>Điều hòa</th>
-      <th>Wifi</th>
-      <th>Nóng lạnh</th>
-      <th>Nội thất</th>
+      <th>Tủ lạnh</th>
+      <th>Bếp</th>
+      <th>Máy giặt</th>
+      <th>Bàn học</th>
+      <th>Chung chủ</th>
+      <th>Giường</th>
+      <th>Vệ sinh khép kín</th>
       <th>Số người ở</th>
       <th>Trạng thái</th>
       <th>Thao tác</th>
@@ -101,35 +103,59 @@
         <!-- Area -->
         <td style="text-align: center;">{{dataItem.areaByMeters}} m<sup>2</sup></td>
 
-        <!-- Air conditioner -->
-        <td *ngIf="dataItem.aircon === false" style="text-align: center;">
+        <!-- Fridge -->
+        <td *ngIf="dataItem.fridge === false" style="text-align: center;">
           <img src="../../../assets/image/cancel.png">
         </td>
-        <td *ngIf="dataItem.aircon === true" style="text-align: center;">
+        <td *ngIf="dataItem.fridge === true" style="text-align: center;">
           <img src="../../../assets/image/tick.png">
         </td>
 
-        <!-- Wifi -->
-        <td *ngIf="dataItem.wifi === false" style="text-align: center;">
+        <!-- Kitchen -->
+        <td *ngIf="dataItem.kitchen === false" style="text-align: center;">
           <img src="../../../assets/image/cancel.png">
         </td>
-        <td *ngIf="dataItem.wifi === true" style="text-align: center;">
+        <td *ngIf="dataItem.kitchen === true" style="text-align: center;">
           <img src="../../../assets/image/tick.png">
         </td>
 
-        <!-- Water Heater -->
-        <td *ngIf="dataItem.waterHeater === false" style="text-align: center;">
+        <!-- Washing Machine -->
+        <td *ngIf="dataItem.washingMachine === false" style="text-align: center;">
           <img src="../../../assets/image/cancel.png">
         </td>
-        <td *ngIf="dataItem.waterHeater === true" style="text-align: center;">
+        <td *ngIf="dataItem.washingMachine === true" style="text-align: center;">
           <img src="../../../assets/image/tick.png">
         </td>
 
-        <!-- Furniture -->
-        <td *ngIf="dataItem.furniture === false" style="text-align: center;">
+        <!-- Desk -->
+        <td *ngIf="dataItem.desk === false" style="text-align: center;">
           <img src="../../../assets/image/cancel.png">
         </td>
-        <td *ngIf="dataItem.furniture === true" style="text-align: center;">
+        <td *ngIf="dataItem.desk === true" style="text-align: center;">
+          <img src="../../../assets/image/tick.png">
+        </td>
+
+        <!-- Live With Host -->
+        <td *ngIf="dataItem.liveWithHost === false" style="text-align: center;">
+          <img src="../../../assets/image/cancel.png">
+        </td>
+        <td *ngIf="dataItem.liveWithHost === true" style="text-align: center;">
+          <img src="../../../assets/image/tick.png">
+        </td>
+
+        <!-- Bed -->
+        <td *ngIf="dataItem.bed === false" style="text-align: center;">
+          <img src="../../../assets/image/cancel.png">
+        </td>
+        <td *ngIf="dataItem.bed === true" style="text-align: center;">
+          <img src="../../../assets/image/tick.png">
+        </td>
+
+        <!-- Closed Toilet -->
+        <td *ngIf="dataItem.closedToilet === false" style="text-align: center;">
+          <img src="../../../assets/image/cancel.png">
+        </td>
+        <td *ngIf="dataItem.closedToilet === true" style="text-align: center;">
           <img src="../../../assets/image/tick.png">
         </td>
 
@@ -173,4 +199,4 @@
   </table>
 </div>
 
-<app-update-room [roomId]="updateRoomId"></app-update-room>
+<app-update-room [roomId]="updateRoomId" [statusCheck]="statusChecked"></app-update-room>

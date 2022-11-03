@@ -17,6 +17,7 @@ namespace BusinessObjects
 
         public int HouseId { get; set; }
         public string HouseName { get; set; }
+        public int? View { get; set; }
         public string Information { get; set; }
         public int AddressId { get; set; }
         public int? VillageId { get; set; }
@@ -26,6 +27,7 @@ namespace BusinessObjects
         public decimal WaterPrice { get; set; }
         public bool? FingerprintLock { get; set; }
         public bool? Camera { get; set; }
+        public bool? Parking { get; set; }
         public bool? Deleted { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }

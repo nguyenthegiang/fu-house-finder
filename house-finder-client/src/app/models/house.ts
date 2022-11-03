@@ -12,5 +12,5 @@ export interface House {
     lowestRoomPrice: number;
     highestRoomPrice: number;
     address: Address;
-    imagesOfHouses: ImagesOfHouse[];
+    imagesOfHouses?: ImagesOfHouse[];
 }
