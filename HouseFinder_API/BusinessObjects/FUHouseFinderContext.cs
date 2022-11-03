@@ -153,7 +153,7 @@ namespace BusinessObjects
             modelBuilder.Entity<ImagesOfHouse>(entity =>
             {
                 entity.HasKey(e => e.ImageId)
-                    .HasName("PK__ImagesOf__7516F70CAABF7662");
+                    .HasName("PK__ImagesOf__7516F70C63C99D14");
 
                 entity.ToTable("ImagesOfHouse");
 
@@ -190,7 +190,7 @@ namespace BusinessObjects
             modelBuilder.Entity<ImagesOfRoom>(entity =>
             {
                 entity.HasKey(e => e.ImageId)
-                    .HasName("PK__ImagesOf__7516F70CFB27F375");
+                    .HasName("PK__ImagesOf__7516F70C7832C577");
 
                 entity.ToTable("ImagesOfRoom");
 
@@ -251,6 +251,8 @@ namespace BusinessObjects
                 entity.ToTable("Order");
 
                 entity.Property(e => e.Email).HasMaxLength(100);
+
+                entity.Property(e => e.OrderContent).IsRequired();
 
                 entity.Property(e => e.OrderedDate).HasColumnType("datetime");
 
@@ -508,7 +510,7 @@ namespace BusinessObjects
             modelBuilder.Entity<UserRole>(entity =>
             {
                 entity.HasKey(e => e.RoleId)
-                    .HasName("PK__UserRole__8AFACE1A8C19C9FD");
+                    .HasName("PK__UserRole__8AFACE1A808F29B4");
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
