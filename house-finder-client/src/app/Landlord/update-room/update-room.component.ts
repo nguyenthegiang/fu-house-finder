@@ -41,6 +41,7 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
       roomTypeName: 'Khép kín'
     },
     houseId: 0,
+    delete: false,
     createdDate: new Date(),
     lastModifiedDate: new Date(),
     createdBy: "",
@@ -82,6 +83,7 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
 
   //Call API: update room
   updateRoom() {
+    //console.log(this.roomDetail);
     this.roomService.updateRoom(this.roomDetail).subscribe(() => this.goBack());
   }
   deleteRoom() {
