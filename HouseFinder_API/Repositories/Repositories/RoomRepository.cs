@@ -31,5 +31,7 @@ namespace Repositories.Repositories
         public int CountTotallyAvailableRoomByHouseId(int houseId) => RoomDAO.CountTotallyAvailableRoomByHouseId(houseId);
 
         public int CountPatiallyyAvailableRoomByHouseId(int houseId) => RoomDAO.CountPartiallyAvailableRoomByHouseId(houseId);
+
+        public void ChangStatusRoom(int statusId, int roomId) => RoomDAO.ChangStatusRoom(statusId, roomId);
     }
 }
