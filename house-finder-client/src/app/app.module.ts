@@ -23,6 +23,7 @@ import { ListLandlordComponent } from './Staff/list-landlord/list-landlord.compo
 import { ListLandlordSignupRequestComponent } from './Staff/list-landlord-signup-request/list-landlord-signup-request.component';
 import { RoomDetailComponent } from './Guest/room-detail/room-detail.component';
 import { AddRoomComponent } from './Landlord/add-room/add-room.component';
+import { AddHouseComponent } from './Landlord/add-house/add-house.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { AddRoomComponent } from './Landlord/add-room/add-room.component';
     ListLandlordSignupRequestComponent,
     RoomDetailComponent,
     AddRoomComponent,
+    AddHouseComponent,
   ],
   imports: [
     BrowserModule,
