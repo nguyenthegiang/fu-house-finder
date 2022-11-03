@@ -59,6 +59,8 @@ namespace DataAccess
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
                     houseDTOs = context.Houses
+                        //not selecting deleted house
+                        .Where(house => house.Deleted == false)
                         //include this for finding DistrictId
                         .Include(house => house.Village.Commune)
                         .ProjectTo<AvailableHouseDTO>(config).ToList();
@@ -66,7 +68,7 @@ namespace DataAccess
                     //find lowest room price & highest room price
                     for (int i = 0; i < houseDTOs.Count; i++)
                     {
-                        houseDTOs[i] = RoomDAO.GetRoomPriceById(houseDTOs[i]);
+                        houseDTOs[i] = RoomDAO.GetRoomPriceByOfHouse(houseDTOs[i]);
                     }
                 }
 
@@ -264,7 +266,14 @@ namespace DataAccess
                 using (var context = new FUHouseFinderContext())
                 {
                     //Count available houses: houses having at least 1 room available
-                    availableHouse = context.Rooms.Where(r => r.Status.StatusName.Equals("Available")).GroupBy(r => r.HouseId).Count();
+                    availableHouse = context.Rooms
+                        //not considering deleted rooms
+                        .Where(room => room.Deleted == false)
+                        //not considering deleted houses
+                        .Where(room => room.House.Deleted == false)
+                        .Where(room => room.Status.StatusName.Equals("Available"))
+                        .GroupBy(room => room.HouseId)
+                        .Count();
                 }
             }
             catch (Exception e)
