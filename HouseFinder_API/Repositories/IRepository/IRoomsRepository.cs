@@ -20,5 +20,6 @@ namespace Repositories.IRepository
         public int? CountAvailableCapacity();
         public int CountTotallyAvailableRoomByHouseId(int houseId);
         public int CountPatiallyyAvailableRoomByHouseId(int houseId);
+        public void ChangStatusRoom(int statusId, int roomId);
     }
 }
