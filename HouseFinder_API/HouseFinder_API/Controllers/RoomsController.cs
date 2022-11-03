@@ -141,6 +141,21 @@ namespace HouseFinder_API.Controllers
             return availableRoom;
         }
 
+        [HttpPut("changeStatus")]
+        public IActionResult ChangStatusRoom(int statusId,int roomId)
+        {
+            try
+            {
+
+                roomsRepository.ChangStatusRoom(statusId,roomId);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
 
     }
 }
