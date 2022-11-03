@@ -125,9 +125,11 @@ CREATE TABLE [dbo].[Houses] (
 	LandlordId nchar(30),				--chủ nhà
 	CampusId int,						--Campus mà nhà này thuộc về
 
+	--Tiền
 	PowerPrice money NOT NULL,			--giá điện
 	WaterPrice money NOT NULL,			--giá nước
 
+	--Tiện ích
 	FingerprintLock bit,				--khóa vân tay
 	Camera bit,							--camera an ninh
 	Parking bit,						--khu để xe
@@ -175,7 +177,7 @@ CREATE TABLE [dbo].[Rooms] (
 	Information nvarchar(MAX),	--thông tin thêm & tiện ích đi kèm
 	AreaByMeters float,			--diện tích, tính theo m2
 
-	--1 số tiện ích khác
+	--Tiện ích
 	Fridge bit NOT NULL,		 --Tủ lạnh (có/ko)
 	Kitchen bit NOT NULL,        --Bếp (có/không)
 	WashingMachine bit NOT NULL, --Máy giặt (có/không)
