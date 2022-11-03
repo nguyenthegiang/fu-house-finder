@@ -174,7 +174,7 @@
 
         <!-- Room status -->
         <td>
-          <label class="switch">
+          <!-- <label class="switch">
             <input *ngIf="dataItem.status.statusName === 'Occupied' || dataItem.status.statusName === 'Disabled'"
               type="checkbox">
             <input *ngIf="dataItem.status.statusName === 'Available'" type="checkbox" checked>
@@ -183,8 +183,19 @@
           <br>
           <span *ngIf="dataItem.status.statusName === 'Available'">Còn trống</span>
           <span *ngIf="dataItem.status.statusName === 'Occupied'">Đã thuê</span>
-          <span *ngIf="dataItem.status.statusName === 'Disabled'">Không dùng được</span>
+          <span *ngIf="dataItem.status.statusName === 'Disabled'">Không dùng được</span> -->
+          <!-- <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
+              [checked]="dataItem.status.statusName === 'Available'"
+              [disabled]="dataItem.status.statusName === 'Disabled'">
+            <label class="form-check-label" for="flexSwitchCheckChecked"><span
+                *ngIf="dataItem.status.statusName === 'Available'">Còn trống</span>
+              <span *ngIf="dataItem.status.statusName === 'Occupied'">Đã thuê</span>
+              <span *ngIf="dataItem.status.statusName === 'Disabled'">Không dùng được</span></label>
+          </div> -->
         </td>
+
+
         <td>
           <!-- Update button -->
           <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#updateModal"
@@ -199,4 +210,4 @@
   </table>
 </div>
 
-<app-update-room [roomId]="updateRoomId" [statusCheck]="statusChecked"></app-update-room>
+<app-update-room [roomId]="updateRoomId"></app-update-room>
