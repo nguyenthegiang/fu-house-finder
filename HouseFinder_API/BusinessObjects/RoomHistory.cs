@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 #nullable disable
 
-namespace BusinessObjects
+namespace 
 {
     public partial class RoomHistory
     {

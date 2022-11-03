@@ -346,9 +346,9 @@ CREATE TABLE [dbo].[Order] (
 	StudentName nvarchar(100),
 	PhoneNumber nvarchar(50) NULL,
 	Email nvarchar(100),
-	OrderContent nvarchar(MAX),
+	OrderContent nvarchar(MAX) NOT NULL,
 	Solved bit,
-	OrderedDate datetime,
+	OrderedDate datetime NOT NULL,
 	SolvedDate datetime,
 	
 	CONSTRAINT StudentId_in_User4 FOREIGN KEY(StudentId) REFERENCES [dbo].[Users](UserId)
