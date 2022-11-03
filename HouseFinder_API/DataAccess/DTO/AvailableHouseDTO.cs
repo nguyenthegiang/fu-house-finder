@@ -41,7 +41,8 @@ namespace DataAccess.DTO
         //List Rooms of this House
         public virtual ICollection<RoomDTO> Rooms { get; set; }
 
-        //[Home Page] List RoomTypeIds (as a string) of all RoomTypes of all Rooms of this House
+        //[Home Page - Filter by RoomType]
+        //List RoomTypeIds (as a string) of all RoomTypes of all Rooms of this House
         public string RoomTypeIds { get; set; }
     }
 }

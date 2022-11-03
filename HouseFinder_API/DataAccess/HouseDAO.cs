@@ -98,6 +98,12 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
 
+            //Remove unnecessary data to make API Response Body lighter
+            houseDTOs.ForEach(delegate(AvailableHouseDTO houseDTO) 
+            {
+                houseDTO.Rooms = null;
+            });
+
             return houseDTOs;
         }
 
