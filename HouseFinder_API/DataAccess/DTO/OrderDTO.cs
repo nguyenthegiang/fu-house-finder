@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-#nullable disable
-
-namespace BusinessObjects
+namespace DataAccess.DTO
 {
-    public partial class Order
+    public class OrderDTO
     {
         public int OrderId { get; set; }
         public string StudentId { get; set; }
@@ -14,9 +15,8 @@ namespace BusinessObjects
         public string Email { get; set; }
         public string OrderContent { get; set; }
         public bool? Solved { get; set; }
-        public DateTime OrderedDate { get; set; }
+        public DateTime? OrderedDate { get; set; }
         public DateTime? SolvedDate { get; set; }
 
-        public virtual User Student { get; set; }
     }
 }
