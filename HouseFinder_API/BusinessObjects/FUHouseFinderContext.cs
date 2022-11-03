@@ -39,13 +39,13 @@ namespace BusinessObjects
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if(!optionsBuilder.IsConfigured)
-            {
-                //Read JSON File -> ConnectionString
-                var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-                optionsBuilder.UseSqlServer(config.GetConnectionString("DBContext"));
-            }
+        if (!optionsBuilder.IsConfigured)
+        {
+            //Read JSON File -> ConnectionString
+            var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+            optionsBuilder.UseSqlServer(config.GetConnectionString("DBContext"));
         }
+    }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -153,7 +153,7 @@ namespace BusinessObjects
             modelBuilder.Entity<ImagesOfHouse>(entity =>
             {
                 entity.HasKey(e => e.ImageId)
-                    .HasName("PK__ImagesOf__7516F70CD96AE7C0");
+                    .HasName("PK__ImagesOf__7516F70CAABF7662");
 
                 entity.ToTable("ImagesOfHouse");
 
@@ -190,7 +190,7 @@ namespace BusinessObjects
             modelBuilder.Entity<ImagesOfRoom>(entity =>
             {
                 entity.HasKey(e => e.ImageId)
-                    .HasName("PK__ImagesOf__7516F70C7467F5B1");
+                    .HasName("PK__ImagesOf__7516F70CFB27F375");
 
                 entity.ToTable("ImagesOfRoom");
 
@@ -250,9 +250,19 @@ namespace BusinessObjects
             {
                 entity.ToTable("Order");
 
+                entity.Property(e => e.Email).HasMaxLength(100);
+
+                entity.Property(e => e.OrderedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.PhoneNumber).HasMaxLength(50);
+
+                entity.Property(e => e.SolvedDate).HasColumnType("datetime");
+
                 entity.Property(e => e.StudentId)
                     .HasMaxLength(30)
                     .IsFixedLength(true);
+
+                entity.Property(e => e.StudentName).HasMaxLength(100);
 
                 entity.HasOne(d => d.Student)
                     .WithMany(p => p.Orders)
@@ -498,7 +508,7 @@ namespace BusinessObjects
             modelBuilder.Entity<UserRole>(entity =>
             {
                 entity.HasKey(e => e.RoleId)
-                    .HasName("PK__UserRole__8AFACE1A2A27DD54");
+                    .HasName("PK__UserRole__8AFACE1A8C19C9FD");
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
