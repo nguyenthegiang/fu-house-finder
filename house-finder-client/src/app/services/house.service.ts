@@ -48,7 +48,8 @@ export class HouseService {
     filterAPIUrl += `$skip=${skip}&$top=${top}`;
 
     //[Filter] check if user has at least 1 filter
-    if (searchName || campusId || maxPrice || selectedRoomTypeIds.length > 0) {
+    if (searchName || campusId || maxPrice || selectedRoomTypeIds.length > 0 ||
+      selectedDistrictId || selectedCommuneId || selectedVillageId) {
       //add filter to API
       filterAPIUrl += `&$filter=`;
     }
@@ -113,6 +114,39 @@ export class HouseService {
           filterAPIUrl += ' or ';
         }
       }
+    }
+
+    //[Filter] add filter by region if has
+    if (selectedVillageId != undefined) {   //filter by Village
+      //if is not the first filter -> need to add 'and' to API URL
+      if (!checkFirstFilter) {
+        filterAPIUrl += ` and `;
+      } else {
+        //if this one is the first filter -> mark it so others won't add 'and'
+        checkFirstFilter = false;
+      }
+
+      filterAPIUrl += `VillageId eq ${selectedVillageId}`;
+    } else if (selectedCommuneId != undefined) {    //filter by Commune
+      //if is not the first filter -> need to add 'and' to API URL
+      if (!checkFirstFilter) {
+        filterAPIUrl += ` and `;
+      } else {
+        //if this one is the first filter -> mark it so others won't add 'and'
+        checkFirstFilter = false;
+      }
+
+      filterAPIUrl += `CommuneId eq ${selectedCommuneId}`;
+    } else if (selectedDistrictId != undefined) {    //filter by District
+      //if is not the first filter -> need to add 'and' to API URL
+      if (!checkFirstFilter) {
+        filterAPIUrl += ` and `;
+      } else {
+        //if this one is the first filter -> mark it so others won't add 'and'
+        checkFirstFilter = false;
+      }
+
+      filterAPIUrl += `DistrictId eq ${selectedDistrictId}`;
     }
 
     return this.http.get<House[]>(filterAPIUrl);
