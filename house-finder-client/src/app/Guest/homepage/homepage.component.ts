@@ -4,7 +4,7 @@ import { Village } from '../../models/village';
 import { Commune } from '../../models/commune';
 import { District } from '../../models/district';
 import { DistrictService } from '../../services/district.service';
-import { RoomUtility } from '../../models/roomUtilities';
+import { OtherUtility } from '../../models/otherUtilities';
 import { CampusService } from '../../services/campus.service';
 import { Campus } from '../../models/campus';
 import { HouseService } from '../../services/house.service';
@@ -35,7 +35,8 @@ export class HomepageComponent implements OnInit {
   //[Filter] Data for Filter column
   roomTypes: RoomType[] = [];         //Room types
   campuses: Campus[] = [];
-  roomUtilities: RoomUtility[] = [];  //List of utilities of Rooms
+  houseUtilities: OtherUtility[] = [];  //List of utilities of Houses
+  roomUtilities: OtherUtility[] = [];  //List of utilities of Rooms
   districts: District[] = [];         //(Regions) All Districts
   communesOfSelectedDistrict: Commune[] = []; //(Regions) all Communes of 1 selected District (only display after user has selected 1 District)
   villagesOfSelectedCommune: Village[] = [];  //(Regions) all Villages of 1 selected Commune (only display after user has selected 1 Commune)
@@ -99,11 +100,20 @@ export class HomepageComponent implements OnInit {
     //Generate data:
 
     //(Filter) Other utilities
+    this.houseUtilities = [
+      { "utilityName": "FingerprintLock", "displayName": "Khóa vân tay" },
+      { "utilityName": "Camera", "displayName": "Camera an ninh" },
+      { "utilityName": "Parking", "displayName": "Chỗ để xe" },
+    ];
+
     this.roomUtilities = [
-      { "utilityName": "aircon", "displayName": "Điều hòa" },
-      { "utilityName": "wifi", "displayName": "Wifi" },
-      { "utilityName": "waterHeater", "displayName": "Bình nóng lạnh" },
-      { "utilityName": "furniture", "displayName": "Nội thất" },
+      { "utilityName": "Fridge", "displayName": "Tủ lạnh" },
+      { "utilityName": "Kitchen", "displayName": "Bếp" },
+      { "utilityName": "WashingMachine", "displayName": "Máy giặt" },
+      { "utilityName": "Desk", "displayName": "Bàn học" },
+      { "utilityName": "LiveWithHost", "displayName": "Chung chủ" },
+      { "utilityName": "Bed", "displayName": "Giường" },
+      { "utilityName": "ClosedToilet", "displayName": "Vệ sinh khép kín" },
     ];
   }
 
@@ -271,11 +281,20 @@ export class HomepageComponent implements OnInit {
   }
 
   //[Filter] Filter by Room Utility
-  onUtilitySelected(event: any, utilityName: string) {
+  onRoomUtilitySelected(event: any, utilityName: string) {
     //see if user just checked or unchecked the checkbox
     const isChecked = (<HTMLInputElement>event.target).checked;
 
-    // Call API to update list houses with the selected room type
+    // Call API to update list houses with the selected room utility
+    alert('Event: ' + isChecked + ' Utility Name: ' + utilityName);
+  }
+
+  //[Filter] Filter by House Utility
+  onHouseUtilitySelected(event: any, utilityName: string) {
+    //see if user just checked or unchecked the checkbox
+    const isChecked = (<HTMLInputElement>event.target).checked;
+
+    // Call API to update list houses with the selected House utility
     alert('Event: ' + isChecked + ' Utility Name: ' + utilityName);
   }
 
