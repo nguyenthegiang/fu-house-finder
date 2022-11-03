@@ -56,6 +56,6 @@ export class DashboardComponent implements OnInit {
 
   addHouse()
   {
-
+    this.router.navigate(['/Landlord/add-house']);
   }
 }
