@@ -94,23 +94,16 @@
         <h3 class="text-center">Người dùng đánh giá</h3>
         Bình luận:
         <div class="bg-light border border-secondary rounded mb-2 p-2">
-          Nguyễn Văn A: Đẹp, gần trường (<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>)
-          <br> <i class="fa-solid fa-arrow-right"></i> Chủ trọ trả lời: Cảm ơn bạn nhiều
-        </div>
-        Viết bình luận:
-        <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
-        <div class="my-2 d-flex">
-          Đánh giá:
-          <div class="ms-2">
-            <i class="star fa-regular fa-star"></i>
-            <i class="star fa-regular fa-star"></i>
-            <i class="star fa-regular fa-star"></i>
-            <i class="star fa-regular fa-star"></i>
-            <i class="star fa-regular fa-star"></i>
+          <b (click)="replyOn = true" style="cursor: pointer;">Nguyễn Văn A</b>: Đẹp, gần trường (<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>)
+
+          <div *ngIf="replyOn == true" class="mt-2">
+            Viết phản hồi:
+            <div class="d-flex">
+              <input type="text" class="form-control w-75 me-2" aria-label="Username" aria-describedby="basic-addon1">
+              <button type="button" class="btn btn-secondary w-25">Đăng</button>
+            </div>
           </div>
         </div>
-
-        <button type="button" class="btn btn-secondary w-100">Đăng</button>
       </div>
     </div>
 
