@@ -69,8 +69,7 @@
                                         </label>
                                         <br>
                                         <input class="form-check-input" type="checkbox" [(ngModel)]="roomDetail.kitchen"
-                                            id="washingMachineChecked" name="kitchenChecked"
-                                            [checked]="roomDetail.kitchen">
+                                            id="kitchenChecked" name="kitchenChecked" [checked]="roomDetail.kitchen">
                                         <label class="form-check-label" for="kitchenChecked">
                                             Bếp
                                         </label>
@@ -79,13 +78,13 @@
                                     <div class="col">
                                         <input class="form-check-input" type="checkbox"
                                             [(ngModel)]="roomDetail.washingMachine" id="washingMachineChecked"
-                                            name="washingMachineChecked" checked>
+                                            name="washingMachineChecked" [checked]="roomDetail.washingMachine">
                                         <label class="form-check-label" for="washingMachineChecked">
                                             Máy giặt
                                         </label>
                                         <br>
                                         <input class="form-check-input" type="checkbox" [(ngModel)]="roomDetail.desk"
-                                            id="deskChecked" name="deskChecked" checked>
+                                            id="deskChecked" name="deskChecked" [checked]="roomDetail.desk">
                                         <label class="form-check-label" for="deskChecked">
                                             Bàn học
                                         </label>
@@ -93,38 +92,24 @@
                                     </div>
                                     <div class="col">
                                         <input class="form-check-input" type="checkbox"
-                                            [(ngModel)]="roomDetail.washingMachine" id="liveWithHostChecked"
-                                            name="liveWithHostChecked" checked>
-                                        <label class="form-check-label" for="liveWithHostChecked">
-                                            Chung chủ
-                                        </label>
-                                        <br>
-                                        <input class="form-check-input" type="checkbox" [(ngModel)]="roomDetail.desk"
-                                            id="bedChecked" name="bedChecked" checked>
-                                        <label class="form-check-label" for="bedChecked">
-                                            Giường
-                                        </label>
-                                        <br>
-                                    </div>
-                                    <div class="col">
-                                        <input class="form-check-input" type="checkbox"
                                             [(ngModel)]="roomDetail.liveWithHost" id="liveWithHostChecked"
-                                            name="liveWithHostChecked" checked>
+                                            name="liveWithHostChecked" [checked]="roomDetail.liveWithHost">
                                         <label class="form-check-label" for="liveWithHostChecked">
                                             Chung chủ
                                         </label>
                                         <br>
                                         <input class="form-check-input" type="checkbox" [(ngModel)]="roomDetail.bed"
-                                            id="bedChecked" name="bedChecked" checked>
+                                            id="bedChecked" name="bedChecked" [checked]="roomDetail.bed">
                                         <label class="form-check-label" for="bedChecked">
                                             Giường
                                         </label>
                                         <br>
                                     </div>
+
                                     <div class="col">
                                         <input class="form-check-input" type="checkbox"
                                             [(ngModel)]="roomDetail.closedToilet" id="closedToiletChecked"
-                                            name="closedToiletChecked" checked>
+                                            name="closedToiletChecked" [checked]="roomDetail.closedToilet">
                                         <label class="form-check-label" for="closedToiletChecked">
                                             Vệ sinh khép kín
                                         </label>
