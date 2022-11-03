@@ -79,7 +79,8 @@
         <br>
         <span>
           <b>Số điện thoại: </b>
-          {{landlordDetail!.phoneNumber}}
+          <a class="phoneOn" (click)="isOn = true" *ngIf="isOn == false">Click để hiển thị</a>
+          <a class="phoneOff" (click)="isOn = false" *ngIf="isOn == true">{{landlordDetail!.phoneNumber}}</a>
         </span>
         <br>
         <span>
