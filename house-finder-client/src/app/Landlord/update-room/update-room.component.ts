@@ -57,7 +57,6 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
   ) { }
 
   @Input() roomId!: number;
-  @Input() statusCheck!: number;
 
   ngOnInit(): void {
   }
@@ -82,9 +81,9 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
   updateRoom() {
     this.roomService.updateRoom(this.roomDetail).subscribe(() => this.goBack());
   }
-  deleteRoom(roomId: number) {
+  deleteRoom() {
     console.log('delete');
-    this.roomService.deleteRoom(roomId).subscribe(() => this.goBack());
+    this.roomService.deleteRoom(this.roomDetail.roomId).subscribe(() => this.goBack());
   }
 
   //Call API: Get Room Detail info from ID
@@ -97,12 +96,12 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
     this.roomService.getRoomByRoomId(this.roomId).subscribe(data => {
       this.roomDetail = data;
 
-      if (this.statusCheck == 2) {
-        this.deleteRoom(data.roomId);
-      }
+      // if (this.statusCheck == 2) {
+      //   //this.deleteRoom(data.roomId);
+      // }
 
-      //demo selected
-      //this.statusSelected = this.roomDetail.status.statusName;
+      // //demo selected
+      // //this.statusSelected = this.roomDetail.status.statusName;
 
     });
   }
