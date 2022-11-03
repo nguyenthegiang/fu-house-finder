@@ -10,7 +10,32 @@
   <div class="row w-100 d-flex justify-content-around">
     <div class="col-12 col-md-7">
       <!-- House images -->
-      <img id="houseImage" src="../../assets/image/HouseImage.jpg" alt="..." width="100%" class="rounded">
+      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner rounded" *ngIf="houseDetail.imagesOfHouses">
+          <div class="carousel-item active" *ngIf="houseDetail?.imagesOfHouses?.length">
+            <img src="../../assets/image/House/{{houseDetail.imagesOfHouses[0].imageLink}}" class="d-block w-100" height="450" alt="...">
+          </div>
+          <div class="carousel-item" *ngIf="houseDetail?.imagesOfHouses?.length">
+            <img src="../../assets/image/House/{{houseDetail.imagesOfHouses[1].imageLink}}" class="d-block w-100" height="450" alt="...">
+          </div>
+          <div class="carousel-item" *ngIf="houseDetail?.imagesOfHouses?.length">
+            <img src="../../assets/image/House/{{houseDetail.imagesOfHouses[2].imageLink}}" class="d-block w-100" height="450" alt="...">
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
 
       <!-- House detail information-->
       <div class="house-information border border-secondary rounded mt-5 p-2">
@@ -97,6 +122,7 @@
           <tr>
             <th scope="col">Tên phòng</th>
             <th scope="col">Giá phòng</th>
+            <th scope="col">Tiện ích</th>
             <th scope="col">Diện tích</th>
             <th scope="col">Số người ở</th>
             <th scope="col">Trạng thái</th>
@@ -109,6 +135,47 @@
 
             <!-- Price -->
             <td>{{dataItem.pricePerMonth | currency:'VND':'symbol':'3.0'}}</td>
+
+            <!-- Utilities -->
+            <td>
+              <div class="d-flex">
+                <div *ngIf="dataItem.fridge == true">
+                  <button type="button" class="btn btn-outline-dark me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Tủ lạnh">
+                    <i class="fa-solid fa-toilet-portable"></i>
+                  </button>
+                </div>
+                <div *ngIf="dataItem.kitchen == true">
+                  <button type="button" class="btn btn-outline-dark me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Bếp">
+                    <i class="fa-solid fa-fire-burner"></i>
+                  </button>
+                </div>
+                <div *ngIf="dataItem.washingMachine == true">
+                  <button type="button" class="btn btn-outline-dark me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Máy giặt">
+                    <i class="fa-solid fa-droplet"></i>
+                  </button>
+                </div>
+                <div *ngIf="dataItem.desk == true">
+                  <button type="button" class="btn btn-outline-dark me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Bàn ghế">
+                    <i class="fa-solid fa-couch"></i>
+                  </button>
+                </div>
+                <div *ngIf="dataItem.liveWithHost == true">
+                  <button type="button" class="btn btn-outline-dark me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Chung chủ">
+                    <i class="fa-solid fa-house-user"></i>
+                  </button>
+                </div>
+                <div *ngIf="dataItem.bed == true">
+                  <button type="button" class="btn btn-outline-dark me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Giường">
+                    <i class="fa-solid fa-bed"></i>
+                  </button>
+                </div>
+                <div *ngIf="dataItem.closedToilet == true">
+                  <button type="button" class="btn btn-outline-dark me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Vệ sinh khép kín">
+                    <i class="fa-solid fa-toilet"></i>
+                  </button>
+                </div>
+              </div>
+            </td>
 
             <!-- Area -->
             <td>{{dataItem.areaByMeters}} m<sup>2</sup></td>
