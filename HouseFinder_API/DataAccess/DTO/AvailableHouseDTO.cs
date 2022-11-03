@@ -18,7 +18,7 @@ namespace DataAccess.DTO
         public int AddressId { get; set; }
         public int? VillageId { get; set; }
 
-        //[Home Page - Filter by Region]
+        //[Home Page - Filter by Region] Commune & District of this house
         public int? CommuneId { get; set; }
         public int? DistrictId { get; set; }
 
@@ -29,6 +29,16 @@ namespace DataAccess.DTO
         public bool? FingerprintLock { get; set; }
         public bool? Camera { get; set; }
         public bool? Parking { get; set; }
+
+        //[Home Page - Filter by RoomUtility] Utility that (at least 1) Rooms of this house has
+        public bool Fridge { get; set; }
+        public bool Kitchen { get; set; }
+        public bool WashingMachine { get; set; }
+        public bool Desk { get; set; }
+        public bool LiveWithHost { get; set; }
+        public bool Bed { get; set; }
+        public bool ClosedToilet { get; set; }
+
         public DateTime? CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
         public string CreatedBy { get; set; }
