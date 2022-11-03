@@ -33,6 +33,8 @@ export class HouseService {
     campusId?: number,
     maxPrice?: number,
     minPrice?: number,
+    selectedHouseUtilities?: string[],
+    selectedRoomUtilities?: string[],
   ): Observable<House[]> {
     //define API here to append query options into it later
     var filterAPIUrl = this.APIUrl + `/availableHouses?`;

@@ -46,7 +46,9 @@ export class HomepageComponent implements OnInit {
   filterCampusId: number | undefined;
   maxPrice: number | undefined;
   minPrice: number | undefined;
-  selectedRoomTypeIds: number[] = [];  //list of roomTypeId of roomTypes that got selected
+  selectedRoomTypeIds: number[] = [];     //list of roomTypeId of roomTypes that got selected
+  selectedHouseUtilities: string[] = [];  //list of Utilities of House that got selected
+  selectedRoomUtilities: string[] = [];   //list of Utilities of Room that got selected
 
   constructor(
     private houseService: HouseService,
@@ -60,7 +62,7 @@ export class HomepageComponent implements OnInit {
     //Call APIs:
 
     //(List) Get available Houses - default: page 1, 9 items
-    this.filterHouse();
+    this.filterHouse(false);
 
     // (Paging) Count available Houses for total number of pages
     this.houseService.countTotalAvailableHouse().subscribe(data => {
@@ -127,7 +129,7 @@ export class HomepageComponent implements OnInit {
   }
 
   // Call API to update list house with selected Filter value & Paging
-  filterHouse(resetPaging: boolean = false) {
+  filterHouse(resetPaging: boolean) {
     //if user filter -> reset Paging (back to page 1)
     if (resetPaging) {
       this.pageNumber = 1;
@@ -141,6 +143,8 @@ export class HomepageComponent implements OnInit {
       this.filterCampusId,
       this.maxPrice,
       this.minPrice,
+      this.selectedHouseUtilities,
+      this.selectedRoomUtilities,
     ).subscribe(data => {
       this.houses = data;
       this.scrollToTop();
@@ -151,7 +155,7 @@ export class HomepageComponent implements OnInit {
   goToPage(pageNumber: number) {
     // Call API: go to Page Number
     this.pageNumber = pageNumber;
-    this.filterHouse();
+    this.filterHouse(false);
   }
 
   //Search House by Name (contains)
@@ -285,22 +289,44 @@ export class HomepageComponent implements OnInit {
 
   }
 
-  //[Filter] Filter by Room Utility
-  onRoomUtilitySelected(event: any, utilityName: string) {
-    //see if user just checked or unchecked the checkbox
-    const isChecked = (<HTMLInputElement>event.target).checked;
-
-    // Call API to update list houses with the selected room utility
-    alert('Event: ' + isChecked + ' Utility Name: ' + utilityName);
-  }
-
   //[Filter] Filter by House Utility
   onHouseUtilitySelected(event: any, utilityName: string) {
     //see if user just checked or unchecked the checkbox
     const isChecked = (<HTMLInputElement>event.target).checked;
 
-    // Call API to update list houses with the selected House utility
-    alert('Event: ' + isChecked + ' Utility Name: ' + utilityName);
+    //if user check -> add houseUtility to the list
+    if (isChecked) {
+      this.selectedHouseUtilities.push(utilityName);
+    } else {
+      //if user uncheck -> remove the houseUtility from the list
+      const index = this.selectedHouseUtilities.indexOf(utilityName, 0);
+      if (index > -1) {
+        this.selectedHouseUtilities.splice(index, 1);
+      }
+    }
+
+    // Call API to update list houses with the selected room type
+    this.filterHouse(true);
+  }
+
+  //[Filter] Filter by Room Utility
+  onRoomUtilitySelected(event: any, utilityName: string) {
+    //see if user just checked or unchecked the checkbox
+    const isChecked = (<HTMLInputElement>event.target).checked;
+
+    //if user check -> add roomUtility to the list
+    if (isChecked) {
+      this.selectedRoomUtilities.push(utilityName);
+    } else {
+      //if user uncheck -> remove the roomUtility from the list
+      const index = this.selectedRoomUtilities.indexOf(utilityName, 0);
+      if (index > -1) {
+        this.selectedRoomUtilities.splice(index, 1);
+      }
+    }
+
+    // Call API to update list houses with the selected room type
+    this.filterHouse(true);
   }
 
   //[Filter] Cancel all Filter values
