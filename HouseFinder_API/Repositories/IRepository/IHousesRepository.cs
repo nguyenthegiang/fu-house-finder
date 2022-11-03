@@ -10,13 +10,13 @@ namespace Repositories.IRepository
 {
     public interface IHousesRepository
     {
-        public List<HouseDTO> GetAllHouses();
-        public List<HouseDTO> GetHouseByName(string HouseName);
+        //public List<HouseDTO> GetAllHouses();
+        //public List<HouseDTO> GetHouseByName(string HouseName);
         public HouseDTO GetHouseById(int HouseId);
         public List<HouseDTO> GetListHousesByLandlordId(string LandlordId);
         public int CountTotalHouse();
         public decimal? GetMoneyForNotRentedRooms(int HouseId);
         public int CountAvailableHouse();
-        public List<HouseDTO> GetAvailableHouses();
+        public List<AvailableHouseDTO> GetAvailableHouses();
     }
 }
