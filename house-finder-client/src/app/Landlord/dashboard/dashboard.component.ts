@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit {
   viewHouse(id: number)
   {
     console.log(id);
-    //this.router.navigate(['/landlord-house-detail/' + id]);
+    this.router.navigate(['/Landlord/landlord-house-detail/' + id]);
   }
 
   addHouse()
