@@ -13,11 +13,19 @@
       <!-- End Rooms Count Available -->
 
     <!-- List available rooms -->
-    <div class="container col-12"  *ngIf="houses.length == 0">
-      <h3 class="text-center my-5">Chưa có nhà trọ</h3>
+    <div class="container col-12 my-5"  *ngIf="houses.length == 0">
+      <h3 class="text-center">Chưa có nhà trọ</h3>
     </div>
-    <div class="container col-12"  *ngIf="houses.length != 0">
-      <h3 class="text-center my-5">Danh sách nhà trọ</h3>
+    <div class="container col-12 my-5"  *ngIf="houses.length != 0">
+      <div class="d-flex justify-content-between mb-5">
+        <h3 class="text-center">Danh sách nhà trọ</h3>
+
+        <div>
+          <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#updateModal"
+          data-whatever="@getbootstrap" (click)="addHouse()"><i class="fa-solid fa-plus"></i> Thêm mới</button>
+        </div>
+
+      </div>
 
       <table class="table table-striped table-hover">
         <thead>
@@ -25,6 +33,7 @@
             <th scope="col">ID</th>
             <th scope="col">Tên nhà trọ</th>
             <th scope="col">Tiện ích</th>
+            <th scope="col">Tùy chọn</th>
           </tr>
         </thead>
         <tbody>
@@ -58,8 +67,12 @@
 
             <td>
               <!-- Detail button -->
-              <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#updateModal"
+              <button type="button" class="btn btn-secondary me-2" data-toggle="modal" data-target="#updateModal"
                 data-whatever="@getbootstrap" (click)="viewHouse(dataItem.houseId)">Xem chi tiết</button>
+              <button type="button" class="btn btn-success me-2" data-toggle="modal" data-target="#updateModal"
+                data-whatever="@getbootstrap" (click)="viewHouse(dataItem.houseId)">Chỉnh sửa</button>
+              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#updateModal"
+                data-whatever="@getbootstrap" (click)="viewHouse(dataItem.houseId)">Xóa</button>
             </td>
           </tr>
         </tbody>

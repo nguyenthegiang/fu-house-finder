@@ -40,4 +40,9 @@ export class DashboardComponent implements OnInit {
   {
     this.router.navigate(['/room-detail/' + id]);
   }
+
+  addHouse()
+  {
+
+  }
 }
