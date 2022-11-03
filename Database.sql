@@ -178,13 +178,13 @@ CREATE TABLE [dbo].[Rooms] (
 	AreaByMeters float,			--diện tích, tính theo m2
 
 	--Tiện ích
-	Fridge bit NOT NULL,		 --Tủ lạnh (có/ko)
-	Kitchen bit NOT NULL,        --Bếp (có/không)
-	WashingMachine bit NOT NULL, --Máy giặt (có/không)
-	Desk bit NOT NULL,			 --Bàn học (có/không)
-	LiveWithHost bit NOT NULL,   --Chung chủ (có/không)
-	Bed bit NOT NULL,			 --Giường (có/không)
-	ClosedToilet bit NOT NULL,   --Vệ sinh khép kín (có/không)
+	Fridge bit NOT NULL,			--Tủ lạnh (có/ko)
+	Kitchen bit NOT NULL,			--Bếp (có/không)
+	WashingMachine bit NOT NULL,	--Máy giặt (có/không)
+	Desk bit NOT NULL,				--Bàn học (có/không)
+	NoLiveWithHost bit NOT NULL,	--Không Chung chủ (có/không)
+	Bed bit NOT NULL,				--Giường (có/không)
+	ClosedToilet bit NOT NULL,		--Vệ sinh khép kín (có/không)
 
 	MaxAmountOfPeople int,		--số người ở tối đa trong phòng
 	CurrentAmountOfPeople int,	--số người ở hiện tại trong phòng (cho tính năng update thông tin phòng 1/2)

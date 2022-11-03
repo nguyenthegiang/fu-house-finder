@@ -102,6 +102,20 @@ namespace DataAccess
                     -> For Filtering by Region*/
                     houseDTO.CommuneId = houseDTO.Village.CommuneId;
                     houseDTO.DistrictId = houseDTO.Village.Commune.DistrictId;
+
+                    //(RoomUtility)
+                    /*Get Utilities of that at least 1 Room of this House has
+                     -> For Filtering by RoomUtility*/
+                    foreach (RoomDTO roomDTO in houseDTO.Rooms)
+                    {
+                        if (roomDTO.Fridge) houseDTO.Fridge = true;
+                        if (roomDTO.Kitchen) houseDTO.Kitchen = true;
+                        if (roomDTO.WashingMachine) houseDTO.WashingMachine = true;
+                        if (roomDTO.Desk) houseDTO.Desk = true;
+                        if (roomDTO.NoLiveWithHost) houseDTO.NoLiveWithHost = true;
+                        if (roomDTO.Bed) houseDTO.Bed = true;
+                        if (roomDTO.ClosedToilet) houseDTO.ClosedToilet = true;
+                    }
                 }
             }
             catch (Exception e)
