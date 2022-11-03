@@ -20,21 +20,21 @@ namespace HouseFinder_API.Controllers
         private IHousesRepository housesRepository = new HouseRepository();
 
         //GET: api/Houses
-        [HttpGet]
-        public ActionResult<IEnumerable<HouseDTO>> GetAllHouses() => housesRepository.GetAllHouses();
+        //[HttpGet]
+        //public ActionResult<IEnumerable<HouseDTO>> GetAllHouses() => housesRepository.GetAllHouses();
 
         //GET: api/Houses/availableHouses
         //[Home Page] List available Houses (using OData)
         [EnableQuery]
         [HttpGet("availableHouses")]
-        public ActionResult<IEnumerable<HouseDTO>> GetAvailableHouses() => housesRepository.GetAvailableHouses();
+        public ActionResult<IEnumerable<AvailableHouseDTO>> GetAvailableHouses() => housesRepository.GetAvailableHouses();
 
         //GET: api/Houses/search?name=
-        [HttpGet("search")]
-        public ActionResult<IEnumerable<HouseDTO>> GetHouseByName(string name)
-        {
-            return housesRepository.GetHouseByName(name);
-        }
+        //[HttpGet("search")]
+        //public ActionResult<IEnumerable<HouseDTO>> GetHouseByName(string name)
+        //{
+        //    return housesRepository.GetHouseByName(name);
+        //}
 
         //GET: api/Houses/HouseId
         [HttpGet("{HouseId}")]

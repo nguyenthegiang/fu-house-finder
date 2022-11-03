@@ -181,10 +181,22 @@
         <div>
           <h6 class="font-weight-bold mb-2">Tiện ích khác:</h6>
 
-          <div class="form-check" *ngFor="let roomUtility of roomUtilities" id="listOtherUtility">
+          <!-- House Utility -->
+          <div class="form-check" *ngFor="let houseUtility of houseUtilities" id="listHouseUtility">
+            <!-- Select utility -->
+            <input class="form-check-input" type="checkbox" value="{{houseUtility.utilityName}}"
+              id="{{houseUtility.utilityName}}" (change)="onHouseUtilitySelected($event, houseUtility.utilityName)">
+            <label class="form-check-label" for="{{houseUtility.utilityName}}">
+              {{houseUtility.displayName}}
+            </label>
+          </div>
+          <br>
+
+          <!-- Room Utility -->
+          <div class="form-check" *ngFor="let roomUtility of roomUtilities" id="listRoomUtility">
             <!-- Select utility -->
             <input class="form-check-input" type="checkbox" value="{{roomUtility.utilityName}}"
-              id="{{roomUtility.utilityName}}" (change)="onUtilitySelected($event, roomUtility.utilityName)">
+              id="{{roomUtility.utilityName}}" (change)="onRoomUtilitySelected($event, roomUtility.utilityName)">
             <label class="form-check-label" for="{{roomUtility.utilityName}}">
               {{roomUtility.displayName}}
             </label>

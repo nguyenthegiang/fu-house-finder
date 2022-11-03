@@ -12,8 +12,8 @@ namespace Repositories.Repositories
 {
     public class HouseRepository : IHousesRepository
     {
-        public List<HouseDTO> GetAllHouses() => HouseDAO.GetAllHouses();
-        public List<HouseDTO> GetHouseByName(string HouseName) => HouseDAO.GetHouseByName(HouseName);
+        //public List<HouseDTO> GetAllHouses() => HouseDAO.GetAllHouses();
+        //public List<HouseDTO> GetHouseByName(string HouseName) => HouseDAO.GetHouseByName(HouseName);
         public HouseDTO GetHouseById(int HouseId) => HouseDAO.GetHouseById(HouseId);
         public List<HouseDTO> GetListHousesByLandlordId(string LandlordId) => HouseDAO.GetListHousesByLandlordId(LandlordId);
 
@@ -22,6 +22,6 @@ namespace Repositories.Repositories
         public int CountTotalHouse() => HouseDAO.CountTotalHouse();
 
         public int CountAvailableHouse() => HouseDAO.CountAvailableHouse();
-        public List<HouseDTO> GetAvailableHouses() => HouseDAO.GetAvailableHouses();
+        public List<AvailableHouseDTO> GetAvailableHouses() => HouseDAO.GetAvailableHouses();
     }
 }
