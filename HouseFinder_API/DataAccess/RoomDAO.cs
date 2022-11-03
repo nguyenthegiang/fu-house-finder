@@ -14,6 +14,7 @@ namespace DataAccess
     public class RoomDAO
     {
         //Get list Rooms by House
+        //Used in: RoomDAO.GetRoomPriceByOfHouse() [Home Page]
         public static List<RoomDTO> GetRoomsByHouseId(int HouseId)
         {
             List<RoomDTO> rooms;
@@ -24,8 +25,12 @@ namespace DataAccess
                     //Get by HouseID, include Images
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    rooms = context.Rooms.Where(r => r.HouseId == HouseId)
-                        .Include(r => r.ImagesOfRooms).Include(r => r.RoomType).ProjectTo<RoomDTO>(config).ToList();
+                    rooms = context.Rooms
+                        //not getting deleted rooms
+                        .Where(room => room.Deleted == false)
+                        .Where(room => room.HouseId == HouseId)
+                        .Include(room => room.ImagesOfRooms)
+                        .Include(room => room.RoomType).ProjectTo<RoomDTO>(config).ToList();
                 }
             }
             catch (Exception e)
@@ -67,7 +72,7 @@ namespace DataAccess
 
         //Get LowestRoomPrice & LowestRoomPrice for AvailableHouseDTO (used to display in Home Page)
         //Used in: HouseDAO.GetAllHouses();
-        public static AvailableHouseDTO GetRoomPriceById(AvailableHouseDTO houseDTO)
+        public static AvailableHouseDTO GetRoomPriceByOfHouse(AvailableHouseDTO houseDTO)
         {
             //Get list of its room
             List<RoomDTO> roomsOfHouse = GetRoomsByHouseId(houseDTO.HouseId);
@@ -186,7 +191,7 @@ namespace DataAccess
             }
         }
 
-        //[Staff - Dashboard] Count available rooms
+        //[Staff - Dashboard] [Home Page] Count available rooms
         public static int CountAvailableRoom()
         {
             int availableRoom = 0;
@@ -195,7 +200,9 @@ namespace DataAccess
                 using (var context = new FUHouseFinderContext())
                 {
                     //Count available rooms
-                    availableRoom = context.Rooms.Where(r => r.Status.StatusName.Equals("Available")).Count();
+                    availableRoom = context.Rooms
+                        .Where(room => room.Deleted == false)
+                        .Where(room => room.Status.StatusName.Equals("Available")).Count();
                 }
             }
             catch (Exception e)
@@ -238,6 +245,8 @@ namespace DataAccess
                 {
                     //Count available rooms of 1 house
                     countAvailableRoom = context.Rooms
+                        //not selecting deleted rooms
+                        .Where(room => room.Deleted == false)
                         .Where(room => room.HouseId == HouseId)
                         .Where(room => room.Status.StatusName.Equals("Available"))
                         .Count();
