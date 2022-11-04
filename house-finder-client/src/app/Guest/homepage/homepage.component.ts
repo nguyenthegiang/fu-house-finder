@@ -40,18 +40,23 @@ export class HomepageComponent implements OnInit {
   districts: District[] = [];         //(Regions) All Districts
   communesOfSelectedDistrict: Commune[] = []; //(Regions) all Communes of 1 selected District (only display after user has selected 1 District)
   villagesOfSelectedCommune: Village[] = [];  //(Regions) all Villages of 1 selected Commune (only display after user has selected 1 Commune)
+  //[Order by] Data for Order select
+  orderValues: string[] = [];
 
   //[Filter] Filter values for passing into API
-  searchName: string | undefined;         //(filter by name)
-  filterCampusId: number | undefined;     //(filter by campus)
-  maxPrice: number | undefined;           //(filter by price)
-  minPrice: number | undefined;           //(filter by price)
-  selectedRoomTypeIds: number[] = [];     //(filter by roomType)    //list of roomTypeId of roomTypes that got selected
-  selectedHouseUtilities: string[] = [];  //(filter by Utility)     //list of Utilities of House that got selected
-  selectedRoomUtilities: string[] = [];   //(filter by Utility)     //list of Utilities of Room that got selected
+  searchName: string | undefined;           //(filter by name)
+  filterCampusId: number | undefined;       //(filter by campus)
+  maxPrice: number | undefined;             //(filter by price)
+  minPrice: number | undefined;             //(filter by price)
+  selectedRoomTypeIds: number[] = [];       //(filter by roomType)    //list of roomTypeId of roomTypes that got selected
+  selectedHouseUtilities: string[] = [];    //(filter by Utility)     //list of Utilities of House that got selected
+  selectedRoomUtilities: string[] = [];     //(filter by Utility)     //list of Utilities of Room that got selected
   selectedDistrictId: number | undefined;   //(filter by Region)
   selectedCommuneId: number | undefined;    //(filter by Region)
   selectedVillageId: number | undefined;    //(filter by Region)
+  selectedRate: number | undefined;         //(filter by Rate)
+  //[Order by] Selected Order value
+  selectedOrderValue: string | undefined;
 
   constructor(
     private houseService: HouseService,
@@ -70,7 +75,6 @@ export class HomepageComponent implements OnInit {
     // (Paging) Count available Houses for total number of pages
     this.houseService.countTotalAvailableHouse().subscribe(data => {
       this.countAvailableHouses = data;
-      console.log(data);
 
       // (Paging) Calculate number of pages
       this.pageCount = Math.ceil(this.countAvailableHouses / this.pageSize);  //divide & round up
@@ -106,19 +110,29 @@ export class HomepageComponent implements OnInit {
 
     //(Filter) Other utilities
     this.houseUtilities = [
-      { "utilityName": "FingerprintLock", "displayName": "Khóa vân tay" },
-      { "utilityName": "Camera", "displayName": "Camera an ninh" },
-      { "utilityName": "Parking", "displayName": "Chỗ để xe" },
+      { utilityName: "FingerprintLock", displayName: "Khóa vân tay" },
+      { utilityName: "Camera", displayName: "Camera an ninh" },
+      { utilityName: "Parking", displayName: "Chỗ để xe" },
     ];
 
     this.roomUtilities = [
-      { "utilityName": "Fridge", "displayName": "Tủ lạnh" },
-      { "utilityName": "Kitchen", "displayName": "Bếp" },
-      { "utilityName": "WashingMachine", "displayName": "Máy giặt" },
-      { "utilityName": "Desk", "displayName": "Bàn học" },
-      { "utilityName": "NoLiveWithHost", "displayName": "Không chung chủ" },
-      { "utilityName": "Bed", "displayName": "Giường" },
-      { "utilityName": "ClosedToilet", "displayName": "Vệ sinh khép kín" },
+      { utilityName: "Fridge", displayName: "Tủ lạnh" },
+      { utilityName: "Kitchen", displayName: "Bếp" },
+      { utilityName: "WashingMachine", displayName: "Máy giặt" },
+      { utilityName: "Desk", displayName: "Bàn học" },
+      { utilityName: "NoLiveWithHost", displayName: "Không chung chủ" },
+      { utilityName: "Bed", displayName: "Giường" },
+      { utilityName: "ClosedToilet", displayName: "Vệ sinh khép kín" },
+    ];
+
+    //(Order by) Order values
+    this.orderValues = [
+      "Giá: Thấp đến Cao",
+      "Giá: Cao đến Thấp",
+      "Khoảng cách: Gần đến Xa",
+      "Khoảng cách: Xa đến Gần",
+      "Đánh giá: Cao đến Thấp",
+      "Đánh giá: Thấp đến Cao",
     ];
   }
 
@@ -151,6 +165,8 @@ export class HomepageComponent implements OnInit {
       this.selectedDistrictId,
       this.selectedCommuneId,
       this.selectedVillageId,
+      this.selectedRate,
+      this.selectedOrderValue,
     ).subscribe(data => {
       this.houses = data;
       this.scrollToTop();
@@ -272,7 +288,7 @@ export class HomepageComponent implements OnInit {
     });
 
     //no need for filtering by commune & village 
-    this.selectedCommuneId = undefined; 
+    this.selectedCommuneId = undefined;
     this.selectedVillageId = undefined;
     // Call API to update list houses with the selected district
     this.selectedDistrictId = numberDistrictId;
@@ -295,7 +311,7 @@ export class HomepageComponent implements OnInit {
     });
 
     //no need for filtering by district & village 
-    this.selectedDistrictId = undefined; 
+    this.selectedDistrictId = undefined;
     this.selectedVillageId = undefined;
     // Call API to update list houses with the selected commune
     this.selectedCommuneId = numberCommuneId;
@@ -308,7 +324,7 @@ export class HomepageComponent implements OnInit {
     var numberVillageId: number = +stringSelectedVillageId;
 
     //no need for filtering by district & commune 
-    this.selectedDistrictId = undefined; 
+    this.selectedDistrictId = undefined;
     this.selectedCommuneId = undefined;
     // Call API to update list houses with the selected village
     this.selectedVillageId = numberVillageId;
@@ -355,9 +371,23 @@ export class HomepageComponent implements OnInit {
     this.filterHouse(true);
   }
 
+  //[Filter] Filter by Rate
+  onRateSelected(rate: number) {
+    // Call API to update list houses with the selected rate
+    this.selectedRate = rate;
+    this.filterHouse(true);
+  }
+
   //[Filter] Cancel all Filter values
   onCancelFilter() {
     //reload page
     window.location.reload();
+  }
+
+  //[Order by] Order by values
+  onOrderBy(selectedOrder: string) {
+    // Call API to update list houses with the selected order
+    this.selectedOrderValue = selectedOrder;
+    this.filterHouse(true);
   }
 }

@@ -38,6 +38,8 @@ export class HouseService {
     selectedDistrictId?: number,
     selectedCommuneId?: number,
     selectedVillageId?: number,
+    selectedRate?: number,
+    selectedOrderValue?: string,
   ): Observable<House[]> {
     //define API here to append query options into it later
     var filterAPIUrl = this.APIUrl + `/availableHouses?`;
@@ -49,8 +51,9 @@ export class HouseService {
 
     //[Filter] check if user has at least 1 filter
     if (searchName || campusId || maxPrice || selectedRoomTypeIds.length > 0 ||
-      selectedDistrictId || selectedCommuneId || selectedVillageId || 
-      selectedHouseUtilities.length > 0 || selectedRoomUtilities.length > 0) {
+      selectedDistrictId || selectedCommuneId || selectedVillageId ||
+      selectedHouseUtilities.length > 0 || selectedRoomUtilities.length > 0
+      || selectedRate) {
       //add filter to API
       filterAPIUrl += `&$filter=`;
     }
@@ -187,6 +190,50 @@ export class HouseService {
         if (i < selectedRoomUtilities.length - 1) {
           filterAPIUrl += ' and ';
         }
+      }
+    }
+
+    //[Filter] add filter by Rate if has
+    if (selectedRate != undefined) {
+      //if is not the first filter -> need to add 'and' to API URL
+      if (!checkFirstFilter) {
+        filterAPIUrl += ` and `;
+      } else {
+        //if this one is the first filter -> mark it so others won't add 'and'
+        checkFirstFilter = false;
+      }
+
+      filterAPIUrl += `AverageRate ge ${selectedRate}`;
+    }
+
+    //[Order by] add Order by if has
+    if (selectedOrderValue != undefined) {
+      //this is not Filter so no need for 'and'
+
+      //add suitable query string based on selected Order
+      switch (selectedOrderValue) {
+        case 'Giá: Thấp đến Cao':
+          filterAPIUrl += `&$orderby=LowestRoomPrice asc`;
+          break;
+        case 'Giá: Cao đến Thấp':
+          filterAPIUrl += `&$orderby=HighestRoomPrice desc`;
+          break;
+        case 'Khoảng cách: Gần đến Xa':
+          //TODO: distance
+          filterAPIUrl += ``;
+          break;
+        case 'Khoảng cách: Xa đến Gần':
+          //TODO: distance
+          filterAPIUrl += ``;
+          break;
+        case 'Đánh giá: Cao đến Thấp':
+          filterAPIUrl += `&$orderby=AverageRate desc`;
+          break;
+        case 'Đánh giá: Thấp đến Cao':
+          filterAPIUrl += `&$orderby=AverageRate asc`;
+          break;
+        default:
+          break;
       }
     }
 
