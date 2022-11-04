@@ -110,21 +110,4 @@
     </tbody>
   </table>
   <!-- End List of Rooms -->
-
-  <!-- Rate and comment -->
-  <div class="my-5">
-    <h3 class="text-center mb-4">Người dùng đánh giá</h3>
-    <div class="bg-light border border-secondary rounded mb-2 p-2">
-      <b>Nguyễn Văn A</b>: Đẹp, gần trường (<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>)
-      <div (click)="replyOn = true" style="cursor: pointer;" class="reply">Phản hồi</div>
-      <div *ngIf="replyOn == true" class="mt-2">
-        Viết phản hồi:
-        <div class="d-flex">
-          <input type="text" class="form-control me-2" aria-label="Username" aria-describedby="basic-addon1">
-          <button type="button" class="btn btn-secondary me-2">Đăng</button>
-          <button type="button" class="btn btn-danger" (click)="replyOn = false">Hủy</button>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
