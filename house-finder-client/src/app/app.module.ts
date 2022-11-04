@@ -22,7 +22,6 @@ import { UpdateRoomComponent } from './Landlord/update-room/update-room.componen
 import { ListLandlordComponent } from './Staff/list-landlord/list-landlord.component';
 import { ListLandlordSignupRequestComponent } from './Staff/list-landlord-signup-request/list-landlord-signup-request.component';
 import { RoomDetailComponent } from './Guest/room-detail/room-detail.component';
-import { AddRoomComponent } from './Landlord/add-room/add-room.component';
 import { AddHouseComponent } from './Landlord/add-house/add-house.component';
 import { UpdateHouseComponent } from './Landlord/update-house/update-house.component';
 import { LandlordHouseDetailComponent } from './Landlord/landlord-house-detail/landlord-house-detail.component';
@@ -45,7 +44,6 @@ import { ListOrderComponent } from './Staff/list-order/list-order.component';
     ListLandlordComponent,
     ListLandlordSignupRequestComponent,
     RoomDetailComponent,
-    AddRoomComponent,
     AddHouseComponent,
     UpdateHouseComponent,
     LandlordHouseDetailComponent,
