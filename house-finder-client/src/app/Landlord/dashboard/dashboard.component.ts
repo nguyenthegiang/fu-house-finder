@@ -2,6 +2,7 @@ import { LandlordInformationService } from './../../services/landlord-informatio
 import { Component, OnInit } from '@angular/core';
 import { House } from 'src/app/models/house';
 import { HouseService } from 'src/app/services/house.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,7 +18,10 @@ export class DashboardComponent implements OnInit {
   roomCount: number = 0;
   roomAvailableCount: number = 0;
 
-  constructor(private houseService: HouseService, private lanlord_informationService: LandlordInformationService) { }
+  constructor(private houseService: HouseService,
+    private lanlord_informationService: LandlordInformationService,
+    private router: Router)
+  { }
 
   ngOnInit(): void {
     //Get List of all Houses
@@ -30,5 +34,28 @@ export class DashboardComponent implements OnInit {
       this.roomCount = data.roomCount;
       this.roomAvailableCount = data.roomAvailableCount;
     });
+  }
+
+  viewHouse(id: number)
+  {
+    console.log(id);
+    this.router.navigate(['/Landlord/landlord-house-detail/' + id]);
+  }
+
+  updateHouse(id: number)
+  {
+    console.log(id);
+    this.router.navigate(['/Landlord/update-house/' + id]);
+  }
+
+  deleteHouse(id: number)
+  {
+    console.log(id);
+    this.router.navigate(['/Landlord/landlord-house-detail/' + id]);
+  }
+
+  addHouse()
+  {
+    this.router.navigate(['/Landlord/add-house']);
   }
 }

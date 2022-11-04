@@ -30,6 +30,7 @@ export class HouseDetailComponent implements OnInit {
   countAvailableHouses = 0; //items count
   pageSize = 9; //number of items per page
   pageNumber = 1; //starts at page 1
+  isOn = false;
 
   constructor(
     private route: ActivatedRoute,

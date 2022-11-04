@@ -14,43 +14,43 @@ namespace DataAccess
 {
     public class HouseDAO
     {
-        //Get list of houses, with Address & Images
-        public static List<HouseDTO> GetAllHouses()
-        {
-            List<HouseDTO> houseDTOs;
-            try
-            {
-                using (var context = new FUHouseFinderContext())
-                {
-                    //include address, images
-                    MapperConfiguration config;
-                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    houseDTOs = context.Houses
-                        //unnecessary includes
-                        //.Include(house => house.Address)
-                        //.Include(house => house.ImagesOfHouses)
-                        .ProjectTo<HouseDTO>(config).ToList();
+        ////(Unused) Get list of houses, with Address & Images
+        //public static List<HouseDTO> GetAllHouses()
+        //{
+        //    List<HouseDTO> houseDTOs;
+        //    try
+        //    {
+        //        using (var context = new FUHouseFinderContext())
+        //        {
+        //            //include address, images
+        //            MapperConfiguration config;
+        //            config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+        //            houseDTOs = context.Houses
+        //                //unnecessary includes
+        //                //.Include(house => house.Address)
+        //                //.Include(house => house.ImagesOfHouses)
+        //                .ProjectTo<HouseDTO>(config).ToList();
 
-                    //find lowest room price & highest room price
-                    for (int i = 0; i < houseDTOs.Count; i++)
-                    {
-                        houseDTOs[i] = RoomDAO.GetRoomPriceById(houseDTOs[i]);
-                    }
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
+        //            //find lowest room price & highest room price
+        //            for (int i = 0; i < houseDTOs.Count; i++)
+        //            {
+        //                houseDTOs[i] = RoomDAO.GetRoomPriceById(houseDTOs[i]);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw new Exception(e.Message);
+        //    }
 
-            return houseDTOs;
-        }
+        //    return houseDTOs;
+        //}
 
         /*[Home Page] Get list of available houses, with Address, Images & Rooms
             Availabe house: house with at least 1 available room */
-        public static List<HouseDTO> GetAvailableHouses()
+        public static List<AvailableHouseDTO> GetAvailableHouses()
         {
-            List<HouseDTO> houseDTOs;
+            List<AvailableHouseDTO> houseDTOs;
             try
             {
                 using (var context = new FUHouseFinderContext())
@@ -59,22 +59,23 @@ namespace DataAccess
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
                     houseDTOs = context.Houses
-                        //unnecessary includes
-                        //.Include(house => house.Address)
-                        //.Include(house => house.ImagesOfHouses)
-                        .ProjectTo<HouseDTO>(config).ToList();
+                        //not selecting deleted house
+                        .Where(house => house.Deleted == false)
+                        //include this for finding DistrictId
+                        .Include(house => house.Village.Commune)
+                        .ProjectTo<AvailableHouseDTO>(config).ToList();
 
                     //find lowest room price & highest room price
                     for (int i = 0; i < houseDTOs.Count; i++)
                     {
-                        houseDTOs[i] = RoomDAO.GetRoomPriceById(houseDTOs[i]);
+                        houseDTOs[i] = RoomDAO.GetRoomPriceByOfHouse(houseDTOs[i]);
                     }
                 }
 
                 /*for each house: check to see if it has available room
                 if not, remove from list*/
-                List<HouseDTO> availableHouses = new List<HouseDTO>();
-                foreach (HouseDTO houseDTO in houseDTOs)
+                List<AvailableHouseDTO> availableHouses = new List<AvailableHouseDTO>();
+                foreach (AvailableHouseDTO houseDTO in houseDTOs)
                 {
                     if (RoomDAO.CountAvailableRoomByHouseId(houseDTO.HouseId) > 0)
                     {
@@ -83,9 +84,12 @@ namespace DataAccess
                 }
                 houseDTOs = availableHouses;
 
-                //Get list (as a string) of ID of RoomTypes of all Rooms of each House -> For Filtering by RoomType
-                foreach (HouseDTO houseDTO in houseDTOs)
+                //Add data for DTO
+                foreach (AvailableHouseDTO houseDTO in houseDTOs)
                 {
+                    //(RoomTypeIds)
+                    /*Get list (as a string) of ID of RoomTypes of all Rooms of each House
+                    -> For Filtering by RoomType*/
                     houseDTO.RoomTypeIds = "";
                     foreach (RoomDTO roomDTO in houseDTO.Rooms)
                     {
@@ -94,42 +98,88 @@ namespace DataAccess
                             houseDTO.RoomTypeIds += roomDTO.RoomTypeId.ToString();
                         }
                     }
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
 
-            return houseDTOs;
-        }
+                    //(Commune, District)
+                    /*Get CommuneId & DistrictId of the Village of this House
+                    -> For Filtering by Region*/
+                    houseDTO.CommuneId = houseDTO.Village.CommuneId;
+                    houseDTO.DistrictId = houseDTO.Village.Commune.DistrictId;
 
-        //Search house by name, with Address
-        public static List<HouseDTO> GetHouseByName(string houseName)
-        {
-            List<HouseDTO> houseDTOs;
-            try
-            {
-                using (var context = new FUHouseFinderContext())
-                {
-                    //include Address into Houses
-                    MapperConfiguration config;
-                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    houseDTOs = context.Houses.Include(h => h.Address).ProjectTo<HouseDTO>(config).Where(p => p.HouseName.Contains(houseName)).ToList();
-
-                    //find lowest room price & highest room price
-                    for (int i = 0; i < houseDTOs.Count; i++)
+                    //(RoomUtility)
+                    /*Get Utilities of that at least 1 Room of this House has
+                     -> For Filtering by RoomUtility*/
+                    foreach (RoomDTO roomDTO in houseDTO.Rooms)
                     {
-                        houseDTOs[i] = RoomDAO.GetRoomPriceById(houseDTOs[i]);
+                        if (roomDTO.Fridge) houseDTO.Fridge = true;
+                        if (roomDTO.Kitchen) houseDTO.Kitchen = true;
+                        if (roomDTO.WashingMachine) houseDTO.WashingMachine = true;
+                        if (roomDTO.Desk) houseDTO.Desk = true;
+                        if (roomDTO.NoLiveWithHost) houseDTO.NoLiveWithHost = true;
+                        if (roomDTO.Bed) houseDTO.Bed = true;
+                        if (roomDTO.ClosedToilet) houseDTO.ClosedToilet = true;
                     }
+
+                    //(Rate)
+                    /*Calculate Average Rate of this house based on List Rate of it
+                     -> For Filtering by Rate*/
+                    float sumRate = 0;
+                    if (houseDTO.Rates.Count != 0)
+                    {
+                        foreach (RateDTO rate in houseDTO.Rates)
+                        {
+                            sumRate += (float)rate.Star;
+                        }
+                        houseDTO.AverageRate = sumRate / houseDTO.Rates.Count;
+                    } else
+                    {
+                        //special case: no rate => averageRate = 0
+                        houseDTO.AverageRate = 0;
+                    }
+                    
                 }
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
+
+            //Remove unnecessary data to make API Response Body lighter
+            houseDTOs.ForEach(delegate(AvailableHouseDTO houseDTO) 
+            {
+                houseDTO.Rooms = null;
+                houseDTO.Village = null;
+                houseDTO.Rates = null;
+            });
+
             return houseDTOs;
         }
+
+        ////(Unused) Search house by name, with Address
+        //public static List<HouseDTO> GetHouseByName(string houseName)
+        //{
+        //    List<HouseDTO> houseDTOs;
+        //    try
+        //    {
+        //        using (var context = new FUHouseFinderContext())
+        //        {
+        //            //include Address into Houses
+        //            MapperConfiguration config;
+        //            config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+        //            houseDTOs = context.Houses.Include(h => h.Address).ProjectTo<HouseDTO>(config).Where(p => p.HouseName.Contains(houseName)).ToList();
+
+        //            //find lowest room price & highest room price
+        //            for (int i = 0; i < houseDTOs.Count; i++)
+        //            {
+        //                houseDTOs[i] = RoomDAO.GetRoomPriceById(houseDTOs[i]);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw new Exception(e.Message);
+        //    }
+        //    return houseDTOs;
+        //}
 
         //[House Detail] Get House Detail information
         public static HouseDTO GetHouseById(int houseId)          
@@ -177,7 +227,7 @@ namespace DataAccess
             return houseDTOs;
         }
 
-        //[Landlord - List Rooms] Get total amount of money of rooms that has not been rented
+        //[Landlord - List Rooms] Get total amount of money of rooms that has not been rented (of 1 House)
         public static decimal? GetMoneyForNotRentedRooms(int HouseId)
         {
             decimal? totalMoney = 0;
@@ -235,7 +285,14 @@ namespace DataAccess
                 using (var context = new FUHouseFinderContext())
                 {
                     //Count available houses: houses having at least 1 room available
-                    availableHouse = context.Rooms.Where(r => r.Status.StatusName.Equals("Available")).GroupBy(r => r.HouseId).Count();
+                    availableHouse = context.Rooms
+                        //not considering deleted rooms
+                        .Where(room => room.Deleted == false)
+                        //not considering deleted houses
+                        .Where(room => room.House.Deleted == false)
+                        .Where(room => room.Status.StatusName.Equals("Available"))
+                        .GroupBy(room => room.HouseId)
+                        .Count();
                 }
             }
             catch (Exception e)

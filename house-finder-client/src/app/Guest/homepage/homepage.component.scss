@@ -28,9 +28,7 @@
   width: 14vw;
 }
 
-
-
-//rate
+//[Filter] Rate: Radio button 
 .rateForm{
   //style for fontawesome icons
   i {
@@ -54,5 +52,19 @@
   }
 }
 
+// Dark Paging
+.page-link
+{
+  color: black;
+}
+.page-link.active
+{
+  color: white !important;
+  background-color: #6c757d !important;
+  border-color: #6c757d !important;
+}
 
-
+// Hide <option> as title of <select> from being selected
+.disableOption {
+  display: none;
+}
