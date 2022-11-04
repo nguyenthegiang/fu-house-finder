@@ -70,8 +70,8 @@
               <td>{{order.phoneNumber}}</td>
               <td>{{order.email}}</td>
               <td>{{order.orderContent}}</td>
-              <td>{{order.orderedDate| date}}</td>
-              <td>{{order.solvedDate| date}}</td>
+              <td>{{order.orderedDate| date:'shortDate'}}</td>
+              <td>{{order.solvedDate| date:'shortDate'}}</td>
               <td *ngIf="order.solved == true">
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
