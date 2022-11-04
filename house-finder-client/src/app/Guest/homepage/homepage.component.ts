@@ -75,7 +75,6 @@ export class HomepageComponent implements OnInit {
     // (Paging) Count available Houses for total number of pages
     this.houseService.countTotalAvailableHouse().subscribe(data => {
       this.countAvailableHouses = data;
-      console.log(data);
 
       // (Paging) Calculate number of pages
       this.pageCount = Math.ceil(this.countAvailableHouses / this.pageSize);  //divide & round up
@@ -130,8 +129,8 @@ export class HomepageComponent implements OnInit {
     this.orderValues = [
       "Giá: Thấp đến Cao",
       "Giá: Cao đến Thấp",
-      "Khoảng cách: Xa đến Gần",
       "Khoảng cách: Gần đến Xa",
+      "Khoảng cách: Xa đến Gần",
       "Đánh giá: Cao đến Thấp",
       "Đánh giá: Thấp đến Cao",
     ];

@@ -53,7 +53,7 @@ export class HouseService {
     if (searchName || campusId || maxPrice || selectedRoomTypeIds.length > 0 ||
       selectedDistrictId || selectedCommuneId || selectedVillageId ||
       selectedHouseUtilities.length > 0 || selectedRoomUtilities.length > 0
-      || selectedRate || selectedOrderValue) {
+      || selectedRate) {
       //add filter to API
       filterAPIUrl += `&$filter=`;
     }
@@ -204,6 +204,37 @@ export class HouseService {
       }
 
       filterAPIUrl += `AverageRate ge ${selectedRate}`;
+    }
+
+    //[Order by] add Order by if has
+    if (selectedOrderValue != undefined) {
+      //this is not Filter so no need for 'and'
+
+      //add suitable query string based on selected Order
+      switch (selectedOrderValue) {
+        case 'Giá: Thấp đến Cao':
+          filterAPIUrl += `&$orderby=LowestRoomPrice asc`;
+          break;
+        case 'Giá: Cao đến Thấp':
+          filterAPIUrl += `&$orderby=HighestRoomPrice desc`;
+          break;
+        case 'Khoảng cách: Gần đến Xa':
+          //TODO: distance
+          filterAPIUrl += ``;
+          break;
+        case 'Khoảng cách: Xa đến Gần':
+          //TODO: distance
+          filterAPIUrl += ``;
+          break;
+        case 'Đánh giá: Cao đến Thấp':
+          filterAPIUrl += `&$orderby=AverageRate desc`;
+          break;
+        case 'Đánh giá: Thấp đến Cao':
+          filterAPIUrl += `&$orderby=AverageRate asc`;
+          break;
+        default:
+          break;
+      }
     }
 
     return this.http.get<House[]>(filterAPIUrl);
