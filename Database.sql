@@ -1292,6 +1292,33 @@ GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 INSERT INTO [dbo].[Rates] VALUES (5, N'Rất tuyệt vời, gần trường nữa', N'Cảm ơn bạn', 1, N'HE153046',  0,
 GETDATE(), GETDATE(), N'HE153046', N'HE153046');
 
+INSERT INTO [dbo].[Rates] VALUES (4, N'Rất tuyệt vời, gần trường nữa 2', N'Cảm ơn bạn 2', 2, N'HE153046',  0,
+GETDATE(), GETDATE(), N'HE153046', N'HE153046');
+
+INSERT INTO [dbo].[Rates] VALUES (3, N'Rất tuyệt vời, gần trường nữa 3', N'Cảm ơn bạn 3', 3, N'HE153046',  0,
+GETDATE(), GETDATE(), N'HE153046', N'HE153046');
+
+INSERT INTO [dbo].[Rates] VALUES (2, N'Rất tuyệt vời, gần trường nữa 4', N'Cảm ơn bạn 4', 4, N'HE153046',  0,
+GETDATE(), GETDATE(), N'HE153046', N'HE153046');
+
+INSERT INTO [dbo].[Rates] VALUES (1, N'Rất tuyệt vời, gần trường nữa 5', N'Cảm ơn bạn 5', 5, N'HE153046',  0,
+GETDATE(), GETDATE(), N'HE153046', N'HE153046');
+
+INSERT INTO [dbo].[Rates] VALUES (2, N'Rất tuyệt vời, gần trường nữa 6', N'Cảm ơn bạn 6', 1, N'HE153046',  0,
+GETDATE(), GETDATE(), N'HE153046', N'HE153046');
+
+INSERT INTO [dbo].[Rates] VALUES (3, N'Rất tuyệt vời, gần trường nữa 7', N'Cảm ơn bạn 7', 2, N'HE153046',  0,
+GETDATE(), GETDATE(), N'HE153046', N'HE153046');
+
+INSERT INTO [dbo].[Rates] VALUES (5, N'Rất tuyệt vời, gần trường nữa 7', N'Cảm ơn bạn 7', 6, N'HE153046',  0,
+GETDATE(), GETDATE(), N'HE153046', N'HE153046');
+
+INSERT INTO [dbo].[Rates] VALUES (5, N'Rất tuyệt vời, gần trường nữa 7', N'Cảm ơn bạn 7', 7, N'HE153046',  0,
+GETDATE(), GETDATE(), N'HE153046', N'HE153046');
+
+INSERT INTO [dbo].[Rates] VALUES (4, N'Rất tuyệt vời, gần trường nữa 7', N'Cảm ơn bạn 7', 8, N'HE153046',  0,
+GETDATE(), GETDATE(), N'HE153046', N'HE153046');
+
 -------------------------------------------------------------------------------------------------------------------------------------------
 
 INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house1.jpg', 1, 0,
