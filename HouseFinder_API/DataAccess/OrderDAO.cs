@@ -82,5 +82,20 @@ namespace DataAccess
             }
             return orders;
         }
+
+        //[Staff/list-order] Count total order 
+        public static int CountTotalOrder()
+        {
+            int total;
+            try
+            {
+                total = GetAllOrders().Count();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return total;
+        }
     }
 }
