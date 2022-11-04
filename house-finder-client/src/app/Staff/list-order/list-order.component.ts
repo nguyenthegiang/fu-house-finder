@@ -43,6 +43,7 @@ export class ListOrderComponent implements OnInit {
   goToPage(pageNumber: number) {
     // Call API: go to Page Number
     this.pageNumber = pageNumber;
+    this.filterHouse(false);
     this.scrollToTop();
   }
 
