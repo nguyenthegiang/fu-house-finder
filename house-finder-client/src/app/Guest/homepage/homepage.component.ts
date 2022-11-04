@@ -52,6 +52,7 @@ export class HomepageComponent implements OnInit {
   selectedDistrictId: number | undefined;   //(filter by Region)
   selectedCommuneId: number | undefined;    //(filter by Region)
   selectedVillageId: number | undefined;    //(filter by Region)
+  selectedRate: number | undefined;
 
   constructor(
     private houseService: HouseService,
@@ -151,6 +152,7 @@ export class HomepageComponent implements OnInit {
       this.selectedDistrictId,
       this.selectedCommuneId,
       this.selectedVillageId,
+      this.selectedRate,
     ).subscribe(data => {
       this.houses = data;
       this.scrollToTop();
@@ -353,6 +355,11 @@ export class HomepageComponent implements OnInit {
 
     // Call API to update list houses with the selected room type
     this.filterHouse(true);
+  }
+
+  //[Filter] Filter by Rate
+  onRateSelected(rate: number) {
+    alert(rate);
   }
 
   //[Filter] Cancel all Filter values
