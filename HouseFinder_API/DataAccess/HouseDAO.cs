@@ -59,12 +59,16 @@ namespace DataAccess
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
                     houseDTOs = context.Houses
+                        //not selecting deleted house
+                        .Where(house => house.Deleted == false)
+                        //include this for finding DistrictId
+                        .Include(house => house.Village.Commune)
                         .ProjectTo<AvailableHouseDTO>(config).ToList();
 
                     //find lowest room price & highest room price
                     for (int i = 0; i < houseDTOs.Count; i++)
                     {
-                        houseDTOs[i] = RoomDAO.GetRoomPriceById(houseDTOs[i]);
+                        houseDTOs[i] = RoomDAO.GetRoomPriceByOfHouse(houseDTOs[i]);
                     }
                 }
 
@@ -80,9 +84,12 @@ namespace DataAccess
                 }
                 houseDTOs = availableHouses;
 
-                //Get list (as a string) of ID of RoomTypes of all Rooms of each House -> For Filtering by RoomType
+                //Add data for DTO
                 foreach (AvailableHouseDTO houseDTO in houseDTOs)
                 {
+                    //(RoomTypeIds)
+                    /*Get list (as a string) of ID of RoomTypes of all Rooms of each House
+                    -> For Filtering by RoomType*/
                     houseDTO.RoomTypeIds = "";
                     foreach (RoomDTO roomDTO in houseDTO.Rooms)
                     {
@@ -91,6 +98,44 @@ namespace DataAccess
                             houseDTO.RoomTypeIds += roomDTO.RoomTypeId.ToString();
                         }
                     }
+
+                    //(Commune, District)
+                    /*Get CommuneId & DistrictId of the Village of this House
+                    -> For Filtering by Region*/
+                    houseDTO.CommuneId = houseDTO.Village.CommuneId;
+                    houseDTO.DistrictId = houseDTO.Village.Commune.DistrictId;
+
+                    //(RoomUtility)
+                    /*Get Utilities of that at least 1 Room of this House has
+                     -> For Filtering by RoomUtility*/
+                    foreach (RoomDTO roomDTO in houseDTO.Rooms)
+                    {
+                        if (roomDTO.Fridge) houseDTO.Fridge = true;
+                        if (roomDTO.Kitchen) houseDTO.Kitchen = true;
+                        if (roomDTO.WashingMachine) houseDTO.WashingMachine = true;
+                        if (roomDTO.Desk) houseDTO.Desk = true;
+                        if (roomDTO.NoLiveWithHost) houseDTO.NoLiveWithHost = true;
+                        if (roomDTO.Bed) houseDTO.Bed = true;
+                        if (roomDTO.ClosedToilet) houseDTO.ClosedToilet = true;
+                    }
+
+                    //(Rate)
+                    /*Calculate Average Rate of this house based on List Rate of it
+                     -> For Filtering by Rate*/
+                    float sumRate = 0;
+                    if (houseDTO.Rates.Count != 0)
+                    {
+                        foreach (RateDTO rate in houseDTO.Rates)
+                        {
+                            sumRate += (float)rate.Star;
+                        }
+                        houseDTO.AverageRate = sumRate / houseDTO.Rates.Count;
+                    } else
+                    {
+                        //special case: no rate => averageRate = 0
+                        houseDTO.AverageRate = 0;
+                    }
+                    
                 }
             }
             catch (Exception e)
@@ -102,6 +147,8 @@ namespace DataAccess
             houseDTOs.ForEach(delegate(AvailableHouseDTO houseDTO) 
             {
                 houseDTO.Rooms = null;
+                houseDTO.Village = null;
+                houseDTO.Rates = null;
             });
 
             return houseDTOs;
@@ -238,7 +285,14 @@ namespace DataAccess
                 using (var context = new FUHouseFinderContext())
                 {
                     //Count available houses: houses having at least 1 room available
-                    availableHouse = context.Rooms.Where(r => r.Status.StatusName.Equals("Available")).GroupBy(r => r.HouseId).Count();
+                    availableHouse = context.Rooms
+                        //not considering deleted rooms
+                        .Where(room => room.Deleted == false)
+                        //not considering deleted houses
+                        .Where(room => room.House.Deleted == false)
+                        .Where(room => room.Status.StatusName.Equals("Available"))
+                        .GroupBy(room => room.HouseId)
+                        .Count();
                 }
             }
             catch (Exception e)

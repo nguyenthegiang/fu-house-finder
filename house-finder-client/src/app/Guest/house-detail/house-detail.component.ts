@@ -78,11 +78,13 @@ export class HouseDetailComponent implements OnInit {
       lastModifiedBy: 'HE153046'
     };
 
-    this.reportService.addReport(report).subscribe();
+    this.reportService.addReport(report).subscribe(() => this.goBack());
+  }
+  goBack(): void {
+    window.location.reload();
   }
 
-  viewRoom(id: number)
-  {
+  viewRoom(id: number) {
     this.router.navigate(['/room-detail/' + id]);
   }
 

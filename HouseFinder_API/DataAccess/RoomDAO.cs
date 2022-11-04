@@ -14,6 +14,7 @@ namespace DataAccess
     public class RoomDAO
     {
         //Get list Rooms by House
+        //Used in: RoomDAO.GetRoomPriceByOfHouse() [Home Page]
         public static List<RoomDTO> GetRoomsByHouseId(int HouseId)
         {
             List<RoomDTO> rooms;
@@ -24,8 +25,12 @@ namespace DataAccess
                     //Get by HouseID, include Images
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    rooms = context.Rooms.Where(r => r.HouseId == HouseId)
-                        .Include(r => r.ImagesOfRooms).Include(r => r.RoomType).ProjectTo<RoomDTO>(config).ToList();
+                    rooms = context.Rooms
+                        //not getting deleted rooms
+                        .Where(room => room.Deleted == false)
+                        .Where(room => room.HouseId == HouseId)
+                        .Include(room => room.ImagesOfRooms)
+                        .Include(room => room.RoomType).ProjectTo<RoomDTO>(config).ToList();
                 }
             }
             catch (Exception e)
@@ -47,7 +52,7 @@ namespace DataAccess
                     //Find rooms of this house
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    var result = context.Rooms.Include(p => p.Status).Where(r => r.HouseId == HouseId).ProjectTo<RoomDTO>(config).ToList();
+                    var result = context.Rooms.Include(p => p.Status).Where(r => r.HouseId == HouseId && r.Deleted== false).ProjectTo<RoomDTO>(config).ToList();
                     //Get only available rooms
                     foreach (RoomDTO r in result)
                     {
@@ -67,7 +72,7 @@ namespace DataAccess
 
         //Get LowestRoomPrice & LowestRoomPrice for AvailableHouseDTO (used to display in Home Page)
         //Used in: HouseDAO.GetAllHouses();
-        public static AvailableHouseDTO GetRoomPriceById(AvailableHouseDTO houseDTO)
+        public static AvailableHouseDTO GetRoomPriceByOfHouse(AvailableHouseDTO houseDTO)
         {
             //Get list of its room
             List<RoomDTO> roomsOfHouse = GetRoomsByHouseId(houseDTO.HouseId);
@@ -151,7 +156,7 @@ namespace DataAccess
                     }
 
                     //Delete by changing Status to Disabled
-                    updatedRoom.StatusId = 3;
+                    updatedRoom.Deleted = true;
                     context.Entry<Room>(updatedRoom).State = EntityState.Detached;
                     context.Rooms.Update(updatedRoom);
                     context.SaveChanges();
@@ -171,7 +176,7 @@ namespace DataAccess
                 {
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    RoomDTO room = context.Rooms.Include(p => p.Status).Where(r => r.RoomId == roomId).ProjectTo<RoomDTO>(config).FirstOrDefault();
+                    RoomDTO room = context.Rooms.Include(p => p.Status).Where(r => r.RoomId == roomId && r.Deleted==false).ProjectTo<RoomDTO>(config).FirstOrDefault();
                     if (room == null)
                     {
                         throw new Exception();
@@ -186,7 +191,7 @@ namespace DataAccess
             }
         }
 
-        //[Staff - Dashboard] Count available rooms
+        //[Staff - Dashboard] [Home Page] Count available rooms
         public static int CountAvailableRoom()
         {
             int availableRoom = 0;
@@ -195,7 +200,9 @@ namespace DataAccess
                 using (var context = new FUHouseFinderContext())
                 {
                     //Count available rooms
-                    availableRoom = context.Rooms.Where(r => r.Status.StatusName.Equals("Available")).Count();
+                    availableRoom = context.Rooms
+                        .Where(room => room.Deleted == false)
+                        .Where(room => room.Status.StatusName.Equals("Available")).Count();
                 }
             }
             catch (Exception e)
@@ -238,6 +245,8 @@ namespace DataAccess
                 {
                     //Count available rooms of 1 house
                     countAvailableRoom = context.Rooms
+                        //not selecting deleted rooms
+                        .Where(room => room.Deleted == false)
                         .Where(room => room.HouseId == HouseId)
                         .Where(room => room.Status.StatusName.Equals("Available"))
                         .Count();
@@ -248,6 +257,29 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
             return countAvailableRoom;
+        }
+
+        //[House Detail] Count total capacity by house id
+        public static int? CountAvailableCapacityByHouseId(int HouseId)
+        {
+            int? capacity;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Get list of available rooms
+                    List<Room> rooms = context.Rooms.Where(r => r.HouseId == HouseId).Where(r => r.Status.StatusName.Equals("Available")).ToList();
+                    //Calculate
+                    int? maxPeople = (from r in rooms select r.MaxAmountOfPeople).Sum();
+                    int? currentPeople = (from r in rooms select r.CurrentAmountOfPeople).Sum();
+                    capacity = maxPeople - currentPeople;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return capacity;
         }
 
         //[Homepage] Count totally available room by house id
@@ -290,6 +322,35 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
             return total;
+        }
+
+        //[RoomPage] Change status Room
+        public static void ChangStatusRoom(int statusId,int roomId)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    Room updatedRoom = context.Rooms.FirstOrDefault(r => r.RoomId == roomId);
+                    if (updatedRoom == null)
+                    {
+                        throw new Exception();
+                    }
+                    updatedRoom.LastModifiedDate = DateTime.Now;
+                    updatedRoom.Status.StatusId = statusId;
+
+                    Room roomToUpdate = updatedRoom;
+
+                    context.Entry<Room>(updatedRoom).State = EntityState.Detached;
+
+                    context.Rooms.Update(roomToUpdate);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }

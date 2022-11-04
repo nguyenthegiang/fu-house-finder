@@ -12,5 +12,9 @@ namespace DataAccess.DTO
         public string VillageName { get; set; }
         public int? CommuneId { get; set; }
         public DateTime? CreatedDate { get; set; }
+
+        //[Home Page - Filter by Region]
+        //Get Commune of this Village -> for HouseDAO to get DistrictId
+        public virtual CommuneDTO Commune { get; set; }
     }
 }
