@@ -1,6 +1,7 @@
 ﻿using DataAccess.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 using Repositories.IRepository;
 using Repositories.Repositories;
 using System;
@@ -16,8 +17,9 @@ namespace HouseFinder_API.Controllers
     {
         private IOrderRepository orderRepository = new OrderRepository();
 
+        [EnableQuery]
         [HttpGet]
-        public ActionResult<IEnumerable<OrderDTO>> GetAllCampuses() => orderRepository.GetAllOrder();
+        public ActionResult<IEnumerable<OrderDTO>> GetAllOrders() => orderRepository.GetAllOrder();
 
         //GET: api/Order/CountTotalOrder
         [HttpGet("CountTotalOrder")]
