@@ -60,19 +60,19 @@
               <th scope="col">Yêu cầu</th>
               <th scope="col">Ngày tạo</th>
               <th scope="col">Ngày giải quyết</th>
-              <th scope="col">Xử lý</th>
+              <th scope="col">Trạng thái</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td></td>
+            <tr *ngFor="let order of orders">
+              <td>{{order.studentId}}</td>
+              <td>{{order.studentName}}</td>
+              <td>{{order.phoneNumber}}</td>
+              <td>{{order.email}}</td>
+              <td>{{order.orderContent}}</td>
+              <td>{{order.orderedDate}}</td>
+              <td>{{order.solvedDate}}</td>
+              <td>{{order.solved}}</td>
             </tr>
           </tbody>
         </table>
