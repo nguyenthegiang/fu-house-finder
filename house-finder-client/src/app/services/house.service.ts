@@ -38,6 +38,7 @@ export class HouseService {
     selectedDistrictId?: number,
     selectedCommuneId?: number,
     selectedVillageId?: number,
+    selectedRate?: number,
   ): Observable<House[]> {
     //define API here to append query options into it later
     var filterAPIUrl = this.APIUrl + `/availableHouses?`;
@@ -49,8 +50,9 @@ export class HouseService {
 
     //[Filter] check if user has at least 1 filter
     if (searchName || campusId || maxPrice || selectedRoomTypeIds.length > 0 ||
-      selectedDistrictId || selectedCommuneId || selectedVillageId || 
-      selectedHouseUtilities.length > 0 || selectedRoomUtilities.length > 0) {
+      selectedDistrictId || selectedCommuneId || selectedVillageId ||
+      selectedHouseUtilities.length > 0 || selectedRoomUtilities.length > 0
+      || selectedRate) {
       //add filter to API
       filterAPIUrl += `&$filter=`;
     }
@@ -188,6 +190,19 @@ export class HouseService {
           filterAPIUrl += ' and ';
         }
       }
+    }
+
+    //[Filter] add filter by Rate if has
+    if (selectedRate != undefined) {
+      //if is not the first filter -> need to add 'and' to API URL
+      if (!checkFirstFilter) {
+        filterAPIUrl += ` and `;
+      } else {
+        //if this one is the first filter -> mark it so others won't add 'and'
+        checkFirstFilter = false;
+      }
+
+      filterAPIUrl += `AverageRate ge ${selectedRate}`;
     }
 
     return this.http.get<House[]>(filterAPIUrl);

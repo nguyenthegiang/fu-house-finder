@@ -118,6 +118,24 @@ namespace DataAccess
                         if (roomDTO.Bed) houseDTO.Bed = true;
                         if (roomDTO.ClosedToilet) houseDTO.ClosedToilet = true;
                     }
+
+                    //(Rate)
+                    /*Calculate Average Rate of this house based on List Rate of it
+                     -> For Filtering by Rate*/
+                    float sumRate = 0;
+                    if (houseDTO.Rates.Count != 0)
+                    {
+                        foreach (RateDTO rate in houseDTO.Rates)
+                        {
+                            sumRate += (float)rate.Star;
+                        }
+                        houseDTO.AverageRate = sumRate / houseDTO.Rates.Count;
+                    } else
+                    {
+                        //special case: no rate => averageRate = 0
+                        houseDTO.AverageRate = 0;
+                    }
+                    
                 }
             }
             catch (Exception e)
@@ -130,6 +148,7 @@ namespace DataAccess
             {
                 houseDTO.Rooms = null;
                 houseDTO.Village = null;
+                houseDTO.Rates = null;
             });
 
             return houseDTOs;

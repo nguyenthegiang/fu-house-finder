@@ -1,5 +1,4 @@
-﻿using BusinessObjects;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -65,5 +64,11 @@ namespace DataAccess.DTO
         //[Home Page - Filter by RoomType]
         //List RoomTypeIds (as a string) of all RoomTypes of all Rooms of this House
         public string RoomTypeIds { get; set; }
+
+        //[Home Page - Filter by Rate]
+        //Average Rate of this House
+        public float AverageRate { get; set; }
+        //List Rates of this House -> to calculate average rate
+        public virtual ICollection<RateDTO> Rates { get; set; }
     }
 }
