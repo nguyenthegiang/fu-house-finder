@@ -19,5 +19,13 @@ namespace HouseFinder_API.Controllers
         [HttpGet]
         public ActionResult<IEnumerable<OrderDTO>> GetAllCampuses() => orderRepository.GetAllOrder();
 
+        //GET: api/Order/CountTotalOrder
+        [HttpGet("CountTotalOrder")]
+        public int CountTotalOrder()
+        {
+            int total = orderRepository.CountTotalOrder();
+            return total;
+        }
+
     }
 }

@@ -10,5 +10,6 @@ namespace Repositories.IRepository
     public interface IOrderRepository
     {
         public List<OrderDTO> GetAllOrder();
+        public int CountTotalOrder();
     }
 }
