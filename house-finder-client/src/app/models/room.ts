@@ -23,6 +23,7 @@ export interface Room {
     status: Status;
     roomType: RoomType;
     houseId: number;
+    delete: boolean;
     createdDate: Date;
     lastModifiedDate: Date;
     createdBy: string;
