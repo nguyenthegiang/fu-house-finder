@@ -359,7 +359,9 @@ export class HomepageComponent implements OnInit {
 
   //[Filter] Filter by Rate
   onRateSelected(rate: number) {
-    alert(rate);
+    // Call API to update list houses with the selected rate
+    this.selectedRate = rate;
+    this.filterHouse(true);
   }
 
   //[Filter] Cancel all Filter values
