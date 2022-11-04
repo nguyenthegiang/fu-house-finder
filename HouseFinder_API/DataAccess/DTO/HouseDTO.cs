@@ -24,20 +24,10 @@ namespace DataAccess.DTO
         public string CreatedBy { get; set; }
         public string LastModifiedBy { get; set; }
 
-        //[Home Page] Price of the cheapest room & the most expensive room, to display in Home Page
-        public decimal LowestRoomPrice { get; set; }
-        public decimal HighestRoomPrice { get; set; }
-
         //Address of the House
         public virtual AddressDTO Address { get; set; }
 
         //List Images of this House
         public virtual ICollection<ImagesOfHouseDTO> ImagesOfHouses { get; set; }
-
-        //List Rooms of this House
-        public virtual ICollection<RoomDTO> Rooms { get; set; }
-
-        //[Home Page] List RoomTypeIds (as a string) of all RoomTypes of all Rooms of this House
-        public string RoomTypeIds { get; set; }
     }
 }

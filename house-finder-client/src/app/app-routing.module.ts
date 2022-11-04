@@ -1,3 +1,6 @@
+import { AddHouseComponent } from './Landlord/add-house/add-house.component';
+import { UpdateHouseComponent } from './Landlord/update-house/update-house.component';
+import { LandlordHouseDetailComponent } from './Landlord/landlord-house-detail/landlord-house-detail.component';
 import { HomepageComponent } from './Guest/homepage/homepage.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -22,6 +25,9 @@ const routes: Routes = [
   { path: 'Landlord/dashboard', component: DashboardComponent},
   { path: 'Landlord/upload/single', component: UploadHouseInfoSingleComponent},
   { path: 'Landlord/list-room/:id', component: ListRoomComponent},
+  { path: 'Landlord/landlord-house-detail/:id', component: LandlordHouseDetailComponent},
+  { path: 'Landlord/add-house', component: AddHouseComponent},
+  { path: 'Landlord/update-house/:id', component: UpdateHouseComponent},
   { path: 'Staff/dashboard', component: DashboardStaffComponent},
   { path: 'Staff/list-landlord', component: ListLandlordComponent},
   { path: 'Staff/list-report', component: ListReportComponent},

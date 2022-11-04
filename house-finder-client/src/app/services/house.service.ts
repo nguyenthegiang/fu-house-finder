@@ -29,10 +29,17 @@ export class HouseService {
     pageSize: number,
     pageNumber: number,
     selectedRoomTypeIds: number[],
+    selectedHouseUtilities: string[],
+    selectedRoomUtilities: string[],
     searchName?: string,
     campusId?: number,
     maxPrice?: number,
     minPrice?: number,
+    selectedDistrictId?: number,
+    selectedCommuneId?: number,
+    selectedVillageId?: number,
+    selectedRate?: number,
+    selectedOrderValue?: string,
   ): Observable<House[]> {
     //define API here to append query options into it later
     var filterAPIUrl = this.APIUrl + `/availableHouses?`;
@@ -43,7 +50,10 @@ export class HouseService {
     filterAPIUrl += `$skip=${skip}&$top=${top}`;
 
     //[Filter] check if user has at least 1 filter
-    if (searchName || campusId || maxPrice || selectedRoomTypeIds.length > 0) {
+    if (searchName || campusId || maxPrice || selectedRoomTypeIds.length > 0 ||
+      selectedDistrictId || selectedCommuneId || selectedVillageId ||
+      selectedHouseUtilities.length > 0 || selectedRoomUtilities.length > 0
+      || selectedRate) {
       //add filter to API
       filterAPIUrl += `&$filter=`;
     }
@@ -100,13 +110,130 @@ export class HouseService {
         checkFirstFilter = false;
       }
 
-      //which each roomTypeId got selected -> append to query string
+      //with each roomTypeId got selected -> append to query string
       for (let i = 0; i < selectedRoomTypeIds.length; i++) {
         filterAPIUrl += `contains(RoomTypeIds,'${selectedRoomTypeIds[i]}')`;
         //if isn't last roomTypeId -> need an 'or'
         if (i < selectedRoomTypeIds.length - 1) {
           filterAPIUrl += ' or ';
         }
+      }
+    }
+
+    //[Filter] add filter by region if has
+    if (selectedVillageId != undefined) {   //filter by Village
+      //if is not the first filter -> need to add 'and' to API URL
+      if (!checkFirstFilter) {
+        filterAPIUrl += ` and `;
+      } else {
+        //if this one is the first filter -> mark it so others won't add 'and'
+        checkFirstFilter = false;
+      }
+
+      filterAPIUrl += `VillageId eq ${selectedVillageId}`;
+    } else if (selectedCommuneId != undefined) {    //filter by Commune
+      //if is not the first filter -> need to add 'and' to API URL
+      if (!checkFirstFilter) {
+        filterAPIUrl += ` and `;
+      } else {
+        //if this one is the first filter -> mark it so others won't add 'and'
+        checkFirstFilter = false;
+      }
+
+      filterAPIUrl += `CommuneId eq ${selectedCommuneId}`;
+    } else if (selectedDistrictId != undefined) {    //filter by District
+      //if is not the first filter -> need to add 'and' to API URL
+      if (!checkFirstFilter) {
+        filterAPIUrl += ` and `;
+      } else {
+        //if this one is the first filter -> mark it so others won't add 'and'
+        checkFirstFilter = false;
+      }
+
+      filterAPIUrl += `DistrictId eq ${selectedDistrictId}`;
+    }
+
+    //[Filter] add filter by houseUtility if has: select house with all of these houseUtility
+    if (selectedHouseUtilities != undefined && selectedHouseUtilities.length > 0) {
+      //if is not the first filter -> need to add 'and' to API URL
+      if (!checkFirstFilter) {
+        filterAPIUrl += ` and `;
+      } else {
+        //if this one is the first filter -> mark it so others won't add 'and'
+        checkFirstFilter = false;
+      }
+
+      //with each houseUtility got selected -> append to query string
+      for (let i = 0; i < selectedHouseUtilities.length; i++) {
+        filterAPIUrl += `${selectedHouseUtilities[i]} eq true`;
+        //if isn't last houseUtility -> need an 'and'
+        if (i < selectedHouseUtilities.length - 1) {
+          filterAPIUrl += ' and ';
+        }
+      }
+    }
+
+    //[Filter] add filter by roomUtility if has: select house with all of these roomUtility
+    if (selectedRoomUtilities != undefined && selectedRoomUtilities.length > 0) {
+      //if is not the first filter -> need to add 'and' to API URL
+      if (!checkFirstFilter) {
+        filterAPIUrl += ` and `;
+      } else {
+        //if this one is the first filter -> mark it so others won't add 'and'
+        checkFirstFilter = false;
+      }
+
+      //with each roomUtility got selected -> append to query string
+      for (let i = 0; i < selectedRoomUtilities.length; i++) {
+        filterAPIUrl += `${selectedRoomUtilities[i]} eq true`;
+        //if isn't last roomUtility -> need an 'and'
+        if (i < selectedRoomUtilities.length - 1) {
+          filterAPIUrl += ' and ';
+        }
+      }
+    }
+
+    //[Filter] add filter by Rate if has
+    if (selectedRate != undefined) {
+      //if is not the first filter -> need to add 'and' to API URL
+      if (!checkFirstFilter) {
+        filterAPIUrl += ` and `;
+      } else {
+        //if this one is the first filter -> mark it so others won't add 'and'
+        checkFirstFilter = false;
+      }
+
+      filterAPIUrl += `AverageRate ge ${selectedRate}`;
+    }
+
+    //[Order by] add Order by if has
+    if (selectedOrderValue != undefined) {
+      //this is not Filter so no need for 'and'
+
+      //add suitable query string based on selected Order
+      switch (selectedOrderValue) {
+        case 'Giá: Thấp đến Cao':
+          filterAPIUrl += `&$orderby=LowestRoomPrice asc`;
+          break;
+        case 'Giá: Cao đến Thấp':
+          filterAPIUrl += `&$orderby=HighestRoomPrice desc`;
+          break;
+        case 'Khoảng cách: Gần đến Xa':
+          //TODO: distance
+          filterAPIUrl += ``;
+          break;
+        case 'Khoảng cách: Xa đến Gần':
+          //TODO: distance
+          filterAPIUrl += ``;
+          break;
+        case 'Đánh giá: Cao đến Thấp':
+          filterAPIUrl += `&$orderby=AverageRate desc`;
+          break;
+        case 'Đánh giá: Thấp đến Cao':
+          filterAPIUrl += `&$orderby=AverageRate asc`;
+          break;
+        default:
+          break;
       }
     }
 

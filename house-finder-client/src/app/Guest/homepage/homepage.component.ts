@@ -4,7 +4,7 @@ import { Village } from '../../models/village';
 import { Commune } from '../../models/commune';
 import { District } from '../../models/district';
 import { DistrictService } from '../../services/district.service';
-import { RoomUtility } from '../../models/roomUtilities';
+import { OtherUtility } from '../../models/otherUtilities';
 import { CampusService } from '../../services/campus.service';
 import { Campus } from '../../models/campus';
 import { HouseService } from '../../services/house.service';
@@ -35,17 +35,28 @@ export class HomepageComponent implements OnInit {
   //[Filter] Data for Filter column
   roomTypes: RoomType[] = [];         //Room types
   campuses: Campus[] = [];
-  roomUtilities: RoomUtility[] = [];  //List of utilities of Rooms
+  houseUtilities: OtherUtility[] = [];  //List of utilities of Houses
+  roomUtilities: OtherUtility[] = [];  //List of utilities of Rooms
   districts: District[] = [];         //(Regions) All Districts
   communesOfSelectedDistrict: Commune[] = []; //(Regions) all Communes of 1 selected District (only display after user has selected 1 District)
   villagesOfSelectedCommune: Village[] = [];  //(Regions) all Villages of 1 selected Commune (only display after user has selected 1 Commune)
+  //[Order by] Data for Order select
+  orderValues: string[] = [];
 
   //[Filter] Filter values for passing into API
-  searchName: string | undefined;
-  filterCampusId: number | undefined;
-  maxPrice: number | undefined;
-  minPrice: number | undefined;
-  selectedRoomTypeIds: number[] = [];  //list of roomTypeId of roomTypes that got selected
+  searchName: string | undefined;           //(filter by name)
+  filterCampusId: number | undefined;       //(filter by campus)
+  maxPrice: number | undefined;             //(filter by price)
+  minPrice: number | undefined;             //(filter by price)
+  selectedRoomTypeIds: number[] = [];       //(filter by roomType)    //list of roomTypeId of roomTypes that got selected
+  selectedHouseUtilities: string[] = [];    //(filter by Utility)     //list of Utilities of House that got selected
+  selectedRoomUtilities: string[] = [];     //(filter by Utility)     //list of Utilities of Room that got selected
+  selectedDistrictId: number | undefined;   //(filter by Region)
+  selectedCommuneId: number | undefined;    //(filter by Region)
+  selectedVillageId: number | undefined;    //(filter by Region)
+  selectedRate: number | undefined;         //(filter by Rate)
+  //[Order by] Selected Order value
+  selectedOrderValue: string | undefined;
 
   constructor(
     private houseService: HouseService,
@@ -59,7 +70,7 @@ export class HomepageComponent implements OnInit {
     //Call APIs:
 
     //(List) Get available Houses - default: page 1, 9 items
-    this.filterHouse();
+    this.filterHouse(false);
 
     // (Paging) Count available Houses for total number of pages
     this.houseService.countTotalAvailableHouse().subscribe(data => {
@@ -67,11 +78,10 @@ export class HomepageComponent implements OnInit {
 
       // (Paging) Calculate number of pages
       this.pageCount = Math.ceil(this.countAvailableHouses / this.pageSize);  //divide & round up
-      console.log(this.countAvailableHouses);
 
       // (Paging) Render pageList based on pageCount
       this.pageList = Array.from({ length: this.pageCount }, (_, i) => i + 1);
-      //pageList is now an array like {1, 2, 3, ..., n | n = pageCount} 
+      //pageList is now an array like {1, 2, 3, ..., n | n = pageCount}
     });
 
     //(List) Count available Rooms
@@ -99,11 +109,30 @@ export class HomepageComponent implements OnInit {
     //Generate data:
 
     //(Filter) Other utilities
+    this.houseUtilities = [
+      { utilityName: "FingerprintLock", displayName: "Khóa vân tay" },
+      { utilityName: "Camera", displayName: "Camera an ninh" },
+      { utilityName: "Parking", displayName: "Chỗ để xe" },
+    ];
+
     this.roomUtilities = [
-      { "utilityName": "aircon", "displayName": "Điều hòa" },
-      { "utilityName": "wifi", "displayName": "Wifi" },
-      { "utilityName": "waterHeater", "displayName": "Bình nóng lạnh" },
-      { "utilityName": "furniture", "displayName": "Nội thất" },
+      { utilityName: "Fridge", displayName: "Tủ lạnh" },
+      { utilityName: "Kitchen", displayName: "Bếp" },
+      { utilityName: "WashingMachine", displayName: "Máy giặt" },
+      { utilityName: "Desk", displayName: "Bàn học" },
+      { utilityName: "NoLiveWithHost", displayName: "Không chung chủ" },
+      { utilityName: "Bed", displayName: "Giường" },
+      { utilityName: "ClosedToilet", displayName: "Vệ sinh khép kín" },
+    ];
+
+    //(Order by) Order values
+    this.orderValues = [
+      "Giá: Thấp đến Cao",
+      "Giá: Cao đến Thấp",
+      "Khoảng cách: Gần đến Xa",
+      "Khoảng cách: Xa đến Gần",
+      "Đánh giá: Cao đến Thấp",
+      "Đánh giá: Thấp đến Cao",
     ];
   }
 
@@ -117,15 +146,27 @@ export class HomepageComponent implements OnInit {
   }
 
   // Call API to update list house with selected Filter value & Paging
-  filterHouse() {
+  filterHouse(resetPaging: boolean) {
+    //if user filter -> reset Paging (back to page 1)
+    if (resetPaging) {
+      this.pageNumber = 1;
+    }
+
     this.houseService.filterAvailableHouses(
       this.pageSize,
       this.pageNumber,
       this.selectedRoomTypeIds,
+      this.selectedHouseUtilities,
+      this.selectedRoomUtilities,
       this.searchName,
       this.filterCampusId,
       this.maxPrice,
       this.minPrice,
+      this.selectedDistrictId,
+      this.selectedCommuneId,
+      this.selectedVillageId,
+      this.selectedRate,
+      this.selectedOrderValue,
     ).subscribe(data => {
       this.houses = data;
       this.scrollToTop();
@@ -136,7 +177,7 @@ export class HomepageComponent implements OnInit {
   goToPage(pageNumber: number) {
     // Call API: go to Page Number
     this.pageNumber = pageNumber;
-    this.filterHouse();
+    this.filterHouse(false);
   }
 
   //Search House by Name (contains)
@@ -148,7 +189,7 @@ export class HomepageComponent implements OnInit {
 
     // Call API (filter by name contains)
     this.searchName = searchHouseName;
-    this.filterHouse();
+    this.filterHouse(true);
   }
 
   //[Filter] Filter by Campus
@@ -158,7 +199,7 @@ export class HomepageComponent implements OnInit {
 
     // Call API: update list houses with the campus user chose
     this.filterCampusId = numberCampusId;
-    this.filterHouse();
+    this.filterHouse(true);
   }
 
   //[Filter] Filter by Distance
@@ -208,7 +249,7 @@ export class HomepageComponent implements OnInit {
     // Call API to update list houses with the price user chose
     this.maxPrice = numMaxPrice;
     this.minPrice = numMinPrice;
-    this.filterHouse();
+    this.filterHouse(true);
   }
 
   //[Filter] Filter by Room Type
@@ -228,13 +269,14 @@ export class HomepageComponent implements OnInit {
     }
 
     // Call API to update list houses with the selected room type
-    this.filterHouse();
+    this.filterHouse(true);
   }
 
-  //[Filter] Change list of Communes after user selected District
-  onDistrictSelected(selectedDistrictId: string) {
+  //[Filter by Region] Filter by Commune
+  //Change list of Communes after user selected District
+  onDistrictSelected(stringSelectedDistrictId: string) {
     // convert string to number
-    var numberDistrictId: number = +selectedDistrictId;
+    var numberDistrictId: number = +stringSelectedDistrictId;
 
     // find the selected district
     this.districts.forEach((district) => {
@@ -245,13 +287,19 @@ export class HomepageComponent implements OnInit {
       }
     });
 
-    //TODO: call API to search for houses with this District
+    //no need for filtering by commune & village 
+    this.selectedCommuneId = undefined;
+    this.selectedVillageId = undefined;
+    // Call API to update list houses with the selected district
+    this.selectedDistrictId = numberDistrictId;
+    this.filterHouse(true);
   }
 
-  //[Filter] Change list of Villages after user selected Commune
-  onCommuneSelected(selectedCommuneId: string) {
+  //[Filter by Region] Filter by Commune
+  //Change list of Villages after user selected Commune
+  onCommuneSelected(stringSelectedCommuneId: string) {
     // convert string to number
-    var numberCommuneId: number = +selectedCommuneId;
+    var numberCommuneId: number = +stringSelectedCommuneId;
 
     // find the selected commune
     this.communesOfSelectedDistrict.forEach((commune) => {
@@ -262,26 +310,84 @@ export class HomepageComponent implements OnInit {
       }
     });
 
-    //TODO: call API to search for houses with this Commune
+    //no need for filtering by district & village 
+    this.selectedDistrictId = undefined;
+    this.selectedVillageId = undefined;
+    // Call API to update list houses with the selected commune
+    this.selectedCommuneId = numberCommuneId;
+    this.filterHouse(true);
   }
 
-  //[Filter] TODO: call API to search for houses with this Village
-  onVillageSelected(selectedVillageId: string) {
+  //[Filter by Region] Filter by Village
+  onVillageSelected(stringSelectedVillageId: string) {
+    // convert string to number
+    var numberVillageId: number = +stringSelectedVillageId;
 
+    //no need for filtering by district & commune 
+    this.selectedDistrictId = undefined;
+    this.selectedCommuneId = undefined;
+    // Call API to update list houses with the selected village
+    this.selectedVillageId = numberVillageId;
+    this.filterHouse(true);
   }
 
-  //[Filter] Filter by Room Utility
-  onUtilitySelected(event: any, utilityName: string) {
+  //[Filter] Filter by House Utility
+  onHouseUtilitySelected(event: any, utilityName: string) {
     //see if user just checked or unchecked the checkbox
     const isChecked = (<HTMLInputElement>event.target).checked;
 
+    //if user check -> add houseUtility to the list
+    if (isChecked) {
+      this.selectedHouseUtilities.push(utilityName);
+    } else {
+      //if user uncheck -> remove the houseUtility from the list
+      const index = this.selectedHouseUtilities.indexOf(utilityName, 0);
+      if (index > -1) {
+        this.selectedHouseUtilities.splice(index, 1);
+      }
+    }
+
     // Call API to update list houses with the selected room type
-    alert('Event: ' + isChecked + ' Utility Name: ' + utilityName);
+    this.filterHouse(true);
+  }
+
+  //[Filter] Filter by Room Utility
+  onRoomUtilitySelected(event: any, utilityName: string) {
+    //see if user just checked or unchecked the checkbox
+    const isChecked = (<HTMLInputElement>event.target).checked;
+
+    //if user check -> add roomUtility to the list
+    if (isChecked) {
+      this.selectedRoomUtilities.push(utilityName);
+    } else {
+      //if user uncheck -> remove the roomUtility from the list
+      const index = this.selectedRoomUtilities.indexOf(utilityName, 0);
+      if (index > -1) {
+        this.selectedRoomUtilities.splice(index, 1);
+      }
+    }
+
+    // Call API to update list houses with the selected room type
+    this.filterHouse(true);
+  }
+
+  //[Filter] Filter by Rate
+  onRateSelected(rate: number) {
+    // Call API to update list houses with the selected rate
+    this.selectedRate = rate;
+    this.filterHouse(true);
   }
 
   //[Filter] Cancel all Filter values
   onCancelFilter() {
     //reload page
     window.location.reload();
+  }
+
+  //[Order by] Order by values
+  onOrderBy(selectedOrder: string) {
+    // Call API to update list houses with the selected order
+    this.selectedOrderValue = selectedOrder;
+    this.filterHouse(true);
   }
 }
