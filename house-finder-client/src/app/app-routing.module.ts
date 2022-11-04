@@ -1,3 +1,4 @@
+import { RateHouseComponent } from './Landlord/rate-house/rate-house.component';
 import { AddHouseComponent } from './Landlord/add-house/add-house.component';
 import { UpdateHouseComponent } from './Landlord/update-house/update-house.component';
 import { LandlordHouseDetailComponent } from './Landlord/landlord-house-detail/landlord-house-detail.component';
@@ -28,6 +29,7 @@ const routes: Routes = [
   { path: 'Landlord/landlord-house-detail/:id', component: LandlordHouseDetailComponent},
   { path: 'Landlord/add-house', component: AddHouseComponent},
   { path: 'Landlord/update-house/:id', component: UpdateHouseComponent},
+  { path: 'Landlord/rate-house/:id', component: RateHouseComponent},
   { path: 'Staff/dashboard', component: DashboardStaffComponent},
   { path: 'Staff/list-landlord', component: ListLandlordComponent},
   { path: 'Staff/list-report', component: ListReportComponent},
