@@ -1,5 +1,5 @@
 <!-- Display Loading Spinner when House Detail is not yet loaded -->
-<div class="container-fluid" *ngIf="houseDetail === undefined || landlordDetail === undefined">
+<div class="container-fluid" *ngIf="rooms === undefined">
   <div class="spinner-border text-danger" role="status">
     <span class="sr-only">Loading...</span>
   </div>
@@ -23,7 +23,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let dataItem of availableRooms">
+      <tr *ngFor="let dataItem of rooms">
         <!-- Room name -->
         <td><b>{{dataItem.roomName}}</b></td>
 
