@@ -6,10 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./rate-house.component.scss']
 })
 export class RateHouseComponent implements OnInit {
+  replyOn = false;
 
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }
