@@ -13,13 +13,13 @@ export class OrderService {
   constructor(private http: HttpClient) { }
 
   //[Staff/list-order] Get List of all Orders
-  getAllOrders(): Observable<Order[]> {
-    return this.http.get<Order[]>(this.APIUrl);
+  getAllOrders(): Observable<any> {
+    return this.http.get<any>(this.APIUrl);
   }
 
   //[Staff/list-order] Count total orders
   countTotalOrder(): Observable<any> {
-    return this.http.get<Order[]>(this.APIUrl + "/CountTotalOrder");
+    return this.http.get<any>(this.APIUrl + "/CountTotalOrder");
   }
 
   //[Staff/list-order]
