@@ -21,6 +21,8 @@ export class DashboardStaffComponent implements OnInit {
   totalHouses: number = 0;
   //Total of available houses
   availableHouseNum: number = 0;
+  //Array total of orders by month
+  orderByMonth: Array<number> | undefined;
 
   constructor(
     private roomService: RoomService,
@@ -53,12 +55,13 @@ export class DashboardStaffComponent implements OnInit {
 
     //Create chart objects
     var myChart = new Chart("myChart", {
+
     type: 'bar',
     data: {
         labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
         datasets: [{
             label: '# of Votes',
-            data: [12, 19, 3, 5, 2, 3],
+            data: this.orderByMonth,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -83,6 +86,12 @@ export class DashboardStaffComponent implements OnInit {
             y: {
                 beginAtZero: true
             }
+        },
+        plugins:{
+          title:{
+            display: true,
+            text: 'Thống kê số lượng đăng ký nhà trọ',
+          }
         }
     }
 });

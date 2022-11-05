@@ -97,5 +97,45 @@ namespace DataAccess
             }
             return total;
         }
+
+        public static int[] OrderByMonth()
+        {
+            int[] totals = new int[12];
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Get first date of cureent year
+                    DateTime firstDate = new DateTime(DateTime.Now.Year, 1, 1);
+                    //Get current date
+                    DateTime currentDate = DateTime.Today;
+
+                    //Get list order from the first date to current date
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    List<OrderDTO> orders = context.Orders.Where(o => o.OrderedDate >= firstDate && o.OrderedDate <= currentDate).ProjectTo<OrderDTO>(config).ToList();
+
+                    //Get months' name
+                    string[] monthNames = CultureInfo.CurrentCulture.DateTimeFormat.MonthGenitiveNames;
+
+                    //Count total orders by month
+                    for (int i = 0; i < 12; i++)
+                    {
+                        foreach (OrderDTO o in orders)
+                        {
+                            if (o.OrderedDate.ToString("MMMM dd").Contains(monthNames[i]))
+                            {
+                                totals[i]++;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return totals;
+        }
     }
 }
