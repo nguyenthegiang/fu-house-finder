@@ -16,7 +16,7 @@ namespace DataAccess.DTO
             CreateMap<Room, RoomDTO>();
             CreateMap<ImagesOfRoom, ImagesOfRoomDTO>();
             CreateMap<User, UserDTO>();
-            CreateMap<Status, StatusDTO>();
+            CreateMap<RoomStatus, RoomStatusDTO>();
             CreateMap<User, ResponseDTO>();
             CreateMap<UserRole, RoleDTO>();
             CreateMap<RoomType, RoomTypeDTO>();

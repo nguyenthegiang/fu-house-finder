@@ -15,7 +15,7 @@ namespace BusinessObjects
         public int CampusId { get; set; }
         public string CampusName { get; set; }
         public int AddressId { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         public virtual Address Address { get; set; }
         public virtual ICollection<House> Houses { get; set; }

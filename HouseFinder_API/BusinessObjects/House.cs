@@ -28,8 +28,8 @@ namespace BusinessObjects
         public bool? FingerprintLock { get; set; }
         public bool? Camera { get; set; }
         public bool? Parking { get; set; }
-        public bool? Deleted { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        public bool Deleted { get; set; }
+        public DateTime CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
         public string CreatedBy { get; set; }
         public string LastModifiedBy { get; set; }
