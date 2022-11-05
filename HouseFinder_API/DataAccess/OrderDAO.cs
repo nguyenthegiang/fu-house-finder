@@ -141,6 +141,7 @@ namespace DataAccess
                     {
                         foreach (OrderDTO o in orders)
                         {
+                            //Check if the solved date is null
                             string dateName = o.SolvedDate != null ? o.SolvedDate.Value.ToString("MMMM dd") : "n/a";
                             if (dateName.Contains(monthNames[i]))
                             {
