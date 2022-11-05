@@ -13,5 +13,7 @@ namespace Repositories.Repositories
     {
         public int CountTotalOrder() => OrderDAO.CountTotalOrder();
         public List<OrderDTO> GetAllOrder() => OrderDAO.GetAllOrders();
+
+        public int[] GetTotalOrderByMonth() => OrderDAO.GetTotalOrderByMonth();
     }
 }

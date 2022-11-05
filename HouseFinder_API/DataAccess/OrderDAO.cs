@@ -13,29 +13,6 @@ namespace DataAccess
 {
     public class OrderDAO
     {
-        public int GetTotalOrderByMonth(int month)
-        {
-            int total = 0;
-            try
-            {
-                using (var context = new FUHouseFinderContext())
-                {
-                    //Convert month type int to string
-                    string monthName = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedMonthName(month);
-                    //Get list orders by month
-                    List<Order> orders = context.Orders.Where(o => o.OrderedDate.ToString("MMMM dd").Contains(monthName)).ToList();
-                    //Count number of orders
-                    orders.Count();
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-            return total;
-        }
-
-
         //[Staff/Dashboard] Get total order of the current month
         public int GetTotalOrderCurrentMonth()
         {
@@ -98,7 +75,7 @@ namespace DataAccess
             return total;
         }
 
-        public static int[] OrderByMonth()
+        public static int[] GetTotalOrderByMonth()
         {
             int[] totals = new int[12];
             try
@@ -136,6 +113,28 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
             return totals;
+        }
+
+        public int OrderByMonth(int month)
+        {
+            int total = 0;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Convert month type int to string
+                    string monthName = DateTimeFormatInfo.CurrentInfo.GetAbbreviatedMonthName(month);
+                    //Get list orders by month
+                    List<Order> orders = context.Orders.Where(o => o.OrderedDate.ToString("MMMM dd").Contains(monthName)).ToList();
+                    //Count number of orders
+                    orders.Count();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return total;
         }
     }
 }

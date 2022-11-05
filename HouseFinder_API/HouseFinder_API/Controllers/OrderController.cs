@@ -29,5 +29,13 @@ namespace HouseFinder_API.Controllers
             return total;
         }
 
+        //GET: api/Order/GetTotalOrderByMonth
+        [HttpGet("GetTotalOrderByMonth")]
+        public int[] GetTotalOrderByMonth()
+        {
+            int[] totals = orderRepository.GetTotalOrderByMonth();
+            return totals;
+        }
+
     }
 }
