@@ -115,6 +115,47 @@ namespace DataAccess
             return totals;
         }
 
+        public static int[] GetSolvedOrderByMonth()
+        {
+            int[] totals = new int[12];
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Get first date of cureent year
+                    DateTime firstDate = new DateTime(DateTime.Now.Year, 1, 1);
+                    //Get current date
+                    DateTime currentDate = DateTime.Today;
+
+                    //Get list orders solved from the first date to current date
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    List<OrderDTO> orders = context.Orders.Where(o => o.SolvedDate >= firstDate && o.SolvedDate <= currentDate).ProjectTo<OrderDTO>(config).ToList();
+
+                    //Get months' name
+                    string[] monthNames = CultureInfo.CurrentCulture.DateTimeFormat.MonthGenitiveNames;
+
+                    //Count total orders by month
+                    for (int i = 0; i < 12; i++)
+                    {
+                        foreach (OrderDTO o in orders)
+                        {
+                            string dateName = o.SolvedDate != null ? o.SolvedDate.Value.ToString("MMMM dd") : "n/a";
+                            if (dateName.Contains(monthNames[i]))
+                            {
+                                totals[i]++;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return totals;
+        }
+
         public int OrderByMonth(int month)
         {
             int total = 0;
