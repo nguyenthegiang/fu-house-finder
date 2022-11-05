@@ -67,7 +67,7 @@ export class DashboardStaffComponent implements OnInit {
         //Create chart objects
     var myChart = new Chart("myChart", {
 
-      type: 'line',
+      type: 'bar',
       data: {
           labels: ['Tháng 1',
                   'Tháng 2',
@@ -85,14 +85,20 @@ export class DashboardStaffComponent implements OnInit {
             {
               label: 'Số đơn đăng ký',
               data: this.orderByMonth,
+              backgroundColor:[
+                '#FF6F3D',
+              ],
               borderColor: [
-                   '#FF6F3D',
+                '#FF6F3D',
               ],
               borderWidth: 1
           },
           {
             label: 'Số đơn đã được giải quyết',
             data: this.solvedOrderByMonth,
+            backgroundColor:[
+              '#3E4F3C',
+            ],
             borderColor: [
                 '#3E4F3C',
             ],
