@@ -34,4 +34,9 @@ export class OrderService {
     filterAPIUrl += `?$skip=${skip}&$top=${top}`;
     return this.http.get<Order[]>(filterAPIUrl);
   }
+
+  //[Staff/dashboard] Get total order by month for bar chart
+  getTotalOrderByMonth():Observable<number[]>{
+    return this.http.get<number[]>(this.APIUrl + "/GetTotalOrderByMonth");
+  }
 }
