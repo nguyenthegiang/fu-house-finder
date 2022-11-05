@@ -22,8 +22,10 @@ export class DashboardStaffComponent implements OnInit {
   totalHouses: number = 0;
   //Total of available houses
   availableHouseNum: number = 0;
-  //Array total of orders by month
+  //Array of total orders by month
   orderByMonth: number[] | undefined;
+  //Array oof solved orders by month
+  solvedOrderByMonth: number[] | undefined;
 
   constructor(
     private roomService: RoomService,
@@ -59,7 +61,10 @@ export class DashboardStaffComponent implements OnInit {
     this.orderService.getTotalOrderByMonth().subscribe(data => {
       this.orderByMonth = data;
 
-      //Create chart objects
+      this.orderService.getSolvedOrderByMonth().subscribe(data => {
+        this.solvedOrderByMonth = data;
+
+        //Create chart objects
     var myChart = new Chart("myChart", {
 
       type: 'line',
@@ -76,47 +81,25 @@ export class DashboardStaffComponent implements OnInit {
                   'Tháng 10',
                   'Tháng 11',
                   'Tháng 12',],
-          datasets: [{
+          datasets: [
+            {
               label: 'Số đơn đăng ký',
               data: this.orderByMonth,
-              // backgroundColor: [
-              //     'rgba(255, 99, 132, 0.2)',
-              //     'rgba(54, 162, 235, 0.2)',
-              //     'rgba(255, 206, 86, 0.2)',
-              //     'rgba(75, 192, 192, 0.2)',
-              //     'rgba(153, 102, 255, 0.2)',
-              //     'rgba(255, 159, 64, 0.2)',
+              borderColor: [
+                   '#FF6F3D',
+              ],
+              borderWidth: 1
+          },
+          {
+            label: 'Số đơn đã được giải quyết',
+            data: this.solvedOrderByMonth,
+            borderColor: [
+                '#3E4F3C',
+            ],
+            borderWidth: 1
+        },
+        ],
 
-              //     'rgba(255, 99, 132, 0.2)',
-              //     'rgba(54, 162, 235, 0.2)',
-              //     'rgba(255, 206, 86, 0.2)',
-              //     'rgba(75, 192, 192, 0.2)',
-              //     'rgba(153, 102, 255, 0.2)',
-              //     'rgba(255, 159, 64, 0.2)',
-
-              //     'rgba(255, 99, 132, 0.2)',
-              //     'rgba(54, 162, 235, 0.2)',
-              // ],
-              // borderColor: [
-              //     'rgba(255, 99, 132, 1)',
-              //     'rgba(54, 162, 235, 1)',
-              //     'rgba(255, 206, 86, 1)',
-              //     'rgba(75, 192, 192, 1)',
-              //     'rgba(153, 102, 255, 1)',
-              //     'rgba(255, 159, 64, 1)',
-
-              //     'rgba(255, 99, 132, 1)',
-              //     'rgba(54, 162, 235, 1)',
-              //     'rgba(255, 206, 86, 1)',
-              //     'rgba(75, 192, 192, 1)',
-              //     'rgba(153, 102, 255, 1)',
-              //     'rgba(255, 159, 64, 1)',
-
-              //     'rgba(255, 99, 132, 1)',
-              //     'rgba(54, 162, 235, 1)',
-              // ],
-              //borderWidth: 1
-          }]
       },
       options: {
           scales: {
@@ -127,11 +110,13 @@ export class DashboardStaffComponent implements OnInit {
           plugins:{
             title:{
               display: true,
-              text: 'Thống kê số lượng đăng ký nhà trọ',
+              text: 'Thống kê số lượng đăng ký nhà trọ trong năm',
             }
           }
       }
   });
+  //End chart
+      })
     });
 
 
