@@ -37,6 +37,9 @@ export class OrderService {
 
   //[Staff/dashboard] Get total order by month for bar chart
   getTotalOrderByMonth():Observable<number[]>{
+
+    console.log("Get here: getTotalOrderByMonth");
+    console.log(this.APIUrl + "/GetTotalOrderByMonth");
     return this.http.get<number[]>(this.APIUrl + "/GetTotalOrderByMonth");
   }
 }

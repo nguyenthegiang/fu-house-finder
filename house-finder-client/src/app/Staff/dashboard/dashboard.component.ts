@@ -55,12 +55,10 @@ export class DashboardStaffComponent implements OnInit {
       this.availableHouseNum = data;
     });
 
-    console.log("orders by month:" + this.orderByMonth);
-    //Get array of total number of orders in current year, grouped by month
+    //Call API: get total orders by month
     this.orderService.getTotalOrderByMonth().subscribe(data => {
       this.orderByMonth = data;
     });
-
     console.log("orders by month:" + this.orderByMonth);
 
     this.orderByMonth = [12, 13, 14, 10, 9, 9, 0, 10, 12];
