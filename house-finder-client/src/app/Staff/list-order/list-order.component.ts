@@ -18,6 +18,10 @@ export class ListOrderComponent implements OnInit {
   pageCount = 0;            //number of pages
   pageList: number[] = [];  //array to loop with *ngFor in HTML Template
 
+  //Filter
+  //status: boolean|undefined;
+  status: boolean = false;
+
   constructor(private orderService: OrderService,) {
 
   }
@@ -62,9 +66,11 @@ export class ListOrderComponent implements OnInit {
     if (resetPaging) {
       this.pageNumber = 1;
     }
-    this.orderService.getListOrderForPaging(
+
+    this.orderService.filterOrder(
       this.pageSize,
       this.pageNumber,
+      this.status,
     ).subscribe(data => {
       this.orders = data;
       this.scrollToTop();
