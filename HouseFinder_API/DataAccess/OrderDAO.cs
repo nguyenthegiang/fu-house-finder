@@ -115,6 +115,7 @@ namespace DataAccess
             return totals;
         }
 
+        //Calculate number of solved order by month
         public static int[] GetSolvedOrderByMonth()
         {
             int[] totals = new int[12];
