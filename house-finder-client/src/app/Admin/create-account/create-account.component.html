@@ -1,1 +1,38 @@
-<p>create-account works!</p>
+<div class="container-fluit m-5 d-flex flex-column align-items-center">
+  <h3 class="text-center mb-5">Tạo tài khoản tuyển sinh</h3>
+
+  <form class="row w-100 d-flex flex-column align-items-center needs-validation" novalidate>
+    <div class="col-12 col-md-5 mb-3">
+      <label for="exampleInput1" class="form-label"><b>Họ và tên</b></label>
+      <input type="text" class="form-control" placeholder="Nhập họ và tên" id="exampleInput1" required>
+      <div class="invalid-feedback mb-3">Không được để trống</div>
+    </div>
+
+    <div class="col-12 col-md-5 mb-3">
+      <label for="exampleInput1" class="form-label"><b>Email</b></label>
+      <input type="email" class="form-control" placeholder="Nhập email" id="exampleInput1" required>
+      <div class="invalid-feedback mb-3">Không được để trống</div>
+    </div>
+
+    <div class="col-12 col-md-5 mb-3">
+      <label for="exampleInput1" class="form-label"><b>Mật khẩu</b></label>
+      <input type="password" class="form-control" placeholder="Nhập mật khẩu" id="exampleInput1" required>
+      <div class="invalid-feedback mb-3">Không được để trống</div>
+    </div>
+
+    <div class="col-12 col-md-5 mb-3">
+      <label class="form-label"><b>Vị trí</b></label>
+      <select class="form-select" aria-label="Default select example" required>
+        <option selected>Chọn vị trí</option>
+        <option value="1">One</option>
+        <option value="2">Two</option>
+        <option value="3">Three</option>
+      </select>
+      <div class="invalid-feedback mb-3">Không được để trống</div>
+    </div>
+
+    <div class="text-center col-12 col-md-5">
+      <button class="btn btn-success w-50 mt-4" type="submit">Tạo mới</button>
+    </div>
+  </form>
+</div>
