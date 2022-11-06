@@ -28,6 +28,7 @@ namespace DataAccess.DTO
             CreateMap<House, AvailableHouseDTO>();
             CreateMap<Order, OrderDTO>();
             CreateMap<Rate, RateDTO>();
+            CreateMap<OrderStatus, OrderStatusDTO>();
         }
     }
 }
