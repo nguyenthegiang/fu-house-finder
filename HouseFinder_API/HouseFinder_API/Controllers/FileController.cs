@@ -22,7 +22,6 @@ namespace HouseFinder_API.Controllers
     public class FileController : ControllerBase
     {
         private IWebHostEnvironment Environment;
-        private ICampusRepository campusRepository = new CampusRepository();
         private IHousesRepository housesRepository = new HouseRepository();
         private IRoomsRepository roomsRepository = new RoomRepository();
 
