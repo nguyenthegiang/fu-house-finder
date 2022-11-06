@@ -21,6 +21,11 @@ export class UserService {
     return this.http.get<User[]>(this.APIUrl + "/landlord");
   }
 
+  //[Admin][List Staff] get list of staffs
+  getStaffs(): Observable<User[]> {
+    return this.http.get<User[]>(this.APIUrl + "/staff");
+  }
+
   loginFacebook(facebookUserId: string): Observable<User> {
     return this.http.post<User>(this.APIUrl + "/login", {"facebookUserId": facebookUserId});
   }
