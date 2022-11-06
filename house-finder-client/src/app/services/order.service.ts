@@ -37,7 +37,7 @@ export class OrderService {
     filterAPIUrl += `?$skip=${skip}&$top=${top}`;
 
     //[Filter] check if user has at least 1 filter
-    if (statusId != null) {
+    if (statusId != undefined && statusId != 0) {
       //add filter to API
       filterAPIUrl += `&$filter=`;
     }
@@ -46,7 +46,7 @@ export class OrderService {
     var checkFirstFilter = true;
 
     //[Filter] add filter by campus if has
-    if (statusId != undefined) {
+    if (statusId != undefined && statusId!= 0) {
       //if is not the first filter -> need to add 'and' to API URL
       if (!checkFirstFilter) {
         filterAPIUrl += ` and `;
@@ -54,7 +54,6 @@ export class OrderService {
         //if this one is the first filter -> mark it so others won't add 'and'
         checkFirstFilter = false;
       }
-
       filterAPIUrl += `Status/StatusId eq ${statusId}`;
     }
 

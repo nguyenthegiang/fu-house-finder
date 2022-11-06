@@ -74,7 +74,9 @@
               <td>{{order.orderContent}}</td>
               <td>{{order.orderedDate| date:'shortDate'}}</td>
               <td>{{order.solvedDate| date:'shortDate'}}</td>
-              <td>{{order.status}}</td>
+              <td *ngIf="order.status.statusName ==='Unsolved'" style="color: red">Chưa giải quyết</td>
+              <td *ngIf="order.status.statusName ==='Processing'" style="color: orange">Đang giải quyết</td>
+              <td *ngIf="order.status.statusName ==='Solved'" style="color: green;">Đã giải quyết</td>
             </tr>
           </tbody>
         </table>
