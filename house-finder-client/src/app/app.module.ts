@@ -31,6 +31,7 @@ import { SingleComponent } from './Landlord/add-room/single/single.component';
 import { MultipleComponent } from './Landlord/add-room/multiple/multiple.component';
 import { ListStaffComponent } from './Admin/list-staff/list-staff.component';
 import { ChangePasswordComponent } from './Admin/list-staff/change-password/change-password.component';
+import { CreateAccountComponent } from './Admin/list-staff/create-account/create-account.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +59,7 @@ import { ChangePasswordComponent } from './Admin/list-staff/change-password/chan
     MultipleComponent,
     ListStaffComponent,
     ChangePasswordComponent,
+    CreateAccountComponent,
   ],
   imports: [
     BrowserModule,
