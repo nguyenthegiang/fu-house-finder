@@ -12,5 +12,6 @@ namespace Repositories.IRepository
         public List<OrderDTO> GetAllOrder();
         public int CountTotalOrder();
         public int[] GetTotalOrderByMonth();
+        public int[] GetSolvedlOrderByMonth();
     }
 }

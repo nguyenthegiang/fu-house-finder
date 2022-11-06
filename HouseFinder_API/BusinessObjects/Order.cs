@@ -13,10 +13,11 @@ namespace BusinessObjects
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public string OrderContent { get; set; }
-        public bool? Solved { get; set; }
+        public int StatusId { get; set; }
         public DateTime OrderedDate { get; set; }
         public DateTime? SolvedDate { get; set; }
 
+        public virtual OrderStatus Status { get; set; }
         public virtual User Student { get; set; }
     }
 }

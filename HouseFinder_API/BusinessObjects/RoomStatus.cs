@@ -5,15 +5,15 @@ using System.Collections.Generic;
 
 namespace BusinessObjects
 {
-    public partial class RoomType
+    public partial class RoomStatus
     {
-        public RoomType()
+        public RoomStatus()
         {
             Rooms = new HashSet<Room>();
         }
 
-        public int RoomTypeId { get; set; }
-        public string RoomTypeName { get; set; }
+        public int StatusId { get; set; }
+        public string StatusName { get; set; }
         public DateTime CreatedDate { get; set; }
 
         public virtual ICollection<Room> Rooms { get; set; }

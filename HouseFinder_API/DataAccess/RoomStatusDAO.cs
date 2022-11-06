@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    public class StatusDAO
+    public class RoomStatusDAO
     {
 
         //[Landlord][List room] Get list Status for Filter
-        public static List<StatusDTO> GetStatusesByHouseId(int houseId)
+        public static List<RoomStatusDTO> GetStatusesByHouseId(int houseId)
         {
-            List<StatusDTO> statusesOfHouse = new List<StatusDTO>();
+            List<RoomStatusDTO> statusesOfHouse = new List<RoomStatusDTO>();
             List<RoomDTO> rooms = RoomDAO.GetRoomsByHouseId(houseId);
             try
             {
@@ -35,9 +35,9 @@ namespace DataAccess
             return statusesOfHouse;
         }
         //Get All List Status
-        public static List<StatusDTO> GetAllListStatus()
+        public static List<RoomStatusDTO> GetAllListStatus()
         {
-            List<StatusDTO> statusDTOs = new List<StatusDTO>();
+            List<RoomStatusDTO> statusDTOs = new List<RoomStatusDTO>();
             try
             {
                 using (var context = new FUHouseFinderContext())
@@ -45,7 +45,7 @@ namespace DataAccess
                     //Get by Id, include Address
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    statusDTOs = context.Statuses.ProjectTo<StatusDTO>(config).ToList();
+                    statusDTOs = context.RoomStatuses.ProjectTo<RoomStatusDTO>(config).ToList();
                     return statusDTOs;
                 }
             }

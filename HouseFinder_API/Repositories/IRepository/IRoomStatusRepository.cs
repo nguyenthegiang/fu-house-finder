@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Repositories.IRepository
 {
-    public interface IStatusRepository
+    public interface IRoomStatusRepository
     {
-        public List<StatusDTO> GetStatusesByHouseId(int houseId);
-        public List<StatusDTO> GetAllStatus();
+        public List<RoomStatusDTO> GetStatusesByHouseId(int houseId);
+        public List<RoomStatusDTO> GetAllStatus();
     }
 }

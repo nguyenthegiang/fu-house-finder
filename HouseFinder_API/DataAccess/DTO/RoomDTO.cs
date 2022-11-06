@@ -24,7 +24,7 @@ namespace DataAccess.DTO
         public int? CurrentAmountOfPeople { get; set; }
         public int? BuildingNumber { get; set; }
         public int? FloorNumber { get; set; }
-        public virtual StatusDTO Status { get; set; }
+        public virtual RoomStatusDTO Status { get; set; }
         public virtual RoomTypeDTO RoomType { get; set; }
         public int? HouseId { get; set; }
         public bool? Deleted { get; set; }

@@ -9,9 +9,9 @@ namespace BusinessObjects
     {
         public int RoomHistoryId { get; set; }
         public string CustomerName { get; set; }
-        public int? RoomId { get; set; }
-        public bool? Deleted { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        public int RoomId { get; set; }
+        public bool Deleted { get; set; }
+        public DateTime CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
         public string CreatedBy { get; set; }
         public string LastModifiedBy { get; set; }

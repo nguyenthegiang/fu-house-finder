@@ -14,7 +14,7 @@ namespace BusinessObjects
 
         public int DistrictId { get; set; }
         public string DistrictName { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         public virtual ICollection<Commune> Communes { get; set; }
     }

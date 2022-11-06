@@ -5,17 +5,17 @@ using System.Collections.Generic;
 
 namespace BusinessObjects
 {
-    public partial class Status
+    public partial class OrderStatus
     {
-        public Status()
+        public OrderStatus()
         {
-            Rooms = new HashSet<Room>();
+            Orders = new HashSet<Order>();
         }
 
         public int StatusId { get; set; }
         public string StatusName { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
-        public virtual ICollection<Room> Rooms { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }
