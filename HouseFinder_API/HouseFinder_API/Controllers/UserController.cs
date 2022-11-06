@@ -61,6 +61,7 @@ namespace HouseFinder_API.Controllers
             if (token == null)
                 return NotFound();
             HttpContext.Session.SetString("Token", token);
+            HttpContext.Session.SetString("User", user.UserId);
             return Ok(user);
         }
         [HttpPost("register")]

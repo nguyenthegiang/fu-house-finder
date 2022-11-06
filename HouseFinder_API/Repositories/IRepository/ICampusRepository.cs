@@ -11,5 +11,6 @@ namespace Repositories
     public interface ICampusRepository
     {
         List<CampusDTO> GetAllCampuses();
+        CampusDTO GetCampusByName(string name);
     }
 }
