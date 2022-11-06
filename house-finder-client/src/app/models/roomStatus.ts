@@ -1,5 +1,5 @@
 //DTO: Statuses
-export interface Status {
+export interface RoomStatus {
   statusId: number;
   statusName: string;
 }
