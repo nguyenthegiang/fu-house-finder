@@ -6,7 +6,7 @@ export interface Order {
   phoneNumber: string;
   email: string;
   orderContent: string;
-  solved: boolean;
+  status: number;
   orderedDate: Date;
   solvedDate: Date;
 }

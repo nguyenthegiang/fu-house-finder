@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Order } from 'src/app/models/order';
+import { OrderStatus } from 'src/app/models/orderStatus';
 import { OrderService } from 'src/app/services/order.service';
+import { OrderStatusService } from 'src/app/services/orderStatus.service';
 
 @Component({
   selector: 'app-list-order',
@@ -11,6 +13,9 @@ export class ListOrderComponent implements OnInit {
   //List of orders
   orders: Order[] = [];
 
+  //List of orders' statuses
+  statuses: OrderStatus[] = [];
+
   //(Paging)
   totalOrder = 0; //items count
   pageSize = 10;             //number of items per page
@@ -20,11 +25,10 @@ export class ListOrderComponent implements OnInit {
 
   //Filter
   //status: boolean|undefined;
-  status: boolean = false;
+  status: boolean = true;
 
-  constructor(private orderService: OrderService,) {
-
-  }
+  constructor(private orderService: OrderService,
+              private orderStatusService: OrderStatusService,){}
 
   ngOnInit(): void {
     this.filterHouse(false);
@@ -40,6 +44,11 @@ export class ListOrderComponent implements OnInit {
       // (Paging) Render pageList based on pageCount
       this.pageList = Array.from({ length: this.pageCount }, (_, i) => i + 1);
       //pageList is now an array like {1, 2, 3, ..., n | n = pageCount}
+    });
+
+    //Call API: get list of orders' statuses
+    this.orderStatusService.getAllStatus().subscribe(data => {
+      this.statuses = data;
     });
   }
 
