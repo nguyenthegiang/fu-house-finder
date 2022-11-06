@@ -32,6 +32,7 @@ import { MultipleComponent } from './Landlord/add-room/multiple/multiple.compone
 import { ListStaffComponent } from './Admin/list-staff/list-staff.component';
 import { ChangePasswordComponent } from './Admin/list-staff/change-password/change-password.component';
 import { CreateAccountComponent } from './Admin/list-staff/create-account/create-account.component';
+import { UpdateAccountComponent } from './Admin/list-staff/update-account/update-account.component';
 
 @NgModule({
   declarations: [
@@ -60,6 +61,7 @@ import { CreateAccountComponent } from './Admin/list-staff/create-account/create
     ListStaffComponent,
     ChangePasswordComponent,
     CreateAccountComponent,
+    UpdateAccountComponent,
   ],
   imports: [
     BrowserModule,
