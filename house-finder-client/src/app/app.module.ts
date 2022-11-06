@@ -29,6 +29,10 @@ import { ListOrderComponent } from './Staff/list-order/list-order.component';
 import { AddRoomComponent } from './Landlord/add-room/add-room.component';
 import { SingleComponent } from './Landlord/add-room/single/single.component';
 import { MultipleComponent } from './Landlord/add-room/multiple/multiple.component';
+import { ListStaffComponent } from './Admin/list-staff/list-staff.component';
+import { ChangePasswordComponent } from './Admin/change-password/change-password.component';
+import { CreateAccountComponent } from './Admin/create-account/create-account.component';
+import { UpdateAccountComponent } from './Admin/update-account/update-account.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +58,10 @@ import { MultipleComponent } from './Landlord/add-room/multiple/multiple.compone
     AddRoomComponent,
     SingleComponent,
     MultipleComponent,
+    ListStaffComponent,
+    ChangePasswordComponent,
+    CreateAccountComponent,
+    UpdateAccountComponent,
   ],
   imports: [
     BrowserModule,
