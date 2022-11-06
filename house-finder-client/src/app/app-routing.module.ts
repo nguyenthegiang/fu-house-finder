@@ -1,3 +1,4 @@
+import { UpdateAccountComponent } from './Admin/update-account/update-account.component';
 import { CreateAccountComponent } from './Admin/create-account/create-account.component';
 import { ChangePasswordComponent } from './Admin/change-password/change-password.component';
 import { ListStaffComponent } from './Admin/list-staff/list-staff.component';
@@ -42,7 +43,8 @@ const routes: Routes = [
   { path: 'Staff/list-order', component: ListOrderComponent},
   { path: 'Admin/list-staff', component: ListStaffComponent},
   { path: 'Admin/change-password', component: ChangePasswordComponent},
-  { path: 'Admin/create-account', component: CreateAccountComponent}
+  { path: 'Admin/create-account', component: CreateAccountComponent},
+  { path: 'Admin/update-account', component: UpdateAccountComponent}
 ];
 
 @NgModule({
