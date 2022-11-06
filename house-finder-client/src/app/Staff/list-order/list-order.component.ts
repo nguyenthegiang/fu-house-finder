@@ -12,20 +12,68 @@ export class ListOrderComponent implements OnInit {
   orders: Order[] = [];
 
   //(Paging)
-  countAvailableHouses = 0; //items count
-  pageSize = 9;             //number of items per page
+  totalOrder = 0; //items count
+  pageSize = 10;             //number of items per page
   pageNumber = 1;           //starts at page 1
   pageCount = 0;            //number of pages
   pageList: number[] = [];  //array to loop with *ngFor in HTML Template
+
+  //Filter
+  //status: boolean|undefined;
+  status: boolean = false;
 
   constructor(private orderService: OrderService,) {
 
   }
 
   ngOnInit(): void {
-    //Call API: get all orders
-    this.orderService.getAllOrders().subscribe(data => {
+    this.filterHouse(false);
+
+    // (Paging) Count available Houses for total number of pages
+    this.orderService.countTotalOrder().subscribe(data => {
+      this.totalOrder = data;
+      console.log(data);
+
+      // (Paging) Calculate number of pages
+      this.pageCount = Math.ceil(this.totalOrder / this.pageSize);  //divide & round up
+
+      // (Paging) Render pageList based on pageCount
+      this.pageList = Array.from({ length: this.pageCount }, (_, i) => i + 1);
+      //pageList is now an array like {1, 2, 3, ..., n | n = pageCount}
+    });
+  }
+
+  //[Paging] User click on a Page number -> Go to that page
+  goToPage(pageNumber: number) {
+    // Call API: go to Page Number
+    this.pageNumber = pageNumber;
+    this.filterHouse(false);
+    this.scrollToTop();
+  }
+
+  // Go to top of Page: used whenever user filter/paging data -> refresh list data
+  scrollToTop() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
+
+  // Call API to update list house with selected Filter value & Paging
+  filterHouse(resetPaging: boolean) {
+    //if user filter -> reset Paging (back to page 1)
+    if (resetPaging) {
+      this.pageNumber = 1;
+    }
+
+    this.orderService.filterOrder(
+      this.pageSize,
+      this.pageNumber,
+      this.status,
+    ).subscribe(data => {
       this.orders = data;
+      this.scrollToTop();
     });
   }
 

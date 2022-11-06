@@ -15,7 +15,7 @@ namespace DataAccess.DTO
         public string Email { get; set; }
         public string OrderContent { get; set; }
         public bool? Solved { get; set; }
-        public DateTime? OrderedDate { get; set; }
+        public DateTime OrderedDate { get; set; }
         public DateTime? SolvedDate { get; set; }
 
     }
