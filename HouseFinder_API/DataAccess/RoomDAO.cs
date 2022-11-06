@@ -117,6 +117,22 @@ namespace DataAccess
             }
         }
 
+        public static void CreateRooms(List<Room> rooms)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    context.Rooms.AddRange(rooms);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         //Update Room by id
         public static void UpdateRoomByRoomId(Room room)
         {
