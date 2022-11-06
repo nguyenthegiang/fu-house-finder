@@ -24,8 +24,7 @@ export class ListOrderComponent implements OnInit {
   pageList: number[] = [];  //array to loop with *ngFor in HTML Template
 
   //Filter
-  //status: boolean|undefined;
-  status: boolean = true;
+  selectedStatusId: number|undefined;
 
   constructor(private orderService: OrderService,
               private orderStatusService: OrderStatusService,){}
@@ -79,11 +78,21 @@ export class ListOrderComponent implements OnInit {
     this.orderService.filterOrder(
       this.pageSize,
       this.pageNumber,
-      this.status,
+      this.selectedStatusId,
     ).subscribe(data => {
       this.orders = data;
       this.scrollToTop();
     });
+  }
+
+  //[Filter] Filter by Campus
+  onStatusSelected(selectedStatusId: string) {
+    // convert string to number
+    var numberCampusId: number = +selectedStatusId;
+
+    // Call API: update list houses with the campus user chose
+    this.selectedStatusId = numberCampusId;
+    this.filterHouse(true);
   }
 
 }
