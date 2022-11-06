@@ -14,7 +14,6 @@ import {
 } from 'angularx-social-login';
 import { DashboardComponent } from './Landlord/dashboard/dashboard.component';
 import { ListRoomComponent } from './Landlord/list-room/list-room.component';
-import { UploadHouseInfoSingleComponent } from './upload-house-info-single/upload-house-info-single.component';
 import { ListReportComponent } from './Staff/list-report/list-report.component';
 import { ListHouseComponent } from './Staff/list-house/list-house.component';
 import { DashboardStaffComponent } from './Staff/dashboard/dashboard.component';
@@ -27,6 +26,9 @@ import { UpdateHouseComponent } from './Landlord/update-house/update-house.compo
 import { LandlordHouseDetailComponent } from './Landlord/landlord-house-detail/landlord-house-detail.component';
 import { RateHouseComponent } from './Landlord/rate-house/rate-house.component';
 import { ListOrderComponent } from './Staff/list-order/list-order.component';
+import { AddRoomComponent } from './Landlord/add-room/add-room.component';
+import { SingleComponent } from './Landlord/add-room/single/single.component';
+import { MultipleComponent } from './Landlord/add-room/multiple/multiple.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +38,6 @@ import { ListOrderComponent } from './Staff/list-order/list-order.component';
     LoginComponent,
     DashboardComponent,
     ListRoomComponent,
-    UploadHouseInfoSingleComponent,
     DashboardStaffComponent,
     ListRoomComponent,
     ListReportComponent,
@@ -50,6 +51,9 @@ import { ListOrderComponent } from './Staff/list-order/list-order.component';
     LandlordHouseDetailComponent,
     RateHouseComponent,
     ListOrderComponent,
+    AddRoomComponent,
+    SingleComponent,
+    MultipleComponent,
   ],
   imports: [
     BrowserModule,

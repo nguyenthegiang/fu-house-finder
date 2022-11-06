@@ -12,6 +12,16 @@ namespace Repositories.Repositories
 {
     public class HouseRepository : IHousesRepository
     {
+        public HouseDTO CreateHouse(string houseName, string information, string _address, string ggAddress, string villageName, string landlordId, string campusName,
+            decimal powerPrice, decimal waterPrice, bool fingerprintLock, bool camera, bool parking)
+        {
+            AddressDTO address = AddressDAO.CreateAddress(_address, ggAddress);
+            VillageDTO village = VillageDAO.GetVillageByName(villageName);
+            CampusDTO campus = CampusDAO.GetCampusByName(campusName);
+            HouseDTO house = HouseDAO.CreateHouse(houseName, information, address.AddressId, village.VillageId, landlordId, campus.CampusId,
+                powerPrice, waterPrice, fingerprintLock, camera, parking);
+            return house;
+        }
         //public List<HouseDTO> GetAllHouses() => HouseDAO.GetAllHouses();
         //public List<HouseDTO> GetHouseByName(string HouseName) => HouseDAO.GetHouseByName(HouseName);
         public HouseDTO GetHouseById(int HouseId) => HouseDAO.GetHouseById(HouseId);

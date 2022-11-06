@@ -33,5 +33,22 @@ namespace DataAccess
 
             return campusDTOs;
         }
+        public static CampusDTO GetCampusByName(string name)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    return context.Campuses.ProjectTo<CampusDTO>(config)
+                        .Where(campus => campus.CampusName.Equals(name)).FirstOrDefault();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
