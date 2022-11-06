@@ -6,7 +6,7 @@ import { Status } from 'src/app/models/status';
 import { HouseService } from 'src/app/services/house.service';
 import { RoomTypeService } from 'src/app/services/room-type.service';
 import { RoomService } from 'src/app/services/room.service';
-import { StatusService } from 'src/app/services/roomStatus.service';
+import StatusService from 'src/app/services/roomStatus.service';
 
 @Component({
   selector: 'app-list-room',

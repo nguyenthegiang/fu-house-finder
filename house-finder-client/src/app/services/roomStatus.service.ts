@@ -6,7 +6,7 @@ import { Status } from '../models/status';
 @Injectable({
   providedIn: 'root'
 })
-export class StatusService {
+export default class StatusService {
 
   readonly APIUrl = "https://localhost:5001/api/Status";
 
