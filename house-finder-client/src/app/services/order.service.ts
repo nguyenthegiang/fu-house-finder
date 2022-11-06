@@ -26,7 +26,7 @@ export class OrderService {
   filterOrder(
     pageSize: number,
     pageNumber: number,
-    status?: boolean): Observable<Order[]>{
+    statusId?: number): Observable<Order[]>{
 
     //[Paging] count Skip and Top from pageSize & pageNumber
     const skip = pageSize * (pageNumber - 1);
@@ -37,7 +37,7 @@ export class OrderService {
     filterAPIUrl += `?$skip=${skip}&$top=${top}`;
 
     //[Filter] check if user has at least 1 filter
-    if (status != null) {
+    if (statusId != null) {
       //add filter to API
       filterAPIUrl += `&$filter=`;
     }
@@ -46,7 +46,7 @@ export class OrderService {
     var checkFirstFilter = true;
 
     //[Filter] add filter by campus if has
-    if (status != undefined) {
+    if (statusId != undefined) {
       //if is not the first filter -> need to add 'and' to API URL
       if (!checkFirstFilter) {
         filterAPIUrl += ` and `;
@@ -55,7 +55,7 @@ export class OrderService {
         checkFirstFilter = false;
       }
 
-      filterAPIUrl += `Solved eq ${status}`;
+      filterAPIUrl += `Status/StatusId eq ${statusId}`;
     }
 
     return this.http.get<Order[]>(filterAPIUrl);

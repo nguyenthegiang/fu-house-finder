@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HouseService } from 'src/app/services/house.service';
 import { RoomTypeService } from 'src/app/services/room-type.service';
 import { RoomService } from 'src/app/services/room.service';
-import { StatusService } from 'src/app/services/status.service';
+import StatusService from 'src/app/services/roomStatus.service';
 import { Chart, registerables } from 'chart.js';
 import { OrderService } from 'src/app/services/order.service';
 Chart.register(...registerables);

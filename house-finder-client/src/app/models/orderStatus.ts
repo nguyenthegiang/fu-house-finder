@@ -1,5 +1,5 @@
-//DTO: Statuses
-export interface Status {
+
+export interface OrderStatus {
   statusId: number;
   statusName: string;
 }

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { HttpClient } from '@angular/common/http';
-import { Status } from '../models/status';
+import { RoomStatus } from '../models/roomStatus';
 
 @Injectable({
   providedIn: 'root'
 })
-export class StatusService {
+export default class RoomStatusService {
 
   readonly APIUrl = "https://localhost:5001/api/Status";
 
@@ -16,7 +16,7 @@ export class StatusService {
   getStatusesByHouseId(houseId: number): Observable<any[]> {
     return this.http.get<any[]>(this.APIUrl + "/getByHouseId?HouseId=" + houseId);
   }
-  getAllStatus(): Observable<Status[]> {
-    return this.http.get<Status[]>(this.APIUrl);
+  getAllStatus(): Observable<RoomStatus[]> {
+    return this.http.get<RoomStatus[]>(this.APIUrl);
   }
 }
