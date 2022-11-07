@@ -116,6 +116,7 @@ namespace HouseFinder_API.Controllers
             int availableRoom = roomsRepository.CountAvailableRoom();
             return availableRoom;
         }
+
         //GET: api/Rooms/CountTotalRoom
         [HttpGet("CountTotalRoom")]
         public int CountTotalRoom()

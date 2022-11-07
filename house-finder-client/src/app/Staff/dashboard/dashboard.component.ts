@@ -20,6 +20,8 @@ export class DashboardStaffComponent implements OnInit {
   availableCapNum: number = 0;
   //Total of houses
   totalHouses: number = 0;
+  //Total of rooms
+  totalRooms: number = 0;
   //Total of available houses
   availableHouseNum: number = 0;
   //Array of total orders by month
@@ -40,6 +42,11 @@ export class DashboardStaffComponent implements OnInit {
     //Call API: get total of available rooms
     this.roomService.countAvailableRooms().subscribe(data => {
       this.availabelRoomsNum = data;
+    });
+
+    //Call API: get number of total rooms
+    this.roomService.CountTotalRoom().subscribe(data => {
+      this.totalRooms = data;
     });
 
     //Call API: get total of available capacity
@@ -139,6 +146,28 @@ export class DashboardStaffComponent implements OnInit {
             title:{
               display: true,
               text: 'Thống kê số nhà trọ',
+            }
+          }
+        }
+      });
+
+      var roomChart = new Chart("roomChart",{
+        type: 'pie',
+        data: {
+          labels: ['Hết chỗ', 'Còn trống'],
+          datasets: [
+            {
+              data: [(this.totalRooms - this.availabelRoomsNum),this.availabelRoomsNum],
+              backgroundColor: ['#ff9020','#2fcaca'],
+            },
+          ],
+
+        },
+        options:{
+          plugins:{
+            title:{
+              display: true,
+              text: 'Thống kê số phòng trọ',
             }
           }
         }
