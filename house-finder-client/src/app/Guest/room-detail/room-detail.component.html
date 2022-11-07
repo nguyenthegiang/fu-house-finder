@@ -9,23 +9,26 @@
         </div> -->
         <div class="carousel-inner rounded">
           <div class="carousel-item active">
-            <img src="../assets/image/Room/{{roomDetail.imagesOfRooms[0].imageLink}}" class="d-block w-100" alt="...">
+            <img src="../assets/image/Room/{{roomDetail.imagesOfRooms[0].imageLink}}" class="d-block w-100" height="350" alt="...">
           </div>
-          <div class="carousel-item">
-            <img src="../assets/image/Room/{{roomDetail.imagesOfRooms[1].imageLink}}" class="d-block w-100" alt="...">
-          </div>
-          <div class="carousel-item">
-            <img src="../assets/image/Room/{{roomDetail.imagesOfRooms[2].imageLink}}" class="d-block w-100" alt="...">
+          <div *ngFor="let image of roomDetail.imagesOfRooms; let i=index;">
+            <div class="carousel-item" *ngIf="i >= 1">
+              <img src="../../assets/image/Room/{{image.imageLink}}" class="d-block w-100" height="350" alt="...">
+            </div>
           </div>
         </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
+        <div *ngFor="let image of roomDetail.imagesOfRooms; let i=index;">
+          <div *ngIf="i > 1">
+            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
       </div>
 
       <div class="border border-dark rounded p-2 mt-4">
