@@ -20,6 +20,6 @@ namespace HouseFinder_API.Controllers
         //[Home Page] Get List Districts to choose to filter
         //(with each District, all its Communes; and with each Commune, all its Villages)
         [HttpGet]
-        public ActionResult<IEnumerable<DistrictDTO>> GetAllCampuses() => districtRepository.GetAllDistricts();
+        public ActionResult<IEnumerable<DistrictDTO>> GetAllDistricts () => districtRepository.GetAllDistricts();
     }
 }
