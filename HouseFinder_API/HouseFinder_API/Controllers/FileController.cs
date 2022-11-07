@@ -1,5 +1,6 @@
 ﻿using BusinessObjects;
 using DataAccess.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -40,6 +41,7 @@ namespace HouseFinder_API.Controllers
             return File(fs, mime, filename);
         }
 
+        [Authorize]
         [HttpPost("upload")]
         public IActionResult UploadFile(IFormFile File)
         {

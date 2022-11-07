@@ -8,7 +8,8 @@
                 <span class="me-3"><i class="fa-solid fa-upload"></i></span> Upload Template
             </label>
         </button>
-        <input type="file" id="room-data-file" class="d-none" (change)="onChange($event)"/>
+        <input type="file" id="room-data-file" class="d-none" accept=".xlsx" (change)="onChange($event)"/>
+        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     </div>
     <div class="row"></div>
 </div>
