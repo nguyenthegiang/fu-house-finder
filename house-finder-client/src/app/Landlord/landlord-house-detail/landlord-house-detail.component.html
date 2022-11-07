@@ -133,9 +133,9 @@
         <td>
           <!-- Detail button -->
           <button type="button" class="btn btn-success me-2 my-1" data-bs-toggle="modal" data-bs-target="#updateModal"
-            data-bs-whatever="@getbootstrap" (click)="updateRoom(dataItem.roomId)">Cập nhật</button>
+            data-bs-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId)">Cập nhật</button>
           <button type="button" class="btn btn-danger my-1" data-bs-toggle="modal" data-bs-target="#updateModal"
-            data-bs-whatever="@getbootstrap" (click)="deleteRoom(dataItem.roomId)">Xóa</button>
+            data-bs-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId)">Xóa</button>
         </td>
       </tr>
     </tbody>
