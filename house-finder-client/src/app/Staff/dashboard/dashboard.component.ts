@@ -85,10 +85,10 @@ export class DashboardStaffComponent implements OnInit {
                 label: 'Số đơn đăng ký',
                 data: this.orderByMonth,
                 backgroundColor:[
-                  '#FF6F3D',
+                  '#ff6384',
                 ],
                 borderColor: [
-                  '#FF6F3D',
+                  '#ff6384',
                 ],
                 borderWidth: 1
             },
@@ -96,10 +96,10 @@ export class DashboardStaffComponent implements OnInit {
               label: 'Số đơn đã được giải quyết',
               data: this.solvedOrderByMonth,
               backgroundColor:[
-                '#3E4F3C',
+                '#069bff',
               ],
               borderColor: [
-                  '#3E4F3C',
+                '#069bff',
               ],
               borderWidth: 1
           },
