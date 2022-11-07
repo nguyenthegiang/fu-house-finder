@@ -12,5 +12,7 @@ namespace Repositories.Repositories
     public class ReportRepository: IReportRepository
     {
         public void AddReport(Report report) => ReportDAO.AddReport(report);
+
+        public int[] GetTotalReportByMonth() => ReportDAO.GetTotalReportByMonth();
     }
 }

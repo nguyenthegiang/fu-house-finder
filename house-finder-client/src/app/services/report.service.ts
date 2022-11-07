@@ -20,4 +20,9 @@ export class ReportService {
     return this.http.post<any>(this.APIUrl, report, this.httpOptions);
   }
 
+  //[Staff/Dashboard]
+  getTotalReportByMonth():Observable<any>{
+    return this.http.get<any>(this.APIUrl + "/GetTotalReportByMonth");
+  }
+
 }

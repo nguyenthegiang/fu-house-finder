@@ -10,5 +10,6 @@ namespace Repositories.IRepository
     public interface IReportRepository
     {
         public void AddReport(Report report);
+        public int[] GetTotalReportByMonth();
     }
 }

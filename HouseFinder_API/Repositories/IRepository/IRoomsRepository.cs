@@ -18,6 +18,7 @@ namespace Repositories.IRepository
         public void DeleteRoom(int roomId);
         public RoomDTO GetRoomByRoomId(int roomId);
         public int CountAvailableRoom();
+        public int CountTotalRoom();
         public int CountAvailableRoomByHouseId(int houseId);
         public int? CountAvailableCapacity();
         public int? CountAvailableCapacityByHouseId(int houseId);
