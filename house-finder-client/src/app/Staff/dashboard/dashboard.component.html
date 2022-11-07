@@ -5,12 +5,13 @@
           <a href="/Staff/list-landlord">Quản lý chủ trọ</a>
           <a href="/Staff/list-house">Quản lý nhà trọ</a>
           <a href="/Staff/list-report">Quản lý báo cáo vi phạm</a>
-          <a href="">Nguyện vọng đăng ký nhà ở của sinh viên</a>
+          <a href="/Staff/list-order">Nguyện vọng đăng ký nhà ở của sinh viên</a>
         </div>
     </div>
     <div class="col-9">
       <!-- Page content -->
       <div class="content">
+
         <div class="row">
           <div class="col-3 statistics">
             <b>Tổng số nhà trọ</b>
@@ -31,6 +32,12 @@
             <b>Sức chứa</b>
             <br>
             <span>{{availableCapNum}}</span>
+          </div>
+        </div>
+
+        <div class="row">
+          <div id="divChart">
+            <canvas id="myChart"></canvas>
           </div>
         </div>
       </div>

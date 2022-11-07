@@ -27,25 +27,26 @@ namespace BusinessObjects
         public virtual DbSet<ImagesOfRoom> ImagesOfRooms { get; set; }
         public virtual DbSet<Issue> Issues { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        public virtual DbSet<OrderStatus> OrderStatuses { get; set; }
         public virtual DbSet<Rate> Rates { get; set; }
         public virtual DbSet<Report> Reports { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<RoomHistory> RoomHistories { get; set; }
+        public virtual DbSet<RoomStatus> RoomStatuses { get; set; }
         public virtual DbSet<RoomType> RoomTypes { get; set; }
-        public virtual DbSet<Status> Statuses { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
         public virtual DbSet<Village> Villages { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-        if (!optionsBuilder.IsConfigured)
-        {
-            //Read JSON File -> ConnectionString
-            var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
-            optionsBuilder.UseSqlServer(config.GetConnectionString("DBContext"));
+            if (!optionsBuilder.IsConfigured)
+            {
+                //Read JSON File -> ConnectionString
+                var config = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build();
+                optionsBuilder.UseSqlServer(config.GetConnectionString("DBContext"));
+            }
         }
-    }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -59,12 +60,16 @@ namespace BusinessObjects
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
+                entity.Property(e => e.GoogleMapLocation).IsRequired();
+
                 entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
             });
 
             modelBuilder.Entity<Campus>(entity =>
             {
-                entity.Property(e => e.CampusName).HasMaxLength(100);
+                entity.Property(e => e.CampusName)
+                    .IsRequired()
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
@@ -77,13 +82,16 @@ namespace BusinessObjects
 
             modelBuilder.Entity<Commune>(entity =>
             {
-                entity.Property(e => e.CommuneName).HasMaxLength(100);
+                entity.Property(e => e.CommuneName)
+                    .IsRequired()
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.HasOne(d => d.District)
                     .WithMany(p => p.Communes)
                     .HasForeignKey(d => d.DistrictId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("DistrictId_in_District");
             });
 
@@ -91,18 +99,23 @@ namespace BusinessObjects
             {
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.DistrictName).HasMaxLength(100);
+                entity.Property(e => e.DistrictName)
+                    .IsRequired()
+                    .HasMaxLength(100);
             });
 
             modelBuilder.Entity<House>(entity =>
             {
                 entity.Property(e => e.CreatedBy)
+                    .IsRequired()
                     .HasMaxLength(30)
                     .IsFixedLength(true);
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.HouseName).HasMaxLength(100);
+                entity.Property(e => e.HouseName)
+                    .IsRequired()
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.LandlordId)
                     .HasMaxLength(30)
@@ -132,6 +145,7 @@ namespace BusinessObjects
                 entity.HasOne(d => d.CreatedByNavigation)
                     .WithMany(p => p.HouseCreatedByNavigations)
                     .HasForeignKey(d => d.CreatedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("createdUser_in_User2");
 
                 entity.HasOne(d => d.Landlord)
@@ -153,17 +167,20 @@ namespace BusinessObjects
             modelBuilder.Entity<ImagesOfHouse>(entity =>
             {
                 entity.HasKey(e => e.ImageId)
-                    .HasName("PK__ImagesOf__7516F70C63C99D14");
+                    .HasName("PK__ImagesOf__7516F70C25B0D86F");
 
                 entity.ToTable("ImagesOfHouse");
 
                 entity.Property(e => e.CreatedBy)
+                    .IsRequired()
                     .HasMaxLength(30)
                     .IsFixedLength(true);
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.ImageLink).HasMaxLength(500);
+                entity.Property(e => e.ImageLink)
+                    .IsRequired()
+                    .HasMaxLength(500);
 
                 entity.Property(e => e.LastModifiedBy)
                     .HasMaxLength(30)
@@ -174,11 +191,13 @@ namespace BusinessObjects
                 entity.HasOne(d => d.CreatedByNavigation)
                     .WithMany(p => p.ImagesOfHouseCreatedByNavigations)
                     .HasForeignKey(d => d.CreatedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("createdUser_in_User5");
 
                 entity.HasOne(d => d.House)
                     .WithMany(p => p.ImagesOfHouses)
                     .HasForeignKey(d => d.HouseId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("HouseId_in_House3");
 
                 entity.HasOne(d => d.LastModifiedByNavigation)
@@ -190,17 +209,20 @@ namespace BusinessObjects
             modelBuilder.Entity<ImagesOfRoom>(entity =>
             {
                 entity.HasKey(e => e.ImageId)
-                    .HasName("PK__ImagesOf__7516F70C7832C577");
+                    .HasName("PK__ImagesOf__7516F70CA55B4976");
 
                 entity.ToTable("ImagesOfRoom");
 
                 entity.Property(e => e.CreatedBy)
+                    .IsRequired()
                     .HasMaxLength(30)
                     .IsFixedLength(true);
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.ImageLink).HasMaxLength(500);
+                entity.Property(e => e.ImageLink)
+                    .IsRequired()
+                    .HasMaxLength(500);
 
                 entity.Property(e => e.LastModifiedBy)
                     .HasMaxLength(30)
@@ -211,6 +233,7 @@ namespace BusinessObjects
                 entity.HasOne(d => d.CreatedByNavigation)
                     .WithMany(p => p.ImagesOfRoomCreatedByNavigations)
                     .HasForeignKey(d => d.CreatedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("createdUser_in_User6");
 
                 entity.HasOne(d => d.LastModifiedByNavigation)
@@ -221,18 +244,22 @@ namespace BusinessObjects
                 entity.HasOne(d => d.Room)
                     .WithMany(p => p.ImagesOfRooms)
                     .HasForeignKey(d => d.RoomId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("RoomId_in_Room");
             });
 
             modelBuilder.Entity<Issue>(entity =>
             {
                 entity.Property(e => e.CreatedBy)
+                    .IsRequired()
                     .HasMaxLength(30)
                     .IsFixedLength(true);
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.Description).HasMaxLength(100);
+                entity.Property(e => e.Description)
+                    .IsRequired()
+                    .HasMaxLength(100);
 
                 entity.Property(e => e.LastModifiedBy)
                     .HasMaxLength(30)
@@ -243,6 +270,7 @@ namespace BusinessObjects
                 entity.HasOne(d => d.Room)
                     .WithMany(p => p.Issues)
                     .HasForeignKey(d => d.RoomId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("RoomId_in_Room3");
             });
 
@@ -256,7 +284,9 @@ namespace BusinessObjects
 
                 entity.Property(e => e.OrderedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.PhoneNumber).HasMaxLength(50);
+                entity.Property(e => e.PhoneNumber)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
                 entity.Property(e => e.SolvedDate).HasColumnType("datetime");
 
@@ -264,7 +294,15 @@ namespace BusinessObjects
                     .HasMaxLength(30)
                     .IsFixedLength(true);
 
-                entity.Property(e => e.StudentName).HasMaxLength(100);
+                entity.Property(e => e.StudentName)
+                    .IsRequired()
+                    .HasMaxLength(100);
+
+                entity.HasOne(d => d.Status)
+                    .WithMany(p => p.Orders)
+                    .HasForeignKey(d => d.StatusId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("StatusId_in_OrderStatuses");
 
                 entity.HasOne(d => d.Student)
                     .WithMany(p => p.Orders)
@@ -272,9 +310,22 @@ namespace BusinessObjects
                     .HasConstraintName("StudentId_in_User4");
             });
 
+            modelBuilder.Entity<OrderStatus>(entity =>
+            {
+                entity.HasKey(e => e.StatusId)
+                    .HasName("PK__OrderSta__C8EE20632537F485");
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.StatusName)
+                    .IsRequired()
+                    .HasMaxLength(300);
+            });
+
             modelBuilder.Entity<Rate>(entity =>
             {
                 entity.Property(e => e.CreatedBy)
+                    .IsRequired()
                     .HasMaxLength(30)
                     .IsFixedLength(true);
 
@@ -287,17 +338,20 @@ namespace BusinessObjects
                 entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.StudentId)
+                    .IsRequired()
                     .HasMaxLength(30)
                     .IsFixedLength(true);
 
                 entity.HasOne(d => d.CreatedByNavigation)
                     .WithMany(p => p.RateCreatedByNavigations)
                     .HasForeignKey(d => d.CreatedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("createdUser_in_User4");
 
                 entity.HasOne(d => d.House)
                     .WithMany(p => p.Rates)
                     .HasForeignKey(d => d.HouseId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("HouseId_in_House2");
 
                 entity.HasOne(d => d.LastModifiedByNavigation)
@@ -308,12 +362,14 @@ namespace BusinessObjects
                 entity.HasOne(d => d.Student)
                     .WithMany(p => p.RateStudents)
                     .HasForeignKey(d => d.StudentId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("StudentId_in_User");
             });
 
             modelBuilder.Entity<Report>(entity =>
             {
                 entity.Property(e => e.CreatedBy)
+                    .IsRequired()
                     .HasMaxLength(30)
                     .IsFixedLength(true);
 
@@ -325,18 +381,23 @@ namespace BusinessObjects
 
                 entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
 
+                entity.Property(e => e.ReportContent).IsRequired();
+
                 entity.Property(e => e.StudentId)
+                    .IsRequired()
                     .HasMaxLength(30)
                     .IsFixedLength(true);
 
                 entity.HasOne(d => d.CreatedByNavigation)
                     .WithMany(p => p.ReportCreatedByNavigations)
                     .HasForeignKey(d => d.CreatedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("createdUser_in_User7");
 
                 entity.HasOne(d => d.House)
                     .WithMany(p => p.Reports)
                     .HasForeignKey(d => d.HouseId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("HouseId_in_House4");
 
                 entity.HasOne(d => d.LastModifiedByNavigation)
@@ -347,12 +408,14 @@ namespace BusinessObjects
                 entity.HasOne(d => d.Student)
                     .WithMany(p => p.ReportStudents)
                     .HasForeignKey(d => d.StudentId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("StudentId_in_User3");
             });
 
             modelBuilder.Entity<Room>(entity =>
             {
                 entity.Property(e => e.CreatedBy)
+                    .IsRequired()
                     .HasMaxLength(30)
                     .IsFixedLength(true);
 
@@ -366,16 +429,20 @@ namespace BusinessObjects
 
                 entity.Property(e => e.PricePerMonth).HasColumnType("money");
 
-                entity.Property(e => e.RoomName).HasMaxLength(50);
+                entity.Property(e => e.RoomName)
+                    .IsRequired()
+                    .HasMaxLength(50);
 
                 entity.HasOne(d => d.CreatedByNavigation)
                     .WithMany(p => p.RoomCreatedByNavigations)
                     .HasForeignKey(d => d.CreatedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("createdUser_in_User3");
 
                 entity.HasOne(d => d.House)
                     .WithMany(p => p.Rooms)
                     .HasForeignKey(d => d.HouseId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("HouseId_in_House");
 
                 entity.HasOne(d => d.LastModifiedByNavigation)
@@ -386,23 +453,28 @@ namespace BusinessObjects
                 entity.HasOne(d => d.RoomType)
                     .WithMany(p => p.Rooms)
                     .HasForeignKey(d => d.RoomTypeId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("RoomTypeId_in_RoomType");
 
                 entity.HasOne(d => d.Status)
                     .WithMany(p => p.Rooms)
                     .HasForeignKey(d => d.StatusId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("StatusId_in_Status");
             });
 
             modelBuilder.Entity<RoomHistory>(entity =>
             {
                 entity.Property(e => e.CreatedBy)
+                    .IsRequired()
                     .HasMaxLength(30)
                     .IsFixedLength(true);
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.CustomerName).HasMaxLength(800);
+                entity.Property(e => e.CustomerName)
+                    .IsRequired()
+                    .HasMaxLength(800);
 
                 entity.Property(e => e.LastModifiedBy)
                     .HasMaxLength(30)
@@ -413,6 +485,7 @@ namespace BusinessObjects
                 entity.HasOne(d => d.CreatedByNavigation)
                     .WithMany(p => p.RoomHistoryCreatedByNavigations)
                     .HasForeignKey(d => d.CreatedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("createdUser_in_User8");
 
                 entity.HasOne(d => d.LastModifiedByNavigation)
@@ -423,7 +496,20 @@ namespace BusinessObjects
                 entity.HasOne(d => d.Room)
                     .WithMany(p => p.RoomHistories)
                     .HasForeignKey(d => d.RoomId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("RoomId_in_Room2");
+            });
+
+            modelBuilder.Entity<RoomStatus>(entity =>
+            {
+                entity.HasKey(e => e.StatusId)
+                    .HasName("PK__RoomStat__C8EE206388D456A7");
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.StatusName)
+                    .IsRequired()
+                    .HasMaxLength(300);
             });
 
             modelBuilder.Entity<RoomType>(entity =>
@@ -435,13 +521,6 @@ namespace BusinessObjects
                     .HasMaxLength(300);
             });
 
-            modelBuilder.Entity<Status>(entity =>
-            {
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
-
-                entity.Property(e => e.StatusName).HasMaxLength(300);
-            });
-
             modelBuilder.Entity<User>(entity =>
             {
                 entity.Property(e => e.UserId)
@@ -449,6 +528,7 @@ namespace BusinessObjects
                     .IsFixedLength(true);
 
                 entity.Property(e => e.CreatedBy)
+                    .IsRequired()
                     .HasMaxLength(30)
                     .IsFixedLength(true);
 
@@ -494,6 +574,7 @@ namespace BusinessObjects
                 entity.HasOne(d => d.CreatedByNavigation)
                     .WithMany(p => p.InverseCreatedByNavigation)
                     .HasForeignKey(d => d.CreatedBy)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("createdUser_in_User");
 
                 entity.HasOne(d => d.LastModifiedByNavigation)
@@ -504,28 +585,34 @@ namespace BusinessObjects
                 entity.HasOne(d => d.Role)
                     .WithMany(p => p.Users)
                     .HasForeignKey(d => d.RoleId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("RoleId_in_UserRole");
             });
 
             modelBuilder.Entity<UserRole>(entity =>
             {
                 entity.HasKey(e => e.RoleId)
-                    .HasName("PK__UserRole__8AFACE1A808F29B4");
+                    .HasName("PK__UserRole__8AFACE1A8DEF5DF1");
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.RoleName).HasMaxLength(100);
+                entity.Property(e => e.RoleName)
+                    .IsRequired()
+                    .HasMaxLength(100);
             });
 
             modelBuilder.Entity<Village>(entity =>
             {
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
-                entity.Property(e => e.VillageName).HasMaxLength(100);
+                entity.Property(e => e.VillageName)
+                    .IsRequired()
+                    .HasMaxLength(100);
 
                 entity.HasOne(d => d.Commune)
                     .WithMany(p => p.Villages)
                     .HasForeignKey(d => d.CommuneId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("CommuneId_in_Commune");
             });
 

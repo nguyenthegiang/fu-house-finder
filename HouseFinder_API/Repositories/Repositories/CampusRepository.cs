@@ -12,5 +12,6 @@ namespace Repositories
     public class CampusRepository : ICampusRepository
     {
         public List<CampusDTO> GetAllCampuses() => CampusDAO.GetAllCampuses();
+        public CampusDTO GetCampusByName(string name) => CampusDAO.GetCampusByName(name);
     }
 }

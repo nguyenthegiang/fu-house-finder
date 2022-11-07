@@ -123,7 +123,6 @@
             <th scope="col">Tiện ích</th>
             <th scope="col">Diện tích</th>
             <th scope="col">Số người ở</th>
-            <th scope="col">Trạng thái</th>
           </tr>
         </thead>
         <tbody>
@@ -191,17 +190,17 @@
             </td>
 
             <!-- Room status -->
-            <td>
-              <!-- <label class="switch me-2">
+            <!-- <td>
+              <label class="switch me-2">
                 <input *ngIf="dataItem.status.statusName === 'Occupied' || dataItem.status.statusName === 'Disabled'"
                   type="checkbox">
                 <input *ngIf="dataItem.status.statusName === 'Available'" type="checkbox" checked>
                 <span class="slider round"></span>
-              </label> -->
+              </label>
               <span *ngIf="dataItem.status.statusName === 'Available'">Còn trống</span>
               <span *ngIf="dataItem.status.statusName === 'Occupied'">Đã thuê</span>
               <span *ngIf="dataItem.status.statusName === 'Disabled'">Không dùng được</span>
-            </td>
+            </td> -->
 
             <td>
               <!-- Detail button -->

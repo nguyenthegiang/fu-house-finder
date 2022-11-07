@@ -1,210 +1,113 @@
 <!-- Display Loading Spinner when House Detail is not yet loaded -->
-<div class="container-fluid" *ngIf="houseDetail === undefined || landlordDetail === undefined">
+<div class="container-fluid" *ngIf="rooms === undefined">
   <div class="spinner-border text-danger" role="status">
     <span class="sr-only">Loading...</span>
   </div>
 </div>
 
 <!-- Only Display when House Detail is loaded -->
-<div class="container-fluid my-5 d-flex justify-content-center" *ngIf="houseDetail && landlordDetail">
-  <div class="row w-100 d-flex justify-content-around">
-    <div class="col-12 col-md-7">
-      <!-- House images -->
-      <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
-        <div class="carousel-inner rounded" *ngIf="houseDetail.imagesOfHouses">
-          <div class="carousel-item active" *ngIf="houseDetail?.imagesOfHouses?.length">
-            <img src="../../assets/image/House/{{houseDetail.imagesOfHouses[0].imageLink}}" class="d-block w-100" height="450" alt="...">
-          </div>
-          <div *ngFor="let image of houseDetail.imagesOfHouses; let i=index;">
-            <div class="carousel-item" *ngIf="i >= 1">
-              <img src="../../assets/image/House/{{image.imageLink}}" class="d-block w-100" height="450" alt="...">
+<!-- List available rooms -->
+<div class="m-5">
+  <h3 class="text-center mb-4">Danh sách phòng</h3>
+
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th scope="col">Tên phòng</th>
+        <th scope="col">Giá phòng</th>
+        <th scope="col">Tiện ích</th>
+        <th scope="col">Diện tích</th>
+        <th scope="col">Số người ở</th>
+        <th scope="col">Trạng thái</th>
+        <th scope="col">Tùy chọn</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dataItem of rooms">
+        <!-- Room name -->
+        <td><b>{{dataItem.roomName}}</b></td>
+
+        <!-- Price -->
+        <td>{{dataItem.pricePerMonth | currency:'VND':'symbol':'3.0'}}</td>
+
+        <!-- Utilities -->
+        <td>
+          <div class="row">
+            <div *ngIf="dataItem.fridge == true" class="col-12 col-md-1 me-1">
+              <button type="button" class="btn btn-outline-dark col-1 d-flex justify-content-center align-items-center mt-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Tủ lạnh">
+                <i class="fa-solid fa-toilet-portable"></i>
+              </button>
+            </div>
+            <div *ngIf="dataItem.kitchen == true" class="col-12 col-md-1 me-1">
+              <button type="button" class="btn btn-outline-dark col-1 d-flex justify-content-center align-items-center mt-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Bếp">
+                <i class="fa-solid fa-fire-burner"></i>
+              </button>
+            </div>
+            <div *ngIf="dataItem.washingMachine == true" class="col-12 col-md-1 me-1">
+              <button type="button" class="btn btn-outline-dark col-1 d-flex justify-content-center align-items-center mt-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Máy giặt">
+                <i class="fa-solid fa-droplet"></i>
+              </button>
+            </div>
+            <div *ngIf="dataItem.desk == true" class="col-12 col-md-1 me-1">
+              <button type="button" class="btn btn-outline-dark col-1 d-flex justify-content-center align-items-center mt-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Bàn ghế">
+                <i class="fa-solid fa-couch"></i>
+              </button>
+            </div>
+            <div *ngIf="dataItem.liveWithHost == true" class="col-12 col-md-1 me-1">
+              <button type="button" class="btn btn-outline-dark col-1 d-flex justify-content-center align-items-center mt-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Chung chủ">
+                <i class="fa-solid fa-house-user"></i>
+              </button>
+            </div>
+            <div *ngIf="dataItem.bed == true" class="col-12 col-md-1 me-1">
+              <button type="button" class="btn btn-outline-dark col-1 d-flex justify-content-center align-items-center mt-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Giường">
+                <i class="fa-solid fa-bed"></i>
+              </button>
+            </div>
+            <div *ngIf="dataItem.closedToilet == true" class="col-12 col-md-1 me-1">
+              <button type="button" class="btn btn-outline-dark col-1 d-flex justify-content-center align-items-center mt-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Vệ sinh khép kín">
+                <i class="fa-solid fa-toilet"></i>
+              </button>
             </div>
           </div>
-        </div>
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Previous</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="visually-hidden">Next</span>
-        </button>
-      </div>
+        </td>
 
-      <!-- House detail information-->
-      <div class="house-information border border-secondary rounded mt-5 p-2">
-        <h3 class="text-center">{{houseDetail!.houseName}}</h3>
-        <span><b>Giá điện: </b> {{houseDetail!.powerPrice}}/kWh</span>
-        <br>
-        <span><b>Giá nước: </b> {{houseDetail!.waterPrice}}/m3</span>
-        <br>
-        <span><b>Địa chỉ: </b>{{houseDetail!.address!.addresses}}</span>
-        <br>
-        <span><b>Thông tin khác: </b>{{houseDetail!.information}}</span>
-      </div>
+        <!-- Area -->
+        <td>{{dataItem.areaByMeters}} m<sup>2</sup></td>
 
-      <!-- Google map -->
-      <div>
-        <iframe id="googleMap" class="w-100 h-25 my-5 border border-secondary rounded"
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.995814709238!2d105.51943301488284!3d20.992804886017904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31345bae7a5f0d39%3A0xec177bce6cdc3a46!2zSG_DoCBM4bqhYyBBcGFydG1lbnQ!5e0!3m2!1svi!2s!4v1665457315377!5m2!1svi!2s"
-          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-      </div>
-    </div>
-
-    <div class="col-12 col-md-4">
-      <!-- Landlord information -->
-      <div class="landlordInformation border border-secondary rounded p-2">
-        <h3 class="text-center">Thông tin chủ trọ</h3>
-        <!-- Landlord's avatar -->
-        <div class="d-flex justify-content-center align-items-center my-3">
-          <img src="../../assets/image/LandlordAvatar.jpg" alt="Landlord's avatar" width="250px" height="200px" class="rounded">
-        </div>
-        <!-- Other information -->
-        <span>
-          <b>Họ và tên: </b>
-          {{landlordDetail.displayName}}
-        </span>
-        <br>
-        <span>
-          <b>Facebook: </b>
-          <a href="{{landlordDetail!.facebookUrl}}">{{landlordDetail!.facebookUrl}}</a>
-        </span>
-        <br>
-        <span>
-          <b>Số điện thoại: </b>
-          <a class="phoneOn" (click)="isOn = true" *ngIf="isOn == false">Click để hiển thị</a>
-          <a class="phoneOff" *ngIf="isOn == true">{{landlordDetail!.phoneNumber}}</a>
-        </span>
-        <br>
-        <span>
-          <b>Địa chỉ: </b>
-          {{landlordDetail!.address.addresses}}
-        </span>
-      </div>
-
-      <!-- Rate and comment -->
-      <div class="my-5 border border-secondary rounded p-2">
-        <h3 class="text-center">Người dùng đánh giá</h3>
-        Bình luận:
-        <div class="bg-light border border-secondary rounded mb-2 p-2">
-          <b (click)="replyOn = true" style="cursor: pointer;">Nguyễn Văn A</b>: Đẹp, gần trường (<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>)
-
-          <div *ngIf="replyOn == true" class="mt-2">
-            Viết phản hồi:
-            <div class="d-flex">
-              <input type="text" class="form-control w-75 me-2" aria-label="Username" aria-describedby="basic-addon1">
-              <button type="button" class="btn btn-secondary w-25">Đăng</button>
+        <!-- Amount of people -->
+        <td>
+          <div class="row">
+            <div *ngFor='let in of peopleCounter(dataItem.currentAmountOfPeople); let i = index' class="col-12 col-md-1">
+              <i class="fa-solid fa-user me-1"></i>
+            </div>
+            <div *ngFor='let in of peopleCounter(dataItem.maxAmountOfPeople - dataItem.currentAmountOfPeople); let i = index' class="col-12 col-md-1">
+              <i class="fa-regular fa-user me-1"></i>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
+        </td>
 
-    <!-- List available rooms -->
-    <div class="container col-12"  *ngIf="availableRooms.length == 0">
-      <h3 class="text-center mb-4">Chưa có phòng trống</h3>
-    </div>
-    <div class="container col-12"  *ngIf="availableRooms.length != 0">
-      <h3 class="text-center mb-4">Danh sách phòng trống</h3>
+        <!-- Room status -->
+        <td>
+          <!-- <label class="switch me-2">
+            <input *ngIf="dataItem.status.statusName === 'Occupied' || dataItem.status.statusName === 'Disabled'"
+              type="checkbox">
+            <input *ngIf="dataItem.status.statusName === 'Available'" type="checkbox" checked>
+            <span class="slider round"></span>
+          </label> -->
+          <span *ngIf="dataItem.status.statusName === 'Available'">Còn trống</span>
+          <span *ngIf="dataItem.status.statusName === 'Occupied'">Đã thuê</span>
+          <span *ngIf="dataItem.status.statusName === 'Disabled'">Không dùng được</span>
+        </td>
 
-      <table class="table table-striped table-hover">
-        <thead>
-          <tr>
-            <th scope="col">Tên phòng</th>
-            <th scope="col">Giá phòng</th>
-            <th scope="col">Tiện ích</th>
-            <th scope="col">Diện tích</th>
-            <th scope="col">Số người ở</th>
-            <th scope="col">Trạng thái</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let dataItem of availableRooms">
-            <!-- Room name -->
-            <td><b>{{dataItem.roomName}}</b></td>
-
-            <!-- Price -->
-            <td>{{dataItem.pricePerMonth | currency:'VND':'symbol':'3.0'}}</td>
-
-            <!-- Utilities -->
-            <td>
-              <div class="d-flex">
-                <div *ngIf="dataItem.fridge == true">
-                  <button type="button" class="btn btn-outline-dark me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Tủ lạnh">
-                    <i class="fa-solid fa-toilet-portable"></i>
-                  </button>
-                </div>
-                <div *ngIf="dataItem.kitchen == true">
-                  <button type="button" class="btn btn-outline-dark me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Bếp">
-                    <i class="fa-solid fa-fire-burner"></i>
-                  </button>
-                </div>
-                <div *ngIf="dataItem.washingMachine == true">
-                  <button type="button" class="btn btn-outline-dark me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Máy giặt">
-                    <i class="fa-solid fa-droplet"></i>
-                  </button>
-                </div>
-                <div *ngIf="dataItem.desk == true">
-                  <button type="button" class="btn btn-outline-dark me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Bàn ghế">
-                    <i class="fa-solid fa-couch"></i>
-                  </button>
-                </div>
-                <div *ngIf="dataItem.liveWithHost == true">
-                  <button type="button" class="btn btn-outline-dark me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Chung chủ">
-                    <i class="fa-solid fa-house-user"></i>
-                  </button>
-                </div>
-                <div *ngIf="dataItem.bed == true">
-                  <button type="button" class="btn btn-outline-dark me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Giường">
-                    <i class="fa-solid fa-bed"></i>
-                  </button>
-                </div>
-                <div *ngIf="dataItem.closedToilet == true">
-                  <button type="button" class="btn btn-outline-dark me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Vệ sinh khép kín">
-                    <i class="fa-solid fa-toilet"></i>
-                  </button>
-                </div>
-              </div>
-            </td>
-
-            <!-- Area -->
-            <td>{{dataItem.areaByMeters}} m<sup>2</sup></td>
-
-            <!-- Amount of people -->
-            <td>
-              <div class="d-flex">
-                <div *ngFor='let in of peopleCounter(dataItem.currentAmountOfPeople); let i = index'>
-                  <i class="fa-solid fa-user me-1"></i>
-                </div>
-                <div *ngFor='let in of peopleCounter(dataItem.maxAmountOfPeople - dataItem.currentAmountOfPeople); let i = index'>
-                  <i class="fa-regular fa-user me-1"></i>
-                </div>
-              </div>
-            </td>
-
-            <!-- Room status -->
-            <td>
-              <!-- <label class="switch me-2">
-                <input *ngIf="dataItem.status.statusName === 'Occupied' || dataItem.status.statusName === 'Disabled'"
-                  type="checkbox">
-                <input *ngIf="dataItem.status.statusName === 'Available'" type="checkbox" checked>
-                <span class="slider round"></span>
-              </label> -->
-              <span *ngIf="dataItem.status.statusName === 'Available'">Còn trống</span>
-              <span *ngIf="dataItem.status.statusName === 'Occupied'">Đã thuê</span>
-              <span *ngIf="dataItem.status.statusName === 'Disabled'">Không dùng được</span>
-            </td>
-
-            <td>
-              <!-- Detail button -->
-              <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#updateModal"
-                data-whatever="@getbootstrap" (click)="viewRoom(dataItem.roomId)">Xem chi tiết</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <!-- End List of Rooms -->
-    </div>
-  </div>
+        <td>
+          <!-- Detail button -->
+          <button type="button" class="btn btn-success me-2 my-1" data-toggle="modal" data-target="#updateModal"
+            data-whatever="@getbootstrap" (click)="viewRoom(dataItem.roomId)">Cập nhật</button>
+          <button type="button" class="btn btn-danger my-1" data-toggle="modal" data-target="#updateModal"
+            data-whatever="@getbootstrap" (click)="viewRoom(dataItem.roomId)">Xóa</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- End List of Rooms -->
 </div>

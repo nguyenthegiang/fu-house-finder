@@ -12,15 +12,15 @@ namespace HouseFinder_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class StatusController : ControllerBase
+    public class RoomStatusController : ControllerBase
     {
-        private IStatusRepository statusRepository = new StatusRepository();
+        private IRoomStatusRepository statusRepository = new RoomStatusRepository();
 
         //GET: api/Status/getByHouseId?HouseId=
         [HttpGet("getByHouseId")]
         public IActionResult GetRStatusByHouseId(int HouseId)
         {
-            List<StatusDTO> statusDTO = statusRepository.GetStatusesByHouseId(HouseId);
+            List<RoomStatusDTO> statusDTO = statusRepository.GetStatusesByHouseId(HouseId);
             if (statusDTO == null)
             {
                 return NotFound();
@@ -33,7 +33,7 @@ namespace HouseFinder_API.Controllers
         [HttpGet]
         public IActionResult GetAllStatus()
         {
-            List <StatusDTO> status = statusRepository.GetAllStatus();
+            List <RoomStatusDTO> status = statusRepository.GetAllStatus();
             if(status == null)
             {
                 return NotFound();

@@ -4,12 +4,12 @@ _(Nhớ pull main trước khi Code nhé)_
 
 Chào bạn! Chúng ta làm việc theo nhóm, vì vậy mọi quyết định đều nên có sự đồng thuận của tất cả mọi người. Vì thế khi Code Hãy nhớ thông báo về công việc mình làm và nhớ viết Commit cho chi tiết và cụ thể nha (dùng tiếng Anh nữa) (❁´◡`❁)
 
-Nếu bạn gặp lỗi hay vấn đề gì đó khi chạy chương trình, hãy thử những cách dưới đây:
+Nếu bạn gặp lỗi hay vấn đề gì đó khi chạy chương trình, hãy thử những cách dưới đây (theo thứ tự):
  - Github Desktop: Fetch origin -> Update from Main
+ - Chạy lại Database
  - Chạy CMD ở Angular Project: npm install
  - Tắt Browser đi mở lại
  - Thử chạy bằng 1 Browser khác
- - Chạy lại Database
  - Khởi động lại máy tính 
  - Clone lại Project
 

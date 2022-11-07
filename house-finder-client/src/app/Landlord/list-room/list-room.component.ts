@@ -2,11 +2,11 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Room } from 'src/app/models/room';
 import { RoomType } from 'src/app/models/roomType';
-import { Status } from 'src/app/models/status';
+import { RoomStatus } from 'src/app/models/roomStatus';
 import { HouseService } from 'src/app/services/house.service';
 import { RoomTypeService } from 'src/app/services/room-type.service';
 import { RoomService } from 'src/app/services/room.service';
-import { StatusService } from 'src/app/services/status.service';
+import StatusService from 'src/app/services/roomStatus.service';
 
 @Component({
   selector: 'app-list-room',
@@ -21,7 +21,7 @@ export class ListRoomComponent implements OnInit {
   //List of room types
   roomTypes: RoomType[] = [];
   //List of statuses
-  statuses: Status[] = [];
+  statuses: RoomStatus[] = [];
 
   //[Update] roomId to pass into <update-room>
   updateRoomId: number = 0;

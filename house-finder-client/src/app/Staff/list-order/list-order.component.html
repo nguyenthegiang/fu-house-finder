@@ -5,11 +5,15 @@
       <a href="/Staff/list-landlord">Quản lý chủ trọ</a>
       <a href="/Staff/list-house">Quản lý nhà trọ</a>
       <a href="/Staff/list-report">Quản lý báo cáo vi phạm</a>
-      <a href="">Nguyện vọng đăng ký nhà ở của sinh viên</a>
+      <a href="/Staff/list-order">Nguyện vọng đăng ký nhà ở của sinh viên</a>
     </div>
   </div>
   <div class="col-9">
     <div class="container">
+
+      <!-- Chart -->
+      <!-- End chart -->
+
       <h3 class="text-center mb-4">Danh sách đăng ký chỗ ở</h3>
       <!-- Filter -->
       <div class="row">
@@ -30,11 +34,9 @@
         <!-- Trạng thái -->
         <div class="col-3">
           <label class="form-label">Trạng thái</label>
-          <select class="form-select">
-            <option>Chọn trạng thái</option>
-            <option>Chưa xử lý</option>
-            <option>Đang xử lý</option>
-            <option>Đã xử lý</option>
+          <select #selectCStatusId class="form-select" (change)="onStatusSelected(selectCStatusId.value)">
+            <option value="0">Tất cả</option>
+            <option *ngFor="let status of statuses" value="{{status.statusId}}">{{status.statusName}}</option>
           </select>
         </div>
         <!-- Order by -->
@@ -72,51 +74,38 @@
               <td>{{order.orderContent}}</td>
               <td>{{order.orderedDate| date:'shortDate'}}</td>
               <td>{{order.solvedDate| date:'shortDate'}}</td>
-              <td *ngIf="order.solved == true">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                  <br>
-                  <label class="form-check-label" for="flexSwitchCheckChecked">Đã xử lý</label>
-                </div>
-              </td>
-              <td *ngIf="order.solved == false">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                  <br>
-                  <label class="form-check-label" for="flexSwitchCheckDefault">Chưa xử lý</label>
-                </div>
-              </td>
+              <td>{{order.status}}</td>
             </tr>
           </tbody>
         </table>
 
         <!-- Paging -->
-      <!-- <div class="d-flex justify-content-center align-items-center my-3">
+      <div class="d-flex justify-content-center align-items-center my-3">
         <nav aria-label="Pagination-nav">
-          <ul class="pagination"> -->
+          <ul class="pagination">
             <!-- Previous: Disabled if this is first page -->
-            <!-- <li class="page-item" [ngClass]="{'disabled': pageNumber == 1}"> -->
+            <li class="page-item" [ngClass]="{'disabled': pageNumber == 1}">
               <!-- Go to previous page -->
-              <!-- <a class="page-link" aria-label="Previous" routerLink="" (click)="goToPage(pageNumber - 1)">
+              <a class="page-link" aria-label="Previous" routerLink="Staff/list-order" (click)="goToPage(pageNumber - 1)">
                 <span aria-hidden="true">&laquo;</span>
               </a>
-            </li> -->
+            </li>
             <!-- Numbers -->
-            <!-- <li *ngFor="let page of pageList" class="page-item"> -->
+            <li *ngFor="let page of pageList" class="page-item">
               <!-- Display this as active if it's the chosen page -->
-              <!-- <a class="page-link" routerLink="" (click)="goToPage(page)"
+              <a class="page-link" routerLink="Staff/list-order" (click)="goToPage(page)"
                 [ngClass]="{'active': pageNumber == page}">{{page}}</a>
-            </li> -->
+            </li>
             <!-- Next: Disabled if this is last page -->
-            <!-- <li class="page-item" [ngClass]="{'disabled': pageNumber == pageCount}"> -->
+            <li class="page-item" [ngClass]="{'disabled': pageNumber == pageCount}">
               <!-- Go to next page -->
-              <!-- <a class="page-link" aria-label="Next" routerLink="" (click)="goToPage(pageNumber + 1)">
+              <a class="page-link" aria-label="Next" routerLink="Staff/list-order" (click)="goToPage(pageNumber + 1)">
                 <span aria-hidden="true">&raquo;</span>
               </a>
             </li>
           </ul>
         </nav>
-      </div>-->
+      </div>
       <!-- End Paging -->
       </div>
       <!-- End list of order -->

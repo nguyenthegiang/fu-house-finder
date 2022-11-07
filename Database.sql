@@ -11,11 +11,11 @@ GO
 CREATE TABLE [dbo].[Addresses] (
 	AddressId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
 	Addresses nvarchar(1000) NOT NULL,					--địa chỉ cụ thể
-	GoogleMapLocation nvarchar(MAX),					--địa chỉ theo Google Map -> Sử dụng hỗ trợ search khoảng cách
+	GoogleMapLocation nvarchar(MAX) NOT NULL,					--địa chỉ theo Google Map -> Sử dụng hỗ trợ search khoảng cách
 
 	--Dành cho những Table CRUD dc -> History
-	Deleted bit,
-	CreatedDate datetime,
+	Deleted bit NOT NULL,
+	CreatedDate datetime NOT NULL,
 	LastModifiedDate datetime,
 ) ON [PRIMARY]
 GO
@@ -23,11 +23,11 @@ GO
 --Cơ sở của FPT
 CREATE TABLE [dbo].[Campuses] (
 	CampusId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	CampusName nvarchar(100),
+	CampusName nvarchar(100) NOT NULL,
 	
 	AddressId int NOT NULL,		--địa chỉ
 
-	CreatedDate datetime,
+	CreatedDate datetime NOT NULL,
 
 	CONSTRAINT AddressId_in_Address FOREIGN KEY(AddressId) REFERENCES Addresses(AddressId),
 ) ON [PRIMARY]
@@ -36,9 +36,9 @@ GO
 --Vai trò người dùng
 CREATE TABLE [dbo].[UserRoles] (
 	RoleId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	RoleName nvarchar(100),
+	RoleName nvarchar(100) NOT NULL,
 
-	CreatedDate datetime,
+	CreatedDate datetime NOT NULL,
 ) ON [PRIMARY]
 GO
 
@@ -55,7 +55,7 @@ CREATE TABLE [dbo].[Users] (
 	[Password] nvarchar(100),
 
 	DisplayName nvarchar(500) NULL,						--Tên để hiển thị, lấy từ Google/Facebook API (nếu login = fb/gg) hoặc lấy khi đăng ký (nếu login = email)
-	Active int,											--chuyển thành false nếu User bị Disable
+	Active int NOT NULL,											--chuyển thành false nếu User bị Disable
 
 	--Dành cho Staff & Landlord
 	ProfileImageLink nvarchar(500) NULL,				--Link ảnh profile
@@ -67,12 +67,12 @@ CREATE TABLE [dbo].[Users] (
 	IdentityCardBackSideImageLink nvarchar(500) NULL,	--Link ảnh Căn cước công dân, mặt sau
 	AddressId int NULL,									--địa chỉ
 
-	RoleId int,
+	RoleId int NOT NULL,
 
 	--Dành cho những Table CRUD dc -> History
-	CreatedDate datetime,
+	CreatedDate datetime NOT NULL,
 	LastModifiedDate datetime,
-	CreatedBy nchar(30),
+	CreatedBy nchar(30) NOT NULL,
 	LastModifiedBy nchar(30),
 
 	CONSTRAINT RoleId_in_UserRole FOREIGN KEY(RoleId) REFERENCES UserRoles(RoleId),
@@ -85,19 +85,19 @@ GO
 --Huyện/Quận
 CREATE TABLE [dbo].[Districts] (
 	DistrictId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	DistrictName nvarchar(100),
+	DistrictName nvarchar(100) NOT NULL,
 
-	CreatedDate datetime,
+	CreatedDate datetime NOT NULL,
 ) ON [PRIMARY]
 GO
 
 --Phường/Xã
 CREATE TABLE [dbo].[Communes] (
 	CommuneId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	CommuneName nvarchar(100),
-	DistrictId int,
+	CommuneName nvarchar(100) NOT NULL,
+	DistrictId int NOT NULL,
 
-	CreatedDate datetime,
+	CreatedDate datetime NOT NULL,
 	CONSTRAINT DistrictId_in_District FOREIGN KEY(DistrictId) REFERENCES Districts(DistrictId),
 ) ON [PRIMARY]
 GO
@@ -105,10 +105,10 @@ GO
 --Thôn/Xóm
 CREATE TABLE [dbo].[Villages] (
 	VillageId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	VillageName nvarchar(100),
-	CommuneId int,
+	VillageName nvarchar(100) NOT NULL,
+	CommuneId int NOT NULL,
 
-	CreatedDate datetime,
+	CreatedDate datetime NOT NULL,
 	CONSTRAINT CommuneId_in_Commune FOREIGN KEY(CommuneId) REFERENCES Communes(CommuneId),
 ) ON [PRIMARY]
 GO
@@ -116,7 +116,7 @@ GO
 --Nhà trọ
 CREATE TABLE [dbo].[Houses] (
 	HouseId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	HouseName nvarchar(100),
+	HouseName nvarchar(100) NOT NULL,
 	[View] int,							--số lượt xem
 	Information nvarchar(MAX),			--thông tin thêm
 
@@ -135,10 +135,10 @@ CREATE TABLE [dbo].[Houses] (
 	Parking bit,						--khu để xe
 
 	--Dành cho những Table CRUD dc -> History
-	Deleted bit,
-	CreatedDate datetime,
+	Deleted bit NOT NULL,
+	CreatedDate datetime NOT NULL,
 	LastModifiedDate datetime,
-	CreatedBy nchar(30),
+	CreatedBy nchar(30) NOT NULL,
 	LastModifiedBy nchar(30),
 
 	CONSTRAINT AddressId_in_Address2 FOREIGN KEY(AddressId) REFERENCES Addresses(AddressId),
@@ -152,11 +152,11 @@ CREATE TABLE [dbo].[Houses] (
 GO
 
 --Trạng thái của 1 phòng (dùng cho Room)
-CREATE TABLE [dbo].[Statuses] (
+CREATE TABLE [dbo].[RoomStatuses] (
 	StatusId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	StatusName nvarchar(300),
+	StatusName nvarchar(300) NOT NULL,
 
-	CreatedDate datetime,
+	CreatedDate datetime NOT NULL,
 ) ON [PRIMARY]
 GO
 
@@ -165,17 +165,17 @@ CREATE TABLE [dbo].[RoomTypes] (
 	RoomTypeId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
 	RoomTypeName nvarchar(300) NOT NULL,
 
-	CreatedDate datetime,
+	CreatedDate datetime NOT NULL,
 ) ON [PRIMARY]
 GO
 
 --Phòng trọ
 CREATE TABLE [dbo].[Rooms] (
 	RoomId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	RoomName nvarchar(50),
-	PricePerMonth money,		--giá theo tháng
-	Information nvarchar(MAX),	--thông tin thêm & tiện ích đi kèm
-	AreaByMeters float,			--diện tích, tính theo m2
+	RoomName nvarchar(50) NOT NULL,
+	PricePerMonth money NOT NULL,		--giá theo tháng
+	Information nvarchar(MAX),			--thông tin thêm & tiện ích đi kèm
+	AreaByMeters float,					--diện tích, tính theo m2
 
 	--Tiện ích
 	Fridge bit NOT NULL,			--Tủ lạnh (có/ko)
@@ -192,18 +192,18 @@ CREATE TABLE [dbo].[Rooms] (
 	BuildingNumber int,			--tòa nhà
 	FloorNumber int,			--tầng
 
-	StatusId int,
-	RoomTypeId int,
-	HouseId int,
+	StatusId int NOT NULL,
+	RoomTypeId int NOT NULL,
+	HouseId int NOT NULL,
 
 	--Dành cho những Table CRUD dc -> History
-	Deleted bit,
-	CreatedDate datetime,
+	Deleted bit NOT NULL,
+	CreatedDate datetime NOT NULL,
 	LastModifiedDate datetime,
-	CreatedBy nchar(30),
+	CreatedBy nchar(30) NOT NULL,
 	LastModifiedBy nchar(30),
 
-	CONSTRAINT StatusId_in_Status FOREIGN KEY(StatusId) REFERENCES [dbo].[Statuses](StatusId),
+	CONSTRAINT StatusId_in_Status FOREIGN KEY(StatusId) REFERENCES [dbo].[RoomStatuses](StatusId),
 	CONSTRAINT RoomTypeId_in_RoomType FOREIGN KEY(RoomTypeId) REFERENCES [dbo].[RoomTypes](RoomTypeId),
 	CONSTRAINT HouseId_in_House FOREIGN KEY(HouseId) REFERENCES [dbo].[Houses](HouseId),
 
@@ -219,14 +219,14 @@ CREATE TABLE [dbo].[Rates] (
 	Comment nvarchar(MAX),				--Nội dung Comment
 	LandlordReply nvarchar(MAX),		--Phản hồi của chủ nhà
 
-	HouseId int,						--Cái nhà dc Comment
-	StudentId nchar(30),				--Người viết Comment
+	HouseId int NOT NULL,						--Cái nhà dc Comment
+	StudentId nchar(30) NOT NULL,				--Người viết Comment
 
 	--Dành cho những Table CRUD dc -> History
-	Deleted bit,
-	CreatedDate datetime,
+	Deleted bit NOT NULL,
+	CreatedDate datetime NOT NULL,
 	LastModifiedDate datetime,
-	CreatedBy nchar(30),
+	CreatedBy nchar(30) NOT NULL,
 	LastModifiedBy nchar(30),
 
 	CONSTRAINT HouseId_in_House2 FOREIGN KEY(HouseId) REFERENCES [dbo].[Houses](HouseId),
@@ -240,15 +240,15 @@ GO
 --Ảnh nhà trọ
 CREATE TABLE [dbo].[ImagesOfHouse] (
 	ImageId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	ImageLink nvarchar(500),
+	ImageLink nvarchar(500) NOT NULL,
 
-	HouseId int,
+	HouseId int NOT NULL,
 
 	--Dành cho những Table CRUD dc -> History
-	Deleted bit,
-	CreatedDate datetime,
+	Deleted bit NOT NULL,
+	CreatedDate datetime NOT NULL,
 	LastModifiedDate datetime,
-	CreatedBy nchar(30),
+	CreatedBy nchar(30) NOT NULL,
 	LastModifiedBy nchar(30),
 
 	CONSTRAINT HouseId_in_House3 FOREIGN KEY(HouseId) REFERENCES [dbo].[Houses](HouseId),
@@ -261,15 +261,15 @@ GO
 --Ảnh phòng trọ
 CREATE TABLE [dbo].[ImagesOfRoom] (
 	ImageId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	ImageLink nvarchar(500),
+	ImageLink nvarchar(500) NOT NULL,
 
-	RoomId int,
+	RoomId int NOT NULL,
 
 	--Dành cho những Table CRUD dc -> History
-	Deleted bit,
-	CreatedDate datetime,
+	Deleted bit NOT NULL,
+	CreatedDate datetime NOT NULL,
 	LastModifiedDate datetime,
-	CreatedBy nchar(30),
+	CreatedBy nchar(30) NOT NULL,
 	LastModifiedBy nchar(30),
 
 	CONSTRAINT RoomId_in_Room FOREIGN KEY(RoomId) REFERENCES [dbo].[Rooms](RoomId),
@@ -282,16 +282,16 @@ GO
 --Report của sinh viên đối với nhà trọ
 CREATE TABLE [dbo].[Reports] (
 	ReportId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	ReportContent nvarchar(MAX),
+	ReportContent nvarchar(MAX) NOT NULL,
 
-	StudentId nchar(30),
-	HouseId int,
+	StudentId nchar(30) NOT NULL,
+	HouseId int NOT NULL,
 
 	--Dành cho những Table CRUD dc -> History
-	Deleted bit,
-	CreatedDate datetime,
+	Deleted bit NOT NULL,
+	CreatedDate datetime NOT NULL,
 	LastModifiedDate datetime,
-	CreatedBy nchar(30),
+	CreatedBy nchar(30) NOT NULL,
 	LastModifiedBy nchar(30),
 
 	CONSTRAINT HouseId_in_House4 FOREIGN KEY(HouseId) REFERENCES [dbo].[Houses](HouseId),
@@ -305,14 +305,14 @@ GO
 --Lịch sử người ở phòng trọ, dành cho chủ trọ tự nguyện thêm vào nếu có nhu cầu quản lý & theo dõi
 CREATE TABLE [dbo].[RoomHistories] (
 	RoomHistoryId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	CustomerName nvarchar(800),		--tên ng ở phòng
-	RoomId int,						--phòng
+	CustomerName nvarchar(800) NOT NULL,		--tên ng ở phòng
+	RoomId int NOT NULL,						--phòng
 
 	--Dành cho những Table CRUD dc -> History
-	Deleted bit,
-	CreatedDate datetime,
+	Deleted bit NOT NULL,
+	CreatedDate datetime NOT NULL,
 	LastModifiedDate datetime,
-	CreatedBy nchar(30),
+	CreatedBy nchar(30) NOT NULL,
 	LastModifiedBy nchar(30),
 
 	CONSTRAINT RoomId_in_Room2 FOREIGN KEY(RoomId) REFERENCES [dbo].Rooms(RoomId),
@@ -325,17 +325,26 @@ GO
 --Vấn đề của 1 phòng trọ -> student tạo ra, landlord có thể thấy được và xử lý
 CREATE TABLE [dbo].[Issues] (
 	IssueId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	Description nvarchar(100),      --mô tả
-	RoomId int,						--phòng
+	Description nvarchar(100) NOT NULL,      --mô tả
+	RoomId int NOT NULL,						--phòng
 
 	--Dành cho những Table CRUD dc -> History
-	Deleted bit,
-	CreatedDate datetime,
+	Deleted bit NOT NULL,
+	CreatedDate datetime NOT NULL,
 	LastModifiedDate datetime,
-	CreatedBy nchar(30),
+	CreatedBy nchar(30) NOT NULL,
 	LastModifiedBy nchar(30),
 
 	CONSTRAINT RoomId_in_Room3 FOREIGN KEY(RoomId) REFERENCES [dbo].Rooms(RoomId),
+) ON [PRIMARY]
+GO
+
+--Trạng thái của 1 order
+CREATE TABLE [dbo].[OrderStatuses] (
+	StatusId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
+	StatusName nvarchar(300) NOT NULL,
+
+	CreatedDate datetime NOT NULL,
 ) ON [PRIMARY]
 GO
 
@@ -343,17 +352,20 @@ GO
 CREATE TABLE [dbo].[Order] (
 	OrderId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
 	StudentId nchar(30),
-	StudentName nvarchar(100),
-	PhoneNumber nvarchar(50) NULL,
+	StudentName nvarchar(100) NOT NULL,
+	PhoneNumber nvarchar(50) NOT NULL,
 	Email nvarchar(100),
 	OrderContent nvarchar(MAX) NOT NULL,
-	Solved bit,
+	StatusId int NOT NULL,
 	OrderedDate datetime NOT NULL,
 	SolvedDate datetime,
 	
-	CONSTRAINT StudentId_in_User4 FOREIGN KEY(StudentId) REFERENCES [dbo].[Users](UserId)
+	CONSTRAINT StudentId_in_User4 FOREIGN KEY(StudentId) REFERENCES [dbo].[Users](UserId),
+	CONSTRAINT StatusId_in_OrderStatuses FOREIGN KEY(StatusId) REFERENCES [dbo].[OrderStatuses](StatusId),
 ) ON [PRIMARY]
 GO
+
+
 
 --------------------------------------------------[Database Population]----------------------------------------------------------------------------------
 
@@ -1100,9 +1112,9 @@ INSERT INTO [dbo].[Houses] VALUES (N'Trọ District 3', 102, N'Không chung ch�
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
-INSERT INTO [dbo].[Statuses] VALUES (N'Available', GETDATE());	--có thể thuê	-> hiển thị khi search
-INSERT INTO [dbo].[Statuses] VALUES (N'Occupied', GETDATE());	--đã có ng thuê	-> ko hiển thị khi search
-INSERT INTO [dbo].[Statuses] VALUES (N'Disabled', GETDATE());	--ko dùng dc vì lý do nào đó	-> ko hiển thị khi search
+INSERT INTO [dbo].[RoomStatuses] VALUES (N'Available', GETDATE());	--có thể thuê	-> hiển thị khi search
+INSERT INTO [dbo].[RoomStatuses] VALUES (N'Occupied', GETDATE());	--đã có ng thuê	-> ko hiển thị khi search
+INSERT INTO [dbo].[RoomStatuses] VALUES (N'Disabled', GETDATE());	--ko dùng dc vì lý do nào đó	-> ko hiển thị khi search
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -1889,45 +1901,52 @@ GETDATE(), GETDATE(), N'HE153046', N'HE153046');
 INSERT INTO [dbo].[RoomHistories] VALUES (N'Nguyễn Thế Giang', 1, 0, GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
+
+INSERT INTO [dbo].[OrderStatuses] VALUES (N'Unsolved', GETDATE());		--chưa giải quyết
+INSERT INTO [dbo].[OrderStatuses] VALUES (N'Processing', GETDATE());	--đang giải quyết
+INSERT INTO [dbo].[OrderStatuses] VALUES (N'Solved', GETDATE());		--đã giải quyết
+
+-------------------------------------------------------------------------------------------------------------------------------------------
+
 --StudentId, StudentName, PhoneNumber, Email, OrderContent, Solved, OrderedDate, SolvedDate
 
 INSERT INTO [dbo].[Order] VALUES (N'HE153046', N'Bùi Ngọc Huyền', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '02/03/2022', '02/10/2022');
 
 
-INSERT INTO [dbo].[Order] VALUES (N'HE153046', N'Bùi Ngọc Huyền', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 0, '07/05/2022', NULL);
-INSERT INTO [dbo].[Order] VALUES (N'HE153046', N'Bùi Ngọc Huyền', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 0, '04/23/2022', NULL);
-INSERT INTO [dbo].[Order] VALUES (N'HE153222', N'Trần Thị Nguyệt Hà', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 0, '08/03/2022', NULL);
-INSERT INTO [dbo].[Order] VALUES (N'HE153299', N'Tống Trường Giang', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 0, '03/31/2022', NULL);
-INSERT INTO [dbo].[Order] VALUES (N'HE153299', N'Tống Trường Giang', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 0, '04/30/2022', NULL);
-INSERT INTO [dbo].[Order] VALUES (N'HE153299', N'Tống Trường Giang', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 0, '04/03/2022', NULL);
-INSERT INTO [dbo].[Order] VALUES (N'HE153299', N'Bùi Ngọc Huyền', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 0, '05/03/2022', NULL);
-INSERT INTO [dbo].[Order] VALUES (N'HE153222', N'Trần Thị Nguyệt Hà', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 0, '07/03/2022', NULL);
-INSERT INTO [dbo].[Order] VALUES (N'HE153046', N'Bùi Ngọc Huyền', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 0, '09/05/2022', NULL);
-INSERT INTO [dbo].[Order] VALUES (N'HE153046', N'Bùi Ngọc Huyền', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 0, '01/31/2022', NULL);
-INSERT INTO [dbo].[Order] VALUES (N'HE153299', N'Tống Trường Giang', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 0, '05/16/2022', NULL);
-INSERT INTO [dbo].[Order] VALUES (N'HE150691', N'Nguyễn Trần Hoàng', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 0, '04/13/2022', NULL);
-INSERT INTO [dbo].[Order] VALUES (N'HE153222', N'Trần Thị Nguyệt Hà', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 0, '05/03/2022', NULL);
+INSERT INTO [dbo].[Order] VALUES (N'HE153046', N'Bùi Ngọc Huyền', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '07/05/2022', NULL);
+INSERT INTO [dbo].[Order] VALUES (N'HE153046', N'Bùi Ngọc Huyền', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 2, '04/23/2022', NULL);
+INSERT INTO [dbo].[Order] VALUES (N'HE153222', N'Trần Thị Nguyệt Hà', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có', 2, '08/03/2022', NULL);
+INSERT INTO [dbo].[Order] VALUES (N'HE153299', N'Tống Trường Giang', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '03/31/2022', NULL);
+INSERT INTO [dbo].[Order] VALUES (N'HE153299', N'Tống Trường Giang', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '04/30/2022', NULL);
+INSERT INTO [dbo].[Order] VALUES (N'HE153299', N'Tống Trường Giang', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '04/03/2022', NULL);
+INSERT INTO [dbo].[Order] VALUES (N'HE153299', N'Bùi Ngọc Huyền', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 2, '05/03/2022', NULL);
+INSERT INTO [dbo].[Order] VALUES (N'HE153222', N'Trần Thị Nguyệt Hà', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '07/03/2022', NULL);
+INSERT INTO [dbo].[Order] VALUES (N'HE153046', N'Bùi Ngọc Huyền', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 2, '09/05/2022', NULL);
+INSERT INTO [dbo].[Order] VALUES (N'HE153046', N'Bùi Ngọc Huyền', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '01/31/2022', NULL);
+INSERT INTO [dbo].[Order] VALUES (N'HE153299', N'Tống Trường Giang', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '05/16/2022', NULL);
+INSERT INTO [dbo].[Order] VALUES (N'HE150691', N'Nguyễn Trần Hoàng', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '04/13/2022', NULL);
+INSERT INTO [dbo].[Order] VALUES (N'HE153222', N'Trần Thị Nguyệt Hà', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 2, '05/03/2022', NULL);
 
-INSERT INTO [dbo].[Order] VALUES (N'HE150340', N'Phùng Quang Thông', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '02/03/2022', '02/10/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150160', N'Nguyễn Trí Kiên', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '02/03/2022', '03/10/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150432', N'Nguyễn Thu An', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '04/03/2022', '04/17/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150600', N'Nguyễn Minh Hạnh', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '04/03/2022', '05/10/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150340', N'Phùng Quang Thông', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '05/03/2022', '05/23/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150340', N'Phùng Quang Thông', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '05/03/2022', '05/13/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150160', N'Nguyễn Trí Kiên', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Cần tìm nhà nguyên căn 4 phòng ngủ, đầy đủ nội thất, gần đh fpt.', 1, '05/03/2022', '07/10/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150160', N'Nguyễn Trí Kiên', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '05/03/2022', '06/17/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150340', N'Phùng Quang Thông', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Yêu cầu ngoài : không chung chủ hoặc là tự do về giờ giấc, có máy giặt càng tốt ạ', 1, '05/03/2022', '05/17/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150160', N'Nguyễn Trí Kiên', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '06/03/2022', '06/10/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150600', N'Nguyễn Minh Hạnh', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Cần tìm nhà trọ giá 1tr9 quay đầu,ở thạch hoà hay có ai cần tìm roomate cho mình ghép với ạ', 1, '06/03/2022', '07/10/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150600', N'Nguyễn Minh Hạnh', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '06/03/2022', '07/11/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150160', N'Nguyễn Trí Kiên', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '06/03/2022', '08/10/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE153590', N'Đinh Thế Thuận', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '06/03/2022', '08/28/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE153590', N'Đinh Thế Thuận', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '07/03/2022', '07/10/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150432', N'Nguyễn Thu An', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '07/03/2022', '09/30/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150340', N'Phùng Quang Thông', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '07/03/2022', '08/10/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150600', N'Nguyễn Minh Hạnh', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '08/03/2022', '08/10/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE153590', N'Đinh Thế Thuận', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Mình cần tìm phòng trọ 2 người tầm 2tr ạ. Hay trọ 1 người giá cả hợp lý ạ', 1, '09/03/2022', '09/10/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE153590', N'Đinh Thế Thuận', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '09/03/2022', '09/21/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150432', N'Nguyễn Thu An', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '10/03/2022', '10/22/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150600', N'Nguyễn Minh Hạnh', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '01/03/2022', '02/10/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150432', N'Nguyễn Thu An', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Cần tìm nhà trọ giá 1tr9 quay đầu,ở thạch hoà hay có ai cần tìm roomate cho mình ghép với ạ', 1, '01/03/2022', '01/10/2022');
+INSERT INTO [dbo].[Order] VALUES (N'HE150340', N'Phùng Quang Thông', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '02/03/2022', '02/10/2022');
+INSERT INTO [dbo].[Order] VALUES (N'HE150160', N'Nguyễn Trí Kiên', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '02/03/2022', '03/10/2022');
+INSERT INTO [dbo].[Order] VALUES (N'HE150432', N'Nguyễn Thu An', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '04/03/2022', '04/17/2022');
+INSERT INTO [dbo].[Order] VALUES (N'HE150600', N'Nguyễn Minh Hạnh', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '04/03/2022', '05/10/2022');
+INSERT INTO [dbo].[Order] VALUES (N'HE150340', N'Phùng Quang Thông', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '05/03/2022', '05/23/2022');
+INSERT INTO [dbo].[Order] VALUES (N'HE150340', N'Phùng Quang Thông', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '05/03/2022', '05/13/2022');
+INSERT INTO [dbo].[Order] VALUES (N'HE150160', N'Nguyễn Trí Kiên', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Cần tìm nhà nguyên căn 4 phòng ngủ, đầy đủ nội thất, gần đh fpt.', 3, '05/03/2022', '07/10/2022');
+INSERT INTO [dbo].[Order] VALUES (N'HE150160', N'Nguyễn Trí Kiên', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '05/03/2022', '06/17/2022');
+INSERT INTO [dbo].[Order] VALUES (N'HE150340', N'Phùng Quang Thông', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Yêu cầu ngoài : không chung chủ hoặc là tự do về giờ giấc, có máy giặt càng tốt ạ', 3, '05/03/2022', '05/17/2022');
+INSERT INTO [dbo].[Order] VALUES (N'HE150160', N'Nguyễn Trí Kiên', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '06/03/2022', '06/10/2022');
+INSERT INTO [dbo].[Order] VALUES (N'HE150600', N'Nguyễn Minh Hạnh', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Cần tìm nhà trọ giá 1tr9 quay đầu,ở thạch hoà hay có ai cần tìm roomate cho mình ghép với ạ', 3, '06/03/2022', '07/10/2022');
+INSERT INTO [dbo].[Order] VALUES (N'HE150600', N'Nguyễn Minh Hạnh', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '06/03/2022', '07/11/2022');
+INSERT INTO [dbo].[Order] VALUES (N'HE150160', N'Nguyễn Trí Kiên', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '06/03/2022', '08/10/2022');
+INSERT INTO [dbo].[Order] VALUES (N'HE153590', N'Đinh Thế Thuận', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '06/03/2022', '08/28/2022');
+INSERT INTO [dbo].[Order] VALUES (N'HE153590', N'Đinh Thế Thuận', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '07/03/2022', '07/10/2022');
+INSERT INTO [dbo].[Order] VALUES (N'HE150432', N'Nguyễn Thu An', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '07/03/2022', '09/30/2022');
+INSERT INTO [dbo].[Order] VALUES (N'HE150340', N'Phùng Quang Thông', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '07/03/2022', '08/10/2022');
+INSERT INTO [dbo].[Order] VALUES (N'HE150600', N'Nguyễn Minh Hạnh', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '08/03/2022', '08/10/2022');
+INSERT INTO [dbo].[Order] VALUES (N'HE153590', N'Đinh Thế Thuận', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Mình cần tìm phòng trọ 2 người tầm 2tr ạ. Hay trọ 1 người giá cả hợp lý ạ', 3, '09/03/2022', '09/10/2022');
+INSERT INTO [dbo].[Order] VALUES (N'HE153590', N'Đinh Thế Thuận', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '09/03/2022', '09/21/2022');
+INSERT INTO [dbo].[Order] VALUES (N'HE150432', N'Nguyễn Thu An', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '10/03/2022', '10/22/2022');
+INSERT INTO [dbo].[Order] VALUES (N'HE150600', N'Nguyễn Minh Hạnh', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '01/03/2022', '02/10/2022');
+INSERT INTO [dbo].[Order] VALUES (N'HE150432', N'Nguyễn Thu An', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Cần tìm nhà trọ giá 1tr9 quay đầu,ở thạch hoà hay có ai cần tìm roomate cho mình ghép với ạ', 3, '01/03/2022', '01/10/2022');

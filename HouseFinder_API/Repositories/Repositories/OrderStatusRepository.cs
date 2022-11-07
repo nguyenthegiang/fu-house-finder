@@ -9,9 +9,8 @@ using System.Threading.Tasks;
 
 namespace Repositories.Repositories
 {
-    public class StatusRepository : IStatusRepository
+    public class OrderStatusRepository : IOrderStatusRepository
     {
-        public List<StatusDTO> GetStatusesByHouseId(int houseId) => StatusDAO.GetStatusesByHouseId(houseId);
-        public List<StatusDTO> GetAllStatus() => StatusDAO.GetAllListStatus();
+        public List<OrderStatusDTO> GetAllOrderStatus() => OrderStatusDAO.GetAllOrderStatus();
     }
 }

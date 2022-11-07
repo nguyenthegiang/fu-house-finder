@@ -14,7 +14,7 @@ namespace BusinessObjects
 
         public int RoleId { get; set; }
         public string RoleName { get; set; }
-        public DateTime? CreatedDate { get; set; }
+        public DateTime CreatedDate { get; set; }
 
         public virtual ICollection<User> Users { get; set; }
     }
