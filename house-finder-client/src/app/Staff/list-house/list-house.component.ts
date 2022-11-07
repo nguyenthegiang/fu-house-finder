@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { House } from 'src/app/models/house';
 import { HouseService } from 'src/app/services/house.service';
 import { LandlordInformationService } from 'src/app/services/landlord-information.service';
@@ -17,7 +18,10 @@ export class ListHouseComponent implements OnInit {
   roomCount: number = 0;
   roomAvailableCount: number = 0;
 
-  constructor(private houseService: HouseService, private lanlord_informationService: LandlordInformationService) { }
+  constructor(private houseService: HouseService,
+    private lanlord_informationService: LandlordInformationService,
+    private router: Router)
+    { }
 
   ngOnInit(): void {
     //Get List of all Houses
@@ -30,5 +34,11 @@ export class ListHouseComponent implements OnInit {
       this.roomCount = data.roomCount;
       this.roomAvailableCount = data.roomAvailableCount;
     });
+  }
+
+  viewHouse(id: number)
+  {
+    console.log(id);
+    this.router.navigate(['/Landlord/landlord-house-detail/' + id]);
   }
 }
