@@ -8,9 +8,15 @@ import { FileService } from 'src/app/services/file.service';
 })
 export class MultipleComponent implements OnInit {
 
+  file: File | any; 
+
   constructor(private fileService: FileService) { }
 
   ngOnInit(): void {
+  }
+
+  onChange(event: any){
+    this.file = event.target.files[0];
   }
 
   downloadTemplate(){
@@ -24,6 +30,10 @@ export class MultipleComponent implements OnInit {
         downloadLink.download = fileName;
         downloadLink.click();
       });
+  }
+
+  uploadDataFile(){
+    this.fileService.uploadFile(this.file).subscribe(()=>{});
   }
 
 }
