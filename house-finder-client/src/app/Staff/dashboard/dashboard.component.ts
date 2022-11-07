@@ -5,6 +5,7 @@ import { RoomService } from 'src/app/services/room.service';
 import StatusService from 'src/app/services/roomStatus.service';
 import { Chart, registerables } from 'chart.js';
 import { OrderService } from 'src/app/services/order.service';
+import { ReportService } from 'src/app/services/report.service';
 Chart.register(...registerables);
 
 
@@ -28,11 +29,13 @@ export class DashboardStaffComponent implements OnInit {
   orderByMonth: number[] | undefined;
   //Array oof solved orders by month
   solvedOrderByMonth: number[] | undefined;
+  //Array of total orders by month
+  reportByMonth: number[] | undefined;
 
   constructor(
     private roomService: RoomService,
     private houseService: HouseService,
-    private roomTypeService: RoomTypeService,
+    private reportService: ReportService,
     private statusService: StatusService,
     private orderService: OrderService,
   ) {
@@ -174,6 +177,56 @@ export class DashboardStaffComponent implements OnInit {
       });
   //End chart
       })
+    });
+
+    //Call API: get total reports by month in the current year
+    this.reportService.getTotalReportByMonth().subscribe(data => {
+      this.reportByMonth = data;
+      //Create order chart
+      var reportChart = new Chart("reportChart", {
+        type: 'line',
+        data: {
+            labels: ['Tháng 1',
+                    'Tháng 2',
+                    'Tháng 3',
+                    'Tháng 4',
+                    'Tháng 5',
+                    'Tháng 6',
+                    'Tháng 7',
+                    'Tháng 8',
+                    'Tháng 9',
+                    'Tháng 10',
+                    'Tháng 11',
+                    'Tháng 12',],
+            datasets: [
+              {
+                label: 'Số báo cáo',
+                data: this.reportByMonth,
+                backgroundColor:[
+                  '#ff6384',
+                ],
+                borderColor: [
+                  '#ff6384',
+                ],
+                borderWidth: 1
+            },
+          ],
+
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins:{
+              title:{
+                display: true,
+                text: 'Thống kê số lượng báo cáo nhà trọ',
+              }
+            }
+        }
+      });
     });
 
 
