@@ -64,63 +64,85 @@ export class DashboardStaffComponent implements OnInit {
       this.orderService.getSolvedOrderByMonth().subscribe(data => {
         this.solvedOrderByMonth = data;
 
-        //Create chart objects
-    var myChart = new Chart("myChart", {
-
-      type: 'bar',
-      data: {
-          labels: ['Tháng 1',
-                  'Tháng 2',
-                  'Tháng 3',
-                  'Tháng 4',
-                  'Tháng 5',
-                  'Tháng 6',
-                  'Tháng 7',
-                  'Tháng 8',
-                  'Tháng 9',
-                  'Tháng 10',
-                  'Tháng 11',
-                  'Tháng 12',],
-          datasets: [
+      //Create order chart
+      var orderChart = new Chart("orderChart", {
+        type: 'bar',
+        data: {
+            labels: ['Tháng 1',
+                    'Tháng 2',
+                    'Tháng 3',
+                    'Tháng 4',
+                    'Tháng 5',
+                    'Tháng 6',
+                    'Tháng 7',
+                    'Tháng 8',
+                    'Tháng 9',
+                    'Tháng 10',
+                    'Tháng 11',
+                    'Tháng 12',],
+            datasets: [
+              {
+                label: 'Số đơn đăng ký',
+                data: this.orderByMonth,
+                backgroundColor:[
+                  '#FF6F3D',
+                ],
+                borderColor: [
+                  '#FF6F3D',
+                ],
+                borderWidth: 1
+            },
             {
-              label: 'Số đơn đăng ký',
-              data: this.orderByMonth,
+              label: 'Số đơn đã được giải quyết',
+              data: this.solvedOrderByMonth,
               backgroundColor:[
-                '#FF6F3D',
+                '#3E4F3C',
               ],
               borderColor: [
-                '#FF6F3D',
+                  '#3E4F3C',
               ],
               borderWidth: 1
           },
-          {
-            label: 'Số đơn đã được giải quyết',
-            data: this.solvedOrderByMonth,
-            backgroundColor:[
-              '#3E4F3C',
-            ],
-            borderColor: [
-                '#3E4F3C',
-            ],
-            borderWidth: 1
-        },
-        ],
+          ],
 
-      },
-      options: {
-          scales: {
-              y: {
-                  beginAtZero: true
+        },
+        options: {
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            },
+            plugins:{
+              title:{
+                display: true,
+                text: 'Thống kê số lượng đăng ký nhà trọ trong năm',
               }
-          },
+            }
+        }
+      });
+
+      //Create pie chart
+      var houseChart = new Chart("houseChart", {
+        type: 'pie',
+        data: {
+          labels: ['Hết chỗ', 'Còn trống'],
+          datasets: [
+            {
+              data: [(this.totalHouses - this.availableHouseNum),this.availableHouseNum],
+              backgroundColor: ['#ff4970','#069bff'],
+            },
+          ],
+
+        },
+        options:{
           plugins:{
             title:{
               display: true,
-              text: 'Thống kê số lượng đăng ký nhà trọ trong năm',
+              text: 'Thống kê số nhà trọ',
             }
           }
-      }
-  });
+        }
+      });
   //End chart
       })
     });
