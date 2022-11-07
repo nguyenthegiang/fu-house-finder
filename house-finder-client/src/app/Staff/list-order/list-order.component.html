@@ -34,10 +34,9 @@
         <!-- Trạng thái -->
         <div class="col-3">
           <label class="form-label">Trạng thái</label>
-          <select class="form-select">
-            <option>Tất cả</option>
-            <option>Chưa xử lý</option>
-            <option>Đã xử lý</option>
+          <select #selectCStatusId class="form-select" (change)="onStatusSelected(selectCStatusId.value)">
+            <option value="0">Tất cả</option>
+            <option *ngFor="let status of statuses" value="{{status.statusId}}">{{status.statusName}}</option>
           </select>
         </div>
         <!-- Order by -->
@@ -75,20 +74,7 @@
               <td>{{order.orderContent}}</td>
               <td>{{order.orderedDate| date:'shortDate'}}</td>
               <td>{{order.solvedDate| date:'shortDate'}}</td>
-              <td *ngIf="order.solved == true">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckChecked" checked>
-                  <br>
-                  <label class="form-check-label" for="flexSwitchCheckChecked">Đã xử lý</label>
-                </div>
-              </td>
-              <td *ngIf="order.solved == false">
-                <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                  <br>
-                  <label class="form-check-label" for="flexSwitchCheckDefault">Chưa xử lý</label>
-                </div>
-              </td>
+              <td>{{order.status}}</td>
             </tr>
           </tbody>
         </table>

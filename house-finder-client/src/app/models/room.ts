@@ -1,5 +1,5 @@
 import { RoomType } from './roomType';
-import { Status } from './status';
+import { RoomStatus } from './roomStatus';
 import { ImagesOfRoom } from './imagesOfRoom';
 
 //DTO: Rooms
@@ -20,7 +20,7 @@ export interface Room {
     currentAmountOfPeople: number;
     buildingNumber: number;
     floorNumber: number;
-    status: Status;
+    status: RoomStatus;
     roomType: RoomType;
     houseId: number;
     delete: boolean;
