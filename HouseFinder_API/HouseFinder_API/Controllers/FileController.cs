@@ -132,8 +132,11 @@ namespace HouseFinder_API.Controllers
                     room.NoLiveWithHost = withHost;
                     room.Information = _information;
                     room.HouseId = house.HouseId;
+                    room.CreatedDate = DateTime.UtcNow;
                     room.CreatedBy = house.LandlordId;
                     room.LastModifiedBy = house.LandlordId;
+                    room.LastModifiedDate = DateTime.UtcNow;
+                    room.Deleted = false;
                     roomList.Add(room);
                 }
                 catch (Exception)
