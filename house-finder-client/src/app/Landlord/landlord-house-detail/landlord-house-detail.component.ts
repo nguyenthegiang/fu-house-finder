@@ -45,7 +45,7 @@ export class LandlordHouseDetailComponent implements OnInit {
 
   updateRoom(id: number)
   {
-    this.router.navigate(['/update-room/' + id]);
+    this.router.navigate(['/Landlord/update-room/' + id]);
   }
 
   deleteRoom(id: number)
