@@ -88,9 +88,10 @@ namespace HouseFinder_API.Controllers
                 roomsRepository.UpdateRoomByRoomId(room);
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest();
+
+                return BadRequest(e.Message);
             }
         }
 
