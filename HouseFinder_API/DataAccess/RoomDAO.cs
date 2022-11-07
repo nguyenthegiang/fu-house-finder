@@ -339,5 +339,30 @@ namespace DataAccess
             }
             return total;
         }
+
+        //[RoomPage] Change status Room
+        public static void ChangStatusRoom(int statusId, int roomId)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    Room roomToUpdate = context.Rooms.FirstOrDefault(r => r.RoomId == roomId);
+                    if(roomToUpdate == null)
+                    {
+                        throw new Exception();
+                    }
+                    roomToUpdate.LastModifiedDate = DateTime.Now;
+                    roomToUpdate.StatusId = statusId;
+                    //context.Entry<Room>(roomToUpdate).State = EntityState.Detached;
+                    context.Rooms.Update(roomToUpdate);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
