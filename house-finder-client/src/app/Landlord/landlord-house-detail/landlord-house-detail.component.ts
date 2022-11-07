@@ -1,3 +1,4 @@
+import { LandlordInformationService } from './../../services/landlord-information.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { House } from 'src/app/models/house';
@@ -17,10 +18,13 @@ export class LandlordHouseDetailComponent implements OnInit {
   rooms: Room[] = [];
   isOn = false;
   replyOn = false;
+  availableRoom: number = 0;
+  availableSlot: number = 0;
 
   constructor(
     private route: ActivatedRoute,
     private roomService: RoomService,
+    private landlordInformationService: LandlordInformationService,
     private router: Router
   ) { }
 
@@ -28,15 +32,25 @@ export class LandlordHouseDetailComponent implements OnInit {
     //Get id of House from Route
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
-    //Call API: get available rooms of this house
+    //Call API: get rooms of this house
+    this.landlordInformationService.getLandLordInfomation("LA000003").subscribe(data => {
+      this.availableRoom = data.roomAvailableCount;
+    });
+
+    //Call API: get rooms of this house
     this.roomService.getRooms(id).subscribe(data => {
       this.rooms = data;
     });
   }
 
-  viewRoom(id: number)
+  updateRoom(id: number)
   {
-    this.router.navigate(['/room-detail/' + id]);
+    this.router.navigate(['/update-room/' + id]);
+  }
+
+  deleteRoom(id: number)
+  {
+
   }
 
   //for displaying 'Amount of People'
