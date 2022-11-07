@@ -14,7 +14,14 @@ export class FileService {
     return this.http.get<Blob>(this.APIUrl + '/download',{ observe: 'response', responseType: 'blob' as 'json'});
   }
 
-  uploadFile(){
-    
+  uploadFile(file: File){
+    const formData = new FormData(); 
+        
+    // Store form name as "file" with file data
+    formData.append("file", file, file.name);
+      
+    // Make http post request over api
+    // with formData as req
+    return this.http.post(this.APIUrl + '/upload', formData);
   }
 }
