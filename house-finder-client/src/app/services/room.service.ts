@@ -47,8 +47,8 @@ export class RoomService {
   }
 
   //[Home Page] [Staff/Dashboard] Count total available rooms
-  countAvailableRooms(): Observable<any>{
-    return this.http.get<any>(this.APIUrl + "/CountAvailableRoom");
+  countAvailableRooms(): Observable<number>{
+    return this.http.get<number>(this.APIUrl + "/CountAvailableRoom");
   }
 
   //[Staff/Dashboard] Count available capacity
