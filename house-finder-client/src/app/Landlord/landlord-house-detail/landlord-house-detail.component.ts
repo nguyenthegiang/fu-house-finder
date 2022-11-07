@@ -50,6 +50,11 @@ export class LandlordHouseDetailComponent implements OnInit {
     this.router.navigate(['/Landlord/update-room/' + id]);
   }
 
+  //[Update] pass roomId and status check to <update-room> component to call API
+  editRoom(roomId: number) {
+    this.updateRoomId = roomId;
+  }
+
   deleteRoom(id: number) {
 
   }
