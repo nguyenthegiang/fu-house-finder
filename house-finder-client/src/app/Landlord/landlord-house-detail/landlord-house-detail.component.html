@@ -94,9 +94,21 @@
             <input *ngIf="dataItem.status.statusName === 'Available'" type="checkbox" checked>
             <span class="slider round"></span>
           </label> -->
-          <span *ngIf="dataItem.status.statusName === 'Available'">Còn trống</span>
-          <span *ngIf="dataItem.status.statusName === 'Occupied'">Đã thuê</span>
-          <span *ngIf="dataItem.status.statusName === 'Disabled'">Không dùng được</span>
+
+          <div class="form-check form-switch" *ngIf="dataItem.status.statusName === 'Available'">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+            <label class="form-check-label" for="flexSwitchCheckChecked">Còn trống</label>
+          </div>
+
+          <div class="form-check form-switch" *ngIf="dataItem.status.statusName === 'Occupied'">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Đã thuê</label>
+          </div>
+
+          <div class="form-check form-switch" *ngIf="dataItem.status.statusName === 'Disabled'">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckDisabled" disabled>
+            <label class="form-check-label" for="flexSwitchCheckDisabled">Không dùng được</label>
+          </div>
         </td>
 
         <td>
