@@ -52,7 +52,10 @@ namespace DataAccess
                     //Find rooms of this house
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    var result = context.Rooms.Include(p => p.Status).Where(r => r.HouseId == HouseId).ProjectTo<RoomDTO>(config).ToList();
+                    var result = context.Rooms
+                        .Include(p => p.Status)
+                        .Where(r => r.HouseId == HouseId && r.Deleted == false)
+                        .ProjectTo<RoomDTO>(config).ToList();
                     //Get only available rooms
                     foreach (RoomDTO r in result)
                     {
@@ -117,6 +120,7 @@ namespace DataAccess
             }
         }
 
+        //Create List of Rooms
         public static void CreateRooms(List<Room> rooms)
         {
             try
@@ -172,6 +176,7 @@ namespace DataAccess
                     }
 
                     //Delete by changing Status to Disabled
+                    updatedRoom.Deleted = true;
                     updatedRoom.StatusId = 3;
                     context.Entry<Room>(updatedRoom).State = EntityState.Detached;
                     context.Rooms.Update(updatedRoom);
@@ -192,7 +197,10 @@ namespace DataAccess
                 {
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    RoomDTO room = context.Rooms.Include(p => p.Status).Where(r => r.RoomId == roomId).ProjectTo<RoomDTO>(config).FirstOrDefault();
+                    RoomDTO room = context.Rooms
+                        .Include(p => p.Status)
+                        .Where(r => r.RoomId == roomId && r.Deleted == false)
+                        .ProjectTo<RoomDTO>(config).FirstOrDefault();
                     if (room == null)
                     {
                         throw new Exception();
@@ -354,7 +362,6 @@ namespace DataAccess
                     }
                     roomToUpdate.LastModifiedDate = DateTime.Now;
                     roomToUpdate.StatusId = statusId;
-                    //context.Entry<Room>(roomToUpdate).State = EntityState.Detached;
                     context.Rooms.Update(roomToUpdate);
                     context.SaveChanges();
                 }
