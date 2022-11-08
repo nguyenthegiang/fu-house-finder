@@ -7,11 +7,11 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HouseDetailComponent } from './Guest/house-detail/house-detail.component';
 import { LoginComponent } from './login/login.component';
-import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
-import {
-  GoogleLoginProvider,
-  FacebookLoginProvider
-} from 'angularx-social-login';
+// import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
+// import {
+//   GoogleLoginProvider,
+//   FacebookLoginProvider
+// } from 'angularx-social-login';
 import { DashboardComponent } from './Landlord/dashboard/dashboard.component';
 import { ListRoomComponent } from './Landlord/list-room/list-room.component';
 import { ListReportComponent } from './Staff/list-report/list-report.component';
@@ -70,7 +70,7 @@ import { UpdateAccountComponent } from './Admin/update-account/update-account.co
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    SocialLoginModule,
+    //SocialLoginModule,
     MaterialModule,
   ],
   bootstrap: [AppComponent]
