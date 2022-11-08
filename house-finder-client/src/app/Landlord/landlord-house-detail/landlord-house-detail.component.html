@@ -69,7 +69,9 @@
                 </button>
               </div>
               <div *ngIf="dataItem.noLiveWithHost == true" class="col-12 col-md-1 me-1">
-                <button type="button" class="btn btn-outline-dark col-1 d-flex justify-content-center align-items-center mt-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Chung chủ">
+                <button type="button"
+                  class="btn btn-outline-dark col-1 d-flex justify-content-center align-items-center mt-1"
+                  data-bs-toggle="tooltip" data-bs-placement="top" title="Chung chủ">
                   <i class="fa-solid fa-house-user"></i>
                 </button>
               </div>
@@ -116,21 +118,33 @@
               <input *ngIf="dataItem.status.statusName === 'Available'" type="checkbox" checked>
               <span class="slider round"></span>
             </label> -->
-
-            <div class="form-check form-switch" *ngIf="dataItem.status.statusName === 'Available'">
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
+                [checked]="dataItem.status.statusName === 'Available'"
+                [disabled]="dataItem.status.statusName === 'Disabled'"
+                (change)="onStatusRoomSelected($event, dataItem.roomId)">
+              <label class="form-check-label" for="flexSwitchCheckChecked">
+                <span *ngIf="dataItem.status.statusName === 'Available'">Còn trống</span>
+                <span *ngIf="dataItem.status.statusName === 'Occupied'">Đã thuê</span>
+                <span *ngIf="dataItem.status.statusName === 'Disabled'">Không dùng được</span></label>
+            </div>
+            <!-- <div class="form-check form-switch" *ngIf="dataItem.status.statusName === 'Available'">
               <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-              <label class="form-check-label" for="flexSwitchCheckChecked">Còn trống</label>
+              <label class="form-check-label" for="flexSwitchCheckChecked"
+                (change)="onStatusRoomSelected($event, dataItem.roomId)">Còn trống</label>
             </div>
 
             <div class="form-check form-switch" *ngIf="dataItem.status.statusName === 'Occupied'">
               <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-              <label class="form-check-label" for="flexSwitchCheckDefault">Đã thuê</label>
+              <label class="form-check-label" for="flexSwitchCheckDefault"
+                (change)="onStatusRoomSelected($event, dataItem.roomId)">Đã thuê</label>
             </div>
 
             <div class="form-check form-switch" *ngIf="dataItem.status.statusName === 'Disabled'">
               <input class="form-check-input" type="checkbox" id="flexSwitchCheckDisabled" disabled>
-              <label class="form-check-label" for="flexSwitchCheckDisabled">Không dùng được</label>
-            </div>
+              <label class="form-check-label" for="flexSwitchCheckDisabled"
+                (change)="onStatusRoomSelected($event, dataItem.roomId)">Không dùng được</label>
+            </div> -->
           </td>
           <td>
             <!-- Detail button -->
