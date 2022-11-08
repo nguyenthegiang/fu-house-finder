@@ -39,11 +39,19 @@ export class LoginComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    var s = document.createElement("script");
-    s.src = "https://accounts.google.com/gsi/client";
-    s.async = true;
-    s.defer = true;
-    this.elementRef.nativeElement.appendChild(s);
+    var gg_s = document.createElement("script");
+    gg_s.src = "https://accounts.google.com/gsi/client";
+    gg_s.async = true;
+    gg_s.defer = true;
+    this.elementRef.nativeElement.appendChild(gg_s);
+    
+    var fb_s = document.createElement("script");
+    fb_s.src = "https://connect.facebook.net/en_US/sdk.js";
+    fb_s.async = true;
+    fb_s.defer = true;
+    fb_s.crossOrigin = 'anonymous';
+    this.elementRef.nativeElement.appendChild(fb_s);
+
     (window as any).onGoogleLibraryLoad = () => {
       console.log('Google\'s One-tap sign in script loaded!');
     
@@ -70,6 +78,48 @@ export class LoginComponent implements OnInit {
       );
     };
     
+
+    /**
+    function statusChangeCallback(response: any) {  // Called with the results from FB.getLoginStatus().
+      console.log('statusChangeCallback');
+      console.log(response);                   // The current login status of the person.
+      if (response.status === 'connected') {   // Logged into your webpage and Facebook.
+        testAPI();  
+      } else {                                 // Not logged into your webpage or we are unable to tell.
+      }
+    }
+  
+  
+    function checkLoginState() {               // Called when a person is finished with the Login Button.
+      FB.getLoginStatus(function(response:any) {   // See the onlogin handler
+        statusChangeCallback(response);
+      });
+    }
+  
+  
+    (window as any).fbAsyncInit = function() {
+      FB.init({
+        appId      : '{app-id}',
+        cookie     : true,                     // Enable cookies to allow the server to access the session.
+        xfbml      : true,                     // Parse social plugins on this webpage.
+        version    : '{api-version}'           // Use this Graph API version for this call.
+      });
+  
+  
+      FB.getLoginStatus(function(response: any) {   // Called after the JS SDK has been initialized.
+        statusChangeCallback(response);        // Returns the login status.
+      });
+      
+   
+      function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+        console.log('Welcome!  Fetching your information.... ');
+        FB.api('/me', function(response: any) {
+          console.log('Successful login for: ' + response.name);
+            'Thanks for logging in, ' + response.name + '!';
+        });
+      }
+    };
+    */
   }
   handleCredentialResponse(response: CredentialResponse) {
     // Decoding  JWT token...
@@ -92,6 +142,7 @@ export class LoginComponent implements OnInit {
     }
     
   signInWithFB(): void {
+    console.log('called');
     this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
     this.authService.authState.subscribe((user) => {
       this.socialUser = user;
