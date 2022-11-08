@@ -23,8 +23,8 @@ namespace HouseFinder_API.Controllers
     public class FileController : ControllerBase
     {
         private IWebHostEnvironment Environment;
-        private IHousesRepository housesRepository = new HouseRepository();
-        private IRoomsRepository roomsRepository = new RoomRepository();
+        private IHouseRepository housesRepository = new HouseRepository();
+        private IRoomRepository roomsRepository = new RoomRepository();
 
         public FileController(IWebHostEnvironment _environment)
         {
@@ -132,8 +132,11 @@ namespace HouseFinder_API.Controllers
                     room.NoLiveWithHost = withHost;
                     room.Information = _information;
                     room.HouseId = house.HouseId;
+                    room.CreatedDate = DateTime.UtcNow;
                     room.CreatedBy = house.LandlordId;
                     room.LastModifiedBy = house.LandlordId;
+                    room.LastModifiedDate = DateTime.UtcNow;
+                    room.Deleted = false;
                     roomList.Add(room);
                 }
                 catch (Exception)

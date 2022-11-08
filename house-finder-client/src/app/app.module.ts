@@ -73,21 +73,6 @@ import { UpdateAccountComponent } from './Admin/update-account/update-account.co
     SocialLoginModule,
     MaterialModule,
   ],
-  providers: [{
-    provide: 'SocialAuthServiceConfig',
-    useValue: {
-      autoLogin: false,
-      providers: [
-        {
-          id: FacebookLoginProvider.PROVIDER_ID,
-          provider: new FacebookLoginProvider('790258838897169')
-        }
-      ],
-      onError: (err) => {
-        console.error(err);
-      }
-    } as SocialAuthServiceConfig,
-  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

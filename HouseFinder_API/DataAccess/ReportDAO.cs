@@ -5,6 +5,7 @@ using DataAccess.DTO;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,5 +29,46 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
         }
+        //Count the total of report by month
+        public static int[] GetTotalReportByMonth()
+        {
+            int[] totals = new int[12];
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Get first date of current year
+                    DateTime firstDate = new DateTime(DateTime.Now.Year, 1, 1);
+                    //Get current date
+                    DateTime currentDate = DateTime.Today;
+
+                    //Get list order from the first date to current date
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    List<ReportDTO> reports = context.Reports.Where(o => o.CreatedDate >= firstDate && o.CreatedDate <= currentDate).ProjectTo<ReportDTO>(config).ToList();
+
+                    //Get months' name
+                    string[] monthNames = CultureInfo.CurrentCulture.DateTimeFormat.MonthGenitiveNames;
+
+                    //Count total orders by month
+                    for (int i = 0; i < 12; i++)
+                    {
+                        foreach (ReportDTO r in reports)
+                        {
+                            if (r.CreatedDate.ToString("MMMM dd").Contains(monthNames[i]))
+                            {
+                                totals[i]++;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return totals;
+        }
+
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Repositories.Repositories
 {
-    public class RoomRepository : IRoomsRepository
+    public class RoomRepository : IRoomRepository
     {
         public List<RoomDTO> GetAvailableRoomsByHouseId(int houseId) => RoomDAO.GetAvailableRoomsByHouseId(houseId);
 
@@ -47,5 +47,7 @@ namespace Repositories.Repositories
         public int? CountAvailableCapacityByHouseId(int houseId) => RoomDAO.CountAvailableCapacityByHouseId(houseId);
         
         public void ChangStatusRoom(int statusId, int roomId) => RoomDAO.ChangStatusRoom(statusId, roomId);
+
+        public int CountTotalRoom() => RoomDAO.CountTotalRoom();
     }
 }
