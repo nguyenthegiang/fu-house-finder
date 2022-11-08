@@ -1,6 +1,4 @@
 import { Component, ElementRef, NgZone, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { SocialAuthService, SocialUser } from "angularx-social-login";
-import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
 import { CredentialResponse } from 'google-one-tap';
@@ -18,9 +16,10 @@ export class LoginComponent implements OnInit {
   @ViewChild('registerModal') registerModal: ElementRef | undefined;
   @ViewChild('roleModal') roleModal: ElementRef | undefined;
 
-  socialUser: SocialUser | undefined;
-  user: User | undefined;
-  googleIdToken: string | any;
+  user: any;
+  googleIdToken: string | undefined;
+  facebookId: string | undefined;
+  name: string| undefined;
   registerForm = this.formBuilder.group({
     phonenumber: "", 
     identityCardFrontSideImageLink: "", 
@@ -29,7 +28,6 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(
-    private authService: SocialAuthService, 
     private userService: UserService,
     private elementRef: ElementRef,
     private router: Router,
@@ -39,11 +37,19 @@ export class LoginComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    var s = document.createElement("script");
-    s.src = "https://accounts.google.com/gsi/client";
-    s.async = true;
-    s.defer = true;
-    this.elementRef.nativeElement.appendChild(s);
+    var gg_s = document.createElement("script");
+    gg_s.src = "https://accounts.google.com/gsi/client";
+    gg_s.async = true;
+    gg_s.defer = true;
+    this.elementRef.nativeElement.appendChild(gg_s);
+    
+    var fb_s = document.createElement("script");
+    fb_s.src = "https://connect.facebook.net/en_US/sdk.js";
+    fb_s.async = true;
+    fb_s.defer = true;
+    fb_s.crossOrigin = 'anonymous';
+    this.elementRef.nativeElement.appendChild(fb_s);
+
     (window as any).onGoogleLibraryLoad = () => {
       console.log('Google\'s One-tap sign in script loaded!');
     
@@ -70,7 +76,34 @@ export class LoginComponent implements OnInit {
       );
     };
     
+    (window as any).fbAsyncInit = function() {
+      FB.init({
+        appId      : '790258838897169',
+        cookie     : true,                     // Enable cookies to allow the server to access the session.
+        xfbml      : true,                     // Parse social plugins on this webpage.
+        version    : 'v15.0',                  // Use this Graph API version for this call.
+      });
+
+      FB.Event.subscribe('auth.statusChange', response => this.signInWithFB(response));
+      /**
+      (response)=>{
+        function SignIn() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
+          FB.api('/me', (response: any) => {
+            signInWithFB();
+          });
+        }
+        if (response.status === 'connected') {  // The current login status of the person.
+          SignIn();   // Logged into your webpage and Facebook.
+        } else {                                 // Not logged into your webpage or we are unable to tell.
+        }
+      });
+      */
+    }
+
+
+    
   }
+
   handleCredentialResponse(response: CredentialResponse) {
     // Decoding  JWT token...
       let decodedToken: any | null = null;
@@ -91,24 +124,25 @@ export class LoginComponent implements OnInit {
 
     }
     
-  signInWithFB(): void {
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
-    this.authService.authState.subscribe((user) => {
-      this.socialUser = user;
-      console.log(user);
-      this.userService.loginFacebook(user.id).subscribe(data => {
-        this.user = data;
+  signInWithFB(resp: any): void {
+    console.log('login fb called');
+    if (resp.status === 'connected') {  // The current login status of the person.
+      // Logged into your webpage and Facebook.
+      FB.api('/me', (response: any) => {
+        this.userService.loginFacebook(response.id).subscribe(data => {
+          this.user = data;
+          this.ngZone.run(()=>{this.router.navigate(['/home']);});
+        },
+        error => {
+          this.facebookId = response.id;
+          this.name = response.name;
+          this.triggerRoleModal();
+        });
       });
-    });
+    } else {                                 // Not logged into your webpage or we are unable to tell.
+    }
   }
 
-  signOut(): void {
-    this.authService.signOut();
-  }
-
-  refreshToken(): void {
-    this.authService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);
-  }
 
   onSubmit(): void {
     this.registerLandlord(
@@ -121,11 +155,20 @@ export class LoginComponent implements OnInit {
 
 
   registerStudent(): void {
-    this.userService.registerStudentGoogle(this.googleIdToken).subscribe(data => {
-      this.user = data;
-      this.dismissRoleModal();
-      this.router.navigate(['/home']);
-    });
+    if (this.googleIdToken != undefined){
+      this.userService.registerStudentGoogle(this.googleIdToken).subscribe(data => {
+        this.user = data;
+        this.dismissRoleModal();
+        this.router.navigate(['/home']);
+      });
+    }
+    else if (this.facebookId != undefined){
+      this.userService.registerStudentGoogle(this.facebookId).subscribe(data => {
+        this.user = data;
+        this.dismissRoleModal();
+        this.router.navigate(['/home']);
+      });
+    }
   }
 
   registerLandlord(
@@ -134,11 +177,20 @@ export class LoginComponent implements OnInit {
     identityCardBackSideImageLink: string, 
     facebookUrl: string
     ): void {
-    this.userService.registerLandlordGoogle(this.googleIdToken, phonenumber, identityCardFrontSideImageLink, identityCardBackSideImageLink, facebookUrl).subscribe(data => {
-      this.user = data;
-      this.dismissRegisterModal();
-      this.router.navigate(['/home']);
-    });
+    if (this.googleIdToken != undefined){
+      this.userService.registerLandlordGoogle(this.googleIdToken, phonenumber, identityCardFrontSideImageLink, identityCardBackSideImageLink, facebookUrl).subscribe(data => {
+        this.user = data;
+        this.dismissRegisterModal();
+        this.router.navigate(['/home']);
+      });
+    }
+    else if (this.facebookId != undefined && this.name != undefined){
+      this.userService.registerLandlordFacebook(this.facebookId, this.name, phonenumber, identityCardFrontSideImageLink, identityCardBackSideImageLink, facebookUrl).subscribe(data => {
+        this.user = data;
+        this.dismissRegisterModal();
+        this.router.navigate(['/home']);
+      });
+    }
   }
   
   triggerRegisterModal(): void {
@@ -162,3 +214,4 @@ export class LoginComponent implements OnInit {
     this.roleModal?.nativeElement.classList.remove('show');
   }
 }
+

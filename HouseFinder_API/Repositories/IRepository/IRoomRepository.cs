@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Repositories.IRepository
 {
-    public interface IRoomsRepository
+    public interface IRoomRepository
     {
         public List<RoomDTO> GetRoomsByHouseId(int HouseId);
         public List<RoomDTO> GetAvailableRoomsByHouseId(int houseId);
@@ -18,6 +18,7 @@ namespace Repositories.IRepository
         public void DeleteRoom(int roomId);
         public RoomDTO GetRoomByRoomId(int roomId);
         public int CountAvailableRoom();
+        public int CountTotalRoom();
         public int CountAvailableRoomByHouseId(int houseId);
         public int? CountAvailableCapacity();
         public int? CountAvailableCapacityByHouseId(int houseId);

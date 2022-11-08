@@ -236,6 +236,25 @@ namespace DataAccess
             return availableRoom;
         }
 
+        //[Staff - Dashboard] [Home Page] Count total rooms
+        public static int CountTotalRoom()
+        {
+            int totalRoom = 0;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Count available rooms
+                    totalRoom = context.Rooms.ToList().Count();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return totalRoom;
+        }
+
         //[Staff - Dashboard] Count capacity of available rooms
         public static int? CountAvailableCapacity()
         {

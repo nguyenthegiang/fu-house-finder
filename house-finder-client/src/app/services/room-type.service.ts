@@ -7,18 +7,18 @@ import { Observable } from 'rxjs/internal/Observable';
 })
 export class RoomTypeService {
 
-  readonly APIUrl = "https://localhost:5001/api/";
+  readonly APIUrl = "https://localhost:5001/api/RoomType";
 
   constructor(private http: HttpClient) { }
 
   //[Landlord][List room] Get List of Room Types by HouseId
   getRoomTypesByHouseId(houseId: number): Observable<any[]>{
-    return this.http.get<any[]>(this.APIUrl + "RoomType/getByHouseId?HouseId=" + houseId);
+    return this.http.get<any[]>(this.APIUrl + "/getByHouseId?HouseId=" + houseId);
   }
 
 
   //[Homepage] Get List of Room Types
   getRoomTypes(): Observable<any[]> {
-    return this.http.get<any[]>(this.APIUrl + "roomType");
+    return this.http.get<any[]>(this.APIUrl);
   }
 }

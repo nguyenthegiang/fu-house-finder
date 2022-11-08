@@ -40,7 +40,6 @@ export class UserService {
   }
 
   registerStudentGoogle(googleIdToken: string){
-    console.log("called");
     return this.http.post<User>(this.APIUrl + "/register", {"googleIdToken": googleIdToken, "roleId": 1});
   }
 
@@ -62,4 +61,32 @@ export class UserService {
         "roleId": 2
       });
   }
+
+  registerStudentFacebook(facebookId: string){
+    return this.http.post<User>(this.APIUrl + "/register", {
+      "facebookId": facebookId,
+      "roleId": 1
+    });
+  }
+
+  registerLandlordFacebook(
+    facebookId: string,
+    name: string,
+    phonenumber: string,
+    identityCardFrontSideImageLink: string,
+    identityCardBackSideImageLink: string,
+    facebookUrl: string
+  ){
+  return this.http.post<User>(
+    this.APIUrl + "/register",
+    {
+      "facebookId": facebookId,
+      "displayName": name,
+      "phonenumber": phonenumber,
+      "identityCardFrontSideImageLink": identityCardFrontSideImageLink,
+      "identityCardBackSideImageLink": identityCardBackSideImageLink,
+      "facebookUrl": facebookUrl,
+      "roleId": 2
+    });
+}
 }

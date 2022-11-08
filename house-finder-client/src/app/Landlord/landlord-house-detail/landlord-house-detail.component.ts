@@ -21,6 +21,9 @@ export class LandlordHouseDetailComponent implements OnInit {
   availableRoom: number = 0;
   availableSlot: number = 0;
 
+  //[Update] roomId to pass into <update-room>
+  updateRoomId: number = 0;
+
   constructor(
     private route: ActivatedRoute,
     private roomService: RoomService,
@@ -43,13 +46,16 @@ export class LandlordHouseDetailComponent implements OnInit {
     });
   }
 
-  updateRoom(id: number)
-  {
+  updateRoom(id: number) {
     this.router.navigate(['/Landlord/update-room/' + id]);
   }
 
-  deleteRoom(id: number)
-  {
+  //[Update] pass roomId and status check to <update-room> component to call API
+  editRoom(roomId: number) {
+    this.updateRoomId = roomId;
+  }
+
+  deleteRoom(id: number) {
 
   }
 

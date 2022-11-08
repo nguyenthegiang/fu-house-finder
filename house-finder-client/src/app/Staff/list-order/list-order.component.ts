@@ -89,6 +89,7 @@ export class ListOrderComponent implements OnInit {
   onStatusSelected(selectedStatusId: string) {
     // convert string to number
     var numberCampusId: number = +selectedStatusId;
+    console.log(numberCampusId);
 
     // Call API: update list houses with the campus user chose
     this.selectedStatusId = numberCampusId;
