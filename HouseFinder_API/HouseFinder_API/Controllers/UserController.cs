@@ -67,15 +67,17 @@ namespace HouseFinder_API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDTO register)
         {
-            Console.WriteLine("called");
-            var validationSettings = new GoogleJsonWebSignature.ValidationSettings
+            if (register.GoogleIdToken != null)
             {
-                Audience = new string[] { "919349682446-etrauq4d5cluclesaifkcr4bnh4gru2j.apps.googleusercontent.com" }
-            };
-            var payload = await GoogleJsonWebSignature.ValidateAsync(register.GoogleIdToken, validationSettings);
-            register.GoogleUserId = payload.Subject;
-            register.Email = payload.Email;
-            register.DisplayName = payload.Name;
+                var validationSettings = new GoogleJsonWebSignature.ValidationSettings
+                {
+                    Audience = new string[] { "919349682446-etrauq4d5cluclesaifkcr4bnh4gru2j.apps.googleusercontent.com" }
+                };
+                var payload = await GoogleJsonWebSignature.ValidateAsync(register.GoogleIdToken, validationSettings);
+                register.GoogleUserId = payload.Subject;
+                register.Email = payload.Email;
+                register.DisplayName = payload.Name;
+            }
             ResponseDTO user = userReposiotry.Register(register);
             string token = this.auth.Authenticate(user);
             HttpContext.Session.SetString("Token", token);
