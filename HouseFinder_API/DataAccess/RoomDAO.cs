@@ -300,6 +300,28 @@ namespace DataAccess
             return capacity;
         }
 
+        //[Staff/Dashboard] Count total of totally available capacity
+        public static int? CountTotallyAvailableCapacity()
+        {
+            int? capacity;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    List<RoomDTO> rooms = context.Rooms.Where(r => r.CurrentAmountOfPeople == 0).ProjectTo<RoomDTO>(config).ToList();
+                    capacity = (from room in rooms
+                                select room.MaxAmountOfPeople).Sum();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return capacity;
+        }
+
         //[Home Page] for HouseDAO.GetAvailableHouses()
         public static int CountAvailableRoomByHouseId(int HouseId)
         {
