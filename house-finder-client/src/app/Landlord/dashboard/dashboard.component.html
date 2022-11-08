@@ -1,5 +1,5 @@
 <!-- Body -->
-<div class="m-5">
+<div class="mx-3 mx-md-5 my-5">
   <!-- Main Content -->
   <div>
     <!-- Display Houses -->
@@ -25,7 +25,7 @@
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Tên nhà trọ</th>
-            <th scope="col">Tiện ích</th>
+            <th scope="col" id="utility">Tiện ích</th>
             <th scope="col">Tùy chọn</th>
           </tr>
         </thead>
@@ -38,7 +38,7 @@
             <td>{{dataItem.houseName}}</td>
 
             <!-- Utilities -->
-            <td>
+            <td id="utility">
               <div class="d-flex">
                 <div *ngIf="dataItem.fingerprintLock == true" class="col-12 col-md-1">
                   <button type="button" class="btn col-1 d-flex justify-content-center align-items-center mt-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Khóa vân tay">
@@ -59,14 +59,16 @@
             </td>
 
             <td>
-              <button type="button" class="btn btn-secondary me-2 my-1" data-toggle="modal" data-target="#updateModal"
-                data-whatever="@getbootstrap" (click)="viewHouse(dataItem.houseId)">Chi tiết</button>
-              <button type="button" class="btn btn-secondary me-2 my-1" data-toggle="modal" data-target="#updateModal"
-                data-whatever="@getbootstrap" (click)="viewRate(dataItem.houseId)">Xem đánh giá</button>
-              <button type="button" class="btn btn-success me-2 my-1" data-toggle="modal" data-target="#updateModal"
-                data-whatever="@getbootstrap" (click)="updateHouse(dataItem.houseId)">Chỉnh sửa</button>
-              <button type="button" class="btn btn-danger my-1" data-toggle="modal" data-target="#updateModal"
-                data-whatever="@getbootstrap" (click)="deleteHouse(dataItem.houseId)">Xóa</button>
+              <div class="row">
+                <button type="button" class="btn btn-secondary me-2 my-1 col-10 col-md-2" data-toggle="modal" data-target="#updateModal"
+                  data-whatever="@getbootstrap" (click)="viewHouse(dataItem.houseId)">Chi tiết</button>
+                <button type="button" class="btn btn-secondary me-2 my-1 col-10 col-md-3" data-toggle="modal" data-target="#updateModal"
+                  data-whatever="@getbootstrap" (click)="viewRate(dataItem.houseId)">Xem đánh giá</button>
+                <button type="button" class="btn btn-success me-2 my-1 col-10 col-md-2" data-toggle="modal" data-target="#updateModal"
+                  data-whatever="@getbootstrap" (click)="updateHouse(dataItem.houseId)">Chỉnh sửa</button>
+                <button type="button" class="btn btn-danger my-1 col-10 col-md-2" data-toggle="modal" data-target="#updateModal"
+                  data-whatever="@getbootstrap" (click)="deleteHouse(dataItem.houseId)">Xóa</button>
+                </div>
             </td>
           </tr>
         </tbody>
