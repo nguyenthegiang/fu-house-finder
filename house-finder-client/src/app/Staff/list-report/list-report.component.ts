@@ -18,6 +18,6 @@ export class ListReportComponent implements OnInit
   {
   }
 
-  searchLandlordByName()
+  searchReport()
   {}
 }
