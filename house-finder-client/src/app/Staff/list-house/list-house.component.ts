@@ -10,7 +10,7 @@ import { LandlordInformationService } from 'src/app/services/landlord-informatio
   styleUrls: ['./list-house.component.scss']
 })
 export class ListHouseComponent implements OnInit {
-//List of all houses
+  //List of all houses
   houses: House[] = [];
 
   //{Search} input value
@@ -41,4 +41,7 @@ export class ListHouseComponent implements OnInit {
     console.log(id);
     this.router.navigate(['/Landlord/landlord-house-detail/' + id]);
   }
+
+  searchHouseByName()
+  {}
 }
