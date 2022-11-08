@@ -13,9 +13,9 @@ namespace HouseFinder_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class RoomsController : ControllerBase
+    public class RoomController : ControllerBase
     {
-        private IRoomsRepository roomsRepository = new RoomRepository();
+        private IRoomRepository roomsRepository = new RoomRepository();
 
         //GET: api/Rooms/getByHouseId?HouseId=
         [HttpGet("getByHouseId")]
@@ -144,6 +144,15 @@ namespace HouseFinder_API.Controllers
             int availableRoom = roomsRepository.CountAvailableRoom();
             return availableRoom;
         }
+
+        //GET: api/Rooms/CountTotalRoom
+        [HttpGet("CountTotalRoom")]
+        public int CountTotalRoom()
+        {
+            int totalRoom = roomsRepository.CountTotalRoom();
+            return totalRoom;
+        }
+
 
         //GET: api/Rooms/CountTotalHouse
         [HttpGet("CountAvailableCapacity")]
