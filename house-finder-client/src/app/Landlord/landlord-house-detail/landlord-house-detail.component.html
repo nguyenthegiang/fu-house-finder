@@ -131,27 +131,12 @@
                 [disabled]="dataItem.status.statusName === 'Disabled'"
                 (change)="onStatusRoomSelected($event, dataItem.roomId)">
               <label class="form-check-label" for="flexSwitchCheckChecked">
-                <span *ngIf="dataItem.status.statusName === 'Available'">Còn trống</span>
+                <!-- <span>{{dataItem.status.statusName}}</span> -->
+                <span *ngIf="dataItem.status.statusName === 'Available'">Còn Trống</span>
                 <span *ngIf="dataItem.status.statusName === 'Occupied'">Đã thuê</span>
-                <span *ngIf="dataItem.status.statusName === 'Disabled'">Không dùng được</span></label>
+                <span *ngIf="dataItem.status.statusName === 'Disabled'">Không dùng được</span>
+              </label>
             </div>
-            <!-- <div class="form-check form-switch" *ngIf="dataItem.status.statusName === 'Available'">
-              <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-              <label class="form-check-label" for="flexSwitchCheckChecked"
-                (change)="onStatusRoomSelected($event, dataItem.roomId)">Còn trống</label>
-            </div>
-
-            <div class="form-check form-switch" *ngIf="dataItem.status.statusName === 'Occupied'">
-              <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-              <label class="form-check-label" for="flexSwitchCheckDefault"
-                (change)="onStatusRoomSelected($event, dataItem.roomId)">Đã thuê</label>
-            </div>
-
-            <div class="form-check form-switch" *ngIf="dataItem.status.statusName === 'Disabled'">
-              <input class="form-check-input" type="checkbox" id="flexSwitchCheckDisabled" disabled>
-              <label class="form-check-label" for="flexSwitchCheckDisabled"
-                (change)="onStatusRoomSelected($event, dataItem.roomId)">Không dùng được</label>
-            </div> -->
           </td>
           <td>
             <!-- Detail button -->
