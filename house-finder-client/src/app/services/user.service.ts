@@ -40,7 +40,11 @@ export class UserService {
   }
 
   registerStudentGoogle(googleIdToken: string){
-    return this.http.post<User>(this.APIUrl + "/register", {"googleIdToken": googleIdToken, "roleId": 1});
+    return this.http.post<User>(this.APIUrl + "/register", 
+    {
+      "googleIdToken": googleIdToken,
+      "roleId": 1,
+    });
   }
 
   registerLandlordGoogle(
@@ -62,9 +66,10 @@ export class UserService {
       });
   }
 
-  registerStudentFacebook(facebookId: string){
+  registerStudentFacebook(facebookId: string, name: string){
     return this.http.post<User>(this.APIUrl + "/register", {
-      "facebookId": facebookId,
+      "facebookUserId": facebookId,
+      "displayName": name,
       "roleId": 1
     });
   }
@@ -80,7 +85,7 @@ export class UserService {
   return this.http.post<User>(
     this.APIUrl + "/register",
     {
-      "facebookId": facebookId,
+      "facebookUserId": facebookId,
       "displayName": name,
       "phonenumber": phonenumber,
       "identityCardFrontSideImageLink": identityCardFrontSideImageLink,
