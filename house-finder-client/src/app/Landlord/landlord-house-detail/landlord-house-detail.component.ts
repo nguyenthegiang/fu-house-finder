@@ -1,5 +1,5 @@
 import { LandlordInformationService } from './../../services/landlord-information.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { House } from 'src/app/models/house';
 import { Room } from 'src/app/models/room';
@@ -32,6 +32,10 @@ export class LandlordHouseDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.getListRoom();
+  }
+
+  getListRoom() {
     //Get id of House from Route
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
@@ -54,10 +58,23 @@ export class LandlordHouseDetailComponent implements OnInit {
     //if user check -> add roomTypeId to the list
     if (isChecked) {
       this.roomService.updateStatusRoom(1, roomId).subscribe();
+      const id = Number(this.route.snapshot.paramMap.get('id'));
+      this.roomService.getRooms(id).subscribe(data => {
+        this.rooms = data;
+      });
     } else {
       this.roomService.updateStatusRoom(2, roomId).subscribe();
+      const id = Number(this.route.snapshot.paramMap.get('id'));
+      this.roomService.getRooms(id).subscribe(data => {
+        this.rooms = data;
+      });
     }
   }
+
+  goBack(): void {
+    window.location.reload();
+  }
+
 
   updateRoom(id: number) {
     this.router.navigate(['/Landlord/update-room/' + id]);
