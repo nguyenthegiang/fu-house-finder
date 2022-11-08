@@ -32,6 +32,11 @@ export class DashboardStaffComponent implements OnInit {
   //Array of total orders by month
   reportByMonth: number[] | undefined;
 
+  //
+  totalCapacity: number = 0;
+  totallyAvailableCapacity: number = 0;
+  partiallyAvailableCapacity: number = 0;
+
   constructor(
     private roomService: RoomService,
     private houseService: HouseService,
@@ -229,7 +234,39 @@ export class DashboardStaffComponent implements OnInit {
       });
     });
 
+    //Call API: Creat capacity chart
+    this.roomService.CountTotalCapacity().subscribe(data => {
+      this.totalCapacity = data;
 
+      this.roomService.CountTotallyAvailableCapacity().subscribe(data => {
+        this.totallyAvailableCapacity = data;
+        this.partiallyAvailableCapacity = this.availableCapNum - this.totallyAvailableCapacity;
+
+        //Create chart
+        var capacityChart = new Chart("capacityChart", {
+          type: 'pie',
+          data: {
+            labels: ['Hết chỗ', 'Hoàn toàn trống', 'một phần trống'],
+            datasets: [
+              {
+                data: [(this.totalCapacity - this.availableCapNum), this.totallyAvailableCapacity, this.partiallyAvailableCapacity],
+                backgroundColor: ['#ed4756','#1d6e9d','#ff9f40'],
+              },
+            ],
+
+          },
+          options:{
+            plugins:{
+              title:{
+                display: true,
+                text: 'Thống kê sức chứa',
+              }
+            }
+          }
+        });
+      })
+
+    })
 
   }
 
