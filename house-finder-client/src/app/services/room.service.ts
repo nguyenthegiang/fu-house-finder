@@ -8,7 +8,7 @@ import { Room } from '../models/room';
 })
 export class RoomService {
 
-  readonly APIUrl = "https://localhost:5001/api/Rooms";
+  readonly APIUrl = "https://localhost:5001/api/Room";
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
