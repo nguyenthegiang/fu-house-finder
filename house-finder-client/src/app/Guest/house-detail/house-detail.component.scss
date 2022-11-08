@@ -107,7 +107,13 @@
 
 .phoneOff
 {
-  cursor: pointer;
   text-decoration: none;
   color: black;
+}
+
+@media only screen and (max-width: 768px) {
+  #utility
+  {
+    display: none;
+  }
 }

@@ -1,57 +1,100 @@
-<div class="row">
-    <div class="col-3">
-        <div class="sidebar">
-          <a class="active" href="/Staff/dashboard">Home</a>
-          <a href="/Staff/list-landlord">Quản lý chủ trọ</a>
-          <a href="/Staff/list-house">Quản lý nhà trọ</a>
-          <a href="/Staff/list-report">Quản lý báo cáo vi phạm</a>
-          <a href="/Staff/list-order">Nguyện vọng đăng ký nhà ở của sinh viên</a>
-        </div>
+<div class="row d-flex justify-content-around mx-3 mx-md-5 mt-5">
+  <div class="col-12 col-md-3 mb-5" id="menu1">
+    <div class="card h-100">
+      <div class="card-header text-center text-white bg-secondary">
+        Menu
+      </div>
+      <ul class="list-group list-group-flush">
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/dashboard">Dashboard</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/list-landlord">Quản lý chủ trọ</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/list-house">Quản lý nhà trọ</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/list-report">Quản lý báo cáo vi phạm</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/list-landlord-signup-request">Chủ trọ đăng ký tài khoản</a>
+        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/list-order">Nguyện vọng đăng ký nhà ở của sinh viên</a>
+      </ul>
     </div>
-    <div class="col-9">
-      <!-- Page content -->
-      <div class="content">
+  </div>
 
-        <div class="row">
-          <div class="col-3 statistics">
-            <b>Tổng số nhà trọ</b>
-            <br>
-            <span>{{totalHouses}}</span>
-          </div>
-          <div class="col-3 statistics">
-            <b>Tổng số nhà còn trống</b>
-            <br>
-            <span>{{availableHouseNum}}</span>
-          </div>
-          <div class="col-3 statistics">
-            <b>Tổng số phòng còn trống</b>
-            <br>
-            <span>{{availabelRoomsNum}}</span>
-          </div>
-          <div class="col-3 statistics">
-            <b>Sức chứa</b>
-            <br>
-            <span>{{availableCapNum}}</span>
-          </div>
+  <div class="col-12 mb-5" id="menu2" style="display: none;">
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Menu
+      </button>
+      <ul class="dropdown-menu w-100">
+        <li>
+          <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/dashboard">Home</a>
+        </li>
+        <li>
+          <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/list-landlord">Quản lý chủ trọ</a>
+        </li>
+        <li>
+          <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/list-house">Quản lý nhà trọ</a>
+        </li>
+        <li>
+          <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/list-report">Quản lý báo cáo vi phạm</a>
+        </li>
+        <li>
+          <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/list-order">Nguyện vọng đăng ký nhà ở của sinh viên</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-8">
+    <!-- Page content -->
+    <div class="row">
+      <div class="col-12 col-sm-6">
+        <div class="p-2 mb-5 d-flex flex-column justify-content-center align-items-center border rounded bg-light">
+          <h5>Tổng nhà trọ</h5>
+          <span>{{ totalHouses }}</span>
         </div>
+      </div>
 
-        <div class="row">
-          <div class="col-6" style="width: 300px;">
-            <canvas id="houseChart"></canvas>
-          </div>
-          <div class="col-6" style="width: 300px;">
-            <canvas id="roomChart"></canvas>
-          </div>
+      <div class="col-12 col-sm-6">
+        <div class="p-2 mb-5 d-flex flex-column justify-content-center align-items-center border rounded bg-light">
+          <h5>Tổng nhà trống</h5>
+          <span>{{ availableHouseNum }}</span>
         </div>
+      </div>
 
-        <div class="row">
-          <div class="col-6" style="width: 50%;">
-            <canvas id="orderChart"></canvas>
-          </div>
-          <div class="col-6" style="width: 50%;">
-            <canvas id="reportChart"></canvas>
-          </div>
+      <div class="col-12 col-sm-6">
+        <div class="p-2 mb-5 d-flex flex-column justify-content-center align-items-center border rounded bg-light">
+          <h5>Tổng phòng trọ</h5>
+          <span>{{ totalRooms }}</span>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6">
+        <div class="p-2 mb-5 d-flex flex-column justify-content-center align-items-center border rounded bg-light">
+          <h5>Tổng phòng trống</h5>
+          <span>{{ availabelRoomsNum }}</span>
+        </div>
+      </div>
+
+      <div class="col-12 col-sm-6">
+        <div class="p-2 mb-5 d-flex flex-column justify-content-center align-items-center border rounded bg-light">
+          <h5>Sức chứa</h5>
+          <span>{{ availableCapNum }}</span>
         </div>
       </div>
     </div>
+
+    <div class="row">
+      <div class="col-12 col-sm-6 mb-5">
+        <canvas id="houseChart"></canvas>
+      </div>
+      <div class="col-12 col-sm-6 mb-5">
+        <canvas id="roomChart"></canvas>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-sm-6 mb-5">
+        <canvas id="orderChart"></canvas>
+      </div>
+      <div class="col-12 col-sm-6 mb-5">
+        <canvas id="reportChart"></canvas>
+      </div>
+    </div>
   </div>
+</div>

@@ -1,6 +1,6 @@
 import { Component, ElementRef, NgZone, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { User } from '../models/user';
-import { UserService } from '../services/user.service';
+import { User } from '../../models/user';
+import { UserService } from '../../services/user.service';
 import { CredentialResponse } from 'google-one-tap';
 import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
@@ -84,23 +84,32 @@ export class LoginComponent implements OnInit {
         version    : 'v15.0',                  // Use this Graph API version for this call.
       });
 
-      FB.Event.subscribe('auth.statusChange', response => this.signInWithFB(response));
-      /**
-      (response)=>{
-        function SignIn() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-          FB.api('/me', (response: any) => {
-            signInWithFB();
-          });
-        }
-        if (response.status === 'connected') {  // The current login status of the person.
-          SignIn();   // Logged into your webpage and Facebook.
-        } else {                                 // Not logged into your webpage or we are unable to tell.
-        }
-      });
-      */
+      FB.Event.subscribe(
+        'auth.statusChange', 
+        signInWithFB
+        );
     }
 
-
+    const signInWithFB = () => {
+      console.log('login fb called');
+      FB.getLoginStatus((resp) => {   // Called after the JS SDK has been initialized.
+        if (resp.status === 'connected') {  // The current login status of the person.
+          // Logged into your webpage and Facebook.
+          FB.api('/me', (response: any) => {
+            this.userService.loginFacebook(response.id).subscribe(data => {
+              this.user = data;
+              this.ngZone.run(()=>{this.router.navigate(['/home']);});
+            },
+            error => {
+              this.facebookId = response.id;
+              this.name = response.name;
+              this.triggerRoleModal();
+            });
+          });
+        } else {                                 // Not logged into your webpage or we are unable to tell.
+        }
+      });    
+    }
     
   }
 
@@ -124,24 +133,7 @@ export class LoginComponent implements OnInit {
 
     }
     
-  signInWithFB(resp: any): void {
-    console.log('login fb called');
-    if (resp.status === 'connected') {  // The current login status of the person.
-      // Logged into your webpage and Facebook.
-      FB.api('/me', (response: any) => {
-        this.userService.loginFacebook(response.id).subscribe(data => {
-          this.user = data;
-          this.ngZone.run(()=>{this.router.navigate(['/home']);});
-        },
-        error => {
-          this.facebookId = response.id;
-          this.name = response.name;
-          this.triggerRoleModal();
-        });
-      });
-    } else {                                 // Not logged into your webpage or we are unable to tell.
-    }
-  }
+  
 
 
   onSubmit(): void {
@@ -162,8 +154,8 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/home']);
       });
     }
-    else if (this.facebookId != undefined){
-      this.userService.registerStudentGoogle(this.facebookId).subscribe(data => {
+    else if (this.facebookId != undefined && this.name != undefined){
+      this.userService.registerStudentFacebook(this.facebookId, this.name).subscribe(data => {
         this.user = data;
         this.dismissRoleModal();
         this.router.navigate(['/home']);

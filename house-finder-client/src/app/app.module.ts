@@ -6,7 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HouseDetailComponent } from './Guest/house-detail/house-detail.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './Guest/login/login.component';
 // import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
 // import {
 //   GoogleLoginProvider,
@@ -34,6 +34,9 @@ import { ListStaffComponent } from './Admin/list-staff/list-staff.component';
 import { ChangePasswordComponent } from './Admin/change-password/change-password.component';
 import { CreateAccountComponent } from './Admin/create-account/create-account.component';
 import { UpdateAccountComponent } from './Admin/update-account/update-account.component';
+import { StaffSidebarComponent } from './Common/staff-sidebar/staff-sidebar.component';
+import { HeaderComponent } from './Common/header/header.component';
+import { FooterComponent } from './Common/footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -63,6 +66,9 @@ import { UpdateAccountComponent } from './Admin/update-account/update-account.co
     ChangePasswordComponent,
     CreateAccountComponent,
     UpdateAccountComponent,
+    StaffSidebarComponent,
+    HeaderComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

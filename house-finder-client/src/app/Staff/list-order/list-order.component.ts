@@ -96,4 +96,6 @@ export class ListOrderComponent implements OnInit {
     this.filterHouse(true);
   }
 
+  searchOrderByName()
+  {}
 }
