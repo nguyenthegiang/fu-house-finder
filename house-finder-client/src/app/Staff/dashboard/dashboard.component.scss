@@ -48,3 +48,15 @@
   cursor: pointer;
   background-color: #f8f9fa !important;
 }
+
+@media only screen and (max-width: 768px) {
+  #menu1
+  {
+    display: none;
+  }
+
+  #menu2
+  {
+    display: inline !important;
+  }
+}

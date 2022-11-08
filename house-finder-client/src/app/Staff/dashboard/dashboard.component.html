@@ -1,5 +1,5 @@
 <div class="row d-flex justify-content-around mx-5 mt-5">
-  <div class="col-12 col-md-3 mb-5">
+  <div class="col-12 col-md-3 mb-5" id="menu1">
     <div class="card h-100">
       <div class="card-header text-center text-white bg-secondary">
         Menu
@@ -14,7 +14,32 @@
     </div>
   </div>
 
-  <div class="col-12 col-md-8 mb-5">
+  <div class="col-12 mb-5" id="menu2" style="display: none;">
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Menu
+      </button>
+      <ul class="dropdown-menu w-100">
+        <li>
+          <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/dashboard">Home</a>
+        </li>
+        <li>
+          <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/list-landlord">Quản lý chủ trọ</a>
+        </li>
+        <li>
+          <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/list-house">Quản lý nhà trọ</a>
+        </li>
+        <li>
+          <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/list-report">Quản lý báo cáo vi phạm</a>
+        </li>
+        <li>
+          <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/list-order">Nguyện vọng đăng ký nhà ở của sinh viên</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-8">
     <!-- Page content -->
     <div class="row">
       <div class="col-12 col-sm-6">
@@ -56,10 +81,10 @@
     </div>
 
     <div class="row">
-      <div class="col-12 col-sm-6">
+      <div class="col-12 col-sm-6 mb-5">
         <canvas id="orderChart"></canvas>
       </div>
-      <div class="col-12 col-sm-6">
+      <div class="col-12 col-sm-6 mb-5">
         <canvas id="reportChart"></canvas>
       </div>
     </div>
