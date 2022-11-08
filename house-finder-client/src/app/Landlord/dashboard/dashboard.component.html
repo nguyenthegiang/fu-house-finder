@@ -42,17 +42,23 @@
               <div class="d-flex">
                 <div *ngIf="dataItem.fingerprintLock == true" class="col-12 col-md-1">
                   <button type="button" class="btn col-1 d-flex justify-content-center align-items-center mt-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Khóa vân tay">
-                    <i class="fa-solid fa-hand-point-up fs-5"></i>
+                    <span class="material-symbols-outlined">
+                      fingerprint
+                    </span>
                   </button>
                 </div>
                 <div *ngIf="dataItem.camera == true" class="col-12 col-md-1">
                   <button type="button" class="btn col-1 d-flex justify-content-center align-items-center mt-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Camera an ninh">
-                    <i class="fa-solid fa-house-lock fs-5"></i>
+                    <span class="material-symbols-outlined">
+                      videocam
+                    </span>
                   </button>
                 </div>
                 <div *ngIf="dataItem.parking == true" class="col-12 col-md-1">
                   <button type="button" class="btn col-1 d-flex justify-content-center align-items-center mt-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Chỗ để xe">
-                    <i class="fa-solid fa-square-parking fs-5"></i>
+                    <span class="material-symbols-outlined">
+                      local_parking
+                    </span>
                   </button>
                 </div>
               </div>
