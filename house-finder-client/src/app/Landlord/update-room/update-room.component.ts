@@ -25,7 +25,7 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
     kitchen: false,
     washingMachine: false,
     desk: false,
-    liveWithHost: false,
+    noLiveWithHost: false,
     bed: false,
     closedToilet: false,
     maxAmountOfPeople: 0,
@@ -73,7 +73,6 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
 
     //call API to get detail info of room
     this.getRoomByRoomId();
-    console.log("hello");
 
 
   }
@@ -83,11 +82,11 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
 
   //Call API: update room
   updateRoom() {
-    //console.log(this.roomDetail);
+    console.log(this.roomDetail);
     this.roomService.updateRoom(this.roomDetail).subscribe(() => this.goBack());
   }
   deleteRoom() {
-    console.log('delete');
+    //console.log('delete');
     this.roomService.deleteRoom(this.roomDetail.roomId).subscribe(() => this.goBack());
   }
 

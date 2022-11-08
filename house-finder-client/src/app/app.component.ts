@@ -20,4 +20,8 @@ export class AppComponent {
     //use reload() so that when user is already in home -> they will get a reload of page
     window.location.href = "/home";
   }
+
+  login(){
+    window.location.href = "/login";
+  }
 }
