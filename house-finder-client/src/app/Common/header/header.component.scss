@@ -1,0 +1,24 @@
+#loginButton{
+  width: 120px;
+  height: 40px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #FF6F3D;
+  box-shadow: 0 8px 8px -4px rgb(0, 0, 0,0.5);
+  border: none;
+  border-radius: 10px;
+}
+
+#app-name{
+  color: white;
+  text-decoration: none;
+}
+
+#app-name:hover{
+  cursor: pointer;
+  text-decoration: none;
+}
+
+#app-name:active{
+  text-decoration: none;
+}
