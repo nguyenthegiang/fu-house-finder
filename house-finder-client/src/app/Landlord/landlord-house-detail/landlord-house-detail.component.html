@@ -42,49 +42,63 @@
             <div class="row">
               <div *ngIf="dataItem.fridge == true" class="col-12 col-md-1 me-1">
                 <button type="button"
-                  class="btn btn-outline-dark col-1 d-flex justify-content-center align-items-center mt-1"
+                  class="btn col-1 d-flex justify-content-center align-items-center mt-1"
                   data-bs-toggle="tooltip" data-bs-placement="top" title="Tủ lạnh">
-                  <i class="fa-solid fa-toilet-portable"></i>
+                  <span class="material-symbols-outlined">
+                    kitchen
+                  </span>
                 </button>
               </div>
               <div *ngIf="dataItem.kitchen == true" class="col-12 col-md-1 me-1">
                 <button type="button"
-                  class="btn btn-outline-dark col-1 d-flex justify-content-center align-items-center mt-1"
+                  class="btn col-1 d-flex justify-content-center align-items-center mt-1"
                   data-bs-toggle="tooltip" data-bs-placement="top" title="Bếp">
-                  <i class="fa-solid fa-fire-burner"></i>
+                  <span class="material-symbols-outlined">
+                    multicooker
+                  </span>
                 </button>
               </div>
               <div *ngIf="dataItem.washingMachine == true" class="col-12 col-md-1 me-1">
                 <button type="button"
-                  class="btn btn-outline-dark col-1 d-flex justify-content-center align-items-center mt-1"
+                  class="btn col-1 d-flex justify-content-center align-items-center mt-1"
                   data-bs-toggle="tooltip" data-bs-placement="top" title="Máy giặt">
-                  <i class="fa-solid fa-droplet"></i>
+                  <span class="material-symbols-outlined">
+                    local_laundry_service
+                  </span>
                 </button>
               </div>
               <div *ngIf="dataItem.desk == true" class="col-12 col-md-1 me-1">
                 <button type="button"
-                  class="btn btn-outline-dark col-1 d-flex justify-content-center align-items-center mt-1"
+                  class="btn col-1 d-flex justify-content-center align-items-center mt-1"
                   data-bs-toggle="tooltip" data-bs-placement="top" title="Bàn ghế">
-                  <i class="fa-solid fa-couch"></i>
+                  <span class="material-symbols-outlined">
+                    desk
+                  </span>
                 </button>
               </div>
               <div *ngIf="dataItem.noLiveWithHost == true" class="col-12 col-md-1 me-1">
-                <button type="button" class="btn btn-outline-dark col-1 d-flex justify-content-center align-items-center mt-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Chung chủ">
-                  <i class="fa-solid fa-house-user"></i>
+                <button type="button" class="btn col-1 d-flex justify-content-center align-items-center mt-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Chung chủ">
+                  <span class="material-symbols-outlined">
+                    gite
+                  </span>
                 </button>
               </div>
               <div *ngIf="dataItem.bed == true" class="col-12 col-md-1 me-1">
                 <button type="button"
-                  class="btn btn-outline-dark col-1 d-flex justify-content-center align-items-center mt-1"
+                  class="btn col-1 d-flex justify-content-center align-items-center mt-1"
                   data-bs-toggle="tooltip" data-bs-placement="top" title="Giường">
-                  <i class="fa-solid fa-bed"></i>
+                  <span class="material-symbols-outlined">
+                    bed
+                  </span>
                 </button>
               </div>
               <div *ngIf="dataItem.closedToilet == true" class="col-12 col-md-1 me-1">
                 <button type="button"
-                  class="btn btn-outline-dark col-1 d-flex justify-content-center align-items-center mt-1"
+                  class="btn col-1 d-flex justify-content-center align-items-center mt-1"
                   data-bs-toggle="tooltip" data-bs-placement="top" title="Vệ sinh khép kín">
-                  <i class="fa-solid fa-toilet"></i>
+                  <span class="material-symbols-outlined">
+                    wc
+                  </span>
                 </button>
               </div>
             </div>
