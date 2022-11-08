@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Repositories.Repositories
 {
-    public class HouseRepository : IHousesRepository
+    public class HouseRepository : IHouseRepository
     {
         public HouseDTO CreateHouse(string houseName, string information, string _address, string ggAddress, string villageName, string landlordId, string campusName,
             decimal powerPrice, decimal waterPrice, bool fingerprintLock, bool camera, bool parking)

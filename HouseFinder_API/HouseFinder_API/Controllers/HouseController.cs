@@ -15,9 +15,9 @@ namespace HouseFinder_API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class HousesController : ControllerBase
+    public class HouseController : ControllerBase
     {
-        private IHousesRepository housesRepository = new HouseRepository();
+        private IHouseRepository housesRepository = new HouseRepository();
 
         //GET: api/Houses
         //[HttpGet]

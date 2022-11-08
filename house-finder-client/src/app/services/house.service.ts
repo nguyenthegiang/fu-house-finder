@@ -8,7 +8,7 @@ import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
   providedIn: 'root'
 })
 export class HouseService {
-  readonly APIUrl = "https://localhost:5001/api/Houses";
+  readonly APIUrl = "https://localhost:5001/api/House";
 
   constructor(private http: HttpClient) { }
 
