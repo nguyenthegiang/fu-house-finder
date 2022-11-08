@@ -16,7 +16,6 @@ export class RoomTypeService {
     return this.http.get<any[]>(this.APIUrl + "/getByHouseId?HouseId=" + houseId);
   }
 
-
   //[Homepage] Get List of Room Types
   getRoomTypes(): Observable<any[]> {
     return this.http.get<any[]>(this.APIUrl);
