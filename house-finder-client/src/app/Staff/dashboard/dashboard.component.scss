@@ -19,18 +19,21 @@
 
 .content{
   .statistics{
-    border-radius: 8px;
-    height: 120px;
-    margin: 20px 20px 20px 0;
-    padding: 15px;
+    border-radius: 10px;
+    margin: 0;
+    padding: 0;
     text-align: center;
     color: white;
     b{
       text-align: center;
     }
     span{
-      font-size: 50px;
+      font-size: 40px;
     }
+  }
+  .house, .room, .capacity{
+    padding: 10px;
+    border-radius: 10px;
   }
 
   .house{

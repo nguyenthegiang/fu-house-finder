@@ -16,34 +16,32 @@
 
     <!-- Page content -->
     <div class="content">
-      <div class="row d-flex justify-content-between">
-        <div class="col-5 mb-5 d-flex flex-column justify-content-center align-items-center border p-2 rounded bg-light">
+      <div class="row d-flex justify-content-between statistics">
+        <div class="col-3 mb-3 d-flex flex-column justify-content-center align-items-center house">
           <h5>Tổng số nhà trọ</h5>
           <span>{{ totalHouses }}</span>
         </div>
 
-        <div class="col-5 mb-5 d-flex flex-column justify-content-center align-items-center border p-2 rounded bg-light">
-          <h5>Tổng số nhà trống</h5>
-          <span>{{ availableHouseNum }}</span>
+        <div class="col-3 mb-3 d-flex flex-column justify-content-center align-items-center room">
+          <h5>Tổng số phòng</h5>
+          <span>{{ totalRooms }}</span>
         </div>
 
-        <div class="col-5 mb-5 d-flex flex-column justify-content-center align-items-center border p-2 rounded bg-light">
-          <h5>Tổng số phòng trống</h5>
-          <span>{{ availabelRoomsNum }}</span>
-        </div>
-
-        <div class="col-5 mb-5 d-flex flex-column justify-content-center align-items-center border rounded bg-light">
-          <h5>Sức chứa</h5>
-          <span>{{ availableCapNum }}</span>
+        <div class="col-3 mb-3 d-flex flex-column justify-content-center align-items-center capacity">
+          <h5>Tổng sức chứa</h5>
+          <span>{{ totalCapacity }}</span>
         </div>
       </div>
 
       <div class="row d-flex justify-content-between my-5">
-        <div class="col-6 w-50">
+        <div class="col-4 w-30">
           <canvas id="houseChart"></canvas>
         </div>
-        <div class="col-6 w-50">
+        <div class="col-4 w-30">
           <canvas id="roomChart"></canvas>
+        </div>
+        <div class="col-4 w-30">
+          <canvas id="capacityChart"></canvas>
         </div>
       </div>
 
