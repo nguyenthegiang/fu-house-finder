@@ -15,7 +15,7 @@ namespace HouseFinder_API.Controllers
     [ApiController]
     public class RoomsController : ControllerBase
     {
-        private IRoomsRepository roomsRepository = new RoomRepository();
+        private IRoomsRepository roomsRepository = new RoomsRepository();
 
         //GET: api/Rooms/getByHouseId?HouseId=
         [HttpGet("getByHouseId")]

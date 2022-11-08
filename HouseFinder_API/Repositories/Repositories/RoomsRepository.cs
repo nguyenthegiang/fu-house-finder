@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Repositories.Repositories
 {
-    public class RoomRepository : IRoomsRepository
+    public class RoomsRepository : IRoomsRepository
     {
         public List<RoomDTO> GetAvailableRoomsByHouseId(int houseId) => RoomDAO.GetAvailableRoomsByHouseId(houseId);
 
