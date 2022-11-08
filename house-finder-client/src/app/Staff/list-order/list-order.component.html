@@ -72,12 +72,12 @@
             <!-- Start date -->
             <div class="col-3">
               <label class="form-label">Từ ngày</label>
-              <input class="form-control" type="date">
+              <input #selectedFromDate class="form-control" type="date" (change)="onFromDateSelected(selectedFromDate.value)">
             </div>
             <!-- End date -->
             <div class="col-3">
               <label class="form-label">Đến ngày</label>
-              <input class="form-control" type="date">
+              <input #selectedToDate class="form-control" type="date" (change)="onToDateSelected(selectedToDate.value)">
             </div>
           <!-- End date picker -->
 

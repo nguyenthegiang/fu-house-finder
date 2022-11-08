@@ -26,7 +26,9 @@ export class OrderService {
   filterOrder(
     pageSize: number,
     pageNumber: number,
-    statusId?: number): Observable<Order[]>{
+    statusId?: number,
+    fromDate?: string,
+    toDate?: string): Observable<Order[]>{
 
     //[Paging] count Skip and Top from pageSize & pageNumber
     const skip = pageSize * (pageNumber - 1);
@@ -37,7 +39,7 @@ export class OrderService {
     filterAPIUrl += `?$skip=${skip}&$top=${top}`;
 
     //[Filter] check if user has at least 1 filter
-    if (statusId != undefined && statusId != 0) {
+    if ((statusId != undefined && statusId != 0) || fromDate || toDate) {
       //add filter to API
       filterAPIUrl += `&$filter=`;
     }
@@ -45,7 +47,7 @@ export class OrderService {
     //[Filter] flag to check if that filter is the first filter (if is first -> not have 'and')
     var checkFirstFilter = true;
 
-    //[Filter] add filter by campus if has
+    //[Filter] add filter by status if has
     if (statusId != undefined && statusId!= 0) {
       //if is not the first filter -> need to add 'and' to API URL
       if (!checkFirstFilter) {
@@ -55,6 +57,29 @@ export class OrderService {
         checkFirstFilter = false;
       }
       filterAPIUrl += `Status/StatusId eq ${statusId}`;
+    }
+
+    //[Filter] add filter by date if it has
+    if(fromDate != undefined){
+      //if is not the first filter -> need to add 'and' to API URL
+      if (!checkFirstFilter) {
+        filterAPIUrl += ` and `;
+      } else {
+        //if this one is the first filter -> mark it so others won't add 'and'
+        checkFirstFilter = false;
+      }
+      filterAPIUrl += `OrderedDate ge ${fromDate}`;
+    }
+
+    if(toDate != undefined){
+      //if is not the first filter -> need to add 'and' to API URL
+      if (!checkFirstFilter) {
+        filterAPIUrl += ` and `;
+      } else {
+        //if this one is the first filter -> mark it so others won't add 'and'
+        checkFirstFilter = false;
+      }
+      filterAPIUrl += `OrderedDate le ${toDate}`;
     }
 
     return this.http.get<Order[]>(filterAPIUrl);
