@@ -1,6 +1,6 @@
 import { Component, ElementRef, NgZone, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { User } from '../models/user';
-import { UserService } from '../services/user.service';
+import { User } from '../../models/user';
+import { UserService } from '../../services/user.service';
 import { CredentialResponse } from 'google-one-tap';
 import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
