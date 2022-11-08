@@ -166,7 +166,7 @@ namespace HouseFinder_API.Controllers
         [HttpGet("CountTotalCapacity")]
         public int? CountTotalCapacity()
         {
-            int? capacity = roomsRepository.CountTotalCapacity();
+            int? capacity = roomRepository.CountTotalCapacity();
             return capacity;
         }
 
@@ -174,7 +174,7 @@ namespace HouseFinder_API.Controllers
         [HttpGet("CountTotallyAvailableCapacity")]
         public int? CountTotallyAvailableCapacity()
         {
-            int? capacity = roomsRepository.CountTotallyAvailableCapacity();
+            int? capacity = roomRepository.CountTotallyAvailableCapacity();
             return capacity;
         }
 
