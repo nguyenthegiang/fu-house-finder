@@ -49,5 +49,9 @@ namespace Repositories.Repositories
         public void ChangStatusRoom(int statusId, int roomId) => RoomDAO.ChangStatusRoom(statusId, roomId);
 
         public int CountTotalRoom() => RoomDAO.CountTotalRoom();
+
+        public int? CountTotalCapacity() => RoomDAO.CountTotalCapacity();
+
+        public int? CountTotallyAvailableCapacity() => RoomDAO.CountTotallyAvailableCapacity();
     }
 }

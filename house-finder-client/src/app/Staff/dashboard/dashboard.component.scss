@@ -1,39 +1,32 @@
-.sidebar{
-  position: relative;
-  background-color: #7F886B;
-  padding: 0;
-  height: 100%;
-
-  a{
-    color: white;
-    display: block;
-    padding: 15px;
-    text-decoration: none;
-  }
-
-  a:hover{
-    background-color: #3E4F3C;
-    color: white;
-  }
-}
-
 .content{
   .statistics{
-    background-color: #7F886B;
-    border: #7F886B 1px solid;
-    border-radius: 8px;
-    height: 120px;
-    margin: 20px;
-    padding: 15px;
+    border-radius: 10px;
+    margin: 0;
+    padding: 0;
     text-align: center;
-
+    color: white;
     b{
       text-align: center;
     }
     span{
-
-      font-size: 50px;
+      font-size: 40px;
     }
+  }
+  .house, .room, .capacity{
+    padding: 10px;
+    border-radius: 10px;
+  }
+
+  .house{
+    background-image: linear-gradient(to bottom right, #e4417e, #b558a0);
+  }
+
+  .room{
+    background-image: linear-gradient(to bottom right, #8f6fb8, #5349b1);
+  }
+
+  .capacity{
+    background-image: linear-gradient(to bottom right, #4bbae0, #5f8fcf);
   }
 }
 
