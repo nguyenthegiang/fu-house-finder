@@ -15,13 +15,13 @@ namespace HouseFinder_API.Controllers
     [ApiController]
     public class RoomController : ControllerBase
     {
-        private IRoomRepository roomsRepository = new RoomRepository();
+        private IRoomRepository roomRepository = new RoomRepository();
 
         //GET: api/Rooms/getByHouseId?HouseId=
         [HttpGet("getByHouseId")]
         public IActionResult GetRoomsByHouseId(int HouseId)
         {
-            List<RoomDTO> roomsDTO = roomsRepository.GetRoomsByHouseId(HouseId);
+            List<RoomDTO> roomsDTO = roomRepository.GetRoomsByHouseId(HouseId);
             if (roomsDTO == null)
             {
                 return NotFound();
@@ -36,7 +36,7 @@ namespace HouseFinder_API.Controllers
         [HttpGet("getAvailableRooms")]
         public IActionResult GetAvailableRoomsByHouseId(int HouseId)
         {
-            List<RoomDTO> rooms = roomsRepository.GetAvailableRoomsByHouseId(HouseId);
+            List<RoomDTO> rooms = roomRepository.GetAvailableRoomsByHouseId(HouseId);
             if (rooms == null)
             {
                 return NotFound();
@@ -50,7 +50,7 @@ namespace HouseFinder_API.Controllers
         [HttpGet("getByRoomId")]
         public IActionResult GetRoomsByRoomId(int RoomId)
         {
-            RoomDTO roomsDTO = roomsRepository.GetRoomByRoomId(RoomId);
+            RoomDTO roomsDTO = roomRepository.GetRoomByRoomId(RoomId);
             if (roomsDTO == null)
             {
                 return NotFound();
@@ -69,7 +69,7 @@ namespace HouseFinder_API.Controllers
             {
                 room.CreatedDate = DateTime.Now;
                 room.LastModifiedDate = DateTime.Now;
-                roomsRepository.CreateRoom(room);
+                roomRepository.CreateRoom(room);
                 return Ok();
             }
             catch (Exception)
@@ -112,7 +112,7 @@ namespace HouseFinder_API.Controllers
 
                 updatedRoom.LastModifiedDate = DateTime.Now;
 
-                roomsRepository.UpdateRoomByRoomId(updatedRoom);
+                roomRepository.UpdateRoomByRoomId(updatedRoom);
                 return Ok();
             }
             catch (Exception e)
@@ -128,7 +128,7 @@ namespace HouseFinder_API.Controllers
         {
             try
             {
-                roomsRepository.DeleteRoom(roomId);
+                roomRepository.DeleteRoom(roomId);
                 return Ok();
             }
             catch (Exception)
@@ -141,7 +141,7 @@ namespace HouseFinder_API.Controllers
         [HttpGet("CountAvailableRoom")]
         public int CountAvailableRoom()
         {
-            int availableRoom = roomsRepository.CountAvailableRoom();
+            int availableRoom = roomRepository.CountAvailableRoom();
             return availableRoom;
         }
 
@@ -149,7 +149,7 @@ namespace HouseFinder_API.Controllers
         [HttpGet("CountTotalRoom")]
         public int CountTotalRoom()
         {
-            int totalRoom = roomsRepository.CountTotalRoom();
+            int totalRoom = roomRepository.CountTotalRoom();
             return totalRoom;
         }
 
@@ -158,7 +158,7 @@ namespace HouseFinder_API.Controllers
         [HttpGet("CountAvailableCapacity")]
         public int? CountAvailableCapacity()
         {
-            int? capacity = roomsRepository.CountAvailableCapacity();
+            int? capacity = roomRepository.CountAvailableCapacity();
             return capacity;
         }
 
@@ -166,7 +166,7 @@ namespace HouseFinder_API.Controllers
         [HttpGet("CountTotallyAvailableRoomByHouseId")]
         public int? CountTotallyAvailableRoomByHouseId(int houseId)
         {
-            int? availableRoom = roomsRepository.CountTotallyAvailableRoomByHouseId(houseId);
+            int? availableRoom = roomRepository.CountTotallyAvailableRoomByHouseId(houseId);
             return availableRoom;
         }
 
@@ -174,7 +174,7 @@ namespace HouseFinder_API.Controllers
         [HttpGet("CountPartiallyAvailableRoomByHouseId")]
         public int? CountPartiallyAvailableRoomByHouseId(int houseId)
         {
-            int? availableRoom = roomsRepository.CountPatiallyyAvailableRoomByHouseId(houseId);
+            int? availableRoom = roomRepository.CountPatiallyyAvailableRoomByHouseId(houseId);
             return availableRoom;
         }
 
@@ -184,7 +184,7 @@ namespace HouseFinder_API.Controllers
             try
             {
 
-                roomsRepository.ChangStatusRoom(statusId, roomId);
+                roomRepository.ChangStatusRoom(statusId, roomId);
                 return Ok();
             }
             catch (Exception)
