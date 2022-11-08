@@ -17,6 +17,6 @@ export class ListLandlordSignupRequestComponent implements OnInit {
   {
   }
 
-  searchLandlordByName()
+  searchRequest()
   {}
 }
