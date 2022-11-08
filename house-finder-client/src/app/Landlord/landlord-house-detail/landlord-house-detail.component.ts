@@ -46,6 +46,19 @@ export class LandlordHouseDetailComponent implements OnInit {
     });
   }
 
+  //[Filter] Filter by Room Type
+  onStatusRoomSelected(event: any, roomId: number) {
+    //see if user just checked or unchecked the checkbox
+    const isChecked = (<HTMLInputElement>event.target).checked;
+
+    //if user check -> add roomTypeId to the list
+    if (isChecked) {
+      this.roomService.updateStatusRoom(1, roomId).subscribe();
+    } else {
+      this.roomService.updateStatusRoom(2, roomId).subscribe();
+    }
+  }
+
   updateRoom(id: number) {
     this.router.navigate(['/Landlord/update-room/' + id]);
   }
