@@ -80,17 +80,45 @@ namespace HouseFinder_API.Controllers
 
         //PUT: api/Rooms
         [HttpPut]
-        public IActionResult UpdateRoomByRoomId(Room room)
+        public IActionResult UpdateRoomByRoomId(RoomDTO roomDTO)
         {
             try
             {
-                room.LastModifiedDate = DateTime.Now;
-                roomsRepository.UpdateRoomByRoomId(room);
+                Room updatedRoom = new Room();
+                updatedRoom.RoomId = roomDTO.RoomId;
+                updatedRoom.RoomName = roomDTO.RoomName;
+                updatedRoom.PricePerMonth = (decimal)roomDTO.PricePerMonth;
+                updatedRoom.Information = roomDTO.Information;
+                updatedRoom.AreaByMeters = roomDTO.AreaByMeters;
+                updatedRoom.Fridge = roomDTO.Fridge;
+                updatedRoom.Kitchen = roomDTO.Kitchen;
+                updatedRoom.WashingMachine = roomDTO.WashingMachine;
+                updatedRoom.Desk = roomDTO.Desk;
+                updatedRoom.NoLiveWithHost = roomDTO.NoLiveWithHost;
+                updatedRoom.Bed = roomDTO.Bed;
+                updatedRoom.ClosedToilet = roomDTO.ClosedToilet;
+                updatedRoom.MaxAmountOfPeople = roomDTO.MaxAmountOfPeople;
+                updatedRoom.CurrentAmountOfPeople = roomDTO.CurrentAmountOfPeople;
+                updatedRoom.BuildingNumber = roomDTO.BuildingNumber;
+                updatedRoom.FloorNumber = roomDTO.FloorNumber;
+                updatedRoom.StatusId = roomDTO.StatusId;
+                updatedRoom.RoomTypeId = (int)roomDTO.RoomTypeId;
+                updatedRoom.HouseId = (int)roomDTO.HouseId;
+                updatedRoom.Deleted = (bool)roomDTO.Deleted;
+                updatedRoom.CreatedDate = (DateTime)roomDTO.CreatedDate;
+                updatedRoom.LastModifiedDate = roomDTO.LastModifiedDate;
+                updatedRoom.LastModifiedBy = roomDTO.LastModifiedBy;
+                updatedRoom.CreatedBy = roomDTO.CreatedBy;
+
+                updatedRoom.LastModifiedDate = DateTime.Now;
+
+                roomsRepository.UpdateRoomByRoomId(updatedRoom);
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest();
+
+                return BadRequest(e.Message);
             }
         }
 
@@ -151,12 +179,12 @@ namespace HouseFinder_API.Controllers
         }
 
         [HttpPut("changeStatus")]
-        public IActionResult ChangStatusRoom(int statusId,int roomId)
+        public IActionResult ChangStatusRoom(int statusId, int roomId)
         {
             try
             {
 
-                roomsRepository.ChangStatusRoom(statusId,roomId);
+                roomsRepository.ChangStatusRoom(statusId, roomId);
                 return Ok();
             }
             catch (Exception)
