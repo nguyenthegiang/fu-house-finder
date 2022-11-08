@@ -25,7 +25,7 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
     kitchen: false,
     washingMachine: false,
     desk: false,
-    liveWithHost: false,
+    noLiveWithHost: false,
     bed: false,
     closedToilet: false,
     maxAmountOfPeople: 0,

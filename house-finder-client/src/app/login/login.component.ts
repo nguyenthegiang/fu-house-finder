@@ -1,6 +1,4 @@
 import { Component, ElementRef, NgZone, OnInit, Renderer2, ViewChild } from '@angular/core';
-import { SocialAuthService, SocialUser } from "angularx-social-login";
-import { FacebookLoginProvider, GoogleLoginProvider } from "angularx-social-login";
 import { User } from '../models/user';
 import { UserService } from '../services/user.service';
 import { CredentialResponse } from 'google-one-tap';
@@ -18,9 +16,10 @@ export class LoginComponent implements OnInit {
   @ViewChild('registerModal') registerModal: ElementRef | undefined;
   @ViewChild('roleModal') roleModal: ElementRef | undefined;
 
-  socialUser: SocialUser | undefined;
-  user: User | undefined;
-  googleIdToken: string | any;
+  user: any;
+  googleIdToken: string | undefined;
+  facebookId: string | undefined;
+  name: string| undefined;
   registerForm = this.formBuilder.group({
     phonenumber: "", 
     identityCardFrontSideImageLink: "", 
@@ -29,7 +28,6 @@ export class LoginComponent implements OnInit {
   });
 
   constructor(
-    private authService: SocialAuthService, 
     private userService: UserService,
     private elementRef: ElementRef,
     private router: Router,
@@ -78,49 +76,43 @@ export class LoginComponent implements OnInit {
       );
     };
     
-
-    /**
-    function statusChangeCallback(response: any) {  // Called with the results from FB.getLoginStatus().
-      console.log('statusChangeCallback');
-      console.log(response);                   // The current login status of the person.
-      if (response.status === 'connected') {   // Logged into your webpage and Facebook.
-        testAPI();  
-      } else {                                 // Not logged into your webpage or we are unable to tell.
-      }
-    }
-  
-  
-    function checkLoginState() {               // Called when a person is finished with the Login Button.
-      FB.getLoginStatus(function(response:any) {   // See the onlogin handler
-        statusChangeCallback(response);
-      });
-    }
-  
-  
     (window as any).fbAsyncInit = function() {
       FB.init({
-        appId      : '{app-id}',
+        appId      : '790258838897169',
         cookie     : true,                     // Enable cookies to allow the server to access the session.
         xfbml      : true,                     // Parse social plugins on this webpage.
-        version    : '{api-version}'           // Use this Graph API version for this call.
+        version    : 'v15.0',                  // Use this Graph API version for this call.
       });
-  
-  
-      FB.getLoginStatus(function(response: any) {   // Called after the JS SDK has been initialized.
-        statusChangeCallback(response);        // Returns the login status.
-      });
-      
-   
-      function testAPI() {                      // Testing Graph API after login.  See statusChangeCallback() for when this call is made.
-        console.log('Welcome!  Fetching your information.... ');
-        FB.api('/me', function(response: any) {
-          console.log('Successful login for: ' + response.name);
-            'Thanks for logging in, ' + response.name + '!';
-        });
-      }
-    };
-    */
+
+      FB.Event.subscribe(
+        'auth.statusChange', 
+        signInWithFB
+        );
+    }
+
+    const signInWithFB = () => {
+      console.log('login fb called');
+      FB.getLoginStatus((resp) => {   // Called after the JS SDK has been initialized.
+        if (resp.status === 'connected') {  // The current login status of the person.
+          // Logged into your webpage and Facebook.
+          FB.api('/me', (response: any) => {
+            this.userService.loginFacebook(response.id).subscribe(data => {
+              this.user = data;
+              this.ngZone.run(()=>{this.router.navigate(['/home']);});
+            },
+            error => {
+              this.facebookId = response.id;
+              this.name = response.name;
+              this.triggerRoleModal();
+            });
+          });
+        } else {                                 // Not logged into your webpage or we are unable to tell.
+        }
+      });    
+    }
+    
   }
+
   handleCredentialResponse(response: CredentialResponse) {
     // Decoding  JWT token...
       let decodedToken: any | null = null;
@@ -141,25 +133,8 @@ export class LoginComponent implements OnInit {
 
     }
     
-  signInWithFB(): void {
-    console.log('called');
-    this.authService.signIn(FacebookLoginProvider.PROVIDER_ID);
-    this.authService.authState.subscribe((user) => {
-      this.socialUser = user;
-      console.log(user);
-      this.userService.loginFacebook(user.id).subscribe(data => {
-        this.user = data;
-      });
-    });
-  }
+  
 
-  signOut(): void {
-    this.authService.signOut();
-  }
-
-  refreshToken(): void {
-    this.authService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);
-  }
 
   onSubmit(): void {
     this.registerLandlord(
@@ -172,11 +147,20 @@ export class LoginComponent implements OnInit {
 
 
   registerStudent(): void {
-    this.userService.registerStudentGoogle(this.googleIdToken).subscribe(data => {
-      this.user = data;
-      this.dismissRoleModal();
-      this.router.navigate(['/home']);
-    });
+    if (this.googleIdToken != undefined){
+      this.userService.registerStudentGoogle(this.googleIdToken).subscribe(data => {
+        this.user = data;
+        this.dismissRoleModal();
+        this.router.navigate(['/home']);
+      });
+    }
+    else if (this.facebookId != undefined && this.name != undefined){
+      this.userService.registerStudentFacebook(this.facebookId, this.name).subscribe(data => {
+        this.user = data;
+        this.dismissRoleModal();
+        this.router.navigate(['/home']);
+      });
+    }
   }
 
   registerLandlord(
@@ -185,11 +169,20 @@ export class LoginComponent implements OnInit {
     identityCardBackSideImageLink: string, 
     facebookUrl: string
     ): void {
-    this.userService.registerLandlordGoogle(this.googleIdToken, phonenumber, identityCardFrontSideImageLink, identityCardBackSideImageLink, facebookUrl).subscribe(data => {
-      this.user = data;
-      this.dismissRegisterModal();
-      this.router.navigate(['/home']);
-    });
+    if (this.googleIdToken != undefined){
+      this.userService.registerLandlordGoogle(this.googleIdToken, phonenumber, identityCardFrontSideImageLink, identityCardBackSideImageLink, facebookUrl).subscribe(data => {
+        this.user = data;
+        this.dismissRegisterModal();
+        this.router.navigate(['/home']);
+      });
+    }
+    else if (this.facebookId != undefined && this.name != undefined){
+      this.userService.registerLandlordFacebook(this.facebookId, this.name, phonenumber, identityCardFrontSideImageLink, identityCardBackSideImageLink, facebookUrl).subscribe(data => {
+        this.user = data;
+        this.dismissRegisterModal();
+        this.router.navigate(['/home']);
+      });
+    }
   }
   
   triggerRegisterModal(): void {
@@ -213,3 +206,4 @@ export class LoginComponent implements OnInit {
     this.roleModal?.nativeElement.classList.remove('show');
   }
 }
+

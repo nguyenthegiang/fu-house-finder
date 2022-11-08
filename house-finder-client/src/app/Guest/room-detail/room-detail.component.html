@@ -14,12 +14,11 @@
         </div>
         <div class="carousel-inner rounded">
           <div class="carousel-item active">
-            <img src="../assets/image/Room/{{roomDetail.imagesOfRooms[0].imageLink}}" class="d-block w-100" height="350"
-              alt="...">
+            <img src="../assets/image/Room/{{roomDetail.imagesOfRooms[0].imageLink}}" class="d-block w-100 h-25" alt="...">
           </div>
           <div *ngFor="let image of roomDetail.imagesOfRooms; let i=index;">
             <div class="carousel-item" *ngIf="i >= 1">
-              <img src="../../assets/image/Room/{{image.imageLink}}" class="d-block w-100" height="350" alt="...">
+              <img src="../../assets/image/Room/{{image.imageLink}}" class="d-block w-100 h-25" alt="...">
             </div>
           </div>
         </div>
@@ -47,8 +46,6 @@
           <span class="carousel-control-next-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Next</span>
         </button>
-        =======
-        >>>>>>> main
       </div>
 
       <div class="border border-dark rounded p-2 mt-4">
@@ -62,8 +59,88 @@
 
     <div class="col-12 col-md-5 mt-4">
       <div class="border border-dark rounded p-2 h-100">
-        <h3 class="text-center mb-2">Thông tin mô tả</h3>
-        {{roomDetail.information}}
+        <h3 class="text-center mb-3">Thông tin mô tả</h3>
+        <div class="row">
+          <div class="d-flex align-items-center col-12 col-sm-6">
+            <span class="material-symbols-outlined me-1">
+              kitchen
+            </span>
+
+            <div>
+              Tủ lạnh: <span *ngIf="roomDetail.fridge">Có</span><span *ngIf="!roomDetail.fridge">Không</span>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center col-12 col-sm-6">
+            <span class="material-symbols-outlined me-1">
+              multicooker
+            </span>
+
+            <div>
+              Bếp: <span *ngIf="roomDetail.kitchen">Có</span><span *ngIf="!roomDetail.kitchen">Không</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="d-flex align-items-center col-12 col-sm-6">
+            <span class="material-symbols-outlined me-1">
+              local_laundry_service
+            </span>
+
+            <div>
+              Máy giặt: <span *ngIf="roomDetail.washingMachine">Có</span><span *ngIf="!roomDetail.washingMachine">Không</span>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center col-12 col-sm-6">
+            <span class="material-symbols-outlined me-1">
+              desk
+            </span>
+
+            <div>
+              Bàn học: <span *ngIf="roomDetail.desk">Có</span><span *ngIf="!roomDetail.desk">Không</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="d-flex align-items-center col-12 col-sm-6">
+            <span class="material-symbols-outlined me-1">
+              wc
+            </span>
+
+            <div>
+              Vệ sinh khép kín: <span *ngIf="roomDetail.closedToilet">Có</span><span *ngIf="!roomDetail.closedToilet">Không</span>
+            </div>
+          </div>
+
+          <div class="d-flex align-items-center col-12 col-sm-6">
+            <span class="material-symbols-outlined me-1">
+              bed
+            </span>
+
+            <div>
+              Giường: <span *ngIf="roomDetail.bed">Có</span><span *ngIf="!roomDetail.bed">Không</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="d-flex align-items-center col-12 col-sm-6">
+            <span class="material-symbols-outlined me-1">
+              gite
+            </span>
+
+            <div>
+              Không chung chủ: <span *ngIf="roomDetail.noLiveWithHost">Có</span><span *ngIf="!roomDetail.noLiveWithHost">Không</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="my-3">
+          {{roomDetail.information}}
+        </div>
       </div>
     </div>
   </div>

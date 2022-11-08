@@ -40,8 +40,11 @@ export class UserService {
   }
 
   registerStudentGoogle(googleIdToken: string){
-    console.log("called");
-    return this.http.post<User>(this.APIUrl + "/register", {"googleIdToken": googleIdToken, "roleId": 1});
+    return this.http.post<User>(this.APIUrl + "/register", 
+    {
+      "googleIdToken": googleIdToken,
+      "roleId": 1,
+    });
   }
 
   registerLandlordGoogle(
@@ -62,4 +65,33 @@ export class UserService {
         "roleId": 2
       });
   }
+
+  registerStudentFacebook(facebookId: string, name: string){
+    return this.http.post<User>(this.APIUrl + "/register", {
+      "facebookUserId": facebookId,
+      "displayName": name,
+      "roleId": 1
+    });
+  }
+
+  registerLandlordFacebook(
+    facebookId: string,
+    name: string,
+    phonenumber: string,
+    identityCardFrontSideImageLink: string,
+    identityCardBackSideImageLink: string,
+    facebookUrl: string
+  ){
+  return this.http.post<User>(
+    this.APIUrl + "/register",
+    {
+      "facebookUserId": facebookId,
+      "displayName": name,
+      "phonenumber": phonenumber,
+      "identityCardFrontSideImageLink": identityCardFrontSideImageLink,
+      "identityCardBackSideImageLink": identityCardBackSideImageLink,
+      "facebookUrl": facebookUrl,
+      "roleId": 2
+    });
+}
 }

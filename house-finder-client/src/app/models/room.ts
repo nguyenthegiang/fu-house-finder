@@ -13,7 +13,7 @@ export interface Room {
     kitchen: boolean;
     washingMachine: boolean;
     desk: boolean;
-    liveWithHost: boolean;
+    noLiveWithHost: boolean;
     bed: boolean;
     closedToilet: boolean;
     maxAmountOfPeople: number;

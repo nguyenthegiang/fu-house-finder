@@ -166,9 +166,17 @@ namespace DataAccess
                         user.PhoneNumber = phonenumber;
                         user.RoleId = role;
                         user.Password = "";
+                        user.CreatedBy = user.UserId;
+                        user.CreatedDate = DateTime.UtcNow;
+                        user.LastModifiedBy = user.UserId;
+                        user.LastModifiedDate = DateTime.UtcNow;
+                        user.Active = 1;
                         context.Users.Add(user);
                         context.SaveChanges();
-                        userDTO = config.CreateMapper().Map<ResponseDTO>(user);
+                        userDTO = context.Users.Where(u => u.UserId == user.UserId)
+                            .Include(u => u.Role)
+                            .ProjectTo<ResponseDTO>(config)
+                            .FirstOrDefault();
                     }
                 }
             }
