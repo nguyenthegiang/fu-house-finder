@@ -60,7 +60,6 @@ namespace DataAccess.DTO
         public string GoogleUserId { get; set; }
         public string Email { get; set; }
         public string DisplayName { get; set; }
-        public bool? Active { get; set; }
         public string ProfileImageLink { get; set; }
         public string PhoneNumber { get; set; }
         public string FacebookUrl { get; set; }

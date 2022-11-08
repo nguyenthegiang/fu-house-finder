@@ -67,6 +67,7 @@ namespace HouseFinder_API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDTO register)
         {
+            Console.WriteLine(register.GoogleIdToken);
             if (register.GoogleIdToken != null)
             {
                 var validationSettings = new GoogleJsonWebSignature.ValidationSettings
