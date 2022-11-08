@@ -46,8 +46,8 @@
       <div class="border border-dark rounded p-2 h-100">
         <h3 class="text-center mb-2">Thông tin mô tả</h3>
         <div class="d-flex">
-          <div class="d-flex align-items-center me-3">
-            <span class="material-symbols-outlined">
+          <div class="d-flex align-items-center me-3 col-6">
+            <span class="material-symbols-outlined me-1">
               kitchen
             </span>
 
@@ -56,8 +56,8 @@
             </div>
           </div>
 
-          <div class="d-flex align-items-center me-3">
-            <span class="material-symbols-outlined">
+          <div class="d-flex align-items-center">
+            <span class="material-symbols-outlined me-1">
               multicooker
             </span>
 
@@ -68,8 +68,8 @@
         </div>
 
         <div class="d-flex">
-          <div class="d-flex align-items-center me-3">
-            <span class="material-symbols-outlined">
+          <div class="d-flex align-items-center me-3 col-6">
+            <span class="material-symbols-outlined me-1">
               local_laundry_service
             </span>
 
@@ -78,8 +78,8 @@
             </div>
           </div>
 
-          <div class="d-flex align-items-center me-3">
-            <span class="material-symbols-outlined">
+          <div class="d-flex align-items-center">
+            <span class="material-symbols-outlined me-1">
               desk
             </span>
 
@@ -90,35 +90,35 @@
         </div>
 
         <div class="d-flex">
-          <div class="d-flex align-items-center me-3">
-            <span class="material-symbols-outlined">
-              gite
+          <div class="d-flex align-items-center col-6">
+            <span class="material-symbols-outlined me-1">
+              wc
             </span>
 
             <div>
-              Chung chủ: <span *ngIf="roomDetail.noLiveWithHost">Có</span><span *ngIf="!roomDetail.noLiveWithHost">Không</span>
+              Vệ sinh khép kín: <span *ngIf="roomDetail.closedToilet">Có</span><span *ngIf="!roomDetail.closedToilet">Không</span>
             </div>
           </div>
 
-          <div class="d-flex align-items-center me-3">
-            <span class="material-symbols-outlined">
-              gite
+          <div class="d-flex align-items-center">
+            <span class="material-symbols-outlined me-1">
+              bed
             </span>
 
             <div>
-              Bếp: <span *ngIf="roomDetail.fridge">Có</span><span *ngIf="!roomDetail.fridge">Không</span>
+              Giường: <span *ngIf="roomDetail.bed">Có</span><span *ngIf="!roomDetail.bed">Không</span>
             </div>
           </div>
         </div>
 
         <div class="d-flex">
-          <div class="d-flex align-items-center me-3">
-            <span class="material-symbols-outlined">
-              kitchen
+          <div class="d-flex align-items-center me-3 col-6">
+            <span class="material-symbols-outlined me-1">
+              gite
             </span>
 
             <div>
-              Tủ lạnh: <span *ngIf="roomDetail.fridge">Có</span><span *ngIf="!roomDetail.fridge">Không</span>
+              Không chung chủ: <span *ngIf="roomDetail.noLiveWithHost">Có</span><span *ngIf="!roomDetail.noLiveWithHost">Không</span>
             </div>
           </div>
         </div>
