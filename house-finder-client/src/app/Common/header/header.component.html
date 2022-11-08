@@ -1,1 +1,25 @@
-<p>header works!</p>
+<!--Header-->
+<div class="navbar nav d-flex justify-content-between text-center text-white"
+style="background-color: #FF6F3D;">
+<div class="logo col-12 col-md-2 my-2">
+  <!-- Link back to Home -->
+  <a (click)="backHome()" id="app-name">
+    <img src="/assets/image/Logo.png" alt="..." width="70px">
+    <h6>FU House Finder</h6>
+  </a>
+</div>
+
+<div class="col-12 col-md-8 my-2">
+  <h1>TÌM TRỌ SINH VIÊN FPT</h1>
+  <div>
+    <a href="/home" class="text-white text-decoration-none mx-2">Trang chủ</a>|
+    <a href="https://daihoc.fpt.edu.vn/tuyen-sinh/" target="_blank" class="text-white text-decoration-none mx-2">Tuyển sinh</a>|
+    <a href="https://daihoc.fpt.edu.vn/lien-he-voi-chung-toi/" target="_blank" class="text-white text-decoration-none mx-2">Liên hệ</a>|
+    <a href="https://daihoc.fpt.edu.vn/gioi-thieu-dai-hoc-fpt/" target="_blank" class="text-white text-decoration-none mx-2">Giới thiệu</a>
+  </div>
+</div>
+
+<div class="col-12 col-md-2 my-2">
+  <button id="loginButton" (click)="login()">Đăng nhập</button>
+</div>
+</div>

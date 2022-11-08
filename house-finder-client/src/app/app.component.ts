@@ -10,18 +10,10 @@ import { CampusService } from './services/campus.service';
 })
 export class AppComponent {
   title = 'FU House Finder';
-  
+
   constructor() { }
 
   ngOnInit() { }
 
-  //Home button -> go back to /home
-  backHome() {
-    //use reload() so that when user is already in home -> they will get a reload of page
-    window.location.href = "/home";
-  }
 
-  login(){
-    window.location.href = "/login";
-  }
 }
