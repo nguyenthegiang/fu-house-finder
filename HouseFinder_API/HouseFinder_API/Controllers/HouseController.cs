@@ -17,7 +17,7 @@ namespace HouseFinder_API.Controllers
     [ApiController]
     public class HouseController : ControllerBase
     {
-        private IHouseRepository housesRepository = new HouseRepository();
+        private IHouseRepository houseRepository = new HouseRepository();
 
         //GET: api/Houses
         //[HttpGet]
@@ -27,7 +27,7 @@ namespace HouseFinder_API.Controllers
         //[Home Page] List available Houses (using OData)
         [EnableQuery]
         [HttpGet("availableHouses")]
-        public ActionResult<IEnumerable<AvailableHouseDTO>> GetAvailableHouses() => housesRepository.GetAvailableHouses();
+        public ActionResult<IEnumerable<AvailableHouseDTO>> GetAvailableHouses() => houseRepository.GetAvailableHouses();
 
         //GET: api/Houses/search?name=
         //[HttpGet("search")]
@@ -40,7 +40,7 @@ namespace HouseFinder_API.Controllers
         [HttpGet("{HouseId}")]
         public IActionResult GetHouseById(int HouseId)
         {
-            HouseDTO houseDTO = housesRepository.GetHouseById(HouseId);
+            HouseDTO houseDTO = houseRepository.GetHouseById(HouseId);
             if (houseDTO == null)
             {
                 return NotFound();
@@ -55,7 +55,7 @@ namespace HouseFinder_API.Controllers
         [HttpGet("GetHousesByLandlord")]
         public IActionResult GetListHousesByLandlordId(string LandlordId)
         {
-            List<HouseDTO> houseDTOs = housesRepository.GetListHousesByLandlordId(LandlordId);
+            List<HouseDTO> houseDTOs = houseRepository.GetListHousesByLandlordId(LandlordId);
             if (houseDTOs == null)
             {
                 return NotFound();
@@ -70,7 +70,7 @@ namespace HouseFinder_API.Controllers
         [HttpGet("GetMoneyForNotRentedRooms")]
         public Decimal? GetMoneyForNotRentedRooms(int HouseId)
         {
-            Decimal? total = housesRepository.GetMoneyForNotRentedRooms(HouseId);
+            Decimal? total = houseRepository.GetMoneyForNotRentedRooms(HouseId);
             return total;
         }
 
@@ -78,7 +78,7 @@ namespace HouseFinder_API.Controllers
         [HttpGet("CountTotalHouse")]
         public int CountTotalHouse()
         {
-            int totalHouse = housesRepository.CountTotalHouse();
+            int totalHouse = houseRepository.CountTotalHouse();
             return totalHouse;
         }
 
@@ -86,7 +86,7 @@ namespace HouseFinder_API.Controllers
         //[Home Page] For Paging
         //[Staff - Dashboard] For statistic report
         [HttpGet("CountAvailableHouse")]
-        public int CountAvailableHouse() => housesRepository.CountAvailableHouse();
+        public int CountAvailableHouse() => houseRepository.CountAvailableHouse();
 
     }
 }
