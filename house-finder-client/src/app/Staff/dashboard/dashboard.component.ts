@@ -246,7 +246,7 @@ export class DashboardStaffComponent implements OnInit {
         var capacityChart = new Chart("capacityChart", {
           type: 'pie',
           data: {
-            labels: ['Hết chỗ', 'Hoàn toàn trống', 'một phần trống'],
+            labels: ['Hết chỗ', 'Hoàn toàn trống', 'Một phần trống'],
             datasets: [
               {
                 data: [(this.totalCapacity - this.availableCapNum), this.totallyAvailableCapacity, this.partiallyAvailableCapacity],
