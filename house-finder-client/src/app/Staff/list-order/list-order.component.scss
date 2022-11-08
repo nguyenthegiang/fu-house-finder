@@ -16,3 +16,15 @@
     color: white;
   }
 }
+
+@media only screen and (max-width: 768px) {
+  #menu1
+  {
+    display: none;
+  }
+
+  #menu2
+  {
+    display: inline !important;
+  }
+}
