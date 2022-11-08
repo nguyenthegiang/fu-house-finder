@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Repositories.IRepository
 {
-    public interface IRoomsRepository
+    public interface IRoomRepository
     {
         public List<RoomDTO> GetRoomsByHouseId(int HouseId);
         public List<RoomDTO> GetAvailableRoomsByHouseId(int houseId);
