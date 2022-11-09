@@ -55,6 +55,8 @@ export class HomepageComponent implements OnInit {
   selectedCommuneId: number | undefined;    //(filter by Region)
   selectedVillageId: number | undefined;    //(filter by Region)
   selectedRate: number | undefined;         //(filter by Rate)
+  maxDistance: number | undefined;          //(filter by Distance)
+  minDistance: number | undefined;          //(filter by Distance)
   //[Order by] Selected Order value
   selectedOrderValue: string | undefined;
 
@@ -378,16 +380,16 @@ export class HomepageComponent implements OnInit {
     this.filterHouse(true);
   }
 
-  //[Filter] Cancel all Filter values
-  onCancelFilter() {
-    //reload page
-    window.location.reload();
-  }
-
   //[Order by] Order by values
   onOrderBy(selectedOrder: string) {
     // Call API to update list houses with the selected order
     this.selectedOrderValue = selectedOrder;
     this.filterHouse(true);
+  }
+
+  //[Filter] Cancel all Filter values
+  onCancelFilter() {
+    //reload page
+    window.location.reload();
   }
 }

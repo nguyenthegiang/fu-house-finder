@@ -10,7 +10,7 @@ GO
 --Địa chỉ của User, House & Campus
 CREATE TABLE [dbo].[Addresses] (
 	AddressId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	Addresses nvarchar(1000) NOT NULL,					--địa chỉ cụ thể
+	Addresses nvarchar(1000) NOT NULL,							--địa chỉ cụ thể
 	GoogleMapLocation nvarchar(MAX) NOT NULL,					--địa chỉ theo Google Map -> Sử dụng hỗ trợ search khoảng cách
 
 	--Dành cho những Table CRUD dc -> History
@@ -55,7 +55,7 @@ CREATE TABLE [dbo].[Users] (
 	[Password] nvarchar(100),
 
 	DisplayName nvarchar(500) NULL,						--Tên để hiển thị, lấy từ Google/Facebook API (nếu login = fb/gg) hoặc lấy khi đăng ký (nếu login = email)
-	Active int NOT NULL,											--chuyển thành false nếu User bị Disable
+	Active int NOT NULL,								--chuyển thành false nếu User bị Disable
 
 	--Dành cho Staff & Landlord
 	ProfileImageLink nvarchar(500) NULL,				--Link ảnh profile
