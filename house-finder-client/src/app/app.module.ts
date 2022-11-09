@@ -37,6 +37,8 @@ import { UpdateAccountComponent } from './Admin/update-account/update-account.co
 import { StaffSidebarComponent } from './Common/staff-sidebar/staff-sidebar.component';
 import { HeaderComponent } from './Common/header/header.component';
 import { FooterComponent } from './Common/footer/footer.component';
+import { RoleModalComponent } from './Guest/login/role-modal/role-modal.component';
+import { LandlordRegisterModalComponent } from './Guest/login/landlord-register-modal/landlord-register-modal.component';
 
 @NgModule({
   declarations: [
@@ -69,6 +71,8 @@ import { FooterComponent } from './Common/footer/footer.component';
     StaffSidebarComponent,
     HeaderComponent,
     FooterComponent,
+    RoleModalComponent,
+    LandlordRegisterModalComponent,
   ],
   imports: [
     BrowserModule,

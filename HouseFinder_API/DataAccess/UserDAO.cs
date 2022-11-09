@@ -85,8 +85,11 @@ namespace DataAccess
                     //Get by Id, include Address
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    Console.WriteLine(email);
+                    Console.WriteLine(password);
                     userDTO = context.Users.Where(u => u.Email.Equals(email) && u.Password.Equals(password))
                         .Include(u => u.Address).Include(u => u.Role).ProjectTo<ResponseDTO>(config).FirstOrDefault();
+                    Console.WriteLine(userDTO == null);
                 }
             }
             catch (Exception e)
