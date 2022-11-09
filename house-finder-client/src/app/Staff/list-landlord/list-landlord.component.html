@@ -1,45 +1,6 @@
+<app-staff-header></app-staff-header>
+
 <div class="row d-flex justify-content-around mx-3 mx-md-5 mt-5">
-  <div class="col-12 col-md-3 mb-5" id="menu1" *ngIf="landlords.length != 0">
-    <div class="card h-100">
-      <div class="card-header text-center text-white bg-secondary">
-        Menu
-      </div>
-      <ul class="list-group list-group-flush">
-        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/dashboard">Dashboard</a>
-        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/list-landlord">Quản lý chủ trọ</a>
-        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/list-house">Quản lý nhà trọ</a>
-        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/list-report">Quản lý báo cáo vi phạm</a>
-        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/list-landlord-signup-request">Chủ trọ đăng ký tài khoản</a>
-        <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/list-order">Nguyện vọng đăng ký nhà ở của sinh viên</a>
-      </ul>
-    </div>
-  </div>
-
-  <div class="col-12 mb-4" id="menu2" style="display: none;" *ngIf="landlords.length != 0">
-    <div class="dropdown">
-      <button class="btn btn-secondary dropdown-toggle w-100" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Menu
-      </button>
-      <ul class="dropdown-menu w-100">
-        <li>
-          <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/dashboard">Home</a>
-        </li>
-        <li>
-          <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/list-landlord">Quản lý chủ trọ</a>
-        </li>
-        <li>
-          <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/list-house">Quản lý nhà trọ</a>
-        </li>
-        <li>
-          <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/list-report">Quản lý báo cáo vi phạm</a>
-        </li>
-        <li>
-          <a class="list-group-item list-group-item-action list-group-item-light p-3" href="/Staff/list-order">Nguyện vọng đăng ký nhà ở của sinh viên</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-
   <div class="col-12 col-md-8">
     <!-- Page content -->
     <div class="row">
@@ -182,3 +143,5 @@
     </div>
   </div>
 </div>
+
+<app-footer></app-footer>
