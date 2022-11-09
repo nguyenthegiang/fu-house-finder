@@ -39,6 +39,7 @@ import { HeaderComponent } from './Common/header/header.component';
 import { FooterComponent } from './Common/footer/footer.component';
 import { RoleModalComponent } from './Guest/login/role-modal/role-modal.component';
 import { LandlordRegisterModalComponent } from './Guest/login/landlord-register-modal/landlord-register-modal.component';
+import { StaffHeaderComponent } from './Common/staff-header/staff-header.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +74,7 @@ import { LandlordRegisterModalComponent } from './Guest/login/landlord-register-
     FooterComponent,
     RoleModalComponent,
     LandlordRegisterModalComponent,
+    StaffHeaderComponent,
   ],
   imports: [
     BrowserModule,
