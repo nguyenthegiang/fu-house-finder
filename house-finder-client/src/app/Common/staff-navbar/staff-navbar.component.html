@@ -1,1 +1,31 @@
-<p>staff-navbar works!</p>
+<div class="row d-flex justify-content-between bg-light border">
+  <div class="col-12 col-sm-2">
+    <div class="p-2 d-flex justify-content-center border">
+      <span>Tổng nhà trọ: {{ totalHouses }}</span>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-2">
+    <div class="p-2 d-flex flex-column justify-content-center align-items-center border">
+      <span>Tổng phòng trọ: {{ totalRooms }}</span>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-2">
+    <div class="p-2 d-flex justify-content-center border">
+      <span>Tổng nhà trống: {{ availableHouseNum }}</span>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-2">
+    <div class="p-2 d-flex flex-column justify-content-center align-items-center border">
+      <span>Tổng phòng trống: {{ availabelRoomsNum }}</span>
+    </div>
+  </div>
+
+  <div class="col-12 col-sm-2">
+    <div class="p-2 d-flex flex-column justify-content-center align-items-center border">
+      <span>Sức chứa: {{ availableCapNum }}</span>
+    </div>
+  </div>
+</div>
