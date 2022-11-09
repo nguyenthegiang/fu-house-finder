@@ -70,5 +70,25 @@ namespace DataAccess
             return totals;
         }
 
+        //Get list of all reports
+        public static List<ReportDTO> GetAllReport()
+        {
+            List<ReportDTO> reports;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    reports = context.Reports.ProjectTo<ReportDTO>(config).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return reports;
+        }
+
     }
 }

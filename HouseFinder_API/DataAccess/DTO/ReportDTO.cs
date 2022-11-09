@@ -10,8 +10,8 @@ namespace DataAccess.DTO
     {
         public int ReportId { get; set; }
         public string ReportContent { get; set; }
-        public string StudentId { get; set; }
-        public int? HouseId { get; set; }
+        public UserDTO Student { get; set; }
+        public HouseDTO House { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
         public string CreatedBy { get; set; }
