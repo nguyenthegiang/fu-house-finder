@@ -4,93 +4,48 @@
   <div class="col-12">
     <!-- Page content -->
     <div class="row">
-      <div class="my-5" *ngIf="landlords.length == 0">
+      <div class="my-4" *ngIf="landlords.length == 0">
         <h3 class="text-center">Chưa có chủ trọ</h3>
       </div>
-      <div class="my-5" *ngIf="landlords.length != 0">
+      <div class="my-4" *ngIf="landlords.length != 0">
         <h3 class="text-center">Danh sách chủ trọ</h3>
 
         <table class="table table-striped table-hover mt-4">
           <thead>
             <tr>
+              <th scope="col">#</th>
               <th scope="col">Id</th>
               <th scope="col">Họ Tên</th>
-              <th scope="col">Email</th>
-              <th scope="col">Số Điện Thoại</th>
-              <th scope="col">Địa Chỉ</th>
-              <th scope="col">Facebook</th>
-              <th scope="col">Ảnh</th>
-              <th scope="col">Căn cước</th>
+              <th scope="col" id="md">Email</th>
+              <th scope="col" id="md">Số Điện Thoại</th>
+              <th scope="col" id="md">Facebook</th>
+              <th scope="col" id="md">Ngày tạo</th>
               <th scope="col">Trạng thái</th>
+              <th scope="col">Tùy chọn</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let dataItem of landlords">
+            <tr *ngFor="let dataItem of landlords; let i=index;">
+              <td><b>{{i+1}}</b></td>
               <td>{{dataItem.userId}}</td>
               <td>{{dataItem.displayName}}</td>
-              <td>{{dataItem.email}}</td>
-              <td>{{dataItem.phoneNumber}}</td>
-              <td>{{dataItem.address.addresses}}</td>
-              <td><a target="_blank" href="{{dataItem.facebookUrl}}">{{dataItem.displayName}}</a></td>
-              <!-- Xem ảnh chủ trọ -->
-              <td>
-                <a data-toggle="modal" data-target="#exampleModal">
-                  Xem ảnh
-                </a>
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <img src="../../../assets/image/LandlordAvatar.jpg">
-                  </div>
-                </div>
-              </td>
+              <td id="md">{{dataItem.email}}</td>
+              <td id="md">{{dataItem.phoneNumber}}</td>
+              <!-- <td>{{dataItem.address.addresses}}</td> -->
+              <td id="md"><a target="_blank" class="text-decoration-none" href="{{dataItem.facebookUrl}}">{{dataItem.displayName}}</a></td>
 
-              <!-- Ảnh chứng minh thư -->
-              <td>
-                <!-- Xem ảnh mặt trước -->
-                <a data-toggle="modal" data-target="#exampleModal">
-                  Xem ảnh mặt trước
-                </a>
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <img src="../../../assets/image/LandlordAvatar.jpg">
-                  </div>
-                </div>
-                <br>
-
-                <!-- Xem ảnh mặt sau -->
-                <a data-toggle="modal" data-target="#exampleModal">
-                  Xem ảnh mặt sau
-                </a>
-                <!-- Modal -->
-                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <img src="../../../assets/image/LandlordAvatar.jpg">
-                  </div>
-                </div>
-              </td>
-
+              <td id="md">{{dataItem.createdDate | date}}</td>
 
               <!-- Room status -->
               <td>
-                <div class="form-check form-switch" *ngIf="dataItem.active === true">
+                <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                  <label class="form-check-label" for="flexSwitchCheckChecked">Hoạt động</label>
+                  <label id="md" class="form-check-label" for="flexSwitchCheckChecked">Hoạt động</label>
                 </div>
-                <div class="form-check form-switch" *ngIf="dataItem.active === false">
-                  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-                  <label class="form-check-label" for="flexSwitchCheckDefault">Không hoạt động</label>
-                </div>
+              </td>
 
-                <label class="switch">
-                  <input *ngIf="dataItem.active === true" type="checkbox" checked>
-                  <input *ngIf="dataItem.active === false" type="checkbox">
-                  <span class="slider round"></span>
-                </label>
-                <br>
-                <span *ngIf="dataItem.active === true">Hoạt động</span>
-                <span *ngIf="dataItem.active === false">Không hoạt động</span>
+              <td>
+                <a class="text-decoration-none" href="#">Chi tiết</a>
               </td>
             </tr>
           </tbody>
