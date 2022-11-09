@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using BusinessObjects;
 using DataAccess.DTO;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -78,24 +79,26 @@ namespace DataAccess
         public static ResponseDTO LoginUsername(string email, string password)
         {
             ResponseDTO userDTO;
-            try
-            {
                 using (var context = new FUHouseFinderContext())
                 {
                     //Get by Id, include Address
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    Console.WriteLine(email);
-                    Console.WriteLine(password);
-                    userDTO = context.Users.Where(u => u.Email.Equals(email) && u.Password.Equals(password))
-                        .Include(u => u.Address).Include(u => u.Role).ProjectTo<ResponseDTO>(config).FirstOrDefault();
-                    Console.WriteLine(userDTO == null);
+                    User user = context.Users.Where(u => u.Email.Equals(email))
+                        .Include(u => u.Address).Include(u => u.Role).FirstOrDefault();
+
+                    PasswordHasher<User> pw = new PasswordHasher<User>();
+                    var result = pw.VerifyHashedPassword(user, user.Password, password);
+                    if (result == PasswordVerificationResult.Success || result == PasswordVerificationResult.SuccessRehashNeeded)
+                    {
+                        var mapper = config.CreateMapper();
+                        userDTO = mapper.Map<ResponseDTO>(user);
+                    }
+                    else
+                    {
+                        userDTO = null;
+                    }
                 }
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
             return userDTO;
         }
         public static ResponseDTO LoginFacebook(string fid)
