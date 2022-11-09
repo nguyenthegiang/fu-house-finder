@@ -25,6 +25,8 @@ export class ListOrderComponent implements OnInit {
 
   //Filter
   selectedStatusId: number|undefined;
+  selectedFromDate: string|undefined;
+  selectedToDate: string|undefined;
 
   constructor(private orderService: OrderService,
               private orderStatusService: OrderStatusService,){}
@@ -79,6 +81,8 @@ export class ListOrderComponent implements OnInit {
       this.pageSize,
       this.pageNumber,
       this.selectedStatusId,
+      this.selectedFromDate,
+      this.selectedToDate,
     ).subscribe(data => {
       this.orders = data;
       this.scrollToTop();
@@ -95,6 +99,20 @@ export class ListOrderComponent implements OnInit {
     this.selectedStatusId = numberCampusId;
     this.filterHouse(true);
   }
+
+  onFromDateSelected(selectedDate: string){
+    this.selectedFromDate = selectedDate;
+    this.filterHouse(true);
+    console.log(selectedDate);
+    console.log(this.selectedFromDate);
+  }
+
+  onToDateSelected(selectedDate: string){
+    this.selectedToDate = selectedDate;
+    this.filterHouse(true);
+    console.log(selectedDate);
+  }
+
 
   searchOrderByName()
   {}

@@ -1,20 +1,12 @@
-.content{
-  .statistics{
-    border-radius: 10px;
-    margin: 0;
-    padding: 0;
-    text-align: center;
-    color: white;
-    b{
-      text-align: center;
-    }
-    span{
-      font-size: 40px;
-    }
-  }
+
   .house, .room, .capacity{
     padding: 10px;
     border-radius: 10px;
+    color: white;
+    span{
+      font-size: 30px;
+      font-weight: 600;
+    }
   }
 
   .house{
@@ -28,7 +20,6 @@
   .capacity{
     background-image: linear-gradient(to bottom right, #4bbae0, #5f8fcf);
   }
-}
 
 #divChart{
   display: block;
@@ -53,3 +44,4 @@
     display: inline !important;
   }
 }
+
