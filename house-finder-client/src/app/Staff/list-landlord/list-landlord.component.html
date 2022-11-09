@@ -16,10 +16,12 @@
               <th scope="col">#</th>
               <th scope="col">Id</th>
               <th scope="col">Họ Tên</th>
-              <th scope="col" id="md">Email</th>
               <th scope="col" id="md">Số Điện Thoại</th>
               <th scope="col" id="md">Facebook</th>
               <th scope="col" id="md">Ngày tạo</th>
+              <th scope="col" id="md">Nhà</th>
+              <th scope="col" id="md">Phòng</th>
+              <th scope="col" id="md">Phòng trống</th>
               <th scope="col">Trạng thái</th>
               <th scope="col">Tùy chọn</th>
             </tr>
@@ -29,12 +31,14 @@
               <td><b>{{i+1}}</b></td>
               <td>{{dataItem.userId}}</td>
               <td>{{dataItem.displayName}}</td>
-              <td id="md">{{dataItem.email}}</td>
               <td id="md">{{dataItem.phoneNumber}}</td>
               <!-- <td>{{dataItem.address.addresses}}</td> -->
               <td id="md"><a target="_blank" class="text-decoration-none" href="{{dataItem.facebookUrl}}">{{dataItem.displayName}}</a></td>
 
               <td id="md">{{dataItem.createdDate | date}}</td>
+              <td id="md">{{houseCount}}</td>
+              <td id="md">{{roomCount}}</td>
+              <td id="md">{{roomAvailableCount}}</td>
 
               <!-- Room status -->
               <td>
@@ -45,7 +49,7 @@
               </td>
 
               <td>
-                <a class="text-decoration-none" href="#">Chi tiết</a>
+                <a class="text-decoration-none" (click)="viewHouse(dataItem.userId)" style="cursor: pointer;">Chi tiết</a>
               </td>
             </tr>
           </tbody>
