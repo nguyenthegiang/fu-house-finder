@@ -28,6 +28,7 @@ export class ListOrderComponent implements OnInit {
   selectedStatusId: number|undefined;
   selectedFromDate: string|undefined;
   selectedToDate: string|undefined;
+  searchValue: string | undefined;
 
   constructor(private orderService: OrderService,
               private orderStatusService: OrderStatusService,
@@ -120,6 +121,6 @@ export class ListOrderComponent implements OnInit {
     this.router.navigate(['/Staff/staff-landlord-detail/' + id]);
   }
 
-  searchOrderByName()
+  search(searchValue: string)
   {}
 }

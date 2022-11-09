@@ -17,7 +17,8 @@ export class ListLandlordComponent implements OnInit
   roomAvailableCount: number = 0;
 
   //{Search} input value
-  searchLandlordName: any;
+  searchValue: string | undefined;
+
   //List of landlords
   landlords: User[] = [];
 
@@ -49,6 +50,6 @@ export class ListLandlordComponent implements OnInit
     this.router.navigate(['/Staff/staff-landlord-detail/' + id]);
   }
 
-  searchLandlordByName()
+  search(searchValue: string)
   {}
 }

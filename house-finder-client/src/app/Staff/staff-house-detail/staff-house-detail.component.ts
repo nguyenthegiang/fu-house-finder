@@ -20,6 +20,9 @@ export class StaffHouseDetailComponent implements OnInit {
   //[Update] roomId to pass into <update-room>
   updateRoomId: number = 0;
 
+  //{Search} input value
+  searchValue: string | undefined;
+
   constructor(
     private route: ActivatedRoute,
     private roomService: RoomService,
@@ -80,4 +83,7 @@ export class StaffHouseDetailComponent implements OnInit {
   {
     this.router.navigate(['/Staff/staff-room-detail/' + id]);
   }
+
+  search(searchValue: string)
+  {}
 }

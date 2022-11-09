@@ -17,6 +17,7 @@ export class StaffLandlordDetailComponent implements OnInit {
   houseCount: number = 0;
   roomCount: number = 0;
   roomAvailableCount: number = 0;
+  searchValue: string | undefined;
 
   constructor(private houseService: HouseService,
     private lanlord_informationService: LandlordInformationService,
@@ -42,6 +43,6 @@ export class StaffLandlordDetailComponent implements OnInit {
     this.router.navigate(['/Staff/staff-house-detail/' + id]);
   }
 
-  searchHouseByName()
+  search(searchValue: string)
   {}
 }
