@@ -15,9 +15,9 @@
             <tr>
               <th scope="col">ID</th>
               <th scope="col">Tên nhà trọ</th>
-              <th scope="col">Giá điện</th>
-              <th scope="col">Giá nước</th>
-              <th scope="col" id="utility">Tiện ích</th>
+              <th scope="col" id="md">Giá điện</th>
+              <th scope="col" id="md">Giá nước</th>
+              <th scope="col" id="md">Tiện ích</th>
               <th scope="col">Tùy chọn</th>
             </tr>
           </thead>
@@ -29,28 +29,28 @@
               <!-- House name -->
               <td>{{dataItem.houseName}}</td>
 
-              <td>{{dataItem.powerPrice | currency:'VND':'symbol':'3.0'}}</td>
-              <td>{{dataItem.waterPrice | currency:'VND':'symbol':'3.0'}}</td>
+              <td id="md">{{dataItem.powerPrice | currency:'VND':'symbol':'3.0'}}</td>
+              <td id="md">{{dataItem.waterPrice | currency:'VND':'symbol':'3.0'}}</td>
 
               <!-- Utilities -->
-              <td id="utility">
+              <td id="md">
                 <div class="d-flex">
                   <div *ngIf="dataItem.fingerprintLock == true" class="col-12 col-md-1 me-1">
-                    <button type="button" class="btn col-1 d-flex justify-content-center align-items-center mt-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Khóa vân tay">
+                    <button type="button" class="btn col-1 d-flex justify-content-center align-items-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Khóa vân tay">
                       <span class="material-symbols-outlined">
                         fingerprint
                       </span>
                     </button>
                   </div>
                   <div *ngIf="dataItem.camera == true" class="col-12 col-md-1 me-1">
-                    <button type="button" class="btn col-1 d-flex justify-content-center align-items-center mt-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Camera an ninh">
+                    <button type="button" class="btn col-1 d-flex justify-content-center align-items-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Camera an ninh">
                       <span class="material-symbols-outlined">
                         videocam
                       </span>
                     </button>
                   </div>
                   <div *ngIf="dataItem.parking == true" class="col-12 col-md-1">
-                    <button type="button" class="btn col-1 d-flex justify-content-center align-items-center mt-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Chỗ để xe">
+                    <button type="button" class="btn col-1 d-flex justify-content-center align-items-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Chỗ để xe">
                       <span class="material-symbols-outlined">
                         local_parking
                       </span>
@@ -60,8 +60,7 @@
               </td>
 
               <td>
-                <button type="button" class="btn btn-secondary me-2 my-1" data-toggle="modal" data-target="#updateModal"
-                  data-whatever="@getbootstrap" (click)="viewHouse(dataItem.houseId)">Chi tiết</button>
+                <a class="text-decoration-none" style="cursor: pointer;">Chi tiết</a>
               </td>
             </tr>
           </tbody>
