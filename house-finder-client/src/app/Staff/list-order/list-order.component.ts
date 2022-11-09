@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Order } from 'src/app/models/order';
 import { OrderStatus } from 'src/app/models/orderStatus';
 import { OrderService } from 'src/app/services/order.service';
@@ -29,7 +30,8 @@ export class ListOrderComponent implements OnInit {
   selectedToDate: string|undefined;
 
   constructor(private orderService: OrderService,
-              private orderStatusService: OrderStatusService,){}
+              private orderStatusService: OrderStatusService,
+              private router: Router){}
 
   ngOnInit(): void {
     this.filterHouse(false);
@@ -113,6 +115,10 @@ export class ListOrderComponent implements OnInit {
     console.log(selectedDate);
   }
 
+  viewOrder(id: number)
+  {
+    this.router.navigate(['/Staff/staff-landlord-detail/' + id]);
+  }
 
   searchOrderByName()
   {}
