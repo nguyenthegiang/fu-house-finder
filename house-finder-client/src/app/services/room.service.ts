@@ -36,6 +36,10 @@ export class RoomService {
     return this.http.put<any>(this.APIUrl, room, this.httpOptions);
   }
 
+  updateStatusRoom(statusId: number, roomId: number): Observable<any> {
+    return this.http.put<any>(this.APIUrl + "/changeStatus?statusId=" + statusId + "&roomId=" + roomId, this.httpOptions);
+  }
+
   //[Landlord: Delete Room]
   deleteRoom(roomId: number): Observable<any> {
     return this.http.delete<any>(this.APIUrl + "/Rooms?roomId=" + roomId, this.httpOptions);
@@ -47,17 +51,17 @@ export class RoomService {
   }
 
   //[Home Page] [Staff/Dashboard] Count total available rooms
-  countAvailableRooms(): Observable<number>{
+  countAvailableRooms(): Observable<number> {
     return this.http.get<number>(this.APIUrl + "/CountAvailableRoom");
   }
 
   //[Staff/Dashboard] Count available capacity
-  countAvailableCapacity(): Observable<any>{
+  countAvailableCapacity(): Observable<any> {
     return this.http.get<any>(this.APIUrl + "/CountAvailableCapacity");
   }
 
   //[Staff/Dashboard] Count total rooms
-  CountTotalRoom(): Observable<any>{
+  CountTotalRoom(): Observable<any> {
     return this.http.get<any>(this.APIUrl + "/CountTotalRoom");
   }
 
@@ -73,7 +77,7 @@ export class RoomService {
 
 
   //[Homepage] Count totally available rooms by house id
-  countTotallyAvailableRoomByHouseId(houseId: number): Observable<any>{
+  countTotallyAvailableRoomByHouseId(houseId: number): Observable<any> {
     return this.http.get<Room>(this.APIUrl + "/CountTotallyAvailableRoomByHouseId?houseId=" + houseId);
   }
 }
