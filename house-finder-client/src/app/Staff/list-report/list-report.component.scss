@@ -9,3 +9,10 @@
     display: inline !important;
   }
 }
+
+@media only screen and (max-width: 768px) {
+  #md
+  {
+    display: none;
+  }
+}

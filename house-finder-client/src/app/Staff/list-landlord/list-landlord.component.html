@@ -33,7 +33,7 @@
         <table class="table table-striped table-hover">
           <thead>
             <tr>
-              <th scope="col">STT</th>
+              <th scope="col" id="md">STT</th>
               <th scope="col">Id</th>
               <th scope="col">Họ Tên</th>
               <th scope="col" id="md">Số Điện Thoại</th>
@@ -48,7 +48,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let dataItem of landlords; let i=index;">
-              <td><b>{{i+1}}</b></td>
+              <td id="md"><b>{{i+1}}</b></td>
               <td>{{dataItem.userId}}</td>
               <td>{{dataItem.displayName}}</td>
               <td id="md">{{dataItem.phoneNumber}}</td>
