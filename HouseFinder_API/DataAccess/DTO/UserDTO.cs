@@ -55,6 +55,7 @@ namespace DataAccess.DTO
     }
     public class ResponseDTO
     {
+        public string AccessToken { get; set; }
         public string UserId { get; set; }
         public string FacebookUserId { get; set; }
         public string GoogleUserId { get; set; }

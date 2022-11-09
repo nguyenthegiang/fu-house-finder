@@ -41,7 +41,7 @@ namespace HouseFinder_API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDTO login)
         {
-            login.Password = Hashing.Encrypt(login.Password);
+            //login.Password = Hashing.Encrypt(login.Password);
             if (login.GoogleUserId != null)
             {
                 var validationSettings = new GoogleJsonWebSignature.ValidationSettings
@@ -62,6 +62,7 @@ namespace HouseFinder_API.Controllers
                 return NotFound();
             HttpContext.Session.SetString("Token", token);
             HttpContext.Session.SetString("User", user.UserId);
+            user.AccessToken = token;
             return Ok(user);
         }
         [HttpPost("register")]
@@ -82,6 +83,8 @@ namespace HouseFinder_API.Controllers
             ResponseDTO user = userReposiotry.Register(register);
             string token = this.auth.Authenticate(user);
             HttpContext.Session.SetString("Token", token);
+            HttpContext.Session.SetString("User", user.UserId);
+            user.AccessToken = token;
             return Ok(user);
         }
         [Authorize(Roles = "Staff")]

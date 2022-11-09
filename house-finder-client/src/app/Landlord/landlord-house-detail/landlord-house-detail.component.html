@@ -41,8 +41,7 @@
           <td id="utility">
             <div class="row">
               <div *ngIf="dataItem.fridge == true" class="col-12 col-md-1 me-1">
-                <button type="button"
-                  class="btn col-1 d-flex justify-content-center align-items-center mt-1"
+                <button type="button" class="btn col-1 d-flex justify-content-center align-items-center mt-1"
                   data-bs-toggle="tooltip" data-bs-placement="top" title="Tủ lạnh">
                   <span class="material-symbols-outlined">
                     kitchen
@@ -50,8 +49,7 @@
                 </button>
               </div>
               <div *ngIf="dataItem.kitchen == true" class="col-12 col-md-1 me-1">
-                <button type="button"
-                  class="btn col-1 d-flex justify-content-center align-items-center mt-1"
+                <button type="button" class="btn col-1 d-flex justify-content-center align-items-center mt-1"
                   data-bs-toggle="tooltip" data-bs-placement="top" title="Bếp">
                   <span class="material-symbols-outlined">
                     multicooker
@@ -59,8 +57,7 @@
                 </button>
               </div>
               <div *ngIf="dataItem.washingMachine == true" class="col-12 col-md-1 me-1">
-                <button type="button"
-                  class="btn col-1 d-flex justify-content-center align-items-center mt-1"
+                <button type="button" class="btn col-1 d-flex justify-content-center align-items-center mt-1"
                   data-bs-toggle="tooltip" data-bs-placement="top" title="Máy giặt">
                   <span class="material-symbols-outlined">
                     local_laundry_service
@@ -68,8 +65,7 @@
                 </button>
               </div>
               <div *ngIf="dataItem.desk == true" class="col-12 col-md-1 me-1">
-                <button type="button"
-                  class="btn col-1 d-flex justify-content-center align-items-center mt-1"
+                <button type="button" class="btn col-1 d-flex justify-content-center align-items-center mt-1"
                   data-bs-toggle="tooltip" data-bs-placement="top" title="Bàn ghế">
                   <span class="material-symbols-outlined">
                     desk
@@ -77,15 +73,15 @@
                 </button>
               </div>
               <div *ngIf="dataItem.noLiveWithHost == true" class="col-12 col-md-1 me-1">
-                <button type="button" class="btn col-1 d-flex justify-content-center align-items-center mt-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Chung chủ">
+                <button type="button" class="btn col-1 d-flex justify-content-center align-items-center mt-1"
+                  data-bs-toggle="tooltip" data-bs-placement="top" title="Chung chủ">
                   <span class="material-symbols-outlined">
                     gite
                   </span>
                 </button>
               </div>
               <div *ngIf="dataItem.bed == true" class="col-12 col-md-1 me-1">
-                <button type="button"
-                  class="btn col-1 d-flex justify-content-center align-items-center mt-1"
+                <button type="button" class="btn col-1 d-flex justify-content-center align-items-center mt-1"
                   data-bs-toggle="tooltip" data-bs-placement="top" title="Giường">
                   <span class="material-symbols-outlined">
                     bed
@@ -93,8 +89,7 @@
                 </button>
               </div>
               <div *ngIf="dataItem.closedToilet == true" class="col-12 col-md-1 me-1">
-                <button type="button"
-                  class="btn col-1 d-flex justify-content-center align-items-center mt-1"
+                <button type="button" class="btn col-1 d-flex justify-content-center align-items-center mt-1"
                   data-bs-toggle="tooltip" data-bs-placement="top" title="Vệ sinh khép kín">
                   <span class="material-symbols-outlined">
                     wc
@@ -130,20 +125,17 @@
               <input *ngIf="dataItem.status.statusName === 'Available'" type="checkbox" checked>
               <span class="slider round"></span>
             </label> -->
-
-            <div class="form-check form-switch" *ngIf="dataItem.status.statusName === 'Available'">
-              <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-              <label class="form-check-label" for="flexSwitchCheckChecked">Còn trống</label>
-            </div>
-
-            <div class="form-check form-switch" *ngIf="dataItem.status.statusName === 'Occupied'">
-              <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-              <label class="form-check-label" for="flexSwitchCheckDefault">Đã thuê</label>
-            </div>
-
-            <div class="form-check form-switch" *ngIf="dataItem.status.statusName === 'Disabled'">
-              <input class="form-check-input" type="checkbox" id="flexSwitchCheckDisabled" disabled>
-              <label class="form-check-label" for="flexSwitchCheckDisabled">Không dùng được</label>
+            <div class="form-check form-switch">
+              <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
+                [checked]="dataItem.status.statusName === 'Available'"
+                [disabled]="dataItem.status.statusName === 'Disabled'"
+                (change)="onStatusRoomSelected($event, dataItem.roomId)">
+              <label class="form-check-label" for="flexSwitchCheckChecked">
+                <!-- <span>{{dataItem.status.statusName}}</span> -->
+                <span *ngIf="dataItem.status.statusName === 'Available'">Còn Trống</span>
+                <span *ngIf="dataItem.status.statusName === 'Occupied'">Đã thuê</span>
+                <span *ngIf="dataItem.status.statusName === 'Disabled'">Không dùng được</span>
+              </label>
             </div>
           </td>
           <td>
