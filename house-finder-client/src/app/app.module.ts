@@ -41,6 +41,7 @@ import { RoleModalComponent } from './Guest/login/role-modal/role-modal.componen
 import { LandlordRegisterModalComponent } from './Guest/login/landlord-register-modal/landlord-register-modal.component';
 import { StaffHeaderComponent } from './Common/staff-header/staff-header.component';
 import { StaffNavbarComponent } from './Common/staff-navbar/staff-navbar.component';
+import { StaffLandlordDetailComponent } from './Staff/staff-landlord-detail/staff-landlord-detail.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { StaffNavbarComponent } from './Common/staff-navbar/staff-navbar.compone
     LandlordRegisterModalComponent,
     StaffHeaderComponent,
     StaffNavbarComponent,
+    StaffLandlordDetailComponent,
   ],
   imports: [
     BrowserModule,
