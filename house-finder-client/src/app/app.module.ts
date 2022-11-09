@@ -42,6 +42,7 @@ import { LandlordRegisterModalComponent } from './Guest/login/landlord-register-
 import { StaffHeaderComponent } from './Common/staff-header/staff-header.component';
 import { StaffNavbarComponent } from './Common/staff-navbar/staff-navbar.component';
 import { StaffLandlordDetailComponent } from './Staff/staff-landlord-detail/staff-landlord-detail.component';
+import { StaffHouseDetailComponent } from './Staff/staff-house-detail/staff-house-detail.component';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { StaffLandlordDetailComponent } from './Staff/staff-landlord-detail/staf
     StaffHeaderComponent,
     StaffNavbarComponent,
     StaffLandlordDetailComponent,
+    StaffHouseDetailComponent,
   ],
   imports: [
     BrowserModule,
