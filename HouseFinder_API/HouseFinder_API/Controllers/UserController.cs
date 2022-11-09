@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using HouseFinder_API.Helper;
 using HouseFinder_API.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Google.Apis.Auth;
@@ -41,7 +40,6 @@ namespace HouseFinder_API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDTO login)
         {
-            //login.Password = Hashing.Encrypt(login.Password);
             if (login.GoogleUserId != null)
             {
                 var validationSettings = new GoogleJsonWebSignature.ValidationSettings
