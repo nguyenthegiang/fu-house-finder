@@ -94,41 +94,6 @@
         </div>
         <hr>
 
-        <!-- <div>
-            <div class=" ranges-container">
-                <div class="range d-flex justify-content-between align-items-center">
-                  <input type="range" min="0" max="20000000" label="Min" value="0" class="w-75">
-                  <span>
-                    <span class="text-mute">Min: </span>
-                    <span>0</span>
-                  </span>
-                </div>
-                <div class="range d-flex justify-content-between align-items-center">
-                  <input type="range" min="0" max="20000000" label="Max" value="20000000" class="w-75">
-                  <span>
-                    <span class="text-mute">Max: </span>
-                    <span>20</span>
-                  </span>
-                </div>
-            </div>
-          </div> -->
-
-        <!-- Room Types -->
-        <div>
-          <h6 class="font-weight-bold mb-2">Loại phòng:</h6>
-          <div>
-            <div class="form-check" *ngFor="let roomType of roomTypes" id="listRoomType">
-              <!-- Select room type -->
-              <input class="form-check-input" type="checkbox" value="{{roomType.roomTypeId}}"
-                id="{{roomType.roomTypeName}}" (change)="onRoomTypeSelected($event, roomType.roomTypeId)">
-              <label class="form-check-label" for="{{roomType.roomTypeName}}">
-                {{roomType.roomTypeName}}
-              </label>
-            </div>
-          </div>
-        </div>
-        <hr>
-
         <!-- Regions -->
         <div>
           <h6 class="font-weight-bold mb-2">Khu vực:</h6>
@@ -175,6 +140,41 @@
                 <option *ngFor="let village of villagesOfSelectedCommune" value="{{village.villageId}}">
                   {{village.villageName}}</option>
               </select>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <!-- <div>
+            <div class=" ranges-container">
+                <div class="range d-flex justify-content-between align-items-center">
+                  <input type="range" min="0" max="20000000" label="Min" value="0" class="w-75">
+                  <span>
+                    <span class="text-mute">Min: </span>
+                    <span>0</span>
+                  </span>
+                </div>
+                <div class="range d-flex justify-content-between align-items-center">
+                  <input type="range" min="0" max="20000000" label="Max" value="20000000" class="w-75">
+                  <span>
+                    <span class="text-mute">Max: </span>
+                    <span>20</span>
+                  </span>
+                </div>
+            </div>
+          </div> -->
+
+        <!-- Room Types -->
+        <div>
+          <h6 class="font-weight-bold mb-2">Loại phòng:</h6>
+          <div>
+            <div class="form-check" *ngFor="let roomType of roomTypes" id="listRoomType">
+              <!-- Select room type -->
+              <input class="form-check-input" type="checkbox" value="{{roomType.roomTypeId}}"
+                id="{{roomType.roomTypeName}}" (change)="onRoomTypeSelected($event, roomType.roomTypeId)">
+              <label class="form-check-label" for="{{roomType.roomTypeName}}">
+                {{roomType.roomTypeName}}
+              </label>
             </div>
           </div>
         </div>
