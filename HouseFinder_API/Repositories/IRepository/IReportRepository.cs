@@ -1,4 +1,5 @@
 ﻿using BusinessObjects;
+using DataAccess.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,5 +12,6 @@ namespace Repositories.IRepository
     {
         public void AddReport(Report report);
         public int[] GetTotalReportByMonth();
+        public List<ReportDTO> GetAllReport();
     }
 }

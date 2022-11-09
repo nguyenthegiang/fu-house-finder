@@ -1,6 +1,8 @@
 ﻿using BusinessObjects;
+using DataAccess.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.OData.Query;
 using Repositories.IRepository;
 using Repositories.Repositories;
 using System;
@@ -15,6 +17,10 @@ namespace HouseFinder_API.Controllers
     public class ReportController : ControllerBase
     {
         private IReportRepository reportRepository = new ReportRepository();
+
+        [EnableQuery]
+        [HttpGet]
+        public ActionResult<IEnumerable<ReportDTO>> GetAllOrders() => reportRepository.GetAllReport();
 
         //[Report] POST: Add Report
         [HttpPost]
@@ -43,5 +49,8 @@ namespace HouseFinder_API.Controllers
             int[] totals = reportRepository.GetTotalReportByMonth();
             return totals;
         }
+
+
+
     }
 }
