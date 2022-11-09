@@ -231,7 +231,7 @@ namespace DataAccess
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
                     //Get by ID
-                    houseDTO = context.Houses.Include(h => h.Address).ProjectTo<HouseDTO>(config)
+                    houseDTO = context.Houses.Where(h => h.Deleted == false).Include(h => h.Address).ProjectTo<HouseDTO>(config)
                         .Where(p => p.HouseId == houseId).FirstOrDefault();
 
                 }
@@ -255,7 +255,7 @@ namespace DataAccess
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
                     //Get by LandlordId
-                    houseDTOs = context.Houses.Include(h => h.Address).ProjectTo<HouseDTO>(config).Where(h => h.LandlordId.Equals(LandlordId)).ToList();
+                    houseDTOs = context.Houses.Where(h => h.Deleted == false).Include(h => h.Address).ProjectTo<HouseDTO>(config).Where(h => h.LandlordId.Equals(LandlordId)).ToList();
                 }
             }
             catch (Exception e)
@@ -277,6 +277,7 @@ namespace DataAccess
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
                     List<RoomDTO>  rooms = context.Rooms
+                        .Where(r => r.Deleted == false)
                         .Where(r => r.HouseId == HouseId)
                         .Where(r => r.Status.StatusName.Equals("Available") || r.Status.StatusName.Equals("Disabled"))
                         .ProjectTo<RoomDTO>(config).ToList();
@@ -304,7 +305,7 @@ namespace DataAccess
                 using (var context = new FUHouseFinderContext())
                 {
                     //Count total houses
-                    totalHouse = context.Houses.Count();
+                    totalHouse = context.Houses.Where(h => h.Deleted == false).Count();
                 }
             }
             catch (Exception e)
