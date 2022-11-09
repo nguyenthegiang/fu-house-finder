@@ -1,4 +1,3 @@
-import { StaffListRoomComponent } from './Staff/staff-list-room/staff-list-room.component';
 import { StaffHouseDetailComponent } from './Staff/staff-house-detail/staff-house-detail.component';
 import { StaffLandlordDetailComponent } from './Staff/staff-landlord-detail/staff-landlord-detail.component';
 import { UpdateAccountComponent } from './Admin/update-account/update-account.component';
@@ -48,7 +47,6 @@ const routes: Routes = [
   { path: 'Staff/list-order', component: ListOrderComponent},
   { path: 'Staff/staff-landlord-detail/:id', component: StaffLandlordDetailComponent},
   { path: 'Staff/staff-house-detail/:id', component: StaffHouseDetailComponent},
-  { path: 'Staff/staff-list-room/:id', component: StaffListRoomComponent},
   { path: 'Admin/list-staff', component: ListStaffComponent},
   { path: 'Admin/change-password', component: ChangePasswordComponent},
   { path: 'Admin/create-account', component: CreateAccountComponent},

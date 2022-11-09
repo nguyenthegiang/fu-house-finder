@@ -36,10 +36,10 @@ export class StaffLandlordDetailComponent implements OnInit {
     });
   }
 
-  viewHouse(id: number)
+  viewRoom(id: number)
   {
     console.log(id);
-    this.router.navigate(['/Landlord/landlord-house-detail/' + id]);
+    this.router.navigate(['/Staff/staff-house-detail/' + id]);
   }
 
   searchHouseByName()
