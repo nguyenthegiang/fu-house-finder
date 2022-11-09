@@ -30,9 +30,9 @@ export class ListReportComponent implements OnInit
   searchReport()
   {}
 
-  viewHouse(id: number)
+  viewReportDetail(id: number)
   {
     console.log(id);
-    this.router.navigate(['/Landlord/landlord-house-detail/' + id]);
+    this.router.navigate(['/Staff/staff-report-detail/' + id]);
   }
 }
