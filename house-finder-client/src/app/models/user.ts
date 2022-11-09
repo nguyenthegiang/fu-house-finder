@@ -2,6 +2,7 @@ import { Address } from './address';
 
 //DTO: Users
 export interface User {
+    accessToken: string;
     userId: string;
     facebookUserId: string;
     googleUserId: string;

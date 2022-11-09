@@ -26,6 +26,10 @@ export class LoginComponent implements OnInit {
     identityCardBackSideImageLink: "", 
     facebookUrl: ""
   });
+  loginForm = this.formBuilder.group({
+    username: "",
+    password: ""
+  });
 
   constructor(
     private userService: UserService,
@@ -51,7 +55,6 @@ export class LoginComponent implements OnInit {
     this.elementRef.nativeElement.appendChild(fb_s);
 
     (window as any).onGoogleLibraryLoad = () => {
-      console.log('Google\'s One-tap sign in script loaded!');
     
       // @ts-ignore
       google.accounts.id.initialize({
@@ -71,7 +74,8 @@ export class LoginComponent implements OnInit {
           size: 'large',
           text: 'signin_with',
           shape: 'rectangular',
-          logo_alignment: 'left'
+          logo_alignment: 'left',
+          width: 250
         }
       );
     };
@@ -96,8 +100,9 @@ export class LoginComponent implements OnInit {
         if (resp.status === 'connected') {  // The current login status of the person.
           // Logged into your webpage and Facebook.
           FB.api('/me', (response: any) => {
-            this.userService.loginFacebook(response.id).subscribe(data => {
-              this.user = data;
+            this.userService.loginFacebook(response.id).subscribe(resp => {
+              localStorage.setItem('user', resp.accessToken);
+              this.user = resp;
               this.ngZone.run(()=>{this.router.navigate(['/home']);});
             },
             error => {
@@ -115,26 +120,38 @@ export class LoginComponent implements OnInit {
 
   handleCredentialResponse(response: CredentialResponse) {
     // Decoding  JWT token...
-      let decodedToken: any | null = null;
-      try {
-        decodedToken = JSON.parse(atob(response?.credential.split('.')[1]));
-      } catch (e) {
-        console.error('Error while trying to decode token', e);
-      }
-      let user = this.userService.loginGoogle(response?.credential).subscribe(
-        response => {
-          this.ngZone.run(()=>{this.router.navigate(['/home']);});
-        },
-        error => {
-          this.googleIdToken = response?.credential;
-          this.triggerRoleModal();
-        }
-      );
-
+    let decodedToken: any | null = null;
+    try {
+      decodedToken = JSON.parse(atob(response?.credential.split('.')[1]));
+    } catch (e) {
+      console.error('Error while trying to decode token', e);
     }
-    
-  
+    let user = this.userService.loginGoogle(response?.credential).subscribe(
+      resp => {
+        localStorage.setItem('user', resp.accessToken);
+        this.ngZone.run(()=>{this.router.navigate(['/home']);});
+      },
+      error => {
+        this.googleIdToken = response?.credential;
+        this.triggerRoleModal();
+      }
+    );
+  }
 
+  loginUsernamePassword(): void{
+    this.userService.loginEmailPassword(
+      this.loginForm.controls['username'].value, 
+      this.loginForm.controls['password'].value
+    ).subscribe(
+      resp => {
+        localStorage.setItem('user', resp.accessToken);
+        this.ngZone.run(()=>{this.router.navigate(['/Admin/list-staff']);});
+      },
+      error => {
+        alert('invalid username - password');
+      }
+    )
+  }
 
   onSubmit(): void {
     this.registerLandlord(
@@ -148,15 +165,17 @@ export class LoginComponent implements OnInit {
 
   registerStudent(): void {
     if (this.googleIdToken != undefined){
-      this.userService.registerStudentGoogle(this.googleIdToken).subscribe(data => {
-        this.user = data;
+      this.userService.registerStudentGoogle(this.googleIdToken).subscribe(resp => {
+        localStorage.setItem('user', resp.accessToken);
+        this.user = resp;
         this.dismissRoleModal();
         this.router.navigate(['/home']);
       });
     }
     else if (this.facebookId != undefined && this.name != undefined){
-      this.userService.registerStudentFacebook(this.facebookId, this.name).subscribe(data => {
-        this.user = data;
+      this.userService.registerStudentFacebook(this.facebookId, this.name).subscribe(resp => {
+        localStorage.setItem('user', resp.accessToken);
+        this.user = resp;
         this.dismissRoleModal();
         this.router.navigate(['/home']);
       });
@@ -170,15 +189,30 @@ export class LoginComponent implements OnInit {
     facebookUrl: string
     ): void {
     if (this.googleIdToken != undefined){
-      this.userService.registerLandlordGoogle(this.googleIdToken, phonenumber, identityCardFrontSideImageLink, identityCardBackSideImageLink, facebookUrl).subscribe(data => {
-        this.user = data;
+      this.userService.registerLandlordGoogle(
+        this.googleIdToken, 
+        phonenumber, 
+        identityCardFrontSideImageLink, 
+        identityCardBackSideImageLink, 
+        facebookUrl
+      ).subscribe(resp => {
+        localStorage.setItem('user', resp.accessToken);
+        this.user = resp;
         this.dismissRegisterModal();
         this.router.navigate(['/home']);
       });
     }
     else if (this.facebookId != undefined && this.name != undefined){
-      this.userService.registerLandlordFacebook(this.facebookId, this.name, phonenumber, identityCardFrontSideImageLink, identityCardBackSideImageLink, facebookUrl).subscribe(data => {
-        this.user = data;
+      this.userService.registerLandlordFacebook(
+        this.facebookId, 
+        this.name, 
+        phonenumber, 
+        identityCardFrontSideImageLink, 
+        identityCardBackSideImageLink, 
+        facebookUrl
+      ).subscribe(resp => {
+        localStorage.setItem('user', resp.accessToken);
+        this.user = resp;
         this.dismissRegisterModal();
         this.router.navigate(['/home']);
       });
