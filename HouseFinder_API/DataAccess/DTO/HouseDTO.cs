@@ -20,8 +20,7 @@ namespace DataAccess.DTO
         public bool? FingerprintLock { get; set; }
         public bool? Camera { get; set; }
         public bool? Parking { get; set; }
-        //No need for deleted because we always only query undeleted data
-        //public bool Deleted { get; set; }
+        public bool Deleted { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
         public string CreatedBy { get; set; }
