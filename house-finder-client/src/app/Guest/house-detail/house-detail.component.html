@@ -56,10 +56,9 @@
       </div>
 
       <!-- Google Map Location -->
-      <div>
-        {{mapAPIkey}} {{houseDetail!.address.googleMapLocation}}
+      <div *ngIf="mapUrl">
         <iframe id="googleMap" class="w-100 h-25 my-5 border border-secondary rounded"
-          src="{{mapUrl | safe: 'url'}}"
+          [src]="mapUrl | safe"
           allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
         </iframe>
       </div>

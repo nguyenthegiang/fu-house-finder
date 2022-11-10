@@ -24,7 +24,7 @@ export class HouseDetailComponent implements OnInit {
   //Detail information of this House
   houseDetail: House | undefined;
   //URL for src in <iframe> Google Map
-  mapUrl: string = "";
+  mapUrl: string | undefined;
   //Detail image of this House
   houseImage: string[] = [];
   //Landlord of this house
