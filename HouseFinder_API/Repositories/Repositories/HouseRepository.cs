@@ -33,5 +33,9 @@ namespace Repositories.Repositories
 
         public int CountAvailableHouse() => HouseDAO.CountAvailableHouse();
         public List<AvailableHouseDTO> GetAvailableHouses() => HouseDAO.GetAvailableHouses();
+
+        public void UpdateHouseByHouseId(House house) => HouseDAO.UpdateHouseByHouseId(house);
+
+        public void DeleteHouseByHouseId(int houseId) => HouseDAO.DeleteHouseByHouseId(houseId);
     }
 }

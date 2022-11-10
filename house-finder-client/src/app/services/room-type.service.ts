@@ -1,13 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
+//environment variable for API URL
+import { environment } from 'src/environments/environment'; 
 
 @Injectable({
   providedIn: 'root'
 })
 export class RoomTypeService {
 
-  readonly APIUrl = "https://localhost:5001/api/RoomType";
+  readonly APIUrl = `${environment.api_url}/RoomType`;
 
   constructor(private http: HttpClient) { }
 

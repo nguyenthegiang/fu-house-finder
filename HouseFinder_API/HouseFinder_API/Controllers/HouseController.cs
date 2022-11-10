@@ -88,5 +88,37 @@ namespace HouseFinder_API.Controllers
         [HttpGet("CountAvailableHouse")]
         public int CountAvailableHouse() => houseRepository.CountAvailableHouse();
 
+
+        //PUT: api/Houses
+        [HttpPut]
+        public IActionResult UpdateHouseByHouseId(House house)
+        {
+            try
+            {
+                houseRepository.UpdateHouseByHouseId(house);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
+
+        //DELETE: api/Houses?houseId=
+        [HttpDelete("Houses")]
+        public IActionResult DeleteHouse(int houseId)
+        {
+            try
+            {
+                houseRepository.DeleteHouseByHouseId(houseId);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
+
     }
 }
