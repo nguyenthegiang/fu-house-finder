@@ -5,11 +5,11 @@ import { HouseService } from 'src/app/services/house.service';
 import { LandlordInformationService } from 'src/app/services/landlord-information.service';
 
 @Component({
-  selector: 'app-list-house',
-  templateUrl: './list-house.component.html',
-  styleUrls: ['./list-house.component.scss']
+  selector: 'app-staff-landlord-detail',
+  templateUrl: './staff-landlord-detail.component.html',
+  styleUrls: ['./staff-landlord-detail.component.scss']
 })
-export class ListHouseComponent implements OnInit {
+export class StaffLandlordDetailComponent implements OnInit {
   //List of all houses
   houses: House[] = [];
 
@@ -37,10 +37,10 @@ export class ListHouseComponent implements OnInit {
     });
   }
 
-  viewHouse(id: number)
+  viewRoom(id: number)
   {
     console.log(id);
-    this.router.navigate(['/Landlord/landlord-house-detail/' + id]);
+    this.router.navigate(['/Staff/staff-house-detail/' + id]);
   }
 
   search(searchValue: string)

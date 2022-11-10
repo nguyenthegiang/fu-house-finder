@@ -12,7 +12,8 @@ import { ReportService } from 'src/app/services/report.service';
 export class ListReportComponent implements OnInit
 {
   //{Search} input value
-  searchLandlordName: any;
+  searchValue: string | undefined;
+
   //List all report
   reports: Report[] = [];
   constructor(private reportService: ReportService,
@@ -27,12 +28,12 @@ export class ListReportComponent implements OnInit
     });
   }
 
-  searchReport()
+  search(searchValue: string)
   {}
 
-  viewHouse(id: number)
+  viewReportDetail(id: number)
   {
     console.log(id);
-    this.router.navigate(['/Landlord/landlord-house-detail/' + id]);
+    this.router.navigate(['/Staff/staff-report-detail/' + id]);
   }
 }

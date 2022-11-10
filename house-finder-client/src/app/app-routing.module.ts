@@ -1,3 +1,5 @@
+import { StaffHouseDetailComponent } from './Staff/staff-house-detail/staff-house-detail.component';
+import { StaffLandlordDetailComponent } from './Staff/staff-landlord-detail/staff-landlord-detail.component';
 import { UpdateAccountComponent } from './Admin/update-account/update-account.component';
 import { CreateAccountComponent } from './Admin/create-account/create-account.component';
 import { ChangePasswordComponent } from './Admin/change-password/change-password.component';
@@ -22,6 +24,7 @@ import { RoomDetailComponent } from './Guest/room-detail/room-detail.component';
 import { ListOrderComponent } from './Staff/list-order/list-order.component';
 import { AddRoomComponent } from './Landlord/add-room/add-room.component';
 import { UpdateRoomComponent } from './Landlord/update-room/update-room.component';
+import { StaffRoomDetailComponent } from './Staff/staff-room-detail/staff-room-detail.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -43,6 +46,9 @@ const routes: Routes = [
   { path: 'Staff/list-house', component: ListHouseComponent},
   { path: 'Staff/list-landlord-signup-request', component: ListLandlordSignupRequestComponent},
   { path: 'Staff/list-order', component: ListOrderComponent},
+  { path: 'Staff/staff-landlord-detail/:id', component: StaffLandlordDetailComponent},
+  { path: 'Staff/staff-house-detail/:id', component: StaffHouseDetailComponent},
+  { path: 'Staff/staff-room-detail/:id', component: StaffRoomDetailComponent},
   { path: 'Admin/list-staff', component: ListStaffComponent},
   { path: 'Admin/change-password', component: ChangePasswordComponent},
   { path: 'Admin/create-account', component: CreateAccountComponent},

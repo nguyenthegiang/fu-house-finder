@@ -4,11 +4,11 @@
   <div class="col-12">
     <!-- Page content -->
     <div class="row">
-      <div class="my-4" *ngIf="landlords.length == 0">
-        <h3 class="text-center">Chưa có chủ trọ</h3>
+      <div class="my-4" *ngIf="houses.length == 0">
+        <h3 class="text-center">Chưa có nhà trọ</h3>
       </div>
-      <div class="my-4" *ngIf="landlords.length != 0">
-        <h3 class="text-center">Danh sách chủ trọ</h3>
+      <div class="my-4" *ngIf="houses.length != 0">
+        <h3 class="text-center">Danh sách nhà trọ</h3>
 
         <!-- Search bar -->
         <div class="row w-100 d-flex justify-content-center">
@@ -34,42 +34,56 @@
           <thead>
             <tr>
               <th scope="col" id="md">STT</th>
-              <th scope="col">Id</th>
-              <th scope="col">Họ Tên</th>
-              <th scope="col" id="md">Số Điện Thoại</th>
-              <th scope="col" id="md">Facebook</th>
-              <th scope="col" id="md">Ngày tạo</th>
-              <th scope="col" id="md">Nhà</th>
-              <th scope="col" id="md">Phòng</th>
-              <th scope="col" id="md">Phòng trống</th>
-              <th scope="col">Trạng thái</th>
+              <th scope="col">ID</th>
+              <th scope="col">Tên nhà trọ</th>
+              <th scope="col" id="md">Giá điện</th>
+              <th scope="col" id="md">Giá nước</th>
+              <th scope="col" id="md">Tiện ích</th>
               <th scope="col">Tùy chọn</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let dataItem of landlords; let i=index;">
+            <tr *ngFor="let dataItem of houses; let i=index;">
               <td id="md"><b>{{i+1}}</b></td>
-              <td>{{dataItem.userId}}</td>
-              <td>{{dataItem.displayName}}</td>
-              <td id="md">{{dataItem.phoneNumber}}</td>
-              <!-- <td>{{dataItem.address.addresses}}</td> -->
-              <td id="md"><a target="_blank" class="text-decoration-none" href="{{dataItem.facebookUrl}}">{{dataItem.displayName}}</a></td>
 
-              <td id="md">{{dataItem.createdDate | date}}</td>
-              <td id="md">{{houseCount}}</td>
-              <td id="md">{{roomCount}}</td>
-              <td id="md">{{roomAvailableCount}}</td>
+              <!-- House id -->
+              <td>{{dataItem.houseId}}</td>
 
-              <!-- Room status -->
-              <td>
-                <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                  <label id="md" class="form-check-label" for="flexSwitchCheckChecked">Hoạt động</label>
+              <!-- House name -->
+              <td>{{dataItem.houseName}}</td>
+
+              <td id="md">{{dataItem.powerPrice | currency:'VND':'symbol':'3.0'}}</td>
+              <td id="md">{{dataItem.waterPrice | currency:'VND':'symbol':'3.0'}}</td>
+
+              <!-- Utilities -->
+              <td id="md">
+                <div class="d-flex">
+                  <div *ngIf="dataItem.fingerprintLock == true" class="col-12 col-md-1 me-1">
+                    <button type="button" class="btn col-1 d-flex justify-content-center align-items-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Khóa vân tay">
+                      <span class="material-symbols-outlined">
+                        fingerprint
+                      </span>
+                    </button>
+                  </div>
+                  <div *ngIf="dataItem.camera == true" class="col-12 col-md-1 me-1">
+                    <button type="button" class="btn col-1 d-flex justify-content-center align-items-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Camera an ninh">
+                      <span class="material-symbols-outlined">
+                        videocam
+                      </span>
+                    </button>
+                  </div>
+                  <div *ngIf="dataItem.parking == true" class="col-12 col-md-1">
+                    <button type="button" class="btn col-1 d-flex justify-content-center align-items-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Chỗ để xe">
+                      <span class="material-symbols-outlined">
+                        local_parking
+                      </span>
+                    </button>
+                  </div>
                 </div>
               </td>
 
               <td>
-                <a class="text-decoration-none" (click)="viewHouse(dataItem.userId)" style="cursor: pointer;">Chi tiết</a>
+                <a class="text-decoration-none" (click)="viewRoom(dataItem.houseId)" style="cursor: pointer;">Chi tiết</a>
               </td>
             </tr>
           </tbody>

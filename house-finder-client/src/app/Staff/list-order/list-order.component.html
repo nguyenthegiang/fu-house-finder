@@ -1,24 +1,27 @@
 <app-staff-header></app-staff-header>
 
-<div class="row d-flex justify-content-around mx-3 mx-md-5 mt-5">
-  <div class="col-12 col-md-8">
+<div class="row m-2">
+  <div class="col-12">
     <!-- Page content -->
     <div class="row">
-      <div class="my-5" *ngIf="orders.length == 0">
+      <div class="my-4" *ngIf="orders.length == 0">
         <h3 class="text-center">Chưa có đăng ký</h3>
       </div>
-      <div class="mb-5" *ngIf="orders.length != 0">
+      <div class="my-4" *ngIf="orders.length != 0">
         <h3 class="text-center">Danh sách đăng ký</h3>
 
         <!-- Search bar -->
-        <div class="row d-flex justify-content-center">
-          <div class="text-center col-12 col-md-8 d-flex justify-content-center my-4">
-            <div class="input-group">
-              <!-- Press enter to search  -->
-              <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm"
-                aria-label="Recipient's username" aria-describedby="button-addon2" (keydown.enter)="searchOrderByName()">
-              <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="searchOrderByName()">
+        <div class="row w-100 d-flex justify-content-center">
+          <div class="col-10 col-md-5">
+            <div class="text-center my-4">
+              <div class="input-group">
+                <!-- Press enter to search  -->
+                <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm" aria-label="search_house_by_name"
+                  aria-describedby="button-addon2" #searchValue
+                  (keydown.enter)="search(searchValue.value)">
+                <!-- Click button to search -->
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2"
+                  (click)="search(searchValue.value)">
                   <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
               </div>
@@ -31,19 +34,19 @@
         <div class="row">
           <!-- Date picker -->
             <!-- Start date -->
-            <div class="col-3">
+            <div class="col-6 col-md-3 my-2">
               <label class="form-label">Từ ngày</label>
               <input #selectedFromDate class="form-control" type="date" (change)="onFromDateSelected(selectedFromDate.value)">
             </div>
             <!-- End date -->
-            <div class="col-3">
+            <div class="col-6 col-md-3 my-2">
               <label class="form-label">Đến ngày</label>
               <input #selectedToDate class="form-control" type="date" (change)="onToDateSelected(selectedToDate.value)">
             </div>
           <!-- End date picker -->
 
           <!-- Trạng thái -->
-          <div class="col-3">
+          <div class="col-6 col-md-3 my-2">
             <label class="form-label">Trạng thái</label>
             <select #selectCStatusId class="form-select" (change)="onStatusSelected(selectCStatusId.value)">
               <option value="0">Tất cả</option>
@@ -51,7 +54,7 @@
             </select>
           </div>
           <!-- Order by -->
-          <div class="col-3">
+          <div class="col-6 col-md-3 my-2">
             <label class="form-label">Sắp xếp</label>
             <select class="form-select">
               <option>Chọn sắp xếp</option>
@@ -65,28 +68,34 @@
         <table class="table table-striped table-hover mt-4">
           <thead>
             <tr>
+              <th scope="col">STT</th>
               <th scope="col">Mã sinh viên</th>
               <th scope="col">Tên sinh viên</th>
               <th scope="col">Số điện thoại</th>
               <th scope="col">Email</th>
-              <th scope="col">Yêu cầu</th>
+              <!-- <th scope="col">Yêu cầu</th> -->
               <th scope="col">Ngày tạo</th>
               <th scope="col">Ngày giải quyết</th>
               <th scope="col">Trạng thái</th>
+              <th scope="col">Tùy chọn</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let order of orders">
+            <tr *ngFor="let order of orders; let i=index;">
+              <td><b>{{i+1}}</b></td>
               <td>{{order.studentId}}</td>
               <td>{{order.studentName}}</td>
               <td>{{order.phoneNumber}}</td>
               <td>{{order.email}}</td>
-              <td>{{order.orderContent}}</td>
+              <!-- <td>{{order.orderContent}}</td> -->
               <td>{{order.orderedDate| date:'shortDate'}}</td>
               <td>{{order.solvedDate| date:'shortDate'}}</td>
               <td *ngIf="order.status.statusName ==='Unsolved'" style="color: red">Chưa giải quyết</td>
               <td *ngIf="order.status.statusName ==='Processing'" style="color: orange">Đang giải quyết</td>
               <td *ngIf="order.status.statusName ==='Solved'" style="color: green;">Đã giải quyết</td>
+              <td>
+                <a class="text-decoration-none" (click)="viewOrder(order.orderId)" style="cursor: pointer;">Chi tiết</a>
+              </td>
             </tr>
           </tbody>
         </table>

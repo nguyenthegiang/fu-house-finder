@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class ListLandlordSignupRequestComponent implements OnInit {
 
   //{Search} input value
-  searchLandlordName: any;
+  searchValue: string | undefined;
 
   constructor()
   { }
@@ -17,6 +17,6 @@ export class ListLandlordSignupRequestComponent implements OnInit {
   {
   }
 
-  searchRequest()
+  search(searchValue: string)
   {}
 }

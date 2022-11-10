@@ -1,50 +1,47 @@
 <app-staff-header></app-staff-header>
 
-<div class="row d-flex justify-content-around mx-3 mx-md-5 mt-5">
-  <div class="col-12 col-md-8">
+<div class="row m-2">
+  <div class="col-12">
     <!-- Page content -->
     <div class="row">
-      <div class="mb-5">
+      <div class="my-4">
         <h3 class="text-center">Danh sách báo cáo</h3>
 
         <!-- Search bar -->
-        <div class="row d-flex justify-content-center">
-          <div class="text-center col-12 col-md-8 d-flex justify-content-center my-4">
-            <div class="input-group">
-              <!-- Press enter to search  -->
-              <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm"
-                aria-label="Recipient's username" aria-describedby="button-addon2" (keydown.enter)="searchReport()">
-              <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="searchReport()">
+        <div class="row w-100 d-flex justify-content-center">
+          <div class="col-10 col-md-5">
+            <div class="text-center my-4">
+              <div class="input-group">
+                <!-- Press enter to search  -->
+                <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm" aria-label="search_house_by_name"
+                  aria-describedby="button-addon2" #searchValue
+                  (keydown.enter)="search(searchValue.value)">
+                <!-- Click button to search -->
+                <button class="btn btn-outline-secondary" type="button" id="button-addon2"
+                  (click)="search(searchValue.value)">
                   <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
               </div>
             </div>
           </div>
         </div>
-
         <!-- End Search bar -->
 
-        <table class="table table-striped table-hover mt-4">
+        <table class="table table-striped table-hover">
           <thead>
             <tr>
-              <th scope="col">#</th>
+              <th scope="col" id="md">STT</th>
               <th scope="col">Mã sinh viên</th>
               <th scope="col">Nhà trọ</th>
               <th scope="col">Nội dung</th>
-              <th scope="col">Ngày tạo</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let report of reports">
-              <th scope="row">1</th>
+            <tr *ngFor="let report of reports; let i=index;">
+              <td id="md"><b>{{i+1}}</b></td>
               <td>{{report.studentId}}</td>
               <td>{{report.houseId}}</td>
               <td>{{report.reportContent}}</td>
-              <td>
-                <button type="button" class="btn btn-secondary me-2 my-1" data-toggle="modal" data-target="#updateModal"
-                  data-whatever="@getbootstrap" (click)="viewHouse(report.houseId)">Chi tiết</button>
-              </td>
             </tr>
           </tbody>
         </table>
