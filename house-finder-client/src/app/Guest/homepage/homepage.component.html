@@ -42,7 +42,7 @@
           <!-- Campus -->
           <h6 class="font-weight-bold">Cơ sở</h6>
           <div>
-            <!-- When select 1 Campus -> call API to update list House -->
+            <!-- When select 1 Campus -> change list of District accordingly -->
             <select #selectCampus class="form-select" aria-label="select-campus"
               (change)="onCampusSelected(selectCampus.value)">
               <option class="disableOption" disabled selected>Chọn cơ sở</option>
@@ -66,8 +66,8 @@
               <select #selectDistrict class="form-select selectRegion" aria-label="select-district"
                 (change)="onDistrictSelected(selectDistrict.value)">
                 <option class="disableOption" disabled selected>Chọn quận/huyện</option>
-                <!-- List all Districts -->
-                <option *ngFor=" let district of districts" value="{{district.districtId}}">
+                <!-- List all Districts of selected Campus-->
+                <option *ngFor=" let district of districtsOfSelectedCampus" value="{{district.districtId}}">
                   {{district.districtName}}</option>
               </select>
             </div>

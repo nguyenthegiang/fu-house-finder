@@ -1092,7 +1092,7 @@ INSERT INTO [dbo].[Villages] VALUES (N'Z 175', 59, GETDATE());
 INSERT INTO [dbo].[Villages] VALUES (N'Xóm Bướm', 59, GETDATE());
 INSERT INTO [dbo].[Villages] VALUES (N'Xóm Chằm', 59, GETDATE());
 
-INSERT INTO [dbo].[Villages] VALUES (N'13KP Long Hòa', 59, GETDATE());
+INSERT INTO [dbo].[Villages] VALUES (N'13KP Long Hòa', 60, GETDATE());
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 

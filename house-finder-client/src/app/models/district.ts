@@ -4,5 +4,6 @@ import { Commune } from './commune';
 export interface District {
     districtId: number;
     districtName: string;
+    campusId: number;
     communes: Commune[];
 }
