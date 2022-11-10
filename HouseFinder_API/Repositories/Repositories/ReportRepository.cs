@@ -14,7 +14,7 @@ namespace Repositories.Repositories
     {
         public void AddReport(Report report) => ReportDAO.AddReport(report);
 
-        public List<ReportDTO> GetAllReport() => ReportDAO.GetAllReport();
+        public List<StaffReportDTO> GetAllReport() => ReportDAO.GetAllReport();
 
         public int[] GetTotalReportByMonth() => ReportDAO.GetTotalReportByMonth();
     }

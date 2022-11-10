@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Report } from 'src/app/models/report';
+import { StaffReport } from 'src/app/models/staffReport';
 import { ReportService } from 'src/app/services/report.service';
 
 @Component({
@@ -13,9 +14,9 @@ export class ListReportComponent implements OnInit
 {
   //{Search} input value
   searchValue: string | undefined;
-
   //List all report
-  reports: Report[] = [];
+  reports: StaffReport[] = [];
+
   constructor(private reportService: ReportService,
     private router: Router,)
   { }
