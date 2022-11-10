@@ -1,3 +1,4 @@
+// Configuration variables
 export const environment = {
   production: true,
   fb_app_id: '790258838897169',

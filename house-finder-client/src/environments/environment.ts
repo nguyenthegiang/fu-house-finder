@@ -2,6 +2,7 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+// Configuration variables
 export const environment = {
   production: false,
   fb_app_id: '790258838897169',

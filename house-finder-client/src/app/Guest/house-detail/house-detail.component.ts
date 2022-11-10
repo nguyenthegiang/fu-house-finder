@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
 import { Room } from '../../models/room';
 import { ReportService } from '../../services/report.service';
 import { Report } from '../../models/report';
+import { environment } from 'src/environments/environment'; //environment variable
 
 @Component({
   selector: 'app-house-detail',
@@ -18,6 +19,8 @@ import { Report } from '../../models/report';
 })
 
 export class HouseDetailComponent implements OnInit {
+  //(Environment) Google Map API Key, to display Google Map iframe embed
+  mapAPIkey = environment.google_maps_api_key;
   //Detail information of this House
   houseDetail: House | undefined;
   //Detail image of this House

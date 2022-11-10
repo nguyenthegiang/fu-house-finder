@@ -57,9 +57,9 @@
 
       <!-- Google Map Location -->
       <div>
-        {{houseDetail!.address.googleMapLocation}}
+        {{mapAPIkey}} {{houseDetail!.address.googleMapLocation}}
         <iframe id="googleMap" class="w-100 h-25 my-5 border border-secondary rounded"
-          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA2kdqK31EX1fVy5tqENHPnl8XW85QiNC8&q={{houseDetail!.address.googleMapLocation}}"
+          src="https://www.google.com/maps/embed/v1/place?key={{mapAPIkey}}&q={{houseDetail!.address.googleMapLocation}}"
           allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
         </iframe>
       </div>
