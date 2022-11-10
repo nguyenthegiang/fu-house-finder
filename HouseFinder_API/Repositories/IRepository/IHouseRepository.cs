@@ -23,6 +23,6 @@ namespace Repositories.IRepository
 
         public void UpdateHouseByHouseId(House house);
 
-        //public void DeleteHouseByHouseId(int houseId);
+        public void DeleteHouseByHouseId(int houseId);
     }
 }
