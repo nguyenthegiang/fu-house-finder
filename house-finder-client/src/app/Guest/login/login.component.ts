@@ -4,6 +4,7 @@ import { UserService } from '../../services/user.service';
 import { CredentialResponse } from 'google-one-tap';
 import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -59,7 +60,7 @@ export class LoginComponent implements OnInit {
       // @ts-ignore
       google.accounts.id.initialize({
         // Ref: https://developers.google.com/identity/gsi/web/reference/js-reference#IdConfiguration
-        client_id: '919349682446-etrauq4d5cluclesaifkcr4bnh4gru2j.apps.googleusercontent.com',
+        client_id: environment.gg_client,
         callback: this.handleCredentialResponse.bind(this), // Whatever function you want to trigger...
         auto_select: false,
         cancel_on_tap_outside: true,
@@ -82,7 +83,7 @@ export class LoginComponent implements OnInit {
     
     (window as any).fbAsyncInit = function() {
       FB.init({
-        appId      : '790258838897169',
+        appId      : environment.fb_app_id,
         cookie     : true,                     // Enable cookies to allow the server to access the session.
         xfbml      : true,                     // Parse social plugins on this webpage.
         version    : 'v15.0',                  // Use this Graph API version for this call.
