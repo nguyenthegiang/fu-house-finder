@@ -86,8 +86,11 @@ GO
 CREATE TABLE [dbo].[Districts] (
 	DistrictId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
 	DistrictName nvarchar(100) NOT NULL,
+	CampusId int,						--Campus của Huyện này (Mỗi Campus sẽ có những Huyện ở quanh đó)
 
 	CreatedDate datetime NOT NULL,
+
+	CONSTRAINT CampusId_in_Campus2 FOREIGN KEY(CampusId) REFERENCES Campuses(CampusId),
 ) ON [PRIMARY]
 GO
 
@@ -502,9 +505,18 @@ GETDATE(), GETDATE(), N'SA000001', N'SA000001');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
-INSERT INTO [dbo].[Districts] VALUES (N'Huyện Thạch Thất',  GETDATE());
-INSERT INTO [dbo].[Districts] VALUES (N'Huyện Quốc Oai', GETDATE());
-INSERT INTO [dbo].[Districts] VALUES (N'Thị xã Sơn Tây', GETDATE());
+--FU Hòa Lạc
+INSERT INTO [dbo].[Districts] VALUES (N'Huyện Thạch Thất', 1, GETDATE());
+INSERT INTO [dbo].[Districts] VALUES (N'Huyện Quốc Oai', 1, GETDATE());
+INSERT INTO [dbo].[Districts] VALUES (N'Thị xã Sơn Tây', 1, GETDATE());
+--FU HCM
+INSERT INTO [dbo].[Districts] VALUES (N'Thành phố Thủ Đức', 2, GETDATE());
+--FU Đà Nẵng
+INSERT INTO [dbo].[Districts] VALUES (N'Quận Ngũ Hành Sơn', 3, GETDATE());
+--FU Cần Thơ
+INSERT INTO [dbo].[Districts] VALUES (N'Quận Ninh Kiều', 4, GETDATE());
+--FU Quy Nhơn
+INSERT INTO [dbo].[Districts] VALUES (N'Thành phố Quy Nhơn', 5, GETDATE());
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -569,6 +581,8 @@ INSERT INTO [dbo].[Communes] VALUES (N'Xã Kim Sơn', 3, GETDATE());
 INSERT INTO [dbo].[Communes] VALUES (N'Xã Sơn Đông', 3, GETDATE());
 INSERT INTO [dbo].[Communes] VALUES (N'Xã Thanh Mỹ', 3, GETDATE());
 INSERT INTO [dbo].[Communes] VALUES (N'Xã Xuân Sơn', 3, GETDATE());
+
+INSERT INTO [dbo].[Communes] VALUES (N'Phường Long Thạnh Mỹ', 4, GETDATE());
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -1078,6 +1092,8 @@ INSERT INTO [dbo].[Villages] VALUES (N'Z 175', 59, GETDATE());
 INSERT INTO [dbo].[Villages] VALUES (N'Xóm Bướm', 59, GETDATE());
 INSERT INTO [dbo].[Villages] VALUES (N'Xóm Chằm', 59, GETDATE());
 
+INSERT INTO [dbo].[Villages] VALUES (N'13KP Long Hòa', 60, GETDATE());
+
 -------------------------------------------------------------------------------------------------------------------------------------------
 
 INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Lê', 34, N'Rất đẹp', 6, 3, N'LA000001', 1, 3700, 1200, 0, 0, 0 , 0, GETDATE(), GETDATE(), N'LA000001', N'LA000001');
@@ -1110,6 +1126,7 @@ INSERT INTO [dbo].[Houses] VALUES (N'Trọ RoomType 3', 102, N'Không chung ch�
 INSERT INTO [dbo].[Houses] VALUES (N'Trọ District 1', 72, N'Không chung chủ', 8, 1, N'LA000003', 3, 3400, 1500, 0, 0, 1, 0, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 INSERT INTO [dbo].[Houses] VALUES (N'Trọ District 2', 72, N'Không chung chủ', 8, 206, N'LA000004', 4, 3400, 1500, 0, 0, 1, 0, GETDATE(), GETDATE(), N'LA000004', N'LA000004');
 INSERT INTO [dbo].[Houses] VALUES (N'Trọ District 3', 102, N'Không chung chủ', 8, 303, N'LA000005', 5, 3400, 1500, 0, 0, 1, 0, GETDATE(), GETDATE(), N'LA000005', N'LA000005');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Hồ Chí Minh', 106, N'Không chung chủ', 8, 448, N'LA000005', 2, 3400, 1500, 0, 0, 1, 0, GETDATE(), GETDATE(), N'LA000005', N'LA000005');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -1300,6 +1317,9 @@ GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1, 3, 30, 0,
 GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1, 3, 31, 0,
+GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+
 -------------------------------------------------------------------------------------------------------------------------------------------
 
 INSERT INTO [dbo].[Rates] VALUES (5, N'Rất tuyệt vời, gần trường nữa', N'Cảm ơn bạn', 1, N'HE153046',  0,
@@ -1405,6 +1425,8 @@ GETDATE(), GETDATE(), N'LA000001', N'LA000003');
 INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house29.jpg', 29, 0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000003');
 INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house30.jpg', 30, 0,
+GETDATE(), GETDATE(), N'LA000001', N'LA000003');
+INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house30.jpg', 31, 0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000003');
 
 -------------------------------------------------------------------------------------------------------------------------------------------

@@ -14,7 +14,7 @@ export class DistrictService {
 
   constructor(private http: HttpClient) { }
 
-  //[Home Page] (for Filter) Get all Districts, Communes & Villages
+  //(Unused) Get all Districts, Communes & Villages
   getAllDistricts(): Observable<District[]> {
     return this.http.get<District[]>(this.APIUrl);
   }

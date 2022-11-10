@@ -12,7 +12,7 @@ namespace DataAccess
 {
     public class DistrictDAO
     {
-        //[Home Page] Get all Districts to choose to filter
+        //(Unused) Get all Districts
         public static List<DistrictDTO> GetAllDistricts()
         {
             var districtDTOs = new List<DistrictDTO>();

@@ -10,9 +10,11 @@ namespace DataAccess.DTO
     {
         public int DistrictId { get; set; }
         public string DistrictName { get; set; }
+        public int? CampusId { get; set; }
+
         public DateTime? CreatedDate { get; set; }
 
-        //List Commune of this DTO
+        //List Commune of this District
         public virtual ICollection<CommuneDTO> Communes { get; set; }
     }
 }
