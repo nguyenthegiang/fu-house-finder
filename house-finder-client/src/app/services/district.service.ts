@@ -2,13 +2,15 @@ import { District } from './../models/district';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+//environment variable for API URL
+import { environment } from 'src/environments/environment'; 
 
 @Injectable({
   providedIn: 'root'
 })
 export class DistrictService {
 
-  readonly APIUrl = "https://localhost:5001/api/District";
+  readonly APIUrl = `${environment.api_url}/District`;
 
   constructor(private http: HttpClient) { }
 

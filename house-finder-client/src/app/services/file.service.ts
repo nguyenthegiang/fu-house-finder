@@ -1,12 +1,14 @@
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+//environment variable for API URL
+import { environment } from 'src/environments/environment'; 
 
 @Injectable({
   providedIn: 'root'
 })
 export class FileService {
-  readonly APIUrl = "https://localhost:5001/api/File";
+  readonly APIUrl = `${environment.api_url}/File`;
 
   constructor(private http: HttpClient) { }
   

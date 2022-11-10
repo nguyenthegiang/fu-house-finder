@@ -3,12 +3,14 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
+//environment variable for API URL
+import { environment } from 'src/environments/environment'; 
 
 @Injectable({
   providedIn: 'root'
 })
 export class HouseService {
-  readonly APIUrl = "https://localhost:5001/api/House";
+  readonly APIUrl = `${environment.api_url}/House`;
 
   constructor(private http: HttpClient) { }
 

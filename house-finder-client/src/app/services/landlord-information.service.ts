@@ -2,13 +2,15 @@ import { LandlordInfo } from './../models/landlord';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+//environment variable for API URL
+import { environment } from 'src/environments/environment'; 
 
 @Injectable({
   providedIn: 'root'
 })
 export class LandlordInformationService
 {
-  readonly APIUrl = "https://localhost:5001/api/LandLordInfomation";
+  readonly APIUrl = `${environment.api_url}/LandLordInfomation`;
 
   constructor(private http: HttpClient) { }
 
