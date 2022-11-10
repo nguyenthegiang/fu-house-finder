@@ -1,5 +1,47 @@
 <app-staff-header></app-staff-header>
 
+<div class="row" *ngIf="landlordDetail">
+  <!-- Landlord's avatar -->
+  <div class="col-12 col-md-2 border">
+    <div class="d-flex justify-content-center align-items-center">
+      <img src="../../assets/image/LandlordAvatar.jpg" alt="Landlord's avatar" class="rounded w-100 h-100">
+    </div>
+  </div>
+
+  <!-- Other information -->
+  <div class="col-12 col-md-7 border d-flex align-items-center">
+    <div class="p-2">
+      <span>
+        <b>Họ và tên: </b>
+        {{landlordDetail.displayName}}
+      </span>
+      <br>
+      <span>
+        <b>Facebook: </b>
+        <a class="text-decoration-none" href="{{landlordDetail!.facebookUrl}}">{{landlordDetail!.facebookUrl}}</a>
+      </span>
+      <br>
+      <span>
+        <b>Số điện thoại: </b>
+        <span>{{landlordDetail!.phoneNumber}}</span>
+      </span>
+      <br>
+      <span>
+        <b>Địa chỉ: </b>
+        {{landlordDetail!.address.addresses}}
+      </span>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-3 border d-flex align-items-center">
+    <div class="p-2 d-flex flex-column">
+      <span><b>Tổng số nhà trọ:</b> {{houseCount}} nhà</span>
+      <span><b>Tổng số phòng:</b> {{roomCount}} phòng</span>
+      <span><b>Tổng số phòng trống:</b> {{roomAvailableCount}} phòng</span>
+    </div>
+  </div>
+</div>
+
 <div class="row m-2">
   <div class="col-12">
     <!-- Page content -->
