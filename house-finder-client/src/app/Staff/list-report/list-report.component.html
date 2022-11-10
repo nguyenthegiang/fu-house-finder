@@ -32,6 +32,7 @@
             <tr>
               <th scope="col" id="md">STT</th>
               <th scope="col">Mã sinh viên</th>
+              <th scope="col">Tên sinh viên</th>
               <th scope="col">Nhà trọ</th>
               <th scope="col">Nội dung</th>
             </tr>
@@ -39,8 +40,9 @@
           <tbody>
             <tr *ngFor="let report of reports; let i=index;">
               <td id="md"><b>{{i+1}}</b></td>
-              <td>{{report.studentId}}</td>
-              <td>{{report.houseId}}</td>
+              <td>{{report.student.userId}}</td>
+              <td>{{report.student.displayName}}</td>
+              <td>{{report.house.houseName}}</td>
               <td>{{report.reportContent}}</td>
             </tr>
           </tbody>

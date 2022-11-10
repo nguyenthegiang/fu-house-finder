@@ -20,7 +20,7 @@ namespace HouseFinder_API.Controllers
 
         [EnableQuery]
         [HttpGet]
-        public ActionResult<IEnumerable<ReportDTO>> GetAllOrders() => reportRepository.GetAllReport();
+        public ActionResult<IEnumerable<StaffReportDTO>> GetAllOrders() => reportRepository.GetAllReport();
 
         //[Report] POST: Add Report
         [HttpPost]

@@ -71,16 +71,16 @@ namespace DataAccess
         }
 
         //Get list of all reports
-        public static List<ReportDTO> GetAllReport()
+        public static List<StaffReportDTO> GetAllReport()
         {
-            List<ReportDTO> reports;
+            List<StaffReportDTO> reports;
             try
             {
                 using (var context = new FUHouseFinderContext())
                 {
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    reports = context.Reports.Where(r => r.Deleted == false).ProjectTo<ReportDTO>(config).ToList();
+                    reports = context.Reports.Where(r => r.Deleted == false).ProjectTo<StaffReportDTO>(config).ToList();
                 }
             }
             catch (Exception e)

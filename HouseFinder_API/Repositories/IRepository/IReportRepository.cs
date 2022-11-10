@@ -12,6 +12,6 @@ namespace Repositories.IRepository
     {
         public void AddReport(Report report);
         public int[] GetTotalReportByMonth();
-        public List<ReportDTO> GetAllReport();
+        public List<StaffReportDTO> GetAllReport();
     }
 }
