@@ -10,6 +10,7 @@ namespace DataAccess.DTO
         public int AddressId { get; set; }
         public string Addresses { get; set; }
         public string GoogleMapLocation { get; set; }
+        public bool Deleted { get; set; }
         public DateTime? CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
     }
