@@ -20,5 +20,9 @@ namespace Repositories.IRepository
         public decimal? GetMoneyForNotRentedRooms(int HouseId);
         public int CountAvailableHouse();
         public List<AvailableHouseDTO> GetAvailableHouses();
+
+        public void UpdateHouseByHouseId(House house);
+
+        //public void DeleteHouseByHouseId(int houseId);
     }
 }
