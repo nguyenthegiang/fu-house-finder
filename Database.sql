@@ -582,6 +582,8 @@ INSERT INTO [dbo].[Communes] VALUES (N'Xã Sơn Đông', 3, GETDATE());
 INSERT INTO [dbo].[Communes] VALUES (N'Xã Thanh Mỹ', 3, GETDATE());
 INSERT INTO [dbo].[Communes] VALUES (N'Xã Xuân Sơn', 3, GETDATE());
 
+INSERT INTO [dbo].[Communes] VALUES (N'Phường Long Thạnh Mỹ', 4, GETDATE());
+
 -------------------------------------------------------------------------------------------------------------------------------------------
 
 INSERT INTO [dbo].[Villages] VALUES (N'Chi Quan 1', 1, GETDATE());
@@ -1090,6 +1092,8 @@ INSERT INTO [dbo].[Villages] VALUES (N'Z 175', 59, GETDATE());
 INSERT INTO [dbo].[Villages] VALUES (N'Xóm Bướm', 59, GETDATE());
 INSERT INTO [dbo].[Villages] VALUES (N'Xóm Chằm', 59, GETDATE());
 
+INSERT INTO [dbo].[Villages] VALUES (N'13KP Long Hòa', 59, GETDATE());
+
 -------------------------------------------------------------------------------------------------------------------------------------------
 
 INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Lê', 34, N'Rất đẹp', 6, 3, N'LA000001', 1, 3700, 1200, 0, 0, 0 , 0, GETDATE(), GETDATE(), N'LA000001', N'LA000001');
@@ -1122,6 +1126,7 @@ INSERT INTO [dbo].[Houses] VALUES (N'Trọ RoomType 3', 102, N'Không chung ch�
 INSERT INTO [dbo].[Houses] VALUES (N'Trọ District 1', 72, N'Không chung chủ', 8, 1, N'LA000003', 3, 3400, 1500, 0, 0, 1, 0, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 INSERT INTO [dbo].[Houses] VALUES (N'Trọ District 2', 72, N'Không chung chủ', 8, 206, N'LA000004', 4, 3400, 1500, 0, 0, 1, 0, GETDATE(), GETDATE(), N'LA000004', N'LA000004');
 INSERT INTO [dbo].[Houses] VALUES (N'Trọ District 3', 102, N'Không chung chủ', 8, 303, N'LA000005', 5, 3400, 1500, 0, 0, 1, 0, GETDATE(), GETDATE(), N'LA000005', N'LA000005');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Hồ Chí Minh', 106, N'Không chung chủ', 8, 448, N'LA000005', 2, 3400, 1500, 0, 0, 1, 0, GETDATE(), GETDATE(), N'LA000005', N'LA000005');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 

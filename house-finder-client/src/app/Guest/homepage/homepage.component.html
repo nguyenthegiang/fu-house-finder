@@ -54,46 +54,6 @@
         </div>
         <hr>
 
-        <!-- Distance to university -->
-        <div>
-          <h6 class="font-weight-bold mb-2">Khoảng cách đến trường:
-            <span class="badge bg-secondary text-white">km</span>&nbsp;
-            <span class="badge bg-secondary text-white"><i class="fa-solid fa-motorcycle"></i></span>
-          </h6>
-          <!-- select max - min number -->
-          <div style="display: flex;">
-            <input #minDistance type="number" style="width: 50%;" min="0">
-            &nbsp;-&nbsp;
-            <input #maxDistance type="number" style="width: 50%;" min="0">
-          </div>
-          <!-- submit button -->
-          <div class="pt-2">
-            <button type="button" class="btn btn-outline-secondary btn-sm"
-              (click)="onDistanceSelected(minDistance.value, maxDistance.value)">Áp dụng</button>
-          </div>
-        </div>
-        <hr>
-
-        <!-- Price -->
-        <div>
-          <div>
-            <h6 class="font-weight-bold mb-2">Giá tiền: <span class="badge bg-secondary text-white">VND/Tháng</span>
-            </h6>
-            <!-- select max - min number -->
-            <div style="display: flex;">
-              <input #minPrice type="number" style="width: 50%;" min="0">
-              &nbsp;-&nbsp;
-              <input #maxPrice type="number" style="width: 50%;" min="0">
-            </div>
-            <!-- submit button -->
-            <div class="pt-2">
-              <button type="button" class="btn btn-outline-secondary btn-sm"
-                (click)="onPriceSelected(minPrice.value, maxPrice.value)">Áp dụng</button>
-            </div>
-          </div>
-        </div>
-        <hr>
-
         <!-- Regions -->
         <div>
           <h6 class="font-weight-bold mb-2">Khu vực:</h6>
@@ -140,6 +100,46 @@
                 <option *ngFor="let village of villagesOfSelectedCommune" value="{{village.villageId}}">
                   {{village.villageName}}</option>
               </select>
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <!-- Distance to university -->
+        <div>
+          <h6 class="font-weight-bold mb-2">Khoảng cách đến trường:
+            <span class="badge bg-secondary text-white">km</span>&nbsp;
+            <span class="badge bg-secondary text-white"><i class="fa-solid fa-motorcycle"></i></span>
+          </h6>
+          <!-- select max - min number -->
+          <div style="display: flex;">
+            <input #minDistance type="number" style="width: 50%;" min="0">
+            &nbsp;-&nbsp;
+            <input #maxDistance type="number" style="width: 50%;" min="0">
+          </div>
+          <!-- submit button -->
+          <div class="pt-2">
+            <button type="button" class="btn btn-outline-secondary btn-sm"
+              (click)="onDistanceSelected(minDistance.value, maxDistance.value)">Áp dụng</button>
+          </div>
+        </div>
+        <hr>
+
+        <!-- Price -->
+        <div>
+          <div>
+            <h6 class="font-weight-bold mb-2">Giá tiền: <span class="badge bg-secondary text-white">VND/Tháng</span>
+            </h6>
+            <!-- select max - min number -->
+            <div style="display: flex;">
+              <input #minPrice type="number" style="width: 50%;" min="0">
+              &nbsp;-&nbsp;
+              <input #maxPrice type="number" style="width: 50%;" min="0">
+            </div>
+            <!-- submit button -->
+            <div class="pt-2">
+              <button type="button" class="btn btn-outline-secondary btn-sm"
+                (click)="onPriceSelected(minPrice.value, maxPrice.value)">Áp dụng</button>
             </div>
           </div>
         </div>
