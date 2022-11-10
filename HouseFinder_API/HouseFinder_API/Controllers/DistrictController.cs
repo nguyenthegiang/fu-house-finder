@@ -17,7 +17,7 @@ namespace HouseFinder_API.Controllers
         private IDistrictRepository districtRepository = new DistrictRepository();
 
         //GET: api/District
-        //[Home Page] Get List Districts to choose to filter
+        //(Unused) Get List Districts
         //(with each District, all its Communes; and with each Commune, all its Villages)
         [HttpGet]
         public ActionResult<IEnumerable<DistrictDTO>> GetAllDistricts () => districtRepository.GetAllDistricts();

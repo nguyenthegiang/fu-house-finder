@@ -1317,6 +1317,9 @@ GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1, 3, 30, 0,
 GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 
+INSERT INTO [dbo].[Rooms] VALUES (N'101', 3000000, N'Vệ sinh khép kín', 3, 1, 0, 0, 1, 1, 1, 1, 2, 1, 1, 1, 1, 3, 31, 0,
+GETDATE(), GETDATE(), N'LA000003', N'LA000003');
+
 -------------------------------------------------------------------------------------------------------------------------------------------
 
 INSERT INTO [dbo].[Rates] VALUES (5, N'Rất tuyệt vời, gần trường nữa', N'Cảm ơn bạn', 1, N'HE153046',  0,
@@ -1422,6 +1425,8 @@ GETDATE(), GETDATE(), N'LA000001', N'LA000003');
 INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house29.jpg', 29, 0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000003');
 INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house30.jpg', 30, 0,
+GETDATE(), GETDATE(), N'LA000001', N'LA000003');
+INSERT INTO [dbo].[ImagesOfHouse] VALUES (N'house30.jpg', 31, 0,
 GETDATE(), GETDATE(), N'LA000001', N'LA000003');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
