@@ -1,3 +1,4 @@
+import { SafePipe } from './pipe/safePipe';
 import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
@@ -49,6 +50,7 @@ import { StaffRoomDetailComponent } from './Staff/staff-room-detail/staff-room-d
   declarations: [
     AppComponent,
     routingComponents,
+    SafePipe,
     HouseDetailComponent,
     LoginComponent,
     DashboardComponent,

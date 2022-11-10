@@ -59,7 +59,7 @@
       <div>
         {{mapAPIkey}} {{houseDetail!.address.googleMapLocation}}
         <iframe id="googleMap" class="w-100 h-25 my-5 border border-secondary rounded"
-          src="https://www.google.com/maps/embed/v1/place?key={{mapAPIkey}}&q={{houseDetail!.address.googleMapLocation}}"
+          src="{{mapUrl | safe: 'url'}}"
           allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
         </iframe>
       </div>

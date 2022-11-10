@@ -23,6 +23,8 @@ export class HouseDetailComponent implements OnInit {
   mapAPIkey = environment.google_maps_api_key;
   //Detail information of this House
   houseDetail: House | undefined;
+  //URL for src in <iframe> Google Map
+  mapUrl: string = "";
   //Detail image of this House
   houseImage: string[] = [];
   //Landlord of this house
@@ -50,6 +52,9 @@ export class HouseDetailComponent implements OnInit {
     //Call API: get House Detail information
     this.houseService.getHouseByHouseId(id).subscribe(data => {
       this.houseDetail = data;
+
+      //Set URL for <iframe> Google Map
+      this.mapUrl = `https://www.google.com/maps/embed/v1/place?key=${this.mapAPIkey}&q=${this.houseDetail!.address.googleMapLocation}`;
 
       //Call API: get this House's Landlord detail information (after get house detail info)
       this.userService.getUserByUserId(this.houseDetail?.landlordId).subscribe(data => {
