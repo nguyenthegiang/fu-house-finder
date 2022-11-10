@@ -26,9 +26,14 @@ export class ReportService {
     return this.http.get<any>(this.APIUrl + "/GetTotalReportByMonth");
   }
 
-  //[Staff/list-report]
+  //[Staff/list-report] Get list of all reports
   getAllReport():Observable<StaffReport[]>{
     return this.http.get<StaffReport[]>(this.APIUrl);
+  }
+
+  //[Staff/list-report] Search reports by house's name
+  searchReportByHouseName(key: string):Observable<StaffReport[]>{
+    return this.http.get<StaffReport[]>(this.APIUrl + "/SearchReportByHouseName/" + key);
   }
 
 }

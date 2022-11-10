@@ -30,7 +30,12 @@ export class ListReportComponent implements OnInit
   }
 
   search(searchValue: string)
-  {}
+  {
+    //Call API: search reports by house's name
+    this.reportService.searchReportByHouseName(searchValue).subscribe(data => {
+      this.reports = data;
+    })
+  }
 
   viewReportDetail(id: number)
   {

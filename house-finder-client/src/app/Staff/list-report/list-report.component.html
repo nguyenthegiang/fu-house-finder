@@ -35,6 +35,7 @@
               <th scope="col">Tên sinh viên</th>
               <th scope="col">Nhà trọ</th>
               <th scope="col">Nội dung</th>
+              <th scope="col">Ngày báo cáo</th>
             </tr>
           </thead>
           <tbody>
@@ -44,6 +45,7 @@
               <td>{{report.student.displayName}}</td>
               <td>{{report.house.houseName}}</td>
               <td>{{report.reportContent}}</td>
+              <td>{{report.createdDate| date:'dd/MM/yyyy'}}</td>
             </tr>
           </tbody>
         </table>

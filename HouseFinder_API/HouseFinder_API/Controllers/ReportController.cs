@@ -51,6 +51,20 @@ namespace HouseFinder_API.Controllers
         }
 
 
+        //GET: api/Report/SearchReportByHouseName/
+        [HttpGet("SearchReportByHouseName/{key}")]
+        public ActionResult<IEnumerable<StaffReportDTO>> SearchReportByHouseName(string key)
+        {
+            List<StaffReportDTO> reports = reportRepository.SearchReportByName(key);
+            if (reports == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(reports);
+            }
+        }
 
     }
 }
