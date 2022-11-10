@@ -55,10 +55,10 @@
         <span><b>Thông tin khác: </b>{{houseDetail!.information}}</span>
       </div>
 
-      <!-- Google map -->
-      <div>
+      <!-- Google Map Location -->
+      <div *ngIf="mapUrl">
         <iframe id="googleMap" class="w-100 h-25 my-5 border border-secondary rounded"
-          src="https://www.google.com/maps/embed/v1/place?key=AIzaSyA2kdqK31EX1fVy5tqENHPnl8XW85QiNC8&q=21.015951854163884, 105.51901041149311"
+          [src]="mapUrl | safe"
           allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
         </iframe>
       </div>
