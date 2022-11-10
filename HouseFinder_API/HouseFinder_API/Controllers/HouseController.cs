@@ -105,20 +105,20 @@ namespace HouseFinder_API.Controllers
             }
         }
 
-        ////DELETE: api/Houses?houseId=
-        //[HttpDelete("Houses")]
-        //public IActionResult DeleteHouse(int houseId)
-        //{
-        //    try
-        //    {
-        //        houseRepository.DeleteHouseByHouseId(houseId);
-        //        return Ok();
-        //    }
-        //    catch (Exception)
-        //    {
-        //        return BadRequest();
-        //    }
-        //}
+        //DELETE: api/Houses?houseId=
+        [HttpDelete("Houses")]
+        public IActionResult DeleteHouse(int houseId)
+        {
+            try
+            {
+                houseRepository.DeleteHouseByHouseId(houseId);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
 
     }
 }
