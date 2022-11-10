@@ -90,5 +90,25 @@ namespace DataAccess
             return reports;
         }
 
+        //[Staff/list-report] Search report by house's name
+        public static List<StaffReportDTO> SearchReportByName(string key)
+        {
+            List<StaffReportDTO> reports;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    reports = context.Reports.Where(r => r.Deleted == false).Where(r => r.House.HouseName.Contains(key)).ProjectTo<StaffReportDTO>(config).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return reports;
+        }
+
     }
 }

@@ -17,5 +17,7 @@ namespace Repositories.Repositories
         public List<StaffReportDTO> GetAllReport() => ReportDAO.GetAllReport();
 
         public int[] GetTotalReportByMonth() => ReportDAO.GetTotalReportByMonth();
+
+        public List<StaffReportDTO> SearchReportByName(string key) => ReportDAO.SearchReportByName(key);
     }
 }
