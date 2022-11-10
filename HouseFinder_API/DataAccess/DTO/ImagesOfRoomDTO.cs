@@ -11,7 +11,9 @@ namespace DataAccess.DTO
         public int ImageId { get; set; }
         public string ImageLink { get; set; }
         public int RoomId { get; set; }
-        public bool Deleted { get; set; }
+
+        //No need for deleted because we always only query undeleted data
+        //public bool Deleted { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
         public string CreatedBy { get; set; }

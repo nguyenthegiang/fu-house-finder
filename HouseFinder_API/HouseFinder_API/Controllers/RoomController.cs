@@ -104,7 +104,8 @@ namespace HouseFinder_API.Controllers
                 updatedRoom.StatusId = roomDTO.StatusId;
                 updatedRoom.RoomTypeId = (int)roomDTO.RoomTypeId;
                 updatedRoom.HouseId = (int)roomDTO.HouseId;
-                updatedRoom.Deleted = (bool)roomDTO.Deleted;
+                //updatedRoom.Deleted = (bool)roomDTO.Deleted;
+                updatedRoom.Deleted = false;    //definitely not a deleted item
                 updatedRoom.CreatedDate = (DateTime)roomDTO.CreatedDate;
                 updatedRoom.LastModifiedDate = roomDTO.LastModifiedDate;
                 updatedRoom.LastModifiedBy = roomDTO.LastModifiedBy;
