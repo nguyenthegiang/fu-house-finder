@@ -14,8 +14,10 @@ namespace BusinessObjects
 
         public int DistrictId { get; set; }
         public string DistrictName { get; set; }
+        public int? CampusId { get; set; }
         public DateTime CreatedDate { get; set; }
 
+        public virtual Campus Campus { get; set; }
         public virtual ICollection<Commune> Communes { get; set; }
     }
 }

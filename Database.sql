@@ -89,6 +89,8 @@ CREATE TABLE [dbo].[Districts] (
 	CampusId int,						--Campus của Huyện này (Mỗi Campus sẽ có những Huyện ở quanh đó)
 
 	CreatedDate datetime NOT NULL,
+
+	CONSTRAINT CampusId_in_Campus2 FOREIGN KEY(CampusId) REFERENCES Campuses(CampusId),
 ) ON [PRIMARY]
 GO
 
