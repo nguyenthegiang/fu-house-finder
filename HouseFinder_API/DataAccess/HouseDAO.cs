@@ -78,48 +78,48 @@ namespace DataAccess
             }
         }
 
-        //public static void DeleteHouseByHouseId(int houseId)
-        //{
-        //    try
-        //    {
-        //        using (var context = new FUHouseFinderContext())
-        //        {
-        //            House updatedHouse = context.Houses.FirstOrDefault(h => h.HouseId == houseId);
-        //            if (updatedHouse == null)
-        //            {
-        //                throw new Exception();
-        //            }
+        public static void DeleteHouseByHouseId(int houseId)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    House updatedHouse = context.Houses.FirstOrDefault(h => h.HouseId == houseId);
+                    if (updatedHouse == null)
+                    {
+                        throw new Exception();
+                    }
 
-        //            //Delete by changing Status to Disabled
-        //            updatedHouse.Deleted = true;
-        //            List<Room> rooms = context.Rooms.Where(r => r.HouseId == houseId).ToList();
-        //            foreach(Room o in rooms)
-        //            {
-        //                o.Deleted = true;
-        //                context.Rooms.Update(o);
-        //            }
-        //            List<Rate> rates = context.Rates.Where(r => r.HouseId == houseId).ToList();
-        //            foreach(Rate r in rates)
-        //            {
-        //                r.Deleted = true;
-        //                context.Rates.Update(r);
-        //            }
-        //            List<ImagesOfHouse> imagesOfHouses = context.ImagesOfHouses.Where(i => i.HouseId == houseId).ToList();
-        //            foreach(ImagesOfHouse i in imagesOfHouses)
-        //            {
-        //                i.Deleted = true;
-        //                context.ImagesOfHouses.Update(i);
-        //            }
-        //            context.Entry<House>(updatedHouse).State = EntityState.Detached;
-        //            context.Houses.Update(updatedHouse);
-        //            context.SaveChanges();
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        throw new Exception(e.Message);
-        //    }
-        //}
+                    //Delete by changing Status to Disabled
+                    updatedHouse.Deleted = true;
+                    List<Room> rooms = context.Rooms.Where(r => r.HouseId == houseId).ToList();
+                    foreach(Room o in rooms)
+                    {
+                        o.Deleted = true;
+                        context.Rooms.Update(o);
+                    }
+                    List<Rate> rates = context.Rates.Where(r => r.HouseId == houseId).ToList();
+                    foreach(Rate r in rates)
+                    {
+                        r.Deleted = true;
+                        context.Rates.Update(r);
+                    }
+                    List<ImagesOfHouse> imagesOfHouses = context.ImagesOfHouses.Where(i => i.HouseId == houseId).ToList();
+                    foreach(ImagesOfHouse i in imagesOfHouses)
+                    {
+                        i.Deleted = true;
+                        context.ImagesOfHouses.Update(i);
+                    }
+                    context.Entry<House>(updatedHouse).State = EntityState.Detached;
+                    context.Houses.Update(updatedHouse);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
         ////(Unused) Get list of houses, with Address & Images
         //public static List<HouseDTO> GetAllHouses()
         //{
