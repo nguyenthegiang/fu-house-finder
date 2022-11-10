@@ -57,24 +57,24 @@ namespace DataAccess
         }
 
         //[Head][Dashboard] Get list of staffs
-        public static List<UserDTO> GetStaffs()
-        {
-            List<UserDTO> staffs;
-            try
-            {
-                using (var context = new FUHouseFinderContext())
-                {
-                    MapperConfiguration config;
-                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    staffs = context.Users.ProjectTo<UserDTO>(config).Where(u => u.Role.RoleName.Contains("Staff")).ToList();
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-            return staffs;
-        }
+        //public static List<UserDTO> GetStaffs()
+        //{
+        //    List<UserDTO> staffs;
+        //    try
+        //    {
+        //        using (var context = new FUHouseFinderContext())
+        //        {
+        //            MapperConfiguration config;
+        //            config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+        //            staffs = context.Users.ProjectTo<UserDTO>(config).Where(u => u.Role.RoleName.Contains("Staff")).ToList();
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw new Exception(e.Message);
+        //    }
+        //    return staffs;
+        //}
 
         public static ResponseDTO LoginUsername(string email, string password)
         {
