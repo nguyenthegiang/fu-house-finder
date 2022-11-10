@@ -45,7 +45,7 @@ namespace DataAccess
                     //Get list order from the first date to current date
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    List<ReportDTO> reports = context.Reports.Where(o => o.CreatedDate >= firstDate && o.CreatedDate <= currentDate).ProjectTo<ReportDTO>(config).ToList();
+                    List<ReportDTO> reports = context.Reports.Where(r => r.Deleted == false).Where(o => o.CreatedDate >= firstDate && o.CreatedDate <= currentDate).ProjectTo<ReportDTO>(config).ToList();
 
                     //Get months' name
                     string[] monthNames = CultureInfo.CurrentCulture.DateTimeFormat.MonthGenitiveNames;
@@ -80,7 +80,7 @@ namespace DataAccess
                 {
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    reports = context.Reports.ProjectTo<ReportDTO>(config).ToList();
+                    reports = context.Reports.Where(r => r.Deleted == false).ProjectTo<ReportDTO>(config).ToList();
                 }
             }
             catch (Exception e)

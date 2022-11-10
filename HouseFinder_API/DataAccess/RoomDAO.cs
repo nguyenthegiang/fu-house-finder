@@ -52,7 +52,7 @@ namespace DataAccess
                     //Find rooms of this house
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    var result = context.Rooms
+                    var result = context.Rooms.Where(r => r.Deleted == false)
                         .Include(p => p.Status)
                         .Where(r => r.HouseId == HouseId && r.Deleted == false)
                         .ProjectTo<RoomDTO>(config).ToList();
@@ -197,7 +197,7 @@ namespace DataAccess
                 {
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    RoomDTO room = context.Rooms
+                    RoomDTO room = context.Rooms.Where(r => r.Deleted == false)
                         .Include(p => p.Status)
                         .Where(r => r.RoomId == roomId && r.Deleted == false)
                         .ProjectTo<RoomDTO>(config).FirstOrDefault();
@@ -245,7 +245,7 @@ namespace DataAccess
                 using (var context = new FUHouseFinderContext())
                 {
                     //Count available rooms
-                    totalRoom = context.Rooms.ToList().Count();
+                    totalRoom = context.Rooms.Where(r => r.Deleted == false).ToList().Count();
                 }
             }
             catch (Exception e)
@@ -264,7 +264,7 @@ namespace DataAccess
                 using (var context = new FUHouseFinderContext())
                 {
                     //Get list of rooms
-                    List<Room> rooms = context.Rooms.ToList();
+                    List<Room> rooms = context.Rooms.Where(r => r.Deleted == false).ToList();
                     //Calculate
                     int? maxPeople = (from r in rooms select r.MaxAmountOfPeople).Sum();
                     int? currentPeople = (from r in rooms select r.CurrentAmountOfPeople).Sum();
@@ -288,7 +288,7 @@ namespace DataAccess
                 {
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    List<RoomDTO> rooms = context.Rooms.ProjectTo<RoomDTO>(config).ToList();
+                    List<RoomDTO> rooms = context.Rooms.Where(r => r.Deleted == false).ProjectTo<RoomDTO>(config).ToList();
                     capacity = (from room in rooms
                                 select room.MaxAmountOfPeople).Sum();
                 }
@@ -310,7 +310,7 @@ namespace DataAccess
                 {
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    List<RoomDTO> rooms = context.Rooms.Where(r => r.CurrentAmountOfPeople == 0).ProjectTo<RoomDTO>(config).ToList();
+                    List<RoomDTO> rooms = context.Rooms.Where(r => r.Deleted == false).Where(r => r.CurrentAmountOfPeople == 0).ProjectTo<RoomDTO>(config).ToList();
                     capacity = (from room in rooms
                                 select room.MaxAmountOfPeople).Sum();
                 }
@@ -355,7 +355,7 @@ namespace DataAccess
                 using (var context = new FUHouseFinderContext())
                 {
                     //Get list of available rooms
-                    List<Room> rooms = context.Rooms.Where(r => r.HouseId == HouseId).Where(r => r.Status.StatusName.Equals("Available")).ToList();
+                    List<Room> rooms = context.Rooms.Where(r => r.Deleted == false).Where(r => r.HouseId == HouseId).Where(r => r.Status.StatusName.Equals("Available")).ToList();
                     //Calculate
                     int? maxPeople = (from r in rooms select r.MaxAmountOfPeople).Sum();
                     int? currentPeople = (from r in rooms select r.CurrentAmountOfPeople).Sum();
