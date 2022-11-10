@@ -86,6 +86,7 @@ GO
 CREATE TABLE [dbo].[Districts] (
 	DistrictId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
 	DistrictName nvarchar(100) NOT NULL,
+	CampusId int,						--Campus của Huyện này (Mỗi Campus sẽ có những Huyện ở quanh đó)
 
 	CreatedDate datetime NOT NULL,
 ) ON [PRIMARY]
@@ -502,9 +503,18 @@ GETDATE(), GETDATE(), N'SA000001', N'SA000001');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
-INSERT INTO [dbo].[Districts] VALUES (N'Huyện Thạch Thất',  GETDATE());
-INSERT INTO [dbo].[Districts] VALUES (N'Huyện Quốc Oai', GETDATE());
-INSERT INTO [dbo].[Districts] VALUES (N'Thị xã Sơn Tây', GETDATE());
+--FU Hòa Lạc
+INSERT INTO [dbo].[Districts] VALUES (N'Huyện Thạch Thất', 1, GETDATE());
+INSERT INTO [dbo].[Districts] VALUES (N'Huyện Quốc Oai', 1, GETDATE());
+INSERT INTO [dbo].[Districts] VALUES (N'Thị xã Sơn Tây', 1, GETDATE());
+--FU HCM
+INSERT INTO [dbo].[Districts] VALUES (N'Thành phố Thủ Đức', 2, GETDATE());
+--FU Đà Nẵng
+INSERT INTO [dbo].[Districts] VALUES (N'Quận Ngũ Hành Sơn', 3, GETDATE());
+--FU Cần Thơ
+INSERT INTO [dbo].[Districts] VALUES (N'Quận Ninh Kiều', 4, GETDATE());
+--FU Quy Nhơn
+INSERT INTO [dbo].[Districts] VALUES (N'Thành phố Quy Nhơn', 5, GETDATE());
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
