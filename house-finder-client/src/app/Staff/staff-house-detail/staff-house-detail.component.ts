@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { House } from 'src/app/models/house';
 import { Room } from 'src/app/models/room';
+import { HouseService } from 'src/app/services/house.service';
 import { LandlordInformationService } from 'src/app/services/landlord-information.service';
 import { RoomService } from 'src/app/services/room.service';
 
@@ -10,7 +12,11 @@ import { RoomService } from 'src/app/services/room.service';
   styleUrls: ['./staff-house-detail.component.scss']
 })
 export class StaffHouseDetailComponent implements OnInit {
-  //List of available rooms
+  //Detail information of this House
+  houseDetail: House | undefined;
+  //Detail image of this House
+  houseImage: string[] = [];
+  //List of rooms
   rooms: Room[] = [];
   isOn = false;
   replyOn = false;
@@ -27,10 +33,17 @@ export class StaffHouseDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private roomService: RoomService,
     private landlordInformationService: LandlordInformationService,
-    private router: Router
+    private router: Router,
+    private houseService: HouseService
   ) { }
 
   ngOnInit(): void {
+    //Get id of House from Route
+    const id = Number(this.route.snapshot.paramMap.get('id'));
+    //Call API: get House Detail information
+    this.houseService.getHouseByHouseId(id).subscribe(data => {
+      this.houseDetail = data;
+    });
     this.getListRoom();
   }
 
