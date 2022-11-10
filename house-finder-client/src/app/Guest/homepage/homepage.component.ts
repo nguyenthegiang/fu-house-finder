@@ -45,7 +45,7 @@ export class HomepageComponent implements OnInit {
 
   //[Filter] Filter values for passing into API
   searchName: string | undefined;           //(filter by name)
-  filterCampusId: number | undefined;       //(filter by campus)
+  selectedCampusId: number | undefined;       //(filter by campus)
   maxPrice: number | undefined;             //(filter by price)
   minPrice: number | undefined;             //(filter by price)
   selectedRoomTypeIds: number[] = [];       //(filter by roomType)    //list of roomTypeId of roomTypes that got selected
@@ -155,7 +155,7 @@ export class HomepageComponent implements OnInit {
       this.selectedHouseUtilities,
       this.selectedRoomUtilities,
       this.searchName,
-      this.filterCampusId,
+      this.selectedCampusId,
       this.maxPrice,
       this.minPrice,
       this.selectedDistrictId,
@@ -203,7 +203,7 @@ export class HomepageComponent implements OnInit {
     });
 
     // Call API: update list houses with the campus user chose
-    this.filterCampusId = numberCampusId;
+    this.selectedCampusId = numberCampusId;
     this.filterHouse(true);
   }
 
@@ -274,6 +274,12 @@ export class HomepageComponent implements OnInit {
 
     // (special case) 0 or empty input -> not handle
     if (numMinDistance == 0 || numMaxDistance == 0) {
+      return;
+    }
+
+    /* Only allow filtering by Distance after choosing Campus */
+    if (!this.selectedCampusId) {
+      alert('Vui lòng chọn Cơ sở bạn học trước!');
       return;
     }
 
