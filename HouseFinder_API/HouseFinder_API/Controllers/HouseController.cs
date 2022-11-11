@@ -105,8 +105,8 @@ namespace HouseFinder_API.Controllers
             }
         }
 
-        //DELETE: api/Houses?houseId=
-        [HttpDelete("Houses")]
+        //DELETE: api/House?houseId=
+        [HttpDelete()]
         public IActionResult DeleteHouse(int houseId)
         {
             try
@@ -120,5 +120,23 @@ namespace HouseFinder_API.Controllers
             }
         }
 
+        //GET: api/Houses/Distance
+        [HttpGet("Distance")]
+        public IActionResult CalculateDistanceOfHouse(int HouseId)
+        {
+            try
+            {
+                HouseDTO houseDTO = houseRepository.GetHouseById(HouseId);
+                if (houseDTO == null)
+                {
+                    return NotFound();
+                }
+
+                return Ok();
+            } catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }
