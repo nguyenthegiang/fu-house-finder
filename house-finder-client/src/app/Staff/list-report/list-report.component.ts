@@ -42,4 +42,8 @@ export class ListReportComponent implements OnInit
     console.log(id);
     this.router.navigate(['/Staff/staff-report-detail/' + id]);
   }
+
+  showReportByHouseId(houseId: number){
+    this.reportService.countTotalReportByHouseId(houseId);
+  }
 }

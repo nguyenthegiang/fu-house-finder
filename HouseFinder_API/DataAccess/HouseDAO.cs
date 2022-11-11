@@ -409,5 +409,33 @@ namespace DataAccess
             return availableHouse;
         }
 
+        public static List<ReportHouseDTO> GetListReportHouse()
+        {
+            List<ReportHouseDTO> houses;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //include address
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    //Get by LandlordId
+                    houses = context.Houses.Where(h => h.Deleted == false).ProjectTo<ReportHouseDTO>(config).ToList();
+
+                    foreach (ReportHouseDTO house in houses)
+                    {
+                        house.NumberOfReport = ReportDAO.CountTotalReportByHouseId(house.HouseId);
+                    }
+
+                    houses.RemoveAll(house => house.NumberOfReport == 0);
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return houses;
+        }
+
     }
 }

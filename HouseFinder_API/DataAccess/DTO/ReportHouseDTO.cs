@@ -13,5 +13,6 @@ namespace DataAccess.DTO
         public string HouseName { get; set; }
         public virtual AddressDTO Address { get; set; }
         public virtual UserDTO Landlord { get; set; }
+        public int NumberOfReport { get; set; }
     }
 }
