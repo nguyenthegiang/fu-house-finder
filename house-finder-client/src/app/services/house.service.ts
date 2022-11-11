@@ -1,7 +1,9 @@
+import { Campus } from './../models/campus';
 import { House } from './../models/house';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
 //environment variable for API URL
 import { environment } from 'src/environments/environment'; 
@@ -241,6 +243,25 @@ export class HouseService {
 
     return this.http.get<House[]>(filterAPIUrl);
   }
+
+  // /**
+  //   [Home Page] Filter available Houses by Distance;
+  //   This has to be a diffrent method because calling Google Map API 
+  //   to calculate distance to filter is expensive
+  //   -> has to minimize times of calling it;
+
+  //   Pass in the list of house to be filtered & Distance to filter
+  //  */
+  // calculateDistanceFromHouseToCampus(house: House, campus: Campus): Observable<any> {
+  //   const googleMapApiUrl = `https://maps.googleapis.com/maps/api/distancematrix/json` + 
+  //     `?destinations=${house.address.googleMapLocation}&origins=${campus.address.googleMapLocation}&key=${environment.google_maps_api_key}`;
+  //     const httpOptions = {
+  //       headers: new HttpHeaders({
+  //         "Access-Control-Allow-Origin": "http://localhost:4200"
+  //       })
+  //     };
+  //     return this.http.get<any>(googleMapApiUrl, httpOptions);
+  // }
 
   //Unused
   //Search house by name

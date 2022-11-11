@@ -292,8 +292,7 @@ export class HomepageComponent implements OnInit {
       return;
     }
 
-    // TODO: Call API to update list houses with the distance user chose
-    alert('distance: ' + numMinDistance + ' ' + numMaxDistance);
+    // Call Service to update list houses with the distance user chose;
   }
 
   //[Filter] Filter by Price
