@@ -1918,47 +1918,47 @@ GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 
 INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 1, 0,
 '01/03/2022', GETDATE(), N'HE153046', N'HE153046');
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ không trả lại cọc', N'HE153046', 2, 3,
+INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ thay khóa cổng không cho vào nhà', N'HE153046', 2, 1,
 '01/04/2022', GETDATE(), N'HE153046', N'HE153046');
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 3, 3,
+INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tự ý vào phòng của bạn và tháo bóng đèn trong nhà vệ sinh của bạn', N'HE153046', 3, 0,
 '01/05/2022', GETDATE(), N'HE153046', N'HE153046');
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 4, 6,
+INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 4, 0,
 '02/03/2022', GETDATE(), N'HE153046', N'HE153046');
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 1, 6,
+INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ xâm phạm quyền riêng tư', N'HE153046', 1, 0,
 '03/03/2022', GETDATE(), N'HE153046', N'HE153046');
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 6, 5,
+INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ thu tiền điện vượt quá giá niêm yết', N'HE153046', 6, 0,
 '03/13/2022', GETDATE(), N'HE153046', N'HE153046');
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 9, 11,
+INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 9, 0,
 '04/03/2022', GETDATE(), N'HE153046', N'HE153046');
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 4, 10,
+INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 4, 0,
 '04/23/2022', GETDATE(), N'HE153046', N'HE153046');
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 7, 10,
+INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng mức đóng tiền điện so với hợp đồng thuê phòng trước đó mà hai bên đã kí', N'HE153046', 7, 0,
 '04/14/2022', GETDATE(), N'HE153046', N'HE153046');
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 8, 9,
+INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 8, 0,
 '04/17/2022', GETDATE(), N'HE153046', N'HE153046');
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 1, 3,
+INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 1, 0,
 '04/03/2022', GETDATE(), N'HE153046', N'HE153046');
 INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 1, 0,
 '05/03/2022', GETDATE(), N'HE153046', N'HE153046');
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 1, 0,
+INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 3, 0,
 '07/03/2022', GETDATE(), N'HE153046', N'HE153046');
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 1, 0,
+INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 2, 0,
 '07/03/2022', GETDATE(), N'HE153046', N'HE153046');
 INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 1, 0,
 '08/03/2022', GETDATE(), N'HE153046', N'HE153046');
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 1, 0,
+INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 10, 0,
 '09/03/2022', GETDATE(), N'HE153046', N'HE153046');
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 1, 0,
+INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 11, 0,
 '09/03/2022', GETDATE(), N'HE153046', N'HE153046');
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 1, 0,
+INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 13, 0,
 '09/03/2022', GETDATE(), N'HE153046', N'HE153046');
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 1, 0,
+INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 8, 0,
 '09/03/2022', GETDATE(), N'HE153046', N'HE153046');
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 1, 0,
+INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 8, 0,
 '10/03/2022', GETDATE(), N'HE153046', N'HE153046');
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 1, 0,
+INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 6, 0,
 '11/03/2022', GETDATE(), N'HE153046', N'HE153046');
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 1, 0,
+INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 7, 0,
 '11/05/2022', GETDATE(), N'HE153046', N'HE153046');
 
 
