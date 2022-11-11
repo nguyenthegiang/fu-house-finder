@@ -33,6 +33,10 @@ namespace DataAccess
 
             return campusDTOs;
         }
+
+        /**
+         Find a Campus by its Name
+         */
         public static CampusDTO GetCampusByName(string name)
         {
             try
