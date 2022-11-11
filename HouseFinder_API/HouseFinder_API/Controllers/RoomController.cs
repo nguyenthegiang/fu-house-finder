@@ -67,9 +67,33 @@ namespace HouseFinder_API.Controllers
         {
             try
             {
-                room.CreatedDate = DateTime.Now;
-                room.LastModifiedDate = DateTime.Now;
-                roomRepository.CreateRoom(room);
+
+                Room createRoom = new Room();
+                createRoom.RoomName = room.RoomName;
+                createRoom.PricePerMonth = (decimal)room.PricePerMonth;
+                createRoom.Information = room.Information;
+                createRoom.AreaByMeters = room.AreaByMeters;
+                createRoom.Fridge = room.Fridge;
+                createRoom.Kitchen = room.Kitchen;
+                createRoom.WashingMachine = room.WashingMachine;
+                createRoom.Desk = room.Desk;
+                createRoom.NoLiveWithHost = room.NoLiveWithHost;
+                createRoom.Bed = room.Bed;
+                createRoom.ClosedToilet = room.ClosedToilet;
+                createRoom.MaxAmountOfPeople = room.MaxAmountOfPeople;
+                createRoom.CurrentAmountOfPeople = room.CurrentAmountOfPeople;
+                createRoom.BuildingNumber = room.BuildingNumber;
+                createRoom.FloorNumber = room.FloorNumber;
+                createRoom.StatusId = room.Status.StatusId;
+                createRoom.RoomTypeId = (int)room.RoomType.RoomTypeId;
+                createRoom.HouseId = (int)room.HouseId;
+                createRoom.Deleted = (bool)room.Deleted;
+                createRoom.CreatedDate = DateTime.Now;
+                createRoom.LastModifiedDate = DateTime.Now;
+                createRoom.LastModifiedBy = room.LastModifiedBy;
+                createRoom.CreatedBy = room.CreatedBy;
+            
+                roomRepository.CreateRoom(createRoom);
                 return Ok();
             }
             catch (Exception)
