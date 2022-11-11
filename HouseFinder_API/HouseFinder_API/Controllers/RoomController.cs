@@ -219,12 +219,12 @@ namespace HouseFinder_API.Controllers
         }
 
         [HttpPut("changeStatus")]
-        public IActionResult ChangStatusRoom(int statusId, int roomId)
+        public IActionResult ChangeStatusRoom(int statusId, int roomId)
         {
             try
             {
 
-                roomRepository.ChangStatusRoom(statusId, roomId);
+                roomRepository.ChangeStatusRoom(statusId, roomId);
                 return Ok();
             }
             catch (Exception)
