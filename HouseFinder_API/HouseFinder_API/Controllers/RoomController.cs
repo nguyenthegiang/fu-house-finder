@@ -63,35 +63,35 @@ namespace HouseFinder_API.Controllers
 
         //POST: api/Rooms
         [HttpPost]
-        public IActionResult CreateRoom(Room roomDTO)
+        public IActionResult CreateRoom(Room room)
         {
             try
             {
 
                 Room createRoom = new Room();
-                createRoom.RoomName = roomDTO.RoomName;
-                createRoom.PricePerMonth = (decimal)roomDTO.PricePerMonth;
-                createRoom.Information = roomDTO.Information;
-                createRoom.AreaByMeters = roomDTO.AreaByMeters;
-                createRoom.Fridge = roomDTO.Fridge;
-                createRoom.Kitchen = roomDTO.Kitchen;
-                createRoom.WashingMachine = roomDTO.WashingMachine;
-                createRoom.Desk = roomDTO.Desk;
-                createRoom.NoLiveWithHost = roomDTO.NoLiveWithHost;
-                createRoom.Bed = roomDTO.Bed;
-                createRoom.ClosedToilet = roomDTO.ClosedToilet;
-                createRoom.MaxAmountOfPeople = roomDTO.MaxAmountOfPeople;
-                createRoom.CurrentAmountOfPeople = roomDTO.CurrentAmountOfPeople;
-                createRoom.BuildingNumber = roomDTO.BuildingNumber;
-                createRoom.FloorNumber = roomDTO.FloorNumber;
-                createRoom.StatusId = roomDTO.Status.StatusId;
-                createRoom.RoomTypeId = (int)roomDTO.RoomType.RoomTypeId;
-                createRoom.HouseId = (int)roomDTO.HouseId;
-                createRoom.Deleted = (bool)roomDTO.Deleted;
+                createRoom.RoomName = room.RoomName;
+                createRoom.PricePerMonth = (decimal)room.PricePerMonth;
+                createRoom.Information = room.Information;
+                createRoom.AreaByMeters = room.AreaByMeters;
+                createRoom.Fridge = room.Fridge;
+                createRoom.Kitchen = room.Kitchen;
+                createRoom.WashingMachine = room.WashingMachine;
+                createRoom.Desk = room.Desk;
+                createRoom.NoLiveWithHost = room.NoLiveWithHost;
+                createRoom.Bed = room.Bed;
+                createRoom.ClosedToilet = room.ClosedToilet;
+                createRoom.MaxAmountOfPeople = room.MaxAmountOfPeople;
+                createRoom.CurrentAmountOfPeople = room.CurrentAmountOfPeople;
+                createRoom.BuildingNumber = room.BuildingNumber;
+                createRoom.FloorNumber = room.FloorNumber;
+                createRoom.StatusId = room.Status.StatusId;
+                createRoom.RoomTypeId = (int)room.RoomType.RoomTypeId;
+                createRoom.HouseId = (int)room.HouseId;
+                createRoom.Deleted = (bool)room.Deleted;
                 createRoom.CreatedDate = DateTime.Now;
                 createRoom.LastModifiedDate = DateTime.Now;
-                createRoom.LastModifiedBy = roomDTO.LastModifiedBy;
-                createRoom.CreatedBy = roomDTO.CreatedBy;
+                createRoom.LastModifiedBy = room.LastModifiedBy;
+                createRoom.CreatedBy = room.CreatedBy;
             
                 roomRepository.CreateRoom(createRoom);
                 return Ok();
