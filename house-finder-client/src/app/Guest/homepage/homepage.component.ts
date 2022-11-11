@@ -158,6 +158,8 @@ export class HomepageComponent implements OnInit {
       this.selectedCampusId,
       this.maxPrice,
       this.minPrice,
+      this.maxDistance,
+      this.minDistance,
       this.selectedDistrictId,
       this.selectedCommuneId,
       this.selectedVillageId,
@@ -292,7 +294,10 @@ export class HomepageComponent implements OnInit {
       return;
     }
 
-    // Call Service to update list houses with the distance user chose;
+    // Call API to update list houses with the distance user chose
+    this.maxDistance = numMaxDistance;
+    this.minDistance = numMinDistance;
+    this.filterHouse(true);
   }
 
   //[Filter] Filter by Price
