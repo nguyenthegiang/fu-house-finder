@@ -39,12 +39,17 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let report of reports; let i=index;">
+            <tr *ngFor="let house of houses; let i=index;">
               <td id="md"><b>{{i+1}}</b></td>
-              <td>{{report.house.houseName}}</td>
-              <td>{{report.house.landlord.displayName}}</td>
-              <td>{{report.reportContent}}</td>
-              <td>{{report.createdDate| date:'dd/MM/yyyy'}}</td>
+              <td>{{house.houseName}}</td>
+              <td>{{house.landlord.displayName}}</td>
+              <td>{{house.numberOfReport}}</td>
+              <td>
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
+                    [checked]="house.landlord.active == true">
+                </div>
+              </td>
               <td>
                 <button type="button" class="btn btn-secondary">Chi tiết</button></td>
               </tr>

@@ -1,6 +1,5 @@
 import { Address } from './address';
 import { ImagesOfHouse } from './imagesOfHouse';
-import { User } from './user';
 
 //DTO: Houses
 export interface House {
@@ -8,7 +7,6 @@ export interface House {
     houseName: string;
     information: string;
     landlordId: string;
-    landlord: User;
     powerPrice: number;
     waterPrice: number;
     fingerprintLock: boolean;

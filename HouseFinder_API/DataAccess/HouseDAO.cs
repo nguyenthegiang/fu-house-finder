@@ -409,6 +409,7 @@ namespace DataAccess
             return availableHouse;
         }
 
+        //[Staff/list-report] Get list of report house
         public static List<ReportHouseDTO> GetListReportHouse()
         {
             List<ReportHouseDTO> houses;
@@ -416,7 +417,6 @@ namespace DataAccess
             {
                 using (var context = new FUHouseFinderContext())
                 {
-                    //include address
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
                     //Get by LandlordId
