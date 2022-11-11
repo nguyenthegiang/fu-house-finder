@@ -63,13 +63,37 @@ namespace HouseFinder_API.Controllers
 
         //POST: api/Rooms
         [HttpPost]
-        public IActionResult CreateRoom(Room room)
+        public IActionResult CreateRoom(Room roomDTO)
         {
             try
             {
-                room.CreatedDate = DateTime.Now;
-                room.LastModifiedDate = DateTime.Now;
-                roomRepository.CreateRoom(room);
+
+                Room createRoom = new Room();
+                createRoom.RoomName = roomDTO.RoomName;
+                createRoom.PricePerMonth = (decimal)roomDTO.PricePerMonth;
+                createRoom.Information = roomDTO.Information;
+                createRoom.AreaByMeters = roomDTO.AreaByMeters;
+                createRoom.Fridge = roomDTO.Fridge;
+                createRoom.Kitchen = roomDTO.Kitchen;
+                createRoom.WashingMachine = roomDTO.WashingMachine;
+                createRoom.Desk = roomDTO.Desk;
+                createRoom.NoLiveWithHost = roomDTO.NoLiveWithHost;
+                createRoom.Bed = roomDTO.Bed;
+                createRoom.ClosedToilet = roomDTO.ClosedToilet;
+                createRoom.MaxAmountOfPeople = roomDTO.MaxAmountOfPeople;
+                createRoom.CurrentAmountOfPeople = roomDTO.CurrentAmountOfPeople;
+                createRoom.BuildingNumber = roomDTO.BuildingNumber;
+                createRoom.FloorNumber = roomDTO.FloorNumber;
+                createRoom.StatusId = roomDTO.Status.StatusId;
+                createRoom.RoomTypeId = (int)roomDTO.RoomType.RoomTypeId;
+                createRoom.HouseId = (int)roomDTO.HouseId;
+                createRoom.Deleted = (bool)roomDTO.Deleted;
+                createRoom.CreatedDate = DateTime.Now;
+                createRoom.LastModifiedDate = DateTime.Now;
+                createRoom.LastModifiedBy = roomDTO.LastModifiedBy;
+                createRoom.CreatedBy = roomDTO.CreatedBy;
+            
+                roomRepository.CreateRoom(createRoom);
                 return Ok();
             }
             catch (Exception)
