@@ -172,7 +172,7 @@ namespace BusinessObjects
             modelBuilder.Entity<ImagesOfHouse>(entity =>
             {
                 entity.HasKey(e => e.ImageId)
-                    .HasName("PK__ImagesOf__7516F70C81010BE5");
+                    .HasName("PK__ImagesOf__7516F70C111C7C06");
 
                 entity.ToTable("ImagesOfHouse");
 
@@ -214,7 +214,7 @@ namespace BusinessObjects
             modelBuilder.Entity<ImagesOfRoom>(entity =>
             {
                 entity.HasKey(e => e.ImageId)
-                    .HasName("PK__ImagesOf__7516F70C2EA7CBC3");
+                    .HasName("PK__ImagesOf__7516F70C0EF6D6C1");
 
                 entity.ToTable("ImagesOfRoom");
 
@@ -318,7 +318,7 @@ namespace BusinessObjects
             modelBuilder.Entity<OrderStatus>(entity =>
             {
                 entity.HasKey(e => e.StatusId)
-                    .HasName("PK__OrderSta__C8EE2063D42C6A88");
+                    .HasName("PK__OrderSta__C8EE2063B9C0C733");
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
@@ -508,7 +508,7 @@ namespace BusinessObjects
             modelBuilder.Entity<RoomStatus>(entity =>
             {
                 entity.HasKey(e => e.StatusId)
-                    .HasName("PK__RoomStat__C8EE206356D088AE");
+                    .HasName("PK__RoomStat__C8EE20639DC09B10");
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
@@ -597,7 +597,7 @@ namespace BusinessObjects
             modelBuilder.Entity<UserRole>(entity =>
             {
                 entity.HasKey(e => e.RoleId)
-                    .HasName("PK__UserRole__8AFACE1A84405238");
+                    .HasName("PK__UserRole__8AFACE1A4023630A");
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
