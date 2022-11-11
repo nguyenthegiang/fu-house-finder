@@ -45,6 +45,7 @@ import { StaffNavbarComponent } from './Common/staff-navbar/staff-navbar.compone
 import { StaffLandlordDetailComponent } from './Staff/staff-landlord-detail/staff-landlord-detail.component';
 import { StaffHouseDetailComponent } from './Staff/staff-house-detail/staff-house-detail.component';
 import { StaffRoomDetailComponent } from './Staff/staff-room-detail/staff-room-detail.component';
+import { DeleteHouseComponent } from './Landlord/delete-house/delete-house.component';
 
 @NgModule({
   declarations: [
@@ -85,6 +86,7 @@ import { StaffRoomDetailComponent } from './Staff/staff-room-detail/staff-room-d
     StaffLandlordDetailComponent,
     StaffHouseDetailComponent,
     StaffRoomDetailComponent,
+    DeleteHouseComponent,
   ],
   imports: [
     BrowserModule,
