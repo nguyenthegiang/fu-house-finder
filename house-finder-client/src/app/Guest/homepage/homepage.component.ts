@@ -45,7 +45,7 @@ export class HomepageComponent implements OnInit {
 
   //[Filter] Filter values for passing into API
   searchName: string | undefined;           //(filter by name)
-  selectedCampusId: number | undefined;       //(filter by campus)
+  selectedCampusId: number | undefined;     //(filter by campus)
   maxPrice: number | undefined;             //(filter by price)
   minPrice: number | undefined;             //(filter by price)
   selectedRoomTypeIds: number[] = [];       //(filter by roomType)    //list of roomTypeId of roomTypes that got selected
