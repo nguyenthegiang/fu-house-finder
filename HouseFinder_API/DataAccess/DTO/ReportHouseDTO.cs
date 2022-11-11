@@ -11,7 +11,7 @@ namespace DataAccess.DTO
     {
         public int HouseId { get; set; }
         public string HouseName { get; set; }
-        public int AddressId { get; set; }
-        public virtual User Landlord { get; set; }
+        public virtual AddressDTO Address { get; set; }
+        public virtual UserDTO Landlord { get; set; }
     }
 }

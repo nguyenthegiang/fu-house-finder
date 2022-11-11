@@ -110,5 +110,23 @@ namespace DataAccess
             return reports;
         }
 
+        //[Staff/list-report] Count total report by house id
+        public static int CountTotalReportByHouseId(int houseId)
+        {
+            int count;
+            try
+            {
+                using(var context = new FUHouseFinderContext())
+                {
+                    count = context.Reports.Where(r => r.HouseId == houseId).Count();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return count;
+        }
+
     }
 }

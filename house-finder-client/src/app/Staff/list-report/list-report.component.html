@@ -31,22 +31,23 @@
           <thead>
             <tr>
               <th scope="col" id="md">STT</th>
-              <th scope="col">Mã sinh viên</th>
-              <th scope="col">Tên sinh viên</th>
               <th scope="col">Nhà trọ</th>
-              <th scope="col">Nội dung</th>
-              <th scope="col">Ngày báo cáo</th>
+              <th scope="col">Chủ trọ</th>
+              <th scope="col">Số lượt báo cáo</th>
+              <th scope="col">Trạng thái</th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let report of reports; let i=index;">
               <td id="md"><b>{{i+1}}</b></td>
-              <td>{{report.student.userId}}</td>
-              <td>{{report.student.displayName}}</td>
               <td>{{report.house.houseName}}</td>
+              <td>{{report.house.landlord.displayName}}</td>
               <td>{{report.reportContent}}</td>
               <td>{{report.createdDate| date:'dd/MM/yyyy'}}</td>
-            </tr>
+              <td>
+                <button type="button" class="btn btn-secondary">Chi tiết</button></td>
+              </tr>
           </tbody>
         </table>
         <!-- End List of Rooms -->
