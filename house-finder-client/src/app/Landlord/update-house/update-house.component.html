@@ -1,10 +1,11 @@
-<div class="container-fluit m-5">
+<div class="container-fluit mx-3 mx-md-5 mt-5" *ngIf="houseDetail">
   <h3 class="text-center my-5">Chỉnh sửa nhà trọ</h3>
-  <form class="row w-100 d-flex justify-content-around needs-validation" novalidate>
+
+  <form class="row d-flex justify-content-around needs-validation" novalidate>
     <div class="col-12 col-md-5">
       <div class="mb-3">
         <label for="exampleInput1" class="form-label"><b>Tên nhà trọ</b></label>
-        <input type="text" class="form-control" id="exampleInput1" placeholder="Nhập tên nhà trọ" required>
+        <input type="text" class="form-control" id="exampleInput1" placeholder="Nhập tên nhà trọ" value="{{houseDetail.houseName}}" required>
         <div class="invalid-feedback mb-3">Không được để trống</div>
       </div>
 
@@ -113,8 +114,8 @@
       </div>
     </div>
 
-    <div class="text-center col-12">
-      <button class="btn btn-success w-25 mt-4" type="submit">Chỉnh sửa</button>
+    <div class="text-center col-12 col-md-4">
+      <button class="btn btn-success w-100 mt-4" type="submit">Chỉnh sửa</button>
     </div>
   </form>
 </div>

@@ -48,6 +48,39 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
     lastModifiedBy: "",
     imagesOfRooms: []
   };
+  roomCreate: Room = {
+    roomId: 0,
+    roomName: '',
+    pricePerMonth: 0,
+    information: '',
+    areaByMeters: 0,
+    fridge: false,
+    kitchen: false,
+    washingMachine: false,
+    desk: false,
+    noLiveWithHost: false,
+    bed: false,
+    closedToilet: false,
+    maxAmountOfPeople: 4,
+    currentAmountOfPeople: 0,
+    buildingNumber: 0,
+    floorNumber: 0,
+    status: {
+      statusId: 1,
+      statusName: 'Available'
+    },
+    roomType: {
+      roomTypeId: 1,
+      roomTypeName: 'Khép kín'
+    },
+    houseId: 1,
+    delete: false,
+    createdDate: new Date(),
+    lastModifiedDate: new Date(),
+    createdBy: "LA000001",
+    lastModifiedBy: "LA000001",
+    imagesOfRooms: []
+  };
   //listStatus: Status[] = [];
   //test string
   // statusSelected: string = "";
@@ -72,7 +105,13 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
     //this.getAllStatus();
 
     //call API to get detail info of room
-    this.getRoomByRoomId();
+    if (this.roomId != 0) {
+      this.getRoomByRoomId();
+    }
+    else {
+      this.roomDetail = this.roomCreate;
+    }
+
 
 
   }
@@ -83,7 +122,14 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
   //Call API: update room
   updateRoom() {
     console.log(this.roomDetail);
-    this.roomService.updateRoom(this.roomDetail).subscribe(() => this.goBack());
+    if (this.roomDetail.roomId === 0) {
+      console.log(this.roomDetail);
+      this.roomService.addRoom(this.roomDetail).subscribe(() => this.goBack());
+    } else {
+      this.roomService.updateRoom(this.roomDetail).subscribe(() => this.goBack());
+
+    }
+
   }
   deleteRoom() {
     //console.log('delete');
