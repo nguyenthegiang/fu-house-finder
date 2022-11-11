@@ -39,6 +39,8 @@ export class HouseService {
     campusId?: number,
     maxPrice?: number,
     minPrice?: number,
+    maxDistance?: number,
+    minDistance?: number,
     selectedDistrictId?: number,
     selectedCommuneId?: number,
     selectedVillageId?: number,
@@ -54,7 +56,7 @@ export class HouseService {
     filterAPIUrl += `$skip=${skip}&$top=${top}`;
 
     //[Filter] check if user has at least 1 filter
-    if (searchName || campusId || maxPrice || selectedRoomTypeIds.length > 0 ||
+    if (searchName || campusId || maxPrice || maxDistance || selectedRoomTypeIds.length > 0 ||
       selectedDistrictId || selectedCommuneId || selectedVillageId ||
       selectedHouseUtilities.length > 0 || selectedRoomUtilities.length > 0
       || selectedRate) {
@@ -102,6 +104,19 @@ export class HouseService {
       }
 
       filterAPIUrl += `LowestRoomPrice le ${maxPrice} and HighestRoomPrice ge ${minPrice}`;
+    }
+
+    //[Filter] add filter by distance if has
+    if (maxDistance != undefined && minDistance != undefined) {
+      //if is not the first filter -> need to add 'and' to API URL
+      if (!checkFirstFilter) {
+        filterAPIUrl += ` and `;
+      } else {
+        //if this one is the first filter -> mark it so others won't add 'and'
+        checkFirstFilter = false;
+      }
+
+      filterAPIUrl += `DistanceToCampus le ${maxDistance} and DistanceToCampus ge ${minDistance}`;
     }
 
     //[Filter] add filter by roomType if has
