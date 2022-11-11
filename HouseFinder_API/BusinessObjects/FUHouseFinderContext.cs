@@ -102,6 +102,11 @@ namespace BusinessObjects
                 entity.Property(e => e.DistrictName)
                     .IsRequired()
                     .HasMaxLength(100);
+
+                entity.HasOne(d => d.Campus)
+                    .WithMany(p => p.Districts)
+                    .HasForeignKey(d => d.CampusId)
+                    .HasConstraintName("CampusId_in_Campus2");
             });
 
             modelBuilder.Entity<House>(entity =>
@@ -167,7 +172,7 @@ namespace BusinessObjects
             modelBuilder.Entity<ImagesOfHouse>(entity =>
             {
                 entity.HasKey(e => e.ImageId)
-                    .HasName("PK__ImagesOf__7516F70C25B0D86F");
+                    .HasName("PK__ImagesOf__7516F70C81010BE5");
 
                 entity.ToTable("ImagesOfHouse");
 
@@ -209,7 +214,7 @@ namespace BusinessObjects
             modelBuilder.Entity<ImagesOfRoom>(entity =>
             {
                 entity.HasKey(e => e.ImageId)
-                    .HasName("PK__ImagesOf__7516F70CA55B4976");
+                    .HasName("PK__ImagesOf__7516F70C2EA7CBC3");
 
                 entity.ToTable("ImagesOfRoom");
 
@@ -313,7 +318,7 @@ namespace BusinessObjects
             modelBuilder.Entity<OrderStatus>(entity =>
             {
                 entity.HasKey(e => e.StatusId)
-                    .HasName("PK__OrderSta__C8EE20632537F485");
+                    .HasName("PK__OrderSta__C8EE2063D42C6A88");
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
@@ -503,7 +508,7 @@ namespace BusinessObjects
             modelBuilder.Entity<RoomStatus>(entity =>
             {
                 entity.HasKey(e => e.StatusId)
-                    .HasName("PK__RoomStat__C8EE206388D456A7");
+                    .HasName("PK__RoomStat__C8EE206356D088AE");
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
@@ -592,7 +597,7 @@ namespace BusinessObjects
             modelBuilder.Entity<UserRole>(entity =>
             {
                 entity.HasKey(e => e.RoleId)
-                    .HasName("PK__UserRole__8AFACE1A8DEF5DF1");
+                    .HasName("PK__UserRole__8AFACE1A84405238");
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 

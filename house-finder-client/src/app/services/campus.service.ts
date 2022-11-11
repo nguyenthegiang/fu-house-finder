@@ -13,7 +13,7 @@ export class CampusService {
 
   constructor(private http: HttpClient) { }
 
-  //[Home Page] Get List of all Campuses for Filter
+  //[Home Page] (for Filter) Get all Campuses, Districts, Communes & Villages
   getAllCampuses(): Observable<Campus[]> {
     return this.http.get<Campus[]>(this.APIUrl);
   }

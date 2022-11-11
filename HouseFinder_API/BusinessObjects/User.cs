@@ -45,8 +45,6 @@ namespace BusinessObjects
         public string IdentityCardBackSideImageLink { get; set; }
         public int? AddressId { get; set; }
         public int RoleId { get; set; }
-        public bool Deleted { get; set; }
-
         public DateTime CreatedDate { get; set; }
         public DateTime? LastModifiedDate { get; set; }
         public string CreatedBy { get; set; }

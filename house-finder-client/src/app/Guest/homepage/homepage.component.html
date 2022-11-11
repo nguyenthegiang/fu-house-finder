@@ -42,7 +42,7 @@
           <!-- Campus -->
           <h6 class="font-weight-bold">Cơ sở</h6>
           <div>
-            <!-- When select 1 Campus -> call API to update list House -->
+            <!-- When select 1 Campus -> change list of District accordingly -->
             <select #selectCampus class="form-select" aria-label="select-campus"
               (change)="onCampusSelected(selectCampus.value)">
               <option class="disableOption" disabled selected>Chọn cơ sở</option>
@@ -50,6 +50,57 @@
               <option *ngFor=" let campus of campuses" value="{{campus.campusId}}">
                 {{campus.campusName}}</option>
             </select>
+          </div>
+        </div>
+        <hr>
+
+        <!-- Regions -->
+        <div>
+          <h6 class="font-weight-bold mb-2">Khu vực:</h6>
+
+          <!-- District -->
+          <div class="d-flex justify-content-between align-items-center my-2">
+            <div class="me-2">Huyện/Quận</div>
+            <div>
+              <!-- When select 1 District -> change list of Communes accordingly -->
+              <select #selectDistrict class="form-select selectRegion" aria-label="select-district"
+                (change)="onDistrictSelected(selectDistrict.value)">
+                <option class="disableOption" disabled selected>Chọn quận/huyện</option>
+                <!-- List all Districts of selected Campus-->
+                <option *ngFor=" let district of districtsOfSelectedCampus" value="{{district.districtId}}">
+                  {{district.districtName}}</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Commune -->
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <div class="me-2">Phường/Xã</div>
+            <div>
+              <!-- When select 1 Communes -> change list of Villages accordingly -->
+              <select #selectCommune class="form-select selectRegion" aria-label="select-commune"
+                (change)="onCommuneSelected(selectCommune.value)">
+                <option class="disableOption" disabled selected>Chọn phường/xã</option>
+                <!-- List all Communes of selected District -->
+                <option *ngFor="let commune of communesOfSelectedDistrict" value="{{commune.communeId}}">
+                  {{commune.communeName}}</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Village -->
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="me-2">Thôn/Xóm</div>
+            <div>
+              <!-- When select 1 Village -> call API -->
+              <select #selectVillage class="form-select selectRegion" aria-label="select-village"
+                (change)="onVillageSelected(selectVillage.value)">
+                <option class="disableOption" disabled selected>Chọn thôn/xóm</option>
+                <!-- List all Villages of selected Commune -->
+                <option *ngFor="let village of villagesOfSelectedCommune" value="{{village.villageId}}">
+                  {{village.villageName}}</option>
+              </select>
+            </div>
           </div>
         </div>
         <hr>
@@ -89,57 +140,6 @@
             <div class="pt-2">
               <button type="button" class="btn btn-outline-secondary btn-sm"
                 (click)="onPriceSelected(minPrice.value, maxPrice.value)">Áp dụng</button>
-            </div>
-          </div>
-        </div>
-        <hr>
-
-        <!-- Regions -->
-        <div>
-          <h6 class="font-weight-bold mb-2">Khu vực:</h6>
-
-          <!-- District -->
-          <div class="d-flex justify-content-between align-items-center my-2">
-            <div class="me-2">Huyện/Quận</div>
-            <div>
-              <!-- When select 1 District -> change list of Communes accordingly -->
-              <select #selectDistrict class="form-select selectRegion" aria-label="select-district"
-                (change)="onDistrictSelected(selectDistrict.value)">
-                <option class="disableOption" disabled selected>Chọn quận/huyện</option>
-                <!-- List all Districts -->
-                <option *ngFor=" let district of districts" value="{{district.districtId}}">
-                  {{district.districtName}}</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Commune -->
-          <div class="d-flex justify-content-between align-items-center mb-2">
-            <div class="me-2">Phường/Xã</div>
-            <div>
-              <!-- When select 1 Communes -> change list of Villages accordingly -->
-              <select #selectCommune class="form-select selectRegion" aria-label="select-commune"
-                (change)="onCommuneSelected(selectCommune.value)">
-                <option class="disableOption" disabled selected>Chọn phường/xã</option>
-                <!-- List all Communes of selected District -->
-                <option *ngFor="let commune of communesOfSelectedDistrict" value="{{commune.communeId}}">
-                  {{commune.communeName}}</option>
-              </select>
-            </div>
-          </div>
-
-          <!-- Village -->
-          <div class="d-flex justify-content-between align-items-center">
-            <div class="me-2">Thôn/Xóm</div>
-            <div>
-              <!-- When select 1 Village -> call API -->
-              <select #selectVillage class="form-select selectRegion" aria-label="select-village"
-                (change)="onVillageSelected(selectVillage.value)">
-                <option class="disableOption" disabled selected>Chọn thôn/xóm</option>
-                <!-- List all Villages of selected Commune -->
-                <option *ngFor="let village of villagesOfSelectedCommune" value="{{village.villageId}}">
-                  {{village.villageName}}</option>
-              </select>
             </div>
           </div>
         </div>
