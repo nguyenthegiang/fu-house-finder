@@ -18,7 +18,10 @@ namespace HouseFinder_API.Controllers
     {
         private IRoomTypeRepository roomTypeRepository = new RoomTypeRepository();
 
-        //GET: api/RoomType
+        /**
+         * GET: api/RoomType
+         Return list of all RoomTypes in the Database
+         */
         [HttpGet]
         public IActionResult GetRoomTypes()
         {
@@ -33,7 +36,10 @@ namespace HouseFinder_API.Controllers
             }
         }
 
-        //GET: api/RoomType/getByHouseId?HouseId=
+        /**
+         * GET: api/RoomType/getByHouseId?HouseId=
+         Get all roomTypes that this house has
+         */
         [HttpGet("getByHouseId")]
         public IActionResult GetRoomTypesByHouseId(int HouseId)
         {

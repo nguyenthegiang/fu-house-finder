@@ -13,8 +13,12 @@ namespace DataAccess
 {
     public class RoomDAO
     {
-        //Get list Rooms by House
-        //Used in: RoomDAO.GetRoomPriceByOfHouse() [Home Page]
+
+        /**
+         *  Get list Rooms by House
+         *  Used in: RoomDAO.GetRoomPriceByOfHouse() [Home Page]
+         Return list of Rooms of 1 House
+         */
         public static List<RoomDTO> GetRoomsByHouseId(int HouseId)
         {
             List<RoomDTO> rooms;
@@ -41,7 +45,10 @@ namespace DataAccess
             return rooms;
         }
 
-        //[HouseDetail] Get list Available Rooms by House ID
+        /**
+         *  [HouseDetail] Get list Available Rooms by House ID
+         Get list of available Rooms (partially or totally) of 1 House
+         */
         public static List<RoomDTO> GetAvailableRoomsByHouseId(int HouseId)
         {
             List<RoomDTO> rooms = new List<RoomDTO>();
@@ -73,8 +80,10 @@ namespace DataAccess
             return rooms;
         }
 
-        //Get LowestRoomPrice & LowestRoomPrice for AvailableHouseDTO (used to display in Home Page)
-        //Used in: HouseDAO.GetAllHouses();
+        /**
+         *  Get LowestRoomPrice & HighestRoomPrice for AvailableHouseDTO (used to display in Home Page)
+            Used in: HouseDAO.GetAllHouses();
+         */
         public static AvailableHouseDTO GetRoomPriceByOfHouse(AvailableHouseDTO houseDTO)
         {
             //Get list of its room
@@ -103,7 +112,10 @@ namespace DataAccess
             return houseDTO;
         }
 
-        //Create room
+        /**
+         Create room
+         Add a new Room to the Database
+         */
         public static void CreateRoom(Room room)
         {
             try
@@ -120,7 +132,10 @@ namespace DataAccess
             }
         }
 
-        //Create List of Rooms
+        /**
+         *  Create List of Rooms
+            Add a list of Rooms of 1 House to the Database
+         */
         public static void CreateRooms(List<Room> rooms)
         {
             try
@@ -137,7 +152,10 @@ namespace DataAccess
             }
         }
 
-        //Update Room by id
+        /**
+         * Update Room by id
+         Update detail information of 1 Room
+         */
         public static void UpdateRoomByRoomId(Room room)
         {
             try
@@ -163,6 +181,9 @@ namespace DataAccess
             }
         }
 
+        /**
+         Delete a Room from a system without removing its data from the Database
+         */
         public static void DeleteRoom(int roomId)
         {
             try
@@ -189,6 +210,9 @@ namespace DataAccess
             }
         }
 
+        /**
+         Find a Room by its Id
+         */
         public static RoomDTO GetRoomByRoomId(int roomId)
         {
             try
@@ -215,7 +239,10 @@ namespace DataAccess
             }
         }
 
-        //[Staff - Dashboard] [Home Page] Count available rooms
+        /**
+         *  [Staff - Dashboard] [Home Page] Count available rooms;
+         Count the sum of all available Rooms (partially or totally) of all Houses in the system
+         */
         public static int CountAvailableRoom()
         {
             int availableRoom = 0;
@@ -236,7 +263,10 @@ namespace DataAccess
             return availableRoom;
         }
 
-        //[Staff - Dashboard] [Home Page] Count total rooms
+        /**
+         * [Staff - Dashboard] [Home Page] Count total rooms;
+         Count the sum of all Rooms (available or not) of all Houses in the system
+         */
         public static int CountTotalRoom()
         {
             int totalRoom = 0;
@@ -255,7 +285,10 @@ namespace DataAccess
             return totalRoom;
         }
 
-        //[Staff - Dashboard] Count capacity of available rooms
+        /**
+         * [Staff - Dashboard] Count capacity of available rooms;
+         Count the sum of Capacity of all Rooms of all Houses in the system
+         */
         public static int? CountAvailableCapacity()
         {
             int? capacity;
@@ -322,7 +355,10 @@ namespace DataAccess
             return capacity;
         }
 
-        //[Home Page] for HouseDAO.GetAvailableHouses()
+        /**
+         * [Home Page] for HouseDAO.GetAvailableHouses()
+         Count the sum of all available Rooms (partially or totally) of 1 House
+         */
         public static int CountAvailableRoomByHouseId(int HouseId)
         {
             int countAvailableRoom = 0;
@@ -346,7 +382,10 @@ namespace DataAccess
             return countAvailableRoom;
         }
 
-        //[House Detail] Count total capacity by house id
+        /**
+         * [House Detail] Count total capacity by house id
+         Count the sum of Capacity of all Rooms of 1 House
+         */
         public static int? CountAvailableCapacityByHouseId(int HouseId)
         {
             int? capacity;
@@ -369,7 +408,10 @@ namespace DataAccess
             return capacity;
         }
 
-        //[Homepage] Count totally available room by house id
+        /**
+         * [Homepage] Count totally available room by house id
+         Count the sum of all available Rooms (totally only) of 1 House
+         */
         public static int CountTotallyAvailableRoomByHouseId(int houseId)
         {
             int total;
@@ -390,7 +432,10 @@ namespace DataAccess
             return total;
         }
 
-        //[Homepage] Count partially available room by house Id
+        /**
+         * [Homepage] Count partially available room by house Id
+         Count the sum of all available Rooms (partially only) of 1 House
+         */
         public static int CountPartiallyAvailableRoomByHouseId(int houseId)
         {
             int total;
@@ -411,8 +456,11 @@ namespace DataAccess
             return total;
         }
 
-        //[RoomPage] Change status Room
-        public static void ChangStatusRoom(int statusId, int roomId)
+        /**
+         * [Landlord - List Room] Change status Room
+         Change Status (Available or Occupied) of 1 Room
+         */
+        public static void ChangeStatusRoom(int statusId, int roomId)
         {
             try
             {
