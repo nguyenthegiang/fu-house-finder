@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using Repositories.Repositories;
 using DataAccess.DTO;
 using Microsoft.AspNetCore.OData.Query;
+using DataAccess;
+using System.Net.Http;
 
 namespace HouseFinder_API.Controllers
 {
@@ -105,8 +107,8 @@ namespace HouseFinder_API.Controllers
             }
         }
 
-        //DELETE: api/Houses?houseId=
-        [HttpDelete("Houses")]
+        //DELETE: api/House?houseId=
+        [HttpDelete()]
         public IActionResult DeleteHouse(int houseId)
         {
             try
@@ -120,5 +122,56 @@ namespace HouseFinder_API.Controllers
             }
         }
 
+        /**
+         * GET: api/Houses/Distance
+         * Demo Calculate Distance by calling Google Map API
+         */
+        [HttpGet("Distance")]
+        public async Task<IActionResult> CalculateDistanceOfHouse(int HouseId)
+        {
+            try
+            {
+                HouseDTO houseDTO = houseRepository.GetHouseById(HouseId);
+                if (houseDTO == null)
+                {
+                    return NotFound();
+                }
+
+                //Get Coordinate of 2 Locations
+                string houseLocation = houseDTO.Address.GoogleMapLocation;
+                string campusLocation = CampusDAO.GetCampusById((int)houseDTO.CampusId).Address.GoogleMapLocation;
+
+                /**
+                 * Use HttpClient to call Google Map API to get Distance
+                 */
+
+                //Make URL
+                string googleMapApiUrl = "https://maps.googleapis.com/maps/api/distancematrix/json" +
+                    $"?destinations={campusLocation}" +
+                    $"&origins={houseLocation}" +
+                    "&key=AIzaSyDxIHcpD2lUN_Y9MSau-_6o0hrKnbha0zo";
+
+                // HttpClient is intended to be instantiated once per application, rather than per-use. See Remarks.
+                HttpClient client = new HttpClient();
+
+                // Call asynchronous network methods in a try/catch block to handle exceptions.
+                try
+                {
+                    using HttpResponseMessage response = await client
+                        .GetAsync(googleMapApiUrl);
+                    response.EnsureSuccessStatusCode();
+                    string responseBody = await response.Content.ReadAsStringAsync();
+
+                    return Ok(responseBody);
+                }
+                catch (HttpRequestException e)
+                {
+                    return BadRequest(e.Message);
+                }
+            } catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

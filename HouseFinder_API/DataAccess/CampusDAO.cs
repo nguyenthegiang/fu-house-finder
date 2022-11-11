@@ -50,5 +50,24 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
         }
+
+        //For demo GetDistance in HouseController
+        public static CampusDTO GetCampusById(int CampusId)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    return context.Campuses.ProjectTo<CampusDTO>(config)
+                        .Where(campus => campus.CampusId == CampusId).FirstOrDefault();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
