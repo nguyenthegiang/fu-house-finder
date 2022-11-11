@@ -6,13 +6,17 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
 //environment variable for API URL
-import { environment } from 'src/environments/environment'; 
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HouseService {
   readonly APIUrl = `${environment.api_url}/House`;
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   constructor(private http: HttpClient) { }
 
@@ -261,14 +265,14 @@ export class HouseService {
 
   // /**
   //   [Home Page] Filter available Houses by Distance;
-  //   This has to be a diffrent method because calling Google Map API 
+  //   This has to be a diffrent method because calling Google Map API
   //   to calculate distance to filter is expensive
   //   -> has to minimize times of calling it;
 
   //   Pass in the list of house to be filtered & Distance to filter
   //  */
   // calculateDistanceFromHouseToCampus(house: House, campus: Campus): Observable<any> {
-  //   const googleMapApiUrl = `https://maps.googleapis.com/maps/api/distancematrix/json` + 
+  //   const googleMapApiUrl = `https://maps.googleapis.com/maps/api/distancematrix/json` +
   //     `?destinations=${house.address.googleMapLocation}&origins=${campus.address.googleMapLocation}&key=${environment.google_maps_api_key}`;
   //     const httpOptions = {
   //       headers: new HttpHeaders({
@@ -308,5 +312,10 @@ export class HouseService {
   //[Home Page] For Paging
   countTotalAvailableHouse(): Observable<any> {
     return this.http.get<any>(this.APIUrl + "/CountAvailableHouse");
+  }
+
+  //[Landlord: Delete House]
+  deleteHouse(houseId: number): Observable<any> {
+    return this.http.delete<any>(this.APIUrl + "?houseId=" + houseId, this.httpOptions);
   }
 }

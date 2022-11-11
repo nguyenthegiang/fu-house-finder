@@ -1,4 +1,4 @@
-<div class="container-fluit m-5">
+<!-- <div class="container-fluit m-5">
   <h3 class="text-center my-5">Chỉnh sửa nhà trọ</h3>
   <form class="row w-100 d-flex justify-content-around needs-validation" novalidate>
     <div class="col-12 col-md-5">
@@ -117,4 +117,19 @@
       <button class="btn btn-success w-25 mt-4" type="submit">Chỉnh sửa</button>
     </div>
   </form>
+</div> -->
+
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+  <div class="modal-dialog">
+      <div class="modal-content">
+          <div class="modal-header d-flex justify-content-center">
+              <h5 class="modal-title" id="updateModalLabel">Xác nhận xóa phòng</h5>
+          </div>
+          <div class="modal-body d-flex justify-content-center">
+              <button type="button" class="btn btn-secondary w-25 me-3" data-bs-dismiss="modal">Hủy</button>
+              <button type="button" class="btn btn-primary w-25" (click)="deleteHouse()">Xóa</button>
+          </div>
+      </div>
+  </div>
 </div>
