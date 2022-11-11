@@ -18,6 +18,9 @@ export class DashboardComponent implements OnInit {
   roomCount: number = 0;
   roomAvailableCount: number = 0;
 
+  //[Update and Delete] houseId to pass into <update-house>
+  houseId: number = 0;
+
   constructor(private houseService: HouseService,
     private lanlord_informationService: LandlordInformationService,
     private router: Router)
@@ -56,8 +59,7 @@ export class DashboardComponent implements OnInit {
 
   deleteHouse(id: number)
   {
-    console.log(id);
-    this.router.navigate(['/Landlord/landlord-house-detail/' + id]);
+    this.houseId = id;
   }
 
   addHouse()
