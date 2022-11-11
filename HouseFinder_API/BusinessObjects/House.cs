@@ -23,6 +23,7 @@ namespace BusinessObjects
         public int? VillageId { get; set; }
         public string LandlordId { get; set; }
         public int? CampusId { get; set; }
+        public double? DistanceToCampus { get; set; }
         public decimal PowerPrice { get; set; }
         public decimal WaterPrice { get; set; }
         public bool? FingerprintLock { get; set; }
