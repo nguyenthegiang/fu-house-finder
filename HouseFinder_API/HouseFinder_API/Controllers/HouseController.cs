@@ -174,6 +174,7 @@ namespace HouseFinder_API.Controllers
             }
         }
 
+        [EnableQuery]
         [HttpGet("GetReportedHouses")]
         public ActionResult<IEnumerable<ReportHouseDTO>> GetReportedHouses()
         {
