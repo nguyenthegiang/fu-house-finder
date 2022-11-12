@@ -72,58 +72,11 @@
                   type="button"
                   class="btn btn-secondary"
                   data-bs-toggle="modal"
-                  data-bs-target="#exampleModal"
+                  data-bs-target="#listReportModal"
+                  (click)="changeSelectedHouse(house.houseId)"
                 >
-                Chi tiết
+                  Chi tiết
                 </button>
-
-                <!-- Modal -->
-                <div
-                  class="modal fade"
-                  id="exampleModal"
-                  tabindex="-1"
-                  aria-labelledby="exampleModalLabel"
-                  aria-hidden="true">
-                  <div class="modal-dialog">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h1 class="modal-title fs-5" id="exampleModalLabel">
-                          Thông tin chi tiết
-                        </h1>
-                        <button
-                          type="button"
-                          class="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        ></button>
-                      </div>
-                      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                        <div style="padding: 20px;">
-                            <table class="table">
-                              <thead>
-                                <tr>
-                                  <th scope="col" id="md">STT</th>
-                                  <th scope="col">Mã sinh viên</th>
-                                  <th scope="col">Tên sinh viên</th>
-                                  <th scope="col">Nội dung</th>
-                                  <th scope="col">Ngày báo cáo</th>
-                                </tr>
-                              </thead>
-                              <tbody>
-                                <tr *ngFor="let report of house.listReports; let j = index">
-                                  <td>{{ j + 1 }}</td>
-                                  <td>{{report.student.userId}}</td>
-                                  <td>{{report.student.displayName}}</td>
-                                  <td>{{report.reportContent}}</td>
-                                  <td>{{report.createdDate | date: "dd/MM/yyyy"}}</td>
-                                </tr>
-                              </tbody>
-                            </table>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </td>
             </tr>
           </tbody>
@@ -164,4 +117,52 @@
   </div>
 </div>
 
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="listReportModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Thông tin chi tiết
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div style="padding: 20px">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" id="md">STT</th>
+                <th scope="col">Mã sinh viên</th>
+                <th scope="col">Tên sinh viên</th>
+                <th scope="col">Nội dung</th>
+                <th scope="col">Ngày báo cáo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let report of reportsOfSelectedHouse; let j = index">
+                <td>{{ j + 1 }}</td>
+                <td>{{ report.student.userId }}</td>
+                <td>{{ report.student.displayName }}</td>
+                <td>{{ report.reportContent }}</td>
+                <td>{{ report.createdDate | date: "dd/MM/yyyy" }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <app-footer></app-footer>

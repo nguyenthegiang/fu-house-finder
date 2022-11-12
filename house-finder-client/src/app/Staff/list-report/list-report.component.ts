@@ -18,6 +18,8 @@ export class ListReportComponent implements OnInit
   searchValue: string | undefined;
   //List all report
   houses: ReportHouse[] = [];
+  //List reports of selected house
+  reportsOfSelectedHouse: StaffReport[] = [];
 
   constructor(private reportService: ReportService,
     private houseService: HouseService,
@@ -36,6 +38,15 @@ export class ListReportComponent implements OnInit
 
   search(searchValue: string)
   {
+  }
+
+  //
+  changeSelectedHouse(houseId: number){
+    //Find the house which id == houseId
+    var selectedHouse = this.houses.find(house => house.houseId == houseId);
+    if(selectedHouse?.listReports != undefined){
+      this.reportsOfSelectedHouse = selectedHouse.listReports;
+    }
   }
 
 }

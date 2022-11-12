@@ -118,7 +118,7 @@ namespace DataAccess
             {
                 using(var context = new FUHouseFinderContext())
                 {
-                    count = context.Reports.Where(r => r.HouseId == houseId).Count();
+                    count = context.Reports.Where(r => r.Deleted == false).Where(r => r.HouseId == houseId).Count();
                 }
             }
             catch (Exception e)
