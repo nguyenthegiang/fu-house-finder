@@ -29,7 +29,7 @@ export class ListReportComponent implements OnInit
   ngOnInit(): void
   {
     //Call API: get all reports of this house
-    this.houseService.getReportHouse().subscribe(data => {
+    this.houseService.getReportedHouses().subscribe(data => {
       this.houses = data;
 
       console.log(this.houses);

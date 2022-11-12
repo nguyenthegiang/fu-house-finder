@@ -174,8 +174,8 @@ namespace HouseFinder_API.Controllers
             }
         }
 
-        [HttpGet("ReportHouse")]
-        public ActionResult<IEnumerable<ReportHouseDTO>> GetReportHouse()
+        [HttpGet("GetReportedHouses")]
+        public ActionResult<IEnumerable<ReportHouseDTO>> GetReportedHouses()
         {
             List<ReportHouseDTO> houses = houseRepository.GetListReportHouse();
             if (houses == null)
