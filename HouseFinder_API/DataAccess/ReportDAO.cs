@@ -70,8 +70,8 @@ namespace DataAccess
             return totals;
         }
 
-        //Get list of all reports
-        public static List<StaffReportDTO> GetAllReport()
+        //Get list of reports by house id
+        public static List<StaffReportDTO> GetReportByHouseId(int houseId)
         {
             List<StaffReportDTO> reports;
             try
@@ -80,7 +80,7 @@ namespace DataAccess
                 {
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    reports = context.Reports.Where(r => r.Deleted == false).ProjectTo<StaffReportDTO>(config).ToList();
+                    reports = context.Reports.Where(r => r.Deleted == false).Where(r => r.HouseId == houseId).ProjectTo<StaffReportDTO>(config).ToList();
                 }
             }
             catch (Exception e)

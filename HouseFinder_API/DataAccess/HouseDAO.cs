@@ -444,6 +444,7 @@ namespace DataAccess
                     foreach (ReportHouseDTO house in houses)
                     {
                         house.NumberOfReport = ReportDAO.CountTotalReportByHouseId(house.HouseId);
+                        house.ListReports = ReportDAO.GetReportByHouseId(house.HouseId);
                     }
 
                     houses.RemoveAll(house => house.NumberOfReport == 0);

@@ -14,5 +14,6 @@ namespace DataAccess.DTO
         public virtual AddressDTO Address { get; set; }
         public virtual UserDTO Landlord { get; set; }
         public int NumberOfReport { get; set; }
+        public virtual List<StaffReportDTO> ListReports { get; set; }
     }
 }
