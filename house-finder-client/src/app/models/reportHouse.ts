@@ -1,4 +1,5 @@
 import { Address } from "./address";
+import { StaffReport } from "./staffReport";
 import { User } from "./user";
 
 export interface ReportHouse {
@@ -7,4 +8,5 @@ export interface ReportHouse {
   landlord: User;
   address: Address;
   numberOfReport: number;
+  listReports: StaffReport[];
 }
