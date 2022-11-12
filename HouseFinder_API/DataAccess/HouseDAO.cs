@@ -296,7 +296,8 @@ namespace DataAccess
         //}
 
         /** [House Detail] Get House Detail information;
-            Find detail information of a House by its Id
+            Find detail information of a House by its Id;
+            Also find its CommuneId & DistrictId
          */
         public static HouseDTO GetHouseById(int houseId)          
         {
@@ -312,6 +313,10 @@ namespace DataAccess
                     houseDTO = context.Houses.Where(h => h.Deleted == false).Include(h => h.Address).ProjectTo<HouseDTO>(config)
                         .Where(p => p.HouseId == houseId).FirstOrDefault();
 
+                    //(Commune, District)
+                    /*Get CommuneId & DistrictId of the Village of this House*/
+                    houseDTO.CommuneId = VillageDAO.GetVillageById((int)houseDTO.VillageId).CommuneId;
+                    houseDTO.DistrictId = CommuneDAO.GetCommuneById((int)houseDTO.CommuneId).DistrictId;
                 }
             }
             catch (Exception e)
