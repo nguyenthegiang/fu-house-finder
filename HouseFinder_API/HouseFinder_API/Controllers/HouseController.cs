@@ -173,5 +173,19 @@ namespace HouseFinder_API.Controllers
                 return BadRequest();
             }
         }
+
+        [HttpGet("ReportHouse")]
+        public ActionResult<IEnumerable<ReportHouseDTO>> GetReportHouse()
+        {
+            List<ReportHouseDTO> houses = houseRepository.GetListReportHouse();
+            if (houses == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(houses);
+            }
+        }
     }
 }

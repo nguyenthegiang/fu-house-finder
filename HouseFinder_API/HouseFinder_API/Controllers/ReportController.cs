@@ -18,9 +18,6 @@ namespace HouseFinder_API.Controllers
     {
         private IReportRepository reportRepository = new ReportRepository();
 
-        [EnableQuery]
-        [HttpGet]
-        public ActionResult<IEnumerable<StaffReportDTO>> GetAllOrders() => reportRepository.GetAllReport();
 
         //[Report] POST: Add Report
         [HttpPost]
@@ -63,6 +60,21 @@ namespace HouseFinder_API.Controllers
             else
             {
                 return Ok(reports);
+            }
+        }
+
+        //GET: api/Report/CountTotalReportByHouseId/
+        [HttpGet("CountTotalReportByHouseId/{houseId}")]
+        public IActionResult CountTotalReportByHouseId(int houseId)
+        {
+            int total = reportRepository.CountReportByHouseId(houseId);
+            if (total == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(total);
             }
         }
 

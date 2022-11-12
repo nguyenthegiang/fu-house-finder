@@ -13,12 +13,22 @@
             <div class="text-center my-4">
               <div class="input-group">
                 <!-- Press enter to search  -->
-                <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm" aria-label="search_house_by_name"
-                  aria-describedby="button-addon2" #searchValue
-                  (keydown.enter)="search(searchValue.value)">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Nhập từ khóa tìm kiếm"
+                  aria-label="search_house_by_name"
+                  aria-describedby="button-addon2"
+                  #searchValue
+                  (keydown.enter)="search(searchValue.value)"
+                />
                 <!-- Click button to search -->
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2"
-                  (click)="search(searchValue.value)">
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  id="button-addon2"
+                  (click)="search(searchValue.value)"
+                >
                   <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
               </div>
@@ -31,21 +41,43 @@
           <thead>
             <tr>
               <th scope="col" id="md">STT</th>
-              <th scope="col">Mã sinh viên</th>
-              <th scope="col">Tên sinh viên</th>
               <th scope="col">Nhà trọ</th>
-              <th scope="col">Nội dung</th>
-              <th scope="col">Ngày báo cáo</th>
+              <th scope="col">Chủ trọ</th>
+              <th scope="col">Số lượt báo cáo</th>
+              <th scope="col">Trạng thái</th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let report of reports; let i=index;">
-              <td id="md"><b>{{i+1}}</b></td>
-              <td>{{report.student.userId}}</td>
-              <td>{{report.student.displayName}}</td>
-              <td>{{report.house.houseName}}</td>
-              <td>{{report.reportContent}}</td>
-              <td>{{report.createdDate| date:'dd/MM/yyyy'}}</td>
+            <tr *ngFor="let house of houses; let i = index">
+              <td id="md">
+                <b>{{ i + 1 }}</b>
+              </td>
+              <td>{{ house.houseName }}</td>
+              <td>{{ house.landlord.displayName }}</td>
+              <td>{{ house.numberOfReport }}</td>
+              <td>
+                <div class="form-check form-switch">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="flexSwitchCheckChecked"
+                    [checked]="house.landlord.active == true"
+                  />
+                </div>
+              </td>
+              <td>
+                <!-- Button trigger modal -->
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#listReportModal"
+                  (click)="changeSelectedHouse(house.houseId)"
+                >
+                  Chi tiết
+                </button>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -61,9 +93,15 @@
                   <span class="sr-only">Previous</span>
                 </a>
               </li>
-              <li class="page-item"><a class="page-link text-dark" href="#">1</a></li>
-              <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
-              <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link text-dark" href="#">1</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link text-dark" href="#">2</a>
+              </li>
+              <li class="page-item">
+                <a class="page-link text-dark" href="#">3</a>
+              </li>
               <li class="page-item">
                 <a class="page-link text-dark" href="#" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>
@@ -79,4 +117,52 @@
   </div>
 </div>
 
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="listReportModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Thông tin chi tiết
+        </h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div style="padding: 20px">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col" id="md">STT</th>
+                <th scope="col">Mã sinh viên</th>
+                <th scope="col">Tên sinh viên</th>
+                <th scope="col">Nội dung</th>
+                <th scope="col">Ngày báo cáo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let report of reportsOfSelectedHouse; let j = index">
+                <td>{{ j + 1 }}</td>
+                <td>{{ report.student.userId }}</td>
+                <td>{{ report.student.displayName }}</td>
+                <td>{{ report.reportContent }}</td>
+                <td>{{ report.createdDate | date: "dd/MM/yyyy" }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 <app-footer></app-footer>

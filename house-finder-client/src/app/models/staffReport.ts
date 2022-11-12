@@ -7,6 +7,6 @@ export interface StaffReport {
   reportId: number;
   reportContent: string;
   student: User;
-  house: House;
+  houseId: number;
   createdDate: Date;
 }

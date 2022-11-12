@@ -24,5 +24,6 @@ namespace Repositories.IRepository
         public void UpdateHouseByHouseId(House house);
 
         public void DeleteHouseByHouseId(int houseId);
+        public List<ReportHouseDTO> GetListReportHouse();
     }
 }

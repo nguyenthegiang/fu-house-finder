@@ -7,6 +7,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
 //environment variable for API URL
 import { environment } from 'src/environments/environment';
+import { ReportHouse } from '../models/reportHouse';
 
 @Injectable({
   providedIn: 'root'
@@ -317,5 +318,10 @@ export class HouseService {
   //[Landlord: Delete House]
   deleteHouse(houseId: number): Observable<any> {
     return this.http.delete<any>(this.APIUrl + "?houseId=" + houseId, this.httpOptions);
+  }
+
+  //[Staff/list-report]
+  getReportHouse(): Observable<ReportHouse[]>{
+    return this.http.get<ReportHouse[]>(this.APIUrl + "/ReportHouse");
   }
 }
