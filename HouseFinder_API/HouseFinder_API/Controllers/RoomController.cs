@@ -218,6 +218,13 @@ namespace HouseFinder_API.Controllers
             return availableRoom;
         }
 
+        //GET: api/Rooms/CountAvailableCapacityByHouseId?houseId=
+        [HttpGet("CountAvailableCapacityByHouseId")]
+        public int? CountAvailableCapacityByHouseId(int houseId)
+        {
+            return roomRepository.CountAvailableCapacityByHouseId(houseId);
+        }
+
         [HttpPut("changeStatus")]
         public IActionResult ChangeStatusRoom(int statusId, int roomId)
         {
@@ -232,7 +239,5 @@ namespace HouseFinder_API.Controllers
                 return BadRequest();
             }
         }
-
-
     }
 }
