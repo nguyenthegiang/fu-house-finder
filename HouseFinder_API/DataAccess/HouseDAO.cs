@@ -315,8 +315,8 @@ namespace DataAccess
 
                     //(Commune, District)
                     /*Get CommuneId & DistrictId of the Village of this House*/
-                    houseDTO.CommuneId = houseDTO.Village.CommuneId;
-                    houseDTO.DistrictId = houseDTO.Village.Commune.DistrictId;
+                    houseDTO.CommuneId = VillageDAO.GetVillageById((int)houseDTO.VillageId).CommuneId;
+                    houseDTO.DistrictId = CommuneDAO.GetCommuneById((int)houseDTO.CommuneId).DistrictId;
                 }
             }
             catch (Exception e)
