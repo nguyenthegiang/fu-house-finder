@@ -1,9 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Order } from '../models/order';
 //environment variable for API URL
-import { environment } from 'src/environments/environment'; 
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,10 @@ import { environment } from 'src/environments/environment';
 export class OrderService {
 
   readonly APIUrl = `${environment.api_url}/Order`;
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   constructor(private http: HttpClient) { }
 
@@ -100,5 +104,10 @@ export class OrderService {
   //[Staff/list-order] Filter orders by status
   filterOrderByStatus(status: boolean): Observable<Order[]>{
     return this.http.get<Order[]>(this.APIUrl + "/?$filter=Solved%20eq%20" + status);
+  }
+
+  //[Staff/list-order] Update order's status
+  updateOrderStatus(orderId: number, statusId: number): Observable<any>{
+    return this.http.put<any>(this.APIUrl + "/" + orderId + "/" + statusId, this.httpOptions);
   }
 }

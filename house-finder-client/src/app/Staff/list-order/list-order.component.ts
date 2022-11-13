@@ -8,7 +8,7 @@ import { OrderStatusService } from 'src/app/services/orderStatus.service';
 @Component({
   selector: 'app-list-order',
   templateUrl: './list-order.component.html',
-  styleUrls: ['./list-order.component.scss']
+  styleUrls: ['./list-order.component.scss'],
 })
 export class ListOrderComponent implements OnInit {
   //List of orders
@@ -19,31 +19,40 @@ export class ListOrderComponent implements OnInit {
 
   //(Paging)
   totalOrder = 0; //items count
-  pageSize = 10;             //number of items per page
-  pageNumber = 1;           //starts at page 1
-  pageCount = 0;            //number of pages
-  pageList: number[] = [];  //array to loop with *ngFor in HTML Template
+  pageSize = 10; //number of items per page
+  pageNumber = 1; //starts at page 1
+  pageCount = 0; //number of pages
+  pageList: number[] = []; //array to loop with *ngFor in HTML Template
 
   //Filter
-  selectedStatusId: number|undefined;
-  selectedFromDate: string|undefined;
-  selectedToDate: string|undefined;
+  selectedStatusId: number | undefined;
+  selectedFromDate: string | undefined;
+  selectedToDate: string | undefined;
   searchValue: string | undefined;
 
-  constructor(private orderService: OrderService,
-              private orderStatusService: OrderStatusService,
-              private router: Router){}
+  //Modal
+  selectedOrderContent: string | undefined;
+  selectedOrderStatus: number | undefined;
+
+  selectedOrder: Order | undefined;
+  selectedStatusIdToUpdate: number | undefined;
+
+  constructor(
+    private orderService: OrderService,
+    private orderStatusService: OrderStatusService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.filterHouse(false);
 
     // (Paging) Count available Houses for total number of pages
-    this.orderService.countTotalOrder().subscribe(data => {
+    this.orderService.countTotalOrder().subscribe((data) => {
       this.totalOrder = data;
       console.log(data);
 
       // (Paging) Calculate number of pages
-      this.pageCount = Math.ceil(this.totalOrder / this.pageSize);  //divide & round up
+      this.pageCount = Math.ceil(this.totalOrder / this.pageSize); //divide & round up
 
       // (Paging) Render pageList based on pageCount
       this.pageList = Array.from({ length: this.pageCount }, (_, i) => i + 1);
@@ -51,7 +60,7 @@ export class ListOrderComponent implements OnInit {
     });
 
     //Call API: get list of orders' statuses
-    this.orderStatusService.getAllStatus().subscribe(data => {
+    this.orderStatusService.getAllStatus().subscribe((data) => {
       this.statuses = data;
     });
   }
@@ -69,7 +78,7 @@ export class ListOrderComponent implements OnInit {
     window.scroll({
       top: 0,
       left: 0,
-      behavior: 'smooth'
+      behavior: 'smooth',
     });
   }
 
@@ -80,16 +89,18 @@ export class ListOrderComponent implements OnInit {
       this.pageNumber = 1;
     }
 
-    this.orderService.filterOrder(
-      this.pageSize,
-      this.pageNumber,
-      this.selectedStatusId,
-      this.selectedFromDate,
-      this.selectedToDate,
-    ).subscribe(data => {
-      this.orders = data;
-      this.scrollToTop();
-    });
+    this.orderService
+      .filterOrder(
+        this.pageSize,
+        this.pageNumber,
+        this.selectedStatusId,
+        this.selectedFromDate,
+        this.selectedToDate
+      )
+      .subscribe((data) => {
+        this.orders = data;
+        this.scrollToTop();
+      });
   }
 
   //[Filter] Filter by Campus
@@ -103,24 +114,47 @@ export class ListOrderComponent implements OnInit {
     this.filterHouse(true);
   }
 
-  onFromDateSelected(selectedDate: string){
+  onFromDateSelected(selectedDate: string) {
     this.selectedFromDate = selectedDate;
     this.filterHouse(true);
     console.log(selectedDate);
     console.log(this.selectedFromDate);
   }
 
-  onToDateSelected(selectedDate: string){
+  onToDateSelected(selectedDate: string) {
     this.selectedToDate = selectedDate;
     this.filterHouse(true);
     console.log(selectedDate);
   }
 
-  viewOrder(id: number)
-  {
+  viewOrder(id: number) {
     this.router.navigate(['/Staff/staff-landlord-detail/' + id]);
   }
 
-  search(searchValue: string)
-  {}
+  search(searchValue: string) {}
+
+  changeSelectedOrder(orderId: number) {
+    //Find the order which id == orderId
+    var selectedOrder = this.orders.find((order) => order.orderId == orderId);
+    this.selectedOrder = this.orders.find((order) => order.orderId == orderId);
+    if (selectedOrder != undefined) {
+      this.selectedOrderContent = selectedOrder.orderContent;
+      this.selectedStatusId = selectedOrder.status.statusId;
+      console.log('Status id: ' + this.selectedStatusId);
+    }
+  }
+
+  onSelectOrderStatus(selectedStatusId: string){
+    this.selectedStatusIdToUpdate = Number(selectedStatusId);
+  }
+
+  updateOrderStatus() {
+    var orderId = this.selectedOrder?.orderId;
+    console.log("OrderId: " + this.selectedOrder?.orderId + "; statusId: " + this.selectedStatusIdToUpdate);
+    if (orderId != undefined && this.selectedStatusIdToUpdate != undefined) {
+      //Call API:
+      this.orderService.updateOrderStatus(orderId, this.selectedStatusIdToUpdate).subscribe();
+      window.location.reload();
+    }
+  }
 }

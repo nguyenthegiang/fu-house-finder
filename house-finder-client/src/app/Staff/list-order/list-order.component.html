@@ -16,12 +16,22 @@
             <div class="text-center my-4">
               <div class="input-group">
                 <!-- Press enter to search  -->
-                <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm" aria-label="search_house_by_name"
-                  aria-describedby="button-addon2" #searchValue
-                  (keydown.enter)="search(searchValue.value)">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="Nhập từ khóa tìm kiếm"
+                  aria-label="search_house_by_name"
+                  aria-describedby="button-addon2"
+                  #searchValue
+                  (keydown.enter)="search(searchValue.value)"
+                />
                 <!-- Click button to search -->
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2"
-                  (click)="search(searchValue.value)">
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  id="button-addon2"
+                  (click)="search(searchValue.value)"
+                >
                   <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
               </div>
@@ -33,24 +43,43 @@
         <!-- Filter -->
         <div class="row">
           <!-- Date picker -->
-            <!-- Start date -->
-            <div class="col-6 col-md-3 my-2">
-              <label class="form-label">Từ ngày</label>
-              <input #selectedFromDate class="form-control" type="date" (change)="onFromDateSelected(selectedFromDate.value)">
-            </div>
-            <!-- End date -->
-            <div class="col-6 col-md-3 my-2">
-              <label class="form-label">Đến ngày</label>
-              <input #selectedToDate class="form-control" type="date" (change)="onToDateSelected(selectedToDate.value)">
-            </div>
+          <!-- Start date -->
+          <div class="col-6 col-md-3 my-2">
+            <label class="form-label">Từ ngày</label>
+            <input
+              #selectedFromDate
+              class="form-control"
+              type="date"
+              (change)="onFromDateSelected(selectedFromDate.value)"
+            />
+          </div>
+          <!-- End date -->
+          <div class="col-6 col-md-3 my-2">
+            <label class="form-label">Đến ngày</label>
+            <input
+              #selectedToDate
+              class="form-control"
+              type="date"
+              (change)="onToDateSelected(selectedToDate.value)"
+            />
+          </div>
           <!-- End date picker -->
 
           <!-- Trạng thái -->
           <div class="col-6 col-md-3 my-2">
             <label class="form-label">Trạng thái</label>
-            <select #selectCStatusId class="form-select" (change)="onStatusSelected(selectCStatusId.value)">
+            <select
+              #selectCStatusId
+              class="form-select"
+              (change)="onStatusSelected(selectCStatusId.value)"
+            >
               <option value="0">Tất cả</option>
-              <option *ngFor="let status of statuses" value="{{status.statusId}}">{{status.statusName}}</option>
+              <option
+                *ngFor="let status of statuses"
+                value="{{ status.statusId }}"
+              >
+                {{ status.statusName }}
+              </option>
             </select>
           </div>
           <!-- Order by -->
@@ -81,20 +110,46 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let order of orders; let i=index;">
-              <td><b>{{(pageNumber-1)*pageSize+i+1}}</b></td>
-              <td>{{order.studentId}}</td>
-              <td>{{order.studentName}}</td>
-              <td>{{order.phoneNumber}}</td>
-              <td>{{order.email}}</td>
-              <!-- <td>{{order.orderContent}}</td> -->
-              <td>{{order.orderedDate| date:'dd/MM/yyyy'}}</td>
-              <td>{{order.solvedDate| date:'dd/MM/yyyy'}}</td>
-              <td *ngIf="order.status.statusName ==='Unsolved'" style="color: red">Chưa giải quyết</td>
-              <td *ngIf="order.status.statusName ==='Processing'" style="color: orange">Đang giải quyết</td>
-              <td *ngIf="order.status.statusName ==='Solved'" style="color: green;">Đã giải quyết</td>
+            <tr *ngFor="let order of orders; let i = index">
               <td>
-                <a class="text-decoration-none" (click)="viewOrder(order.orderId)" style="cursor: pointer;">Chi tiết</a>
+                <b>{{ (pageNumber - 1) * pageSize + i + 1 }}</b>
+              </td>
+              <td>{{ order.studentId }}</td>
+              <td>{{ order.studentName }}</td>
+              <td>{{ order.phoneNumber }}</td>
+              <td>{{ order.email }}</td>
+              <!-- <td>{{order.orderContent}}</td> -->
+              <td>{{ order.orderedDate | date: "dd/MM/yyyy" }}</td>
+              <td>{{ order.solvedDate | date: "dd/MM/yyyy" }}</td>
+              <td
+                *ngIf="order.status.statusName === 'Unsolved'"
+                style="color: red"
+              >
+                Chưa giải quyết
+              </td>
+              <td
+                *ngIf="order.status.statusName === 'Processing'"
+                style="color: orange"
+              >
+                Đang giải quyết
+              </td>
+              <td
+                *ngIf="order.status.statusName === 'Solved'"
+                style="color: green"
+              >
+                Đã giải quyết
+              </td>
+              <td>
+                <!-- Button trigger modal -->
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#selectedOrderModal"
+                  (click)="changeSelectedOrder(order.orderId)"
+                >
+                  Chi tiết
+                </button>
               </td>
             </tr>
           </tbody>
@@ -106,22 +161,40 @@
           <nav aria-label="Pagination-nav">
             <ul class="pagination">
               <!-- Previous: Disabled if this is first page -->
-              <li class="page-item" [ngClass]="{'disabled': pageNumber == 1}">
+              <li class="page-item" [ngClass]="{ disabled: pageNumber == 1 }">
                 <!-- Go to previous page -->
-                <a class="page-link" aria-label="Previous" routerLink="Staff/list-order" (click)="goToPage(pageNumber - 1)">
+                <a
+                  class="page-link"
+                  aria-label="Previous"
+                  routerLink="Staff/list-order"
+                  (click)="goToPage(pageNumber - 1)"
+                >
                   <span aria-hidden="true">&laquo;</span>
                 </a>
               </li>
               <!-- Numbers -->
               <li *ngFor="let page of pageList" class="page-item">
                 <!-- Display this as active if it's the chosen page -->
-                <a class="page-link" routerLink="Staff/list-order" (click)="goToPage(page)"
-                  [ngClass]="{'active': pageNumber == page}">{{page}}</a>
+                <a
+                  class="page-link"
+                  routerLink="Staff/list-order"
+                  (click)="goToPage(page)"
+                  [ngClass]="{ active: pageNumber == page }"
+                  >{{ page }}</a
+                >
               </li>
               <!-- Next: Disabled if this is last page -->
-              <li class="page-item" [ngClass]="{'disabled': pageNumber == pageCount}">
+              <li
+                class="page-item"
+                [ngClass]="{ disabled: pageNumber == pageCount }"
+              >
                 <!-- Go to next page -->
-                <a class="page-link" aria-label="Next" routerLink="Staff/list-order" (click)="goToPage(pageNumber + 1)">
+                <a
+                  class="page-link"
+                  aria-label="Next"
+                  routerLink="Staff/list-order"
+                  (click)="goToPage(pageNumber + 1)"
+                >
                   <span aria-hidden="true">&raquo;</span>
                 </a>
               </li>
@@ -135,3 +208,44 @@
 </div>
 
 <app-footer></app-footer>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="selectedOrderModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Thông tin chi tiết</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+
+      <div class="modal-body">
+        <h6>Nội dung:</h6>
+        <span>{{ selectedOrderContent }}</span>
+        <br>
+        <h6 class="form-label">Trạng thái</h6>
+        <!-- Set selected value for <select> by [ngModel] -->
+        <select #selectOrderStatusId class="form-select" [(ngModel)]="selectedStatusId" (change)="onSelectOrderStatus(selectOrderStatusId.value)">
+          <option *ngFor="let status of statuses" [value]="status.statusId">
+            {{ status.statusName }}
+          </option>
+        </select>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="updateOrderStatus()">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
