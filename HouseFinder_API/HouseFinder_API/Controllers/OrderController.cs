@@ -44,6 +44,21 @@ namespace HouseFinder_API.Controllers
             return totals;
         }
 
+        //Update reservation
+        [HttpPut("{orderId}/{statusId}")]
+        public IActionResult UpdateReservation(int orderId, int statusId)
+        {
+            try
+            {
+                orderRepository.UpdateOrderStatus(orderId, statusId);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
 
     }
 }

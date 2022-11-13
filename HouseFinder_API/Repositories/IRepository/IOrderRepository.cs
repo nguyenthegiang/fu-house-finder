@@ -13,5 +13,6 @@ namespace Repositories.IRepository
         public int CountTotalOrder();
         public int[] GetTotalOrderByMonth();
         public int[] GetSolvedlOrderByMonth();
+        public void UpdateOrderStatus(int orderId, int statusId);
     }
 }

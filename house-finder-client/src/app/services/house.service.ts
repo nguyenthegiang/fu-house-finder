@@ -321,7 +321,7 @@ export class HouseService {
   }
 
   //[Staff/list-report]
-  getReportHouse(): Observable<ReportHouse[]>{
-    return this.http.get<ReportHouse[]>(this.APIUrl + "/ReportHouse");
+  getReportedHouses(): Observable<ReportHouse[]>{
+    return this.http.get<ReportHouse[]>(this.APIUrl + "/GetReportedHouses");
   }
 }
