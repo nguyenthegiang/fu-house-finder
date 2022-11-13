@@ -82,7 +82,7 @@
           </thead>
           <tbody>
             <tr *ngFor="let order of orders; let i=index;">
-              <td><b>{{i+1}}</b></td>
+              <td><b>{{(pageNumber-1)*pageSize+i+1}}</b></td>
               <td>{{order.studentId}}</td>
               <td>{{order.studentName}}</td>
               <td>{{order.phoneNumber}}</td>

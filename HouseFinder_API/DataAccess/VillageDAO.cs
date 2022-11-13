@@ -29,5 +29,24 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
         }
+
+        //For HouseDAO.GetHouseById()
+        public static VillageDTO GetVillageById(int VillageId)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    return context.Villages.ProjectTo<VillageDTO>(config)
+                        .Where(village => village.VillageId == VillageId).FirstOrDefault();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
