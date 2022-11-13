@@ -48,6 +48,7 @@ import { StaffHouseDetailComponent } from './Staff/staff-house-detail/staff-hous
 import { StaffRoomDetailComponent } from './Staff/staff-room-detail/staff-room-detail.component';
 import { DeleteHouseComponent } from './Landlord/delete-house/delete-house.component';
 import { RegisterComponent } from './Guest/login/register/register.component';
+import { ImportComponent } from './Landlord/import/import.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +90,7 @@ import { RegisterComponent } from './Guest/login/register/register.component';
     StaffRoomDetailComponent,
     DeleteHouseComponent,
     RegisterComponent,
+    ImportComponent,
   ],
   imports: [
     BrowserModule,
