@@ -5,7 +5,8 @@
     <div class="col-12 col-md-5">
       <div class="mb-3">
         <label for="exampleInput1" class="form-label"><b>Tên nhà trọ</b></label>
-        <input type="text" class="form-control" id="exampleInput1" placeholder="Nhập tên nhà trọ" value="{{houseDetail.houseName}}" required>
+        <input type="text" class="form-control" id="exampleInput1" placeholder="Nhập tên nhà trọ"
+          value="{{houseDetail.houseName}}" required>
         <div class="invalid-feedback mb-3">Không được để trống</div>
       </div>
 
@@ -15,8 +16,10 @@
         <select #selectCampus class="form-select" aria-label="select-campus"
           (change)="onCampusSelected(selectCampus.value)">
           <!-- List of Campuses to choose -->
-          <option *ngFor=" let campus of campuses" value="{{campus.campusId}}">
-            {{campus.campusName}}</option>
+          <option *ngFor=" let campus of campuses" value="{{campus.campusId}}"
+            [selected]="campus.campusId == houseDetail.campusId">
+            {{campus.campusName}}
+          </option>
         </select>
         <div class="invalid-feedback mb-3">Không được để trống</div>
       </div>
@@ -26,10 +29,11 @@
         <!-- When select 1 District -> change list of Communes accordingly -->
         <select #selectDistrict class="form-select selectRegion" aria-label="select-district"
           (change)="onDistrictSelected(selectDistrict.value)">
-          <option class="disableOption" disabled selected>Chọn quận/huyện</option>
           <!-- List all Districts of selected Campus-->
-          <option *ngFor=" let district of districtsOfSelectedCampus" value="{{district.districtId}}">
-            {{district.districtName}}</option>
+          <option *ngFor=" let district of districtsOfSelectedCampus" value="{{district.districtId}}"
+            [selected]="district.districtId == houseDetail.districtId">
+            {{district.districtName}}
+          </option>
         </select>
         <div class="invalid-feedback mb-3">Không được để trống</div>
       </div>
@@ -39,9 +43,9 @@
         <!-- When select 1 Communes -> change list of Villages accordingly -->
         <select #selectCommune class="form-select selectRegion" aria-label="select-commune"
           (change)="onCommuneSelected(selectCommune.value)">
-          <option class="disableOption" disabled selected>Chọn phường/xã</option>
           <!-- List all Communes of selected District -->
-          <option *ngFor="let commune of communesOfSelectedDistrict" value="{{commune.communeId}}">
+          <option *ngFor="let commune of communesOfSelectedDistrict" value="{{commune.communeId}}"
+            [selected]="commune.communeId == houseDetail.communeId">
             {{commune.communeName}}</option>
         </select>
         <div class="invalid-feedback mb-3">Không được để trống</div>
@@ -52,9 +56,9 @@
         <!-- When select 1 Village -> call API -->
         <select #selectVillage class="form-select selectRegion" aria-label="select-village"
           (change)="onVillageSelected(selectVillage.value)">
-          <option class="disableOption" disabled selected>Chọn thôn/xóm</option>
           <!-- List all Villages of selected Commune -->
-          <option *ngFor="let village of villagesOfSelectedCommune" value="{{village.villageId}}">
+          <option *ngFor="let village of villagesOfSelectedCommune" value="{{village.villageId}}"
+            [selected]="village.villageId == houseDetail.villageId">
             {{village.villageName}}</option>
         </select>
         <div class="invalid-feedback mb-3">Không được để trống</div>
@@ -62,53 +66,40 @@
 
       <div class="mb-3">
         <label for="exampleInput2" class="form-label"><b>Địa chỉ</b></label>
-        <input type="text" class="form-control" id="exampleInput2" placeholder="Nhập địa chỉ" required>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Nhập địa chỉ"
+          value="{{houseDetail.address.addresses}}" required>
+        </textarea>
         <div class="invalid-feedback mb-3">Không được để trống</div>
       </div>
 
       <div class="mb-3">
-        <label for="exampleInput3" class="form-label"><b>Giá điện trên tháng (VNĐ)</b></label>
-        <input type="number" class="form-control" id="exampleInput3" placeholder="Nhập giá điện" required>
+        <label for="exampleInput3" class="form-label"><b>Giá điện / số (VNĐ)</b></label>
+        <input type="number" class="form-control" id="exampleInput3" placeholder="Nhập giá điện"
+          value="{{houseDetail.powerPrice}}" required>
         <div class="invalid-feedback mb-3">Không được để trống</div>
       </div>
 
       <div class="mb-3">
-        <label for="exampleInput4" class="form-label"><b>Giá nước trên tháng (VNĐ)</b></label>
-        <input type="number" class="form-control" id="exampleInput4" placeholder="Nhập giá nước" required>
-        <div class="invalid-feedback mb-3">Không được để trống</div>
-      </div>
-    </div>
-
-    <div class="col-12 col-md-5">
-      <div class="mb-3">
-        <label for="exampleInput5" class="form-label"><b>Ảnh nhà (1)</b></label>
-        <input type="file" class="form-control" id="exampleInput5" required>
-        <div class="invalid-feedback mb-3">Không được để trống</div>
-      </div>
-
-      <div class="mb-3">
-        <label for="exampleInput6" class="form-label"><b>Ảnh nhà (2)</b></label>
-        <input type="file" class="form-control" id="exampleInput6" required>
-        <div class="invalid-feedback mb-3">Không được để trống</div>
-      </div>
-
-      <div class="mb-3">
-        <label for="exampleInput7" class="form-label"><b>Ảnh nhà (3)</b></label>
-        <input type="file" class="form-control" id="exampleInput7" required>
+        <label for="exampleInput4" class="form-label"><b>Giá nước / khối (VNĐ)</b></label>
+        <input type="number" class="form-control" id="exampleInput4" placeholder="Nhập giá nước"
+          value="{{houseDetail.waterPrice}}" required>
         <div class="invalid-feedback mb-3">Không được để trống</div>
       </div>
 
       <label class="form-label"><b>Tiện ích</b></label>
       <div class="mb-3">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1"
+          [checked]="houseDetail.fingerprintLock == true">
         <label class="form-check-label ms-2 me-3" for="flexCheckDefault1">
           Khóa vân tay
         </label>
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2"
+          [checked]="houseDetail.camera == true">
         <label class="form-check-label ms-2 me-3" for="flexCheckDefault2">
           Camera giám sát
         </label>
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3">
+        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3"
+          [checked]="houseDetail.parking == true">
         <label class="form-check-label ms-2 me-3" for="flexCheckDefault3">
           Chỗ để xe
         </label>
@@ -116,8 +107,27 @@
 
       <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label"><b>Thông tin mô tả</b></label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="7" required></textarea>
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="9"
+          value="{{houseDetail.information}}" required>
+        </textarea>
         <div class="invalid-feedback mb-3">Không được để trống</div>
+      </div>
+    </div>
+
+    <div class="col-12 col-md-5">
+      <div *ngFor="let image of listImage; let i=index">
+        <div class="mb-3">
+          <label for="exampleInput5" class="form-label"><b>Ảnh nhà {{i+1}}</b></label>
+          <img src="../../assets/image/House/{{image.imageLink}}" class="w-100 h-50 mb-2 border rounded" alt="...">
+          <label for="exampleInput5" class="form-label">Thay đổi ảnh</label>
+          <div class="d-flex">
+            <input type="file" class="form-control" id="exampleInput5"
+            (change)="getImageId(i)" (change)="this.onFilechange($event)" required>
+            <!-- <button class="btn btn-secondary ms-2" (click)="cancelChange(i)">Hủy</button> -->
+          </div>
+
+          <div class="invalid-feedback mb-3">Không được để trống</div>
+        </div>
       </div>
     </div>
 
