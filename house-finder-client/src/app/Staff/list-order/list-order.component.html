@@ -82,13 +82,14 @@
               </option>
             </select>
           </div>
+
           <!-- Order by -->
           <div class="col-6 col-md-3 my-2">
             <label class="form-label">Sắp xếp</label>
-            <select class="form-select">
-              <option>Chọn sắp xếp</option>
-              <option>Ngày gần nhất</option>
-              <option>Ngày xa nhất</option>
+            <select #selectedOrderBy class="form-select" (change)="onOrderBySelected(selectedOrderBy.value)">
+              <option selected disabled>Chọn sắp xếp</option>
+              <option value="asc">Ngày gần nhất</option>
+              <option value="desc">Ngày xa nhất</option>
             </select>
           </div>
         </div>

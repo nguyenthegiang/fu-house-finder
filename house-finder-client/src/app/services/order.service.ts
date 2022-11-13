@@ -34,7 +34,8 @@ export class OrderService {
     pageNumber: number,
     statusId?: number,
     fromDate?: string,
-    toDate?: string): Observable<Order[]>{
+    toDate?: string,
+    orderBy?:string): Observable<Order[]>{
 
     //[Paging] count Skip and Top from pageSize & pageNumber
     const skip = pageSize * (pageNumber - 1);
@@ -87,6 +88,18 @@ export class OrderService {
       }
       filterAPIUrl += `OrderedDate le ${toDate}`;
     }
+
+    if(orderBy != undefined){
+      //if is not the first filter -> need to add 'and' to API URL
+      if (!checkFirstFilter) {
+        filterAPIUrl += ` and `;
+      } else {
+        //if this one is the first filter -> mark it so others won't add 'and'
+        checkFirstFilter = false;
+      }
+      filterAPIUrl += `&$orderby=OrderedDate ${orderBy}`;
+    }
+
 
     return this.http.get<Order[]>(filterAPIUrl);
   }
