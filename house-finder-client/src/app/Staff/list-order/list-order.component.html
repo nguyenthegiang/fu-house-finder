@@ -235,11 +235,16 @@
         <br>
         <h6 class="form-label">Trạng thái</h6>
         <!-- Set selected value for <select> by [ngModel] -->
-        <select #selectCStatusId class="form-select" [(ngModel)]="selectedStatusId">
+        <select #selectOrderStatusId class="form-select" [(ngModel)]="selectedStatusId" (change)="onSelectOrderStatus(selectOrderStatusId.value)">
           <option *ngFor="let status of statuses" [value]="status.statusId">
             {{ status.statusName }}
           </option>
         </select>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" (click)="updateOrderStatus()">Save changes</button>
       </div>
     </div>
   </div>
