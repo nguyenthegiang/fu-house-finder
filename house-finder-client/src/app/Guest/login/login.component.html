@@ -1,75 +1,55 @@
-<div class="col-md-6 offset-md-3 mt-5 text-center">
-    <div class="card">
-        <div class="card-body ">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
+
+<ng-container class="col-md-6 offset-md-3 mt-5 text-center" #loginTemplate *ngIf="login; else registerTemplate">
+  <div class="row d-flex justify-content-center">
+    <div class="col-auto">
+      <div class="row d-flex justify-content-center m-2">
+        <div class="fb-login-button col-auto" data-width="250" data-size="large" data-button-type="continue_with"
+          data-layout="default"></div>
+      </div>
+      <div class="row d-flex justify-content-center m-2">
+        <div clasd="col-auto" style="width: fit-content;" #ggDiv></div>
+      </div>
+      <div class="row m-5">
+        <form class="col" [formGroup]="loginForm" (ngSubmit)="loginUsernamePassword()">
           <div class="row d-flex justify-content-center m-2">
-            <div class="fb-login-button col-auto" data-width="250" data-size="large" data-button-type="continue_with" data-layout="default"></div>
+            <mat-form-field appearance="fill" style="width: 270px;">
+              <mat-label>Tên đăng nhập</mat-label>
+              <input matInput type="text" style="width: 250px; height: 30px;" id="username" formControlName="username" required>
+            </mat-form-field>
           </div>
           <div class="row d-flex justify-content-center m-2">
-            <div clasd="col-auto" style="width: fit-content;" #ggDiv></div>
+            <mat-form-field appearance="fill" style="width: 270px;">
+              <mat-label>Mật khẩu</mat-label>
+              <input matInput type="password" style="width: 250px; height: 30px;" id="password" formControlName="password" required>
+            </mat-form-field>
           </div>
-          <div class="row m-5">
-            <form class="col" [formGroup]="loginForm" (ngSubmit)="loginUsernamePassword()">
-              <div class="row d-flex justify-content-center m-2">
-                <label for="username">Username</label>
-                <input class="col-auto" style="width: 250px; height: 40px;" type="text" id="username" formControlName="username" required />
-              </div>
-              <div class="row d-flex justify-content-center m-2">
-                <label for="username">Password</label>
-                <input class="col-auto" style="width: 250px; height: 40px;" type="password" id="password" formControlName="password" required />
-              </div>
-              <div class="row d-flex justify-content-center m-2">
-                <button class="btn btn-primary" style="width: 250px; height: 40px;" type="submit">Login</button>
-              </div>
-            </form>
+          <div class="row d-flex justify-content-center m-2">
+            <button class="btn btn-primary" style="width: 250px; height: 40px;" type="submit">Login</button>
           </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" tabindex="-1" role="dialog" #roleModal>
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Role</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="dismissRoleModal()">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <button type="button" class="btn btn-primary col-md-6" data-dismiss="modal" (click)="registerStudent()">Student</button>
-            <button type="button" class="btn btn-secondary col-md-6" data-dismiss="modal" (click)="triggerRegisterModal()">Landlord</button>
-        </div>
+        </form>
       </div>
     </div>
-</div>
-<div class="modal fade" tabindex="-1" role="dialog" #registerModal>
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Landlord Information</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="dismissRegisterModal()">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-            <label for="phonenumber">Phone Number</label>
-            <input type="text" id="phonenumber" formControlName="phonenumber"/>
-            <br/>
-            <label for="facebookUrl">Facebook Link</label>
-            <input type="text" id="facebookUrl" formControlName="facebookUrl"/>
-            <br/>
-            <label for="identityCardFrontSideImageLink">Identity Card Front Side Image Link</label>
-            <input type="text" id="identityCardFrontSideImageLink" formControlName="identityCardFrontSideImageLink"/>
-            <br/>
-            <label for="identityCardBackSideImageLink">Identity Card Back Side Image Link</label>
-            <input type="text" id="identityCardBackSideImageLink" formControlName="identityCardBackSideImageLink"/>
-            <button class="button" type="submit">Submit</button>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="dismissRegisterModal()">Close</button>
-        </div>
+  </div>
+</ng-container>
+<ng-template #registerTemplate>
+  <mat-stepper [linear]="true" #stepper>
+    <mat-step label="Thông tin liên hệ">
+      <div>
+        <button mat-button matStepperNext>Next</button>
       </div>
-    </div>
-</div>
-  
+    </mat-step>
+    <mat-step label="Chụp ảnh CMND">
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button matStepperNext>Next</button>
+      </div>
+    </mat-step>
+    <mat-step label="Xác nhận thông tin">
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+</ng-template>
