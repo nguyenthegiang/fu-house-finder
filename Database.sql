@@ -449,16 +449,16 @@ INSERT INTO [dbo].[UserRoles] VALUES (N'Staff of Student Service Department', GE
 --dữ liệu giả định, sau này cần sửa Fb UserId
 INSERT INTO [dbo].[Users] VALUES (N'HE153046', N'someFbUserid', null, null, null, 'Nguyen The Giang', 1, null , null, null, null, null, null, 1, 
 GETDATE(), GETDATE(), N'HE153046', N'HE153046');
-INSERT INTO [dbo].[Users] VALUES (N'HE150432', null, N'108412035069598134567', null, null, 'Nguyen Thu An', 1, null , null, null, null, null, null, 1, 
+INSERT INTO [dbo].[Users] VALUES (N'HE150432', null, N'1084120350695981345670', null, null, 'Nguyen Thu An', 1, null , null, null, null, null, null, 1, 
 GETDATE(), GETDATE(), N'HE150432', N'HE150432');
 
 INSERT INTO [dbo].[Users] VALUES (N'HE150340', null, N'108412032323648134567', null, null, 'Phung Quang Thong', 1, null , null, null, null, null, null, 1, 
 GETDATE(), GETDATE(), N'HE150432', N'HE150432');
 INSERT INTO [dbo].[Users] VALUES (N'HE150346', null, N'108412035687598134567', null, null, 'Bui Ngoc Huyen', 1, null , null, null, null, null, null, 1, 
 GETDATE(), GETDATE(), N'HE150432', N'HE150432');
-INSERT INTO [dbo].[Users] VALUES (N'HE150160', null, N'108412035069598134567', null, null, 'Nguyen Tri Kien', 1, null , null, null, null, null, null, 1, 
+INSERT INTO [dbo].[Users] VALUES (N'HE150160', null, N'1084120350695981345671', null, null, 'Nguyen Tri Kien', 1, null , null, null, null, null, null, 1, 
 GETDATE(), GETDATE(), N'HE150432', N'HE150432');
-INSERT INTO [dbo].[Users] VALUES (N'HE150600', null, N'108412035069598134567', null, null, 'Nguyen Minh Hanh', 1, null , null, null, null, null, null, 1, 
+INSERT INTO [dbo].[Users] VALUES (N'HE150600', null, N'1084120350695981345672', null, null, 'Nguyen Minh Hanh', 1, null , null, null, null, null, null, 1, 
 GETDATE(), GETDATE(), N'HE150432', N'HE150432');
 INSERT INTO [dbo].[Users] VALUES (N'HE151378', null, N'108417846369598134567', null, null, 'Nguyen Thi Ngoc Anh', 1, null , null, null, null, null, null, 1, 
 GETDATE(), GETDATE(), N'HE150432', N'HE150432');
