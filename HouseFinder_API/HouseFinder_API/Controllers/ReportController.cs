@@ -65,17 +65,9 @@ namespace HouseFinder_API.Controllers
 
         //GET: api/Report/CountTotalReportByHouseId/
         [HttpGet("CountTotalReportByHouseId/{houseId}")]
-        public IActionResult CountTotalReportByHouseId(int houseId)
+        public int CountTotalReportByHouseId(int houseId)
         {
-            int total = reportRepository.CountReportByHouseId(houseId);
-            if (total == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                return Ok(total);
-            }
+            return reportRepository.CountReportByHouseId(houseId);
         }
 
     }

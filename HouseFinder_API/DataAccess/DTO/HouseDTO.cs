@@ -13,6 +13,9 @@ namespace DataAccess.DTO
         public string Information { get; set; }
         public int AddressId { get; set; }
         public int? VillageId { get; set; }
+        //Additional information for Display in [Update House] & [House Detail]
+        public int? CommuneId { get; set; }
+        public int? DistrictId { get; set; }
         public string LandlordId { get; set; }
         public int? CampusId { get; set; }
         public double? DistanceToCampus { get; set; }
