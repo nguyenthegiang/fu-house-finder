@@ -30,6 +30,10 @@ export class ListOrderComponent implements OnInit {
   selectedToDate: string|undefined;
   searchValue: string | undefined;
 
+  //Modal
+  selectedOrderContent: string | undefined;
+  selectedOrderStatus: number| undefined;
+
   constructor(private orderService: OrderService,
               private orderStatusService: OrderStatusService,
               private router: Router){}
@@ -123,4 +127,14 @@ export class ListOrderComponent implements OnInit {
 
   search(searchValue: string)
   {}
+
+  changeSelectedOrder(orderId: number){
+    //Find the house which id == houseId
+    var selectedOrder = this.orders.find((order) => order.orderId == orderId);
+    if (selectedOrder != undefined) {
+      this.selectedOrderContent = selectedOrder.orderContent;
+      this.selectedStatusId = selectedOrder.status.statusId;
+      console.log("Status id: " + this.selectedStatusId);
+    }
+  }
 }
