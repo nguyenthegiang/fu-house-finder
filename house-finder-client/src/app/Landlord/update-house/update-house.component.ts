@@ -7,6 +7,7 @@ import { CampusService } from 'src/app/services/campus.service';
 import { Commune } from 'src/app/models/commune';
 import { Village } from 'src/app/models/village';
 import { District } from 'src/app/models/district';
+import { ImagesOfHouse } from 'src/app/models/imagesOfHouse';
 
 @Component({
   selector: 'app-update-house',
@@ -28,6 +29,11 @@ export class UpdateHouseComponent implements OnInit
   selectedCommuneId: number | undefined;    //(filter by Region)
   selectedVillageId: number | undefined;    //(filter by Region)
 
+  fileToUpload: File | null = null;
+  fileIndex: number = 0;
+  listImage: ImagesOfHouse[] | undefined;
+  imageLink: string = '';
+
   constructor(private houseService: HouseService,
     private campusService: CampusService,
     private route: ActivatedRoute,
@@ -41,7 +47,8 @@ export class UpdateHouseComponent implements OnInit
 
     this.houseService.getHouseByHouseId(id).subscribe(data => {
       this.houseDetail = data;
-console.log(this.houseDetail?.houseId);
+      this.listImage = data.imagesOfHouses;
+
       //(Filter) Get all Campuses (with their Districts, Communes, Villages)
       this.campusService.getAllCampuses().subscribe(data => {
         this.campuses = data;
@@ -80,7 +87,6 @@ console.log(this.houseDetail?.houseId);
   //[Filter] Filter by Campus
   onCampusSelected(selectedCampusId: string) {
     // convert string to number
-    console.log(selectedCampusId);
     var numberCampusId: number = +selectedCampusId;
 
     // find the selected campus
@@ -150,6 +156,35 @@ console.log(this.houseDetail?.houseId);
     this.selectedCommuneId = undefined;
     // Call API to update list houses with the selected village
     this.selectedVillageId = numberVillageId;
+  }
+
+  getImageId(index: number)
+  {
+    this.fileIndex = index;
+
+    if(this.houseDetail?.imagesOfHouses)
+    {
+      this.imageLink = this.houseDetail.imagesOfHouses[this.fileIndex].imageLink;
+    }
+  }
+
+  onFilechange(event: any)
+  {
+    //console.log(event.target.files[0].name);
+    this.fileToUpload = event.target.files[0];
+
+    if(this.listImage)
+    {
+      this.listImage[this.fileIndex].imageLink = event.target.files[0].name;
+    }
+  }
+
+  cancelChange(index: number)
+  {
+    if(this.listImage && this.houseDetail?.imagesOfHouses)
+    {
+      this.listImage[index].imageLink = this.imageLink;
+    }
   }
 
   goBack(): void
