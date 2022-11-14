@@ -18,7 +18,9 @@ export class LandlordHouseDetailComponent implements OnInit {
   rooms: Room[] = [];
   isOn = false;
   replyOn = false;
-  availableRoom: number = 0;
+
+  totallyAvailableRoom: number = 0;
+  partiallyAvailableRoom: number = 0;
   availableSlot: number = 0;
 
   //[Update] roomId to pass into <update-room>
@@ -45,10 +47,14 @@ export class LandlordHouseDetailComponent implements OnInit {
     });
 
     this.roomService.countTotallyAvailableRoomByHouseId(id).subscribe(data => {
-      this.availableRoom = data;
+      this.totallyAvailableRoom = data;
     });
 
     this.roomService.countPartiallyAvailableRoomByHouseId(id).subscribe(data => {
+      this.partiallyAvailableRoom = data;
+    });
+
+    this.roomService.countAvailableCapacityByHouseId(id).subscribe(data => {
       this.availableSlot = data;
     });
   }
