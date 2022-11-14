@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Room } from '../models/room';
 //environment variable for API URL
-import { environment } from 'src/environments/environment'; 
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -77,10 +77,21 @@ export class RoomService {
     return this.http.get<any>(this.APIUrl + "/CountTotallyAvailableCapacity");
   }
 
-
   //[Homepage] Count totally available rooms by house id
   countTotallyAvailableRoomByHouseId(houseId: number): Observable<any> {
     return this.http.get<Room>(this.APIUrl + "/CountTotallyAvailableRoomByHouseId?houseId=" + houseId);
+  }
+
+  //[House-detail] Count partially available rooms by house id
+  countPartiallyAvailableRoomByHouseId(houseId: number): Observable<any>
+  {
+    return this.http.get<Room>(this.APIUrl + "/CountPartiallyAvailableRoomByHouseId?houseId=" + houseId);
+  }
+
+  //[House-detail] Count partially available rooms by house id
+  countAvailableCapacityByHouseId(houseId: number): Observable<any>
+  {
+    return this.http.get<Room>(this.APIUrl + "/CountAvailableCapacityByHouseId?houseId=" + houseId);
   }
 }
 
