@@ -138,7 +138,7 @@ namespace DataAccess
         }
 
         //Update Room by id
-        public static void UpdateRoomByRoomId(Room room)
+        public static void UpdateRoom(Room room)
         {
             try
             {
