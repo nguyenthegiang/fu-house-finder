@@ -1,14 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+declare const google: any;  //For Google Map
 
 @Component({
   selector: 'app-import',
   templateUrl: './import.component.html',
   styleUrls: ['./import.component.scss']
 })
-export class ImportComponent implements OnInit {
+export class ImportComponent implements OnInit, AfterViewInit {
 
+  //Coorditate of current location of Client
   latitude: number = 0;
   longitude: number = 0;
+
+  map: any;
+  @ViewChild('mapElement') mapElement: any;
 
   constructor() { }
 
@@ -16,6 +21,20 @@ export class ImportComponent implements OnInit {
     this.getCurrentLocation();
   }
 
+  ngAfterViewInit(): void {
+    //initialize google map
+    this.map = new google.maps.Map(this.mapElement.nativeElement, {
+      center: { lat: this.latitude, lng: this.longitude },
+      zoom: 14,
+    });
+
+    // Configure the click listener
+    this.map.addListener("click", (mapsMouseEvent: any) => {
+      console.log(mapsMouseEvent.latLng);
+    });
+  }
+
+  //Get current location through Browser 
   getCurrentLocation() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(position => {
