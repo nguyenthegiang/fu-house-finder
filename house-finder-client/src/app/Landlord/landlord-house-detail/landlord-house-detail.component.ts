@@ -40,13 +40,16 @@ export class LandlordHouseDetailComponent implements OnInit {
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
     //Call API: get rooms of this house
-    this.landlordInformationService.getLandLordInfomation("LA000003").subscribe(data => {
-      this.availableRoom = data.roomAvailableCount;
-    });
-
-    //Call API: get rooms of this house
     this.roomService.getRooms(id).subscribe(data => {
       this.rooms = data;
+    });
+
+    this.roomService.countTotallyAvailableRoomByHouseId(id).subscribe(data => {
+      this.availableRoom = data;
+    });
+
+    this.roomService.countPartiallyAvailableRoomByHouseId(id).subscribe(data => {
+      this.availableSlot = data;
     });
   }
 

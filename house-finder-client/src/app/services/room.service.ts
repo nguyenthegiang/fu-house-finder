@@ -87,5 +87,11 @@ export class RoomService {
   {
     return this.http.get<Room>(this.APIUrl + "/CountPartiallyAvailableRoomByHouseId?houseId=" + houseId);
   }
+
+  //[House-detail] Count partially available rooms by house id
+  countAvailableCapacityByHouseId(houseId: number): Observable<any>
+  {
+    return this.http.get<Room>(this.APIUrl + "/CountAvailableCapacityByHouseId?houseId=" + houseId);
+  }
 }
 
