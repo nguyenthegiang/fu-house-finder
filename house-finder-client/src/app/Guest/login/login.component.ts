@@ -3,7 +3,7 @@ import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 import { CredentialResponse } from 'google-one-tap';
 import { Router } from '@angular/router';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { MatDialog } from '@angular/material/dialog';
 import { RoleModalComponent } from './role-modal/role-modal.component';
@@ -33,15 +33,17 @@ export class LoginComponent implements OnInit {
   identityCardFrontSideImageLink: string | undefined;
   identityCardBackSideImageLink: string | undefined;
 
-  registerForm = this.formBuilder.group({
-    phonenumber: "", 
-    identityCardFrontSideImageLink: "", 
-    identityCardBackSideImageLink: "", 
-    facebookUrl: ""
+  contactForm = this.formBuilder.group({
+    phonenumber: ['', Validators.required], 
+    facebookUrl: ['', Validators.required],
   });
+  imageForm = this.formBuilder.group({
+    identityCardFrontSideImageLink: [undefined, Validators.required],
+    identityCardBackSideImageLink: [undefined, Validators.required]
+  })
   loginForm = this.formBuilder.group({
-    username: "",
-    password: ""
+    username: ['', Validators.required],
+    password: ['', Validators.required]
   });
 
   constructor(
@@ -50,7 +52,6 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private ngZone: NgZone,
     private formBuilder: FormBuilder,
-    private renderer: Renderer2,
     public dialog: MatDialog,
     ) {
      }
@@ -173,10 +174,10 @@ export class LoginComponent implements OnInit {
 
   onSubmit(): void {
     this.registerLandlord(
-      this.registerForm.controls['phonenumber'].value,
-      this.registerForm.controls['identityCardFrontSideImageLink'].value,
-      this.registerForm.controls['identityCardBackSideImageLink'].value,
-      this.registerForm.controls['facebookUrl'].value
+      this.contactForm.controls['phonenumber'].value,
+      this.contactForm.controls['identityCardFrontSideImageLink'].value,
+      this.contactForm.controls['identityCardBackSideImageLink'].value,
+      this.contactForm.controls['facebookUrl'].value
     );
   }
 
@@ -247,7 +248,6 @@ export class LoginComponent implements OnInit {
 
   triggerRegister(){
     this.login = false;
-    console.log(this.login);
   }
 
 }
