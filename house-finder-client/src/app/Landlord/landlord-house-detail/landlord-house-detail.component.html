@@ -17,8 +17,9 @@
   </div>
   <div class="my-5" *ngIf="rooms.length != 0">
     <h3 class="text-center mb-4">Danh sách phòng</h3>
-    <h6>Tổng số phòng trống: {{availableRoom}} phòng</h6>
-    <h6>Tổng số chỗ trống: {{availableSlot}} phòng</h6>
+    <h6>Tổng phòng trống hoàn toàn: {{totallyAvailableRoom}} phòng</h6>
+    <h6>Tổng phòng trống một phần: {{partiallyAvailableRoom}} phòng</h6>
+    <h6>Tổng chỗ trống: {{availableSlot}} chỗ</h6>
 
     <table class="table table-striped table-hover mt-4">
       <thead>

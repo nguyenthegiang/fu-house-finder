@@ -1,10 +1,12 @@
-import { Component, ElementRef, NgZone, OnInit, Renderer2, ViewChild } from '@angular/core';
+import { Component, ElementRef, NgZone, OnInit, Renderer2, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user.service';
 import { CredentialResponse } from 'google-one-tap';
 import { Router } from '@angular/router';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { environment } from 'src/environments/environment';
+import { MatDialog } from '@angular/material/dialog';
+import { RoleModalComponent } from './role-modal/role-modal.component';
 
 
 @Component({
@@ -16,11 +18,21 @@ export class LoginComponent implements OnInit {
   @ViewChild('ggDiv') ggDiv: ElementRef | undefined;
   @ViewChild('registerModal') registerModal: ElementRef | undefined;
   @ViewChild('roleModal') roleModal: ElementRef | undefined;
+  @ViewChild('registerTemplate') registerTemplate: TemplateRef<any> | any;
+  @ViewChild('loginTemplate') loginTemplate: TemplateRef<any> | any;
+
+  login = true;
 
   user: any;
   googleIdToken: string | undefined;
   facebookId: string | undefined;
-  name: string| undefined;
+  name: string | undefined;
+  role: string | undefined;
+  phonenumber: string | undefined;
+  facebookUrl: string | undefined;
+  identityCardFrontSideImageLink: string | undefined;
+  identityCardBackSideImageLink: string | undefined;
+
   registerForm = this.formBuilder.group({
     phonenumber: "", 
     identityCardFrontSideImageLink: "", 
@@ -38,8 +50,10 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private ngZone: NgZone,
     private formBuilder: FormBuilder,
-    private renderer: Renderer2
-    ) { }
+    private renderer: Renderer2,
+    public dialog: MatDialog,
+    ) {
+     }
 
   ngOnInit(): void {
     var gg_s = document.createElement("script");
@@ -132,9 +146,12 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('user', resp.accessToken);
         this.ngZone.run(()=>{this.router.navigate(['/home']);});
       },
-      error => {
+      async error => {
         this.googleIdToken = response?.credential;
-        this.triggerRoleModal();
+        await this.triggerRoleModal();
+        if (this.role == 'landlord'){
+          this.ngZone.run(()=>{this.triggerRegister()});
+        }
       }
     );
   }
@@ -169,7 +186,6 @@ export class LoginComponent implements OnInit {
       this.userService.registerStudentGoogle(this.googleIdToken).subscribe(resp => {
         localStorage.setItem('user', resp.accessToken);
         this.user = resp;
-        this.dismissRoleModal();
         this.router.navigate(['/home']);
       });
     }
@@ -177,7 +193,6 @@ export class LoginComponent implements OnInit {
       this.userService.registerStudentFacebook(this.facebookId, this.name).subscribe(resp => {
         localStorage.setItem('user', resp.accessToken);
         this.user = resp;
-        this.dismissRoleModal();
         this.router.navigate(['/home']);
       });
     }
@@ -199,7 +214,6 @@ export class LoginComponent implements OnInit {
       ).subscribe(resp => {
         localStorage.setItem('user', resp.accessToken);
         this.user = resp;
-        this.dismissRegisterModal();
         this.router.navigate(['/home']);
       });
     }
@@ -214,31 +228,27 @@ export class LoginComponent implements OnInit {
       ).subscribe(resp => {
         localStorage.setItem('user', resp.accessToken);
         this.user = resp;
-        this.dismissRegisterModal();
         this.router.navigate(['/home']);
       });
     }
   }
-  
-  triggerRegisterModal(): void {
-    this.dismissRegisterModal();
-    this.renderer.setStyle(this.registerModal?.nativeElement, "display", "block")
-    this.registerModal?.nativeElement.classList.add('show');
+
+  async triggerRoleModal(): Promise<Boolean> {
+    const dialogRef = this.dialog.open(RoleModalComponent, {
+      width: '500px',
+      height: '200px'
+    });
+    return dialogRef.afterClosed().toPromise().then(
+      result =>{
+        this.role = result;
+        return Promise.resolve(result);
+      });
   }
 
-  triggerRoleModal(): void {
-    this.renderer.setStyle(this.roleModal?.nativeElement, "display", "block");
-    this.roleModal?.nativeElement.classList.add('show');
+  triggerRegister(){
+    this.login = false;
+    console.log(this.login);
   }
 
-  dismissRegisterModal(): void {
-    this.renderer.setStyle(this.registerModal?.nativeElement, "display", "none")
-    this.registerModal?.nativeElement.classList.remove('show');
-  }
-
-  dismissRoleModal(): void {
-    this.renderer.setStyle(this.roleModal?.nativeElement, "display", "none");
-    this.roleModal?.nativeElement.classList.remove('show');
-  }
 }
 

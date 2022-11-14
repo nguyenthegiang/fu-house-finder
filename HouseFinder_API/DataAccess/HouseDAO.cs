@@ -14,6 +14,9 @@ namespace DataAccess
 {
     public class HouseDAO
     {
+        /**
+         Add a new House into the Database
+         */
         public static HouseDTO CreateHouse(string houseName, string information, int addressId, int villageId, string landlordId, int campusId,
             decimal powerPrice, decimal waterPrice, bool fingerprintLock, bool camera, bool parking)
         {
@@ -152,8 +155,13 @@ namespace DataAccess
         //    return houseDTOs;
         //}
 
-        /*[Home Page] Get list of available houses, with Address, Images & Rooms
-            Availabe house: house with at least 1 available room */
+        /**
+         * [Home Page] Get list of available houses, with Address, Images & Rooms
+            Availabe house: house with at least 1 available room;
+
+            Return list of all available Houses in the system (Houses that have available Rooms) 
+            with additional information to support filtering
+        */
         public static List<AvailableHouseDTO> GetAvailableHouses()
         {
             List<AvailableHouseDTO> houseDTOs;
@@ -287,7 +295,10 @@ namespace DataAccess
         //    return houseDTOs;
         //}
 
-        //[House Detail] Get House Detail information
+        /** [House Detail] Get House Detail information;
+            Find detail information of a House by its Id;
+            Also find its CommuneId & DistrictId
+         */
         public static HouseDTO GetHouseById(int houseId)          
         {
             HouseDTO houseDTO;
@@ -302,6 +313,10 @@ namespace DataAccess
                     houseDTO = context.Houses.Where(h => h.Deleted == false).Include(h => h.Address).ProjectTo<HouseDTO>(config)
                         .Where(p => p.HouseId == houseId).FirstOrDefault();
 
+                    //(Commune, District)
+                    /*Get CommuneId & DistrictId of the Village of this House*/
+                    houseDTO.CommuneId = VillageDAO.GetVillageById((int)houseDTO.VillageId).CommuneId;
+                    houseDTO.DistrictId = CommuneDAO.GetCommuneById((int)houseDTO.CommuneId).DistrictId;
                 }
             }
             catch (Exception e)
@@ -311,7 +326,10 @@ namespace DataAccess
             return houseDTO;
         }
 
-        //Get list of houses by landlordId, with Address
+        /**        
+         * Get list of houses by landlordId, with Address;
+           Get list of Houses of 1 Landlord for him to manage
+         */
         public static List<HouseDTO> GetListHousesByLandlordId(string LandlordId)
         {
             List<HouseDTO> houseDTOs;
@@ -364,7 +382,10 @@ namespace DataAccess
             return totalMoney;
         }
 
-        //[Staff - Dashboard] Count total houses
+        /**
+         *  [Staff - Dashboard] Count total houses;
+            Count total number of Houses in the system
+         */
         public static int CountTotalHouse()
         {
             int totalHouse;
@@ -383,7 +404,10 @@ namespace DataAccess
             return totalHouse;
         }
 
-        //[Staff - Dashboard] [Home Page] Count available houses
+        /**
+         *  [Staff - Dashboard] [Home Page] Count available houses
+            Count number of available Houses in the system
+         */
         public static int CountAvailableHouse()
         {
             int availableHouse;
@@ -407,6 +431,35 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
             return availableHouse;
+        }
+
+        //[Staff/list-report] Get list of report house
+        public static List<ReportHouseDTO> GetListReportHouse()
+        {
+            List<ReportHouseDTO> houses;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    //Get by LandlordId
+                    houses = context.Houses.Where(h => h.Deleted == false).ProjectTo<ReportHouseDTO>(config).ToList();
+
+                    foreach (ReportHouseDTO house in houses)
+                    {
+                        house.NumberOfReport = ReportDAO.CountTotalReportByHouseId(house.HouseId);
+                        house.ListReports = ReportDAO.GetReportByHouseId(house.HouseId);
+                    }
+
+                    houses.RemoveAll(house => house.NumberOfReport == 0);
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return houses;
         }
 
     }

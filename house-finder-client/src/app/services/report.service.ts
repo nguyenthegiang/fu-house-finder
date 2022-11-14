@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { Report } from '../models/report';
 import { StaffReport } from '../models/staffReport';
 //environment variable for API URL
-import { environment } from 'src/environments/environment'; 
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +36,11 @@ export class ReportService {
   //[Staff/list-report] Search reports by house's name
   searchReportByHouseName(key: string):Observable<StaffReport[]>{
     return this.http.get<StaffReport[]>(this.APIUrl + "/SearchReportByHouseName/" + key);
+  }
+
+  //[Staff/list-report] Count total report by house id
+  countTotalReportByHouseId(houseId: number):Observable<number>{
+    return this.http.get<number>(this.APIUrl + "/CountTotalReportByHouseId/" + houseId);
   }
 
 }

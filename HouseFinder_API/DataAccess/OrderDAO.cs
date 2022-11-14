@@ -2,6 +2,7 @@
 using AutoMapper.QueryableExtensions;
 using BusinessObjects;
 using DataAccess.DTO;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -178,6 +179,37 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
             return total;
+        }
+        public static void UpdateOrderStatus(int orderId, int statusId)
+        {
+            try
+            {
+                using(var context = new FUHouseFinderContext())
+                {
+                    Order updateOrder = context.Orders.FirstOrDefault(o => o.OrderId == orderId);
+                    if(updateOrder == null)
+                    {
+                        throw new Exception();
+                    }
+                    //Check status id
+                    if(statusId == 3) //Add solved date for order if status change to solved
+                    {
+                        updateOrder.SolvedDate = DateTime.Today;
+                    }
+                    else if(statusId == 1 || statusId == 2)
+                    {
+                        updateOrder.SolvedDate = null;
+                    }
+                    //Update order's status
+                    updateOrder.StatusId = statusId;
+                    context.Entry<Order>(updateOrder).State = EntityState.Modified;
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
     }
 }

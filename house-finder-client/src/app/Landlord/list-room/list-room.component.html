@@ -174,16 +174,6 @@
 
         <!-- Room status -->
         <td>
-          <!-- <label class="switch">
-            <input *ngIf="dataItem.status.statusName === 'Occupied' || dataItem.status.statusName === 'Disabled'"
-              type="checkbox">
-            <input *ngIf="dataItem.status.statusName === 'Available'" type="checkbox" checked>
-            <span class="slider round"></span>
-          </label>
-          <br>
-          <span *ngIf="dataItem.status.statusName === 'Available'">Còn trống</span>
-          <span *ngIf="dataItem.status.statusName === 'Occupied'">Đã thuê</span>
-          <span *ngIf="dataItem.status.statusName === 'Disabled'">Không dùng được</span> -->
           <div class="form-check form-switch">
             <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
               [checked]="dataItem.status.statusName === 'Available'"

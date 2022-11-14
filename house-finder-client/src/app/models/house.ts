@@ -16,4 +16,8 @@ export interface House {
     highestRoomPrice: number;
     address: Address;
     imagesOfHouses?: ImagesOfHouse[];
+    campusId: number;
+    districtId: number;
+    communeId: number;
+    villageId: number;
 }

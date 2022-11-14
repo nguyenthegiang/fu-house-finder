@@ -3,6 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -39,12 +40,14 @@ import { StaffSidebarComponent } from './Common/staff-sidebar/staff-sidebar.comp
 import { HeaderComponent } from './Common/header/header.component';
 import { FooterComponent } from './Common/footer/footer.component';
 import { RoleModalComponent } from './Guest/login/role-modal/role-modal.component';
-import { LandlordRegisterModalComponent } from './Guest/login/landlord-register-modal/landlord-register-modal.component';
 import { StaffHeaderComponent } from './Common/staff-header/staff-header.component';
 import { StaffNavbarComponent } from './Common/staff-navbar/staff-navbar.component';
 import { StaffLandlordDetailComponent } from './Staff/staff-landlord-detail/staff-landlord-detail.component';
 import { StaffHouseDetailComponent } from './Staff/staff-house-detail/staff-house-detail.component';
 import { StaffRoomDetailComponent } from './Staff/staff-room-detail/staff-room-detail.component';
+import { DeleteHouseComponent } from './Landlord/delete-house/delete-house.component';
+import { RegisterComponent } from './Guest/login/register/register.component';
+import { ImportComponent } from './Landlord/import/import.component';
 
 @NgModule({
   declarations: [
@@ -79,12 +82,14 @@ import { StaffRoomDetailComponent } from './Staff/staff-room-detail/staff-room-d
     HeaderComponent,
     FooterComponent,
     RoleModalComponent,
-    LandlordRegisterModalComponent,
     StaffHeaderComponent,
     StaffNavbarComponent,
     StaffLandlordDetailComponent,
     StaffHouseDetailComponent,
     StaffRoomDetailComponent,
+    DeleteHouseComponent,
+    RegisterComponent,
+    ImportComponent,
   ],
   imports: [
     BrowserModule,
@@ -92,8 +97,8 @@ import { StaffRoomDetailComponent } from './Staff/staff-room-detail/staff-room-d
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    //SocialLoginModule,
     MaterialModule,
+    BrowserAnimationsModule,
   ],
   bootstrap: [AppComponent]
 })

@@ -6,13 +6,18 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
 //environment variable for API URL
-import { environment } from 'src/environments/environment'; 
+import { environment } from 'src/environments/environment';
+import { ReportHouse } from '../models/reportHouse';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HouseService {
   readonly APIUrl = `${environment.api_url}/House`;
+
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+  };
 
   constructor(private http: HttpClient) { }
 
@@ -39,6 +44,8 @@ export class HouseService {
     campusId?: number,
     maxPrice?: number,
     minPrice?: number,
+    maxDistance?: number,
+    minDistance?: number,
     selectedDistrictId?: number,
     selectedCommuneId?: number,
     selectedVillageId?: number,
@@ -54,7 +61,7 @@ export class HouseService {
     filterAPIUrl += `$skip=${skip}&$top=${top}`;
 
     //[Filter] check if user has at least 1 filter
-    if (searchName || campusId || maxPrice || selectedRoomTypeIds.length > 0 ||
+    if (searchName || campusId || maxPrice || maxDistance || selectedRoomTypeIds.length > 0 ||
       selectedDistrictId || selectedCommuneId || selectedVillageId ||
       selectedHouseUtilities.length > 0 || selectedRoomUtilities.length > 0
       || selectedRate) {
@@ -102,6 +109,19 @@ export class HouseService {
       }
 
       filterAPIUrl += `LowestRoomPrice le ${maxPrice} and HighestRoomPrice ge ${minPrice}`;
+    }
+
+    //[Filter] add filter by distance if has
+    if (maxDistance != undefined && minDistance != undefined) {
+      //if is not the first filter -> need to add 'and' to API URL
+      if (!checkFirstFilter) {
+        filterAPIUrl += ` and `;
+      } else {
+        //if this one is the first filter -> mark it so others won't add 'and'
+        checkFirstFilter = false;
+      }
+
+      filterAPIUrl += `DistanceToCampus le ${maxDistance} and DistanceToCampus ge ${minDistance}`;
     }
 
     //[Filter] add filter by roomType if has
@@ -246,14 +266,14 @@ export class HouseService {
 
   // /**
   //   [Home Page] Filter available Houses by Distance;
-  //   This has to be a diffrent method because calling Google Map API 
+  //   This has to be a diffrent method because calling Google Map API
   //   to calculate distance to filter is expensive
   //   -> has to minimize times of calling it;
 
   //   Pass in the list of house to be filtered & Distance to filter
   //  */
   // calculateDistanceFromHouseToCampus(house: House, campus: Campus): Observable<any> {
-  //   const googleMapApiUrl = `https://maps.googleapis.com/maps/api/distancematrix/json` + 
+  //   const googleMapApiUrl = `https://maps.googleapis.com/maps/api/distancematrix/json` +
   //     `?destinations=${house.address.googleMapLocation}&origins=${campus.address.googleMapLocation}&key=${environment.google_maps_api_key}`;
   //     const httpOptions = {
   //       headers: new HttpHeaders({
@@ -293,5 +313,15 @@ export class HouseService {
   //[Home Page] For Paging
   countTotalAvailableHouse(): Observable<any> {
     return this.http.get<any>(this.APIUrl + "/CountAvailableHouse");
+  }
+
+  //[Landlord: Delete House]
+  deleteHouse(houseId: number): Observable<any> {
+    return this.http.delete<any>(this.APIUrl + "?houseId=" + houseId, this.httpOptions);
+  }
+
+  //[Staff/list-report]
+  getReportedHouses(): Observable<ReportHouse[]>{
+    return this.http.get<ReportHouse[]>(this.APIUrl + "/GetReportedHouses");
   }
 }
