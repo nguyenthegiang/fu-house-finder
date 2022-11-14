@@ -104,7 +104,7 @@ namespace HouseFinder_API.Controllers
 
         //PUT: api/Rooms
         [HttpPut]
-        public IActionResult UpdateRoomByRoomId(RoomDTO roomDTO)
+        public IActionResult UpdateRoom(RoomDTO roomDTO)
         {
             try
             {
@@ -136,7 +136,7 @@ namespace HouseFinder_API.Controllers
 
                 updatedRoom.LastModifiedDate = DateTime.Now;
 
-                roomRepository.UpdateRoomByRoomId(updatedRoom);
+                roomRepository.UpdateRoom(updatedRoom);
                 return Ok();
             }
             catch (Exception e)
