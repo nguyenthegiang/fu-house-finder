@@ -27,10 +27,12 @@ export class StaffLandlordDetailComponent implements OnInit {
   //Landlord of this house
   landlordDetail: User | undefined;
 
-  //{Search} input value
+  //statistic data
   houseCount: number = 0;
   roomCount: number = 0;
   roomAvailableCount: number = 0;
+
+  //{Search} input value
   searchValue: string | undefined;
 
   constructor(private houseService: HouseService,
@@ -53,6 +55,7 @@ export class StaffLandlordDetailComponent implements OnInit {
       this.houses = data;
     });
 
+    //Get Data for Statistics
     this.lanlord_informationService.getLandLordInfomation(id).subscribe(data => {
       this.houseCount = data.houseCount;
       this.roomCount = data.roomCount;
