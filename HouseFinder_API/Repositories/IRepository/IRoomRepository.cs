@@ -12,7 +12,7 @@ namespace Repositories.IRepository
     {
         public List<RoomDTO> GetRoomsByHouseId(int HouseId);
         public List<RoomDTO> GetAvailableRoomsByHouseId(int houseId);
-        public void UpdateRoomByRoomId(Room room);
+        public void UpdateRoom(Room room);
         public void CreateRoom(Room room);
         public void CreateRooms(List<Room> rooms);
         public void DeleteRoom(int roomId);
