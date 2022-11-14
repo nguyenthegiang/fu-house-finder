@@ -37,6 +37,10 @@ export class HouseDetailComponent implements OnInit {
   pageNumber = 1; //starts at page 1
   isOn = false;
 
+  totallyAvailableRoom: number = 0;
+  partiallyAvailableRoom: number = 0;
+  availableSlot: number = 0;
+
   constructor(
     private route: ActivatedRoute,
     private houseService: HouseService,
@@ -65,6 +69,18 @@ export class HouseDetailComponent implements OnInit {
       this.roomService.getAvailableRooms(id).subscribe(data => {
         this.availableRooms = data;
       });
+    });
+
+    this.roomService.countTotallyAvailableRoomByHouseId(id).subscribe(data => {
+      this.totallyAvailableRoom = data;
+    });
+
+    this.roomService.countPartiallyAvailableRoomByHouseId(id).subscribe(data => {
+      this.partiallyAvailableRoom = data;
+    });
+
+    this.roomService.countAvailableCapacityByHouseId(id).subscribe(data => {
+      this.availableSlot = data;
     });
 
     //(Paging) Count available Houses for total number of pages
