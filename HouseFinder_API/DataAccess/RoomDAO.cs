@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using BusinessObjects;
 using DataAccess.DTO;
@@ -152,11 +152,8 @@ namespace DataAccess
             }
         }
 
-        /**
-         * Update Room by id
-         Update detail information of 1 Room
-         */
-        public static void UpdateRoomByRoomId(Room room)
+        //Update Room by id
+        public static void UpdateRoom(Room room)
         {
             try
             {
