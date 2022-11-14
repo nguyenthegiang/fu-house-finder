@@ -28,6 +28,9 @@ export class StaffLandlordDetailComponent implements OnInit {
   landlordDetail: User | undefined;
 
   //{Search} input value
+  totallyAvailableRoomByHouseId: number = 0;
+  totallyPartiallyRoomByHouseId: number = 0;
+  totallyAvailableCapacityByHouseId: number = 0;
   houseCount: number = 0;
   roomCount: number = 0;
   roomAvailableCount: number = 0;
@@ -37,6 +40,7 @@ export class StaffLandlordDetailComponent implements OnInit {
     private lanlord_informationService: LandlordInformationService,
     private router: Router,
     private route: ActivatedRoute,
+    private roomService: RoomService,
     private userService: UserService)
     { }
 
@@ -57,6 +61,18 @@ export class StaffLandlordDetailComponent implements OnInit {
       this.houseCount = data.houseCount;
       this.roomCount = data.roomCount;
       this.roomAvailableCount = data.roomAvailableCount;
+    });
+
+    this.roomService.countTotallyAvailableRoomByHouseId(1).subscribe(data => {
+      this.totallyAvailableRoomByHouseId = data;
+    });
+
+    this.roomService.countPartiallyAvailableRoomByHouseId(1).subscribe(data => {
+      this.totallyPartiallyRoomByHouseId = data;
+    });
+
+    this.roomService.countAvailableCapacityByHouseId(1).subscribe(data => {
+      this.totallyAvailableCapacityByHouseId = data;
     });
   }
 
