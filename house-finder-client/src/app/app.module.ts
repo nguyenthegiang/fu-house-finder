@@ -5,7 +5,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 
-
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HouseDetailComponent } from './Guest/house-detail/house-detail.component';
@@ -49,6 +48,7 @@ import { StaffRoomDetailComponent } from './Staff/staff-room-detail/staff-room-d
 import { DeleteHouseComponent } from './Landlord/delete-house/delete-house.component';
 import { RegisterComponent } from './Guest/login/register/register.component';
 import { ImportComponent } from './Landlord/import/import.component';
+import { LandlordDetailInfoComponent } from './Staff/list-landlord/landlord-detail-info/landlord-detail-info.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +91,7 @@ import { ImportComponent } from './Landlord/import/import.component';
     DeleteHouseComponent,
     RegisterComponent,
     ImportComponent,
+    LandlordDetailInfoComponent,
   ],
   imports: [
     BrowserModule,

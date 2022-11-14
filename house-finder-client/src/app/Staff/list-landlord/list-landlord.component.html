@@ -16,8 +16,8 @@
             <div class="text-center my-4">
               <div class="input-group">
                 <!-- Press enter to search  -->
-                <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm" aria-label="search_house_by_name"
-                  aria-describedby="button-addon2" #searchValue
+                <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm"
+                  aria-label="search_house_by_name" aria-describedby="button-addon2" #searchValue
                   (keydown.enter)="search(searchValue.value)">
                 <!-- Click button to search -->
                 <button class="btn btn-outline-secondary" type="button" id="button-addon2"
@@ -38,7 +38,19 @@
               <th scope="col">Họ Tên</th>
               <th scope="col" id="md">Số Điện Thoại</th>
               <th scope="col" id="md">Facebook</th>
-              <th scope="col" id="md">Ngày tạo</th>
+              <th scope="col" id="md">
+                <div class="row">
+                  <div class="col">
+                    Tổng nhà
+                  </div>
+                  <div class="col">
+                    Tổng phòng
+                  </div>
+                  <div class="col">
+                    Tổng phòng trống
+                  </div>
+                </div>
+              </th>
               <th scope="col">Trạng thái</th>
               <th scope="col">Tùy chọn</th>
             </tr>
@@ -50,9 +62,13 @@
               <td>{{dataItem.displayName}}</td>
               <td id="md">{{dataItem.phoneNumber}}</td>
               <!-- <td>{{dataItem.address.addresses}}</td> -->
-              <td id="md"><a target="_blank" class="text-decoration-none" href="{{dataItem.facebookUrl}}">{{dataItem.displayName}}</a></td>
+              <td id="md"><a target="_blank" class="text-decoration-none"
+                  href="{{dataItem.facebookUrl}}">{{dataItem.displayName}}</a></td>
 
-              <td id="md">{{dataItem.createdDate | date}}</td>
+              <!-- Statistics -->
+              <td>
+                <app-landlord-detail-info [landlordId]="dataItem.userId"></app-landlord-detail-info>
+              </td>
 
               <!-- Room status -->
               <td>
@@ -63,7 +79,8 @@
               </td>
 
               <td>
-                <a class="text-decoration-none" (click)="viewHouse(dataItem.userId)" style="cursor: pointer;">Chi tiết</a>
+                <a class="text-decoration-none" (click)="viewHouse(dataItem.userId)" style="cursor: pointer;">Chi
+                  tiết</a>
               </td>
             </tr>
           </tbody>
@@ -75,16 +92,16 @@
           <nav aria-label="Page navigation example">
             <ul class="pagination">
               <li class="page-item">
-                <a class="page-link text-dark" href="#" aria-label="Previous">
+                <a class="page-link text-dark" aria-label="Previous">
                   <span aria-hidden="true">&laquo;</span>
                   <span class="sr-only">Previous</span>
                 </a>
               </li>
-              <li class="page-item"><a class="page-link text-dark" href="#">1</a></li>
-              <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
-              <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
+              <li class="page-item"><a class="page-link text-dark">1</a></li>
+              <li class="page-item"><a class="page-link text-dark">2</a></li>
+              <li class="page-item"><a class="page-link text-dark">3</a></li>
               <li class="page-item">
-                <a class="page-link text-dark" href="#" aria-label="Next">
+                <a class="page-link text-dark" aria-label="Next">
                   <span aria-hidden="true">&raquo;</span>
                   <span class="sr-only">Next</span>
                 </a>
