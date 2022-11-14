@@ -1,6 +1,6 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
 
-<ng-container class="col-md-6 offset-md-3 mt-5 text-center" #loginTemplate *ngIf="login; else registerTemplate">
+<ng-container class="col-md-6 offset-md-3 mt-5 text-center" #loginTemplate *ngIf="!login; else registerTemplate">
   <div class="row d-flex justify-content-center">
     <div class="col-auto">
       <div class="row d-flex justify-content-center m-2">
@@ -34,15 +34,47 @@
 </ng-container>
 <ng-template #registerTemplate>
   <mat-stepper [linear]="true" #stepper>
-    <mat-step label="Thông tin liên hệ">
-      <div>
-        <button mat-button matStepperNext>Next</button>
-      </div>
+    <mat-step label="Điền Thông tin liên hệ" [stepControl]="contactForm">
+      <form [formGroup]="contactForm">
+        <div  class="row d-flex justify-content-center">
+          <div class="col-auto" style="width: 400px;">
+            <div class="row">
+              <mat-form-field appearance="fill" style="width: 400px;" class="m-0 p-0">
+                <mat-label>Số điện thoại</mat-label>
+                <input matInput type="tel" style="width: 250px; height: 30px;" id="phonenumber" formControlName="phonenumber" required>
+              </mat-form-field>
+            </div>
+            <div class="row">
+              <mat-form-field appearance="fill" style="width: 400px;" class="m-0 p-0">
+                <mat-label>Link Facebook</mat-label>
+                <input matInput type="url" style="width: 250px; height: 30px;" id="facebookUrl" formControlName="facebookUrl" required>
+              </mat-form-field>
+            </div>
+            <div class="row d-flex justify-content-end">
+              <button class="col-auto" mat-raised-button color="primary" matStepperNext style="width: 100px;">Next</button>
+            </div>
+          </div>
+        </div>
+      </form>
     </mat-step>
-    <mat-step label="Chụp ảnh CMND">
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button matStepperNext>Next</button>
+    <mat-step label="Chụp ảnh CMND" [stepControl]="imageForm">
+      <div class="row d-flex justify-content-center">
+        <div class="col-auto" style="width: 600px;">
+          <div class="row d-flex justify-content-around">
+            <div class="col-auto" style="width: 290px">
+
+              <input type="file">
+            </div>
+            <div class="col-auto" style="width: 290px">
+
+              <input type="file">
+            </div>
+          </div>
+          <div class="row d-flex justify-content-between">
+            <button mat-raised-button matStepperPrevious style="width: 100px;">Back</button>
+            <button mat-raised-button color="primary" matStepperNext style="width: 100px;">Next</button>
+          </div>
+        </div>
       </div>
     </mat-step>
     <mat-step label="Xác nhận thông tin">

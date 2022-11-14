@@ -16,7 +16,7 @@ namespace Repositories.Repositories
 
         public List<RoomDTO> GetRoomsByHouseId(int HouseId) => RoomDAO.GetRoomsByHouseId(HouseId);
 
-        public void UpdateRoomByRoomId(Room room) => RoomDAO.UpdateRoomByRoomId(room);
+        public void UpdateRoom(Room room) => RoomDAO.UpdateRoom(room);
 
         public void CreateRoom(Room room) => RoomDAO.CreateRoom(room);
         public void CreateRooms(List<Room> rooms)
