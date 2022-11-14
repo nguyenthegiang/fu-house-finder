@@ -28,6 +28,7 @@ export class ListOrderComponent implements OnInit {
   selectedStatusId: number | undefined;
   selectedFromDate: string | undefined;
   selectedToDate: string | undefined;
+  selectedOrderBy: string | undefined;
   searchValue: string | undefined;
 
   //Modal
@@ -95,7 +96,8 @@ export class ListOrderComponent implements OnInit {
         this.pageNumber,
         this.selectedStatusId,
         this.selectedFromDate,
-        this.selectedToDate
+        this.selectedToDate,
+        this.selectedOrderBy
       )
       .subscribe((data) => {
         this.orders = data;
@@ -125,6 +127,12 @@ export class ListOrderComponent implements OnInit {
     this.selectedToDate = selectedDate;
     this.filterHouse(true);
     console.log(selectedDate);
+  }
+
+  onOrderBySelected(selectedOrderBy: string){
+    this.selectedOrderBy = selectedOrderBy;
+    console.log("Order by: " + this.selectedOrderBy);
+    this.filterHouse(true);
   }
 
   viewOrder(id: number) {
