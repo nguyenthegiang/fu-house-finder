@@ -52,6 +52,6 @@ namespace Repositories.Repositories
 
         public int? CountTotalCapacity() => RoomDAO.CountTotalCapacity();
 
-        public int? CountTotallyAvailableCapacity() => RoomDAO.CountTotallyAvailableCapacity();
+        public int? CountTotallyAvailableRoom() => RoomDAO.CountTotallyAvailableRoom();
     }
 }

@@ -22,7 +22,7 @@ namespace Repositories.IRepository
         public int CountAvailableRoomByHouseId(int houseId);
         public int? CountAvailableCapacity();
         public int? CountTotalCapacity();
-        public int? CountTotallyAvailableCapacity();
+        public int? CountTotallyAvailableRoom();
         public int? CountAvailableCapacityByHouseId(int houseId);
 
         public int CountTotallyAvailableRoomByHouseId(int houseId);
