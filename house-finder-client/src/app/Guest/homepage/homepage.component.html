@@ -2,36 +2,7 @@
 <!-- Body -->
 <div class="container-fluid">
   <br>
-  <div class="row">
-    <div class="col-3"></div>
-
-    <div class="col-6">
-      <!-- Search bar -->
-      <div class="text-center pb-4 d-flex justify-content-center">
-        <div class="input-group w-50">
-          <!-- Press enter to search  -->
-          <input type="text" class="form-control" placeholder="Nhập tên trọ" aria-label="search_house_by_name"
-            aria-describedby="button-addon2" #searchHouseName
-            (keydown.enter)="searchHouseByName(searchHouseName.value)">
-          <!-- Click button to search -->
-          <button class="btn btn-outline-secondary" type="button" id="button-addon2"
-            (click)="searchHouseByName(searchHouseName.value)">
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </button>
-        </div>
-      </div>
-      <!-- End Search bar -->
-    </div>
-
-    <!-- Rooms Count Available -->
-    <div class="col-3">
-      <div class="d-flex justify-content-end me-5">
-        <h6 class="font-weight-bold">Tổng số phòng trống: {{countAvailableRooms}}</h6>
-      </div>
-    </div>
-  </div>
-
-  <!-- Main Content -->
+  <!-- Content -->
   <div class="d-flex justify-content-between">
     <!-- Filter Column -->
     <div class="w-25 bg-light mx-5 rounded h-100">
@@ -264,28 +235,77 @@
     </div>
     <!-- End Filter Column -->
 
-    <!-- Display Houses -->
+    <!-- Main Content -->
     <div class="w-75 me-5">
-      <!-- Rooms Count Available -->
+      <!-- Filter Row -->
       <div class="d-flex justify-content-between mb-3">
-        <!-- For Style -->
-        <div></div>
+        <!-- Search bar -->
+        <div class="w-50">
+          <div class="input-group">
+            <!-- Press enter to search  -->
+            <input type="text" class="form-control" placeholder="Nhập tên trọ" aria-label="search_house_by_name"
+              aria-describedby="button-addon2" #searchHouseName
+              (keydown.enter)="searchHouseByName(searchHouseName.value)">
+            <!-- Click button to search -->
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2"
+              (click)="searchHouseByName(searchHouseName.value)">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </div>
+        </div>
+        <!-- End Search bar -->
 
         <!-- [Order by] -->
-        <div class="d-flex justify-content-between align-items-center mb-2">
-          <div>
-            <!-- When select 1 Order -> call API to update list House -->
-            <select #selectOrder class="form-select" aria-label="select-order"
-              (change)="onOrderBy(selectOrder.value)">
-              <option class="disableOption" disabled selected>Sắp xếp theo</option>
-              <!-- List of Order to choose -->
-              <option *ngFor=" let orderValue of orderValues" value="{{orderValue}}">
-                {{orderValue}}</option>
-            </select>
+        <div class="w-25">
+          <!-- When select 1 Order -> call API to update list House -->
+          <select #selectOrder class="form-select" aria-label="select-order" (change)="onOrderBy(selectOrder.value)">
+            <option class="disableOption" disabled selected>Sắp xếp theo</option>
+            <!-- List of Order to choose -->
+            <option *ngFor=" let orderValue of orderValues" value="{{orderValue}}">
+              {{orderValue}}</option>
+          </select>
+        </div>
+        <!-- End [Order by] -->
+      </div>
+      <!-- End Rooms Count Available -->
+
+      <!-- Statistics -->
+      <div class="d-flex justify-content-between mb-3">
+        <div class="d-flex align-items-center justify-content-around">
+          <div class="row">
+            <div class="col">
+              <div>
+                <h6 class="font-weight-bold">Tổng số phòng trống:
+                  <span class="badge bg-secondary">
+                    {{countAvailableRooms}}
+                  </span>
+                </h6>
+              </div>
+            </div>
+
+            <div class="col">
+              <div>
+                <h6 class="font-weight-bold">Tổng số phòng trống:
+                  <span class="badge bg-secondary">
+                    {{countAvailableRooms}}
+                  </span>
+                </h6>
+              </div>
+            </div>
+
+            <div class="col">
+              <div>
+                <h6 class="font-weight-bold">Tổng số phòng trống:
+                  <span class="badge bg-success">
+                    {{countAvailableRooms}}
+                  </span>
+                </h6>
+              </div>
+            </div>
           </div>
         </div>
       </div>
-      <!-- End Rooms Count Available -->
+      <!-- End Statistics -->
 
       <!-- List of Houses -->
       <div class="row">
