@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess.DTO
 {
-    //Detail information that got displayed in Landlord Dashboard
+    //Detail information that got displayed in Landlord Dashboard & Staff List-Landlord
     public class LandlordDasboardInformationDTO
     {
         //Total Houses of 1 Landlord

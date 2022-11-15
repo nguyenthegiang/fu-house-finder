@@ -238,7 +238,7 @@ export class DashboardStaffComponent implements OnInit {
     this.roomService.CountTotalCapacity().subscribe(data => {
       this.totalCapacity = data;
 
-      this.roomService.CountTotallyAvailableCapacity().subscribe(data => {
+      this.roomService.CountTotallyAvailableRoom().subscribe(data => {
         this.totallyAvailableCapacity = data;
         this.partiallyAvailableCapacity = this.availableCapNum - this.totallyAvailableCapacity;
 
