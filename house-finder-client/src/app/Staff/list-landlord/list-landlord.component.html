@@ -1,4 +1,5 @@
 <app-staff-header></app-staff-header>
+<app-staff-navbar></app-staff-navbar>
 
 <div class="row m-2">
   <div class="col-12">
@@ -47,7 +48,7 @@
                     Tổng phòng
                   </div>
                   <div class="col">
-                    Tổng phòng trống
+                    Phòng trống
                   </div>
                 </div>
               </th>
@@ -66,7 +67,7 @@
                   href="{{dataItem.facebookUrl}}">{{dataItem.displayName}}</a></td>
 
               <!-- Statistics -->
-              <td>
+              <td id="md">
                 <app-landlord-detail-info [landlordId]="dataItem.userId"></app-landlord-detail-info>
               </td>
 
@@ -79,8 +80,11 @@
               </td>
 
               <td>
-                <a class="text-decoration-none" (click)="viewHouse(dataItem.userId)" style="cursor: pointer;">Chi
-                  tiết</a>
+                <a class="text-decoration-none text-dark" (click)="viewHouse(dataItem.userId)" data-bs-toggle="tooltip" data-bs-placement="top" title="Chi tiết" style="cursor: pointer;">
+                  <span class="material-symbols-outlined">
+                    info
+                  </span>
+                </a>
               </td>
             </tr>
           </tbody>

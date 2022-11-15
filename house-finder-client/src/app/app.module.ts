@@ -49,6 +49,9 @@ import { DeleteHouseComponent } from './Landlord/delete-house/delete-house.compo
 import { RegisterComponent } from './Guest/login/register/register.component';
 import { ImportComponent } from './Landlord/import/import.component';
 import { LandlordDetailInfoComponent } from './Staff/list-landlord/landlord-detail-info/landlord-detail-info.component';
+import { StaffLandlordDetailInfoComponent } from './Staff/staff-landlord-detail/staff-landlord-detail-info/staff-landlord-detail-info.component';
+import { DashboardInfoComponent } from './Landlord/dashboard/dashboard-info/dashboard-info.component';
+import { ListHouseInfoComponent } from './Staff/list-house/list-house-info/list-house-info.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +95,9 @@ import { LandlordDetailInfoComponent } from './Staff/list-landlord/landlord-deta
     RegisterComponent,
     ImportComponent,
     LandlordDetailInfoComponent,
+    StaffLandlordDetailInfoComponent,
+    DashboardInfoComponent,
+    ListHouseInfoComponent,
   ],
   imports: [
     BrowserModule,

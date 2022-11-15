@@ -1,4 +1,5 @@
 <app-staff-header></app-staff-header>
+<app-staff-navbar></app-staff-navbar>
 
 <div class="row" *ngIf="landlordDetail">
   <!-- Landlord's avatar -->
@@ -80,6 +81,27 @@
               <th scope="col">Tên nhà trọ</th>
               <th scope="col" id="md">Giá điện</th>
               <th scope="col" id="md">Giá nước</th>
+              <th scope="col" id="md">
+                <div class="row">
+                  <div class="col">
+                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Phòng trống hoàn toàn" style="cursor: pointer;">
+                      <i class="fa-regular fa-user me-1"></i>
+                      <i class="fa-regular fa-user"></i>
+                    </span>
+                  </div>
+                  <div class="col">
+                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Phòng trống một phần" style="cursor: pointer;">
+                      <i class="fa-solid fa-user me-1"></i>
+                      <i class="fa-regular fa-user"></i>
+                    </span>
+                  </div>
+                  <div class="col">
+                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Tổng chỗ trống" style="cursor: pointer;">
+                      <i class="fa-solid fa-bed"></i>
+                    </span>
+                  </div>
+                </div>
+              </th>
               <th scope="col" id="md">Tiện ích</th>
               <th scope="col">Tùy chọn</th>
             </tr>
@@ -97,35 +119,43 @@
               <td id="md">{{dataItem.powerPrice | currency:'VND':'symbol':'3.0'}}</td>
               <td id="md">{{dataItem.waterPrice | currency:'VND':'symbol':'3.0'}}</td>
 
+              <!-- Statistics -->
+              <td id="md">
+                <app-staff-landlord-detail-info [houseId]="dataItem.houseId"></app-staff-landlord-detail-info>
+              </td>
+
               <!-- Utilities -->
               <td id="md">
                 <div class="d-flex">
-                  <div *ngIf="dataItem.fingerprintLock == true" class="col-12 col-md-1 me-1">
-                    <button type="button" class="btn col-1 d-flex justify-content-center align-items-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Khóa vân tay">
-                      <span class="material-symbols-outlined">
-                        fingerprint
-                      </span>
-                    </button>
+                  <div *ngIf="dataItem.fingerprintLock == false && dataItem.camera == false && dataItem.parking == false">
+                    <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Không có tiện ích" style="cursor: pointer;">
+                      block
+                    </span>
                   </div>
-                  <div *ngIf="dataItem.camera == true" class="col-12 col-md-1 me-1">
-                    <button type="button" class="btn col-1 d-flex justify-content-center align-items-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Camera an ninh">
-                      <span class="material-symbols-outlined">
-                        videocam
-                      </span>
-                    </button>
+                  <div *ngIf="dataItem.fingerprintLock == true">
+                    <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Khóa vân tay" style="cursor: pointer;">
+                      fingerprint
+                    </span>
                   </div>
-                  <div *ngIf="dataItem.parking == true" class="col-12 col-md-1">
-                    <button type="button" class="btn col-1 d-flex justify-content-center align-items-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Chỗ để xe">
-                      <span class="material-symbols-outlined">
-                        local_parking
-                      </span>
-                    </button>
+                  <div *ngIf="dataItem.camera == true">
+                    <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Camera an ninh" style="cursor: pointer;">
+                      videocam
+                    </span>
+                  </div>
+                  <div *ngIf="dataItem.parking == true">
+                    <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Chỗ để xe" style="cursor: pointer;">
+                      local_parking
+                    </span>
                   </div>
                 </div>
               </td>
 
               <td>
-                <a class="text-decoration-none" (click)="viewRoom(dataItem.houseId)" style="cursor: pointer;">Chi tiết</a>
+                <a class="text-decoration-none text-dark" (click)="viewRoom(dataItem.houseId)" data-bs-toggle="tooltip" data-bs-placement="top" title="Chi tiết" style="cursor: pointer;">
+                  <span class="material-symbols-outlined">
+                    info
+                  </span>
+                </a>
               </td>
             </tr>
           </tbody>

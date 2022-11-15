@@ -18,6 +18,9 @@ namespace HouseFinder_API.Controllers
     {
         private IReportRepository reportRepository = new ReportRepository();
 
+        [EnableQuery]
+        [HttpGet]
+        public ActionResult<IEnumerable<StaffReportDTO>> GetAllReports() => reportRepository.GetAllReports();
 
         //[Report] POST: Add Report
         [HttpPost]

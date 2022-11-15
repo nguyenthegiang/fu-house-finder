@@ -3,7 +3,7 @@ import { User } from './../models/user';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 //environment variable for API URL
-import { environment } from 'src/environments/environment'; 
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -42,7 +42,7 @@ export class UserService {
   }
 
   registerStudentGoogle(googleIdToken: string){
-    return this.http.post<User>(this.APIUrl + "/register", 
+    return this.http.post<User>(this.APIUrl + "/register",
     {
       "googleIdToken": googleIdToken,
       "roleId": 1,
@@ -87,5 +87,9 @@ export class UserService {
       "facebookUrl": facebookUrl,
       "roleId": 2
     });
-}
+  }
+
+  countTotalLandlords():Observable<number>{
+    return this.http.get<number>(this.APIUrl + "/CountTotalLandlord");
+  }
 }
