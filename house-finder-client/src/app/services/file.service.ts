@@ -1,4 +1,4 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 //environment variable for API URL
@@ -32,5 +32,20 @@ export class FileService {
     var fileReader = new FileReader();
 
     fileReader.readAsArrayBuffer(file);
+  }
+
+  uploadIDC(frontFile: File, backFile: File){
+    const formData = new FormData(); 
+        
+    // Store form name as "file" with file data
+    formData.append("files", frontFile, frontFile.name);
+    formData.append("files", backFile, backFile.name);
+      
+    // Make http post request over api
+    // with formData as req
+    let headers = new HttpHeaders();
+    headers.append("Authorization", "Bearer "+ localStorage.getItem('user'));
+
+    return this.http.post(this.APIUrl + '/idc/upload', formData, {headers: headers});
   }
 }

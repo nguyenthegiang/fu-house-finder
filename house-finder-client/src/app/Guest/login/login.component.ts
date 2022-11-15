@@ -181,8 +181,6 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     this.registerLandlord(
       this.contactForm.controls['phonenumber'].value,
-      this.frontImg,
-      this.backImg,
       this.contactForm.controls['facebookUrl'].value
     );
   }
@@ -207,18 +205,15 @@ export class LoginComponent implements OnInit {
 
   registerLandlord(
     phonenumber: string,
-    identityCardFrontSideImageLink: any,
-    identityCardBackSideImageLink: any,
     facebookUrl: string
   ): void {
     if (this.googleIdToken != undefined) {
       this.userService.registerLandlordGoogle(
         this.googleIdToken,
         phonenumber,
-        identityCardFrontSideImageLink,
-        identityCardBackSideImageLink,
         facebookUrl
       ).subscribe(resp => {
+        this.fileService.uploadIDC(this.frontImg, this.backImg).subscribe(resp => {});
         localStorage.setItem('user', resp.accessToken);
         this.user = resp;
         this.router.navigate(['/home']);
@@ -229,10 +224,10 @@ export class LoginComponent implements OnInit {
         this.facebookId,
         this.name,
         phonenumber,
-        identityCardFrontSideImageLink,
-        identityCardBackSideImageLink,
         facebookUrl
       ).subscribe(resp => {
+        console.log(resp.accessToken);
+        this.fileService.uploadIDC(this.frontImg, this.backImg).subscribe(resp => {});
         localStorage.setItem('user', resp.accessToken);
         this.user = resp;
         this.router.navigate(['/home']);

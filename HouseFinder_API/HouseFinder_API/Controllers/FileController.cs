@@ -160,9 +160,10 @@ namespace HouseFinder_API.Controllers
         }
 
         [Authorize]
-        [HttpPost("idc/uppload")]
+        [HttpPost("idc/upload")]
         public IActionResult UploadIDC(List<IFormFile> files)
         {
+            Console.WriteLine(HttpContext.Session.GetString("User"));
             string uid = HttpContext.Session.GetString("User");
             if (uid == null)
             {

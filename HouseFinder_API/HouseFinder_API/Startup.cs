@@ -39,8 +39,9 @@ namespace HouseFinder_API
             //Add Session
             services.AddDistributedMemoryCache();
             services.AddSession(cfg => {
-                cfg.Cookie.Name = "HomeFinder";
-                cfg.IdleTimeout = new TimeSpan(0, 60, 0);
+                cfg.IdleTimeout = TimeSpan.FromDays(1);
+                cfg.Cookie.HttpOnly = true;
+                cfg.Cookie.IsEssential = true;
             });
             
             //Add CORS policy
@@ -97,13 +98,15 @@ namespace HouseFinder_API
             app.UseSession();
             app.Use(async (context, next) =>
             {
-                var token = context.Session.GetString("Token");
-                if (!string.IsNullOrEmpty(token))
+                var token = context.Request.Cookies["X-Access-Token"];
+                if (string.IsNullOrEmpty(token))
                 {
-                    context.Request.Headers.Add("Authorization", "Bearer " + token);
+                    token = context.Session.GetString("Token");
                 }
+                if (!string.IsNullOrEmpty(token)) context.Request.Headers.Add("Authorization", "Bearer " + token);
                 await next();
             });
+
 
             app.UseHttpsRedirection();
 
