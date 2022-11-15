@@ -192,5 +192,23 @@ namespace DataAccess
             }
             return userDTO;
         }
+
+        //[Staff/Da
+        public static int CountTotalLandlord()
+        {
+            int total;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    total = context.Users.Where(u => u.Role.RoleName.Equals("Landlord")).Count();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return total;
+        }
     }
 }

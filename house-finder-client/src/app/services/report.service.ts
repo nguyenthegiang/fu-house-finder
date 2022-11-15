@@ -30,6 +30,7 @@ export class ReportService {
 
   //[Staff/list-report] Get list of all reports
   getAllReport():Observable<StaffReport[]>{
+    console.log(this.APIUrl);
     return this.http.get<StaffReport[]>(this.APIUrl);
   }
 
