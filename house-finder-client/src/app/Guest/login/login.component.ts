@@ -35,6 +35,8 @@ export class LoginComponent implements OnInit {
   facebookUrl: string | undefined;
   identityCardFrontSideImageLink: string | undefined;
   identityCardBackSideImageLink: string | undefined;
+  frontImg: any;
+  backImg: any;
 
   contactForm = this.formBuilder.group({
     phonenumber: ['', Validators.required],
@@ -179,8 +181,8 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     this.registerLandlord(
       this.contactForm.controls['phonenumber'].value,
-      this.contactForm.controls['identityCardFrontSideImageLink'].value,
-      this.contactForm.controls['identityCardBackSideImageLink'].value,
+      this.frontImg,
+      this.backImg,
       this.contactForm.controls['facebookUrl'].value
     );
   }
@@ -205,8 +207,8 @@ export class LoginComponent implements OnInit {
 
   registerLandlord(
     phonenumber: string,
-    identityCardFrontSideImageLink: string,
-    identityCardBackSideImageLink: string,
+    identityCardFrontSideImageLink: File,
+    identityCardBackSideImageLink: File,
     facebookUrl: string
   ): void {
     if (this.googleIdToken != undefined) {
@@ -263,16 +265,12 @@ export class LoginComponent implements OnInit {
       if (side == 'front'){
         reader.onload = e => this.frontImgSrc = reader.result!.toString();
         reader.readAsDataURL(file);
-        let dir = 'src/user_data/1/info/';
-        let filename = file.name;
-        this.fileService.storeFile(file, dir, filename);
+        this.frontImg = file;
       }
       else if (side == 'back'){
         reader.onload = e => this.backImgSrc = reader.result!.toString();
         reader.readAsDataURL(file);
-        let dir = 'src/user_data/1/info/';
-        let filename = file.name;
-        this.fileService.storeFile(file, dir, filename);
+        this.backImg = file;
       }
   }
 
