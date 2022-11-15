@@ -81,6 +81,11 @@
               <!-- Utilities -->
               <td id="md">
                 <div class="d-flex">
+                  <div *ngIf="dataItem.fingerprintLock == false && dataItem.camera == false && dataItem.parking == false">
+                    <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Không có tiện ích" style="cursor: pointer;">
+                      block
+                    </span>
+                  </div>
                   <div *ngIf="dataItem.fingerprintLock == true">
                     <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Khóa vân tay" style="cursor: pointer;">
                       fingerprint
