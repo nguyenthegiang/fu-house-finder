@@ -20,20 +20,13 @@ export class ListHouseComponent implements OnInit {
   searchValue: string | undefined;
 
   constructor(private houseService: HouseService,
-    private lanlord_informationService: LandlordInformationService,
     private router: Router)
     { }
 
   ngOnInit(): void {
     //Get List of all Houses
-    this.houseService.getListHousesByLandlordId("LA000003").subscribe(data => {
+    this.houseService.getAvailableHouses().subscribe(data => {
       this.houses = data;
-    });
-
-    this.lanlord_informationService.getLandLordInfomation("LA000003").subscribe(data => {
-      this.houseCount = data.houseCount;
-      this.roomCount = data.roomCount;
-      this.roomAvailableCount = data.roomAvailableCount;
     });
   }
 
