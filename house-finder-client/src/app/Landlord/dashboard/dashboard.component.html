@@ -1,3 +1,61 @@
+<!-- Statistics -->
+<div class="row">
+  <div class="col-4 col-md-2 border">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="fs-4 d-flex align-items-center text-danger">
+        {{totalHouse}}
+      </div>
+      <h6 class="font-weight-bold text-center">Tổng nhà</h6>
+    </div>
+  </div>
+
+  <div class="col-4 col-md-2 border">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="fs-4 d-flex align-items-center text-danger">
+        {{availableHouse}}
+      </div>
+      <h6 class="font-weight-bold text-center">Nhà trống</h6>
+    </div>
+  </div>
+
+  <div class="col-4 col-md-2 border">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="fs-4 d-flex align-items-center text-danger">
+        {{totalRoom}}
+      </div>
+      <h6 class="font-weight-bold text-center">Tổng phòng</h6>
+    </div>
+  </div>
+
+  <div class="col-4 col-md-2 border">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="fs-4 d-flex align-items-center text-danger">
+        {{availableRoom}}
+      </div>
+      <h6 class="font-weight-bold text-center">Phòng trống</h6>
+    </div>
+  </div>
+
+  <div class="col-4 col-md-2 border">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="fs-4 d-flex align-items-center text-danger">
+        {{totalCapacity}}
+      </div>
+      <h6 class="font-weight-bold text-center">Tổng chỗ</h6>
+    </div>
+  </div>
+
+  <div class="col-4 col-md-2 border">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="fs-4 d-flex align-items-center text-danger">
+        {{availableCapacity}}
+      </div>
+      <h6 class="font-weight-bold text-center">Chỗ trống</h6>
+    </div>
+  </div>
+</div>
+<!-- End Statistics -->
+
 <!-- Body -->
 <div class="row m-2">
   <!-- Main Content -->
@@ -34,28 +92,57 @@
       <table class="table table-striped table-hover">
         <thead>
           <tr>
+            <th scope="col" id="md">STT</th>
             <th scope="col">ID</th>
             <th scope="col">Tên nhà trọ</th>
-            <th scope="col" id="utility">Tổng tiền chưa thuê</th>
-            <th scope="col" id="utility">Tiện ích</th>
+            <th scope="col" id="md">Tiền chưa thuê</th>
+            <th scope="col" id="md">
+              <div class="row">
+                <div class="col">
+                  <span data-bs-toggle="tooltip" data-bs-placement="top" title="Phòng trống hoàn toàn" style="cursor: pointer;">
+                    <i class="fa-regular fa-user me-1"></i>
+                    <i class="fa-regular fa-user"></i>
+                  </span>
+                </div>
+                <div class="col">
+                  <span data-bs-toggle="tooltip" data-bs-placement="top" title="Phòng trống một phần" style="cursor: pointer;">
+                    <i class="fa-solid fa-user me-1"></i>
+                    <i class="fa-regular fa-user"></i>
+                  </span>
+                </div>
+                <div class="col">
+                  <span data-bs-toggle="tooltip" data-bs-placement="top" title="Tổng chỗ trống" style="cursor: pointer;">
+                    <i class="fa-regular fa-user"></i>
+                  </span>
+                </div>
+              </div>
+            </th>
+            <th scope="col" id="md">Tiện ích</th>
             <th scope="col">Tùy chọn</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let dataItem of houses">
+          <tr *ngFor="let dataItem of houses; let i=index;">
+            <td id="md"><b>{{i+1}}</b></td>
+
             <!-- House id -->
-            <td><b>{{dataItem.houseId}}</b></td>
+            <td>{{dataItem.houseId}}</td>
 
             <!-- House name -->
             <td>{{dataItem.houseName}}</td>
 
             <!-- Money not for rented rooms -->
-            <td id="utility">
+            <td id="md">
               <app-dashboard-info [houseId]="dataItem.houseId"></app-dashboard-info>
             </td>
 
+            <!-- Statistics -->
+            <td id="md">
+              <app-list-house-info [houseId]="dataItem.houseId"></app-list-house-info>
+            </td>
+
             <!-- Utilities -->
-            <td id="utility">
+            <td id="md">
               <div class="d-flex">
                 <div *ngIf="dataItem.fingerprintLock == false && dataItem.camera == false && dataItem.parking == false">
                   <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Không có tiện ích" style="cursor: pointer;">

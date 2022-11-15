@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { House } from 'src/app/models/house';
 import { HouseService } from 'src/app/services/house.service';
 import { Router } from '@angular/router';
+import { RoomService } from 'src/app/services/room.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,7 +22,15 @@ export class DashboardComponent implements OnInit {
   //[Update and Delete] houseId to pass into <update-house>
   houseId: number = 0;
 
+  totalHouse: number = 0;
+  availableHouse: number = 0;
+  totalRoom: number = 0;
+  availableRoom: number = 0;
+  totalCapacity: number = 0;
+  availableCapacity: number = 0;
+
   constructor(private houseService: HouseService,
+    private roomService: RoomService,
     private lanlord_informationService: LandlordInformationService,
     private router: Router)
   { }
@@ -36,6 +45,30 @@ export class DashboardComponent implements OnInit {
       this.houseCount = data.houseCount;
       this.roomCount = data.roomCount;
       this.roomAvailableCount = data.roomAvailableCount;
+    });
+
+    this.houseService.getTotalHouse().subscribe(data => {
+      this.totalHouse = data;
+    });
+
+    this.houseService.countTotalAvailableHouse().subscribe(data => {
+      this.availableHouse = data;
+    });
+
+    this.roomService.CountTotalRoom().subscribe(data => {
+      this.totalRoom = data;
+    });
+
+    this.roomService.countAvailableRooms().subscribe(data => {
+      this.availableRoom = data;
+    });
+
+    this.roomService.CountTotalCapacity().subscribe(data => {
+      this.totalCapacity = data;
+    });
+
+    this.roomService.countAvailableCapacity().subscribe(data => {
+      this.availableCapacity = data;
     });
   }
 
