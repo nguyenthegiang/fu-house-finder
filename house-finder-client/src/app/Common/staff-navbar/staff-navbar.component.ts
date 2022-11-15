@@ -10,46 +10,41 @@ import { RoomService } from 'src/app/services/room.service';
   styleUrls: ['./staff-navbar.component.scss']
 })
 export class StaffNavbarComponent implements OnInit {
-  //Total of available rooms
-  availabelRoomsNum: number = 0;
-  //Total of available capacity
-  availableCapNum: number = 0;
-  //Total of houses
-  totalHouses: number = 0;
-  //Total of rooms
-  totalRooms: number = 0;
-  //Total of available houses
-  availableHouseNum: number = 0;
+  totalHouse: number = 0;
+  availableHouse: number = 0;
+  totalRoom: number = 0;
+  availableRoom: number = 0;
+  totalCapacity: number = 0;
+  availableCapacity: number = 0;
 
-  constructor(private roomService: RoomService,
-    private houseService: HouseService,
-    private reportService: ReportService,
-    private orderService: OrderService,) { }
+  constructor(private houseService: HouseService,
+    private roomService: RoomService)
+  { }
 
-  ngOnInit(): void {
-    //Call API: get total of available rooms
-    this.roomService.countAvailableRooms().subscribe(data => {
-      this.availabelRoomsNum = data;
-    });
-
-    //Call API: get number of total rooms
-    this.roomService.CountTotalRoom().subscribe(data => {
-      this.totalRooms = data;
-    });
-
-    //Call API: get total of available capacity
-    this.roomService.countAvailableCapacity().subscribe(data => {
-      this.availableCapNum = data;
-    });
-
-    //Call API: get total houses
+  ngOnInit(): void
+  {
     this.houseService.getTotalHouse().subscribe(data => {
-      this.totalHouses = data;
+      this.totalHouse = data;
     });
 
-    //Call API: get total of available houses
     this.houseService.countTotalAvailableHouse().subscribe(data => {
-      this.availableHouseNum = data;
+      this.availableHouse = data;
+    });
+
+    this.roomService.CountTotalRoom().subscribe(data => {
+      this.totalRoom = data;
+    });
+
+    this.roomService.countAvailableRooms().subscribe(data => {
+      this.availableRoom = data;
+    });
+
+    this.roomService.CountTotalCapacity().subscribe(data => {
+      this.totalCapacity = data;
+    });
+
+    this.roomService.countAvailableCapacity().subscribe(data => {
+      this.availableCapacity = data;
     });
   }
 }
