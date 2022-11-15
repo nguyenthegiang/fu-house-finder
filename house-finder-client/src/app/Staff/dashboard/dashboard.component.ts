@@ -6,6 +6,7 @@ import StatusService from 'src/app/services/roomStatus.service';
 import { Chart, registerables } from 'chart.js';
 import { OrderService } from 'src/app/services/order.service';
 import { ReportService } from 'src/app/services/report.service';
+import { UserService } from 'src/app/services/user.service';
 Chart.register(...registerables);
 
 
@@ -23,6 +24,8 @@ export class DashboardStaffComponent implements OnInit {
   totalHouses: number = 0;
   //Total of rooms
   totalRooms: number = 0;
+  //Total of landlords
+  totalLandlords: number = 0;
   //Total of available houses
   availableHouseNum: number = 0;
   //Array of total orders by month
@@ -44,13 +47,17 @@ export class DashboardStaffComponent implements OnInit {
     private roomService: RoomService,
     private houseService: HouseService,
     private reportService: ReportService,
-    private statusService: StatusService,
+    private userService: UserService,
     private orderService: OrderService,
   ) {
   }
 
   ngOnInit(): void {
-    console.log("Current year: " +this.currentYear);
+    //Call API:
+    this.userService.countTotalLandlords().subscribe(data => {
+      this.totalLandlords = data;
+    });
+
     //Call API: get total of available rooms
     this.roomService.countAvailableRooms().subscribe(data => {
       this.availabelRoomsNum = data;
