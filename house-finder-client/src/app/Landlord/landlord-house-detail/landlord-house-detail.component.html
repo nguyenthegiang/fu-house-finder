@@ -82,9 +82,9 @@
           <tr>
             <th scope="col">Tên phòng</th>
             <th scope="col">Giá phòng</th>
-            <th scope="col" id="utility">Tiện ích</th>
-            <th scope="col">Diện tích</th>
-            <th scope="col">Số người ở</th>
+            <th scope="col" id="md">Tiện ích</th>
+            <th scope="col" id="md">Diện tích</th>
+            <th scope="col" id="md">Số người ở</th>
             <th scope="col">Trạng thái</th>
             <th scope="col">Tùy chọn</th>
           </tr>
@@ -98,7 +98,7 @@
             <td>{{dataItem.pricePerMonth | currency:'VND':'symbol':'3.0'}}</td>
 
             <!-- Utilities -->
-            <td id="utility">
+            <td id="md">
               <div class="d-flex">
                 <div *ngIf="dataItem.fridge == false && dataItem.kitchen == false && dataItem.washingMachine == false
                   && dataItem.desk == false && dataItem.noLiveWithHost == false && dataItem.bed == false && dataItem.closedToilet == false">
@@ -145,10 +145,10 @@
             </td>
 
             <!-- Area -->
-            <td>{{dataItem.areaByMeters}} m<sup>2</sup></td>
+            <td id="md">{{dataItem.areaByMeters}} m<sup>2</sup></td>
 
             <!-- Amount of people -->
-            <td>
+            <td id="md">
               <div class="row">
                 <div *ngFor='let in of peopleCounter(dataItem.currentAmountOfPeople); let i = index'
                   class="col-12 col-md-1">
@@ -185,10 +185,18 @@
             </td>
             <td>
               <!-- Detail button -->
-              <a class="text-decoration-none text-success me-3" data-bs-toggle="modal" data-bs-target="#updateModal"
-                data-bs-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId)" style="cursor: pointer;">Cập nhật</a>
-              <a class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
-                data-bs-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId)" style="cursor: pointer;">Xóa</a>
+              <a class="text-decoration-none text-dark me-2" data-bs-toggle="modal" data-bs-target="#updateModal"
+                data-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId)" style="cursor: pointer;">
+                <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Chỉnh sửa">
+                  build
+                </span>
+              </a>
+              <a class="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                data-bs-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId)" style="cursor: pointer;">
+                <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Xóa">
+                  delete
+                </span>
+              </a>
             </td>
           </tr>
         </tbody>

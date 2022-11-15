@@ -181,7 +181,11 @@
           </td>
 
           <td>
-            <a class="text-decoration-none" (click)="viewRoomDetail(dataItem.roomId)" style="cursor: pointer;">Chi tiết</a>
+            <a class="text-decoration-none text-dark" (click)="viewRoomDetail(dataItem.roomId)" data-bs-toggle="tooltip" data-bs-placement="top" title="Chi tiết" style="cursor: pointer;">
+              <span class="material-symbols-outlined">
+                info
+              </span>
+            </a>
           </td>
         </tr>
       </tbody>
