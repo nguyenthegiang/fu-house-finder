@@ -142,6 +142,9 @@ export class DashboardStaffComponent implements OnInit {
               title:{
                 display: true,
                 text: 'Thống kê số lượng đăng ký nhà trọ năm ' + this.currentYear,
+                font:{
+                  size: 15,
+                }
               }
             }
         }
@@ -165,6 +168,9 @@ export class DashboardStaffComponent implements OnInit {
             title:{
               display: true,
               text: 'Thống kê số nhà trọ',
+              font:{
+                size: 15,
+              }
             }
           }
         }
@@ -187,6 +193,9 @@ export class DashboardStaffComponent implements OnInit {
             title:{
               display: true,
               text: 'Thống kê số phòng trọ',
+              font:{
+                size: 15,
+              }
             }
           }
         }
@@ -239,6 +248,9 @@ export class DashboardStaffComponent implements OnInit {
               title:{
                 display: true,
                 text: 'Thống kê số lượng báo cáo nhà trọ năm ' + this.currentYear,
+                font:{
+                  size: 15,
+                }
               }
             }
         }
@@ -271,6 +283,9 @@ export class DashboardStaffComponent implements OnInit {
               title:{
                 display: true,
                 text: 'Thống kê sức chứa',
+                font:{
+                  size: 15,
+                }
               }
             }
           }
