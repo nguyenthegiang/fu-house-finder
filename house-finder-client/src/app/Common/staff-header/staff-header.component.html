@@ -1,19 +1,79 @@
 <!--Header-->
-<div class="navbar nav d-flex justify-content-between text-white"
-style="background-color: #FF6F3D;">
+<div>
+  <div class="navbar nav d-flex justify-content-between text-white"
+  style="background-color: #FF6F3D;">
 
-<div class="col-12 col-md-9">
-  <div id="link">
-    <a href="/Staff/dashboard" class="text-white text-decoration-none mx-2">Dashboard</a>
-    <a href="/Staff/list-landlord" class="text-white text-decoration-none mx-2">Danh sách chủ trọ</a>
-    <a href="/Staff/list-house" class="text-white text-decoration-none mx-2">Danh sách nhà trọ</a>
-    <a href="/Staff/list-report" class="text-white text-decoration-none mx-2">Báo cáo</a>
-    <a href="/Staff/list-landlord-signup-request" class="text-white text-decoration-none mx-2">Chủ trọ đăng ký</a>
-    <a href="/Staff/list-order" class="text-white text-decoration-none mx-2">Nguyện vọng</a>
+  <div class="col-12 col-md-9">
+    <div id="link">
+      <a href="/Staff/dashboard" class="text-white text-decoration-none mx-2">Dashboard</a>
+      <a href="/Staff/list-landlord" class="text-white text-decoration-none mx-2">Danh sách chủ trọ</a>
+      <a href="/Staff/list-house" class="text-white text-decoration-none mx-2">Danh sách nhà trọ</a>
+      <a href="/Staff/list-report" class="text-white text-decoration-none mx-2">Báo cáo</a>
+      <a href="/Staff/list-landlord-signup-request" class="text-white text-decoration-none mx-2">Chủ trọ đăng ký</a>
+      <a href="/Staff/list-order" class="text-white text-decoration-none mx-2">Nguyện vọng</a>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-3 d-flex justify-content-center align-items-center" id="btn">
+    <div>Chủ trọ</div>
+    <button class="btn btn-light mx-3" id="loginButton" (click)="login()">Đăng xuất</button>
   </div>
 </div>
 
-<div class="col-12 col-md-3 d-flex justify-content-center align-items-center" id="btn">
-  <div>Chủ trọ</div>
-  <button class="btn btn-light mx-3" id="loginButton" (click)="login()">Đăng xuất</button>
+<!-- Statistics -->
+<div class="row border">
+  <div class="col-12 col-lg-2 col-sm-4 border">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="fs-4 d-flex align-items-center" style="color: #ee4d2d;">
+        {{totalHouse}}
+      </div>
+      <h6 class="font-weight-bold text-center">Tổng nhà</h6>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-2 col-sm-4 border">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="fs-4 d-flex align-items-center" style="color: #ee4d2d;">
+        {{availableHouse}}
+      </div>
+      <h6 class="font-weight-bold text-center">Nhà trống</h6>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-2 col-sm-4 border">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="fs-4 d-flex align-items-center" style="color: #ee4d2d;">
+        {{totalRoom}}
+      </div>
+      <h6 class="font-weight-bold text-center">Tổng phòng</h6>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-2 col-sm-4 border">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="fs-4 d-flex align-items-center" style="color: #ee4d2d;">
+        {{availableRoom}}
+      </div>
+      <h6 class="font-weight-bold text-center">Phòng trống</h6>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-2 col-sm-4 border">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="fs-4 d-flex align-items-center" style="color: #ee4d2d;">
+        {{totalCapacity}}
+      </div>
+      <h6 class="font-weight-bold text-center">Tổng chỗ</h6>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-2 col-sm-4 border">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="fs-4 d-flex align-items-center" style="color: #ee4d2d;">
+        {{availableCapacity}}
+      </div>
+      <h6 class="font-weight-bold text-center">Chỗ trống</h6>
+    </div>
+  </div>
 </div>
+<!-- End Statistics -->
