@@ -1,12 +1,12 @@
 <app-header></app-header>
 <!-- Body -->
-<div class="container-fluid">
+<div class="container-fluid backgroundGray">
   <br>
   <!-- Content -->
   <div class="d-flex justify-content-between">
     <!-- Filter Column -->
-    <div class="w-25 bg-light mx-5 rounded h-100">
-      <h5 class="text-center text-white p-2 rounded-top" id="roomFilterTitle">LỌC PHÒNG TRỌ</h5>
+    <div class="w-25 bg-white mx-5 rounded h-100">
+      <h5 class="text-center text-white p-2 rounded-top orangeBackround">LỌC PHÒNG TRỌ</h5>
 
       <div class="container">
         <div class="d-flex justify-content-between align-items-center pt-3">
@@ -139,7 +139,7 @@
         <div>
           <h6 class="font-weight-bold mb-2">Loại phòng:</h6>
           <div>
-            <div class="form-check" *ngFor="let roomType of roomTypes" id="listRoomType">
+            <div class="form-check" *ngFor="let roomType of roomTypes">
               <!-- Select room type -->
               <input class="form-check-input" type="checkbox" value="{{roomType.roomTypeId}}"
                 id="{{roomType.roomTypeName}}" (change)="onRoomTypeSelected($event, roomType.roomTypeId)">
@@ -257,13 +257,19 @@
 
         <!-- [Order by] -->
         <div class="w-25">
-          <!-- When select 1 Order -> call API to update list House -->
-          <select #selectOrder class="form-select" aria-label="select-order" (change)="onOrderBy(selectOrder.value)">
-            <option class="disableOption" disabled selected>Sắp xếp theo</option>
-            <!-- List of Order to choose -->
-            <option *ngFor=" let orderValue of orderValues" value="{{orderValue}}">
-              {{orderValue}}</option>
-          </select>
+          <div class="row">
+            <div class="col-4"></div>
+            <div class="col-8">
+              <!-- When select 1 Order -> call API to update list House -->
+              <select #selectOrder class="form-select" aria-label="select-order"
+                (change)="onOrderBy(selectOrder.value)">
+                <option class="disableOption" disabled selected>Sắp xếp theo</option>
+                <!-- List of Order to choose -->
+                <option *ngFor=" let orderValue of orderValues" value="{{orderValue}}">
+                  {{orderValue}}</option>
+              </select>
+            </div>
+          </div>
         </div>
         <!-- End [Order by] -->
       </div>
@@ -275,7 +281,7 @@
           <!-- House available count -->
           <div class="col-12 col-md-4">
             <div class="border-end d-flex flex-column justify-content-center align-items-center pe-4">
-              <div class="fs-4 d-flex align-items-center" style="color: #ee4d2d;">
+              <div class="fs-4 d-flex align-items-center text-danger">
                 <span class="material-symbols-outlined fs-3">
                   home
                 </span>
@@ -288,7 +294,7 @@
           <!-- Room available count -->
           <div class="col-12 col-md-4">
             <div class="border-end d-flex flex-column justify-content-center align-items-center pe-4">
-              <div class="fs-4 d-flex align-items-center" style="color: #ee4d2d;">
+              <div class="fs-4 d-flex align-items-center text-danger">
                 <span class="material-symbols-outlined">
                   door_back
                 </span>
@@ -301,7 +307,7 @@
           <!-- Capacity available count -->
           <div class="col-12 col-md-4">
             <div class="d-flex flex-column justify-content-center align-items-center pe-4">
-              <div class="fs-4 d-flex align-items-center" style="color: #ee4d2d;">
+              <div class="fs-4 d-flex align-items-center text-danger">
                 <span class="material-symbols-outlined">
                   bed
                 </span>
@@ -328,28 +334,52 @@
                 background-position: center center;
                 background-repeat: no-repeat;">
 
-            <div class="card-body text-bg-success rounded-bottom ">
-              <!--text-white-->
+            <div class="card-body rounded-bottom ">
               <!-- Name -->
               <h5 class="card-title text-center font-weight-bold">{{house.houseName}}</h5>
-              <!-- View -->
-              <div style="text-align: right; font-size: 12px;">
-                <i class="fa-solid fa-eye" style="margin-right: 10px;"></i>
-                <span>3,459</span>
-              </div>
+
               <!-- Distance -->
-              <div class="card-text d-inline-block text-truncate" style="max-width: 100%;">
+              <div class="card-text d-inline-block text-truncate maxWidthText orangeText fs-5">
                 <i class="fa-solid fa-road me-2"></i>3.5km
               </div>
+
               <!-- Price with VND format -->
-              <div class="card-text">
+              <div class="card-text grayText">
                 <i class="fa-solid fa-tag me-2"></i>{{house.lowestRoomPrice |
                 currency:'VND':'symbol':'3.0'}} -
                 {{house.highestRoomPrice | currency:'VND':'symbol':'3.0'}}
               </div>
+
               <!-- Address -->
-              <div class="card-text d-inline-block text-truncate" style="max-width: 100%;">
+              <div class="card-text d-inline-block text-truncate maxWidthText grayText">
                 <i class="fa-solid fa-location-dot me-2"></i>{{house.address.addresses}}
+              </div>
+
+              <!-- Utility -->
+              <div class="card-text d-inline-block text-truncate maxWidthText grayText">
+                <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Khóa vân tay" style="cursor: pointer;">
+                  fingerprint
+                </span>
+                <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Camera an ninh" style="cursor: pointer;">
+                  videocam
+                </span>
+                <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Chỗ để xe" style="cursor: pointer;">
+                  local_parking
+                </span>
+              </div>
+
+              <div class="d-flex justify-content-between">
+                <!-- Rate -->
+                <div class="rateHouse">
+                  <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i>
+                  <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i>
+                </div>
+
+                <!-- View -->
+                <div class="text-end grayText smallText">
+                  <i class="fa-solid fa-eye me-2"></i>
+                  <span>3,459</span>
+                </div>
               </div>
             </div>
           </div>
