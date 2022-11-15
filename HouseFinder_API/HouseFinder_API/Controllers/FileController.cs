@@ -25,6 +25,7 @@ namespace HouseFinder_API.Controllers
         private IWebHostEnvironment Environment;
         private IHouseRepository housesRepository = new HouseRepository();
         private IRoomRepository roomsRepository = new RoomRepository();
+        private IUserReposiotry userReposiotry = new UserRepository();
 
         public FileController(IWebHostEnvironment _environment)
         {
@@ -156,6 +157,40 @@ namespace HouseFinder_API.Controllers
                 mimeType.Equals("xlsx", StringComparison.OrdinalIgnoreCase)
                 || mimeType.Equals("xls", StringComparison.OrdinalIgnoreCase)
             );
+        }
+
+        [Authorize]
+        [HttpPost("idc/uppload")]
+        public IActionResult UploadIDC(List<IFormFile> files)
+        {
+            string uid = HttpContext.Session.GetString("User");
+            if (uid == null)
+            {
+                return Forbid();
+            }
+            UserDTO user = userReposiotry.GetUserByID(uid);
+            var dir = Path.Combine(Environment.ContentRootPath, "data/user/");
+            DirectoryInfo info = new DirectoryInfo(dir);
+            if (!info.Exists)
+            {
+                info.Create();
+            }
+            var frontImg = "";
+            var backImg = "";
+            for (int i=0; i<2; i++)
+            {
+                var path = Path.Combine(dir, files[i].FileName);
+                Stream fs = files[i].OpenReadStream();
+                Stream dest = new FileStream(path, FileMode.Create);
+                fs.CopyTo(dest);
+                if (i == 0)
+                    frontImg = path;
+                else
+                    backImg = path;
+            }
+            Console.WriteLine(frontImg);
+            Console.WriteLine(backImg);
+            return Ok();
         }
     }
 }
