@@ -26,6 +26,8 @@ export class DashboardStaffComponent implements OnInit {
   totalRooms: number = 0;
   //Total of landlords
   totalLandlords: number = 0;
+  activeLandlordNum: number = 0;
+  inactiveLandlordNum: number = 0;
   //Total of available houses
   availableHouseNum: number = 0;
   //Array of total orders by month
@@ -56,6 +58,39 @@ export class DashboardStaffComponent implements OnInit {
     //Call API:
     this.userService.countTotalLandlords().subscribe(data => {
       this.totalLandlords = data;
+
+      this.userService.countActiveLandlords().subscribe(data => {
+        this.activeLandlordNum = data;
+
+        this.userService.countInactiveLandlords().subscribe(data => {
+          this.inactiveLandlordNum = data;
+
+          var landlordChart = new Chart("landlordChart",{
+            type: 'pie',
+            data: {
+              labels: ['Hoạt động', 'Không hoạt động', 'Yêu cầu'],
+              datasets: [
+                {
+                  data: [this.activeLandlordNum, this.inactiveLandlordNum, (this.totalLandlords - this.activeLandlordNum - this.inactiveLandlordNum)],
+                  backgroundColor: ['#ff9020','#2fcaca', '#ff6384'],
+                },
+              ],
+
+            },
+            options:{
+              plugins:{
+                title:{
+                  display: true,
+                  text: 'Thống kê số chủ trọ',
+                  font:{
+                    size: 15,
+                  }
+                }
+              }
+            }
+          });
+        })
+      })
     });
 
     //Call API: get total of available rooms
@@ -150,7 +185,7 @@ export class DashboardStaffComponent implements OnInit {
         }
       });
 
-      //Create pie chart
+      //Create house chart
       var houseChart = new Chart("houseChart", {
         type: 'pie',
         data: {
