@@ -330,8 +330,8 @@ namespace DataAccess
             return capacity;
         }
 
-        //[Staff/Dashboard] Count total of totally available capacity
-        public static int? CountTotallyAvailableCapacity()
+        //[Staff/Dashboard] Count total of totally available room
+        public static int? CountTotallyAvailableRoom()
         {
             int? capacity;
             try
