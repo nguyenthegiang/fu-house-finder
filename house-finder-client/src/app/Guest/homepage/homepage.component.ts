@@ -404,9 +404,9 @@ export class HomepageComponent implements OnInit {
     this.filterHouse(true);
   }
 
-  //[Filter] Cancel all Filter values
-  onCancelFilter() {
-    //reload page
-    window.location.reload();
-  }
+  // //[Filter] Cancel all Filter values
+  // onCancelFilter() {
+  //   //reload page
+  //   window.location.reload();
+  // }
 }

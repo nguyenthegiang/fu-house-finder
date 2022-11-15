@@ -6,7 +6,14 @@
   <div class="d-flex justify-content-between">
     <!-- Filter Column -->
     <div class="w-25 bg-white mx-5 rounded h-100">
-      <h5 class="text-center text-white p-2 rounded-top orangeBackround">LỌC PHÒNG TRỌ</h5>
+      <div class="d-flex justify-content-between align-items-center p-3 rounded-top text-white orangeBackround">
+        <h5>LỌC KẾT QUẢ</h5>
+
+        <!-- Cancel Filter -->
+        <div>
+          <a href="/home" class="text-white">Đặt lại bộ lọc</a>
+        </div>
+      </div>
 
       <div class="container">
         <div class="d-flex justify-content-between align-items-center pt-3">
@@ -223,14 +230,6 @@
             </label>
           </div>
         </div>
-        <hr>
-
-        <!-- Cancel Filter -->
-        <div>
-          <div class="d-grid gap-2 mb-2">
-            <button class="btn btn-outline-secondary" type="button" (click)="onCancelFilter()">XÓA TẤT CẢ</button>
-          </div>
-        </div>
       </div>
     </div>
     <!-- End Filter Column -->
@@ -357,13 +356,16 @@
 
               <!-- Utility -->
               <div class="card-text d-inline-block text-truncate maxWidthText grayText">
-                <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Khóa vân tay" style="cursor: pointer;">
+                <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top"
+                  title="Khóa vân tay" style="cursor: pointer;">
                   fingerprint
                 </span>
-                <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Camera an ninh" style="cursor: pointer;">
+                <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top"
+                  title="Camera an ninh" style="cursor: pointer;">
                   videocam
                 </span>
-                <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Chỗ để xe" style="cursor: pointer;">
+                <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
+                  title="Chỗ để xe" style="cursor: pointer;">
                   local_parking
                 </span>
               </div>
