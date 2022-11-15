@@ -14,5 +14,6 @@ namespace Repositories.IRepository
         public ResponseDTO Register(RegisterDTO register);
         public List<UserDTO> GetLandlords();
         //public List<UserDTO> GetStaffs();
+        public int CountTotalLandlord();
     }
 }

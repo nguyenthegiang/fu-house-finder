@@ -128,5 +128,25 @@ namespace DataAccess
             return count;
         }
 
+        //[Staff/list-report] Get all reports
+        public static List<StaffReportDTO> GetAllReports()
+        {
+            List<StaffReportDTO> reports;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    reports = context.Reports.Where(r => r.Deleted != true).ProjectTo<StaffReportDTO>(config).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return reports;
+        }
+
     }
 }

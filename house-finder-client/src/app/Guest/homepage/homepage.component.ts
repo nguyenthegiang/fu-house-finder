@@ -22,8 +22,9 @@ export class HomepageComponent implements OnInit {
   //List of available houses to display in Main Content
   houses: House[] = [];
 
-  //to display in Main Content
+  //to display in [Statistics]
   countAvailableRooms: number = 0;
+  countAvailableCapacity: number = 0;
 
   //(Paging)
   countAvailableHouses = 0; //items count
@@ -85,9 +86,12 @@ export class HomepageComponent implements OnInit {
       //pageList is now an array like {1, 2, 3, ..., n | n = pageCount}
     });
 
-    //(List) Count available Rooms
+    //(Statistics)
     this.roomService.countAvailableRooms().subscribe(data => {
       this.countAvailableRooms = data;
+    });
+    this.roomService.countAvailableCapacity().subscribe(data => {
+      this.countAvailableCapacity = data;
     });
 
     //(Filter) Get all Campuses (with their Districts, Communes, Villages)

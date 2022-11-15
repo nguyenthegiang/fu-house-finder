@@ -272,18 +272,20 @@
       <!-- Statistics -->
       <div class="d-flex justify-content-between border shadow-sm p-3 mb-5 bg-body rounded">
         <div class="row w-100">
+          <!-- House available count -->
           <div class="col-12 col-md-4">
             <div class="border-end d-flex flex-column justify-content-center align-items-center pe-4">
               <div class="fs-4 d-flex align-items-center" style="color: #ee4d2d;">
                 <span class="material-symbols-outlined fs-3">
                   home
                 </span>
-                {{countAvailableRooms}}
+                {{countAvailableHouses}}
               </div>
-              <h6 class="font-weight-bold text-center">Tổng nhà có phòng trống</h6>
+              <h6 class="font-weight-bold text-center">Nhà có phòng trống</h6>
             </div>
           </div>
 
+          <!-- Room available count -->
           <div class="col-12 col-md-4">
             <div class="border-end d-flex flex-column justify-content-center align-items-center pe-4">
               <div class="fs-4 d-flex align-items-center" style="color: #ee4d2d;">
@@ -292,19 +294,20 @@
                 </span>
                 {{countAvailableRooms}}
               </div>
-              <h6 class="font-weight-bold text-center">Tổng số phòng trống</h6>
+              <h6 class="font-weight-bold text-center">Phòng trống</h6>
             </div>
           </div>
 
+          <!-- Capacity available count -->
           <div class="col-12 col-md-4">
             <div class="d-flex flex-column justify-content-center align-items-center pe-4">
               <div class="fs-4 d-flex align-items-center" style="color: #ee4d2d;">
                 <span class="material-symbols-outlined">
                   bed
-                  </span>
-                {{countAvailableRooms}}
+                </span>
+                {{countAvailableCapacity}}
               </div>
-              <h6 class="font-weight-bold text-center">Tổng số chỗ trống</h6>
+              <h6 class="font-weight-bold text-center">Chỗ trống</h6>
             </div>
           </div>
         </div>
@@ -313,36 +316,45 @@
 
       <!-- List of Houses -->
       <div class="row">
-        <!-- House Item -->
+        <!---------------- House Item ---------------->
         <div class="col-4" *ngFor="let house of houses">
           <!-- Item onClick: to House Detail -->
           <div class="card rounded houseCardItem" routerLink="/house-detail/{{house.houseId}}">
 
+            <!-- Image -->
             <img class="card-img-top" *ngIf="house.imagesOfHouses"
               src="../assets/image/House/{{house.imagesOfHouses[0].imageLink}}" alt="House Image" style="width: 100%;
                 height: 200px;
                 background-position: center center;
                 background-repeat: no-repeat;">
 
-            <div class="card-body text-white rounded-bottom">
+            <div class="card-body text-bg-success rounded-bottom ">
+              <!--text-white-->
+              <!-- Name -->
               <h5 class="card-title text-center font-weight-bold">{{house.houseName}}</h5>
               <!-- View -->
               <div style="text-align: right; font-size: 12px;">
                 <i class="fa-solid fa-eye" style="margin-right: 10px;"></i>
                 <span>3,459</span>
               </div>
+              <!-- Distance -->
+              <div class="card-text d-inline-block text-truncate" style="max-width: 100%;">
+                <i class="fa-solid fa-road me-2"></i>3.5km
+              </div>
               <!-- Price with VND format -->
-              <div class="card-text"><i class="fa-solid fa-tag me-2"></i>{{house.lowestRoomPrice |
+              <div class="card-text">
+                <i class="fa-solid fa-tag me-2"></i>{{house.lowestRoomPrice |
                 currency:'VND':'symbol':'3.0'}} -
-                {{house.highestRoomPrice | currency:'VND':'symbol':'3.0'}}</div>
-              <div class="card-text d-inline-block text-truncate" style="max-width: 100%;"><i
-                  class="fa-solid fa-location-dot me-2"></i>{{house.address.addresses}}</div>
-              <div class="card-text d-inline-block text-truncate" style="max-width: 100%;"><i
-                  class="fa-solid fa-road me-2"></i>3.5km</div>
+                {{house.highestRoomPrice | currency:'VND':'symbol':'3.0'}}
+              </div>
+              <!-- Address -->
+              <div class="card-text d-inline-block text-truncate" style="max-width: 100%;">
+                <i class="fa-solid fa-location-dot me-2"></i>{{house.address.addresses}}
+              </div>
             </div>
           </div>
         </div>
-        <!-- End House Item -->
+        <!---------------- End House Item ---------------->
       </div>
       <!-- End List of Houses -->
 

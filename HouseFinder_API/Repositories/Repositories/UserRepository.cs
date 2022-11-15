@@ -8,6 +8,8 @@ namespace Repositories.Repositories
 {
     public class UserRepository : IUserReposiotry
     {
+        public int CountTotalLandlord() => UserDAO.CountTotalLandlord();
+
         //Get list of landlords
         public List<UserDTO> GetLandlords() => UserDAO.GetLandlords();
         //Get list of staffs
