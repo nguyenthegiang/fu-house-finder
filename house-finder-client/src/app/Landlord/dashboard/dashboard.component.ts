@@ -66,4 +66,7 @@ export class DashboardComponent implements OnInit {
   {
     this.router.navigate(['/Landlord/add-house']);
   }
+
+  search(searchValue: string)
+  {}
 }
