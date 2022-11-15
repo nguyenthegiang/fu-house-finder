@@ -10,6 +10,8 @@ namespace Repositories.Repositories
     {
         public int CountActiveLandlord() => UserDAO.CountActiveLandlord();
 
+        public int CountInactiveLandlord() => UserDAO.CountInactiveLandlord();
+
         public int CountTotalLandlord() => UserDAO.CountTotalLandlord();
 
         //Get list of landlords

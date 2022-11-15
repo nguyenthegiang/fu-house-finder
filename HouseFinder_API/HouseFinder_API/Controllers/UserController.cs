@@ -123,6 +123,11 @@ namespace HouseFinder_API.Controllers
         {
             return userReposiotry.CountActiveLandlord();
         }
+        [HttpGet("CountInactiveLandlord")]
+        public int? CountInactiveLandlord()
+        {
+            return userReposiotry.CountInactiveLandlord();
+        }
 
         //[Head][Dashboard] Get list of all landlords
         //[HttpGet("staff")]
