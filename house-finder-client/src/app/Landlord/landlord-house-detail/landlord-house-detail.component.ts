@@ -22,6 +22,7 @@ export class LandlordHouseDetailComponent implements OnInit {
   totallyAvailableRoom: number = 0;
   partiallyAvailableRoom: number = 0;
   availableSlot: number = 0;
+  moneyForNotRentedRooms: number = 0;
 
   //[Update] roomId to pass into <update-room>
   updateRoomId: number = 0;
@@ -29,6 +30,7 @@ export class LandlordHouseDetailComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private roomService: RoomService,
+    private houseService: HouseService,
     private landlordInformationService: LandlordInformationService,
     private router: Router
   ) { }
@@ -56,6 +58,10 @@ export class LandlordHouseDetailComponent implements OnInit {
 
     this.roomService.countAvailableCapacityByHouseId(id).subscribe(data => {
       this.availableSlot = data;
+    });
+
+    this.houseService.getMoneyForNotRentedRooms(id).subscribe(data => {
+      this.moneyForNotRentedRooms = data;
     });
   }
 
@@ -102,4 +108,7 @@ export class LandlordHouseDetailComponent implements OnInit {
   peopleCounter(i: number) {
     return new Array(i);
   }
+
+  search(searchValue: string)
+  {}
 }
