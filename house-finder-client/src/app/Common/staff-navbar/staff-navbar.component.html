@@ -1,31 +1,57 @@
-<div class="row d-flex justify-content-between bg-light border">
-  <div class="col-12 col-sm-2">
-    <div class="p-2 d-flex justify-content-center border">
-      <span>Tổng nhà trọ: {{ totalHouses }}</span>
+<!-- Statistics -->
+<div class="row">
+  <div class="col-12 col-lg-2 col-sm-4 border">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="fs-4 d-flex align-items-center" style="color: #ee4d2d;">
+        {{totalHouse}}
+      </div>
+      <h6 class="font-weight-bold text-center">Tổng nhà</h6>
     </div>
   </div>
 
-  <div class="col-12 col-sm-2">
-    <div class="p-2 d-flex flex-column justify-content-center align-items-center border">
-      <span>Tổng phòng trọ: {{ totalRooms }}</span>
+  <div class="col-12 col-lg-2 col-sm-4 border">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="fs-4 d-flex align-items-center" style="color: #ee4d2d;">
+        {{availableHouse}}
+      </div>
+      <h6 class="font-weight-bold text-center">Nhà trống</h6>
     </div>
   </div>
 
-  <div class="col-12 col-sm-2">
-    <div class="p-2 d-flex justify-content-center border">
-      <span>Tổng nhà trống: {{ availableHouseNum }}</span>
+  <div class="col-12 col-lg-2 col-sm-4 border">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="fs-4 d-flex align-items-center" style="color: #ee4d2d;">
+        {{totalRoom}}
+      </div>
+      <h6 class="font-weight-bold text-center">Tổng phòng</h6>
     </div>
   </div>
 
-  <div class="col-12 col-sm-2">
-    <div class="p-2 d-flex flex-column justify-content-center align-items-center border">
-      <span>Tổng phòng trống: {{ availabelRoomsNum }}</span>
+  <div class="col-12 col-lg-2 col-sm-4 border">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="fs-4 d-flex align-items-center" style="color: #ee4d2d;">
+        {{availableRoom}}
+      </div>
+      <h6 class="font-weight-bold text-center">Phòng trống</h6>
     </div>
   </div>
 
-  <div class="col-12 col-sm-2">
-    <div class="p-2 d-flex flex-column justify-content-center align-items-center border">
-      <span>Sức chứa: {{ availableCapNum }}</span>
+  <div class="col-12 col-lg-2 col-sm-4 border">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="fs-4 d-flex align-items-center" style="color: #ee4d2d;">
+        {{totalCapacity}}
+      </div>
+      <h6 class="font-weight-bold text-center">Tổng chỗ</h6>
+    </div>
+  </div>
+
+  <div class="col-12 col-lg-2 col-sm-4 border">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="fs-4 d-flex align-items-center" style="color: #ee4d2d;">
+        {{availableCapacity}}
+      </div>
+      <h6 class="font-weight-bold text-center">Chỗ trống</h6>
     </div>
   </div>
 </div>
+<!-- End Statistics -->
