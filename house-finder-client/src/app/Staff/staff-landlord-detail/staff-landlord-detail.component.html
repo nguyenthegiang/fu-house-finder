@@ -81,6 +81,19 @@
               <th scope="col">Tên nhà trọ</th>
               <th scope="col" id="md">Giá điện</th>
               <th scope="col" id="md">Giá nước</th>
+              <th scope="col" id="md">
+                <div class="row">
+                  <div class="col">
+                    Phòng trống hết
+                  </div>
+                  <div class="col">
+                    Phòng trống nửa
+                  </div>
+                  <div class="col">
+                    Chỗ trống
+                  </div>
+                </div>
+              </th>
               <th scope="col" id="md">Tiện ích</th>
               <th scope="col">Tùy chọn</th>
             </tr>
@@ -97,6 +110,11 @@
 
               <td id="md">{{dataItem.powerPrice | currency:'VND':'symbol':'3.0'}}</td>
               <td id="md">{{dataItem.waterPrice | currency:'VND':'symbol':'3.0'}}</td>
+
+              <!-- Statistics -->
+              <td id="md">
+                <app-staff-landlord-detail-info [houseId]="dataItem.houseId"></app-staff-landlord-detail-info>
+              </td>
 
               <!-- Utilities -->
               <td id="md">
