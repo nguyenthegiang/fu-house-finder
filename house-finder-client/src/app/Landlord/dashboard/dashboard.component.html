@@ -111,15 +111,31 @@
 
             <td>
               <div class="d-flex">
-                <a class="text-decoration-none me-3" data-toggle="modal" data-target="#updateModal"
-                  data-whatever="@getbootstrap" (click)="viewHouse(dataItem.houseId)" style="cursor: pointer;">Chi tiết</a>
-                <a class="text-decoration-none text-secondary me-3" data-toggle="modal" data-target="#updateModal"
-                  data-whatever="@getbootstrap" (click)="viewRate(dataItem.houseId)" style="cursor: pointer;">Đánh giá</a>
-                <a class="text-decoration-none text-success me-3" data-toggle="modal" data-target="#updateModal"
-                  data-whatever="@getbootstrap" (click)="updateHouse(dataItem.houseId)" style="cursor: pointer;">Chỉnh sửa</a>
-                <a class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
-                  data-bs-whatever="@getbootstrap" (click)="deleteHouse(dataItem.houseId)" style="cursor: pointer;">Xóa</a>
-                </div>
+                <a class="text-decoration-none text-dark me-2" data-toggle="modal" data-target="#updateModal"
+                  data-whatever="@getbootstrap" (click)="viewHouse(dataItem.houseId)" style="cursor: pointer;">
+                  <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Chi tiết">
+                    info
+                  </span>
+                </a>
+                <a class="text-decoration-none text-dark me-2" data-toggle="modal" data-target="#updateModal"
+                  data-whatever="@getbootstrap" (click)="viewRate(dataItem.houseId)" style="cursor: pointer;">
+                  <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Xem đánh giá">
+                    rate_review
+                  </span>
+                </a>
+                <a class="text-decoration-none text-dark me-2" data-toggle="modal" data-target="#updateModal"
+                  data-whatever="@getbootstrap" (click)="updateHouse(dataItem.houseId)" style="cursor: pointer;">
+                  <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Chỉnh sửa">
+                    build
+                  </span>
+                </a>
+                <a class="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                  data-bs-whatever="@getbootstrap" (click)="deleteHouse(dataItem.houseId)" style="cursor: pointer;">
+                  <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Xóa">
+                    delete
+                  </span>
+                </a>
+              </div>
             </td>
           </tr>
         </tbody>
