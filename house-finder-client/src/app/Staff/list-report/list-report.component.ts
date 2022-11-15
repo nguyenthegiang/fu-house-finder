@@ -14,10 +14,12 @@ import { ReportService } from 'src/app/services/report.service';
 export class ListReportComponent implements OnInit {
   //{Search} input value
   searchValue: string | undefined;
-  //List all report
+  //List all reported houses
   houses: ReportHouse[] = [];
   //List reports of selected house
   reportsOfSelectedHouse: StaffReport[] = [];
+  //List all reports
+  reports: StaffReport[] = [];
 
   //Filter
   selectedFromDate: string | undefined;
@@ -33,9 +35,11 @@ export class ListReportComponent implements OnInit {
     //Call API: get all reports of this house
     this.houseService.getReportedHouses().subscribe((data) => {
       this.houses = data;
-
-      console.log(this.houses);
     });
+
+    this.reportService.getAllReport().subscribe((data) => {
+      this.reports = data;
+    })
   }
 
   search(searchValue: string) {}

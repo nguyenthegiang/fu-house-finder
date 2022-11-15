@@ -11,7 +11,7 @@ namespace DataAccess.DTO
     {
         public int ReportId { get; set; }
         public string ReportContent { get; set; }
-        public int HouseId { get; set; }
+        public virtual StaffReportDTO House { get; set; }
         public virtual UserDTO Student { get; set; }
         public bool Deleted { get; set; }
         public DateTime CreatedDate { get; set; }
