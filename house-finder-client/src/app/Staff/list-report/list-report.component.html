@@ -91,7 +91,7 @@
                     <b>{{ i + 1 }}</b>
                   </td>
                   <td>{{ report.student.displayName }}</td>
-                  <td>{{ report.houseId }}</td>
+                  <td>{{ report.house.houseName }}</td>
                   <td>{{ report.createdDate | date:'dd/MM/yyyy'}}</td>
                   <td>{{ report.reportContent }}</td>
                 </tr>
@@ -134,7 +134,7 @@
       <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
         <div class="row">
           <div class="my-4">
-            <h3 class="text-center">Danh sách báo cáo</h3>
+            <h3 class="text-center">Danh sách nhà bị báo cáo</h3>
 
             <!-- Search bar -->
             <div class="row w-100 d-flex justify-content-center">
@@ -298,28 +298,37 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-        <div style="padding: 20px">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col" id="md">STT</th>
-                <th scope="col">Mã sinh viên</th>
-                <th scope="col">Tên sinh viên</th>
-                <th scope="col">Nội dung</th>
-                <th scope="col">Ngày báo cáo</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let report of reportsOfSelectedHouse; let j = index">
-                <td>{{ j + 1 }}</td>
-                <td>{{ report.student.userId }}</td>
-                <td>{{ report.student.displayName }}</td>
-                <td style="color: red;">{{ report.reportContent }}</td>
-                <td>{{ report.createdDate | date: "dd/MM/yyyy" }}</td>
-              </tr>
-            </tbody>
-          </table>
+      <div class="modal-dialog-scrollabled">
+        <div style="padding: 20px" *ngIf="landlordOfSelectedHouse">
+          <h6 class="text-center">Thông tin chủ trọ</h6>
+          <b>Tên chủ trọ: </b><span>{{landlordOfSelectedHouse.displayName}}</span>
+          <br>
+          <b>Số điện thoại: </b><span>{{landlordOfSelectedHouse.phoneNumber}}</span>
+          <br>
+          <b>Link facebook: </b><span>{{landlordOfSelectedHouse.facebookUrl}}</span>
+          <h6 class="text-center">Danh sách báo cáo</h6>
+          <div>
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col" id="md">STT</th>
+                  <th scope="col">Mã sinh viên</th>
+                  <th scope="col">Tên sinh viên</th>
+                  <th scope="col">Nội dung</th>
+                  <th scope="col">Ngày báo cáo</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let report of reportsOfSelectedHouse; let j = index">
+                  <td>{{ j + 1 }}</td>
+                  <td>{{ report.student.userId }}</td>
+                  <td>{{ report.student.displayName }}</td>
+                  <td style="color: red;">{{ report.reportContent }}</td>
+                  <td>{{ report.createdDate | date: "dd/MM/yyyy" }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </div>

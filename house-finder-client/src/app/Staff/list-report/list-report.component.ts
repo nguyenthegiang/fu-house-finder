@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Report } from 'src/app/models/report';
 import { ReportHouse } from 'src/app/models/reportHouse';
 import { StaffReport } from 'src/app/models/staffReport';
+import { User } from 'src/app/models/user';
 import { HouseService } from 'src/app/services/house.service';
 import { ReportService } from 'src/app/services/report.service';
 
@@ -20,6 +21,8 @@ export class ListReportComponent implements OnInit {
   reportsOfSelectedHouse: StaffReport[] = [];
   //List all reports
   reports: StaffReport[] = [];
+  //Landlord of selected house
+  landlordOfSelectedHouse: User | undefined;
 
   //Filter
   selectedFromDate: string | undefined;
@@ -50,6 +53,7 @@ export class ListReportComponent implements OnInit {
     var selectedHouse = this.houses.find((house) => house.houseId == houseId);
     if (selectedHouse?.listReports != undefined) {
       this.reportsOfSelectedHouse = selectedHouse.listReports;
+      this.landlordOfSelectedHouse = selectedHouse.landlord;
     }
   }
 
