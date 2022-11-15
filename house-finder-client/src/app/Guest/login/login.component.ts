@@ -7,6 +7,7 @@ import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { MatDialog } from '@angular/material/dialog';
 import { RoleModalComponent } from './role-modal/role-modal.component';
+import { FileService } from 'src/app/services/file.service';
 
 
 @Component({
@@ -40,8 +41,8 @@ export class LoginComponent implements OnInit {
     facebookUrl: ['', Validators.required],
   });
   imageForm = this.formBuilder.group({
-    identityCardFrontSideImageLink: [undefined, Validators.required],
-    identityCardBackSideImageLink: [undefined, Validators.required]
+    identityCardFrontSideImageLink: [, Validators.required],
+    identityCardBackSideImageLink: [, Validators.required]
   })
   loginForm = this.formBuilder.group({
     username: ['', Validators.required],
@@ -55,6 +56,7 @@ export class LoginComponent implements OnInit {
     private ngZone: NgZone,
     private formBuilder: FormBuilder,
     public dialog: MatDialog,
+    private fileService: FileService,
   ) {
   }
 
@@ -91,9 +93,9 @@ export class LoginComponent implements OnInit {
           theme: 'outline',
           size: 'large',
           text: 'signin_with',
-          shape: 'rectangular',
+          shape: 'pill',
           logo_alignment: 'left',
-          width: 250
+          width: 320
         }
       );
     };
@@ -261,12 +263,17 @@ export class LoginComponent implements OnInit {
       if (side == 'front'){
         reader.onload = e => this.frontImgSrc = reader.result!.toString();
         reader.readAsDataURL(file);
+        let dir = 'src/user_data/1/info/';
+        let filename = file.name;
+        this.fileService.storeFile(file, dir, filename);
       }
       else if (side == 'back'){
         reader.onload = e => this.backImgSrc = reader.result!.toString();
         reader.readAsDataURL(file);
+        let dir = 'src/user_data/1/info/';
+        let filename = file.name;
+        this.fileService.storeFile(file, dir, filename);
       }
-
   }
 
   }

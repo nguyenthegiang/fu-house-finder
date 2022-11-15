@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 //environment variable for API URL
 import { environment } from 'src/environments/environment'; 
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -25,5 +26,11 @@ export class FileService {
     // Make http post request over api
     // with formData as req
     return this.http.post(this.APIUrl + '/upload', formData);
+  }
+
+  storeFile(file: File, dir: string, filename: string){
+    var fileReader = new FileReader();
+
+    fileReader.readAsArrayBuffer(file);
   }
 }
