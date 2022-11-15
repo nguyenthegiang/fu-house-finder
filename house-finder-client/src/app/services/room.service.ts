@@ -67,14 +67,14 @@ export class RoomService {
     return this.http.get<any>(this.APIUrl + "/CountTotalRoom");
   }
 
-  //[Staff/Dashboard] Count total rooms
+  //[Staff/Dashboard] Count total capacity
   CountTotalCapacity(): Observable<any>{
     return this.http.get<any>(this.APIUrl + "/CountTotalCapacity");
   }
 
-  //[Staff/Dashboard] Count total rooms
-  CountTotallyAvailableCapacity(): Observable<any>{
-    return this.http.get<any>(this.APIUrl + "/CountTotallyAvailableCapacity");
+  //[Staff/Dashboard] Count totally available room
+  CountTotallyAvailableRoom(): Observable<any>{
+    return this.http.get<any>(this.APIUrl + "/CountTotallyAvailableRoom");
   }
 
   //[Homepage] Count totally available rooms by house id
