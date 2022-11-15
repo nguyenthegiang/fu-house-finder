@@ -43,62 +43,47 @@
 
           <!-- Utilities -->
           <td id="utility">
-            <div class="row">
-              <div *ngIf="dataItem.fridge == true" class="col-12 col-md-1 me-1">
-                <button type="button" class="btn col-1 d-flex justify-content-center align-items-center mt-1"
-                  data-bs-toggle="tooltip" data-bs-placement="top" title="Tủ lạnh">
-                  <span class="material-symbols-outlined">
-                    kitchen
-                  </span>
-                </button>
+            <div class="d-flex">
+              <div *ngIf="dataItem.fridge == false && dataItem.kitchen == false && dataItem.washingMachine == false
+                && dataItem.desk == false && dataItem.noLiveWithHost == false && dataItem.bed == false && dataItem.closedToilet == false">
+                <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Không có tiện ích" style="cursor: pointer;">
+                  block
+                </span>
               </div>
-              <div *ngIf="dataItem.kitchen == true" class="col-12 col-md-1 me-1">
-                <button type="button" class="btn col-1 d-flex justify-content-center align-items-center mt-1"
-                  data-bs-toggle="tooltip" data-bs-placement="top" title="Bếp">
-                  <span class="material-symbols-outlined">
-                    multicooker
-                  </span>
-                </button>
+              <div *ngIf="dataItem.fridge == true">
+                <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Tủ lạnh" style="cursor: pointer;">
+                  kitchen
+                </span>
               </div>
-              <div *ngIf="dataItem.washingMachine == true" class="col-12 col-md-1 me-1">
-                <button type="button" class="btn col-1 d-flex justify-content-center align-items-center mt-1"
-                  data-bs-toggle="tooltip" data-bs-placement="top" title="Máy giặt">
-                  <span class="material-symbols-outlined">
-                    local_laundry_service
-                  </span>
-                </button>
+              <div *ngIf="dataItem.kitchen == true">
+                <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Bếp" style="cursor: pointer;">
+                  multicooker
+                </span>
               </div>
-              <div *ngIf="dataItem.desk == true" class="col-12 col-md-1 me-1">
-                <button type="button" class="btn col-1 d-flex justify-content-center align-items-center mt-1"
-                  data-bs-toggle="tooltip" data-bs-placement="top" title="Bàn ghế">
-                  <span class="material-symbols-outlined">
-                    desk
-                  </span>
-                </button>
+              <div *ngIf="dataItem.washingMachine == true">
+                <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Máy giặt" style="cursor: pointer;">
+                  local_laundry_service
+                </span>
               </div>
-              <div *ngIf="dataItem.noLiveWithHost == true" class="col-12 col-md-1 me-1">
-                <button type="button" class="btn col-1 d-flex justify-content-center align-items-center mt-1"
-                  data-bs-toggle="tooltip" data-bs-placement="top" title="Chung chủ">
-                  <span class="material-symbols-outlined">
-                    gite
-                  </span>
-                </button>
+              <div *ngIf="dataItem.desk == true">
+                <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Bàn ghế" style="cursor: pointer;">
+                  desk
+                </span>
               </div>
-              <div *ngIf="dataItem.bed == true" class="col-12 col-md-1 me-1">
-                <button type="button" class="btn col-1 d-flex justify-content-center align-items-center mt-1"
-                  data-bs-toggle="tooltip" data-bs-placement="top" title="Giường">
-                  <span class="material-symbols-outlined">
-                    bed
-                  </span>
-                </button>
+              <div *ngIf="dataItem.noLiveWithHost == true">
+                <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Không chung chủ" style="cursor: pointer;">
+                  gite
+                </span>
               </div>
-              <div *ngIf="dataItem.closedToilet == true" class="col-12 col-md-1 me-1">
-                <button type="button" class="btn col-1 d-flex justify-content-center align-items-center mt-1"
-                  data-bs-toggle="tooltip" data-bs-placement="top" title="Vệ sinh khép kín">
-                  <span class="material-symbols-outlined">
-                    wc
-                  </span>
-                </button>
+              <div *ngIf="dataItem.bed == true">
+                <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Giường" style="cursor: pointer;">
+                  bed
+                </span>
+              </div>
+              <div *ngIf="dataItem.closedToilet == true">
+                <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Vệ sinh khép kín" style="cursor: pointer;">
+                  wc
+                </span>
               </div>
             </div>
           </td>
@@ -144,10 +129,10 @@
           </td>
           <td>
             <!-- Detail button -->
-            <button type="button" class="btn btn-success me-2 my-1" data-bs-toggle="modal" data-bs-target="#updateModal"
-              data-bs-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId)">Cập nhật</button>
-            <button type="button" class="btn btn-danger my-1" data-bs-toggle="modal" data-bs-target="#deleteModal"
-              data-bs-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId)">Xóa</button>
+            <a class="text-decoration-none text-success me-3" data-bs-toggle="modal" data-bs-target="#updateModal"
+              data-bs-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId)" style="cursor: pointer;">Cập nhật</a>
+            <a class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
+              data-bs-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId)" style="cursor: pointer;">Xóa</a>
           </td>
         </tr>
       </tbody>
