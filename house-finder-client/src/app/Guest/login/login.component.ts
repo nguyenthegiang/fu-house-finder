@@ -207,8 +207,8 @@ export class LoginComponent implements OnInit {
 
   registerLandlord(
     phonenumber: string,
-    identityCardFrontSideImageLink: File,
-    identityCardBackSideImageLink: File,
+    identityCardFrontSideImageLink: any,
+    identityCardBackSideImageLink: any,
     facebookUrl: string
   ): void {
     if (this.googleIdToken != undefined) {
