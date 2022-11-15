@@ -32,6 +32,9 @@ export class DashboardStaffComponent implements OnInit {
   //Array of total orders by month
   reportByMonth: number[] | undefined;
 
+  //Get current year
+  currentYear: number=new Date().getFullYear();
+
   //
   totalCapacity: number = 0;
   totallyAvailableCapacity: number = 0;
@@ -47,6 +50,7 @@ export class DashboardStaffComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log("Current year: " +this.currentYear);
     //Call API: get total of available rooms
     this.roomService.countAvailableRooms().subscribe(data => {
       this.availabelRoomsNum = data;
@@ -130,7 +134,7 @@ export class DashboardStaffComponent implements OnInit {
             plugins:{
               title:{
                 display: true,
-                text: 'Thống kê số lượng đăng ký nhà trọ trong năm',
+                text: 'Thống kê số lượng đăng ký nhà trọ năm ' + this.currentYear,
               }
             }
         }
@@ -227,7 +231,7 @@ export class DashboardStaffComponent implements OnInit {
             plugins:{
               title:{
                 display: true,
-                text: 'Thống kê số lượng báo cáo nhà trọ',
+                text: 'Thống kê số lượng báo cáo nhà trọ năm ' + this.currentYear,
               }
             }
         }
