@@ -25,6 +25,7 @@
           <tr>
             <th scope="col">ID</th>
             <th scope="col">Tên nhà trọ</th>
+            <th scope="col" id="utility">Tổng tiền chưa được thuê</th>
             <th scope="col" id="utility">Tiện ích</th>
             <th scope="col">Tùy chọn</th>
           </tr>
@@ -36,6 +37,11 @@
 
             <!-- House name -->
             <td>{{dataItem.houseName}}</td>
+
+            <!-- Money not for rented rooms -->
+            <td id="utility">
+              <app-dashboard-info [houseId]="dataItem.houseId"></app-dashboard-info>
+            </td>
 
             <!-- Utilities -->
             <td id="utility">
@@ -65,14 +71,14 @@
             </td>
 
             <td>
-              <div class="row">
-                <button type="button" class="btn btn-secondary me-2 my-1 col-10 col-md-2" data-toggle="modal" data-target="#updateModal"
+              <div class="d-flex">
+                <button type="button" class="btn btn-secondary me-2 my-1" data-toggle="modal" data-target="#updateModal"
                   data-whatever="@getbootstrap" (click)="viewHouse(dataItem.houseId)">Chi tiết</button>
-                <button type="button" class="btn btn-secondary me-2 my-1 col-10 col-md-3" data-toggle="modal" data-target="#updateModal"
-                  data-whatever="@getbootstrap" (click)="viewRate(dataItem.houseId)">Xem đánh giá</button>
-                <button type="button" class="btn btn-success me-2 my-1 col-10 col-md-2" data-toggle="modal" data-target="#updateModal"
+                <button type="button" class="btn btn-secondary me-2 my-1" data-toggle="modal" data-target="#updateModal"
+                  data-whatever="@getbootstrap" (click)="viewRate(dataItem.houseId)">Đánh giá</button>
+                <button type="button" class="btn btn-success me-2 my-1" data-toggle="modal" data-target="#updateModal"
                   data-whatever="@getbootstrap" (click)="updateHouse(dataItem.houseId)">Chỉnh sửa</button>
-                <button type="button" class="btn btn-danger me-2 my-1 col-10 col-md-2" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                <button type="button" class="btn btn-danger me-2 my-1" data-bs-toggle="modal" data-bs-target="#deleteModal"
                   data-bs-whatever="@getbootstrap" (click)="deleteHouse(dataItem.houseId)">Xóa</button>
                 </div>
             </td>

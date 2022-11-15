@@ -1,15 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { HouseService } from 'src/app/services/house.service';
 
 @Component({
   selector: 'app-dashboard-info',
   templateUrl: './dashboard-info.component.html',
   styleUrls: ['./dashboard-info.component.scss']
 })
-export class DashboardInfoComponent implements OnInit {
+export class DashboardInfoComponent implements OnInit
+{
+  @Input() houseId!: number;
+  moneyForNotRentedRooms: number = 0;
 
-  constructor() { }
+  constructor(private houseService: HouseService)
+  { }
 
-  ngOnInit(): void {
+  ngOnInit(): void
+  {
+    this.houseService.getMoneyForNotRentedRooms(this.houseId).subscribe(data => {
+      this.moneyForNotRentedRooms = data;
+    });
   }
-
 }
