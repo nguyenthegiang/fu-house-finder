@@ -112,7 +112,7 @@ namespace DataAccess
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
                     userDTO = context.Users.Where(u => u.FacebookUserId.Equals(fid))
-                        .Include(u => u.Address).ProjectTo<ResponseDTO>(config).FirstOrDefault();
+                        .Include(u => u.Address).Include(u => u.Role).ProjectTo<ResponseDTO>(config).FirstOrDefault();
                 }
             }
             catch (Exception e)
@@ -152,7 +152,7 @@ namespace DataAccess
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
                     userDTO = context.Users.Where(u => u.FacebookUserId.Equals(fid) && u.GoogleUserId.Equals(gid))
-                        .Include(u => u.Address).ProjectTo<ResponseDTO>(config).FirstOrDefault();
+                        .Include(u => u.Address).Include(u => u.Role).ProjectTo<ResponseDTO>(config).FirstOrDefault();
                     if (userDTO == null)
                     {
                         const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

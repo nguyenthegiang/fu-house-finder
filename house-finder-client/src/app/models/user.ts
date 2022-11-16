@@ -15,6 +15,7 @@ export interface User {
     identityCardFrontSideImageLink: string;
     identityCardBackSideImageLink: string;
     roleId: number;
+    roleName: string;
     createdDate: Date;
     lastModifiedDate: Date;
     createdBy: string;
