@@ -213,6 +213,15 @@ export class HomepageComponent implements OnInit {
     this.filterHouse(true);
   }
 
+  // When user clicked on select District
+  onDistrictClicked() {
+    // check if user has chosen Campus
+    if (!this.selectedCampusId) {
+      // if not => alert that they have to choose Campus before District
+      alert('Vui lòng chọn Cơ sở trước');
+    }
+  }
+
   //[Filter by Region] Filter by Commune
   //Change list of Communes after user selected District
   onDistrictSelected(stringSelectedDistrictId: string) {

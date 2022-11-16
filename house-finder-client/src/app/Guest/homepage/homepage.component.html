@@ -30,7 +30,6 @@
             </select>
           </div>
         </div>
-        <hr>
 
         <!-- Regions -->
         <div>
@@ -42,7 +41,7 @@
             <div>
               <!-- When select 1 District -> change list of Communes accordingly -->
               <select #selectDistrict class="form-select selectRegion" aria-label="select-district"
-                (change)="onDistrictSelected(selectDistrict.value)">
+                (change)="onDistrictSelected(selectDistrict.value)" (click)="onDistrictClicked()">
                 <option class="disableOption" disabled selected>Chọn quận/huyện</option>
                 <!-- List all Districts of selected Campus-->
                 <option *ngFor=" let district of districtsOfSelectedCampus" value="{{district.districtId}}">
