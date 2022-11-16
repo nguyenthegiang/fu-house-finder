@@ -337,7 +337,8 @@
               <h5 class="card-title text-center font-weight-bold">{{house.houseName}}</h5>
 
               <!-- Distance -->
-              <div class="card-text text-truncate maxWidthText orangeText fs-5">
+              <div class="card-text text-truncate maxWidthText orangeText fs-5" data-bs-toggle="tooltip"
+                data-bs-placement="top" title="Khoảng cách từ cổng chính trường Đại học">
                 <i class="fa-solid fa-road me-2"></i>{{house.distanceToCampus}} km
               </div>
 
@@ -417,7 +418,8 @@
 
                   <!-- 1 Star -->
                   <div *ngIf="house.averageRate > 0.5 && house.averageRate <= 1.5">
-                    <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i>
+                    <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i> <i
+                      class="fa-regular fa-star"></i>
                     <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i>
                   </div>
                 </div>
