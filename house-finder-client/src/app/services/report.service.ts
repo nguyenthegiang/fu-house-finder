@@ -5,6 +5,7 @@ import { Report } from '../models/report';
 import { StaffReport } from '../models/staffReport';
 //environment variable for API URL
 import { environment } from 'src/environments/environment';
+import { ReportHouse } from '../models/reportHouse';
 
 @Injectable({
   providedIn: 'root'
@@ -44,4 +45,20 @@ export class ReportService {
     return this.http.get<number>(this.APIUrl + "/CountTotalReportByHouseId/" + houseId);
   }
 
+
+
+  //[Staff/list-report] Filter reports
+   filterReport(
+    pageSize: number,
+    pageNumber: number,
+  ): Observable<StaffReport[]>{
+    //[Paging] count Skip and Top from pageSize & pageNumber
+    const skip = pageSize * (pageNumber - 1);
+    const top = pageSize;
+
+    //define API here to append query options into it later
+    var filterAPIUrl = this.APIUrl;
+    filterAPIUrl += `?$skip=${skip}&$top=${top}`;
+    return this.http.get<StaffReport[]>(filterAPIUrl);
+  }
 }

@@ -45,7 +45,7 @@ export class ListOrderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.filterHouse(false);
+    this.filterOrder(false);
 
     // (Paging) Count available Houses for total number of pages
     this.orderService.countTotalOrder().subscribe((data) => {
@@ -70,7 +70,7 @@ export class ListOrderComponent implements OnInit {
   goToPage(pageNumber: number) {
     // Call API: go to Page Number
     this.pageNumber = pageNumber;
-    this.filterHouse(false);
+    this.filterOrder(false);
     this.scrollToTop();
   }
 
@@ -84,7 +84,7 @@ export class ListOrderComponent implements OnInit {
   }
 
   // Call API to update list house with selected Filter value & Paging
-  filterHouse(resetPaging: boolean) {
+  filterOrder(resetPaging: boolean) {
     //if user filter -> reset Paging (back to page 1)
     if (resetPaging) {
       this.pageNumber = 1;
@@ -113,26 +113,22 @@ export class ListOrderComponent implements OnInit {
 
     // Call API: update list houses with the campus user chose
     this.selectedStatusId = numberCampusId;
-    this.filterHouse(true);
+    this.filterOrder(true);
   }
 
   onFromDateSelected(selectedDate: string) {
     this.selectedFromDate = selectedDate;
-    this.filterHouse(true);
-    console.log(selectedDate);
-    console.log(this.selectedFromDate);
+    this.filterOrder(true);
   }
 
   onToDateSelected(selectedDate: string) {
     this.selectedToDate = selectedDate;
-    this.filterHouse(true);
-    console.log(selectedDate);
+    this.filterOrder(true);
   }
 
   onOrderBySelected(selectedOrderBy: string){
     this.selectedOrderBy = selectedOrderBy;
-    console.log("Order by: " + this.selectedOrderBy);
-    this.filterHouse(true);
+    this.filterOrder(true);
   }
 
   viewOrder(id: number) {
@@ -154,6 +150,7 @@ export class ListOrderComponent implements OnInit {
 
   onSelectOrderStatus(selectedStatusId: string){
     this.selectedStatusIdToUpdate = Number(selectedStatusId);
+    this.filterOrder(true);
   }
 
   updateOrderStatus() {

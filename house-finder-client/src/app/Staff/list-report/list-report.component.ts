@@ -28,6 +28,13 @@ export class ListReportComponent implements OnInit {
   selectedFromDate: string | undefined;
   selectedToDate: string | undefined;
 
+  //(Paging)
+  totalOrder = 0; //items count
+  pageSize = 10; //number of items per page
+  pageNumber = 1; //starts at page 1
+  pageCount = 0; //number of pages
+  pageList: number[] = []; //array to loop with *ngFor in HTML Template
+
   constructor(
     private reportService: ReportService,
     private houseService: HouseService,
@@ -35,6 +42,8 @@ export class ListReportComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    this.filterOrder(false);
+
     //Call API: get all reports of this house
     this.houseService.getReportedHouses().subscribe((data) => {
       this.houses = data;
@@ -42,7 +51,7 @@ export class ListReportComponent implements OnInit {
 
     this.reportService.getAllReport().subscribe((data) => {
       this.reports = data;
-    })
+    });
   }
 
   search(searchValue: string) {}
@@ -66,4 +75,39 @@ export class ListReportComponent implements OnInit {
     this.selectedToDate = selectedDate;
     console.log(selectedDate);
   }
+
+  //[Paging] User click on a Page number -> Go to that page
+  goToPage(pageNumber: number) {
+    // Call API: go to Page Number
+    this.pageNumber = pageNumber;
+    this.filterOrder(false);
+    this.scrollToTop();
+  }
+
+  // Go to top of Page: used whenever user filter/paging data -> refresh list data
+  scrollToTop() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+  }
+
+    // Call API to update list house with selected Filter value & Paging
+    filterOrder(resetPaging: boolean) {
+      //if user filter -> reset Paging (back to page 1)
+      if (resetPaging) {
+        this.pageNumber = 1;
+      }
+
+      this.reportService
+        .filterReport(
+          this.pageSize,
+          this.pageNumber,
+        )
+        .subscribe((data) => {
+          this.reports = data;
+          this.scrollToTop();
+        });
+    }
 }

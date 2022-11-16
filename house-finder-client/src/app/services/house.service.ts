@@ -323,4 +323,19 @@ export class HouseService {
   getReportedHouses(): Observable<ReportHouse[]>{
     return this.http.get<ReportHouse[]>(this.APIUrl + "/GetReportedHouses");
   }
+
+   //[Staff/list-report] Filter reported houses
+  //  filterReportedHouse(
+  //   pageSize: number,
+  //   pageNumber: number,
+  // ): Observable<ReportHouse[]>{
+  //   //[Paging] count Skip and Top from pageSize & pageNumber
+  //   const skip = pageSize * (pageNumber - 1);
+  //   const top = pageSize;
+
+  //   //define API here to append query options into it later
+  //   var filterAPIUrl = this.APIUrl;
+  //   filterAPIUrl += `?$skip=${skip}&$top=${top}`;
+  //   return this.http.get<ReportHouse[]>(filterAPIUrl);
+  // }
 }

@@ -148,5 +148,23 @@ namespace DataAccess
             return reports;
         }
 
+        //[Staff/list-report] Count total report
+        public static int CountTotalReport()
+        {
+            int total;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    total = context.Reports.Where(r => r.Deleted != true).Count();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return total;
+        }
+
     }
 }
