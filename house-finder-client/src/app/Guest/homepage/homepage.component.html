@@ -337,7 +337,7 @@
               <h5 class="card-title text-center font-weight-bold">{{house.houseName}}</h5>
 
               <!-- Distance -->
-              <div class="card-text d-inline-block text-truncate maxWidthText orangeText fs-5">
+              <div class="card-text text-truncate maxWidthText orangeText fs-5">
                 <i class="fa-solid fa-road me-2"></i>{{house.distanceToCampus}} km
               </div>
 
@@ -349,24 +349,32 @@
               </div>
 
               <!-- Address -->
-              <div class="card-text d-inline-block text-truncate maxWidthText grayText">
+              <div class="card-text text-truncate maxWidthText grayText">
                 <i class="fa-solid fa-location-dot me-2"></i>{{house.address.addresses}}
               </div>
 
               <!-- Utility -->
-              <div class="card-text d-inline-block text-truncate maxWidthText grayText">
-                <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top"
-                  title="Khóa vân tay" style="cursor: pointer;">
-                  fingerprint
-                </span>
-                <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top"
-                  title="Camera an ninh" style="cursor: pointer;">
-                  videocam
-                </span>
-                <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
-                  title="Chỗ để xe" style="cursor: pointer;">
-                  local_parking
-                </span>
+              <div class="card-text text-truncate maxWidthText grayText">
+                <div class="d-flex">
+                  <div *ngIf="house.fingerprintLock == true">
+                    <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top"
+                      title="Khóa vân tay" style="cursor: pointer;">
+                      fingerprint
+                    </span>
+                  </div>
+                  <div *ngIf="house.camera == true">
+                    <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top"
+                      title="Camera an ninh" style="cursor: pointer;">
+                      videocam
+                    </span>
+                  </div>
+                  <div *ngIf="house.parking == true">
+                    <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
+                      title="Chỗ để xe" style="cursor: pointer;">
+                      local_parking
+                    </span>
+                  </div>
+                </div>
               </div>
 
               <div class="d-flex justify-content-between">
