@@ -96,19 +96,19 @@ namespace DataAccess
                     //Delete by changing Status to Disabled
                     updatedHouse.Deleted = true;
                     List<Room> rooms = context.Rooms.Where(r => r.HouseId == houseId).ToList();
-                    foreach(Room o in rooms)
+                    foreach (Room o in rooms)
                     {
                         o.Deleted = true;
                         context.Rooms.Update(o);
                     }
                     List<Rate> rates = context.Rates.Where(r => r.HouseId == houseId).ToList();
-                    foreach(Rate r in rates)
+                    foreach (Rate r in rates)
                     {
                         r.Deleted = true;
                         context.Rates.Update(r);
                     }
                     List<ImagesOfHouse> imagesOfHouses = context.ImagesOfHouses.Where(i => i.HouseId == houseId).ToList();
-                    foreach(ImagesOfHouse i in imagesOfHouses)
+                    foreach (ImagesOfHouse i in imagesOfHouses)
                     {
                         i.Deleted = true;
                         context.ImagesOfHouses.Update(i);
@@ -244,14 +244,17 @@ namespace DataAccess
                             sumRate += (float)rate.Star;
                         }
                         houseDTO.AverageRate = sumRate / houseDTO.Rates.Count;
-                    } else
+                    }
+                    else
                     {
                         //special case: no rate => averageRate = 0
                         houseDTO.AverageRate = 0;
                     }
 
                     //(Statistics Information)
-                    
+                    houseDTO.TotallyAvailableRoomCount = RoomDAO.CountTotallyAvailableRoomByHouseId(houseDTO.HouseId);
+                    houseDTO.PartiallyAvailableRoomCount = RoomDAO.CountPartiallyAvailableRoomByHouseId(houseDTO.HouseId);
+                    houseDTO.AvailableCapacityCount = (int)RoomDAO.CountAvailableCapacityByHouseId(houseDTO.HouseId);
                 }
             }
             catch (Exception e)
@@ -260,7 +263,7 @@ namespace DataAccess
             }
 
             //Remove unnecessary data to make API Response Body lighter
-            houseDTOs.ForEach(delegate(AvailableHouseDTO houseDTO) 
+            houseDTOs.ForEach(delegate (AvailableHouseDTO houseDTO)
             {
                 houseDTO.Rooms = null;
                 houseDTO.Village = null;
@@ -301,7 +304,7 @@ namespace DataAccess
             Find detail information of a House by its Id;
             Also find its CommuneId & DistrictId
          */
-        public static HouseDTO GetHouseById(int houseId)          
+        public static HouseDTO GetHouseById(int houseId)
         {
             HouseDTO houseDTO;
             try
@@ -364,7 +367,7 @@ namespace DataAccess
                     //Get rooms by HouseID, include Images
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    List<RoomDTO>  rooms = context.Rooms
+                    List<RoomDTO> rooms = context.Rooms
                         .Where(r => r.Deleted == false)
                         .Where(r => r.HouseId == HouseId)
                         .Where(r => r.Status.StatusName.Equals("Available") || r.Status.StatusName.Equals("Disabled"))
@@ -373,7 +376,7 @@ namespace DataAccess
                     //Count total money
                     foreach (RoomDTO r in rooms)
                     {
-                            totalMoney += r.PricePerMonth;
+                        totalMoney += r.PricePerMonth;
                     }
                 }
             }
