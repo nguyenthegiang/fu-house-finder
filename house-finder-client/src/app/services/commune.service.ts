@@ -13,6 +13,6 @@ export class CommuneService {
   constructor(private http: HttpClient) { }
 
   countCommuneHavingHouse(): Observable<number> {
-    return this.http.get<number>(this.APIUrl + "CountCommuneHavingHouse");
+    return this.http.get<number>(this.APIUrl + "/CountCommuneHavingHouse");
   }
 }

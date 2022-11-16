@@ -20,6 +20,6 @@ export class DistrictService {
   }
 
   countDistrictHavingHouse(): Observable<number> {
-    return this.http.get<number>(this.APIUrl + "CountDistrictHavingHouse");
+    return this.http.get<number>(this.APIUrl + "/CountDistrictHavingHouse");
   }
 }

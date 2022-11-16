@@ -14,6 +14,6 @@ export class VillageService {
   constructor(private http: HttpClient) { }
 
   countVillageHavingHouse(): Observable<number> {
-    return this.http.get<number>(this.APIUrl + "CountVillageHavingHouse");
+    return this.http.get<number>(this.APIUrl + "/CountVillageHavingHouse");
   }
 }
