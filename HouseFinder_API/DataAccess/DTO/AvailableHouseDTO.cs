@@ -71,5 +71,12 @@ namespace DataAccess.DTO
         public float AverageRate { get; set; }
         //List Rates of this House -> to calculate average rate
         public virtual ICollection<RateDTO> Rates { get; set; }
+
+        //Statistics Information
+        public int TotallyAvailableRoomCount { get; set; }
+        public int PartiallyAvailableRoomCount { get; set; }
+
+        public int AvailableCapacityCount { get; set; }
+
     }
 }

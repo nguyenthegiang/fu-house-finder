@@ -249,6 +249,8 @@ namespace DataAccess
                         //special case: no rate => averageRate = 0
                         houseDTO.AverageRate = 0;
                     }
+
+                    //(Statistics Information)
                     
                 }
             }
