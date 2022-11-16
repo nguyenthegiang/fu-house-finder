@@ -274,16 +274,18 @@
       <!-- End Rooms Count Available -->
 
       <!-- Statistics -->
-      <div class="d-flex justify-content-between border shadow-sm p-3 mb-5 bg-body rounded">
+      <div class="d-flex justify-content-between border shadow-sm p-3 mb-3 bg-body rounded">
         <div class="row w-100">
           <!-- House available count -->
           <div class="col-12 col-md-4">
             <div class="border-end d-flex flex-column justify-content-center align-items-center pe-4">
               <div class="fs-4 d-flex align-items-center text-danger">
-                <span class="material-symbols-outlined fs-3">
+                <span class="material-symbols-outlined fs-3 me-1">
                   home
                 </span>
-                {{countAvailableHouses}}
+                <span>
+                  {{countAvailableHouses}}
+                </span>
               </div>
               <h6 class="font-weight-bold text-center">Nhà có phòng trống</h6>
             </div>
@@ -293,10 +295,12 @@
           <div class="col-12 col-md-4">
             <div class="border-end d-flex flex-column justify-content-center align-items-center pe-4">
               <div class="fs-4 d-flex align-items-center text-danger">
-                <span class="material-symbols-outlined">
+                <span class="material-symbols-outlined me-1">
                   door_back
                 </span>
-                {{countAvailableRooms}}
+                <span>
+                  {{countAvailableRooms}}
+                </span>
               </div>
               <h6 class="font-weight-bold text-center">Phòng trống</h6>
             </div>
@@ -306,10 +310,12 @@
           <div class="col-12 col-md-4">
             <div class="d-flex flex-column justify-content-center align-items-center pe-4">
               <div class="fs-4 d-flex align-items-center text-danger">
-                <span class="material-symbols-outlined">
+                <span class="material-symbols-outlined me-1">
                   bed
                 </span>
-                {{countAvailableCapacity}}
+                <span>
+                  {{countAvailableCapacity}}
+                </span>
               </div>
               <h6 class="font-weight-bold text-center">Chỗ trống</h6>
             </div>
@@ -352,6 +358,33 @@
               <!-- Address -->
               <div class="card-text text-truncate maxWidthText grayText">
                 <i class="fa-solid fa-location-dot me-2"></i>{{house.address.addresses}}
+              </div>
+
+              <!-- Statistics -->
+              <div class="card-text grayText">
+                <div class="d-flex">
+                  <!-- Available Room Count -->
+                  <div class="d-flex align-items-center me-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                    title="Tổng số phòng trống">
+                    <span class="material-symbols-outlined me-1">
+                      door_back
+                    </span>
+                    <span>
+                      {{countAvailableRooms}}
+                    </span>
+                  </div>
+
+                  <!-- Available Capacity Count -->
+                  <div class="d-flex align-items-center" data-bs-toggle="tooltip" data-bs-placement="top"
+                    title="Tổng số chỗ trống">
+                    <span class="material-symbols-outlined me-1">
+                      bed
+                    </span>
+                    <span>
+                      {{countAvailableCapacity}}
+                    </span>
+                  </div>
+                </div>
               </div>
 
               <!-- Utility -->
