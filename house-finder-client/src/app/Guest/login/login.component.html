@@ -1,33 +1,36 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
 
-<ng-container class="col-md-6 offset-md-3 mt-5 text-center" #loginTemplate *ngIf="!login; else registerTemplate">
-  <div class="row d-flex justify-content-center">
-    <div class="col-auto">
-      <div class="row d-flex justify-content-center m-2">
-        <div class="fb-login-button col-auto" data-width="250" data-size="large" data-button-type="continue_with"
-          data-layout="default"></div>
-      </div>
-      <div class="row d-flex justify-content-center m-2">
-        <div clasd="col-auto" style="width: fit-content;" #ggDiv></div>
-      </div>
-      <div class="row m-5">
-        <form class="col" [formGroup]="loginForm" (ngSubmit)="loginUsernamePassword()">
-          <div class="row d-flex justify-content-center m-2">
-            <mat-form-field appearance="fill" style="width: 270px;">
-              <mat-label>Tên đăng nhập</mat-label>
-              <input matInput type="text" style="width: 250px; height: 30px;" id="username" formControlName="username" required>
-            </mat-form-field>
-          </div>
-          <div class="row d-flex justify-content-center m-2">
-            <mat-form-field appearance="fill" style="width: 270px;">
-              <mat-label>Mật khẩu</mat-label>
-              <input matInput type="password" style="width: 250px; height: 30px;" id="password" formControlName="password" required>
-            </mat-form-field>
-          </div>
-          <div class="row d-flex justify-content-center m-2">
-            <button class="btn btn-primary" style="width: 250px; height: 40px;" type="submit">Login</button>
-          </div>
-        </form>
+<ng-container class="col-md-6 offset-md-3 mt-5 text-center" #loginTemplate *ngIf="login; else registerTemplate">
+  <div class="row d-flex justify-content-center vh-100">
+    <div class="col-6"></div>
+    <div class="col-6 h-100 d-flex justify-content-center align-items-center" style="background-color: hsl(15, 100%, 70%);">
+      <div class="row" style="height: 35%;">
+        <div class="row d-flex justify-content-center m-2">
+          <div class="fb-login-button col-auto" data-width="320" data-size="large" data-button-type="continue_with"
+            data-layout="rounded"></div>
+        </div>
+        <div class="row d-flex justify-content-center m-2">
+          <div clasd="col-auto" style="width: fit-content;" #ggDiv></div>
+        </div>
+        <div class="row m-2">
+          <form class="col" [formGroup]="loginForm" (ngSubmit)="loginUsernamePassword()">
+            <div class="row d-flex justify-content-center m-2">
+              <mat-form-field appearance="legacy" style="width: 320px;">
+                <mat-label>Tên đăng nhập</mat-label>
+                <input matInput type="text" style="width: 320px; height: 30px;" id="username" formControlName="username" required>
+              </mat-form-field>
+            </div>
+            <div class="row d-flex justify-content-center m-2">
+              <mat-form-field appearance="legacy" style="width: 320px;">
+                <mat-label>Mật khẩu</mat-label>
+                <input matInput type="password" style="width: 320px; height: 30px;" id="password" formControlName="password" required>
+              </mat-form-field>
+            </div>
+            <div class="row d-flex justify-content-center m-2">
+              <button class="form-control rounded-pill" style="width: 200px; height: 40px; background-color: #bbbbbb;" type="submit">Login</button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
@@ -58,29 +61,67 @@
       </form>
     </mat-step>
     <mat-step label="Chụp ảnh CMND" [stepControl]="imageForm">
-      <div class="row d-flex justify-content-center">
-        <div class="col-auto" style="width: 600px;">
-          <div class="row d-flex justify-content-around">
-            <div class="col-auto" style="width: 290px">
-
-              <input type="file">
+      <form [formGroup]="imageForm">
+        <div class="row d-flex justify-content-center">
+          <div class="col-auto" style="width: 600px;">
+            <div class="row d-flex justify-content-around">
+              <div class="col-auto p-0" style="height: 340px; width: 290px; ">
+                <div style="position:relative; border: 1px dashed #bbbbbb; width: 290px; height: 290px;">
+                  <img [src]="frontImgSrc" style="width: 290px; max-height: 290px; position:absolute; z-index: 1; height: auto;">
+                  <span class="col align-self-center" style="position: absolute; margin-top: 180px; margin-left: 80px;">Kéo thả ảnh ở đây</span>
+                  <div style="position: absolute; margin-top: 110px; margin-left: 110px;">
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <rect width="64" height="64" fill="url(#pattern0)"/>
+                      <defs>
+                      <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                      <use xlink:href="#image0_211_16" transform="scale(0.015625)"/>
+                      </pattern>
+                      <image id="image0_211_16" width="64" height="64" xlink:href="data:image/png;base64,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"/>
+                      </defs>
+                    </svg>  
+                  </div>
+                  <input type="file" id="frontImg" accept="image/*" style="height: 280px; width: 280px; opacity: 0; position: absolute; z-index: 10; margin: 5px;" (change)="displayImage($event, 'front');" formControlName="identityCardFrontSideImageLink" required>
+                </div>
+                <div class="row d-flex justify-content-center mt-2">
+                  <div class="col-auto" style="width: fit-content;">CMND mặt trước</div>
+                </div>
+              </div>
+              <div class="col-auto p-0" style="height: 340px; width: 290px; ">
+                <div style="position:relative; border: 1px dashed #bbbbbb; width: 290px; height: 290px;">
+                  <img [src]="backImgSrc" style="width: 290px; max-height: 290px; position:absolute; z-index: 1; height: auto;">
+                  <span class="col align-self-center" style="position: absolute; margin-top: 180px; margin-left: 80px;">Kéo thả ảnh ở đây</span>
+                  <div style="position: absolute; margin-top: 110px; margin-left: 110px;">
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <rect width="64" height="64" fill="url(#pattern0)"/>
+                      <defs>
+                      <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                      <use xlink:href="#image0_211_16" transform="scale(0.015625)"/>
+                      </pattern>
+                      <image id="image0_211_16" width="64" height="64" xlink:href="data:image/png;base64,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"/>
+                      </defs>
+                    </svg>  
+                  </div>
+                  <input type="file" id="backImg" accept="image/*" style="height: 280px; width: 280px; opacity: 0; position: absolute; z-index: 10; margin: 5px;" (change)="displayImage($event, 'back');" formControlName="identityCardBackSideImageLink" required>
+                </div>
+                <div class="row d-flex justify-content-center mt-2">
+                  <div class="col-auto" style="width: fit-content;">CMND mặt sau</div>
+                </div>
+              </div>
             </div>
-            <div class="col-auto" style="width: 290px">
-
-              <input type="file">
+            <div class="row d-flex justify-content-between">
+              <button mat-raised-button matStepperPrevious style="width: 100px;">Back</button>
+              <button mat-raised-button color="primary" matStepperNext style="width: 100px;">Next</button>
             </div>
-          </div>
-          <div class="row d-flex justify-content-between">
-            <button mat-raised-button matStepperPrevious style="width: 100px;">Back</button>
-            <button mat-raised-button color="primary" matStepperNext style="width: 100px;">Next</button>
           </div>
         </div>
-      </div>
+      </form>
     </mat-step>
     <mat-step label="Xác nhận thông tin">
-      <div>
-        <button mat-button matStepperPrevious>Back</button>
-        <button mat-button (click)="stepper.reset()">Reset</button>
+      <div class="row d-flex justify-content-between">
+        <button mat-raised-button color="primary" style="width: 100px;" (click)="onSubmit()">Đăng kí</button>
+      </div>
+      <div class="row d-flex justify-content-between">
+        <button mat-raised-button matStepperPrevious style="width: 100px;">Back</button>
       </div>
     </mat-step>
   </mat-stepper>

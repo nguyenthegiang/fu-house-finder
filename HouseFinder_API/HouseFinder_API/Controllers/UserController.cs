@@ -48,7 +48,6 @@ namespace HouseFinder_API.Controllers
                 };
                 var payload = await GoogleJsonWebSignature.ValidateAsync(login.GoogleUserId, validationSettings);
                 login.GoogleUserId = payload.Subject;
-                Console.WriteLine(payload.Subject);
             }
             ResponseDTO user = userReposiotry.Login(login);
             if (login.Email != null && login.Password != null && user == null)
@@ -60,13 +59,13 @@ namespace HouseFinder_API.Controllers
                 return NotFound();
             HttpContext.Session.SetString("Token", token);
             HttpContext.Session.SetString("User", user.UserId);
+            HttpContext.Response.Cookies.Append("X-Access-Token", token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
             user.AccessToken = token;
             return Ok(user);
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDTO register)
         {
-            Console.WriteLine(register.GoogleIdToken);
             if (register.GoogleIdToken != null)
             {
                 var validationSettings = new GoogleJsonWebSignature.ValidationSettings
@@ -82,13 +81,15 @@ namespace HouseFinder_API.Controllers
             string token = this.auth.Authenticate(user);
             HttpContext.Session.SetString("Token", token);
             HttpContext.Session.SetString("User", user.UserId);
+            HttpContext.Response.Cookies.Append("X-Access-Token", token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
             user.AccessToken = token;
             return Ok(user);
         }
-        [Authorize(Roles = "Staff")]
+        [Authorize]
         [HttpGet("test")]
         public IActionResult TestAuthorize()
         {
+            Console.WriteLine(HttpContext.Session.GetString("User"));
             return Ok();
         }
         [HttpPost("logout")]
@@ -117,6 +118,16 @@ namespace HouseFinder_API.Controllers
         public int? CountTotalLandlord()
         {
             return userReposiotry.CountTotalLandlord();
+        }
+        [HttpGet("CountActiveLandlord")]
+        public int? CountActiveLandlord()
+        {
+            return userReposiotry.CountActiveLandlord();
+        }
+        [HttpGet("CountInactiveLandlord")]
+        public int? CountInactiveLandlord()
+        {
+            return userReposiotry.CountInactiveLandlord();
         }
 
         //[Head][Dashboard] Get list of all landlords

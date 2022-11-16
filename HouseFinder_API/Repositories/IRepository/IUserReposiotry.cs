@@ -15,5 +15,7 @@ namespace Repositories.IRepository
         public List<UserDTO> GetLandlords();
         //public List<UserDTO> GetStaffs();
         public int CountTotalLandlord();
+        public int CountActiveLandlord();
+        public int CountInactiveLandlord();
     }
 }
