@@ -38,6 +38,7 @@
                                 [(ngModel)]="roomDetail.buildingNumber" name="buildingNumber">
                         </div>
                     </div>
+
                     <div class="row">
                         <!-- info -->
                         <div class="col-md-6">Thông tin
@@ -53,11 +54,33 @@
                         </div>
                     </div>
                     <div class="row">
+                        <!-- info -->
+                        <div class="col-md-6">Số người ở tối đa
+                            <br>
+                            <input type="text" class="form-control" id="maxAmountOfPeople"
+                                [(ngModel)]="roomDetail.maxAmountOfPeople" name="maxAmountOfPeople">
+                        </div>
+                        <!-- floor -->
+                        <div class="col-md-6 ml-auto">Trạng thái
+                            <br>
+                            {{roomDetail.status.statusId}}
+                            <select [(ngModel)]="roomDetail.status.statusId" name="statusName" class="form-select"
+                                aria-label="select-status">
+
+                                <!-- List of Campuses to choose -->
+                                <option *ngFor=" let status of listStatus" value="{{status.statusId}}">
+                                    {{status.statusName}}</option>
+                            </select>
+                            <!-- <input type="text" class="form-control" id="status"
+                                [(ngModel)]="roomDetail.status.statusName" name="status"> -->
+                        </div>
+                    </div>
+                    <div class="row">
                         <!-- current amount -->
                         <div class="col-md-6">Số người ở
                             <br>
                             <input type="text" class="form-control" id="currentAmountOfPeople"
-                                value="{{roomDetail.currentAmountOfPeople}}" name="currentAmountOfPeople">
+                                [(ngModel)]="roomDetail.currentAmountOfPeople" name="currentAmountOfPeople">
                         </div>
                         <div class="col-md-6 ml-auto "> Tiện ích
                             <div class="form-check">
