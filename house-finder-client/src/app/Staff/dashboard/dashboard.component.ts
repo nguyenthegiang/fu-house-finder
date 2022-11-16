@@ -7,6 +7,9 @@ import { Chart, registerables } from 'chart.js';
 import { OrderService } from 'src/app/services/order.service';
 import { ReportService } from 'src/app/services/report.service';
 import { UserService } from 'src/app/services/user.service';
+import { CommuneService } from 'src/app/services/commune.service';
+import { DistrictService } from 'src/app/services/district.service';
+import { VillageService } from 'src/app/services/village.service';
 Chart.register(...registerables);
 
 
@@ -45,12 +48,20 @@ export class DashboardStaffComponent implements OnInit {
   totallyAvailableCapacity: number = 0;
   partiallyAvailableCapacity: number = 0;
 
+  //Number of villages, communes, districts having houses
+  totalVillage: number = 0;
+  totalCommune: number = 0;
+  totalDistrict: number = 0;
+
   constructor(
     private roomService: RoomService,
     private houseService: HouseService,
     private reportService: ReportService,
     private userService: UserService,
     private orderService: OrderService,
+    private villageService: VillageService,
+    private communeService: CommuneService,
+    private districtService: DistrictService,
   ) {
   }
 
@@ -327,8 +338,23 @@ export class DashboardStaffComponent implements OnInit {
         });
       })
 
-    })
+    });
 
+    //Call API: Count number of villages, communes, districts having house
+    this.villageService.countVillageHavingHouse().subscribe(data => {
+      this.totalVillage = data;
+      console.log(this.totalVillage);
+    });
+
+    this.communeService.countCommuneHavingHouse().subscribe(data => {
+      this.totalCommune = data;
+      console.log(this.totalCommune);
+    });
+
+    this.districtService.countDistrictHavingHouse().subscribe(data => {
+      this.totalDistrict = data;
+      console.log(this.totalDistrict);
+    });
   }
 
 }

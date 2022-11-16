@@ -92,7 +92,7 @@ export class OrderService {
     if(orderBy != undefined){
       //if is not the first filter -> need to add 'and' to API URL
       if (!checkFirstFilter) {
-        filterAPIUrl += ` and `;
+        filterAPIUrl += ` `;
       } else {
         //if this one is the first filter -> mark it so others won't add 'and'
         checkFirstFilter = false;

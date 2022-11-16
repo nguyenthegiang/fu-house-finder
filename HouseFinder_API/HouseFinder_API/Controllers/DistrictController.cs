@@ -21,5 +21,9 @@ namespace HouseFinder_API.Controllers
         //(with each District, all its Communes; and with each Commune, all its Villages)
         [HttpGet]
         public ActionResult<IEnumerable<DistrictDTO>> GetAllDistricts () => districtRepository.GetAllDistricts();
+
+        [HttpGet("CountDistrictHavingHouse")]
+        public int CountDistrictHavingHouse() => districtRepository.CountDistrictHavingHouse();
+
     }
 }
