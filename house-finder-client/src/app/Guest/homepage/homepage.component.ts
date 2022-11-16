@@ -218,7 +218,7 @@ export class HomepageComponent implements OnInit {
     // check if user has chosen Campus
     if (!this.selectedCampusId) {
       // if not => alert that they have to choose Campus before District
-      alert('Vui lòng chọn Cơ sở trước');
+      alert('Vui lòng chọn Cơ sở bạn muốn tìm trước');
     }
   }
 
