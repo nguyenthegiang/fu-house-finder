@@ -11,6 +11,8 @@ namespace Repositories.Repositories
 {
     public class DistrictRepository : IDistrictRepository
     {
+        public int CountDistrictHavingHouse() => DistrictDAO.CountDistrictHavingHouse();
+
         public List<DistrictDTO> GetAllDistricts() => DistrictDAO.GetAllDistricts();
     }
 }
