@@ -10,5 +10,6 @@ namespace Repositories.IRepository
     public interface IDistrictRepository
     {
         List<DistrictDTO> GetAllDistricts();
+        public int CountDistrictHavingHouse();
     }
 }

@@ -30,5 +30,22 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
         }
+
+        public static int CountCommuneHavingHouse()
+        {
+            int total;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    total = context.Communes.Where(c => c.Villages.Where(v => v.Houses.Count() > 0).Count() > 0).Count();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return total;
+        }
     }
 }
