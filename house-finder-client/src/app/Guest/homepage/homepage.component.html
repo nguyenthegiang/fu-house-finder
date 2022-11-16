@@ -356,18 +356,27 @@
               <!-- Utility -->
               <div class="card-text text-truncate maxWidthText grayText">
                 <div class="d-flex">
+                  <!-- No Utility -->
+                  <div *ngIf="house.fingerprintLock == false && house.camera == false && house.parking == false">
+                    <span class="material-symbols-outlined me-1" style="visibility: hidden;">
+                      fingerprint
+                    </span>
+                  </div>
+                  <!-- Fingerprint -->
                   <div *ngIf="house.fingerprintLock == true">
                     <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top"
                       title="Khóa vân tay" style="cursor: pointer;">
                       fingerprint
                     </span>
                   </div>
+                  <!-- Video camera -->
                   <div *ngIf="house.camera == true">
                     <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top"
                       title="Camera an ninh" style="cursor: pointer;">
                       videocam
                     </span>
                   </div>
+                  <!-- Parking spot -->
                   <div *ngIf="house.parking == true">
                     <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
                       title="Chỗ để xe" style="cursor: pointer;">
