@@ -88,6 +88,11 @@
   }
 }
 
+//Tooltip styling
+.custom-tooltip {
+  --bs-tooltip-bg: var(--bs-primary);
+}
+
 // Dark Paging
 .page-link {
   color: black;

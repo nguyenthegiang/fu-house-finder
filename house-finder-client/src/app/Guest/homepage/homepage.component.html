@@ -364,13 +364,13 @@
               <div class="card-text grayText">
                 <div class="d-flex">
                   <!-- Available Room Count -->
-                  <div class="d-flex align-items-center me-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="Tổng số phòng trống">
+                  <div class="d-flex align-items-center me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip"
+                    title="Tổng số phòng trống: {{house.totallyAvailableRoomCount + house.partiallyAvailableRoomCount}} &#10; Số phòng trống hoàn toàn: {{house.totallyAvailableRoomCount}} &#10; Số phòng tìm người ở ghép: {{house.partiallyAvailableRoomCount}}">
                     <span class="material-symbols-outlined me-1">
                       door_back
                     </span>
                     <span>
-                      {{countAvailableRooms}}
+                      {{house.totallyAvailableRoomCount + house.partiallyAvailableRoomCount}}
                     </span>
                   </div>
 
@@ -381,7 +381,7 @@
                       bed
                     </span>
                     <span>
-                      {{countAvailableCapacity}}
+                      {{house.availableCapacityCount}}
                     </span>
                   </div>
                 </div>

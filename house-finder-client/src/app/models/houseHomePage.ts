@@ -30,4 +30,9 @@ export interface HouseHomePage {
 
     //attributes only for Home Page
     averageRate: number;
+
+    //statistic
+    totallyAvailableRoomCount: number;
+    partiallyAvailableRoomCount: number;
+    availableCapacityCount: number;
 }
