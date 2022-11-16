@@ -185,13 +185,13 @@
             </td>
             <td>
               <!-- Detail button -->
-              <a class="text-decoration-none text-dark me-2" data-bs-toggle="modal" data-bs-target="#updateModal"
+              <a id="btn" class="text-decoration-none text-success me-2" data-bs-toggle="modal" data-bs-target="#updateModal"
                 data-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId)" style="cursor: pointer;">
                 <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Chỉnh sửa">
-                  build
+                  edit
                 </span>
               </a>
-              <a class="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#deleteModal"
+              <a id="btn" class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
                 data-bs-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId)" style="cursor: pointer;">
                 <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Xóa">
                   delete
