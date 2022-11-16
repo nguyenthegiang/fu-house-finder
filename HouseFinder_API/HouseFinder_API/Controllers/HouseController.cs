@@ -20,6 +20,7 @@ namespace HouseFinder_API.Controllers
     public class HouseController : ControllerBase
     {
         private IHouseRepository houseRepository = new HouseRepository();
+        private IVillageRepository villageRepository = new VillageRepository();
 
         //GET: api/Houses
         //[HttpGet]
@@ -90,6 +91,8 @@ namespace HouseFinder_API.Controllers
         [HttpGet("CountAvailableHouse")]
         public int CountAvailableHouse() => houseRepository.CountAvailableHouse();
 
+        [HttpGet("CountVillageHavingHouse")]
+        public int CountVillageHavingHouse() => villageRepository.CountVillageHavingHouse();
 
         //PUT: api/Houses
         [HttpPut]

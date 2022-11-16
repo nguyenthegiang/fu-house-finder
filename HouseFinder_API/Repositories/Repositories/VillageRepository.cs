@@ -11,6 +11,8 @@ namespace Repositories.Repositories
 {
     public class VillageRepository : IVillageRepository
     {
+        public int CountVillageHavingHouse() => VillageDAO.CountVillageHavingHouse();
+
         public VillageDTO GetVillageByName(string name) => VillageDAO.GetVillageByName(name);
     }
 }
