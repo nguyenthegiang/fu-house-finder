@@ -389,9 +389,37 @@
               <div class="d-flex justify-content-between">
                 <!-- Rate -->
                 <div class="rateHouse">
-                  {{house.averageRate}}
-                  <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i>
-                  <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i>
+                  <!-- Display Star based on Average Rate -->
+
+                  <!-- 5 Star -->
+                  <div *ngIf="house.averageRate > 4.5">
+                    <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i>
+                  </div>
+
+                  <!-- 4 Star -->
+                  <div *ngIf="house.averageRate > 3.5 && house.averageRate <= 4.5">
+                    <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i>
+                  </div>
+
+                  <!-- 3 Star -->
+                  <div *ngIf="house.averageRate > 2.5 && house.averageRate <= 3.5">
+                    <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i>
+                  </div>
+
+                  <!-- 2 Star -->
+                  <div *ngIf="house.averageRate > 1.5 && house.averageRate <= 2.5">
+                    <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i>
+                  </div>
+
+                  <!-- 1 Star -->
+                  <div *ngIf="house.averageRate > 0.5 && house.averageRate <= 1.5">
+                    <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i>
+                  </div>
                 </div>
 
                 <!-- View -->
