@@ -1,8 +1,8 @@
 import { Address } from './address';
 import { ImagesOfHouse } from './imagesOfHouse';
 
-//DTO: Houses
-export interface House {
+//DTO: Houses but to display in Home Page -> different attributes
+export interface HouseHomePage {
     houseId: number;
     houseName: string;
     information: string;
@@ -27,4 +27,7 @@ export interface House {
     districtId: number;
     communeId: number;
     villageId: number;
+
+    //attributes only for Home Page
+    averageRate: number;
 }
