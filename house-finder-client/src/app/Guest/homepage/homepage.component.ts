@@ -1,3 +1,4 @@
+import { HouseHomePage } from './../../models/houseHomePage';
 import { Campus } from './../../models/campus';
 import { Router } from '@angular/router';
 import { RoomService } from 'src/app/services/room.service';
@@ -20,7 +21,7 @@ import { RoomTypeService } from '../../services/room-type.service';
 })
 export class HomepageComponent implements OnInit {
   //List of available houses to display in Main Content
-  houses: House[] = [];
+  houses: HouseHomePage[] = [];
 
   //to display in [Statistics]
   countAvailableRooms: number = 0;

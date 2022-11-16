@@ -1,3 +1,4 @@
+import { HouseHomePage } from './../models/houseHomePage';
 import { Campus } from './../models/campus';
 import { House } from './../models/house';
 import { Injectable } from '@angular/core';
@@ -51,7 +52,7 @@ export class HouseService {
     selectedVillageId?: number,
     selectedRate?: number,
     selectedOrderValue?: string,
-  ): Observable<House[]> {
+  ): Observable<HouseHomePage[]> {
     //define API here to append query options into it later
     var filterAPIUrl = this.APIUrl + `/availableHouses?`;
 
@@ -261,7 +262,7 @@ export class HouseService {
       }
     }
 
-    return this.http.get<House[]>(filterAPIUrl);
+    return this.http.get<HouseHomePage[]>(filterAPIUrl);
   }
 
   // /**
