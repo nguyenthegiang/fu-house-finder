@@ -137,7 +137,8 @@
             <th scope="col">Giá phòng</th>
             <th scope="col" id="utility">Tiện ích</th>
             <th scope="col">Diện tích</th>
-            <th scope="col">Số người ở</th>
+            <th scope="col" id="md">Số người ở</th>
+            <th scope="col">Tùy chọn</th>
           </tr>
         </thead>
         <tbody>
@@ -149,56 +150,48 @@
             <td>{{dataItem.pricePerMonth | currency:'VND':'symbol':'3.0'}}</td>
 
             <!-- Utilities -->
-            <td id="utility">
-              <div class="row">
-                <div *ngIf="dataItem.fridge == true" class="col-12 col-md-1">
-                  <button type="button" class="btn col-1 d-flex justify-content-center align-items-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Tủ lạnh">
-                    <span class="material-symbols-outlined">
-                      kitchen
-                    </span>
-                  </button>
+            <td id="md">
+              <div class="d-flex">
+                <div *ngIf="dataItem.fridge == false && dataItem.kitchen == false && dataItem.washingMachine == false
+                  && dataItem.desk == false && dataItem.noLiveWithHost == false && dataItem.bed == false && dataItem.closedToilet == false">
+                  <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Không có tiện ích" style="cursor: pointer;">
+                    block
+                  </span>
                 </div>
-                <div *ngIf="dataItem.kitchen == true" class="col-12 col-md-1">
-                  <button type="button" class="btn col-1 d-flex justify-content-center align-items-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Bếp">
-                    <span class="material-symbols-outlined">
-                      multicooker
-                    </span>
-                  </button>
+                <div *ngIf="dataItem.fridge == true">
+                  <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Tủ lạnh" style="cursor: pointer;">
+                    kitchen
+                  </span>
                 </div>
-                <div *ngIf="dataItem.washingMachine == true" class="col-12 col-md-1">
-                  <button type="button" class="btn col-1 d-flex justify-content-center align-items-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Máy giặt">
-                    <span class="material-symbols-outlined">
-                      local_laundry_service
-                    </span>
-                  </button>
+                <div *ngIf="dataItem.kitchen == true">
+                  <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Bếp" style="cursor: pointer;">
+                    multicooker
+                  </span>
                 </div>
-                <div *ngIf="dataItem.desk == true" class="col-12 col-md-1">
-                  <button type="button" class="btn col-1 d-flex justify-content-center align-items-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Bàn ghế">
-                    <span class="material-symbols-outlined">
-                      desk
-                    </span>
-                  </button>
+                <div *ngIf="dataItem.washingMachine == true">
+                  <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Máy giặt" style="cursor: pointer;">
+                    local_laundry_service
+                  </span>
                 </div>
-                <div *ngIf="dataItem.noLiveWithHost == true" class="col-12 col-md-1">
-                  <button type="button" class="btn col-1 d-flex justify-content-center align-items-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Chung chủ">
-                    <span class="material-symbols-outlined">
-                      gite
-                    </span>
-                  </button>
+                <div *ngIf="dataItem.desk == true">
+                  <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Bàn ghế" style="cursor: pointer;">
+                    desk
+                  </span>
                 </div>
-                <div *ngIf="dataItem.bed == true" class="col-12 col-md-1">
-                  <button type="button" class="btn col-1 d-flex justify-content-center align-items-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Giường">
-                    <span class="material-symbols-outlined">
-                      bed
-                    </span>
-                  </button>
+                <div *ngIf="dataItem.noLiveWithHost == true">
+                  <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Không chung chủ" style="cursor: pointer;">
+                    gite
+                  </span>
                 </div>
-                <div *ngIf="dataItem.closedToilet == true" class="col-12 col-md-1">
-                  <button type="button" class="btn col-1 d-flex justify-content-center align-items-center" data-bs-toggle="tooltip" data-bs-placement="top" title="Vệ sinh khép kín">
-                    <span class="material-symbols-outlined">
-                      wc
-                    </span>
-                  </button>
+                <div *ngIf="dataItem.bed == true">
+                  <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Giường" style="cursor: pointer;">
+                    bed
+                  </span>
+                </div>
+                <div *ngIf="dataItem.closedToilet == true">
+                  <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Vệ sinh khép kín" style="cursor: pointer;">
+                    wc
+                  </span>
                 </div>
               </div>
             </td>
@@ -207,7 +200,7 @@
             <td>{{dataItem.areaByMeters}} m<sup>2</sup></td>
 
             <!-- Amount of people -->
-            <td>
+            <td id="md">
               <div class="row">
                 <div *ngFor='let in of peopleCounter(dataItem.currentAmountOfPeople); let i = index' class="col-12 col-md-1">
                   <i class="fa-solid fa-user"></i>
@@ -233,8 +226,12 @@
 
             <td>
               <!-- Detail button -->
-              <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#updateModal"
-                data-whatever="@getbootstrap" (click)="viewRoom(dataItem.roomId)">Chi tiết</button>
+              <a id="btn" class="text-decoration-none text-primary me-2" data-toggle="modal" data-target="#updateModal"
+                data-whatever="@getbootstrap" (click)="viewRoom(dataItem.roomId)" style="cursor: pointer;">
+                <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Chi tiết">
+                  info
+                </span>
+              </a>
             </td>
           </tr>
         </tbody>
@@ -248,7 +245,7 @@
     <i class="fa-solid fa-flag"></i>
   </button>
   <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">   
+    aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header" style="background-color: #FF6F3D;">
