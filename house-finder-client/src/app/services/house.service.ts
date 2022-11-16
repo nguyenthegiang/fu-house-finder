@@ -244,12 +244,10 @@ export class HouseService {
           filterAPIUrl += `&$orderby=HighestRoomPrice desc`;
           break;
         case 'Khoảng cách: Gần đến Xa':
-          //TODO: distance
-          filterAPIUrl += ``;
+          filterAPIUrl += `&$orderby=DistanceToCampus asc`;
           break;
         case 'Khoảng cách: Xa đến Gần':
-          //TODO: distance
-          filterAPIUrl += ``;
+          filterAPIUrl += `&$orderby=DistanceToCampus desc`;
           break;
         case 'Đánh giá: Cao đến Thấp':
           filterAPIUrl += `&$orderby=AverageRate desc`;
