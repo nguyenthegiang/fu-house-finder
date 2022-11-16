@@ -7,6 +7,9 @@ import { Chart, registerables } from 'chart.js';
 import { OrderService } from 'src/app/services/order.service';
 import { ReportService } from 'src/app/services/report.service';
 import { UserService } from 'src/app/services/user.service';
+import { CommuneService } from 'src/app/services/commune.service';
+import { DistrictService } from 'src/app/services/district.service';
+import { VillageService } from 'src/app/services/village.service';
 Chart.register(...registerables);
 
 
@@ -26,6 +29,8 @@ export class DashboardStaffComponent implements OnInit {
   totalRooms: number = 0;
   //Total of landlords
   totalLandlords: number = 0;
+  activeLandlordNum: number = 0;
+  inactiveLandlordNum: number = 0;
   //Total of available houses
   availableHouseNum: number = 0;
   //Array of total orders by month
@@ -43,12 +48,20 @@ export class DashboardStaffComponent implements OnInit {
   totallyAvailableCapacity: number = 0;
   partiallyAvailableCapacity: number = 0;
 
+  //Number of villages, communes, districts having houses
+  totalVillage: number = 0;
+  totalCommune: number = 0;
+  totalDistrict: number = 0;
+
   constructor(
     private roomService: RoomService,
     private houseService: HouseService,
     private reportService: ReportService,
     private userService: UserService,
     private orderService: OrderService,
+    private villageService: VillageService,
+    private communeService: CommuneService,
+    private districtService: DistrictService,
   ) {
   }
 
@@ -56,6 +69,39 @@ export class DashboardStaffComponent implements OnInit {
     //Call API:
     this.userService.countTotalLandlords().subscribe(data => {
       this.totalLandlords = data;
+
+      this.userService.countActiveLandlords().subscribe(data => {
+        this.activeLandlordNum = data;
+
+        this.userService.countInactiveLandlords().subscribe(data => {
+          this.inactiveLandlordNum = data;
+
+          var landlordChart = new Chart("landlordChart",{
+            type: 'pie',
+            data: {
+              labels: ['Hoạt động', 'Không hoạt động', 'Yêu cầu'],
+              datasets: [
+                {
+                  data: [this.activeLandlordNum, this.inactiveLandlordNum, (this.totalLandlords - this.activeLandlordNum - this.inactiveLandlordNum)],
+                  backgroundColor: ['#ff9020','#2fcaca', '#ff6384'],
+                },
+              ],
+
+            },
+            options:{
+              plugins:{
+                title:{
+                  display: true,
+                  text: 'Thống kê số chủ trọ',
+                  font:{
+                    size: 15,
+                  }
+                }
+              }
+            }
+          });
+        })
+      })
     });
 
     //Call API: get total of available rooms
@@ -142,12 +188,15 @@ export class DashboardStaffComponent implements OnInit {
               title:{
                 display: true,
                 text: 'Thống kê số lượng đăng ký nhà trọ năm ' + this.currentYear,
+                font:{
+                  size: 15,
+                }
               }
             }
         }
       });
 
-      //Create pie chart
+      //Create house chart
       var houseChart = new Chart("houseChart", {
         type: 'pie',
         data: {
@@ -165,6 +214,9 @@ export class DashboardStaffComponent implements OnInit {
             title:{
               display: true,
               text: 'Thống kê số nhà trọ',
+              font:{
+                size: 15,
+              }
             }
           }
         }
@@ -187,6 +239,9 @@ export class DashboardStaffComponent implements OnInit {
             title:{
               display: true,
               text: 'Thống kê số phòng trọ',
+              font:{
+                size: 15,
+              }
             }
           }
         }
@@ -239,6 +294,9 @@ export class DashboardStaffComponent implements OnInit {
               title:{
                 display: true,
                 text: 'Thống kê số lượng báo cáo nhà trọ năm ' + this.currentYear,
+                font:{
+                  size: 15,
+                }
               }
             }
         }
@@ -271,14 +329,32 @@ export class DashboardStaffComponent implements OnInit {
               title:{
                 display: true,
                 text: 'Thống kê sức chứa',
+                font:{
+                  size: 15,
+                }
               }
             }
           }
         });
       })
 
-    })
+    });
 
+    //Call API: Count number of villages, communes, districts having house
+    this.villageService.countVillageHavingHouse().subscribe(data => {
+      this.totalVillage = data;
+      console.log(this.totalVillage);
+    });
+
+    this.communeService.countCommuneHavingHouse().subscribe(data => {
+      this.totalCommune = data;
+      console.log(this.totalCommune);
+    });
+
+    this.districtService.countDistrictHavingHouse().subscribe(data => {
+      this.totalDistrict = data;
+      console.log(this.totalDistrict);
+    });
   }
 
 }

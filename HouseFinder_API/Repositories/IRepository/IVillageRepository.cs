@@ -10,5 +10,7 @@ namespace Repositories.IRepository
     public interface IVillageRepository
     {
         VillageDTO GetVillageByName(string name);
+        public int CountVillageHavingHouse();
+
     }
 }

@@ -48,5 +48,24 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
         }
+
+        //Count total of villages having houses
+        public static int CountVillageHavingHouse()
+        {
+            int total;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    total = context.Villages.Where(village => village.Houses.Count() > 0).Count();
+                    
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return total;
+        }
     }
 }

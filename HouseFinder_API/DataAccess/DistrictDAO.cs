@@ -34,5 +34,22 @@ namespace DataAccess
 
             return districtDTOs;
         }
+
+        public static int CountDistrictHavingHouse()
+        {
+            int total;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    total = context.Districts.Where(d => d.Communes.Where(c => c.Villages.Where(v => v.Houses.Count() > 0).Count() > 0).Count() > 0).Count();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return total;
+        }
     }
 }

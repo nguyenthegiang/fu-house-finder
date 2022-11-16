@@ -20,6 +20,7 @@ namespace HouseFinder_API.Controllers
     public class HouseController : ControllerBase
     {
         private IHouseRepository houseRepository = new HouseRepository();
+        
 
         //GET: api/Houses
         //[HttpGet]
@@ -89,7 +90,6 @@ namespace HouseFinder_API.Controllers
         //[Staff - Dashboard] For statistic report
         [HttpGet("CountAvailableHouse")]
         public int CountAvailableHouse() => houseRepository.CountAvailableHouse();
-
 
         //PUT: api/Houses
         [HttpPut]

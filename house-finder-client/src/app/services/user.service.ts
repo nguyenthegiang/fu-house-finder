@@ -52,8 +52,6 @@ export class UserService {
   registerLandlordGoogle(
       googleIdToken: string,
       phonenumber: string,
-      identityCardFrontSideImageLink: string,
-      identityCardBackSideImageLink: string,
       facebookUrl: string
     ){
     return this.http.post<User>(
@@ -61,8 +59,6 @@ export class UserService {
       {
         "googleIdToken": googleIdToken,
         "phonenumber": phonenumber,
-        "identityCardFrontSideImageLink": identityCardFrontSideImageLink,
-        "identityCardBackSideImageLink": identityCardBackSideImageLink,
         "facebookUrl": facebookUrl,
         "roleId": 2
       });
@@ -80,8 +76,6 @@ export class UserService {
     facebookId: string,
     name: string,
     phonenumber: string,
-    identityCardFrontSideImageLink: string,
-    identityCardBackSideImageLink: string,
     facebookUrl: string
   ){
   return this.http.post<User>(
@@ -90,8 +84,6 @@ export class UserService {
       "facebookUserId": facebookId,
       "displayName": name,
       "phonenumber": phonenumber,
-      "identityCardFrontSideImageLink": identityCardFrontSideImageLink,
-      "identityCardBackSideImageLink": identityCardBackSideImageLink,
       "facebookUrl": facebookUrl,
       "roleId": 2
     });
@@ -99,5 +91,13 @@ export class UserService {
 
   countTotalLandlords():Observable<number>{
     return this.http.get<number>(this.APIUrl + "/CountTotalLandlord");
+  }
+
+  countActiveLandlords():Observable<number>{
+    return this.http.get<number>(this.APIUrl + "/CountActiveLandlord");
+  }
+
+  countInactiveLandlords():Observable<number>{
+    return this.http.get<number>(this.APIUrl + "/CountInactiveLandlord");
   }
 }

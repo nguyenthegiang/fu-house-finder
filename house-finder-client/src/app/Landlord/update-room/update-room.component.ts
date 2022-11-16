@@ -3,8 +3,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Room } from 'src/app/models/room';
 import { RoomService } from 'src/app/services/room.service';
 import { Location } from '@angular/common';
-//import { StatusService } from 'src/app/services/status.service';
-//import { Status } from 'src/app/models/status';
+import { RoomStatus } from 'src/app/models/roomStatus';
+import RoomStatusService from 'src/app/services/roomStatus.service';
+
 
 
 
@@ -81,13 +82,14 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
     lastModifiedBy: "LA000001",
     imagesOfRooms: []
   };
-  //listStatus: Status[] = [];
+  listStatus: RoomStatus[] = [];
   //test string
   // statusSelected: string = "";
 
   constructor(
     private roomService: RoomService,
-    private location: Location
+    private location: Location,
+    private roomStatusService: RoomStatusService
     //demo status selected
     //private statusService: StatusService,
 
@@ -104,6 +106,11 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
     // status demo
     //this.getAllStatus();
 
+    this.initiateModal();
+  }
+
+  //determine whether this is a Create or Update modal
+  initiateModal() {
     //call API to get detail info of room
     if (this.roomId != 0) {
       this.getRoomByRoomId();
@@ -111,10 +118,8 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
     else {
       this.roomDetail = this.roomCreate;
     }
-
-
-
   }
+
   goBack(): void {
     window.location.reload();
   }
@@ -143,6 +148,9 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
       return;
     }
 
+    this.roomStatusService.getAllStatus().subscribe(data => {
+      this.listStatus = data;
+    })
     this.roomService.getRoomByRoomId(this.roomId).subscribe(data => {
       this.roomDetail = data;
 

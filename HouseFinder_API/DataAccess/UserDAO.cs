@@ -112,7 +112,7 @@ namespace DataAccess
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
                     userDTO = context.Users.Where(u => u.FacebookUserId.Equals(fid))
-                        .Include(u => u.Address).ProjectTo<ResponseDTO>(config).FirstOrDefault();
+                        .Include(u => u.Address).Include(u => u.Role).ProjectTo<ResponseDTO>(config).FirstOrDefault();
                 }
             }
             catch (Exception e)
@@ -152,7 +152,7 @@ namespace DataAccess
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
                     userDTO = context.Users.Where(u => u.FacebookUserId.Equals(fid) && u.GoogleUserId.Equals(gid))
-                        .Include(u => u.Address).ProjectTo<ResponseDTO>(config).FirstOrDefault();
+                        .Include(u => u.Address).Include(u => u.Role).ProjectTo<ResponseDTO>(config).FirstOrDefault();
                     if (userDTO == null)
                     {
                         const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
@@ -193,7 +193,7 @@ namespace DataAccess
             return userDTO;
         }
 
-        //[Staff/Da
+        //[Staff/Dashboard] Count total landlords
         public static int CountTotalLandlord()
         {
             int total;
@@ -210,5 +210,41 @@ namespace DataAccess
             }
             return total;
         }
+
+        //[Staff/Dashboard] Count total active landlords
+        public static int CountActiveLandlord()
+        {
+            int total;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    total = context.Users.Where(u => u.Role.RoleName.Equals("Landlord")).Where(l => l.Active == 1).Count();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return total;
+        }
+        //[Staff/Dashboard] Count total inactive landlords
+        public static int CountInactiveLandlord()
+        {
+            int total;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    total = context.Users.Where(u => u.Role.RoleName.Equals("Landlord")).Where(l => l.Active == 2).Count();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return total;
+        }
+
     }
 }

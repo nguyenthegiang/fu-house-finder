@@ -1,26 +1,61 @@
-//House Card Item on Hover -> Clickable
+//Background color for all page
+.backgroundGray {
+  background-color: #f5f5f5;
+}
+
+//Style House Card Item: On Hover: Clickable
 .houseCardItem {
   cursor: pointer;
   margin: 10px 0;
 
   .card-body {
-    background-color: #3E4F3C;
+    background-color: white;
+    color: black;
   }
+
+  box-shadow: 0 0.0625rem 0.125rem 0 rgb(0 0 0 / 10%);
+
+  border: 1px solid white;
 }
 
 .houseCardItem:hover {
   // scale: 1.1;
   // z-index: 99;
 
-  box-shadow: 0 6px 12px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  // box-shadow: 0 6px 12px 0 #ec7e68, 0 6px 20px 0 rgb(255, 255, 255);
+
+  border: 1px solid #e96136;
+
+  transform: translateY(-2px);
 }
 
-#roomFilterTitle {
-  background-color: #3E4F3C;
+//avoid text overflow in House Card Item
+.maxWidthText {
+  max-width: 100%;
 }
 
-#listRoomType {
-  list-style: none;
+//Distance in House Card Item displayed stand-out
+.orangeText {
+  color: #e96136;
+}
+
+//Others in House Card Item displayed stand-in
+.grayText {
+  color: #595959;
+}
+
+//Small unimportant items
+.smallText {
+  font-size: 13px;
+}
+
+//Rate in House Item
+.rateHouse {
+  i {
+    color: #ffce3d;
+    font-size: 15px;
+    margin: 0 2px;
+  }
 }
 
 //set fixed width for <select> of Regions in [Filter]
@@ -29,7 +64,8 @@
 }
 
 //[Filter] Rate: Radio button 
-.rateForm{
+.rateForm {
+
   //style for fontawesome icons
   i {
     color: #ffce3d;
@@ -37,28 +73,32 @@
     margin: 0 2px;
   }
 
-  input{
+  input {
     visibility: hidden;
   }
 
-  label{
+  label {
     cursor: pointer;
     padding: 5px 10px;
     border-radius: 20px;
   }
 
-  input:checked + label{
+  input:checked+label {
     background: #ebebeb;
   }
 }
 
+//Tooltip styling
+.custom-tooltip {
+  --bs-tooltip-bg: var(--bs-primary);
+}
+
 // Dark Paging
-.page-link
-{
+.page-link {
   color: black;
 }
-.page-link.active
-{
+
+.page-link.active {
   color: white !important;
   background-color: #6c757d !important;
   border-color: #6c757d !important;

@@ -34,14 +34,17 @@
     </div>
 
     <div class="row">
-      <div class="col-12 col-sm-4 mb-5">
+      <div class="col-12 col-sm-3 mb-5">
         <canvas id="houseChart"></canvas>
       </div>
-      <div class="col-12 col-sm-4 mb-5">
+      <div class="col-12 col-sm-3 mb-5">
         <canvas id="roomChart"></canvas>
       </div>
-      <div class="col-12 col-sm-4 mb-5">
+      <div class="col-12 col-sm-3 mb-5">
         <canvas id="capacityChart"></canvas>
+      </div>
+      <div class="col-12 col-sm-3 mb-5">
+        <canvas id="landlordChart"></canvas>
       </div>
     </div>
 
@@ -51,6 +54,46 @@
       </div>
       <div class="col-12 col-sm-6 mb-5">
         <canvas id="reportChart"></canvas>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between border shadow-sm p-3 mb-3 bg-body rounded">
+      <div class="row w-100">
+        <!-- House available count -->
+        <div class="col-12 col-md-4">
+          <div class="border-end d-flex flex-column justify-content-center align-items-center pe-4">
+            <div class="fs-4 d-flex align-items-center text-danger">
+              <span>
+                {{totalVillage}}
+              </span>
+            </div>
+            <h6 class="font-weight-bold text-center">Số thôn/xóm có trọ</h6>
+          </div>
+        </div>
+
+        <!-- Room available count -->
+        <div class="col-12 col-md-4">
+          <div class="border-end d-flex flex-column justify-content-center align-items-center pe-4">
+            <div class="fs-4 d-flex align-items-center text-danger">
+              <span>
+                {{totalCommune}}
+              </span>
+            </div>
+            <h6 class="font-weight-bold text-center">Số phường/xã có trọ</h6>
+          </div>
+        </div>
+
+        <!-- Capacity available count -->
+        <div class="col-12 col-md-4">
+          <div class="d-flex flex-column justify-content-center align-items-center pe-4">
+            <div class="fs-4 d-flex align-items-center text-danger">
+              <span>
+                {{totalDistrict}}
+              </span>
+            </div>
+            <h6 class="font-weight-bold text-center">Số quận/huyện có trọ</h6>
+          </div>
+        </div>
       </div>
     </div>
   </div>
