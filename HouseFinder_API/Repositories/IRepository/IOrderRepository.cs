@@ -1,4 +1,5 @@
-﻿using DataAccess.DTO;
+﻿using BusinessObjects;
+using DataAccess.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +15,7 @@ namespace Repositories.IRepository
         public int[] GetTotalOrderByMonth();
         public int[] GetSolvedlOrderByMonth();
         public void UpdateOrderStatus(int orderId, int statusId);
+        public void AddOrder(Order order);
+
     }
 }

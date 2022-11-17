@@ -1,4 +1,5 @@
-﻿using DataAccess.DTO;
+﻿using BusinessObjects;
+using DataAccess.DTO;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
@@ -57,6 +58,27 @@ namespace HouseFinder_API.Controllers
             {
 
                 return BadRequest(e.Message);
+            }
+        }
+
+        //[User] Add Order
+        [HttpPost]
+        public IActionResult Post([FromBody] Order order)
+        {
+            try
+            {
+                //Set default status
+                order.StatusId = 1;
+                //Set default date
+                order.OrderedDate = DateTime.Now;
+
+                //Add to DB
+                orderRepository.AddOrder(order);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
             }
         }
 
