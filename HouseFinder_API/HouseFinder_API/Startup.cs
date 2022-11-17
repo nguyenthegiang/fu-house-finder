@@ -39,13 +39,22 @@ namespace HouseFinder_API
             //Add Session
             services.AddDistributedMemoryCache();
             services.AddSession(cfg => {
-                cfg.IdleTimeout = TimeSpan.FromDays(1);
+                cfg.IdleTimeout = TimeSpan.FromHours(1);
                 cfg.Cookie.HttpOnly = true;
                 cfg.Cookie.IsEssential = true;
+                cfg.Cookie.Name = "HOUSEFINDER";
+                cfg.Cookie.MaxAge = TimeSpan.FromHours(3);
             });
             
             //Add CORS policy
-            services.AddCors();
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                    builder.SetIsOriginAllowed(_ => true)
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
 
             //Configure OData service
             services.AddControllers().AddOData(option => option.Select().Filter().Count().OrderBy().Expand().SetMaxTop(100));
@@ -99,10 +108,6 @@ namespace HouseFinder_API
             app.Use(async (context, next) =>
             {
                 var token = context.Request.Cookies["X-Access-Token"];
-                if (string.IsNullOrEmpty(token))
-                {
-                    token = context.Session.GetString("Token");
-                }
                 if (!string.IsNullOrEmpty(token)) context.Request.Headers.Add("Authorization", "Bearer " + token);
                 await next();
             });
@@ -113,10 +118,7 @@ namespace HouseFinder_API
             app.UseRouting();
 
             //CORS policy
-            app.UseCors(builder =>
-            {
-                builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
-            });
+            app.UseCors();
 
             app.UseAuthentication();
             app.UseAuthorization();
