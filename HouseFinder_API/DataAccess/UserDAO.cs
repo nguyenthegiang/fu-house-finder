@@ -176,7 +176,7 @@ namespace DataAccess
                         user.CreatedDate = DateTime.UtcNow;
                         user.LastModifiedBy = user.UserId;
                         user.LastModifiedDate = DateTime.UtcNow;
-                        user.Active = 1;
+                        user.StatusId = 1;
                         context.Users.Add(user);
                         context.SaveChanges();
                         userDTO = context.Users.Where(u => u.UserId == user.UserId)
@@ -219,7 +219,7 @@ namespace DataAccess
             {
                 using (var context = new FUHouseFinderContext())
                 {
-                    total = context.Users.Where(u => u.Role.RoleName.Equals("Landlord")).Where(l => l.Active == 1).Count();
+                    total = context.Users.Where(u => u.Role.RoleName.Equals("Landlord")).Where(l => l.StatusId == 1).Count();
                 }
             }
             catch (Exception e)
@@ -236,7 +236,7 @@ namespace DataAccess
             {
                 using (var context = new FUHouseFinderContext())
                 {
-                    total = context.Users.Where(u => u.Role.RoleName.Equals("Landlord")).Where(l => l.Active == 2).Count();
+                    total = context.Users.Where(u => u.Role.RoleName.Equals("Landlord")).Where(l => l.StatusId == 2).Count();
                 }
             }
             catch (Exception e)
