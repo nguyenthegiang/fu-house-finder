@@ -180,6 +180,23 @@ namespace DataAccess
             }
             return total;
         }
+
+        public static void AddOrder(Order order)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    context.Orders.Add(order);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        
         public static void UpdateOrderStatus(int orderId, int statusId)
         {
             try
