@@ -59,6 +59,7 @@ namespace HouseFinder_API.Controllers
          * [House Detail] 
          * Increase 'view' of this House by 1 when user click House Detail
          */
+        [HttpGet("IncreaseView")]
         public IActionResult IncreaseView(int HouseId)
         {
             try
