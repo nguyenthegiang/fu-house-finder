@@ -67,6 +67,8 @@ namespace HouseFinder_API.Controllers
         {
             try
             {
+                //Set default status
+                order.StatusId = 1;
                 //Set default date
                 order.OrderedDate = DateTime.Now;
 
