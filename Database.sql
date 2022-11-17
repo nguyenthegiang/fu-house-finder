@@ -361,11 +361,14 @@ CREATE TABLE [dbo].[Order] (
 	Email nvarchar(100),
 	OrderContent nvarchar(MAX) NOT NULL,
 	StatusId int NOT NULL,
+
 	OrderedDate datetime NOT NULL,
 	SolvedDate datetime,
-	
+	SolvedBy nchar(30) NULL,			--Staff giải quyết Order này, NULL nếu chưa giải quyết xong
+
 	CONSTRAINT StudentId_in_User4 FOREIGN KEY(StudentId) REFERENCES [dbo].[Users](UserId),
 	CONSTRAINT StatusId_in_OrderStatuses FOREIGN KEY(StatusId) REFERENCES [dbo].[OrderStatuses](StatusId),
+	CONSTRAINT StaffId_in_User4 FOREIGN KEY(SolvedBy) REFERENCES [dbo].[Users](UserId),
 ) ON [PRIMARY]
 GO
 
@@ -472,10 +475,12 @@ INSERT INTO [dbo].[Users] VALUES (N'HE153590', null, N'108442175069598134567', n
 GETDATE(), GETDATE(), N'HE150432', N'HE150432');
 INSERT INTO [dbo].[Users] VALUES (N'HE172884', null, N'108412035032158134567', null, null, 'Pham Vu Thai Minh', 1, null , null, null, null, null, null, 1, 
 GETDATE(), GETDATE(), N'HE150432', N'HE150432');
+
 --Staffs
 -- password: thanhle
 INSERT INTO [dbo].[Users] VALUES (N'SA000001', null, null, N'thanhle@gmail.com', N'AQAAAAEAACcQAAAAEJCloD0i7VZc1j5n/6cOh78keYPynrQMmdYV7Fx3/5XhDLwtreP8uf9ewo1MON/Yag==', N'Lê Thành', 1, 'image_profile_1.jpg', null, null, null, null, null, 3, 
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
+
 --Landlords
 INSERT INTO [dbo].[Users] VALUES (N'LA000001', null, null, N'tamle@gmail.com', N'tamle', N'Tâm Lê', 0, 'image_profile_1.jpg', '0987654321', 'facebook.com/tamle12', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
@@ -1977,43 +1982,43 @@ INSERT INTO [dbo].[OrderStatuses] VALUES (N'Solved', GETDATE());		--đã giải
 
 --StudentId, StudentName, PhoneNumber, Email, OrderContent, Solved, OrderedDate, SolvedDate
 
-INSERT INTO [dbo].[Order] VALUES (N'HE153046', N'Bùi Ngọc Huyền', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '02/03/2022', '02/10/2022');
+INSERT INTO [dbo].[Order] VALUES (N'HE153046', N'Bùi Ngọc Huyền', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '02/03/2022', '02/10/2022', 'SA000001');
 
 
-INSERT INTO [dbo].[Order] VALUES (N'HE153046', N'Bùi Ngọc Huyền', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '07/05/2022', NULL);
-INSERT INTO [dbo].[Order] VALUES (N'HE153046', N'Bùi Ngọc Huyền', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 2, '04/23/2022', NULL);
-INSERT INTO [dbo].[Order] VALUES (N'HE153222', N'Trần Thị Nguyệt Hà', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có', 2, '08/03/2022', NULL);
-INSERT INTO [dbo].[Order] VALUES (N'HE153299', N'Tống Trường Giang', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '03/31/2022', NULL);
-INSERT INTO [dbo].[Order] VALUES (N'HE153299', N'Tống Trường Giang', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '04/30/2022', NULL);
-INSERT INTO [dbo].[Order] VALUES (N'HE153299', N'Tống Trường Giang', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '04/03/2022', NULL);
-INSERT INTO [dbo].[Order] VALUES (N'HE153299', N'Bùi Ngọc Huyền', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 2, '05/03/2022', NULL);
-INSERT INTO [dbo].[Order] VALUES (N'HE153222', N'Trần Thị Nguyệt Hà', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '07/03/2022', NULL);
-INSERT INTO [dbo].[Order] VALUES (N'HE153046', N'Bùi Ngọc Huyền', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 2, '09/05/2022', NULL);
-INSERT INTO [dbo].[Order] VALUES (N'HE153046', N'Bùi Ngọc Huyền', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '01/31/2022', NULL);
-INSERT INTO [dbo].[Order] VALUES (N'HE153299', N'Tống Trường Giang', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '05/16/2022', NULL);
-INSERT INTO [dbo].[Order] VALUES (N'HE150691', N'Nguyễn Trần Hoàng', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '04/13/2022', NULL);
-INSERT INTO [dbo].[Order] VALUES (N'HE153222', N'Trần Thị Nguyệt Hà', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 2, '05/03/2022', NULL);
+INSERT INTO [dbo].[Order] VALUES (N'HE153046', N'Bùi Ngọc Huyền', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '07/05/2022', NULL, NULL);
+INSERT INTO [dbo].[Order] VALUES (N'HE153046', N'Bùi Ngọc Huyền', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 2, '04/23/2022', NULL, NULL);
+INSERT INTO [dbo].[Order] VALUES (N'HE153222', N'Trần Thị Nguyệt Hà', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có', 2, '08/03/2022', NULL, NULL);
+INSERT INTO [dbo].[Order] VALUES (N'HE153299', N'Tống Trường Giang', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '03/31/2022', NULL, NULL);
+INSERT INTO [dbo].[Order] VALUES (N'HE153299', N'Tống Trường Giang', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '04/30/2022', NULL, NULL);
+INSERT INTO [dbo].[Order] VALUES (N'HE153299', N'Tống Trường Giang', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '04/03/2022', NULL, NULL);
+INSERT INTO [dbo].[Order] VALUES (N'HE153299', N'Bùi Ngọc Huyền', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 2, '05/03/2022', NULL, NULL);
+INSERT INTO [dbo].[Order] VALUES (N'HE153222', N'Trần Thị Nguyệt Hà', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '07/03/2022', NULL, NULL);
+INSERT INTO [dbo].[Order] VALUES (N'HE153046', N'Bùi Ngọc Huyền', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 2, '09/05/2022', NULL, NULL);
+INSERT INTO [dbo].[Order] VALUES (N'HE153046', N'Bùi Ngọc Huyền', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '01/31/2022', NULL, NULL);
+INSERT INTO [dbo].[Order] VALUES (N'HE153299', N'Tống Trường Giang', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '05/16/2022', NULL, NULL);
+INSERT INTO [dbo].[Order] VALUES (N'HE150691', N'Nguyễn Trần Hoàng', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 1, '04/13/2022', NULL, NULL);
+INSERT INTO [dbo].[Order] VALUES (N'HE153222', N'Trần Thị Nguyệt Hà', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 2, '05/03/2022', NULL, NULL);
 
-INSERT INTO [dbo].[Order] VALUES (N'HE150340', N'Phùng Quang Thông', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '02/03/2022', '02/10/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150160', N'Nguyễn Trí Kiên', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '02/03/2022', '03/10/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150432', N'Nguyễn Thu An', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '04/03/2022', '04/17/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150600', N'Nguyễn Minh Hạnh', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '04/03/2022', '05/10/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150340', N'Phùng Quang Thông', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '05/03/2022', '05/23/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150340', N'Phùng Quang Thông', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '05/03/2022', '05/13/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150160', N'Nguyễn Trí Kiên', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Cần tìm nhà nguyên căn 4 phòng ngủ, đầy đủ nội thất, gần đh fpt.', 3, '05/03/2022', '07/10/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150160', N'Nguyễn Trí Kiên', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '05/03/2022', '06/17/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150340', N'Phùng Quang Thông', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Yêu cầu ngoài : không chung chủ hoặc là tự do về giờ giấc, có máy giặt càng tốt ạ', 3, '05/03/2022', '05/17/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150160', N'Nguyễn Trí Kiên', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '06/03/2022', '06/10/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150600', N'Nguyễn Minh Hạnh', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Cần tìm nhà trọ giá 1tr9 quay đầu,ở thạch hoà hay có ai cần tìm roomate cho mình ghép với ạ', 3, '06/03/2022', '07/10/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150600', N'Nguyễn Minh Hạnh', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '06/03/2022', '07/11/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150160', N'Nguyễn Trí Kiên', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '06/03/2022', '08/10/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE153590', N'Đinh Thế Thuận', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '06/03/2022', '08/28/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE153590', N'Đinh Thế Thuận', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '07/03/2022', '07/10/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150432', N'Nguyễn Thu An', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '07/03/2022', '09/30/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150340', N'Phùng Quang Thông', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '07/03/2022', '08/10/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150600', N'Nguyễn Minh Hạnh', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '08/03/2022', '08/10/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE153590', N'Đinh Thế Thuận', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Mình cần tìm phòng trọ 2 người tầm 2tr ạ. Hay trọ 1 người giá cả hợp lý ạ', 3, '09/03/2022', '09/10/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE153590', N'Đinh Thế Thuận', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '09/03/2022', '09/21/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150432', N'Nguyễn Thu An', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '10/03/2022', '10/22/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150600', N'Nguyễn Minh Hạnh', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '01/03/2022', '02/10/2022');
-INSERT INTO [dbo].[Order] VALUES (N'HE150432', N'Nguyễn Thu An', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Cần tìm nhà trọ giá 1tr9 quay đầu,ở thạch hoà hay có ai cần tìm roomate cho mình ghép với ạ', 3, '01/03/2022', '01/10/2022');
+INSERT INTO [dbo].[Order] VALUES (N'HE150340', N'Phùng Quang Thông', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '02/03/2022', '02/10/2022', 'SA000001');
+INSERT INTO [dbo].[Order] VALUES (N'HE150160', N'Nguyễn Trí Kiên', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '02/03/2022', '03/10/2022', 'SA000001');
+INSERT INTO [dbo].[Order] VALUES (N'HE150432', N'Nguyễn Thu An', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '04/03/2022', '04/17/2022', 'SA000001');
+INSERT INTO [dbo].[Order] VALUES (N'HE150600', N'Nguyễn Minh Hạnh', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '04/03/2022', '05/10/2022', 'SA000001');
+INSERT INTO [dbo].[Order] VALUES (N'HE150340', N'Phùng Quang Thông', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '05/03/2022', '05/23/2022', 'SA000001');
+INSERT INTO [dbo].[Order] VALUES (N'HE150340', N'Phùng Quang Thông', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '05/03/2022', '05/13/2022', 'SA000001');
+INSERT INTO [dbo].[Order] VALUES (N'HE150160', N'Nguyễn Trí Kiên', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Cần tìm nhà nguyên căn 4 phòng ngủ, đầy đủ nội thất, gần đh fpt.', 3, '05/03/2022', '07/10/2022', 'SA000001');
+INSERT INTO [dbo].[Order] VALUES (N'HE150160', N'Nguyễn Trí Kiên', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '05/03/2022', '06/17/2022', 'SA000001');
+INSERT INTO [dbo].[Order] VALUES (N'HE150340', N'Phùng Quang Thông', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Yêu cầu ngoài : không chung chủ hoặc là tự do về giờ giấc, có máy giặt càng tốt ạ', 3, '05/03/2022', '05/17/2022', 'SA000001');
+INSERT INTO [dbo].[Order] VALUES (N'HE150160', N'Nguyễn Trí Kiên', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '06/03/2022', '06/10/2022', 'SA000001');
+INSERT INTO [dbo].[Order] VALUES (N'HE150600', N'Nguyễn Minh Hạnh', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Cần tìm nhà trọ giá 1tr9 quay đầu,ở thạch hoà hay có ai cần tìm roomate cho mình ghép với ạ', 3, '06/03/2022', '07/10/2022', 'SA000001');
+INSERT INTO [dbo].[Order] VALUES (N'HE150600', N'Nguyễn Minh Hạnh', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '06/03/2022', '07/11/2022', 'SA000001');
+INSERT INTO [dbo].[Order] VALUES (N'HE150160', N'Nguyễn Trí Kiên', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '06/03/2022', '08/10/2022', 'SA000001');
+INSERT INTO [dbo].[Order] VALUES (N'HE153590', N'Đinh Thế Thuận', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '06/03/2022', '08/28/2022', 'SA000001');
+INSERT INTO [dbo].[Order] VALUES (N'HE153590', N'Đinh Thế Thuận', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '07/03/2022', '07/10/2022', 'SA000001');
+INSERT INTO [dbo].[Order] VALUES (N'HE150432', N'Nguyễn Thu An', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '07/03/2022', '09/30/2022', 'SA000001');
+INSERT INTO [dbo].[Order] VALUES (N'HE150340', N'Phùng Quang Thông', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '07/03/2022', '08/10/2022', 'SA000001');
+INSERT INTO [dbo].[Order] VALUES (N'HE150600', N'Nguyễn Minh Hạnh', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '08/03/2022', '08/10/2022', 'SA000001');
+INSERT INTO [dbo].[Order] VALUES (N'HE153590', N'Đinh Thế Thuận', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Mình cần tìm phòng trọ 2 người tầm 2tr ạ. Hay trọ 1 người giá cả hợp lý ạ', 3, '09/03/2022', '09/10/2022', 'SA000001');
+INSERT INTO [dbo].[Order] VALUES (N'HE153590', N'Đinh Thế Thuận', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '09/03/2022', '09/21/2022', 'SA000001');
+INSERT INTO [dbo].[Order] VALUES (N'HE150432', N'Nguyễn Thu An', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '10/03/2022', '10/22/2022', 'SA000001');
+INSERT INTO [dbo].[Order] VALUES (N'HE150600', N'Nguyễn Minh Hạnh', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Em muốn tìm 1 nhà trọ với mức giá dưới 2 triệu và ở trong vòng 2km quanh trường nhưng không có.', 3, '01/03/2022', '02/10/2022', 'SA000001');
+INSERT INTO [dbo].[Order] VALUES (N'HE150432', N'Nguyễn Thu An', N'0346034217', N'huyenbnhe150346@fpt.edu.vn', N'Cần tìm nhà trọ giá 1tr9 quay đầu,ở thạch hoà hay có ai cần tìm roomate cho mình ghép với ạ', 3, '01/03/2022', '01/10/2022', 'SA000001');
