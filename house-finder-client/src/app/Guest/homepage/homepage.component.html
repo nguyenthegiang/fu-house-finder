@@ -345,9 +345,10 @@
               <h5 class="card-title text-center font-weight-bold">{{house.houseName}}</h5>
 
               <!-- Distance -->
-              <div class="card-text text-truncate maxWidthText orangeText fs-5" data-bs-toggle="tooltip"
-                data-bs-placement="top" title="Khoảng cách từ cổng chính trường Đại học">
-                <i class="fa-solid fa-road me-2"></i>{{house.distanceToCampus}} km
+              <div class="card-text text-truncate maxWidthText orangeText fs-5">
+                <span data-bs-toggle="tooltip" data-bs-placement="top" title="Khoảng cách từ cổng chính trường Đại học">
+                  <i class="fa-solid fa-road me-2"></i>{{house.distanceToCampus}} km
+                </span>
               </div>
 
               <!-- Price with VND format -->
@@ -366,7 +367,8 @@
               <div class="card-text grayText">
                 <div class="d-flex">
                   <!-- Available Room Count -->
-                  <div class="d-flex align-items-center me-3" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="custom-tooltip"
+                  <div class="d-flex align-items-center me-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                    data-bs-custom-class="custom-tooltip"
                     title="Tổng số phòng trống: {{house.totallyAvailableRoomCount + house.partiallyAvailableRoomCount}} &#10; Số phòng trống hoàn toàn: {{house.totallyAvailableRoomCount}} &#10; Số phòng tìm người ở ghép: {{house.partiallyAvailableRoomCount}}">
                     <span class="material-symbols-outlined me-1">
                       door_back
@@ -479,20 +481,20 @@
             <!-- Previous: Disabled if this is first page -->
             <li class="page-item" [ngClass]="{'disabled': pageNumber == 1}">
               <!-- Go to previous page -->
-              <a class="page-link" aria-label="Previous" routerLink="" (click)="goToPage(pageNumber - 1)">
+              <a class="page-link hoverableLink" aria-label="Previous" (click)="goToPage(pageNumber - 1)">
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
             <!-- Numbers -->
             <li *ngFor="let page of pageList" class="page-item">
               <!-- Display this as active if it's the chosen page -->
-              <a class="page-link" routerLink="" (click)="goToPage(page)"
+              <a class="page-link hoverableLink" (click)="goToPage(page)"
                 [ngClass]="{'active': pageNumber == page}">{{page}}</a>
             </li>
             <!-- Next: Disabled if this is last page -->
             <li class="page-item" [ngClass]="{'disabled': pageNumber == pageCount}">
               <!-- Go to next page -->
-              <a class="page-link" aria-label="Next" routerLink="" (click)="goToPage(pageNumber + 1)">
+              <a class="page-link hoverableLink" aria-label="Next" (click)="goToPage(pageNumber + 1)">
                 <span aria-hidden="true">&raquo;</span>
               </a>
             </li>
@@ -504,6 +506,11 @@
     <!-- End Display Houses -->
   </div>
   <!-- End Main content -->
+
+  <!-- Send Order button -->
+  <div class="position-fixed bottom-0 end-0 me-5">
+    <app-create-order></app-create-order>
+  </div>
 </div>
 <!-- End Body -->
 
