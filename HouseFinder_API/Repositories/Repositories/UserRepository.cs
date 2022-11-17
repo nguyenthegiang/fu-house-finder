@@ -48,5 +48,9 @@ namespace Repositories.Repositories
             );
             return user;
         }
+        public void UpdateUserIdCardImage(UserDTO user)
+        {
+            UserDAO.UpdateUserIdCardImage(user.UserId, user.IdentityCardFrontSideImageLink, user.IdentityCardBackSideImageLink);
+        }
     }
 }

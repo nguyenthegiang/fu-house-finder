@@ -210,5 +210,27 @@ namespace DataAccess
             }
             return total;
         }
+
+        public static void UpdateUserIdCardImage(string userId, string identityCardFrontSideImageLink, string identityCardBackSideImageLink)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    User user = context.Users.Where(u => u.UserId == userId).FirstOrDefault();
+                    if (user != null)
+                    {
+                        user.IdentityCardFrontSideImageLink = identityCardFrontSideImageLink;
+                        user.IdentityCardBackSideImageLink = identityCardBackSideImageLink;
+                        context.Users.Update(user);
+                        context.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

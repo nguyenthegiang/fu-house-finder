@@ -57,6 +57,7 @@ namespace HouseFinder_API.Controllers
             string token = this.auth.Authenticate(user);
             if (token == null)
                 return NotFound();
+            Console.WriteLine(HttpContext.Session.Id);
             HttpContext.Session.SetString("Token", token);
             HttpContext.Session.SetString("User", user.UserId);
             HttpContext.Response.Cookies.Append("X-Access-Token", token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
@@ -89,13 +90,12 @@ namespace HouseFinder_API.Controllers
         [HttpGet("test")]
         public IActionResult TestAuthorize()
         {
-            Console.WriteLine(HttpContext.Session.GetString("User"));
             return Ok();
         }
         [HttpPost("logout")]
         public IActionResult Logout()
         {
-            HttpContext.Session.Remove("Token");
+            HttpContext.Session.Clear();
             return Ok();
         }
 

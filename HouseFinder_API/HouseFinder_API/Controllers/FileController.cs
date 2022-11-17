@@ -163,7 +163,6 @@ namespace HouseFinder_API.Controllers
         [HttpPost("idc/upload")]
         public IActionResult UploadIDC(List<IFormFile> files)
         {
-            Console.WriteLine(HttpContext.Session.GetString("User"));
             string uid = HttpContext.Session.GetString("User");
             if (uid == null)
             {
@@ -189,8 +188,9 @@ namespace HouseFinder_API.Controllers
                 else
                     backImg = path;
             }
-            Console.WriteLine(frontImg);
-            Console.WriteLine(backImg);
+            user.IdentityCardFrontSideImageLink = frontImg;
+            user.IdentityCardBackSideImageLink = backImg;
+            userReposiotry.UpdateUserIdCardImage(user);
             return Ok();
         }
     }

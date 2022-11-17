@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { User } from './../models/user';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 //environment variable for API URL
 import { environment } from 'src/environments/environment';
 
@@ -29,16 +29,15 @@ export class UserService {
   }
 
   loginFacebook(facebookUserId: string): Observable<User> {
-    return this.http.post<User>(this.APIUrl + "/login", {"facebookUserId": facebookUserId});
+    return this.http.post<User>(this.APIUrl + "/login", {"facebookUserId": facebookUserId}, {withCredentials: true});
   }
 
   loginGoogle(googleUserId: string): Observable<User>{
-    console.log("api called");
-    return this.http.post<User>(this.APIUrl + "/login", {"googleUserId": googleUserId});
+    return this.http.post<User>(this.APIUrl + "/login", {"googleUserId": googleUserId}, {withCredentials: true});
   }
 
   loginEmailPassword(email: string, password: string): Observable<User>{
-    return this.http.post<User>(this.APIUrl + "/login", {"email": email, "password": password});
+    return this.http.post<User>(this.APIUrl + "/login", {"email": email, "password": password}, {withCredentials: true});
   }
 
   registerStudentGoogle(googleIdToken: string){
@@ -46,7 +45,8 @@ export class UserService {
     {
       "googleIdToken": googleIdToken,
       "roleId": 1,
-    });
+    },
+    {withCredentials: true});
   }
 
   registerLandlordGoogle(
@@ -61,7 +61,8 @@ export class UserService {
         "phonenumber": phonenumber,
         "facebookUrl": facebookUrl,
         "roleId": 2
-      });
+      },
+      {withCredentials: true});
   }
 
   registerStudentFacebook(facebookId: string, name: string){
@@ -69,7 +70,8 @@ export class UserService {
       "facebookUserId": facebookId,
       "displayName": name,
       "roleId": 1
-    });
+    },
+    {withCredentials: true});
   }
 
   registerLandlordFacebook(
@@ -86,7 +88,8 @@ export class UserService {
       "phonenumber": phonenumber,
       "facebookUrl": facebookUrl,
       "roleId": 2
-    });
+    },
+    {withCredentials: true});
   }
 
   countTotalLandlords():Observable<number>{

@@ -61,21 +61,6 @@ namespace DataAccess.DTO
         public string GoogleUserId { get; set; }
         public string Email { get; set; }
         public string DisplayName { get; set; }
-        public string ProfileImageLink { get; set; }
-        public string PhoneNumber { get; set; }
-        public string FacebookUrl { get; set; }
-        public string IdentityCardFrontSideImageLink { get; set; }
-        public string IdentityCardBackSideImageLink { get; set; }
-        public int? AddressId { get; set; }
-        public int? RoleId { get; set; }
         public string RoleName { get; set; }
-        public DateTime? CreatedDate { get; set; }
-        public DateTime? LastModifiedDate { get; set; }
-        public string CreatedBy { get; set; }
-        public string LastModifiedBy { get; set; }
-
-        //Address of this User
-        public virtual AddressDTO Address { get; set; }
-        public virtual RoleDTO Role { get; set; }
     }
 }
