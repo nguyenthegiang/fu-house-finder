@@ -63,10 +63,8 @@
                         <!-- floor -->
                         <div class="col-md-6 ml-auto">Trạng thái
                             <br>
-                            {{roomDetail.status.statusId}}
                             <select [(ngModel)]="roomDetail.status.statusId" name="statusName" class="form-select"
                                 aria-label="select-status">
-
                                 <!-- List of Campuses to choose -->
                                 <option *ngFor=" let status of listStatus" value="{{status.statusId}}">
                                     {{status.statusName}}</option>
