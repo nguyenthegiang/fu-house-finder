@@ -45,7 +45,10 @@ export class ReportService {
     return this.http.get<number>(this.APIUrl + "/CountTotalReportByHouseId/" + houseId);
   }
 
-
+  //[Staff/list-report] Count total of report
+  countTotalReport() : Observable<number>{
+    return this.http.get<number>(this.APIUrl + "/CountTotalReport");
+  }
 
   //[Staff/list-report] Filter reports
    filterReport(

@@ -29,7 +29,7 @@ export class ListReportComponent implements OnInit {
   selectedToDate: string | undefined;
 
   //(Paging)
-  totalOrder = 0; //items count
+  totalReport = 0; //items count
   pageSize = 10; //number of items per page
   pageNumber = 1; //starts at page 1
   pageCount = 0; //number of pages
@@ -42,15 +42,24 @@ export class ListReportComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.filterOrder(false);
+    this.filterReport(false);
+
+    // (Paging) Count available Houses for total number of pages
+    this.reportService.countTotalReport().subscribe((data) => {
+      this.totalReport = data;
+      console.log(data);
+
+      // (Paging) Calculate number of pages
+      this.pageCount = Math.ceil(this.totalReport / this.pageSize); //divide & round up
+
+      // (Paging) Render pageList based on pageCount
+      this.pageList = Array.from({ length: this.pageCount }, (_, i) => i + 1);
+      //pageList is now an array like {1, 2, 3, ..., n | n = pageCount}
+    });
 
     //Call API: get all reports of this house
     this.houseService.getReportedHouses().subscribe((data) => {
       this.houses = data;
-    });
-
-    this.reportService.getAllReport().subscribe((data) => {
-      this.reports = data;
     });
   }
 
@@ -80,7 +89,7 @@ export class ListReportComponent implements OnInit {
   goToPage(pageNumber: number) {
     // Call API: go to Page Number
     this.pageNumber = pageNumber;
-    this.filterOrder(false);
+    this.filterReport(false);
     this.scrollToTop();
   }
 
@@ -94,7 +103,7 @@ export class ListReportComponent implements OnInit {
   }
 
     // Call API to update list house with selected Filter value & Paging
-    filterOrder(resetPaging: boolean) {
+    filterReport(resetPaging: boolean) {
       //if user filter -> reset Paging (back to page 1)
       if (resetPaging) {
         this.pageNumber = 1;

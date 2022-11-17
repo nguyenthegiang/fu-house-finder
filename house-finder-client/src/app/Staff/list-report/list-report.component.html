@@ -1,19 +1,50 @@
 <app-staff-header></app-staff-header>
 
-<div class="row m-2" style="padding: 20px;">
+<div class="row m-2" style="padding: 20px">
   <div class="col-12">
-
     <!-- Page content -->
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Danh sách báo cáo</button>
+        <button
+          class="nav-link active"
+          id="home-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#home-tab-pane"
+          type="button"
+          role="tab"
+          aria-controls="home-tab-pane"
+          aria-selected="true"
+        >
+          Danh sách báo cáo
+        </button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Báo cáo theo nhà</button>
+        <button
+          class="nav-link"
+          id="profile-tab"
+          data-bs-toggle="tab"
+          data-bs-target="#profile-tab-pane"
+          type="button"
+          role="tab"
+          aria-controls="profile-tab-pane"
+          aria-selected="false"
+        >
+          Báo cáo theo nhà
+        </button>
       </li>
     </ul>
-    <div class="tab-content border-end border-bottom border-start" id="myTabContent" style="padding: 20px;">
-      <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+    <div
+      class="tab-content border-end border-bottom border-start"
+      id="myTabContent"
+      style="padding: 20px"
+    >
+      <div
+        class="tab-pane fade show active"
+        id="home-tab-pane"
+        role="tabpanel"
+        aria-labelledby="home-tab"
+        tabindex="0"
+      >
         <div class="row">
           <div class="my-4">
             <h3 class="text-center">Danh sách báo cáo</h3>
@@ -51,16 +82,26 @@
             <!-- Filter -->
             <div class="row justify-content-end">
               <!-- Date picker -->
-                <!-- Start date -->
-                <div class="col-6 col-md-3 my-2">
-                  <label class="form-label">Từ ngày</label>
-                  <input #selectedFromDate class="form-control" type="date" (change)="onFromDateSelected(selectedFromDate.value)">
-                </div>
-                <!-- End date -->
-                <div class="col-6 col-md-3 my-2">
-                  <label class="form-label">Đến ngày</label>
-                  <input #selectedToDate class="form-control" type="date" (change)="onToDateSelected(selectedToDate.value)">
-                </div>
+              <!-- Start date -->
+              <div class="col-6 col-md-3 my-2">
+                <label class="form-label">Từ ngày</label>
+                <input
+                  #selectedFromDate
+                  class="form-control"
+                  type="date"
+                  (change)="onFromDateSelected(selectedFromDate.value)"
+                />
+              </div>
+              <!-- End date -->
+              <div class="col-6 col-md-3 my-2">
+                <label class="form-label">Đến ngày</label>
+                <input
+                  #selectedToDate
+                  class="form-control"
+                  type="date"
+                  (change)="onToDateSelected(selectedToDate.value)"
+                />
+              </div>
               <!-- End date picker -->
 
               <!-- Order by -->
@@ -88,50 +129,70 @@
               <tbody>
                 <tr *ngFor="let report of reports; let i = index">
                   <td id="md">
-                    <b>{{ i + 1 }}</b>
+                    <b>{{ (pageNumber - 1) * pageSize + i + 1 }}</b>
                   </td>
                   <td>{{ report.student.displayName }}</td>
                   <td>{{ report.house.houseName }}</td>
-                  <td>{{ report.createdDate | date:'dd/MM/yyyy'}}</td>
+                  <td>{{ report.createdDate | date: "dd/MM/yyyy" }}</td>
                   <td>{{ report.reportContent }}</td>
                 </tr>
               </tbody>
             </table>
             <!-- End List of Rooms -->
 
-            <!-- Paging -->
-            <div class="d-flex justify-content-center align-items-center mt-4">
-              <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                  <li class="page-item">
-                    <a class="page-link text-dark" href="#" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                      <span class="sr-only">Previous</span>
-                    </a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link text-dark" href="#">1</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link text-dark" href="#">2</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link text-dark" href="#">3</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link text-dark" href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                      <span class="sr-only">Next</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-            <!-- End Paging -->
+          <!-- Paging -->
+          <div class="d-flex justify-content-center align-items-center my-3">
+            <nav aria-label="Pagination-nav">
+              <ul class="pagination">
+                <!-- Previous: Disabled if this is first page -->
+                <li class="page-item" [ngClass]="{ disabled: pageNumber == 1 }">
+                  <!-- Go to previous page -->
+                  <a routerLink="/Staff/list-report"
+                    class="page-link"
+                    aria-label="Previous"
+                    (click)="goToPage(pageNumber - 1)"
+                  >
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                <!-- Numbers -->
+                <li *ngFor="let page of pageList" class="page-item">
+                  <!-- Display this as active if it's the chosen page -->
+                  <a routerLink="/Staff/list-report"
+                    class="page-link"
+                    (click)="goToPage(page)"
+                    [ngClass]="{ active: pageNumber == page }"
+                    >{{ page }}</a
+                  >
+                </li>
+                <!-- Next: Disabled if this is last page -->
+                <li
+                  class="page-item"
+                  [ngClass]="{ disabled: pageNumber == pageCount }"
+                >
+                  <!-- Go to next page -->
+                  <a routerLink="/Staff/list-report"
+                    class="page-link"
+                    aria-label="Next"
+                    (click)="goToPage(pageNumber + 1)"
+                  >
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+          <!-- End Paging -->
           </div>
         </div>
       </div>
-      <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+      <div
+        class="tab-pane fade"
+        id="profile-tab-pane"
+        role="tabpanel"
+        aria-labelledby="profile-tab"
+        tabindex="0"
+      >
         <div class="row">
           <div class="my-4">
             <h3 class="text-center">Danh sách nhà bị báo cáo</h3>
@@ -235,41 +296,53 @@
             </table>
             <!-- End List of Rooms -->
 
-            <!-- Paging -->
-            <div class="d-flex justify-content-center align-items-center mt-4">
-              <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                  <li class="page-item">
-                    <a class="page-link text-dark" href="#" aria-label="Previous">
-                      <span aria-hidden="true">&laquo;</span>
-                      <span class="sr-only">Previous</span>
-                    </a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link text-dark" href="#">1</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link text-dark" href="#">2</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link text-dark" href="#">3</a>
-                  </li>
-                  <li class="page-item">
-                    <a class="page-link text-dark" href="#" aria-label="Next">
-                      <span aria-hidden="true">&raquo;</span>
-                      <span class="sr-only">Next</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
-            </div>
-            <!-- End Paging -->
+          <!-- Paging -->
+        <div class="d-flex justify-content-center align-items-center my-3">
+          <nav aria-label="Pagination-nav">
+            <ul class="pagination">
+              <!-- Previous: Disabled if this is first page -->
+              <li class="page-item" [ngClass]="{ disabled: pageNumber == 1 }">
+                <!-- Go to previous page -->
+                <a routerLink="/Staff/list-report"
+                  class="page-link"
+                  aria-label="Previous"
+                  (click)="goToPage(pageNumber - 1)"
+                >
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+              <!-- Numbers -->
+              <li *ngFor="let page of pageList" class="page-item">
+                <!-- Display this as active if it's the chosen page -->
+                <a routerLink="/Staff/list-report"
+                  class="page-link"
+                  (click)="goToPage(page)"
+                  [ngClass]="{ active: pageNumber == page }"
+                  >{{ page }}</a
+                >
+              </li>
+              <!-- Next: Disabled if this is last page -->
+              <li
+                class="page-item"
+                [ngClass]="{ disabled: pageNumber == pageCount }"
+              >
+                <!-- Go to next page -->
+                <a routerLink="/Staff/list-report"
+                  class="page-link"
+                  aria-label="Next"
+                  (click)="goToPage(pageNumber + 1)"
+                >
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <!-- End Paging -->
           </div>
         </div>
       </div>
     </div>
-
-
   </div>
 </div>
 
@@ -297,11 +370,14 @@
       <div class="modal-dialog-scrollabled">
         <div style="padding: 20px" *ngIf="landlordOfSelectedHouse">
           <h6 class="text-center">Thông tin chủ trọ</h6>
-          <b>Tên chủ trọ: </b><span>{{landlordOfSelectedHouse.displayName}}</span>
-          <br>
-          <b>Số điện thoại: </b><span>{{landlordOfSelectedHouse.phoneNumber}}</span>
-          <br>
-          <b>Link facebook: </b><span>{{landlordOfSelectedHouse.facebookUrl}}</span>
+          <b>Tên chủ trọ: </b
+          ><span>{{ landlordOfSelectedHouse.displayName }}</span>
+          <br />
+          <b>Số điện thoại: </b
+          ><span>{{ landlordOfSelectedHouse.phoneNumber }}</span>
+          <br />
+          <b>Link facebook: </b
+          ><span>{{ landlordOfSelectedHouse.facebookUrl }}</span>
           <h6 class="text-center">Danh sách báo cáo</h6>
           <div>
             <table class="table">
@@ -315,11 +391,13 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let report of reportsOfSelectedHouse; let j = index">
+                <tr
+                  *ngFor="let report of reportsOfSelectedHouse; let j = index"
+                >
                   <td>{{ j + 1 }}</td>
                   <td>{{ report.student.userId }}</td>
                   <td>{{ report.student.displayName }}</td>
-                  <td style="color: red;">{{ report.reportContent }}</td>
+                  <td style="color: red">{{ report.reportContent }}</td>
                   <td>{{ report.createdDate | date: "dd/MM/yyyy" }}</td>
                 </tr>
               </tbody>

@@ -71,7 +71,7 @@ export class ListOrderComponent implements OnInit {
     // Call API: go to Page Number
     this.pageNumber = pageNumber;
     this.filterOrder(false);
-    this.scrollToTop();
+    //this.scrollToTop();
   }
 
   // Go to top of Page: used whenever user filter/paging data -> refresh list data

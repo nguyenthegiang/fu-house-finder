@@ -167,7 +167,6 @@
                 <a
                   class="page-link"
                   aria-label="Previous"
-                  routerLink="Staff/list-order"
                   (click)="goToPage(pageNumber - 1)"
                 >
                   <span aria-hidden="true">&laquo;</span>
@@ -178,7 +177,6 @@
                 <!-- Display this as active if it's the chosen page -->
                 <a
                   class="page-link"
-                  routerLink="Staff/list-order"
                   (click)="goToPage(page)"
                   [ngClass]="{ active: pageNumber == page }"
                   >{{ page }}</a
@@ -193,7 +191,6 @@
                 <a
                   class="page-link"
                   aria-label="Next"
-                  routerLink="Staff/list-order"
                   (click)="goToPage(pageNumber + 1)"
                 >
                   <span aria-hidden="true">&raquo;</span>
