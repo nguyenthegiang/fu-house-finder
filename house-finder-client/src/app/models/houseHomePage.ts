@@ -5,6 +5,7 @@ import { ImagesOfHouse } from './imagesOfHouse';
 export interface HouseHomePage {
     houseId: number;
     houseName: string;
+    view: number;
     information: string;
     distanceToCampus: number;
 
