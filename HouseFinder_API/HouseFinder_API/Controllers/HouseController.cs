@@ -54,6 +54,25 @@ namespace HouseFinder_API.Controllers
             }
         }
 
+        /**
+         * GET: api/Houses/IncreaseView?HouseId=
+         * [House Detail] 
+         * Increase 'view' of this House by 1 when user click House Detail
+         */
+        public IActionResult IncreaseView(int HouseId)
+        {
+            try
+            {
+                houseRepository.IncreaseView(HouseId);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
+
         //GET: api/Houses/GetHousesByLandlord?LandlordId=
         [HttpGet("GetHousesByLandlord")]
         public IActionResult GetListHousesByLandlordId(string LandlordId)
