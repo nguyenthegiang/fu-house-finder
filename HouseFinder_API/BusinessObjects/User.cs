@@ -18,12 +18,12 @@ namespace BusinessObjects
             ImagesOfRoomLastModifiedByNavigations = new HashSet<ImagesOfRoom>();
             InverseCreatedByNavigation = new HashSet<User>();
             InverseLastModifiedByNavigation = new HashSet<User>();
-            Orders = new HashSet<Order>();
+            OrderSolvedByNavigations = new HashSet<Order>();
+            OrderStudents = new HashSet<Order>();
             RateCreatedByNavigations = new HashSet<Rate>();
             RateLastModifiedByNavigations = new HashSet<Rate>();
             RateStudents = new HashSet<Rate>();
-            ReportCreatedByNavigations = new HashSet<Report>();
-            ReportLastModifiedByNavigations = new HashSet<Report>();
+            ReportSolvedByNavigations = new HashSet<Report>();
             ReportStudents = new HashSet<Report>();
             RoomCreatedByNavigations = new HashSet<Room>();
             RoomHistoryCreatedByNavigations = new HashSet<RoomHistory>();
@@ -37,7 +37,7 @@ namespace BusinessObjects
         public string Email { get; set; }
         public string Password { get; set; }
         public string DisplayName { get; set; }
-        public int Active { get; set; }
+        public int Statusid { get; set; }
         public string ProfileImageLink { get; set; }
         public string PhoneNumber { get; set; }
         public string FacebookUrl { get; set; }
@@ -54,6 +54,7 @@ namespace BusinessObjects
         public virtual User CreatedByNavigation { get; set; }
         public virtual User LastModifiedByNavigation { get; set; }
         public virtual UserRole Role { get; set; }
+        public virtual UserStatus Status { get; set; }
         public virtual ICollection<House> HouseCreatedByNavigations { get; set; }
         public virtual ICollection<House> HouseLandlords { get; set; }
         public virtual ICollection<House> HouseLastModifiedByNavigations { get; set; }
@@ -63,12 +64,12 @@ namespace BusinessObjects
         public virtual ICollection<ImagesOfRoom> ImagesOfRoomLastModifiedByNavigations { get; set; }
         public virtual ICollection<User> InverseCreatedByNavigation { get; set; }
         public virtual ICollection<User> InverseLastModifiedByNavigation { get; set; }
-        public virtual ICollection<Order> Orders { get; set; }
+        public virtual ICollection<Order> OrderSolvedByNavigations { get; set; }
+        public virtual ICollection<Order> OrderStudents { get; set; }
         public virtual ICollection<Rate> RateCreatedByNavigations { get; set; }
         public virtual ICollection<Rate> RateLastModifiedByNavigations { get; set; }
         public virtual ICollection<Rate> RateStudents { get; set; }
-        public virtual ICollection<Report> ReportCreatedByNavigations { get; set; }
-        public virtual ICollection<Report> ReportLastModifiedByNavigations { get; set; }
+        public virtual ICollection<Report> ReportSolvedByNavigations { get; set; }
         public virtual ICollection<Report> ReportStudents { get; set; }
         public virtual ICollection<Room> RoomCreatedByNavigations { get; set; }
         public virtual ICollection<RoomHistory> RoomHistoryCreatedByNavigations { get; set; }

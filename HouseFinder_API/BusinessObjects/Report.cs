@@ -11,15 +11,15 @@ namespace BusinessObjects
         public string ReportContent { get; set; }
         public string StudentId { get; set; }
         public int HouseId { get; set; }
+        public int StatusId { get; set; }
         public bool Deleted { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime? LastModifiedDate { get; set; }
-        public string CreatedBy { get; set; }
-        public string LastModifiedBy { get; set; }
+        public DateTime ReportedDate { get; set; }
+        public DateTime? SolvedDate { get; set; }
+        public string SolvedBy { get; set; }
 
-        public virtual User CreatedByNavigation { get; set; }
         public virtual House House { get; set; }
-        public virtual User LastModifiedByNavigation { get; set; }
+        public virtual User SolvedByNavigation { get; set; }
+        public virtual ReportStatus Status { get; set; }
         public virtual User Student { get; set; }
     }
 }
