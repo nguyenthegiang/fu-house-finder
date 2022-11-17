@@ -14,6 +14,8 @@ namespace DataAccess.DTO
         public virtual ReportHouseDTO House { get; set; }
         public virtual UserDTO Student { get; set; }
         public bool Deleted { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public DateTime ReportedDate { get; set; }
+        public DateTime? SolvedDate { get; set; }
+        public string SolvedBy { get; set; }
     }
 }

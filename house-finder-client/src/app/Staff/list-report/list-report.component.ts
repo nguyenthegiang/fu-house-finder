@@ -30,10 +30,10 @@ export class ListReportComponent implements OnInit {
 
   //(Paging)
   totalReport = 0; //items count
-  pageSize = 10; //number of items per page
-  pageNumber = 1; //starts at page 1
-  pageCount = 0; //number of pages
-  pageList: number[] = []; //array to loop with *ngFor in HTML Template
+  reportPageSize = 10; //number of items per page
+  reportPageNumber = 1; //starts at page 1
+  reportPageCount = 0; //number of pages
+  reportPageList: number[] = []; //array to loop with *ngFor in HTML Template
 
   constructor(
     private reportService: ReportService,
@@ -50,10 +50,10 @@ export class ListReportComponent implements OnInit {
       console.log(data);
 
       // (Paging) Calculate number of pages
-      this.pageCount = Math.ceil(this.totalReport / this.pageSize); //divide & round up
+      this.reportPageCount = Math.ceil(this.totalReport / this.reportPageSize); //divide & round up
 
       // (Paging) Render pageList based on pageCount
-      this.pageList = Array.from({ length: this.pageCount }, (_, i) => i + 1);
+      this.reportPageList = Array.from({ length: this.reportPageCount }, (_, i) => i + 1);
       //pageList is now an array like {1, 2, 3, ..., n | n = pageCount}
     });
 
@@ -88,7 +88,7 @@ export class ListReportComponent implements OnInit {
   //[Paging] User click on a Page number -> Go to that page
   goToPage(pageNumber: number) {
     // Call API: go to Page Number
-    this.pageNumber = pageNumber;
+    this.reportPageNumber = pageNumber;
     this.filterReport(false);
     this.scrollToTop();
   }
@@ -106,13 +106,13 @@ export class ListReportComponent implements OnInit {
     filterReport(resetPaging: boolean) {
       //if user filter -> reset Paging (back to page 1)
       if (resetPaging) {
-        this.pageNumber = 1;
+        this.reportPageNumber = 1;
       }
 
       this.reportService
         .filterReport(
-          this.pageSize,
-          this.pageNumber,
+          this.reportPageSize,
+          this.reportPageNumber,
         )
         .subscribe((data) => {
           this.reports = data;
