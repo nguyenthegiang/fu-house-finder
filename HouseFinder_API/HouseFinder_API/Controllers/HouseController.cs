@@ -55,11 +55,11 @@ namespace HouseFinder_API.Controllers
         }
 
         /**
-         * GET: api/Houses/IncreaseView?HouseId=
+         * POST: api/Houses/IncreaseView?HouseId=
          * [House Detail] 
          * Increase 'view' of this House by 1 when user click House Detail
          */
-        [HttpGet("IncreaseView")]
+        [HttpPut("IncreaseView")]
         public IActionResult IncreaseView(int HouseId)
         {
             try
