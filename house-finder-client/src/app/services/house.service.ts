@@ -294,10 +294,13 @@ export class HouseService {
   }
 
   /**
-   * GET: api/Houses/IncreaseView?HouseId=
+   * PUT: api/Houses/IncreaseView?HouseId=
    * [House Detail] 
    * Increase 'view' of this House by 1 when user click House Detail
    */
+  increaseView(houseId: number): Observable<any> {
+    return this.http.put<any>(this.APIUrl + "/IncreaseView?HouseId=" + houseId, this.httpOptions);
+  }
 
   //[Dashboard] Get List Houses by Landlord Id
   getListHousesByLandlordId(landlordId: string): Observable<any[]> {
