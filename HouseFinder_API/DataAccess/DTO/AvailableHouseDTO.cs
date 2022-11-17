@@ -13,6 +13,7 @@ namespace DataAccess.DTO
     {
         public int HouseId { get; set; }
         public string HouseName { get; set; }
+        public int? View { get; set; }
         public string Information { get; set; }
         public int AddressId { get; set; }
         public int? VillageId { get; set; }
