@@ -25,6 +25,7 @@ namespace Repositories.Repositories
         //public List<HouseDTO> GetAllHouses() => HouseDAO.GetAllHouses();
         //public List<HouseDTO> GetHouseByName(string HouseName) => HouseDAO.GetHouseByName(HouseName);
         public HouseDTO GetHouseById(int HouseId) => HouseDAO.GetHouseById(HouseId);
+        public void IncreaseView(int HouseId) => HouseDAO.IncreaseView(HouseId);
         public List<HouseDTO> GetListHousesByLandlordId(string LandlordId) => HouseDAO.GetListHousesByLandlordId(LandlordId);
 
         public decimal? GetMoneyForNotRentedRooms(int HouseId) => HouseDAO.GetMoneyForNotRentedRooms(HouseId);

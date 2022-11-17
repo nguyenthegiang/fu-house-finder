@@ -29,8 +29,7 @@ namespace HouseFinder_API.Controllers
             try
             {
                 //Set default date
-                report.CreatedDate = DateTime.Now;
-                report.LastModifiedDate = DateTime.Now;
+                report.ReportedDate = DateTime.Now;
 
                 //Add to DB
                 reportRepository.AddReport(report);

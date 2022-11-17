@@ -53,6 +53,10 @@ export class HouseDetailComponent implements OnInit {
   ngOnInit(): void {
     //Get id of House from Route
     const id = Number(this.route.snapshot.paramMap.get('id'));
+
+    //Call API: Increase view of this House by 1
+    this.houseService.increaseView(id).subscribe();
+
     //Call API: get House Detail information
     this.houseService.getHouseByHouseId(id).subscribe(data => {
       this.houseDetail = data;

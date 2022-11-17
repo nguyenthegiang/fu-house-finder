@@ -346,7 +346,8 @@
 
               <!-- Distance -->
               <div class="card-text text-truncate maxWidthText orangeText fs-5">
-                <span data-bs-toggle="tooltip" data-bs-placement="top" title="Khoảng cách từ cổng chính trường Đại học">
+                <span data-bs-toggle="tooltip" data-bs-placement="top"
+                  data-bs-title="Khoảng cách từ cổng chính trường Đại học">
                   <i class="fa-solid fa-road me-2"></i>{{house.distanceToCampus}} km
                 </span>
               </div>
@@ -368,8 +369,7 @@
                 <div class="d-flex">
                   <!-- Available Room Count -->
                   <div class="d-flex align-items-center me-3" data-bs-toggle="tooltip" data-bs-placement="top"
-                    data-bs-custom-class="custom-tooltip"
-                    title="Tổng số phòng trống: {{house.totallyAvailableRoomCount + house.partiallyAvailableRoomCount}} &#10; Số phòng trống hoàn toàn: {{house.totallyAvailableRoomCount}} &#10; Số phòng tìm người ở ghép: {{house.partiallyAvailableRoomCount}}">
+                    title="Tổng số phòng trống: {{house.totallyAvailableRoomCount + house.partiallyAvailableRoomCount}}; Số phòng trống hoàn toàn: {{house.totallyAvailableRoomCount}}; Số phòng tìm người ở ghép: {{house.partiallyAvailableRoomCount}}">
                     <span class="material-symbols-outlined me-1">
                       door_back
                     </span>
@@ -464,7 +464,7 @@
                 <!-- View -->
                 <div class="text-end grayText smallText">
                   <i class="fa-solid fa-eye me-2"></i>
-                  <span>3,459</span>
+                  <span>{{house.view}}</span>
                 </div>
               </div>
             </div>

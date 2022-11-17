@@ -37,25 +37,20 @@ namespace DataAccess
             {
                 using (var context = new FUHouseFinderContext())
                 {
-                    //Get first date of current year
-                    DateTime firstDate = new DateTime(DateTime.Now.Year, 1, 1);
-                    //Get current date
-                    DateTime currentDate = DateTime.Today;
-
-                    //Get list order from the first date to current date
+                    //Get list order from the first date of this year to current date
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    List<ReportDTO> reports = context.Reports.Where(r => r.Deleted == false).Where(o => o.CreatedDate >= firstDate && o.CreatedDate <= currentDate).ProjectTo<ReportDTO>(config).ToList();
-
-                    //Get months' name
-                    string[] monthNames = CultureInfo.CurrentCulture.DateTimeFormat.MonthGenitiveNames;
+                    List<ReportDTO> reports = context.Reports
+                        .Where(r => r.Deleted == false)
+                        .Where(o => o.ReportedDate.Year == DateTime.Today.Year)
+                        .ProjectTo<ReportDTO>(config).ToList();
 
                     //Count total orders by month
                     for (int i = 0; i < 12; i++)
                     {
                         foreach (ReportDTO r in reports)
                         {
-                            if (r.CreatedDate.ToString("MMMM dd").Contains(monthNames[i]))
+                            if (r.ReportedDate.Month == i+1)
                             {
                                 totals[i]++;
                             }

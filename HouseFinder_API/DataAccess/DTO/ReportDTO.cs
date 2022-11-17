@@ -12,10 +12,10 @@ namespace DataAccess.DTO
         public string ReportContent { get; set; }
         public string StudentId { get; set; }
         public int HouseId { get; set; }
+        public int StatusId { get; set; }
         public bool Deleted { get; set; }
-        public DateTime CreatedDate { get; set; }
-        public DateTime? LastModifiedDate { get; set; }
-        public string CreatedBy { get; set; }
-        public string LastModifiedBy { get; set; }
+        public DateTime ReportedDate { get; set; }
+        public DateTime? SolvedDate { get; set; }
+        public string SolvedBy { get; set; }
     }
 }
