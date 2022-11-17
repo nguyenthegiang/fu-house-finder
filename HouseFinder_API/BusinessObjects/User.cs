@@ -37,7 +37,7 @@ namespace BusinessObjects
         public string Email { get; set; }
         public string Password { get; set; }
         public string DisplayName { get; set; }
-        public int Statusid { get; set; }
+        public int StatusId { get; set; }
         public string ProfileImageLink { get; set; }
         public string PhoneNumber { get; set; }
         public string FacebookUrl { get; set; }

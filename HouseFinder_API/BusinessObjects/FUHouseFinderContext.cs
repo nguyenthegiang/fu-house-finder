@@ -174,7 +174,7 @@ namespace BusinessObjects
             modelBuilder.Entity<ImagesOfHouse>(entity =>
             {
                 entity.HasKey(e => e.ImageId)
-                    .HasName("PK__ImagesOf__7516F70C5265F99A");
+                    .HasName("PK__ImagesOf__7516F70C5FC213DE");
 
                 entity.ToTable("ImagesOfHouse");
 
@@ -216,7 +216,7 @@ namespace BusinessObjects
             modelBuilder.Entity<ImagesOfRoom>(entity =>
             {
                 entity.HasKey(e => e.ImageId)
-                    .HasName("PK__ImagesOf__7516F70C14BFB3D7");
+                    .HasName("PK__ImagesOf__7516F70CC1A1145A");
 
                 entity.ToTable("ImagesOfRoom");
 
@@ -329,7 +329,7 @@ namespace BusinessObjects
             modelBuilder.Entity<OrderStatus>(entity =>
             {
                 entity.HasKey(e => e.StatusId)
-                    .HasName("PK__OrderSta__C8EE2063A868B483");
+                    .HasName("PK__OrderSta__C8EE20635F4FA436");
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
@@ -426,7 +426,7 @@ namespace BusinessObjects
             modelBuilder.Entity<ReportStatus>(entity =>
             {
                 entity.HasKey(e => e.StatusId)
-                    .HasName("PK__ReportSt__C8EE2063549BA836");
+                    .HasName("PK__ReportSt__C8EE2063520CB4CE");
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
@@ -526,7 +526,7 @@ namespace BusinessObjects
             modelBuilder.Entity<RoomStatus>(entity =>
             {
                 entity.HasKey(e => e.StatusId)
-                    .HasName("PK__RoomStat__C8EE206301B70D2E");
+                    .HasName("PK__RoomStat__C8EE2063A10B5EBC");
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
@@ -613,7 +613,7 @@ namespace BusinessObjects
 
                 entity.HasOne(d => d.Status)
                     .WithMany(p => p.Users)
-                    .HasForeignKey(d => d.Statusid)
+                    .HasForeignKey(d => d.StatusId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("StatusId_in_Status3");
             });
@@ -621,7 +621,7 @@ namespace BusinessObjects
             modelBuilder.Entity<UserRole>(entity =>
             {
                 entity.HasKey(e => e.RoleId)
-                    .HasName("PK__UserRole__8AFACE1A331476BE");
+                    .HasName("PK__UserRole__8AFACE1A5C9587D8");
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
@@ -633,7 +633,7 @@ namespace BusinessObjects
             modelBuilder.Entity<UserStatus>(entity =>
             {
                 entity.HasKey(e => e.StatusId)
-                    .HasName("PK__UserStat__C8EE2063DC29C183");
+                    .HasName("PK__UserStat__C8EE2063FCCA35EC");
 
                 entity.Property(e => e.StatusId).ValueGeneratedNever();
 

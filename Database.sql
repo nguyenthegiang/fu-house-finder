@@ -65,7 +65,7 @@ CREATE TABLE [dbo].[Users] (
 	[Password] nvarchar(100),
 
 	DisplayName nvarchar(500) NULL,						--Tên để hiển thị, lấy từ Google/Facebook API (nếu login = fb/gg) hoặc lấy khi đăng ký (nếu login = email)
-	Statusid int NOT NULL,								--0: landlord request, 1: active, 2: inactive
+	StatusId int NOT NULL,								--0: landlord request, 1: active, 2: inactive
 
 	--Dành cho Staff & Landlord
 	ProfileImageLink nvarchar(500) NULL,				--Link ảnh profile
