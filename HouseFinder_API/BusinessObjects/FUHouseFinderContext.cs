@@ -30,12 +30,14 @@ namespace BusinessObjects
         public virtual DbSet<OrderStatus> OrderStatuses { get; set; }
         public virtual DbSet<Rate> Rates { get; set; }
         public virtual DbSet<Report> Reports { get; set; }
+        public virtual DbSet<ReportStatus> ReportStatuses { get; set; }
         public virtual DbSet<Room> Rooms { get; set; }
         public virtual DbSet<RoomHistory> RoomHistories { get; set; }
         public virtual DbSet<RoomStatus> RoomStatuses { get; set; }
         public virtual DbSet<RoomType> RoomTypes { get; set; }
         public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<UserRole> UserRoles { get; set; }
+        public virtual DbSet<UserStatus> UserStatuses { get; set; }
         public virtual DbSet<Village> Villages { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -172,7 +174,7 @@ namespace BusinessObjects
             modelBuilder.Entity<ImagesOfHouse>(entity =>
             {
                 entity.HasKey(e => e.ImageId)
-                    .HasName("PK__ImagesOf__7516F70C111C7C06");
+                    .HasName("PK__ImagesOf__7516F70C5FC213DE");
 
                 entity.ToTable("ImagesOfHouse");
 
@@ -214,7 +216,7 @@ namespace BusinessObjects
             modelBuilder.Entity<ImagesOfRoom>(entity =>
             {
                 entity.HasKey(e => e.ImageId)
-                    .HasName("PK__ImagesOf__7516F70C0EF6D6C1");
+                    .HasName("PK__ImagesOf__7516F70CC1A1145A");
 
                 entity.ToTable("ImagesOfRoom");
 
@@ -293,6 +295,10 @@ namespace BusinessObjects
                     .IsRequired()
                     .HasMaxLength(50);
 
+                entity.Property(e => e.SolvedBy)
+                    .HasMaxLength(30)
+                    .IsFixedLength(true);
+
                 entity.Property(e => e.SolvedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.StudentId)
@@ -303,6 +309,11 @@ namespace BusinessObjects
                     .IsRequired()
                     .HasMaxLength(100);
 
+                entity.HasOne(d => d.SolvedByNavigation)
+                    .WithMany(p => p.OrderSolvedByNavigations)
+                    .HasForeignKey(d => d.SolvedBy)
+                    .HasConstraintName("StaffId_in_User4");
+
                 entity.HasOne(d => d.Status)
                     .WithMany(p => p.Orders)
                     .HasForeignKey(d => d.StatusId)
@@ -310,7 +321,7 @@ namespace BusinessObjects
                     .HasConstraintName("StatusId_in_OrderStatuses");
 
                 entity.HasOne(d => d.Student)
-                    .WithMany(p => p.Orders)
+                    .WithMany(p => p.OrderStudents)
                     .HasForeignKey(d => d.StudentId)
                     .HasConstraintName("StudentId_in_User4");
             });
@@ -318,7 +329,7 @@ namespace BusinessObjects
             modelBuilder.Entity<OrderStatus>(entity =>
             {
                 entity.HasKey(e => e.StatusId)
-                    .HasName("PK__OrderSta__C8EE2063B9C0C733");
+                    .HasName("PK__OrderSta__C8EE20635F4FA436");
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
@@ -373,31 +384,20 @@ namespace BusinessObjects
 
             modelBuilder.Entity<Report>(entity =>
             {
-                entity.Property(e => e.CreatedBy)
-                    .IsRequired()
-                    .HasMaxLength(30)
-                    .IsFixedLength(true);
-
-                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
-
-                entity.Property(e => e.LastModifiedBy)
-                    .HasMaxLength(30)
-                    .IsFixedLength(true);
-
-                entity.Property(e => e.LastModifiedDate).HasColumnType("datetime");
-
                 entity.Property(e => e.ReportContent).IsRequired();
+
+                entity.Property(e => e.ReportedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.SolvedBy)
+                    .HasMaxLength(30)
+                    .IsFixedLength(true);
+
+                entity.Property(e => e.SolvedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.StudentId)
                     .IsRequired()
                     .HasMaxLength(30)
                     .IsFixedLength(true);
-
-                entity.HasOne(d => d.CreatedByNavigation)
-                    .WithMany(p => p.ReportCreatedByNavigations)
-                    .HasForeignKey(d => d.CreatedBy)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("createdUser_in_User7");
 
                 entity.HasOne(d => d.House)
                     .WithMany(p => p.Reports)
@@ -405,16 +405,34 @@ namespace BusinessObjects
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("HouseId_in_House4");
 
-                entity.HasOne(d => d.LastModifiedByNavigation)
-                    .WithMany(p => p.ReportLastModifiedByNavigations)
-                    .HasForeignKey(d => d.LastModifiedBy)
-                    .HasConstraintName("updatedUser_in_User7");
+                entity.HasOne(d => d.SolvedByNavigation)
+                    .WithMany(p => p.ReportSolvedByNavigations)
+                    .HasForeignKey(d => d.SolvedBy)
+                    .HasConstraintName("SolvedBy_in_User2");
+
+                entity.HasOne(d => d.Status)
+                    .WithMany(p => p.Reports)
+                    .HasForeignKey(d => d.StatusId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("StatusId_in_StatusId9");
 
                 entity.HasOne(d => d.Student)
                     .WithMany(p => p.ReportStudents)
                     .HasForeignKey(d => d.StudentId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("StudentId_in_User3");
+            });
+
+            modelBuilder.Entity<ReportStatus>(entity =>
+            {
+                entity.HasKey(e => e.StatusId)
+                    .HasName("PK__ReportSt__C8EE2063520CB4CE");
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.StatusName)
+                    .IsRequired()
+                    .HasMaxLength(300);
             });
 
             modelBuilder.Entity<Room>(entity =>
@@ -508,7 +526,7 @@ namespace BusinessObjects
             modelBuilder.Entity<RoomStatus>(entity =>
             {
                 entity.HasKey(e => e.StatusId)
-                    .HasName("PK__RoomStat__C8EE20639DC09B10");
+                    .HasName("PK__RoomStat__C8EE2063A10B5EBC");
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
@@ -592,18 +610,38 @@ namespace BusinessObjects
                     .HasForeignKey(d => d.RoleId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("RoleId_in_UserRole");
+
+                entity.HasOne(d => d.Status)
+                    .WithMany(p => p.Users)
+                    .HasForeignKey(d => d.StatusId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("StatusId_in_Status3");
             });
 
             modelBuilder.Entity<UserRole>(entity =>
             {
                 entity.HasKey(e => e.RoleId)
-                    .HasName("PK__UserRole__8AFACE1A4023630A");
+                    .HasName("PK__UserRole__8AFACE1A5C9587D8");
 
                 entity.Property(e => e.CreatedDate).HasColumnType("datetime");
 
                 entity.Property(e => e.RoleName)
                     .IsRequired()
                     .HasMaxLength(100);
+            });
+
+            modelBuilder.Entity<UserStatus>(entity =>
+            {
+                entity.HasKey(e => e.StatusId)
+                    .HasName("PK__UserStat__C8EE2063FCCA35EC");
+
+                entity.Property(e => e.StatusId).ValueGeneratedNever();
+
+                entity.Property(e => e.CreatedDate).HasColumnType("datetime");
+
+                entity.Property(e => e.StatusName)
+                    .IsRequired()
+                    .HasMaxLength(300);
             });
 
             modelBuilder.Entity<Village>(entity =>
