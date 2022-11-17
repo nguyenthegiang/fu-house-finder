@@ -480,6 +480,12 @@ namespace DataAccess
             }
             return houses;
         }
+        
+        //[Staff/list-report] Count total of reported houses
+        public static int CountTotalReportedHouse()
+        {
+            return GetListReportHouse().Count();
+        }
 
     }
 }

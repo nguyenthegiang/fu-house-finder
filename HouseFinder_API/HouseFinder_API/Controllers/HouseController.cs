@@ -208,5 +208,11 @@ namespace HouseFinder_API.Controllers
                 return Ok(houses);
             }
         }
+
+        [HttpGet("CountTotalReportedHouse")]
+        public int CountTotalReportedHouse()
+        {
+            return houseRepository.CountTotalReportedHouse();
+        }
     }
 }
