@@ -62,7 +62,7 @@ namespace DataAccess
             {
                 using (var context = new FUHouseFinderContext())
                 {
-                    //Find rooms of this house
+                    //Find house
                     House updatedHouse = context.Houses.FirstOrDefault(h => h.HouseId == house.HouseId);
                     if (updatedHouse == null)
                     {
@@ -329,6 +329,38 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
             return houseDTO;
+        }
+
+        /**
+         * [House Detail] 
+         * Increase 'view' of this House by 1 when user click House Detail
+         */
+        public static void IncreaseView(int HouseId)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Find house
+                    House house = context.Houses.FirstOrDefault(h => h.HouseId == HouseId);
+                    if (house == null)
+                    {
+                        throw new Exception();
+                    }
+
+                    //Increase view
+                    house.View++;
+
+                    //Update to DB
+                    context.Entry<House>(house).State = EntityState.Detached;
+                    context.Houses.Update(house);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /**        

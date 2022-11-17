@@ -88,11 +88,6 @@
   }
 }
 
-//Tooltip styling
-.custom-tooltip {
-  --bs-tooltip-bg: var(--bs-primary);
-}
-
 // Dark Paging
 .page-link {
   color: black;
@@ -107,4 +102,9 @@
 // Hide <option> as title of <select> from being selected
 .disableOption {
   display: none;
+}
+
+// hover effect for <a> in Paging
+.hoverableLink:hover {
+  cursor: pointer;
 }

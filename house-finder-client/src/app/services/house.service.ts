@@ -293,6 +293,15 @@ export class HouseService {
     return this.http.get<House>(this.APIUrl + "/" + houseId);
   }
 
+  /**
+   * PUT: api/Houses/IncreaseView?HouseId=
+   * [House Detail] 
+   * Increase 'view' of this House by 1 when user click House Detail
+   */
+  increaseView(houseId: number): Observable<any> {
+    return this.http.put<any>(this.APIUrl + "/IncreaseView?HouseId=" + houseId, this.httpOptions);
+  }
+
   //[Dashboard] Get List Houses by Landlord Id
   getListHousesByLandlordId(landlordId: string): Observable<any[]> {
     return this.http.get<any>(this.APIUrl + "/GetHousesByLandlord?LandlordId=" + landlordId);
@@ -320,7 +329,7 @@ export class HouseService {
   }
 
   //[Staff/list-report]
-  getReportedHouses(): Observable<ReportHouse[]>{
+  getReportedHouses(): Observable<ReportHouse[]> {
     return this.http.get<ReportHouse[]>(this.APIUrl + "/GetReportedHouses");
   }
 }
