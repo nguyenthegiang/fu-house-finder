@@ -514,9 +514,9 @@ INSERT INTO [dbo].[Users] VALUES (N'LA000001', null, null, N'tamle@gmail.com', N
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
 INSERT INTO [dbo].[Users] VALUES (N'LA000002', null, null, N'dungnhung@gmail.com', N'dungnhung', N'Dũng Nhung', 0, 'image_profile_1.jpg', '0982298681', 'facebook.com/dungnhung34', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
-INSERT INTO [dbo].[Users] VALUES (N'LA000003', null, null, N'ngahuong@gmail.com', N'ngahuong', N'Nga Hương', 2, 'image_profile_1.jpg', ' 0984530814', 'facebook.com/ngahuong12', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2,  
+INSERT INTO [dbo].[Users] VALUES (N'LA000003', null, null, N'ngahuong@gmail.com', N'ngahuong', N'Nga Hương', 1, 'image_profile_1.jpg', ' 0984530814', 'facebook.com/ngahuong12', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2,  
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
-INSERT INTO [dbo].[Users] VALUES (N'LA000004', null, null, N'binhyen@gmail.com', N'binhyen', N'Bình Yên', 2, 'image_profile_1.jpg', '0973866690', 'facebook.com/binhyen56', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
+INSERT INTO [dbo].[Users] VALUES (N'LA000004', null, null, N'binhyen@gmail.com', N'binhyen', N'Bình Yên', 1, 'image_profile_1.jpg', '0973866690', 'facebook.com/binhyen56', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
 INSERT INTO [dbo].[Users] VALUES (N'LA000005', null, null, N'tienphuong@gmail.com', N'tienphuong', N'Tiến Phương', 1, 'image_profile_1.jpg', '0961602245', 'facebook.com/tienphuong88', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
@@ -535,6 +535,10 @@ GETDATE(), GETDATE(), N'SA000001', N'SA000001');
 INSERT INTO [dbo].[Users] VALUES (N'LA000012', null, null, N'tuancuong@gmail.com', N'tuancuong', N'Tuấn Cường', 1, 'image_profile_1.jpg', '0363266546', 'facebook.com/tuancuong444', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
 INSERT INTO [dbo].[Users] VALUES (N'LA000013', null, null, N'phuongduy@gmail.com', N'phuongduy', N'Phương Duy', 1, 'image_profile_1.jpg', '0365928073', 'facebook.com/phuongduy9512', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2,  
+GETDATE(), GETDATE(), N'SA000001', N'SA000001');
+INSERT INTO [dbo].[Users] VALUES (N'LA000014', null, null, N'minhvu@gmail.com', N'minhvu', N'Minh Vũ', 2, 'image_profile_1.jpg', '0365928072', 'facebook.com/minhvu', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2,  
+GETDATE(), GETDATE(), N'SA000001', N'SA000001');
+INSERT INTO [dbo].[Users] VALUES (N'LA000015', null, null, N'phuongnguyen@gmail.com', N'phuongnguyen', N'Phương Nguyễn', 2, 'image_profile_1.jpg', '0365928071', 'facebook.com/phuongnguyen', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2,  
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
 
 -------------------------------------------------------------------------------------------------------------------------------------------

@@ -46,6 +46,6 @@ export class FileService {
     let headers = new HttpHeaders();
     headers.append("Authorization", "Bearer "+ localStorage.getItem('user'));
 
-    return this.http.post(this.APIUrl + '/idc/upload', formData, {headers: headers});
+    return this.http.post(this.APIUrl + '/idc/upload', formData, {headers: headers,  withCredentials: true});
   }
 }

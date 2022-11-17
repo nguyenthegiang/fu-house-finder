@@ -155,12 +155,17 @@ namespace DataAccess
                         .Include(u => u.Address).Include(u => u.Role).ProjectTo<ResponseDTO>(config).FirstOrDefault();
                     if (userDTO == null)
                     {
-                        const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-                        Random random = new Random();
+                        var lastUser = context.Users.Where(u => u.RoleId == role).OrderBy(u => u.UserId).LastOrDefault();
+                        int index = 0;
+                        if (lastUser != null)
+                        {
+                            index = Int32.Parse(lastUser.UserId.Substring(2)) + 1;
+                        }
+
+                        string userPrefix = role == 0 ? "HE" : "LA";
 
                         User user = new User();
-                        user.UserId = new string(Enumerable.Repeat(chars, 10)
-                            .Select(s => s[random.Next(s.Length)]).ToArray());
+                        user.UserId = userPrefix + index.ToString("D6");
 
                         user.FacebookUserId = fid;
                         user.GoogleUserId = gid;
@@ -176,7 +181,8 @@ namespace DataAccess
                         user.CreatedDate = DateTime.UtcNow;
                         user.LastModifiedBy = user.UserId;
                         user.LastModifiedDate = DateTime.UtcNow;
-                        user.StatusId = 1;
+                        int status = role == 1 ? 2 : 1;
+                        user.StatusId = status;
                         context.Users.Add(user);
                         context.SaveChanges();
                         userDTO = context.Users.Where(u => u.UserId == user.UserId)
@@ -211,6 +217,29 @@ namespace DataAccess
             return total;
         }
 
+        public static void UpdateUserIdCardImage(string userId, string identityCardFrontSideImageLink, string identityCardBackSideImageLink)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    User user = context.Users.Where(u => u.UserId == userId).FirstOrDefault();
+                    if (user != null)
+                    {
+                        user.IdentityCardFrontSideImageLink = identityCardFrontSideImageLink;
+                        user.IdentityCardBackSideImageLink = identityCardBackSideImageLink;
+                        context.Users.Update(user);
+                        context.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            
+        }
+
         //[Staff/Dashboard] Count total active landlords
         public static int CountActiveLandlord()
         {
@@ -228,6 +257,7 @@ namespace DataAccess
             }
             return total;
         }
+
         //[Staff/Dashboard] Count total inactive landlords
         public static int CountInactiveLandlord()
         {
