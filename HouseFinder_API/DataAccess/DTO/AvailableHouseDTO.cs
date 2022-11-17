@@ -13,6 +13,7 @@ namespace DataAccess.DTO
     {
         public int HouseId { get; set; }
         public string HouseName { get; set; }
+        public int? View { get; set; }
         public string Information { get; set; }
         public int AddressId { get; set; }
         public int? VillageId { get; set; }
@@ -71,5 +72,12 @@ namespace DataAccess.DTO
         public float AverageRate { get; set; }
         //List Rates of this House -> to calculate average rate
         public virtual ICollection<RateDTO> Rates { get; set; }
+
+        //Statistics Information
+        public int TotallyAvailableRoomCount { get; set; }
+        public int PartiallyAvailableRoomCount { get; set; }
+
+        public int AvailableCapacityCount { get; set; }
+
     }
 }

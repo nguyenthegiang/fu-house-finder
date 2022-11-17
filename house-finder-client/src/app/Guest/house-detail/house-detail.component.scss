@@ -112,8 +112,13 @@
 }
 
 @media only screen and (max-width: 768px) {
-  #utility
+  #md
   {
     display: none;
   }
+}
+
+#btn:hover
+{
+  opacity: 0.8 !important;
 }

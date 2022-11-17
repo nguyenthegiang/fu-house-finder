@@ -95,4 +95,12 @@ export class UserService {
   countTotalLandlords():Observable<number>{
     return this.http.get<number>(this.APIUrl + "/CountTotalLandlord");
   }
+
+  countActiveLandlords():Observable<number>{
+    return this.http.get<number>(this.APIUrl + "/CountActiveLandlord");
+  }
+
+  countInactiveLandlords():Observable<number>{
+    return this.http.get<number>(this.APIUrl + "/CountInactiveLandlord");
+  }
 }

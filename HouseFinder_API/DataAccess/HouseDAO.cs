@@ -62,7 +62,7 @@ namespace DataAccess
             {
                 using (var context = new FUHouseFinderContext())
                 {
-                    //Find rooms of this house
+                    //Find house
                     House updatedHouse = context.Houses.FirstOrDefault(h => h.HouseId == house.HouseId);
                     if (updatedHouse == null)
                     {
@@ -96,19 +96,19 @@ namespace DataAccess
                     //Delete by changing Status to Disabled
                     updatedHouse.Deleted = true;
                     List<Room> rooms = context.Rooms.Where(r => r.HouseId == houseId).ToList();
-                    foreach(Room o in rooms)
+                    foreach (Room o in rooms)
                     {
                         o.Deleted = true;
                         context.Rooms.Update(o);
                     }
                     List<Rate> rates = context.Rates.Where(r => r.HouseId == houseId).ToList();
-                    foreach(Rate r in rates)
+                    foreach (Rate r in rates)
                     {
                         r.Deleted = true;
                         context.Rates.Update(r);
                     }
                     List<ImagesOfHouse> imagesOfHouses = context.ImagesOfHouses.Where(i => i.HouseId == houseId).ToList();
-                    foreach(ImagesOfHouse i in imagesOfHouses)
+                    foreach (ImagesOfHouse i in imagesOfHouses)
                     {
                         i.Deleted = true;
                         context.ImagesOfHouses.Update(i);
@@ -175,6 +175,8 @@ namespace DataAccess
                     houseDTOs = context.Houses
                         //not selecting deleted house
                         .Where(house => house.Deleted == false)
+                        //not getting houses of Inactive Landlord
+                        .Where(house => house.Landlord.Status.StatusName.Equals("Active"))
                         //include this for finding DistrictId
                         .Include(house => house.Village.Commune)
                         .ProjectTo<AvailableHouseDTO>(config).ToList();
@@ -244,12 +246,17 @@ namespace DataAccess
                             sumRate += (float)rate.Star;
                         }
                         houseDTO.AverageRate = sumRate / houseDTO.Rates.Count;
-                    } else
+                    }
+                    else
                     {
                         //special case: no rate => averageRate = 0
                         houseDTO.AverageRate = 0;
                     }
-                    
+
+                    //(Statistics Information)
+                    houseDTO.TotallyAvailableRoomCount = RoomDAO.CountTotallyAvailableRoomByHouseId(houseDTO.HouseId);
+                    houseDTO.PartiallyAvailableRoomCount = RoomDAO.CountPartiallyAvailableRoomByHouseId(houseDTO.HouseId);
+                    houseDTO.AvailableCapacityCount = (int)RoomDAO.CountAvailableCapacityByHouseId(houseDTO.HouseId);
                 }
             }
             catch (Exception e)
@@ -258,7 +265,7 @@ namespace DataAccess
             }
 
             //Remove unnecessary data to make API Response Body lighter
-            houseDTOs.ForEach(delegate(AvailableHouseDTO houseDTO) 
+            houseDTOs.ForEach(delegate (AvailableHouseDTO houseDTO)
             {
                 houseDTO.Rooms = null;
                 houseDTO.Village = null;
@@ -299,7 +306,7 @@ namespace DataAccess
             Find detail information of a House by its Id;
             Also find its CommuneId & DistrictId
          */
-        public static HouseDTO GetHouseById(int houseId)          
+        public static HouseDTO GetHouseById(int houseId)
         {
             HouseDTO houseDTO;
             try
@@ -324,6 +331,38 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
             return houseDTO;
+        }
+
+        /**
+         * [House Detail] 
+         * Increase 'view' of this House by 1 when user click House Detail
+         */
+        public static void IncreaseView(int HouseId)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Find house
+                    House house = context.Houses.FirstOrDefault(h => h.HouseId == HouseId);
+                    if (house == null)
+                    {
+                        throw new Exception();
+                    }
+
+                    //Increase view
+                    house.View++;
+
+                    //Update to DB
+                    context.Entry<House>(house).State = EntityState.Detached;
+                    context.Houses.Update(house);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         /**        
@@ -362,7 +401,7 @@ namespace DataAccess
                     //Get rooms by HouseID, include Images
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    List<RoomDTO>  rooms = context.Rooms
+                    List<RoomDTO> rooms = context.Rooms
                         .Where(r => r.Deleted == false)
                         .Where(r => r.HouseId == HouseId)
                         .Where(r => r.Status.StatusName.Equals("Available") || r.Status.StatusName.Equals("Disabled"))
@@ -371,7 +410,7 @@ namespace DataAccess
                     //Count total money
                     foreach (RoomDTO r in rooms)
                     {
-                            totalMoney += r.PricePerMonth;
+                        totalMoney += r.PricePerMonth;
                     }
                 }
             }
@@ -410,27 +449,7 @@ namespace DataAccess
          */
         public static int CountAvailableHouse()
         {
-            int availableHouse;
-            try
-            {
-                using (var context = new FUHouseFinderContext())
-                {
-                    //Count available houses: houses having at least 1 room available
-                    availableHouse = context.Rooms
-                        //not considering deleted rooms
-                        .Where(room => room.Deleted == false)
-                        //not considering deleted houses
-                        .Where(room => room.House.Deleted == false)
-                        .Where(room => room.Status.StatusName.Equals("Available"))
-                        .GroupBy(room => room.HouseId)
-                        .Count();
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-            return availableHouse;
+            return GetAvailableHouses().Count();
         }
 
         //[Staff/list-report] Get list of report house

@@ -1,4 +1,6 @@
+<!-- Header -->
 <app-header></app-header>
+
 <!-- Body -->
 <div class="container-fluid backgroundGray">
   <br>
@@ -6,7 +8,14 @@
   <div class="d-flex justify-content-between">
     <!-- Filter Column -->
     <div class="w-25 bg-white mx-5 rounded h-100">
-      <h5 class="text-center text-white p-2 rounded-top orangeBackround">LỌC PHÒNG TRỌ</h5>
+      <div class="d-flex justify-content-between align-items-center p-3 rounded-top text-white orangeBackround">
+        <h5>LỌC KẾT QUẢ</h5>
+
+        <!-- Cancel Filter -->
+        <div>
+          <a href="/home" class="text-white">Đặt lại bộ lọc</a>
+        </div>
+      </div>
 
       <div class="container">
         <div class="d-flex justify-content-between align-items-center pt-3">
@@ -23,7 +32,6 @@
             </select>
           </div>
         </div>
-        <hr>
 
         <!-- Regions -->
         <div>
@@ -35,7 +43,7 @@
             <div>
               <!-- When select 1 District -> change list of Communes accordingly -->
               <select #selectDistrict class="form-select selectRegion" aria-label="select-district"
-                (change)="onDistrictSelected(selectDistrict.value)">
+                (change)="onDistrictSelected(selectDistrict.value)" (click)="onDistrictClicked()">
                 <option class="disableOption" disabled selected>Chọn quận/huyện</option>
                 <!-- List all Districts of selected Campus-->
                 <option *ngFor=" let district of districtsOfSelectedCampus" value="{{district.districtId}}">
@@ -223,14 +231,6 @@
             </label>
           </div>
         </div>
-        <hr>
-
-        <!-- Cancel Filter -->
-        <div>
-          <div class="d-grid gap-2 mb-2">
-            <button class="btn btn-outline-secondary" type="button" (click)="onCancelFilter()">XÓA TẤT CẢ</button>
-          </div>
-        </div>
       </div>
     </div>
     <!-- End Filter Column -->
@@ -276,16 +276,18 @@
       <!-- End Rooms Count Available -->
 
       <!-- Statistics -->
-      <div class="d-flex justify-content-between border shadow-sm p-3 mb-5 bg-body rounded">
+      <div class="d-flex justify-content-between border shadow-sm p-3 mb-3 bg-body rounded">
         <div class="row w-100">
           <!-- House available count -->
           <div class="col-12 col-md-4">
             <div class="border-end d-flex flex-column justify-content-center align-items-center pe-4">
               <div class="fs-4 d-flex align-items-center text-danger">
-                <span class="material-symbols-outlined fs-3">
+                <span class="material-symbols-outlined fs-3 me-1">
                   home
                 </span>
-                {{countAvailableHouses}}
+                <span>
+                  {{countAvailableHouses}}
+                </span>
               </div>
               <h6 class="font-weight-bold text-center">Nhà có phòng trống</h6>
             </div>
@@ -295,10 +297,12 @@
           <div class="col-12 col-md-4">
             <div class="border-end d-flex flex-column justify-content-center align-items-center pe-4">
               <div class="fs-4 d-flex align-items-center text-danger">
-                <span class="material-symbols-outlined">
+                <span class="material-symbols-outlined me-1">
                   door_back
                 </span>
-                {{countAvailableRooms}}
+                <span>
+                  {{countAvailableRooms}}
+                </span>
               </div>
               <h6 class="font-weight-bold text-center">Phòng trống</h6>
             </div>
@@ -308,10 +312,12 @@
           <div class="col-12 col-md-4">
             <div class="d-flex flex-column justify-content-center align-items-center pe-4">
               <div class="fs-4 d-flex align-items-center text-danger">
-                <span class="material-symbols-outlined">
+                <span class="material-symbols-outlined me-1">
                   bed
                 </span>
-                {{countAvailableCapacity}}
+                <span>
+                  {{countAvailableCapacity}}
+                </span>
               </div>
               <h6 class="font-weight-bold text-center">Chỗ trống</h6>
             </div>
@@ -339,8 +345,11 @@
               <h5 class="card-title text-center font-weight-bold">{{house.houseName}}</h5>
 
               <!-- Distance -->
-              <div class="card-text d-inline-block text-truncate maxWidthText orangeText fs-5">
-                <i class="fa-solid fa-road me-2"></i>3.5km
+              <div class="card-text text-truncate maxWidthText orangeText fs-5">
+                <span data-bs-toggle="tooltip" data-bs-placement="top"
+                  data-bs-title="Khoảng cách từ cổng chính trường Đại học">
+                  <i class="fa-solid fa-road me-2"></i>{{house.distanceToCampus}} km
+                </span>
               </div>
 
               <!-- Price with VND format -->
@@ -351,34 +360,111 @@
               </div>
 
               <!-- Address -->
-              <div class="card-text d-inline-block text-truncate maxWidthText grayText">
+              <div class="card-text text-truncate maxWidthText grayText">
                 <i class="fa-solid fa-location-dot me-2"></i>{{house.address.addresses}}
               </div>
 
+              <!-- Statistics -->
+              <div class="card-text grayText">
+                <div class="d-flex">
+                  <!-- Available Room Count -->
+                  <div class="d-flex align-items-center me-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                    title="Tổng số phòng trống: {{house.totallyAvailableRoomCount + house.partiallyAvailableRoomCount}}; Số phòng trống hoàn toàn: {{house.totallyAvailableRoomCount}}; Số phòng tìm người ở ghép: {{house.partiallyAvailableRoomCount}}">
+                    <span class="material-symbols-outlined me-1">
+                      door_back
+                    </span>
+                    <span>
+                      {{house.totallyAvailableRoomCount + house.partiallyAvailableRoomCount}}
+                    </span>
+                  </div>
+
+                  <!-- Available Capacity Count -->
+                  <div class="d-flex align-items-center" data-bs-toggle="tooltip" data-bs-placement="top"
+                    title="Tổng số chỗ trống">
+                    <span class="material-symbols-outlined me-1">
+                      bed
+                    </span>
+                    <span>
+                      {{house.availableCapacityCount}}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
               <!-- Utility -->
-              <div class="card-text d-inline-block text-truncate maxWidthText grayText">
-                <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Khóa vân tay" style="cursor: pointer;">
-                  fingerprint
-                </span>
-                <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Camera an ninh" style="cursor: pointer;">
-                  videocam
-                </span>
-                <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Chỗ để xe" style="cursor: pointer;">
-                  local_parking
-                </span>
+              <div class="card-text text-truncate maxWidthText grayText">
+                <div class="d-flex">
+                  <!-- No Utility -->
+                  <div *ngIf="house.fingerprintLock == false && house.camera == false && house.parking == false">
+                    <span class="material-symbols-outlined me-1" style="visibility: hidden;">
+                      fingerprint
+                    </span>
+                  </div>
+                  <!-- Fingerprint -->
+                  <div *ngIf="house.fingerprintLock == true">
+                    <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top"
+                      title="Khóa vân tay" style="cursor: pointer;">
+                      fingerprint
+                    </span>
+                  </div>
+                  <!-- Video camera -->
+                  <div *ngIf="house.camera == true">
+                    <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top"
+                      title="Camera an ninh" style="cursor: pointer;">
+                      videocam
+                    </span>
+                  </div>
+                  <!-- Parking spot -->
+                  <div *ngIf="house.parking == true">
+                    <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
+                      title="Chỗ để xe" style="cursor: pointer;">
+                      local_parking
+                    </span>
+                  </div>
+                </div>
               </div>
 
               <div class="d-flex justify-content-between">
                 <!-- Rate -->
                 <div class="rateHouse">
-                  <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i>
-                  <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i>
+                  <!-- Display Star based on Average Rate -->
+
+                  <!-- 5 Star -->
+                  <div *ngIf="house.averageRate > 4.5">
+                    <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i>
+                  </div>
+
+                  <!-- 4 Star -->
+                  <div *ngIf="house.averageRate > 3.5 && house.averageRate <= 4.5">
+                    <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i>
+                  </div>
+
+                  <!-- 3 Star -->
+                  <div *ngIf="house.averageRate > 2.5 && house.averageRate <= 3.5">
+                    <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i>
+                  </div>
+
+                  <!-- 2 Star -->
+                  <div *ngIf="house.averageRate > 1.5 && house.averageRate <= 2.5">
+                    <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i>
+                  </div>
+
+                  <!-- 1 Star -->
+                  <div *ngIf="house.averageRate > 0.5 && house.averageRate <= 1.5">
+                    <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i> <i
+                      class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i>
+                  </div>
                 </div>
 
                 <!-- View -->
                 <div class="text-end grayText smallText">
                   <i class="fa-solid fa-eye me-2"></i>
-                  <span>3,459</span>
+                  <span>{{house.view}}</span>
                 </div>
               </div>
             </div>
@@ -395,20 +481,20 @@
             <!-- Previous: Disabled if this is first page -->
             <li class="page-item" [ngClass]="{'disabled': pageNumber == 1}">
               <!-- Go to previous page -->
-              <a class="page-link" aria-label="Previous" routerLink="" (click)="goToPage(pageNumber - 1)">
+              <a class="page-link hoverableLink" aria-label="Previous" (click)="goToPage(pageNumber - 1)">
                 <span aria-hidden="true">&laquo;</span>
               </a>
             </li>
             <!-- Numbers -->
             <li *ngFor="let page of pageList" class="page-item">
               <!-- Display this as active if it's the chosen page -->
-              <a class="page-link" routerLink="" (click)="goToPage(page)"
+              <a class="page-link hoverableLink" (click)="goToPage(page)"
                 [ngClass]="{'active': pageNumber == page}">{{page}}</a>
             </li>
             <!-- Next: Disabled if this is last page -->
             <li class="page-item" [ngClass]="{'disabled': pageNumber == pageCount}">
               <!-- Go to next page -->
-              <a class="page-link" aria-label="Next" routerLink="" (click)="goToPage(pageNumber + 1)">
+              <a class="page-link hoverableLink" aria-label="Next" (click)="goToPage(pageNumber + 1)">
                 <span aria-hidden="true">&raquo;</span>
               </a>
             </li>
@@ -420,6 +506,13 @@
     <!-- End Display Houses -->
   </div>
   <!-- End Main content -->
+
+  <!-- Send Order button -->
+  <div class="position-fixed bottom-0 end-0 me-5">
+    <app-create-order></app-create-order>
+  </div>
 </div>
 <!-- End Body -->
+
+<!-- Footer -->
 <app-footer></app-footer>

@@ -151,3 +151,8 @@ input:checked + .slider:before {
     display: none;
   }
 }
+
+#btn:hover
+{
+  opacity: 0.8 !important;
+}

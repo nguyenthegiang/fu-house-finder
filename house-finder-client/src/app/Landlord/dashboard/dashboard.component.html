@@ -111,25 +111,25 @@
 
             <td>
               <div class="d-flex">
-                <a class="text-decoration-none text-dark me-2" data-toggle="modal" data-target="#updateModal"
+                <a id="btn" class="text-decoration-none text-primary me-2" data-toggle="modal" data-target="#updateModal"
                   data-whatever="@getbootstrap" (click)="viewHouse(dataItem.houseId)" style="cursor: pointer;">
                   <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Chi tiết">
                     info
                   </span>
                 </a>
-                <a class="text-decoration-none text-dark me-2" data-toggle="modal" data-target="#updateModal"
+                <a id="btn" class="text-decoration-none text-warning me-2" data-toggle="modal" data-target="#updateModal"
                   data-whatever="@getbootstrap" (click)="viewRate(dataItem.houseId)" style="cursor: pointer;">
                   <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Xem đánh giá">
                     rate_review
                   </span>
                 </a>
-                <a class="text-decoration-none text-dark me-2" data-toggle="modal" data-target="#updateModal"
+                <a id="btn" class="text-decoration-none text-success me-2" data-toggle="modal" data-target="#updateModal"
                   data-whatever="@getbootstrap" (click)="updateHouse(dataItem.houseId)" style="cursor: pointer;">
                   <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Chỉnh sửa">
                     build
                   </span>
                 </a>
-                <a class="text-decoration-none text-dark" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                <a id="btn" class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
                   data-bs-whatever="@getbootstrap" (click)="deleteHouse(dataItem.houseId)" style="cursor: pointer;">
                   <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Xóa">
                     delete
@@ -173,3 +173,6 @@
 <!-- End Body -->
 
 <app-delete-house [houseId]="houseId"></app-delete-house>
+
+<!-- Footer -->
+<app-footer></app-footer>

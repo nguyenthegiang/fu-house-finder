@@ -16,7 +16,9 @@ namespace BusinessObjects
         public int StatusId { get; set; }
         public DateTime OrderedDate { get; set; }
         public DateTime? SolvedDate { get; set; }
+        public string SolvedBy { get; set; }
 
+        public virtual User SolvedByNavigation { get; set; }
         public virtual OrderStatus Status { get; set; }
         public virtual User Student { get; set; }
     }

@@ -47,6 +47,7 @@ import { LandlordDetailInfoComponent } from './Staff/list-landlord/landlord-deta
 import { StaffLandlordDetailInfoComponent } from './Staff/staff-landlord-detail/staff-landlord-detail-info/staff-landlord-detail-info.component';
 import { DashboardInfoComponent } from './Landlord/dashboard/dashboard-info/dashboard-info.component';
 import { ListHouseInfoComponent } from './Staff/list-house/list-house-info/list-house-info.component';
+import { CreateOrderComponent } from './Guest/create-order/create-order.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +94,7 @@ import { ListHouseInfoComponent } from './Staff/list-house/list-house-info/list-
     StaffLandlordDetailInfoComponent,
     DashboardInfoComponent,
     ListHouseInfoComponent,
+    CreateOrderComponent,
   ],
   imports: [
     BrowserModule,

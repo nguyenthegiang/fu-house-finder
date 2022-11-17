@@ -1,3 +1,4 @@
+import { HouseHomePage } from './../../models/houseHomePage';
 import { Campus } from './../../models/campus';
 import { Router } from '@angular/router';
 import { RoomService } from 'src/app/services/room.service';
@@ -20,7 +21,7 @@ import { RoomTypeService } from '../../services/room-type.service';
 })
 export class HomepageComponent implements OnInit {
   //List of available houses to display in Main Content
-  houses: House[] = [];
+  houses: HouseHomePage[] = [];
 
   //to display in [Statistics]
   countAvailableRooms: number = 0;
@@ -211,6 +212,15 @@ export class HomepageComponent implements OnInit {
     // Call API: update list houses with the campus user chose
     this.selectedCampusId = numberCampusId;
     this.filterHouse(true);
+  }
+
+  // When user clicked on select District
+  onDistrictClicked() {
+    // check if user has chosen Campus
+    if (!this.selectedCampusId) {
+      // if not => alert that they have to choose Campus before District
+      alert('Vui lòng chọn Cơ sở bạn muốn tìm trước');
+    }
   }
 
   //[Filter by Region] Filter by Commune
@@ -404,9 +414,9 @@ export class HomepageComponent implements OnInit {
     this.filterHouse(true);
   }
 
-  //[Filter] Cancel all Filter values
-  onCancelFilter() {
-    //reload page
-    window.location.reload();
-  }
+  // //[Filter] Cancel all Filter values
+  // onCancelFilter() {
+  //   //reload page
+  //   window.location.reload();
+  // }
 }

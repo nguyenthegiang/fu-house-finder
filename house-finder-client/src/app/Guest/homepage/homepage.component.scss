@@ -103,3 +103,8 @@
 .disableOption {
   display: none;
 }
+
+// hover effect for <a> in Paging
+.hoverableLink:hover {
+  cursor: pointer;
+}

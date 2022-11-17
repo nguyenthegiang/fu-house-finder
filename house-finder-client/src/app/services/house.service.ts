@@ -1,3 +1,4 @@
+import { HouseHomePage } from './../models/houseHomePage';
 import { Campus } from './../models/campus';
 import { House } from './../models/house';
 import { Injectable } from '@angular/core';
@@ -51,7 +52,7 @@ export class HouseService {
     selectedVillageId?: number,
     selectedRate?: number,
     selectedOrderValue?: string,
-  ): Observable<House[]> {
+  ): Observable<HouseHomePage[]> {
     //define API here to append query options into it later
     var filterAPIUrl = this.APIUrl + `/availableHouses?`;
 
@@ -243,12 +244,10 @@ export class HouseService {
           filterAPIUrl += `&$orderby=HighestRoomPrice desc`;
           break;
         case 'Khoảng cách: Gần đến Xa':
-          //TODO: distance
-          filterAPIUrl += ``;
+          filterAPIUrl += `&$orderby=DistanceToCampus asc`;
           break;
         case 'Khoảng cách: Xa đến Gần':
-          //TODO: distance
-          filterAPIUrl += ``;
+          filterAPIUrl += `&$orderby=DistanceToCampus desc`;
           break;
         case 'Đánh giá: Cao đến Thấp':
           filterAPIUrl += `&$orderby=AverageRate desc`;
@@ -261,7 +260,7 @@ export class HouseService {
       }
     }
 
-    return this.http.get<House[]>(filterAPIUrl);
+    return this.http.get<HouseHomePage[]>(filterAPIUrl);
   }
 
   // /**
@@ -294,6 +293,15 @@ export class HouseService {
     return this.http.get<House>(this.APIUrl + "/" + houseId);
   }
 
+  /**
+   * PUT: api/Houses/IncreaseView?HouseId=
+   * [House Detail] 
+   * Increase 'view' of this House by 1 when user click House Detail
+   */
+  increaseView(houseId: number): Observable<any> {
+    return this.http.put<any>(this.APIUrl + "/IncreaseView?HouseId=" + houseId, this.httpOptions);
+  }
+
   //[Dashboard] Get List Houses by Landlord Id
   getListHousesByLandlordId(landlordId: string): Observable<any[]> {
     return this.http.get<any>(this.APIUrl + "/GetHousesByLandlord?LandlordId=" + landlordId);
@@ -321,7 +329,7 @@ export class HouseService {
   }
 
   //[Staff/list-report]
-  getReportedHouses(): Observable<ReportHouse[]>{
+  getReportedHouses(): Observable<ReportHouse[]> {
     return this.http.get<ReportHouse[]>(this.APIUrl + "/GetReportedHouses");
   }
 }

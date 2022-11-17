@@ -20,6 +20,7 @@ namespace HouseFinder_API.Controllers
     public class HouseController : ControllerBase
     {
         private IHouseRepository houseRepository = new HouseRepository();
+        
 
         //GET: api/Houses
         //[HttpGet]
@@ -50,6 +51,26 @@ namespace HouseFinder_API.Controllers
             else
             {
                 return Ok(houseDTO);
+            }
+        }
+
+        /**
+         * POST: api/Houses/IncreaseView?HouseId=
+         * [House Detail] 
+         * Increase 'view' of this House by 1 when user click House Detail
+         */
+        [HttpPut("IncreaseView")]
+        public IActionResult IncreaseView(int HouseId)
+        {
+            try
+            {
+                houseRepository.IncreaseView(HouseId);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
             }
         }
 
@@ -89,7 +110,6 @@ namespace HouseFinder_API.Controllers
         //[Staff - Dashboard] For statistic report
         [HttpGet("CountAvailableHouse")]
         public int CountAvailableHouse() => houseRepository.CountAvailableHouse();
-
 
         //PUT: api/Houses
         [HttpPut]

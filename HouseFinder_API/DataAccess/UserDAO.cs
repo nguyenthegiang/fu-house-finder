@@ -176,7 +176,7 @@ namespace DataAccess
                         user.CreatedDate = DateTime.UtcNow;
                         user.LastModifiedBy = user.UserId;
                         user.LastModifiedDate = DateTime.UtcNow;
-                        user.Active = 1;
+                        user.StatusId = 1;
                         context.Users.Add(user);
                         context.SaveChanges();
                         userDTO = context.Users.Where(u => u.UserId == user.UserId)
@@ -193,7 +193,7 @@ namespace DataAccess
             return userDTO;
         }
 
-        //[Staff/Da
+        //[Staff/Dashboard] Count total landlords
         public static int CountTotalLandlord()
         {
             int total;
@@ -226,11 +226,48 @@ namespace DataAccess
                         context.SaveChanges();
                     }
                 }
+                catch (Exception e)
+                {
+                    throw new Exception(e.Message);
+                }
+            }
+        }
+
+        //[Staff/Dashboard] Count total active landlords
+        public static int CountActiveLandlord()
+        {
+            int total;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    total = context.Users.Where(u => u.Role.RoleName.Equals("Landlord")).Where(l => l.StatusId == 1).Count();
+                }
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
+            return total;
         }
+
+        //[Staff/Dashboard] Count total inactive landlords
+        public static int CountInactiveLandlord()
+        {
+            int total;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    total = context.Users.Where(u => u.Role.RoleName.Equals("Landlord")).Where(l => l.StatusId == 2).Count();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return total;
+        }
+
     }
 }
