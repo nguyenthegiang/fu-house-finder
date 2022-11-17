@@ -175,6 +175,8 @@ namespace DataAccess
                     houseDTOs = context.Houses
                         //not selecting deleted house
                         .Where(house => house.Deleted == false)
+                        //not getting houses of Inactive Landlord
+                        .Where(house => house.Landlord.Status.StatusName.Equals("Active"))
                         //include this for finding DistrictId
                         .Include(house => house.Village.Commune)
                         .ProjectTo<AvailableHouseDTO>(config).ToList();
@@ -447,27 +449,7 @@ namespace DataAccess
          */
         public static int CountAvailableHouse()
         {
-            int availableHouse;
-            try
-            {
-                using (var context = new FUHouseFinderContext())
-                {
-                    //Count available houses: houses having at least 1 room available
-                    availableHouse = context.Rooms
-                        //not considering deleted rooms
-                        .Where(room => room.Deleted == false)
-                        //not considering deleted houses
-                        .Where(room => room.House.Deleted == false)
-                        .Where(room => room.Status.StatusName.Equals("Available"))
-                        .GroupBy(room => room.HouseId)
-                        .Count();
-                }
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-            return availableHouse;
+            return GetAvailableHouses().Count();
         }
 
         //[Staff/list-report] Get list of report house
