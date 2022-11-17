@@ -30,6 +30,11 @@ export class CreateOrderComponent implements OnInit {
   ngOnInit(): void {
 
   }
-
+  addOrder(order: Order) {
+    this.orderService.addOrder(order).subscribe(() => this.goBack());
+  }
+  goBack(): void {
+    window.location.reload();
+  }
 
 }
