@@ -129,7 +129,7 @@
               <tbody>
                 <tr *ngFor="let report of reports; let i = index">
                   <td id="md">
-                    <b>{{ (reportPageNumber - 1) * reportPageSize + i + 1 }}</b>
+                    <b>{{ (housePageNumber - 1) * housePageSize + i + 1 }}</b>
                   </td>
                   <td>{{ report.student.displayName }}</td>
                   <td>{{ report.house.houseName }}</td>
@@ -145,36 +145,36 @@
             <nav aria-label="Pagination-nav">
               <ul class="pagination">
                 <!-- Previous: Disabled if this is first page -->
-                <li class="page-item" [ngClass]="{ disabled: reportPageNumber == 1 }">
+                <li class="page-item" [ngClass]="{ disabled: housePageNumber == 1 }">
                   <!-- Go to previous page -->
                   <a
                     class="page-link"
                     aria-label="Previous"
-                    (click)="goToPage(reportPageNumber - 1)"
+                    (click)="goToPage(housePageNumber - 1)"
                   >
                     <span aria-hidden="true">&laquo;</span>
                   </a>
                 </li>
                 <!-- Numbers -->
-                <li *ngFor="let page of reportPageList" class="page-item">
+                <li *ngFor="let page of housePageList" class="page-item">
                   <!-- Display this as active if it's the chosen page -->
                   <a
                     class="page-link"
                     (click)="goToPage(page)"
-                    [ngClass]="{ active: reportPageNumber == page }"
+                    [ngClass]="{ active: housePageNumber == page }"
                     >{{ page }}</a
                   >
                 </li>
                 <!-- Next: Disabled if this is last page -->
                 <li
                   class="page-item"
-                  [ngClass]="{ disabled: reportPageNumber == reportPageCount }"
+                  [ngClass]="{ disabled: housePageNumber == housePageCount }"
                 >
                   <!-- Go to next page -->
                   <a
                     class="page-link"
                     aria-label="Next"
-                    (click)="goToPage(reportPageNumber + 1)"
+                    (click)="goToPage(housePageNumber + 1)"
                   >
                     <span aria-hidden="true">&raquo;</span>
                   </a>
