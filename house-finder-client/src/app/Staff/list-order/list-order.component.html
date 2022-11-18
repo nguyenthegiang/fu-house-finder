@@ -234,10 +234,13 @@
       </div>
 
       <div class="modal-body">
-        <h6>Nội dung:</h6>
-        <span>{{ selectedOrderContent }}</span>
+        <span><b>Tên sinh viên: </b>{{ selectedOrderName }}</span><br>
+        <span><b>Số điện thoại: </b>{{ selectedOrderPhone }}</span><br>
+        <span><b>Email: </b>{{ selectedOrderEmail }}</span><br>
+        <span><b>Ngày tạo: </b>{{ selectedOrderCreatedDate | date }}</span><br>
+        <span><b>Nội dung: </b>{{ selectedOrderContent }}</span><br>
         <br>
-        <h6 class="form-label">Trạng thái</h6>
+        <b class="form-label">Trạng thái</b>
         <!-- Set selected value for <select> by [ngModel] -->
         <select #selectOrderStatusId class="form-select" [(ngModel)]="selectedStatusId" (change)="onSelectOrderStatus(selectOrderStatusId.value)">
           <option *ngFor="let status of statuses" [value]="status.statusId">
