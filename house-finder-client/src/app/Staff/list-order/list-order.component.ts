@@ -32,6 +32,10 @@ export class ListOrderComponent implements OnInit {
   searchValue: string | undefined;
 
   //Modal
+  selectedOrderName: string | undefined;
+  selectedOrderPhone: string | undefined;
+  selectedOrderEmail: string | undefined;
+  selectedOrderCreatedDate: Date | undefined;
   selectedOrderContent: string | undefined;
   selectedOrderStatus: number | undefined;
 
@@ -146,6 +150,10 @@ export class ListOrderComponent implements OnInit {
     var selectedOrder = this.orders.find((order) => order.orderId == orderId);
     this.selectedOrder = this.orders.find((order) => order.orderId == orderId);
     if (selectedOrder != undefined) {
+      this.selectedOrderName = selectedOrder.studentName;
+      this.selectedOrderPhone = selectedOrder.phoneNumber;
+      this.selectedOrderEmail = selectedOrder.email;
+      this.selectedOrderCreatedDate = selectedOrder.orderedDate;
       this.selectedOrderContent = selectedOrder.orderContent;
       this.selectedStatusId = selectedOrder.status.statusId;
       console.log('Status id: ' + this.selectedStatusId);
