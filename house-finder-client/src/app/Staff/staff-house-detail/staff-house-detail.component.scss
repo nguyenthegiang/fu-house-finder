@@ -18,5 +18,12 @@
 
 #btn:hover
 {
-  opacity: 0.8 !important;
+  background-color: rgb(180, 180, 180);
+  border-radius: 5px;
+}
+
+#btn:active
+{
+  background-color: rgb(147, 147, 147);
+  border-radius: 5px;
 }
