@@ -79,7 +79,7 @@
             </div>
             <!-- End Search bar -->
 
-            <!-- Filter -->
+            <!-- Filter report -->
             <div class="row justify-content-end">
               <!-- Date picker -->
               <!-- Start date -->
@@ -129,7 +129,7 @@
               <tbody>
                 <tr *ngFor="let report of reports; let i = index">
                   <td id="md">
-                    <b>{{ (housePageNumber - 1) * housePageSize + i + 1 }}</b>
+                    <b>{{ (reportPageNumber - 1) * reportPageSize + i + 1 }}</b>
                   </td>
                   <td>{{ report.student.displayName }}</td>
                   <td>{{ report.house.houseName }}</td>
@@ -140,41 +140,41 @@
             </table>
             <!-- End List of Rooms -->
 
-          <!-- Paging -->
+          <!-- Paging report -->
           <div class="d-flex justify-content-center align-items-center my-3">
             <nav aria-label="Pagination-nav">
               <ul class="pagination">
                 <!-- Previous: Disabled if this is first page -->
-                <li class="page-item" [ngClass]="{ disabled: housePageNumber == 1 }">
+                <li class="page-item" [ngClass]="{ disabled: reportPageNumber == 1 }">
                   <!-- Go to previous page -->
                   <a
                     class="page-link"
                     aria-label="Previous"
-                    (click)="goToPage(housePageNumber - 1)"
+                    (click)="goToPage(reportPageNumber - 1)"
                   >
                     <span aria-hidden="true">&laquo;</span>
                   </a>
                 </li>
                 <!-- Numbers -->
-                <li *ngFor="let page of housePageList" class="page-item">
+                <li *ngFor="let page of reportPageList" class="page-item">
                   <!-- Display this as active if it's the chosen page -->
                   <a
                     class="page-link"
                     (click)="goToPage(page)"
-                    [ngClass]="{ active: housePageNumber == page }"
+                    [ngClass]="{ active: reportPageNumber == page }"
                     >{{ page }}</a
                   >
                 </li>
                 <!-- Next: Disabled if this is last page -->
                 <li
                   class="page-item"
-                  [ngClass]="{ disabled: housePageNumber == housePageCount }"
+                  [ngClass]="{ disabled: reportPageNumber == reportPageCount }"
                 >
                   <!-- Go to next page -->
                   <a
                     class="page-link"
                     aria-label="Next"
-                    (click)="goToPage(housePageNumber + 1)"
+                    (click)="goToPage(reportPageNumber + 1)"
                   >
                     <span aria-hidden="true">&raquo;</span>
                   </a>
@@ -227,7 +227,7 @@
             </div>
             <!-- End Search bar -->
 
-            <!-- Filter -->
+            <!-- Filter reported houses-->
             <div class="row justify-content-end">
               <!-- Order by -->
               <div class="col-6 col-md-3 my-2">
@@ -264,7 +264,7 @@
               <tbody>
                 <tr *ngFor="let house of houses; let i = index">
                   <td id="md">
-                    <b>{{ i + 1 }}</b>
+                    <b>{{ (housePageNumber - 1) * housePageSize + i + 1 }}</b>
                   </td>
                   <td>{{ house.houseName }}</td>
                   <td>{{ house.landlord.displayName }}</td>
@@ -297,40 +297,41 @@
             <!-- End List of Rooms -->
 
           <!-- Paging -->
+
         <div class="d-flex justify-content-center align-items-center my-3">
           <nav aria-label="Pagination-nav">
             <ul class="pagination">
               <!-- Previous: Disabled if this is first page -->
-              <li class="page-item" [ngClass]="{ disabled: reportPageNumber == 1 }">
+              <li class="page-item" [ngClass]="{ disabled: housePageNumber == 1 }">
                 <!-- Go to previous page -->
-                <a routerLink="/Staff/list-report"
+                <a
                   class="page-link"
                   aria-label="Previous"
-                  (click)="goToPage(reportPageNumber - 1)"
+                  (click)="goToHousePage(housePageNumber - 1)"
                 >
                   <span aria-hidden="true">&laquo;</span>
                 </a>
               </li>
               <!-- Numbers -->
-              <li *ngFor="let page of reportPageList" class="page-item">
+              <li *ngFor="let page of housePageList" class="page-item">
                 <!-- Display this as active if it's the chosen page -->
-                <a routerLink="/Staff/list-report"
+                <a
                   class="page-link"
-                  (click)="goToPage(page)"
-                  [ngClass]="{ active: reportPageNumber == page }"
+                  (click)="goToHousePage(page)"
+                  [ngClass]="{ active: housePageNumber == page }"
                   >{{ page }}</a
                 >
               </li>
               <!-- Next: Disabled if this is last page -->
               <li
                 class="page-item"
-                [ngClass]="{ disabled: reportPageNumber == reportPageCount }"
+                [ngClass]="{ disabled: housePageNumber == housePageCount }"
               >
                 <!-- Go to next page -->
-                <a routerLink="/Staff/list-report"
+                <a
                   class="page-link"
                   aria-label="Next"
-                  (click)="goToPage(reportPageNumber + 1)"
+                  (click)="goToHousePage(housePageNumber + 1)"
                 >
                   <span aria-hidden="true">&raquo;</span>
                 </a>

@@ -68,6 +68,7 @@ export class ListReportComponent implements OnInit {
     //Call API: get all reports of this house
     this.houseService.countTotalReportedHouse().subscribe((data) => {
       this.totalReportedHouse = data;
+      console.log(data);
 
       //(Paging) Count total number of pages
       this.housePageCount = Math.ceil(this.totalReportedHouse / this.housePageSize);
@@ -109,7 +110,6 @@ export class ListReportComponent implements OnInit {
     // Call API: go to Page Number
     this.housePageNumber = pageNumber;
     this.filterReportedHouse(false);
-    this.scrollToTop();
   }
 
   // Go to top of Page: used whenever user filter/paging data -> refresh list data

@@ -348,8 +348,9 @@ export class HouseService {
     const top = pageSize;
 
     //define API here to append query options into it later
-    var filterAPIUrl = this.APIUrl;
+    var filterAPIUrl = this.APIUrl + `/GetReportedHouses`;
     filterAPIUrl += `?$skip=${skip}&$top=${top}`;
+    console.log(filterAPIUrl);
     return this.http.get<ReportHouse[]>(filterAPIUrl);
   }
 }
