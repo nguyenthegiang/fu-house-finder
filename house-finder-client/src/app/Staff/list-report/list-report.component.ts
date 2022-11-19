@@ -60,7 +60,10 @@ export class ListReportComponent implements OnInit {
       this.reportPageCount = Math.ceil(this.totalReport / this.reportPageSize); //divide & round up
 
       // (Paging) Render pageList based on pageCount
-      this.reportPageList = Array.from({ length: this.reportPageCount }, (_, i) => i + 1);
+      this.reportPageList = Array.from(
+        { length: this.reportPageCount },
+        (_, i) => i + 1
+      );
       //pageList is now an array like {1, 2, 3, ..., n | n = pageCount}
     });
 
@@ -71,8 +74,13 @@ export class ListReportComponent implements OnInit {
       console.log(data);
 
       //(Paging) Count total number of pages
-      this.housePageCount = Math.ceil(this.totalReportedHouse / this.housePageSize);
-      this.housePageList = Array.from({ length: this.housePageCount }, (_, i) => i + 1);
+      this.housePageCount = Math.ceil(
+        this.totalReportedHouse / this.housePageSize
+      );
+      this.housePageList = Array.from(
+        { length: this.housePageCount },
+        (_, i) => i + 1
+      );
     });
   }
 
@@ -90,12 +98,12 @@ export class ListReportComponent implements OnInit {
 
   onFromDateSelected(selectedDate: string) {
     this.selectedFromDate = selectedDate;
-    console.log(selectedDate);
+    this.filterReport(true);
   }
 
   onToDateSelected(selectedDate: string) {
     this.selectedToDate = selectedDate;
-    console.log(selectedDate);
+    this.filterReport(true);
   }
 
   //[Paging] User click on a Page number -> Go to that page
@@ -103,7 +111,6 @@ export class ListReportComponent implements OnInit {
     // Call API: go to Page Number
     this.reportPageNumber = pageNumber;
     this.filterReport(false);
-    this.scrollToTop();
   }
 
   goToHousePage(pageNumber: number) {
@@ -121,37 +128,32 @@ export class ListReportComponent implements OnInit {
     });
   }
 
-    // Call API to update list house with selected Filter value & Paging
-    filterReport(resetPaging: boolean) {
-      //if user filter -> reset Paging (back to page 1)
-      if (resetPaging) {
-        this.reportPageNumber = 1;
-      }
-
-      this.reportService
-        .filterReport(
-          this.reportPageSize,
-          this.reportPageNumber,
-        )
-        .subscribe((data) => {
-          this.reports = data;
-          this.scrollToTop();
-        });
+  // Call API to update list house with selected Filter value & Paging
+  filterReport(resetPaging: boolean) {
+    //if user filter -> reset Paging (back to page 1)
+    if (resetPaging) {
+      this.reportPageNumber = 1;
     }
 
-    filterReportedHouse(resetPaging: boolean) {
-      //if user filter -> reset Paging (back to page 1)
-      if (resetPaging) {
-        this.housePageNumber = 1;
-      }
+    this.reportService
+      .filterReport(this.reportPageSize, this.reportPageNumber, this.selectedFromDate, this.selectedToDate)
+      .subscribe((data) => {
+        this.reports = data;
+        this.scrollToTop();
+      });
+  }
 
-      this.houseService.filterReportedHouse(
-          this.housePageSize,
-          this.housePageNumber,
-        )
-        .subscribe((data) => {
-          this.houses = data;
-          this.scrollToTop();
-        });
+  filterReportedHouse(resetPaging: boolean) {
+    //if user filter -> reset Paging (back to page 1)
+    if (resetPaging) {
+      this.housePageNumber = 1;
     }
+
+    this.houseService
+      .filterReportedHouse(this.housePageSize, this.housePageNumber)
+      .subscribe((data) => {
+        this.houses = data;
+        this.scrollToTop();
+      });
+  }
 }

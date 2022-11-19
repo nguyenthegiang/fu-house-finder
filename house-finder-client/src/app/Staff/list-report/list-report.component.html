@@ -3,6 +3,8 @@
 <div class="row m-2" style="padding: 20px">
   <div class="col-12">
     <!-- Page content -->
+
+    <!-- Tab -->
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
         <button
@@ -33,11 +35,14 @@
         </button>
       </li>
     </ul>
+    <!-- End tab -->
+
     <div
       class="tab-content border-end border-bottom border-start"
       id="myTabContent"
       style="padding: 20px"
     >
+      <!-- List of reports -->
       <div
         class="tab-pane fade show active"
         id="home-tab-pane"
@@ -140,52 +145,59 @@
             </table>
             <!-- End List of Rooms -->
 
-          <!-- Paging report -->
-          <div class="d-flex justify-content-center align-items-center my-3">
-            <nav aria-label="Pagination-nav">
-              <ul class="pagination">
-                <!-- Previous: Disabled if this is first page -->
-                <li class="page-item" [ngClass]="{ disabled: reportPageNumber == 1 }">
-                  <!-- Go to previous page -->
-                  <a
-                    class="page-link"
-                    aria-label="Previous"
-                    (click)="goToPage(reportPageNumber - 1)"
+            <!-- Paging report -->
+            <div class="d-flex justify-content-center align-items-center my-3">
+              <nav aria-label="Pagination-nav">
+                <ul class="pagination">
+                  <!-- Previous: Disabled if this is first page -->
+                  <li
+                    class="page-item"
+                    [ngClass]="{ disabled: reportPageNumber == 1 }"
                   >
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-                <!-- Numbers -->
-                <li *ngFor="let page of reportPageList" class="page-item">
-                  <!-- Display this as active if it's the chosen page -->
-                  <a
-                    class="page-link"
-                    (click)="goToPage(page)"
-                    [ngClass]="{ active: reportPageNumber == page }"
-                    >{{ page }}</a
+                    <!-- Go to previous page -->
+                    <a
+                      class="page-link"
+                      aria-label="Previous"
+                      (click)="goToPage(reportPageNumber - 1)"
+                    >
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <!-- Numbers -->
+                  <li *ngFor="let page of reportPageList" class="page-item">
+                    <!-- Display this as active if it's the chosen page -->
+                    <a
+                      class="page-link"
+                      (click)="goToPage(page)"
+                      [ngClass]="{ active: reportPageNumber == page }"
+                      >{{ page }}</a
+                    >
+                  </li>
+                  <!-- Next: Disabled if this is last page -->
+                  <li
+                    class="page-item"
+                    [ngClass]="{
+                      disabled: reportPageNumber == reportPageCount
+                    }"
                   >
-                </li>
-                <!-- Next: Disabled if this is last page -->
-                <li
-                  class="page-item"
-                  [ngClass]="{ disabled: reportPageNumber == reportPageCount }"
-                >
-                  <!-- Go to next page -->
-                  <a
-                    class="page-link"
-                    aria-label="Next"
-                    (click)="goToPage(reportPageNumber + 1)"
-                  >
-                    <span aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-          <!-- End Paging -->
+                    <!-- Go to next page -->
+                    <a
+                      class="page-link"
+                      aria-label="Next"
+                      (click)="goToPage(reportPageNumber + 1)"
+                    >
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <!-- End Paging -->
           </div>
         </div>
       </div>
+
+      <!-- List of reportes houses -->
       <div
         class="tab-pane fade"
         id="profile-tab-pane"
@@ -296,50 +308,53 @@
             </table>
             <!-- End List of Rooms -->
 
-          <!-- Paging -->
+            <!-- Paging reported houses-->
+            <div class="d-flex justify-content-center align-items-center my-3">
+              <nav aria-label="Pagination-nav">
+                <ul class="pagination">
+                  <!-- Previous: Disabled if this is first page -->
+                  <li
+                    class="page-item"
+                    [ngClass]="{ disabled: housePageNumber == 1 }"
+                  >
+                    <!-- Go to previous page -->
+                    <a
+                      class="page-link"
+                      aria-label="Previous"
+                      (click)="goToHousePage(housePageNumber - 1)"
+                    >
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <!-- Numbers -->
+                  <li *ngFor="let page of housePageList" class="page-item">
+                    <!-- Display this as active if it's the chosen page -->
+                    <a
+                      class="page-link"
+                      (click)="goToHousePage(page)"
+                      [ngClass]="{ active: housePageNumber == page }"
+                      >{{ page }}</a
+                    >
+                  </li>
+                  <!-- Next: Disabled if this is last page -->
+                  <li
+                    class="page-item"
+                    [ngClass]="{ disabled: housePageNumber == housePageCount }"
+                  >
+                    <!-- Go to next page -->
+                    <a
+                      class="page-link"
+                      aria-label="Next"
+                      (click)="goToHousePage(housePageNumber + 1)"
+                    >
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <!-- End Paging -->
 
-        <div class="d-flex justify-content-center align-items-center my-3">
-          <nav aria-label="Pagination-nav">
-            <ul class="pagination">
-              <!-- Previous: Disabled if this is first page -->
-              <li class="page-item" [ngClass]="{ disabled: housePageNumber == 1 }">
-                <!-- Go to previous page -->
-                <a
-                  class="page-link"
-                  aria-label="Previous"
-                  (click)="goToHousePage(housePageNumber - 1)"
-                >
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              <!-- Numbers -->
-              <li *ngFor="let page of housePageList" class="page-item">
-                <!-- Display this as active if it's the chosen page -->
-                <a
-                  class="page-link"
-                  (click)="goToHousePage(page)"
-                  [ngClass]="{ active: housePageNumber == page }"
-                  >{{ page }}</a
-                >
-              </li>
-              <!-- Next: Disabled if this is last page -->
-              <li
-                class="page-item"
-                [ngClass]="{ disabled: housePageNumber == housePageCount }"
-              >
-                <!-- Go to next page -->
-                <a
-                  class="page-link"
-                  aria-label="Next"
-                  (click)="goToHousePage(housePageNumber + 1)"
-                >
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        <!-- End Paging -->
           </div>
         </div>
       </div>
@@ -347,7 +362,7 @@
   </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal to show detail of a reported house-->
 <div
   class="modal fade"
   id="listReportModal"

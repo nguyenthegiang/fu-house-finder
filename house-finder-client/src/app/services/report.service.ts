@@ -8,16 +8,16 @@ import { environment } from 'src/environments/environment';
 import { ReportHouse } from '../models/reportHouse';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ReportService {
   readonly APIUrl = `${environment.api_url}/Report`;
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
   };
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   //POST: [Report] Send Report
   addReport(report: Report): Observable<any> {
@@ -25,36 +25,42 @@ export class ReportService {
   }
 
   //[Staff/Dashboard]
-  getTotalReportByMonth():Observable<any>{
-    return this.http.get<any>(this.APIUrl + "/GetTotalReportByMonth");
+  getTotalReportByMonth(): Observable<any> {
+    return this.http.get<any>(this.APIUrl + '/GetTotalReportByMonth');
   }
 
   //[Staff/list-report] Get list of all reports
-  getAllReport():Observable<StaffReport[]>{
+  getAllReport(): Observable<StaffReport[]> {
     console.log(this.APIUrl);
     return this.http.get<StaffReport[]>(this.APIUrl);
   }
 
   //[Staff/list-report] Search reports by house's name
-  searchReportByHouseName(key: string):Observable<StaffReport[]>{
-    return this.http.get<StaffReport[]>(this.APIUrl + "/SearchReportByHouseName/" + key);
+  searchReportByHouseName(key: string): Observable<StaffReport[]> {
+    return this.http.get<StaffReport[]>(
+      this.APIUrl + '/SearchReportByHouseName/' + key
+    );
   }
 
   //[Staff/list-report] Count total report by house id
-  countTotalReportByHouseId(houseId: number):Observable<number>{
-    return this.http.get<number>(this.APIUrl + "/CountTotalReportByHouseId/" + houseId);
+  countTotalReportByHouseId(houseId: number): Observable<number> {
+    return this.http.get<number>(
+      this.APIUrl + '/CountTotalReportByHouseId/' + houseId
+    );
   }
 
   //[Staff/list-report] Count total of report
-  countTotalReport() : Observable<number>{
-    return this.http.get<number>(this.APIUrl + "/CountTotalReport");
+  countTotalReport(): Observable<number> {
+    return this.http.get<number>(this.APIUrl + '/CountTotalReport');
   }
 
   //[Staff/list-report] Filter reports
-   filterReport(
+  filterReport(
     pageSize: number,
     pageNumber: number,
-  ): Observable<StaffReport[]>{
+    fromDate?: string,
+    toDate?: string
+  ): Observable<StaffReport[]> {
     //[Paging] count Skip and Top from pageSize & pageNumber
     const skip = pageSize * (pageNumber - 1);
     const top = pageSize;
@@ -62,6 +68,39 @@ export class ReportService {
     //define API here to append query options into it later
     var filterAPIUrl = this.APIUrl;
     filterAPIUrl += `?$skip=${skip}&$top=${top}`;
+
+    //[Filter] check if user has at least 1 filter
+    if (fromDate || toDate) {
+      //add filter to API
+      filterAPIUrl += `&$filter=`;
+    }
+
+    //[Filter] flag to check if that filter is the first filter (if is first -> not have 'and')
+    var checkFirstFilter = true;
+
+//[Filter] add filter by date if it has
+if (fromDate != undefined) {
+  //if is not the first filter -> need to add 'and' to API URL
+  if (!checkFirstFilter) {
+    filterAPIUrl += ` and `;
+  } else {
+    //if this one is the first filter -> mark it so others won't add 'and'
+    checkFirstFilter = false;
+  }
+  filterAPIUrl += `ReportedDate ge ${fromDate}`;
+}
+
+if (toDate != undefined) {
+  //if is not the first filter -> need to add 'and' to API URL
+  if (!checkFirstFilter) {
+    filterAPIUrl += ` and `;
+  } else {
+    //if this one is the first filter -> mark it so others won't add 'and'
+    checkFirstFilter = false;
+  }
+  filterAPIUrl += `ReportedDate le ${toDate}`;
+}
+
     return this.http.get<StaffReport[]>(filterAPIUrl);
   }
 }
