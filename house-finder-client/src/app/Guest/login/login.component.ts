@@ -123,7 +123,7 @@ export class LoginComponent implements OnInit {
           // Logged into your webpage and Facebook.
           FB.api('/me', (response: any) => {
             this.userService.loginFacebook(response.id).subscribe(resp => {
-              localStorage.setItem('user', 'true');
+              localStorage.setItem('user', resp.displayName);
               localStorage.setItem("role", resp.roleName);
               this.ngZone.run(() => { this.router.navigate(['/home']); });
             },
@@ -150,7 +150,7 @@ export class LoginComponent implements OnInit {
     }
     let user = this.userService.loginGoogle(response?.credential).subscribe(
       resp => {
-        localStorage.setItem('user', 'true');
+        localStorage.setItem('user', resp.displayName);
         localStorage.setItem("role", resp.roleName);
         this.ngZone.run(() => { this.router.navigate(['/home']); });
       },
@@ -170,7 +170,7 @@ export class LoginComponent implements OnInit {
       this.loginForm.controls['password'].value
     ).subscribe(
       resp => {
-        localStorage.setItem('user', 'true');
+        localStorage.setItem('user', resp.displayName);
         localStorage.setItem("role", resp.roleName);
         this.ngZone.run(() => { this.router.navigate(['/Admin/list-staff']); });
       },
@@ -191,7 +191,7 @@ export class LoginComponent implements OnInit {
   registerStudent(): void {
     if (this.googleIdToken != undefined) {
       this.userService.registerStudentGoogle(this.googleIdToken).subscribe(resp => {
-        localStorage.setItem('user', 'true');
+        localStorage.setItem('user', resp.displayName);
         localStorage.setItem("role", resp.roleName);
         this.user = resp;
         this.router.navigate(['/home']);
@@ -199,7 +199,7 @@ export class LoginComponent implements OnInit {
     }
     else if (this.facebookId != undefined && this.name != undefined) {
       this.userService.registerStudentFacebook(this.facebookId, this.name).subscribe(resp => {
-        localStorage.setItem('user', 'true');
+        localStorage.setItem('user', resp.displayName);
         localStorage.setItem("role", resp.roleName);
         this.user = resp;
         this.router.navigate(['/home']);
@@ -218,7 +218,7 @@ export class LoginComponent implements OnInit {
         facebookUrl
       ).subscribe(resp => {
         this.fileService.uploadIDC(this.frontImg, this.backImg).subscribe(resp => {});
-        localStorage.setItem('user', 'true');
+        localStorage.setItem('user', resp.displayName);
         localStorage.setItem("role", resp.roleName);
         this.router.navigate(['/home']);
       });
@@ -232,7 +232,7 @@ export class LoginComponent implements OnInit {
       ).subscribe(resp => {
         console.log(resp.accessToken);
         this.fileService.uploadIDC(this.frontImg, this.backImg).subscribe(resp => {});
-        localStorage.setItem('user', 'true');
+        localStorage.setItem('user', resp.displayName);
         localStorage.setItem("role", resp.roleName);
         this.router.navigate(['/home']);
       });

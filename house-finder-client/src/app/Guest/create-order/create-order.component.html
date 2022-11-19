@@ -1,1 +1,50 @@
-<button type="button" class="btn btn-primary">Primary</button>
+<!-- <button type="button" class="btn btn-primary">Primary</button> -->
+
+<div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="orderModalLabel">Đăng ký tư vấn phòng trọ</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="row">
+                        <!-- roomName -->
+                        <div class="col-md-6">Mã số sinh viên
+                            <br>
+                            <input type="text" class="form-control" id="roomName" name="roomName">
+                        </div>
+                        <!-- area -->
+                        <div class="col-md-6 ml-auto">Tên
+                            <br>
+                            <input type="text" class="form-control" id="areaByMeters" name="areaByMeters">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <!-- price -->
+                        <div class="col-md-6">Số điện thoại
+                            <br>
+                            <input type="text" class="form-control" id="pricePerMonth" name="pricePerMonth">
+                        </div>
+                        <!-- building -->
+                        <div class="col-md-6 ml-auto">Email
+                            <br>
+                            <input type="text" class="form-control" id="buildingNumber" name="buildingNumber">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- info -->
+                        <div class="col-md-6">Nguyện vọng
+                            <br>
+                            <input type="text" class="form-control" id="information" name="information">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send message</button>
+            </div>
+        </div>
