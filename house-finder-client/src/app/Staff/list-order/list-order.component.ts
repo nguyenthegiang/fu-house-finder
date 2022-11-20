@@ -49,7 +49,9 @@ export class ListOrderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.filterOrder(false);
+    this.selectedOrderBy = 'asc';
+    this.filterOrder(true);
+    //this.filterOrder(false);
 
     // (Paging) Count available Houses for total number of pages
     this.orderService.countTotalOrder().subscribe((data) => {
