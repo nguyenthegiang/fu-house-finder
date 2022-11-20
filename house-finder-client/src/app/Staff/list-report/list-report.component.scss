@@ -16,3 +16,15 @@
     display: none;
   }
 }
+
+#btn:hover
+{
+  background-color: rgb(180, 180, 180);
+  border-radius: 5px;
+}
+
+#btn:active
+{
+  background-color: rgb(147, 147, 147);
+  border-radius: 5px;
+}
