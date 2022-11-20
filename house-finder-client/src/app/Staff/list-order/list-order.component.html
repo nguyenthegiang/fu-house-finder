@@ -70,14 +70,14 @@
             <tr>
               <th scope="col" id="md">STT</th>
               <th scope="col">Mã sinh viên</th>
-              <!-- <th scope="col">Tên sinh viên</th> -->
-              <th scope="col" id="md">Số điện thoại</th>
-              <th scope="col" id="md">Email</th>
+              <th scope="col">Tên sinh viên</th>
+              <!-- <th scope="col" id="md">Số điện thoại</th>
+              <th scope="col" id="md">Email</th> -->
               <!-- <th scope="col">Yêu cầu</th> -->
               <th scope="col">Ngày tạo</th>
               <th scope="col" id="md">Ngày giải quyết</th>
               <th scope="col">Trạng thái</th>
-              <th scope="col">Tùy chọn</th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
@@ -86,9 +86,9 @@
                 <b>{{ (pageNumber - 1) * pageSize + i + 1 }}</b>
               </td>
               <td>{{ order.studentId }}</td>
-              <!-- <td>{{ order.studentName }}</td> -->
-              <td id="md">{{ order.phoneNumber }}</td>
-              <td id="md">{{ order.email }}</td>
+              <td>{{ order.studentName }}</td>
+              <!-- <td id="md">{{ order.phoneNumber }}</td>
+              <td id="md">{{ order.email }}</td> -->
               <!-- <td>{{order.orderContent}}</td> -->
               <td>{{ order.orderedDate | date: "dd/MM/yyyy" }}</td>
               <td id="md">{{ order.solvedDate | date: "dd/MM/yyyy" }}</td>
