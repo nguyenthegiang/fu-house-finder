@@ -40,5 +40,7 @@ namespace Repositories.Repositories
         public void DeleteHouseByHouseId(int houseId) => HouseDAO.DeleteHouseByHouseId(houseId);
 
         public List<ReportHouseDTO> GetListReportHouse() => HouseDAO.GetListReportHouse();
+
+        public int CountTotalReportedHouse() => HouseDAO.CountTotalReportedHouse();
     }
 }

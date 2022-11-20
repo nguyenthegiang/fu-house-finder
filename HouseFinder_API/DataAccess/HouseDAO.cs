@@ -452,7 +452,7 @@ namespace DataAccess
             return GetAvailableHouses().Count();
         }
 
-        //[Staff/list-report] Get list of report house
+        //[Staff/list-report] Get list of reported houses
         public static List<ReportHouseDTO> GetListReportHouse()
         {
             List<ReportHouseDTO> houses;
@@ -470,7 +470,6 @@ namespace DataAccess
                         house.NumberOfReport = ReportDAO.CountTotalReportByHouseId(house.HouseId);
                         house.ListReports = ReportDAO.GetReportByHouseId(house.HouseId);
                     }
-
                     houses.RemoveAll(house => house.NumberOfReport == 0);
                 }
             }
@@ -479,6 +478,12 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
             return houses;
+        }
+        
+        //[Staff/list-report] Count total of reported houses
+        public static int CountTotalReportedHouse()
+        {
+            return GetListReportHouse().Count();
         }
 
     }

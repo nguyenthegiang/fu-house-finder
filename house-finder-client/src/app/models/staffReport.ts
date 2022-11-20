@@ -9,5 +9,7 @@ export interface StaffReport {
   reportContent: string;
   student: User;
   house: ReportHouse;
-  createdDate: Date;
+  reportedDate: Date;
+  solvedDate: Date;
+  solvedBy: string;
 }

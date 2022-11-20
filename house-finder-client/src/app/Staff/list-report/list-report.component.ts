@@ -27,6 +27,21 @@ export class ListReportComponent implements OnInit {
   //Filter
   selectedFromDate: string | undefined;
   selectedToDate: string | undefined;
+  selectedOrderBy: string | undefined;
+
+  //(Paging) for Reports
+  totalReport = 0; //items count
+  reportPageSize = 10; //number of items per page
+  reportPageNumber = 1; //starts at page 1
+  reportPageCount = 0; //number of pages
+  reportPageList: number[] = []; //array to loop with *ngFor in HTML Template
+
+  //(Paging) for Reported Houses
+  totalReportedHouse = 0; //number of items
+  housePageSize = 10; //number of items per page
+  housePageNumber = 1;
+  housePageCount = 0; // number of pages
+  housePageList: number[] = [];
 
   constructor(
     private reportService: ReportService,
@@ -35,14 +50,40 @@ export class ListReportComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    //Call API: get all reports of this house
-    this.houseService.getReportedHouses().subscribe((data) => {
-      this.houses = data;
+    this.selectedOrderBy = 'desc';
+    this.filterReport(true);
+
+    // (Paging for Reports) Count available Houses for total number of pages
+    this.reportService.countTotalReport().subscribe((data) => {
+      this.totalReport = data;
+      console.log(data);
+
+      // (Paging) Calculate number of pages
+      this.reportPageCount = Math.ceil(this.totalReport / this.reportPageSize); //divide & round up
+
+      // (Paging) Render pageList based on pageCount
+      this.reportPageList = Array.from(
+        { length: this.reportPageCount },
+        (_, i) => i + 1
+      );
+      //pageList is now an array like {1, 2, 3, ..., n | n = pageCount}
     });
 
-    this.reportService.getAllReport().subscribe((data) => {
-      this.reports = data;
-    })
+    this.filterReportedHouse(false);
+    //Call API: get all reports of this house
+    this.houseService.countTotalReportedHouse().subscribe((data) => {
+      this.totalReportedHouse = data;
+      console.log(data);
+
+      //(Paging) Count total number of pages
+      this.housePageCount = Math.ceil(
+        this.totalReportedHouse / this.housePageSize
+      );
+      this.housePageList = Array.from(
+        { length: this.housePageCount },
+        (_, i) => i + 1
+      );
+    });
   }
 
   search(searchValue: string) {}
@@ -59,11 +100,67 @@ export class ListReportComponent implements OnInit {
 
   onFromDateSelected(selectedDate: string) {
     this.selectedFromDate = selectedDate;
-    console.log(selectedDate);
+    this.filterReport(true);
   }
 
   onToDateSelected(selectedDate: string) {
     this.selectedToDate = selectedDate;
-    console.log(selectedDate);
+    this.filterReport(true);
+  }
+
+  onOrderBySelected(selectedOrderBy: string){
+    this.selectedOrderBy = selectedOrderBy;
+    this.filterReport(true);
+  }
+
+  //[Paging] User click on a Page number -> Go to that page
+  goToPage(pageNumber: number) {
+    // Call API: go to Page Number
+    this.reportPageNumber = pageNumber;
+    this.filterReport(false);
+  }
+
+  goToHousePage(pageNumber: number) {
+    // Call API: go to Page Number
+    this.housePageNumber = pageNumber;
+    this.filterReportedHouse(false);
+  }
+
+  // Go to top of Page: used whenever user filter/paging data -> refresh list data
+  scrollToTop() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+  }
+
+  // Call API to update list house with selected Filter value & Paging
+  filterReport(resetPaging: boolean) {
+    //if user filter -> reset Paging (back to page 1)
+    if (resetPaging) {
+      this.reportPageNumber = 1;
+    }
+
+    this.reportService
+      .filterReport(this.reportPageSize, this.reportPageNumber, this.selectedFromDate, this.selectedToDate, this.selectedOrderBy)
+      .subscribe((data) => {
+        this.reports = data;
+        this.scrollToTop();
+      });
+  }
+
+  filterReportedHouse(resetPaging: boolean) {
+    //if user filter -> reset Paging (back to page 1)
+    if (resetPaging) {
+      this.housePageNumber = 1;
+    }
+
+    this.houseService
+      .filterReportedHouse(this.housePageSize, this.housePageNumber)
+      .subscribe((data) => {
+        this.houses = data;
+        this.scrollToTop();
+      });
   }
 }
