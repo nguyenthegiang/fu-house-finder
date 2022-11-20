@@ -55,7 +55,7 @@
             <h3 class="text-center">Danh sách báo cáo</h3>
 
             <!-- Search bar -->
-            <div class="row w-100 d-flex justify-content-center">
+            <div class="row d-flex justify-content-center">
               <div class="col-10 col-md-5">
                 <div class="text-center my-4">
                   <div class="input-group">
@@ -110,7 +110,7 @@
               <!-- End date picker -->
 
               <!-- Order by -->
-              <div class="col-6 col-md-3 my-2">
+              <div class="col-10 col-md-4">
                 <label class="form-label">Sắp xếp</label>
                 <select class="form-select">
                   <option>Chọn sắp xếp</option>
@@ -210,7 +210,7 @@
             <h3 class="text-center">Danh sách nhà bị báo cáo</h3>
 
             <!-- Search bar -->
-            <div class="row w-100 d-flex justify-content-center">
+            <div class="row d-flex justify-content-center">
               <div class="col-10 col-md-5">
                 <div class="text-center my-4">
                   <div class="input-group">
@@ -242,7 +242,7 @@
             <!-- Filter reported houses-->
             <div class="row justify-content-end">
               <!-- Order by -->
-              <div class="col-6 col-md-3 my-2">
+              <div class="col-10 col-md-6">
                 <label class="form-label">Trạng thái</label>
                 <select class="form-select">
                   <option>Chọn sắp xếp</option>
@@ -251,7 +251,7 @@
                 </select>
               </div>
               <!-- Order by -->
-              <div class="col-6 col-md-3 my-2">
+              <div class="col-10 col-md-6">
                 <label class="form-label">Sắp xếp</label>
                 <select class="form-select">
                   <option>Chọn sắp xếp</option>
@@ -267,10 +267,10 @@
                 <tr>
                   <th scope="col" id="md">STT</th>
                   <th scope="col">Nhà trọ</th>
-                  <th scope="col">Chủ trọ</th>
+                  <th scope="col" id="md">Chủ trọ</th>
                   <th scope="col">Số lượt báo cáo</th>
                   <th scope="col">Trạng thái chủ trọ</th>
-                  <th scope="col"></th>
+                  <th scope="col">Tùy chọn</th>
                 </tr>
               </thead>
               <tbody>
@@ -279,7 +279,7 @@
                     <b>{{ (housePageNumber - 1) * housePageSize + i + 1 }}</b>
                   </td>
                   <td>{{ house.houseName }}</td>
-                  <td>{{ house.landlord.displayName }}</td>
+                  <td id="md">{{ house.landlord.displayName }}</td>
                   <td>{{ house.numberOfReport }}</td>
                   <td>
                     <div class="form-check form-switch">
@@ -293,15 +293,16 @@
                   </td>
                   <td>
                     <!-- Button trigger modal -->
-                    <button
+                    <a class="text-decoration-none text-primary"
                       type="button"
-                      class="btn btn-secondary"
                       data-bs-toggle="modal"
                       data-bs-target="#listReportModal"
                       (click)="changeSelectedHouse(house.houseId)"
                     >
-                      Chi tiết
-                    </button>
+                      <span id="btn" class="material-symbols-outlined">
+                        info
+                      </span>
+                    </a>
                   </td>
                 </tr>
               </tbody>

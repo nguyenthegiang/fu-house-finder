@@ -22,3 +22,15 @@
 #app-name:active{
   text-decoration: none;
 }
+
+#link:hover
+{
+  text-decoration: underline !important;
+}
+
+@media only screen and (max-width: 768px) {
+  .logo
+  {
+    display: none !important;
+  }
+}
