@@ -46,7 +46,7 @@ export class OrderService {
     filterAPIUrl += `?$skip=${skip}&$top=${top}`;
 
     //[Filter] check if user has at least 1 filter
-    if ((statusId != undefined && statusId != 0) || fromDate || toDate) {
+    if ((statusId != undefined && statusId != 0) || fromDate || toDate ) {
       //add filter to API
       filterAPIUrl += `&$filter=`;
     }

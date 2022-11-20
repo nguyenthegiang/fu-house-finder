@@ -59,7 +59,8 @@ export class ReportService {
     pageSize: number,
     pageNumber: number,
     fromDate?: string,
-    toDate?: string
+    toDate?: string,
+    orderBy?: string
   ): Observable<StaffReport[]> {
     //[Paging] count Skip and Top from pageSize & pageNumber
     const skip = pageSize * (pageNumber - 1);
@@ -78,28 +79,39 @@ export class ReportService {
     //[Filter] flag to check if that filter is the first filter (if is first -> not have 'and')
     var checkFirstFilter = true;
 
-//[Filter] add filter by date if it has
-if (fromDate != undefined) {
-  //if is not the first filter -> need to add 'and' to API URL
-  if (!checkFirstFilter) {
-    filterAPIUrl += ` and `;
-  } else {
-    //if this one is the first filter -> mark it so others won't add 'and'
-    checkFirstFilter = false;
-  }
-  filterAPIUrl += `ReportedDate ge ${fromDate}`;
-}
+    //[Filter] add filter by date if it has
+    if (fromDate != undefined) {
+      //if is not the first filter -> need to add 'and' to API URL
+      if (!checkFirstFilter) {
+        filterAPIUrl += ` and `;
+      } else {
+        //if this one is the first filter -> mark it so others won't add 'and'
+        checkFirstFilter = false;
+      }
+      filterAPIUrl += `ReportedDate ge ${fromDate}`;
+    }
 
-if (toDate != undefined) {
-  //if is not the first filter -> need to add 'and' to API URL
-  if (!checkFirstFilter) {
-    filterAPIUrl += ` and `;
-  } else {
-    //if this one is the first filter -> mark it so others won't add 'and'
-    checkFirstFilter = false;
-  }
-  filterAPIUrl += `ReportedDate le ${toDate}`;
-}
+    if (toDate != undefined) {
+      //if is not the first filter -> need to add 'and' to API URL
+      if (!checkFirstFilter) {
+        filterAPIUrl += ` and `;
+      } else {
+        //if this one is the first filter -> mark it so others won't add 'and'
+        checkFirstFilter = false;
+      }
+      filterAPIUrl += `ReportedDate le ${toDate}`;
+    }
+
+    if (orderBy != undefined) {
+      //if is not the first filter -> need to add 'and' to API URL
+      if (!checkFirstFilter) {
+        filterAPIUrl += ` `;
+      } else {
+        //if this one is the first filter -> mark it so others won't add 'and'
+        checkFirstFilter = false;
+      }
+      filterAPIUrl += `&$orderby=ReportedDate ${orderBy}`;
+    }
 
     return this.http.get<StaffReport[]>(filterAPIUrl);
   }

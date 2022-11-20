@@ -27,6 +27,7 @@ export class ListReportComponent implements OnInit {
   //Filter
   selectedFromDate: string | undefined;
   selectedToDate: string | undefined;
+  selectedOrderBy: string | undefined;
 
   //(Paging) for Reports
   totalReport = 0; //items count
@@ -49,7 +50,8 @@ export class ListReportComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.filterReport(false);
+    this.selectedOrderBy = 'desc';
+    this.filterReport(true);
 
     // (Paging for Reports) Count available Houses for total number of pages
     this.reportService.countTotalReport().subscribe((data) => {
@@ -106,6 +108,11 @@ export class ListReportComponent implements OnInit {
     this.filterReport(true);
   }
 
+  onOrderBySelected(selectedOrderBy: string){
+    this.selectedOrderBy = selectedOrderBy;
+    this.filterReport(true);
+  }
+
   //[Paging] User click on a Page number -> Go to that page
   goToPage(pageNumber: number) {
     // Call API: go to Page Number
@@ -136,7 +143,7 @@ export class ListReportComponent implements OnInit {
     }
 
     this.reportService
-      .filterReport(this.reportPageSize, this.reportPageNumber, this.selectedFromDate, this.selectedToDate)
+      .filterReport(this.reportPageSize, this.reportPageNumber, this.selectedFromDate, this.selectedToDate, this.selectedOrderBy)
       .subscribe((data) => {
         this.reports = data;
         this.scrollToTop();

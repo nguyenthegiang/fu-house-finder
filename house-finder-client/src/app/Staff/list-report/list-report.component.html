@@ -112,10 +112,10 @@
               <!-- Order by -->
               <div class="col-10 col-md-4">
                 <label class="form-label">Sắp xếp</label>
-                <select class="form-select">
-                  <option>Chọn sắp xếp</option>
-                  <option>Ngày gần nhất</option>
-                  <option>Ngày xa nhất</option>
+                <select #selectedOrderBy class="form-select" (change)="onOrderBySelected(selectedOrderBy.value)">
+                  <option selected disabled>Chọn sắp xếp</option>
+                  <option value="desc">Ngày gần nhất</option>
+                  <option value="asc">Ngày xa nhất</option>
                 </select>
               </div>
             </div>
