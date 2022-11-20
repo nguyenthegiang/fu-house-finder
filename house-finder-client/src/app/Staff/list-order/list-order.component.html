@@ -10,36 +10,6 @@
       <div class="my-4" *ngIf="orders.length != 0">
         <h3 class="text-center">Danh sách đăng ký</h3>
 
-        <!-- Search bar -->
-        <div class="row d-flex justify-content-center">
-          <div class="col-10 col-md-5">
-            <div class="text-center my-4">
-              <div class="input-group">
-                <!-- Press enter to search  -->
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Nhập từ khóa tìm kiếm"
-                  aria-label="search_house_by_name"
-                  aria-describedby="button-addon2"
-                  #searchValue
-                  (keydown.enter)="search(searchValue.value)"
-                />
-                <!-- Click button to search -->
-                <button
-                  class="btn btn-outline-secondary"
-                  type="button"
-                  id="button-addon2"
-                  (click)="search(searchValue.value)"
-                >
-                  <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- End Search bar -->
-
         <!-- Filter -->
         <div class="row">
           <!-- Date picker -->

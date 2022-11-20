@@ -49,7 +49,7 @@ export class ListOrderComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.selectedOrderBy = 'asc';
+    this.selectedOrderBy = 'desc';
     this.filterOrder(true);
     //this.filterOrder(false);
 
