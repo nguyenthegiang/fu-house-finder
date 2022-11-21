@@ -72,5 +72,12 @@ namespace HouseFinder_API.Controllers
             return reportRepository.CountReportByHouseId(houseId);
         }
 
+        //GET: api/Report/CountTotalReport
+        [HttpGet("CountTotalReport")]
+        public int CountTotalReport()
+        {
+            return reportRepository.CounTotalReport();
+        }
+
     }
 }

@@ -35,7 +35,7 @@ export class OrderService {
     statusId?: number,
     fromDate?: string,
     toDate?: string,
-    orderBy?:string): Observable<Order[]>{
+    orderBy?: string): Observable<Order[]> {
 
     //[Paging] count Skip and Top from pageSize & pageNumber
     const skip = pageSize * (pageNumber - 1);
@@ -46,7 +46,7 @@ export class OrderService {
     filterAPIUrl += `?$skip=${skip}&$top=${top}`;
 
     //[Filter] check if user has at least 1 filter
-    if ((statusId != undefined && statusId != 0) || fromDate || toDate) {
+    if ((statusId != undefined && statusId != 0) || fromDate || toDate ) {
       //add filter to API
       filterAPIUrl += `&$filter=`;
     }
@@ -55,7 +55,7 @@ export class OrderService {
     var checkFirstFilter = true;
 
     //[Filter] add filter by status if has
-    if (statusId != undefined && statusId!= 0) {
+    if (statusId != undefined && statusId != 0) {
       //if is not the first filter -> need to add 'and' to API URL
       if (!checkFirstFilter) {
         filterAPIUrl += ` and `;
@@ -67,7 +67,7 @@ export class OrderService {
     }
 
     //[Filter] add filter by date if it has
-    if(fromDate != undefined){
+    if (fromDate != undefined) {
       //if is not the first filter -> need to add 'and' to API URL
       if (!checkFirstFilter) {
         filterAPIUrl += ` and `;
@@ -78,7 +78,7 @@ export class OrderService {
       filterAPIUrl += `OrderedDate ge ${fromDate}`;
     }
 
-    if(toDate != undefined){
+    if (toDate != undefined) {
       //if is not the first filter -> need to add 'and' to API URL
       if (!checkFirstFilter) {
         filterAPIUrl += ` and `;
@@ -89,7 +89,7 @@ export class OrderService {
       filterAPIUrl += `OrderedDate le ${toDate}`;
     }
 
-    if(orderBy != undefined){
+    if (orderBy != undefined) {
       //if is not the first filter -> need to add 'and' to API URL
       if (!checkFirstFilter) {
         filterAPIUrl += ` `;
@@ -105,22 +105,27 @@ export class OrderService {
   }
 
   //[Staff/dashboard] Get total order by month for bar chart
-  getTotalOrderByMonth():Observable<number[]>{
+  getTotalOrderByMonth(): Observable<number[]> {
     return this.http.get<number[]>(this.APIUrl + "/GetTotalOrderByMonth");
   }
 
   //[Staff/dashboard] Get total order by month for bar chart
-  getSolvedOrderByMonth():Observable<number[]>{
+  getSolvedOrderByMonth(): Observable<number[]> {
     return this.http.get<number[]>(this.APIUrl + "/GetSolvedOrderByMonth");
   }
 
   //[Staff/list-order] Filter orders by status
-  filterOrderByStatus(status: boolean): Observable<Order[]>{
+  filterOrderByStatus(status: boolean): Observable<Order[]> {
     return this.http.get<Order[]>(this.APIUrl + "/?$filter=Solved%20eq%20" + status);
   }
 
   //[Staff/list-order] Update order's status
-  updateOrderStatus(orderId: number, statusId: number): Observable<any>{
+  updateOrderStatus(orderId: number, statusId: number): Observable<any> {
     return this.http.put<any>(this.APIUrl + "/" + orderId + "/" + statusId, this.httpOptions);
+  }
+
+  //POST Order for user
+  addOrder(order: Order): Observable<any> {
+    return this.http.post<any>(this.APIUrl, order, this.httpOptions);
   }
 }

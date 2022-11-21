@@ -12,7 +12,7 @@
 
     a:hover{
       color: white;
-      text-decoration: none;
+      text-decoration: underline;
     }
   }
 
@@ -36,5 +36,12 @@
       //border: solid 1px black;
       opacity: 0.8;
     }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  #img
+  {
+    display: none !important;
   }
 }

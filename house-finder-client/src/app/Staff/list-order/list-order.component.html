@@ -10,36 +10,6 @@
       <div class="my-4" *ngIf="orders.length != 0">
         <h3 class="text-center">Danh sách đăng ký</h3>
 
-        <!-- Search bar -->
-        <div class="row w-100 d-flex justify-content-center">
-          <div class="col-10 col-md-5">
-            <div class="text-center my-4">
-              <div class="input-group">
-                <!-- Press enter to search  -->
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Nhập từ khóa tìm kiếm"
-                  aria-label="search_house_by_name"
-                  aria-describedby="button-addon2"
-                  #searchValue
-                  (keydown.enter)="search(searchValue.value)"
-                />
-                <!-- Click button to search -->
-                <button
-                  class="btn btn-outline-secondary"
-                  type="button"
-                  id="button-addon2"
-                  (click)="search(searchValue.value)"
-                >
-                  <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- End Search bar -->
-
         <!-- Filter -->
         <div class="row">
           <!-- Date picker -->
@@ -98,30 +68,30 @@
         <table class="table table-striped table-hover mt-4">
           <thead>
             <tr>
-              <th scope="col">STT</th>
+              <th scope="col" id="md">STT</th>
               <th scope="col">Mã sinh viên</th>
               <th scope="col">Tên sinh viên</th>
-              <th scope="col">Số điện thoại</th>
-              <th scope="col">Email</th>
+              <!-- <th scope="col" id="md">Số điện thoại</th>
+              <th scope="col" id="md">Email</th> -->
               <!-- <th scope="col">Yêu cầu</th> -->
               <th scope="col">Ngày tạo</th>
-              <th scope="col">Ngày giải quyết</th>
+              <th scope="col" id="md">Ngày giải quyết</th>
               <th scope="col">Trạng thái</th>
-              <th scope="col">Tùy chọn</th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let order of orders; let i = index">
-              <td>
+              <td id="md">
                 <b>{{ (pageNumber - 1) * pageSize + i + 1 }}</b>
               </td>
               <td>{{ order.studentId }}</td>
               <td>{{ order.studentName }}</td>
-              <td>{{ order.phoneNumber }}</td>
-              <td>{{ order.email }}</td>
+              <!-- <td id="md">{{ order.phoneNumber }}</td>
+              <td id="md">{{ order.email }}</td> -->
               <!-- <td>{{order.orderContent}}</td> -->
               <td>{{ order.orderedDate | date: "dd/MM/yyyy" }}</td>
-              <td>{{ order.solvedDate | date: "dd/MM/yyyy" }}</td>
+              <td id="md">{{ order.solvedDate | date: "dd/MM/yyyy" }}</td>
               <td
                 *ngIf="order.status.statusName === 'Unsolved'"
                 style="color: red"
@@ -142,15 +112,18 @@
               </td>
               <td>
                 <!-- Button trigger modal -->
-                <button
+                <a
                   type="button"
-                  class="btn btn-secondary"
+                  class="text-decoration-none text-primary"
                   data-bs-toggle="modal"
                   data-bs-target="#selectedOrderModal"
                   (click)="changeSelectedOrder(order.orderId)"
+                  style="cursor: pointer;"
                 >
-                  Chi tiết
-                </button>
+                  <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Chi tiết">
+                    info
+                  </span>
+                </a>
               </td>
             </tr>
           </tbody>
@@ -167,7 +140,6 @@
                 <a
                   class="page-link"
                   aria-label="Previous"
-                  routerLink="Staff/list-order"
                   (click)="goToPage(pageNumber - 1)"
                 >
                   <span aria-hidden="true">&laquo;</span>
@@ -178,7 +150,6 @@
                 <!-- Display this as active if it's the chosen page -->
                 <a
                   class="page-link"
-                  routerLink="Staff/list-order"
                   (click)="goToPage(page)"
                   [ngClass]="{ active: pageNumber == page }"
                   >{{ page }}</a
@@ -193,7 +164,6 @@
                 <a
                   class="page-link"
                   aria-label="Next"
-                  routerLink="Staff/list-order"
                   (click)="goToPage(pageNumber + 1)"
                 >
                   <span aria-hidden="true">&raquo;</span>
@@ -231,10 +201,13 @@
       </div>
 
       <div class="modal-body">
-        <h6>Nội dung:</h6>
-        <span>{{ selectedOrderContent }}</span>
+        <span><b>Tên sinh viên: </b>{{ selectedOrderName }}</span><br>
+        <span><b>Số điện thoại: </b>{{ selectedOrderPhone }}</span><br>
+        <span><b>Email: </b>{{ selectedOrderEmail }}</span><br>
+        <span><b>Ngày tạo: </b>{{ selectedOrderCreatedDate | date }}</span><br>
+        <span><b>Nội dung: </b>{{ selectedOrderContent }}</span><br>
         <br>
-        <h6 class="form-label">Trạng thái</h6>
+        <b class="form-label">Trạng thái</b>
         <!-- Set selected value for <select> by [ngModel] -->
         <select #selectOrderStatusId class="form-select" [(ngModel)]="selectedStatusId" (change)="onSelectOrderStatus(selectOrderStatusId.value)">
           <option *ngFor="let status of statuses" [value]="status.statusId">
