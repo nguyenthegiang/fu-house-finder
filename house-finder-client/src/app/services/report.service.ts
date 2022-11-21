@@ -90,7 +90,7 @@ export class ReportService {
         checkFirstFilter = false;
       }
 
-      filterAPIUrl += `contains(ReportContent,'${searchName}')`;
+      filterAPIUrl += `contains(ReportContent, '${searchName}')`;
     }
 
     //[Filter] add filter by date if it has
@@ -127,6 +127,7 @@ export class ReportService {
       filterAPIUrl += `&$orderby=ReportedDate ${orderBy}`;
     }
 
+    console.log(filterAPIUrl);
     return this.http.get<StaffReport[]>(filterAPIUrl);
   }
 }
