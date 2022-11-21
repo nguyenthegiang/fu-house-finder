@@ -24,7 +24,7 @@ namespace HouseFinder_API.Controllers
 
         //[Report] POST: Add Report
         [HttpPost]
-        public IActionResult Post([FromBody] Report report)
+        public IActionResult Post( Report report)
         {
             try
             {
