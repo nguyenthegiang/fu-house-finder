@@ -54,7 +54,7 @@ GO
 
 --Người dùng
 CREATE TABLE [dbo].[Users] (
-	UserId nchar(30) NOT NULL PRIMARY KEY,
+	UserId nchar(8) NOT NULL PRIMARY KEY,
 
 	--Dành cho người Login = Facebook/Google
 	FacebookUserId nchar(300) NULL,

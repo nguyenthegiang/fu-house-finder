@@ -547,7 +547,7 @@ namespace BusinessObjects
             modelBuilder.Entity<User>(entity =>
             {
                 entity.Property(e => e.UserId)
-                    .HasMaxLength(30)
+                    .HasMaxLength(8)
                     .IsFixedLength(true);
 
                 entity.Property(e => e.CreatedBy)

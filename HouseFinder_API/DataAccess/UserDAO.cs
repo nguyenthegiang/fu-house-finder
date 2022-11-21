@@ -166,7 +166,6 @@ namespace DataAccess
 
                         User user = new User();
                         user.UserId = userPrefix + index.ToString("D6");
-
                         user.FacebookUserId = fid;
                         user.GoogleUserId = gid;
                         user.Email = email;

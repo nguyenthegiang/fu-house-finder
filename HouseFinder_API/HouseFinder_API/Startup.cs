@@ -16,6 +16,8 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OData.Edm;
 using Microsoft.OData.ModelBuilder;
 using Microsoft.OpenApi.Models;
+using Repositories.IRepository;
+using Repositories.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -93,6 +95,24 @@ namespace HouseFinder_API
                 };
             });
             services.AddSingleton<IAuthentication>(new AuthenticationManager(key));
+            string AwsAccessKey;
+            string AwsSecretKey;
+            string AwsBucket;
+
+            try
+            {
+                AwsAccessKey = Configuration.GetSection("AWS").GetSection("AccessKey").Value;
+                AwsSecretKey = Configuration.GetSection("AWS").GetSection("SecretKey").Value;
+                AwsBucket = Configuration.GetSection("AWS").GetSection("Bucket").Value;
+            }
+            catch (Exception)
+            {
+                AwsAccessKey = "";
+                AwsSecretKey = "";
+                AwsBucket = "";
+            }
+
+            services.AddSingleton<IStorageRepository>(new StorageRepository(AwsAccessKey, AwsSecretKey, AwsBucket));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
