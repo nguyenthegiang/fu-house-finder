@@ -60,7 +60,8 @@ export class ReportService {
     pageNumber: number,
     fromDate?: string,
     toDate?: string,
-    orderBy?: string
+    orderBy?: string,
+    searchName?: string,
   ): Observable<StaffReport[]> {
     //[Paging] count Skip and Top from pageSize & pageNumber
     const skip = pageSize * (pageNumber - 1);
@@ -71,13 +72,26 @@ export class ReportService {
     filterAPIUrl += `?$skip=${skip}&$top=${top}`;
 
     //[Filter] check if user has at least 1 filter
-    if (fromDate || toDate) {
+    if (fromDate || toDate || searchName) {
       //add filter to API
       filterAPIUrl += `&$filter=`;
     }
 
     //[Filter] flag to check if that filter is the first filter (if is first -> not have 'and')
     var checkFirstFilter = true;
+
+    //[Filter] add filter by name if has (contains name)
+    if (searchName != undefined) {
+      //if is not the first filter -> need to add 'and' to API URL
+      if (!checkFirstFilter) {
+        filterAPIUrl += ` and `;
+      } else {
+        //if this one is the first filter -> mark it so others won't add 'and'
+        checkFirstFilter = false;
+      }
+
+      filterAPIUrl += `contains(ReportContent, '${searchName}')`;
+    }
 
     //[Filter] add filter by date if it has
     if (fromDate != undefined) {
@@ -113,6 +127,7 @@ export class ReportService {
       filterAPIUrl += `&$orderby=ReportedDate ${orderBy}`;
     }
 
+    console.log(filterAPIUrl);
     return this.http.get<StaffReport[]>(filterAPIUrl);
   }
 }

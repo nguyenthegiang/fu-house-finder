@@ -1964,13 +1964,13 @@ INSERT INTO [dbo].[ReportStatuses] VALUES (N'Solved', GETDATE());		--đã giả
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 1, 1, 0,
+INSERT INTO [dbo].[Reports] VALUES (N'Cho em hỏi là bạn em thuê nhà của 1 người, trong hợp đồng không hề ghi là cấm nuôi thú cưng, nhưng khi bạn em nuôi thì chủ nhà xông vào nhà và cảnh cáo cấm không được nuôi', N'HE153046', 1, 1, 0,
 '01/03/2022', NULL, NULL);
 INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ thay khóa cổng không cho vào nhà', N'HE153046', 2, 1, 1,
 '01/04/2022', NULL, NULL);
 INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tự ý vào phòng của bạn và tháo bóng đèn trong nhà vệ sinh của bạn', N'HE153046', 3, 1, 0,
 '01/05/2022', NULL, NULL);
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 4, 1, 0,
+INSERT INTO [dbo].[Reports] VALUES (N'Chủ nhà trọ tứ ý vào phòng trọ của người thuê có vi phạm pháp luật. Chủ nhà trọ có bị truy cứu trách nhiệm hình sự tội xâm phạm chỗ ở công dân.', N'HE153046', 4, 1, 0,
 '02/03/2022', NULL, NULL);
 INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ xâm phạm quyền riêng tư', N'HE153046', 1, 1, 0,
 '03/03/2022', NULL, NULL);
@@ -1978,37 +1978,62 @@ INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ thu tiền điện vượt 
 '03/13/2022', NULL, NULL);
 INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 9, 2, 0,
 '04/03/2022', NULL, NULL);
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 4, 2, 0,
+INSERT INTO [dbo].[Reports] VALUES (N'Bạn em không hề vi phạm luật cho thuê nhà hay hợp đồng nên bạn em vẫn nuôi vì thấy chủ nhà bất hợp lý.', N'HE153046', 4, 2, 0,
 '04/23/2022', NULL, NULL);
 INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng mức đóng tiền điện so với hợp đồng thuê phòng trước đó mà hai bên đã kí', N'HE153046', 7, 2, 0,
 '04/14/2022', NULL, NULL);
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 8, 2, 0,
+INSERT INTO [dbo].[Reports] VALUES (N'Gần đây, chủ nhà lại tự tiện vô nhà lúc bạn em đang ngủ và khóa hết cửa để bắt lấy 1 con mèo nhỏ của bạn em mà không nói 1 tiếng nào', N'HE153046', 8, 2, 0,
 '04/17/2022', NULL, NULL);
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 1, 2, 0,
+INSERT INTO [dbo].[Reports] VALUES (N'Nếu hợp đồng không có quy định về việc nuôi thú cưng thì hành vi của người chủ nhà trọ đang xâm phạm chỗ ở hợp pháp của người khác.', N'HE153046', 1, 2, 0,
 '04/03/2022', NULL, NULL);
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 1, 2, 0,
+INSERT INTO [dbo].[Reports] VALUES (N'Không chấp hành việc kiểm tra hộ khẩu, kiểm tra tạm trú, kiểm tra lưu trú hoặc không xuất trình sổ hộ khẩu, sổ tạm trú, giấy tờ khác liên quan đến cư trú theo yêu cầu của cơ quan có thẩm quyền.', N'HE153046', 1, 2, 0,
 '05/03/2022', NULL, NULL);
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 3, 2, 0,
+INSERT INTO [dbo].[Reports] VALUES (N'Thuê, cho thuê sổ hộ khẩu, sổ tạm trú, giấy tờ khác liên quan đến cư trú để thực hiện hành vi trái quy định của pháp luật;', N'HE153046', 3, 2, 0,
 '07/03/2022', NULL, NULL);
 INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 2, 1, 0,
 '07/03/2022', NULL, NULL);
 INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 1, 1, 0,
 '08/03/2022', GETDATE(), NULL);
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 10, 3, 0,
+INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ bắt thú nuôi trong phòng', N'HE153046', 10, 3, 0,
 '09/03/2022', GETDATE(), N'SA000001');
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 11, 3, 0,
+INSERT INTO [dbo].[Reports] VALUES (N'Chủ nhà không trả lại tiền cọc.', N'HE153046', 11, 3, 0,
 '09/03/2022', GETDATE(), N'SA000001');
 INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 13, 3, 0,
 '09/03/2022', GETDATE(), N'SA000001');
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 8, 3, 0,
+INSERT INTO [dbo].[Reports] VALUES (N'Cá nhân, chủ hộ gia đình không thực hiện đúng quy định về đăng ký thường trú, đăng ký tạm trú hoặc điều chỉnh những thay đổi trong sổ hộ khẩu, sổ tạm trú', N'HE153046', 8, 3, 0,
 '09/03/2022', GETDATE(), N'SA000001');
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 8, 3, 0,
+INSERT INTO [dbo].[Reports] VALUES (N'Nếu không đăng ký tạm trú thì sẽ bị xử phạt như thế nào?', N'HE153046', 8, 3, 0,
 '10/03/2022', GETDATE(), N'SA000001');
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 6, 3, 0,
+INSERT INTO [dbo].[Reports] VALUES (N'Ng­ười đang sinh sống, làm việc, lao động, học tập tại một địa điểm thuộc xã, phường, thị trấn nhưng không thuộc trường hợp được đăng ký thường trú tại địa phương đó thì trong thời hạn ba mươi ngày, kể từ ngày đến phải đăng ký tạm trú tại Công an xã, phường, thị trấn.', N'HE153046', 6, 3, 0,
 '11/03/2022', GETDATE(), N'SA000001');
-INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tăng giá phòng trái với hợp đồng', N'HE153046', 7, 1, 0,
+INSERT INTO [dbo].[Reports] VALUES (N'Đăng ký tạm trú là việc công dân đăng ký nơi tạm trú của mình với cơ quan nhà nước có thẩm quyền và được cơ quan này làm thủ tục đăng ký tạm trú, cấp sổ tạm trú cho họ.', N'HE153046', 7, 1, 0,
 '11/05/2022', NULL, NULL);
-
+INSERT INTO [dbo].[Reports] VALUES (N'Lorem ipsum', N'HE153046', 7, 1, 0,
+'11/21/2022', NULL, NULL);
+INSERT INTO [dbo].[Reports] VALUES (N'Lorem ipsum1', N'HE153046', 7, 1, 0,
+'11/21/2022', NULL, NULL);
+INSERT INTO [dbo].[Reports] VALUES (N'Lorem ipsum2', N'HE153046', 7, 1, 0,
+'11/21/2022', NULL, NULL);
+INSERT INTO [dbo].[Reports] VALUES (N'Lorem ipsum3', N'HE153046', 7, 1, 0,
+'11/21/2022', NULL, NULL);
+INSERT INTO [dbo].[Reports] VALUES (N'Lorem ipsum4', N'HE153046', 7, 1, 0,
+'11/21/2022', NULL, NULL);
+INSERT INTO [dbo].[Reports] VALUES (N'Lorem ipsum5', N'HE153046', 6, 2, 0,
+'11/21/2022', NULL, NULL);
+INSERT INTO [dbo].[Reports] VALUES (N'Lorem ipsum síu amats relid deisnt huyen bui ngoc dep trai alo1234 alo alo .,23... điện đèn tăng giá', N'HE153046', 6, 2, 0,
+'11/21/2022', NULL, NULL);
+INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tự ý vào phòng của bạn và tháo bóng đèn điện trong nhà vệ sinh của bạn', N'HE153046', 4, 1, 0,
+'01/05/2022', NULL, NULL);
+INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tự ý vào phòng của bạn và tháo bóng đèn điện trong nhà vệ sinh của bạn', N'HE153046', 4, 1, 0,
+'11/21/2022', NULL, NULL);
+INSERT INTO [dbo].[Reports] VALUES (N'The Test is used by organisations to determine whether an employee is suitable for a particular task. If you work or want to work for a large organisation, particularily in Asia, then the TOEIC test will be useful to you. In some countries you can also take a Speaking and Writing exam along with the Reading and Listening. đèn điện', N'HE153046', 4, 1, 0,
+'11/21/2022', NULL, NULL);
+INSERT INTO [dbo].[Reports] VALUES (N'TOEIC, viết tắt của Test of English for International Communication – Bài kiểm tra tiếng Anh giao tiếp quốc tế, là một chứng chỉ tiếng Anh quốc tế về giao tiếp dành cho người đi làm không phải là người sử dụng tiếng Anh làm tiếng mẹ đẻ, đặc biệt là những đối tượng muốn sử dụng tiếng Anh trong môi trường giao tiếp và đèn điện', N'HE153046', 4, 1, 0,
+'11/21/2022', NULL, NULL);
+INSERT INTO [dbo].[Reports] VALUES (N'đèn TOEIC, viết tắt của Test of English for International Communication – Bài kiểm tra tiếng Anh giao tiếp quốc tế, là một chứng chỉ tiếng Anh quốc tế về giao tiếp dành cho người đi làm không phải là người sử dụng tiếng Anh làm tiếng mẹ đẻ, đặc biệt là những đối tượng muốn sử dụng tiếng Anh trong môi trường giao tiếp và điện', N'HE153046', 4, 1, 0,
+'11/21/2022', NULL, NULL);
+INSERT INTO [dbo].[Reports] VALUES (N'đèn, viết tắt của Test of English for International Communication – Bài kiểm tra tiếng Anh giao tiếp quốc tế, là một chứng chỉ tiếng Anh quốc tế về giao tiếp dành cho người đi làm không phải là người sử dụng tiếng Anh làm tiếng mẹ đẻ, đặc biệt là những đối tượng muốn sử dụng tiếng Anh trong môi trường giao tiếp và điện', N'HE153046', 4, 2, 0,
+'11/21/2022', NULL, NULL);
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 

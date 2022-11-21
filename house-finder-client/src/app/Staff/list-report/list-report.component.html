@@ -63,18 +63,18 @@
                     <input
                       type="text"
                       class="form-control"
-                      placeholder="Nhập từ khóa tìm kiếm"
+                      placeholder="Nhập nội dung báo cáo tìm kiếm"
                       aria-label="search_house_by_name"
                       aria-describedby="button-addon2"
-                      #searchValue
-                      (keydown.enter)="search(searchValue.value)"
+                      #searchReportContent
+                      (keydown.enter)="searchReportByContent(searchReportContent.value)"
                     />
                     <!-- Click button to search -->
                     <button
                       class="btn btn-outline-secondary"
                       type="button"
                       id="button-addon2"
-                      (click)="search(searchValue.value)"
+                      (click)="searchReportByContent(searchReportContent.value)"
                     >
                       <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
@@ -112,7 +112,11 @@
               <!-- Order by -->
               <div class="col-10 col-md-4">
                 <label class="form-label">Sắp xếp</label>
-                <select #selectedOrderBy class="form-select" (change)="onOrderBySelected(selectedOrderBy.value)">
+                <select
+                  #selectedOrderBy
+                  class="form-select"
+                  (change)="onOrderBySelected(selectedOrderBy.value)"
+                >
                   <option selected disabled>Chọn sắp xếp</option>
                   <option value="desc">Ngày gần nhất</option>
                   <option value="asc">Ngày xa nhất</option>
@@ -221,6 +225,7 @@
                       placeholder="Nhập từ khóa tìm kiếm"
                       aria-label="search_house_by_name"
                       aria-describedby="button-addon2"
+                      placeholder="Nhập tên nhà tìm kiếm"
                       #searchValue
                       (keydown.enter)="search(searchValue.value)"
                     />
@@ -293,7 +298,8 @@
                   </td>
                   <td>
                     <!-- Button trigger modal -->
-                    <a class="text-decoration-none text-primary"
+                    <a
+                      class="text-decoration-none text-primary"
                       type="button"
                       data-bs-toggle="modal"
                       data-bs-target="#listReportModal"
@@ -355,7 +361,6 @@
               </nav>
             </div>
             <!-- End Paging -->
-
           </div>
         </div>
       </div>

@@ -24,10 +24,11 @@ export class ListReportComponent implements OnInit {
   //Landlord of selected house
   landlordOfSelectedHouse: User | undefined;
 
-  //Filter
+  //Filter report
   selectedFromDate: string | undefined;
   selectedToDate: string | undefined;
   selectedOrderBy: string | undefined;
+  searchName: string | undefined;
 
   //(Paging) for Reports
   totalReport = 0; //items count
@@ -113,6 +114,19 @@ export class ListReportComponent implements OnInit {
     this.filterReport(true);
   }
 
+  //Search House by Name (contains)
+  searchReportByContent(searchReportContent: string) {
+    //not perform search for empty input
+    if (!searchReportContent.trim()) {
+      return;
+    }
+
+    // Call API (filter by name contains)
+    this.searchName = searchReportContent;
+    this.filterReport(true);
+    console.log(this.searchName)
+  }
+
   //[Paging] User click on a Page number -> Go to that page
   goToPage(pageNumber: number) {
     // Call API: go to Page Number
@@ -143,7 +157,7 @@ export class ListReportComponent implements OnInit {
     }
 
     this.reportService
-      .filterReport(this.reportPageSize, this.reportPageNumber, this.selectedFromDate, this.selectedToDate, this.selectedOrderBy)
+      .filterReport(this.reportPageSize, this.reportPageNumber, this.selectedFromDate, this.selectedToDate, this.selectedOrderBy, this.searchName)
       .subscribe((data) => {
         this.reports = data;
         this.scrollToTop();
