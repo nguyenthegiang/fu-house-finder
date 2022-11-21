@@ -26,10 +26,12 @@ namespace HouseFinder_API.Controllers
         private IHouseRepository housesRepository = new HouseRepository();
         private IRoomRepository roomsRepository = new RoomRepository();
         private IUserReposiotry userReposiotry = new UserRepository();
+        private readonly IStorageRepository storageRepository;
 
-        public FileController(IWebHostEnvironment _environment)
+        public FileController(IWebHostEnvironment _environment, IStorageRepository storageRepository)
         {
             Environment = _environment;
+            this.storageRepository = storageRepository;
         }
         
         [HttpGet("download")]
@@ -161,7 +163,7 @@ namespace HouseFinder_API.Controllers
 
         [Authorize]
         [HttpPost("idc/upload")]
-        public IActionResult UploadIDC(List<IFormFile> files)
+        public async Task<IActionResult> UploadIDC(List<IFormFile> files)
         {
             string uid = HttpContext.Session.GetString("User");
             if (uid == null)
@@ -169,20 +171,14 @@ namespace HouseFinder_API.Controllers
                 return Forbid();
             }
             UserDTO user = userReposiotry.GetUserByID(uid);
-            var dir = Path.Combine(Environment.ContentRootPath, "data/user/");
-            DirectoryInfo info = new DirectoryInfo(dir);
-            if (!info.Exists)
-            {
-                info.Create();
-            }
+            var dir = $"user/{user.UserId}/IDC".Trim();
             var frontImg = "";
             var backImg = "";
             for (int i=0; i<2; i++)
             {
-                var path = Path.Combine(dir, files[i].FileName);
+                var path = $"{dir}/{files[i].FileName}";
                 Stream fs = files[i].OpenReadStream();
-                Stream dest = new FileStream(path, FileMode.Create);
-                fs.CopyTo(dest);
+                await storageRepository.UploadFileAsync(path, fs);
                 if (i == 0)
                     frontImg = path;
                 else

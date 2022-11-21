@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using HouseFinder_API.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Google.Apis.Auth;
+using Microsoft.Extensions.Configuration;
 
 namespace HouseFinder_API.Controllers
 {
@@ -18,9 +19,11 @@ namespace HouseFinder_API.Controllers
     public class UserController : ControllerBase
     {
         private IAuthentication auth;
-        public UserController(IAuthentication auth)
+        private IConfiguration Configuration;
+        public UserController(IAuthentication auth, IConfiguration configuration)
         {
             this.auth = auth;
+            this.Configuration = configuration;
         }
         private IUserReposiotry userReposiotry = new UserRepository();
 
@@ -42,22 +45,26 @@ namespace HouseFinder_API.Controllers
         {
             if (login.GoogleUserId != null)
             {
-                var validationSettings = new GoogleJsonWebSignature.ValidationSettings
+                try
                 {
-                    Audience = new string[] { "919349682446-etrauq4d5cluclesaifkcr4bnh4gru2j.apps.googleusercontent.com" }
-                };
-                var payload = await GoogleJsonWebSignature.ValidateAsync(login.GoogleUserId, validationSettings);
-                login.GoogleUserId = payload.Subject;
+                    var validationSettings = new GoogleJsonWebSignature.ValidationSettings
+                    {
+                        Audience = new string[] { Configuration.GetSection("Google").GetSection("Audience").Value }
+                    };
+                    var payload = await GoogleJsonWebSignature.ValidateAsync(login.GoogleUserId, validationSettings);
+                    login.GoogleUserId = payload.Subject;
+                }
+                catch (Exception)
+                {
+                    return Forbid();
+                }
             }
             ResponseDTO user = userReposiotry.Login(login);
-            if (login.Email != null && login.Password != null && user == null)
-                return Forbid();
-            else if (user == null)
+            if (user == null)
                 return NotFound();
             string token = this.auth.Authenticate(user);
             if (token == null)
                 return NotFound();
-            Console.WriteLine(HttpContext.Session.Id);
             HttpContext.Session.SetString("Token", token);
             HttpContext.Session.SetString("User", user.UserId);
             HttpContext.Response.Cookies.Append("X-Access-Token", token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
@@ -71,12 +78,19 @@ namespace HouseFinder_API.Controllers
             {
                 var validationSettings = new GoogleJsonWebSignature.ValidationSettings
                 {
-                    Audience = new string[] { "919349682446-etrauq4d5cluclesaifkcr4bnh4gru2j.apps.googleusercontent.com" }
+                    Audience = new string[] { Configuration.GetSection("Google").GetSection("Audience").Value }
                 };
-                var payload = await GoogleJsonWebSignature.ValidateAsync(register.GoogleIdToken, validationSettings);
-                register.GoogleUserId = payload.Subject;
-                register.Email = payload.Email;
-                register.DisplayName = payload.Name;
+                try
+                {
+                    var payload = await GoogleJsonWebSignature.ValidateAsync(register.GoogleIdToken, validationSettings);
+                    register.GoogleUserId = payload.Subject;
+                    register.Email = payload.Email;
+                    register.DisplayName = payload.Name;
+                }
+                catch (Exception)
+                {
+                    return Forbid();
+                }
             }
             ResponseDTO user = userReposiotry.Register(register);
             string token = this.auth.Authenticate(user);
