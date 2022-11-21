@@ -82,8 +82,8 @@ CREATE TABLE [dbo].[Users] (
 	--Dành cho những Table CRUD dc -> History
 	CreatedDate datetime NOT NULL,
 	LastModifiedDate datetime,
-	CreatedBy nchar(30) NOT NULL,
-	LastModifiedBy nchar(30),
+	CreatedBy nchar(8) NOT NULL,
+	LastModifiedBy nchar(8),
 
 	CONSTRAINT RoleId_in_UserRole FOREIGN KEY(RoleId) REFERENCES UserRoles(RoleId),
 	CONSTRAINT createdUser_in_User FOREIGN KEY(CreatedBy) REFERENCES [dbo].[Users](UserId),
@@ -136,7 +136,7 @@ CREATE TABLE [dbo].[Houses] (
 
 	AddressId int NOT NULL,				--địa chỉ
 	VillageId int,						--thôn/xóm -> phường/xã -> quận/huyện
-	LandlordId nchar(30),				--chủ nhà
+	LandlordId nchar(8),				--chủ nhà
 	CampusId int,						--Campus mà nhà này thuộc về
 	DistanceToCampus float,				--Khoảng cách đến trường
 
@@ -153,8 +153,8 @@ CREATE TABLE [dbo].[Houses] (
 	Deleted bit NOT NULL,
 	CreatedDate datetime NOT NULL,
 	LastModifiedDate datetime,
-	CreatedBy nchar(30) NOT NULL,
-	LastModifiedBy nchar(30),
+	CreatedBy nchar(8) NOT NULL,
+	LastModifiedBy nchar(8),
 
 	CONSTRAINT AddressId_in_Address2 FOREIGN KEY(AddressId) REFERENCES Addresses(AddressId),
 	CONSTRAINT LandlordId_in_User FOREIGN KEY(LandlordId) REFERENCES [dbo].[Users](UserId),
@@ -215,8 +215,8 @@ CREATE TABLE [dbo].[Rooms] (
 	Deleted bit NOT NULL,
 	CreatedDate datetime NOT NULL,
 	LastModifiedDate datetime,
-	CreatedBy nchar(30) NOT NULL,
-	LastModifiedBy nchar(30),
+	CreatedBy nchar(8) NOT NULL,
+	LastModifiedBy nchar(8),
 
 	CONSTRAINT StatusId_in_Status FOREIGN KEY(StatusId) REFERENCES [dbo].[RoomStatuses](StatusId),
 	CONSTRAINT RoomTypeId_in_RoomType FOREIGN KEY(RoomTypeId) REFERENCES [dbo].[RoomTypes](RoomTypeId),
@@ -235,14 +235,14 @@ CREATE TABLE [dbo].[Rates] (
 	LandlordReply nvarchar(MAX),		--Phản hồi của chủ nhà
 
 	HouseId int NOT NULL,						--Cái nhà dc Comment
-	StudentId nchar(30) NOT NULL,				--Người viết Comment
+	StudentId nchar(8) NOT NULL,				--Người viết Comment
 
 	--Dành cho những Table CRUD dc -> History
 	Deleted bit NOT NULL,
 	CreatedDate datetime NOT NULL,
 	LastModifiedDate datetime,
-	CreatedBy nchar(30) NOT NULL,
-	LastModifiedBy nchar(30),
+	CreatedBy nchar(8) NOT NULL,
+	LastModifiedBy nchar(8),
 
 	CONSTRAINT HouseId_in_House2 FOREIGN KEY(HouseId) REFERENCES [dbo].[Houses](HouseId),
 	CONSTRAINT StudentId_in_User FOREIGN KEY(StudentId) REFERENCES [dbo].[Users](UserId),
@@ -263,8 +263,8 @@ CREATE TABLE [dbo].[ImagesOfHouse] (
 	Deleted bit NOT NULL,
 	CreatedDate datetime NOT NULL,
 	LastModifiedDate datetime,
-	CreatedBy nchar(30) NOT NULL,
-	LastModifiedBy nchar(30),
+	CreatedBy nchar(8) NOT NULL,
+	LastModifiedBy nchar(8),
 
 	CONSTRAINT HouseId_in_House3 FOREIGN KEY(HouseId) REFERENCES [dbo].[Houses](HouseId),
 
@@ -284,8 +284,8 @@ CREATE TABLE [dbo].[ImagesOfRoom] (
 	Deleted bit NOT NULL,
 	CreatedDate datetime NOT NULL,
 	LastModifiedDate datetime,
-	CreatedBy nchar(30) NOT NULL,
-	LastModifiedBy nchar(30),
+	CreatedBy nchar(8) NOT NULL,
+	LastModifiedBy nchar(8),
 
 	CONSTRAINT RoomId_in_Room FOREIGN KEY(RoomId) REFERENCES [dbo].[Rooms](RoomId),
 
@@ -308,7 +308,7 @@ CREATE TABLE [dbo].[Reports] (
 	ReportId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
 	ReportContent nvarchar(MAX) NOT NULL,
 
-	StudentId nchar(30) NOT NULL,
+	StudentId nchar(8) NOT NULL,
 	HouseId int NOT NULL,
 
 	StatusId int NOT NULL,
@@ -317,7 +317,7 @@ CREATE TABLE [dbo].[Reports] (
 	Deleted bit NOT NULL,
 	ReportedDate datetime NOT NULL,
 	SolvedDate datetime,
-	SolvedBy nchar(30),
+	SolvedBy nchar(8),
 
 	CONSTRAINT StatusId_in_StatusId9 FOREIGN KEY(StatusId) REFERENCES [dbo].[ReportStatuses](StatusId),
 
@@ -338,8 +338,8 @@ CREATE TABLE [dbo].[RoomHistories] (
 	Deleted bit NOT NULL,
 	CreatedDate datetime NOT NULL,
 	LastModifiedDate datetime,
-	CreatedBy nchar(30) NOT NULL,
-	LastModifiedBy nchar(30),
+	CreatedBy nchar(8) NOT NULL,
+	LastModifiedBy nchar(8),
 
 	CONSTRAINT RoomId_in_Room2 FOREIGN KEY(RoomId) REFERENCES [dbo].Rooms(RoomId),
 
@@ -358,8 +358,8 @@ CREATE TABLE [dbo].[Issues] (
 	Deleted bit NOT NULL,
 	CreatedDate datetime NOT NULL,
 	LastModifiedDate datetime,
-	CreatedBy nchar(30) NOT NULL,
-	LastModifiedBy nchar(30),
+	CreatedBy nchar(8) NOT NULL,
+	LastModifiedBy nchar(8),
 
 	CONSTRAINT RoomId_in_Room3 FOREIGN KEY(RoomId) REFERENCES [dbo].Rooms(RoomId),
 ) ON [PRIMARY]
@@ -377,7 +377,7 @@ GO
 --Wishlist của sinh viên, khi không tìm được phòng trọ theo mong muốn -> tạo -> tuyển sinh thấy được và xử lý
 CREATE TABLE [dbo].[Order] (
 	OrderId int NOT NULL IDENTITY(1, 1) PRIMARY KEY,
-	StudentId nchar(30),
+	StudentId nchar(8),
 	StudentName nvarchar(100) NOT NULL,
 	PhoneNumber nvarchar(50) NOT NULL,
 	Email nvarchar(100),
@@ -386,7 +386,7 @@ CREATE TABLE [dbo].[Order] (
 
 	OrderedDate datetime NOT NULL,
 	SolvedDate datetime,
-	SolvedBy nchar(30) NULL,			--Staff giải quyết Order này, NULL nếu chưa giải quyết xong
+	SolvedBy nchar(8) NULL,			--Staff giải quyết Order này, NULL nếu chưa giải quyết xong
 
 	CONSTRAINT StudentId_in_User4 FOREIGN KEY(StudentId) REFERENCES [dbo].[Users](UserId),
 	CONSTRAINT StatusId_in_OrderStatuses FOREIGN KEY(StatusId) REFERENCES [dbo].[OrderStatuses](StatusId),
@@ -540,9 +540,9 @@ INSERT INTO [dbo].[Users] VALUES (N'LA000014', null, null, N'minhvu@gmail.com', 
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
 INSERT INTO [dbo].[Users] VALUES (N'LA000015', null, null, N'phuongnguyen@gmail.com', N'phuongnguyen', N'Phương Nguyễn', 2, 'image_profile_1.jpg', '0365928071', 'facebook.com/phuongnguyen', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2,  
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
-INSERT INTO [dbo].[Users] VALUES (N'LA000015', null, null, N'namminh@gmail.com', N'namminh', N'Nam Minh', 0, 'image_profile_1.jpg', '0365928071', 'facebook.com/namminh', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2,  
+INSERT INTO [dbo].[Users] VALUES (N'LA000016', null, null, N'namminh@gmail.com', N'namminh', N'Nam Minh', 0, 'image_profile_1.jpg', '0365928071', 'facebook.com/namminh', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2,  
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
-INSERT INTO [dbo].[Users] VALUES (N'LA000015', null, null, N'minhhai@gmail.com', N'minhhai', N'Minh Hải', 0, 'image_profile_1.jpg', '0365928071', 'facebook.com/minhhai', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2,  
+INSERT INTO [dbo].[Users] VALUES (N'LA000017', null, null, N'minhhai@gmail.com', N'minhhai', N'Minh Hải', 0, 'image_profile_1.jpg', '0365928071', 'facebook.com/minhhai', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2,  
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
