@@ -3,7 +3,12 @@ export interface Report {
     reportContent: string;
     studentId: string;
     houseId: number;
-    createdBy: string;
-    lastModifiedBy: string;
+    statusId: number;
+    deleted: boolean;
+    reportedDate: Date;
+    solvedDate: Date;
+    solvedBy?: string;
+
+
     //no need for createdDate & lastModifiedDate
 }
