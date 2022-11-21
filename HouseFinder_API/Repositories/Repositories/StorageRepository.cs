@@ -48,6 +48,9 @@ namespace Repositories.Repositories
             return url;
         }
 
+        /**
+         * Upload file to Server Amazon S3
+         */
         public async Task<bool> UploadFileAsync(string fileName, Stream file)
         {
             try
