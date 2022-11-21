@@ -102,8 +102,10 @@ export class HouseDetailComponent implements OnInit {
       studentId: 'HE153046',   //Fake data, fix later when have Login
       houseId: this.houseDetail!.houseId,
       reportContent: inputReportContent,
-      createdBy: 'HE153046',
-      lastModifiedBy: 'HE153046'
+      statusId: 1,
+      deleted: false,
+      reportedDate: new Date(),
+      solvedDate: new Date(),
     };
 
     this.reportService.addReport(report).subscribe(() => this.goBack());
