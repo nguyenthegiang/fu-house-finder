@@ -188,7 +188,7 @@ export class ListReportComponent implements OnInit {
     }
 
     this.houseService
-      .filterReportedHouse(this.housePageSize, this.housePageNumber, this.selectedOrderByHouse)
+      .filterReportedHouse(this.housePageSize, this.housePageNumber, this.selectedOrderByHouse, this.selectedActiveStatus)
       .subscribe((data) => {
         this.houses = data;
         this.scrollToTop();
