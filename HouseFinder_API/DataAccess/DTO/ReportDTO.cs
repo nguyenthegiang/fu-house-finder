@@ -17,5 +17,6 @@ namespace DataAccess.DTO
         public DateTime ReportedDate { get; set; }
         public DateTime? SolvedDate { get; set; }
         public virtual StaffDTO SolvedByNavigation { get; set; }
+
     }
 }

@@ -132,6 +132,9 @@
                   <th scope="col">Tên sinh viên</th>
                   <th scope="col">Nhà trọ</th>
                   <th scope="col">Ngày báo cáo</th>
+                  <th scope="col">Ngày giải quyết</th>
+                  <th scope="col">Người giải quyết</th>
+                  <th scope="col">Trạng thái</th>
                   <th scope="col">Nội dung</th>
                 </tr>
               </thead>
@@ -143,7 +146,27 @@
                   <td>{{ report.student.displayName }}</td>
                   <td>{{ report.house.houseName }}</td>
                   <td>{{ report.reportedDate | date: "dd/MM/yyyy" }}</td>
-                  <td>{{ report.reportContent }}</td>
+                  <td>{{ report.solvedDate| date: "dd/MM/yyyy" }}</td>
+                  <td id="md"><div *ngIf="report.solvedByNavigation">{{ report.solvedByNavigation.displayName }}</div></td>
+                  <td
+                *ngIf="report.status.statusName === 'Unsolved'"
+                style="color: red"
+              >
+                Chưa giải quyết
+              </td>
+              <td
+                *ngIf="report.status.statusName === 'Processing'"
+                style="color: orange"
+              >
+                Đang giải quyết
+              </td>
+              <td
+                *ngIf="report.status.statusName === 'Solved'"
+                style="color: green"
+              >
+                Đã giải quyết
+              </td>
+                  <td><div class="d-inline-block text-truncate" style="max-width: 350px;">{{ report.reportContent }}</div></td>
                 </tr>
               </tbody>
             </table>
