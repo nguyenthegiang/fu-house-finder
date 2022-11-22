@@ -11,6 +11,8 @@ using HouseFinder_API.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Google.Apis.Auth;
 using Microsoft.Extensions.Configuration;
+using Microsoft.AspNetCore.Identity;
+using BusinessObjects;
 
 namespace HouseFinder_API.Controllers
 {
@@ -106,6 +108,16 @@ namespace HouseFinder_API.Controllers
         {
             return Ok();
         }
+
+        [HttpGet("generate_password")]
+        public IActionResult GeneratePassword(string password)
+        {
+            User user = new User();
+            PasswordHasher<User> pw = new PasswordHasher<User>();
+            var result = new { Password = pw.HashPassword(user, password) };
+            return Ok(result);
+        }
+
         [HttpPost("logout")]
         public IActionResult Logout()
         {
