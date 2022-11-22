@@ -179,7 +179,7 @@ namespace HouseFinder_API.Controllers
             }
             UserDTO user = userReposiotry.GetUserByID(uid);
 
-            //URL of File in Amazon S3 Server
+            //URL of Folder in Amazon S3 Server
             var dir = $"user/{user.UserId}/IDC".Trim();
             var frontImg = "";
             var backImg = "";
@@ -187,8 +187,13 @@ namespace HouseFinder_API.Controllers
             //Upload identity card images (front & back) to Server
             for (int i=0; i<2; i++)
             {
+                //Path to file in Server
                 var path = $"{dir}/{files[i].FileName}";
+
+                //File: an object of IFormFile
                 Stream fs = files[i].OpenReadStream();
+
+                //Upload to Server
                 await storageRepository.UploadFileAsync(path, fs);
                 if (i == 0)
                     frontImg = path;
