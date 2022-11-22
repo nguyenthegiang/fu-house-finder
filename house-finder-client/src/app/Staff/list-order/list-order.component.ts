@@ -160,7 +160,6 @@ export class ListOrderComponent implements OnInit {
 
   onSelectOrderStatus(selectedStatusId: string){
     this.selectedStatusIdToUpdate = Number(selectedStatusId);
-    this.filterOrder(true);
   }
 
   updateOrderStatus() {

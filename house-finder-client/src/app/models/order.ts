@@ -1,4 +1,5 @@
 import { OrderStatus } from "./orderStatus";
+import { Staff } from "./staff";
 
 //DTO: Orders
 export interface Order {
@@ -11,5 +12,5 @@ export interface Order {
   status: OrderStatus;
   orderedDate: Date;
   solvedDate?: Date;
-  solvedBy?: string;
+  solvedByNavigation?: Staff;
 }

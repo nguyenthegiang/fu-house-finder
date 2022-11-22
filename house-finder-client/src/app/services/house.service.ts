@@ -353,38 +353,15 @@ export class HouseService {
     var filterAPIUrl = this.APIUrl + `/GetReportedHouses`;
     filterAPIUrl += `?$skip=${skip}&$top=${top}`;
 
-    //[Filter] check if user has at least 1 filter
-    if (statusId) {
-      //add filter to API
-      filterAPIUrl += `&$filter=`;
-    }
-
-    //[Filter] flag to check if that filter is the first filter (if is first -> not have 'and')
-    var checkFirstFilter = true;
-
     if (orderBy != undefined) {
-      //if is not the first filter -> need to add 'and' to API URL
-      if (!checkFirstFilter) {
-        filterAPIUrl += ` `;
-      } else {
-        //if this one is the first filter -> mark it so others won't add 'and'
-        checkFirstFilter = false;
-      }
       filterAPIUrl += `&$orderby=NumberOfReport ${orderBy}`;
     }
 
     //[Filter] add filter by status if has
     if (statusId != undefined) {
-      //if is not the first filter -> need to add 'and' to API URL
-      if (!checkFirstFilter) {
-        filterAPIUrl += ` and `;
-      } else {
-        //if this one is the first filter -> mark it so others won't add 'and'
-        checkFirstFilter = false;
-      }
-      filterAPIUrl += `Landlord/StatusId eq ${statusId}`;
+      filterAPIUrl += `&$filter=Landlord/StatusId eq ${statusId}`;
     }
-
+    console.log(filterAPIUrl);
     return this.http.get<ReportHouse[]>(filterAPIUrl);
   }
 }
