@@ -249,19 +249,27 @@
               <!-- Order by -->
               <div class="col-10 col-md-6">
                 <label class="form-label">Trạng thái</label>
-                <select class="form-select">
+                <select
+                  #selectedActiveStatus
+                  class="form-select"
+                  (change)="onActiveStatusSelected(selectedActiveStatus.value)"
+                >
                   <option>Chọn sắp xếp</option>
-                  <option>Đang hoạt động</option>
-                  <option>Dừng hoạt động</option>
+                  <option value="1">Đang hoạt động</option>
+                  <option value="0">Dừng hoạt động</option>
                 </select>
               </div>
               <!-- Order by -->
               <div class="col-10 col-md-6">
                 <label class="form-label">Sắp xếp</label>
-                <select class="form-select">
+                <select
+                  #selectedHouseOrderBy
+                  class="form-select"
+                  (change)="onHouseOrderBySelected(selectedHouseOrderBy.value)"
+                >
                   <option>Chọn sắp xếp</option>
-                  <option>Báo cáo nhiều nhất</option>
-                  <option>Báo cáo ít nhất</option>
+                  <option value="desc">Báo cáo nhiều nhất</option>
+                  <option value="asc">Báo cáo ít nhất</option>
                 </select>
               </div>
             </div>

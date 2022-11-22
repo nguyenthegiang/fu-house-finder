@@ -30,6 +30,10 @@ export class ListReportComponent implements OnInit {
   selectedOrderBy: string | undefined;
   searchName: string | undefined;
 
+  //Filter house
+  selectedOrderByHouse: string | undefined;
+  selectedActiveStatus: string | undefined;
+
   //(Paging) for Reports
   totalReport = 0; //items count
   reportPageSize = 10; //number of items per page
@@ -89,7 +93,7 @@ export class ListReportComponent implements OnInit {
 
   search(searchValue: string) {}
 
-  //
+  //Show modal
   changeSelectedHouse(houseId: number) {
     //Find the house which id == houseId
     var selectedHouse = this.houses.find((house) => house.houseId == houseId);
@@ -99,6 +103,8 @@ export class ListReportComponent implements OnInit {
     }
   }
 
+
+  //Filter reports
   onFromDateSelected(selectedDate: string) {
     this.selectedFromDate = selectedDate;
     this.filterReport(true);
@@ -112,6 +118,17 @@ export class ListReportComponent implements OnInit {
   onOrderBySelected(selectedOrderBy: string){
     this.selectedOrderBy = selectedOrderBy;
     this.filterReport(true);
+  }
+
+  //Filter reported houses
+  onHouseOrderBySelected(selectedOrderBy: string){
+    this.selectedOrderByHouse = selectedOrderBy;
+    this.filterReportedHouse(true);
+  }
+
+  onActiveStatusSelected(selectedStatus: string){
+    this.selectedActiveStatus = selectedStatus;
+    this.filterReportedHouse(true);
   }
 
   //Search House by Name (contains)
@@ -171,7 +188,7 @@ export class ListReportComponent implements OnInit {
     }
 
     this.houseService
-      .filterReportedHouse(this.housePageSize, this.housePageNumber)
+      .filterReportedHouse(this.housePageSize, this.housePageNumber, this.selectedOrderByHouse)
       .subscribe((data) => {
         this.houses = data;
         this.scrollToTop();

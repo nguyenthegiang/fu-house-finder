@@ -339,9 +339,11 @@ export class HouseService {
   }
 
   //[Staff/list-report] Filter reported houses
-   filterReportedHouse(
+  filterReportedHouse(
     pageSize: number,
     pageNumber: number,
+    orderBy?: string,
+    active? : string,
   ): Observable<ReportHouse[]>{
     //[Paging] count Skip and Top from pageSize & pageNumber
     const skip = pageSize * (pageNumber - 1);
@@ -350,7 +352,27 @@ export class HouseService {
     //define API here to append query options into it later
     var filterAPIUrl = this.APIUrl + `/GetReportedHouses`;
     filterAPIUrl += `?$skip=${skip}&$top=${top}`;
-    console.log(filterAPIUrl);
+
+    //[Filter] check if user has at least 1 filter
+    if (active) {
+      //add filter to API
+      filterAPIUrl += `&$filter=`;
+    }
+
+    //[Filter] flag to check if that filter is the first filter (if is first -> not have 'and')
+    var checkFirstFilter = true;
+
+    if (orderBy != undefined) {
+      //if is not the first filter -> need to add 'and' to API URL
+      if (!checkFirstFilter) {
+        filterAPIUrl += ` `;
+      } else {
+        //if this one is the first filter -> mark it so others won't add 'and'
+        checkFirstFilter = false;
+      }
+      filterAPIUrl += `&$orderby=NumberOfReport ${orderBy}`;
+    }
+
     return this.http.get<ReportHouse[]>(filterAPIUrl);
   }
 }
