@@ -26,8 +26,11 @@ namespace HouseFinder_API.Controllers
         private IHouseRepository housesRepository = new HouseRepository();
         private IRoomRepository roomsRepository = new RoomRepository();
         private IUserReposiotry userReposiotry = new UserRepository();
+
+        //Used for Upload file to Amazon S3 Server
         private readonly IStorageRepository storageRepository;
 
+        //Inject through Constructor from Startup
         public FileController(IWebHostEnvironment _environment, IStorageRepository storageRepository)
         {
             Environment = _environment;
@@ -161,19 +164,27 @@ namespace HouseFinder_API.Controllers
             );
         }
 
+        /**
+         * [Landlord] Upload images of Identity Card
+         */
         [Authorize]
         [HttpPost("idc/upload")]
         public async Task<IActionResult> UploadIDC(List<IFormFile> files)
         {
+            //Get UserId from Session
             string uid = HttpContext.Session.GetString("User");
             if (uid == null)
             {
                 return Forbid();
             }
             UserDTO user = userReposiotry.GetUserByID(uid);
+
+            //URL of File in Amazon S3 Server
             var dir = $"user/{user.UserId}/IDC".Trim();
             var frontImg = "";
             var backImg = "";
+
+            //Upload identity card images (front & back) to Server
             for (int i=0; i<2; i++)
             {
                 var path = $"{dir}/{files[i].FileName}";
@@ -184,9 +195,12 @@ namespace HouseFinder_API.Controllers
                 else
                     backImg = path;
             }
+
+            //Save URL to images uploaded
             user.IdentityCardFrontSideImageLink = frontImg;
             user.IdentityCardBackSideImageLink = backImg;
             userReposiotry.UpdateUserIdCardImage(user);
+
             return Ok();
         }
     }
