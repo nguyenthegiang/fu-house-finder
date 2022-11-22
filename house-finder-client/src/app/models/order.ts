@@ -10,5 +10,6 @@ export interface Order {
   orderContent: string;
   status: OrderStatus;
   orderedDate: Date;
-  solvedDate: Date;
+  solvedDate?: Date;
+  solvedBy?: string;
 }

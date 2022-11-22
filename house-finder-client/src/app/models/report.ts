@@ -8,7 +8,5 @@ export interface Report {
     reportedDate: Date;
     solvedDate: Date;
     solvedBy?: string;
-
-
     //no need for createdDate & lastModifiedDate
 }
