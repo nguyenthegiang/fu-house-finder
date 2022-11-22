@@ -70,6 +70,7 @@
   bottom: 20px;
   transition: background 0.25s;
   border: none;
+  z-index: 999999;
 }
 .floating-btn:active{
   background: #990000;
