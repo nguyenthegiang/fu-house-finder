@@ -95,18 +95,25 @@ export class HouseDetailComponent implements OnInit {
 
   //Send the Report for House
   sendReport(inputReportContent: string) {
-    inputReportContent = inputReportContent.trim();
+    var user = null;
+    user = localStorage.getItem("user");
+    if (user === null) {
+      alert("Dang nhap de su dung tinh nang nay")
+    } else {
+      inputReportContent = inputReportContent.trim();
 
-    //Create Report
-    const report: Report = {
-      houseId: this.houseDetail!.houseId,
-      reportContent: inputReportContent,
-      statusId: 1,
-      deleted: false,
-      reportedDate: new Date()
-    };
+      //Create Report
+      const report: Report = {
+        houseId: this.houseDetail!.houseId,
+        reportContent: inputReportContent,
+        statusId: 1,
+        deleted: false,
+        reportedDate: new Date()
+      };
 
-    this.reportService.addReport(report).subscribe(() => this.goBack());
+      this.reportService.addReport(report).subscribe(() => this.goBack());
+    }
+
   }
   goBack(): void {
     window.location.reload();
