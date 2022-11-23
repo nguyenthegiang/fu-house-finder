@@ -334,11 +334,8 @@
           <div class="card rounded houseCardItem" routerLink="/house-detail/{{house.houseId}}">
 
             <!-- Image -->
-            <img class="card-img-top" *ngIf="house.imagesOfHouses"
-              src="../assets/image/House/{{house.imagesOfHouses[0].imageLink}}" alt="House Image" style="width: 100%;
-                height: 200px;
-                background-position: center center;
-                background-repeat: no-repeat;">
+            <img class="card-img-top" *ngIf="house.imagesOfHouses" id="houseItemImage"
+              src="../assets/image/House/{{house.imagesOfHouses[0].imageLink}}" alt="House Image">
 
             <div class="card-body rounded-bottom ">
               <!-- Name -->
@@ -394,7 +391,7 @@
               <!-- Utility -->
               <div class="card-text text-truncate maxWidthText grayText">
                 <div class="d-flex">
-                  <!-- No Utility -->
+                  <!-- No Utility (not show up, only stay as placeholder) -->
                   <div *ngIf="house.fingerprintLock == false && house.camera == false && house.parking == false">
                     <span class="material-symbols-outlined me-1" style="visibility: hidden;">
                       fingerprint
@@ -403,21 +400,21 @@
                   <!-- Fingerprint -->
                   <div *ngIf="house.fingerprintLock == true">
                     <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top"
-                      title="Khóa vân tay" style="cursor: pointer;">
+                      title="Khóa vân tay">
                       fingerprint
                     </span>
                   </div>
                   <!-- Video camera -->
                   <div *ngIf="house.camera == true">
                     <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top"
-                      title="Camera an ninh" style="cursor: pointer;">
+                      title="Camera an ninh">
                       videocam
                     </span>
                   </div>
                   <!-- Parking spot -->
                   <div *ngIf="house.parking == true">
                     <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
-                      title="Chỗ để xe" style="cursor: pointer;">
+                      title="Chỗ để xe">
                       local_parking
                     </span>
                   </div>
@@ -510,7 +507,7 @@
   <!-- Send Order button -->
   <div class=" bottom-0 end-0 me-5">
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#orderModal"
-      data-bs-whatever="@getbootstrap">Open modal for @getbootstrap</button>
+      data-bs-whatever="@getbootstrap">Không tìm được phòng trọ mong muốn? Bấm vào đây!</button>
     <app-create-order></app-create-order>
   </div>
 </div>
