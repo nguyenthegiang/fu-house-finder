@@ -127,10 +127,16 @@ export class LoginComponent implements OnInit {
               localStorage.setItem("role", resp.roleName);
               this.ngZone.run(() => { this.router.navigate(['/home']); });
             },
-              error => {
+              async error => {
                 this.facebookId = response.id;
                 this.name = response.name;
-                this.triggerRoleModal();
+                await this.triggerRoleModal();
+                if (this.role == 'landlord') {
+                  this.ngZone.run(() => { this.triggerRegister() });
+                }
+                else if (this.role == 'student'){
+                  this.ngZone.run(() => { this.registerStudent() });
+                }
               });
           });
         } else {                                 // Not logged into your webpage or we are unable to tell.
@@ -159,6 +165,9 @@ export class LoginComponent implements OnInit {
         await this.triggerRoleModal();
         if (this.role == 'landlord') {
           this.ngZone.run(() => { this.triggerRegister() });
+        }
+        else if (this.role == 'student'){
+          this.ngZone.run(() => { this.registerStudent() });
         }
       }
     );
@@ -230,7 +239,6 @@ export class LoginComponent implements OnInit {
         phonenumber,
         facebookUrl
       ).subscribe(resp => {
-        console.log(resp.accessToken);
         this.fileService.uploadIDC(this.frontImg, this.backImg).subscribe(resp => {});
         localStorage.setItem('user', resp.displayName);
         localStorage.setItem("role", resp.roleName);
@@ -271,8 +279,7 @@ export class LoginComponent implements OnInit {
         reader.readAsDataURL(file);
         this.backImg = file;
       }
-  }
-
+    }
   }
 
 }
