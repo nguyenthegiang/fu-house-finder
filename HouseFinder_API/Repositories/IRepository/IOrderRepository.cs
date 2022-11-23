@@ -17,6 +17,7 @@ namespace Repositories.IRepository
         public void UpdateOrderStatus(int orderId, int statusId, string account);
         public void AddOrder(Order order);
         public int CountTotalOrderSolvedByAccount(string account);
+        public int[] CountSolvedOrderByStaffInAYear(string account);
 
     }
 }

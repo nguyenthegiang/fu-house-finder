@@ -1,16 +1,36 @@
 <app-staff-header></app-staff-header>
 
-<div class="container-fluid backgroundGray">
-  <div class="row p-4 m-2">
-    <div class="col-6 p-4 backgroundWhite">
-
+<div class="container-fluid m-0 backgroundGray">
+  <div class="row px-3 pt-3">
+    <div class="col-6">
+      <div class="p-4 backgroundWhite">
+        <div>
+          <h6>Tổng số đơn đã giải quyết</h6>
+          <span>{{ totalOfSolvedOrder }}</span>
+        </div>
+        <div>
+          <h6>Tổng số đơn đã giải quyết trong năm</h6>
+          <span>{{ totalOfSolvedOrder }}</span>
+        </div>
+        <div>
+          <h6>Tổng số đơn đã giải quyết trong tuần</h6>
+          <span>{{ totalOfSolvedOrder }}</span>
+        </div>
+      </div>
     </div>
-    <div class="col-6 p-4 backgroundWhite">
-
+    <div class="col-6">
+      <div class="p-4 backgroundWhite position-relative">
+        <select class="btn position-absolute top-0 end-0" type="button">
+          <option>This week</option>
+          <option>This month</option>
+          <option>This year</option>
+        </select>
+        <canvas id="solvedOrderChart"></canvas>
+      </div>
     </div>
   </div>
-  <div class="row p-4 m-2">
-    <div class="col-12 p-4 backgroundWhite">
+  <div class="row p-4">
+    <div class="col-12 px-4 backgroundWhite">
       <!-- Page content -->
       <div class="row">
         <div class="my-4" *ngIf="orders.length == 0">
@@ -65,7 +85,11 @@
             <!-- Order by -->
             <div class="col-6 col-md-3 my-2">
               <label class="form-label">Sắp xếp</label>
-              <select #selectedOrderBy class="form-select" (change)="onOrderBySelected(selectedOrderBy.value)">
+              <select
+                #selectedOrderBy
+                class="form-select"
+                (change)="onOrderBySelected(selectedOrderBy.value)"
+              >
                 <option selected disabled>Chọn sắp xếp</option>
                 <option value="desc">Ngày gần nhất</option>
                 <option value="asc">Ngày xa nhất</option>
@@ -96,7 +120,11 @@
                 <td>{{ order.studentName }}</td>
                 <td>{{ order.orderedDate | date: "dd/MM/yyyy" }}</td>
                 <td id="md">{{ order.solvedDate | date: "dd/MM/yyyy" }}</td>
-                <td id="md"><div *ngIf="order.solvedByNavigation">{{ order.solvedByNavigation.displayName }}</div></td>
+                <td id="md">
+                  <div *ngIf="order.solvedByNavigation">
+                    {{ order.solvedByNavigation.displayName }}
+                  </div>
+                </td>
                 <td
                   *ngIf="order.status.statusName === 'Unsolved'"
                   style="color: red"
@@ -123,9 +151,15 @@
                     data-bs-toggle="modal"
                     data-bs-target="#selectedOrderModal"
                     (click)="changeSelectedOrder(order.orderId)"
-                    style="cursor: pointer;"
+                    style="cursor: pointer"
                   >
-                    <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Chi tiết">
+                    <span
+                      id="btn"
+                      class="material-symbols-outlined"
+                      data-bs-toggle="tooltip"
+                      data-bs-placement="top"
+                      title="Chi tiết"
+                    >
                       info
                     </span>
                   </a>
@@ -182,7 +216,6 @@
       </div>
     </div>
   </div>
-
 </div>
 
 <app-footer></app-footer>
@@ -198,7 +231,9 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Thông tin chi tiết</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Thông tin chi tiết
+        </h1>
         <button
           type="button"
           class="btn-close"
@@ -208,15 +243,25 @@
       </div>
 
       <div class="modal-body">
-        <span><b>Tên sinh viên: </b>{{ selectedOrderName }}</span><br>
-        <span><b>Số điện thoại: </b>{{ selectedOrderPhone }}</span><br>
-        <span><b>Email: </b>{{ selectedOrderEmail }}</span><br>
-        <span><b>Ngày tạo: </b>{{ selectedOrderCreatedDate | date }}</span><br>
-        <span><b>Nội dung: </b>{{ selectedOrderContent }}</span><br>
-        <br>
+        <span><b>Tên sinh viên: </b>{{ selectedOrderName }}</span
+        ><br />
+        <span><b>Số điện thoại: </b>{{ selectedOrderPhone }}</span
+        ><br />
+        <span><b>Email: </b>{{ selectedOrderEmail }}</span
+        ><br />
+        <span><b>Ngày tạo: </b>{{ selectedOrderCreatedDate | date }}</span
+        ><br />
+        <span><b>Nội dung: </b>{{ selectedOrderContent }}</span
+        ><br />
+        <br />
         <b class="form-label">Trạng thái</b>
         <!-- Set selected value for <select> by [ngModel] -->
-        <select #selectOrderStatusId class="form-select" [(ngModel)]="selectedStatusId" (change)="onSelectOrderStatus(selectOrderStatusId.value)">
+        <select
+          #selectOrderStatusId
+          class="form-select"
+          [(ngModel)]="selectedStatusId"
+          (change)="onSelectOrderStatus(selectOrderStatusId.value)"
+        >
           <option *ngFor="let status of statuses" [value]="status.statusId">
             {{ status.statusName }}
           </option>
@@ -224,8 +269,16 @@
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" (click)="updateOrderStatus()">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="updateOrderStatus()"
+        >
+          Save changes
+        </button>
       </div>
     </div>
   </div>

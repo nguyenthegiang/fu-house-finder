@@ -248,6 +248,41 @@ namespace DataAccess
             }
             return total;
         }
+
+        public static int[] CountSolvedOrderByStaffInAYear(string account)
+        {
+            int[] totals = new int[12];
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Get list order from the first date of this year to current date
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    List<OrderDTO> orders = context.Orders
+                        .Where(o => o.SolvedBy.Equals(account))
+                        .Where(o => o.SolvedDate.Value.Year == DateTime.Today.Year)
+                        .ProjectTo<OrderDTO>(config).ToList();
+
+                    //Count total orders by month
+                    for (int i = 0; i < 12; i++)
+                    {
+                        foreach (OrderDTO o in orders)
+                        {
+                            if (o.SolvedDate.Value.Month == i + 1)
+                            {
+                                totals[i]++;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return totals;
+        }
     }
    
 }

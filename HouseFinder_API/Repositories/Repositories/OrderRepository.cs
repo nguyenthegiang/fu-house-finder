@@ -22,5 +22,7 @@ namespace Repositories.Repositories
         public void AddOrder(Order order) => OrderDAO.AddOrder(order);
 
         public int CountTotalOrderSolvedByAccount(string account) => OrderDAO.CountTotalOrderSolvedByAccount(account);
+
+        public int[] CountSolvedOrderByStaffInAYear(string account) => OrderDAO.CountSolvedOrderByStaffInAYear(account);
     }
 }
