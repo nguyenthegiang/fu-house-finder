@@ -17,6 +17,7 @@ namespace HouseFinder_API.Controllers
     public class ReportController : ControllerBase
     {
         private IReportRepository reportRepository = new ReportRepository();
+        private IUserReposiotry userReposiotry = new UserRepository();
 
         [EnableQuery]
         [HttpGet]
@@ -28,9 +29,17 @@ namespace HouseFinder_API.Controllers
         {
             try
             {
+                //Get UserId from Session
+                string uid = HttpContext.Session.GetString("User");
+                if (uid == null)
+                {
+                    return Forbid();
+                }
                 //Set default date
                 report.ReportedDate = DateTime.Now;
-
+                //get user by userId
+                UserDTO user = userReposiotry.GetUserByID(uid);
+                report.StudentId = user.UserId;
                 //Add to DB
                 reportRepository.AddReport(report);
                 return Ok();

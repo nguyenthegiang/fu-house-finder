@@ -17,6 +17,7 @@ namespace HouseFinder_API.Controllers
     public class OrderController : ControllerBase
     {
         private IOrderRepository orderRepository = new OrderRepository();
+        private IUserReposiotry userReposiotry = new UserRepository();
 
         [EnableQuery]
         [HttpGet]
@@ -67,11 +68,18 @@ namespace HouseFinder_API.Controllers
         {
             try
             {
+                string uid = HttpContext.Session.GetString("User");
+                if (uid == null)
+                {
+                    return Forbid();
+                }
+                UserDTO user = userReposiotry.GetUserByID(uid);
                 //Set default status
                 order.StatusId = 1;
                 //Set default date
                 order.OrderedDate = DateTime.Now;
-
+                //add user order
+                order.StudentId = user.UserId;
                 //Add to DB
                 orderRepository.AddOrder(order);
                 return Ok();
