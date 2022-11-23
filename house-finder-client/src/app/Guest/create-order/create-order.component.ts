@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Order } from 'src/app/models/order';
+import { CreateOrder } from 'src/app/models/createOrder';
 import { OrderService } from 'src/app/services/order.service';
 @Component({
   selector: 'app-create-order',
@@ -7,16 +7,13 @@ import { OrderService } from 'src/app/services/order.service';
   styleUrls: ['./create-order.component.scss']
 })
 export class CreateOrderComponent implements OnInit {
-  orderDetail: Order = {
+  orderDetail: CreateOrder = {
     orderId: 0,
     studentName: '',
     phoneNumber: '',
     email: '',
     orderContent: '',
-    status: {
-      statusId: 1,
-      statusName: 'Unsolved'
-    },
+    statusId: 1
   }
   constructor(
     private orderService: OrderService
