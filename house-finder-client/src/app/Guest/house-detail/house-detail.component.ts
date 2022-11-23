@@ -99,7 +99,6 @@ export class HouseDetailComponent implements OnInit {
 
     //Create Report
     const report: Report = {
-      studentId: 'HE153046',   //Fake data, fix later when have Login
       houseId: this.houseDetail!.houseId,
       reportContent: inputReportContent,
       statusId: 1,
