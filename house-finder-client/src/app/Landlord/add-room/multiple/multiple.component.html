@@ -8,7 +8,14 @@
                 <span class="me-3"><i class="fa-solid fa-upload"></i></span> Upload Template
             </label>
         </button>
-        <input type="file" id="room-data-file" class="d-none" accept=".xlsx" (change)="onChange($event)"/>
+        <button class="border-0 m-3 p-0 form-control" style="height: 50px; width: 300px; background-color: #BCBAB5;">
+            <label for="room-images" style="height: 40px; width: 290px; background-color: #BCBAB5; margin: auto; text-align: center; display: flex; align-items: center; justify-content: center;">
+                <span class="me-3"><i class="fa-solid fa-upload"></i></span> Upload Image
+            </label>
+        </button>
+        <input type="file" id="room-data-file" class="d-none" accept=".xlsx" (change)="onTemplateChange($event)"/>
+        <input type="file" id="room-images" class="d-none" 
+            accept=".xlsx" (change)="onImagesChange($event)" webkitdirectory directory multiple/>
         <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     </div>
     <div class="row"></div>
