@@ -17,7 +17,6 @@ namespace DataAccess.DTO
         public virtual OrderStatusDTO Status { get; set; }
         public DateTime OrderedDate { get; set; }
         public DateTime? SolvedDate { get; set; }
-        public string SolvedBy { get; set; }
-
+        public virtual StaffDTO SolvedByNavigation { get; set; }
     }
 }

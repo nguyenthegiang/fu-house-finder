@@ -32,6 +32,7 @@ namespace DataAccess.DTO
             CreateMap<Report, ReportDTO>();
             CreateMap<Report, StaffReportDTO>();
             CreateMap<House, ReportHouseDTO>();
+            CreateMap<User, StaffDTO>();
         }
     }
 }

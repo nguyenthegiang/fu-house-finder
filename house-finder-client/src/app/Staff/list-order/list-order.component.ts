@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Chart } from 'chart.js';
 import { Order } from 'src/app/models/order';
 import { OrderStatus } from 'src/app/models/orderStatus';
 import { OrderService } from 'src/app/services/order.service';
@@ -42,6 +43,13 @@ export class ListOrderComponent implements OnInit {
   selectedOrder: Order | undefined;
   selectedStatusIdToUpdate: number | undefined;
 
+  totalOfSolvedOrder: number | undefined;
+
+  //Bar chart
+  totalofSolvedOrderInYear: number[] | undefined;
+  //Get current year
+  currentYear: number = new Date().getFullYear();
+
   constructor(
     private orderService: OrderService,
     private orderStatusService: OrderStatusService,
@@ -51,7 +59,6 @@ export class ListOrderComponent implements OnInit {
   ngOnInit(): void {
     this.selectedOrderBy = 'desc';
     this.filterOrder(true);
-    //this.filterOrder(false);
 
     // (Paging) Count available Houses for total number of pages
     this.orderService.countTotalOrder().subscribe((data) => {
@@ -70,6 +77,61 @@ export class ListOrderComponent implements OnInit {
     this.orderStatusService.getAllStatus().subscribe((data) => {
       this.statuses = data;
     });
+
+    this.orderService.countTotalOrderSolvedByAccount().subscribe((data) => {
+      this.totalOfSolvedOrder = data;
+      console.log("ĐÃ GIẢI QUYẾT: " + this.totalOfSolvedOrder);
+    });
+
+    //Call API: create a bar chart show number of solved orders by this staff in a year
+    this.orderService.CountSolvedOrderByStaffInAYear().subscribe((data) =>{
+      this.totalofSolvedOrderInYear = data;
+      //Create order chart
+      var solvedOrderChart = new Chart('solvedOrderChart', {
+        type: 'bar',
+        data: {
+          labels: [
+            'Tháng 1',
+            'Tháng 2',
+            'Tháng 3',
+            'Tháng 4',
+            'Tháng 5',
+            'Tháng 6',
+            'Tháng 7',
+            'Tháng 8',
+            'Tháng 9',
+            'Tháng 10',
+            'Tháng 11',
+            'Tháng 12',
+          ],
+          datasets: [
+            {
+              label: 'Số đơn đã được giải quyết',
+              data: this.totalofSolvedOrderInYear,
+              backgroundColor: ['#069bff'],
+              borderColor: ['#069bff'],
+              borderWidth: 1,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+          plugins: {
+            title: {
+              display: true,
+              text:
+                'Thống kê số lượng đăng ký đã giải quyết năm ' + this.currentYear,
+            },
+          },
+        },
+      });
+    }
+    )
+
   }
 
   //[Paging] User click on a Page number -> Go to that page
@@ -77,7 +139,6 @@ export class ListOrderComponent implements OnInit {
     // Call API: go to Page Number
     this.pageNumber = pageNumber;
     this.filterOrder(false);
-    //this.scrollToTop();
   }
 
   // Go to top of Page: used whenever user filter/paging data -> refresh list data
@@ -160,7 +221,6 @@ export class ListOrderComponent implements OnInit {
 
   onSelectOrderStatus(selectedStatusId: string){
     this.selectedStatusIdToUpdate = Number(selectedStatusId);
-    this.filterOrder(true);
   }
 
   updateOrderStatus() {

@@ -197,7 +197,7 @@ namespace DataAccess
             }
         }
         
-        public static void UpdateOrderStatus(int orderId, int statusId)
+        public static void UpdateOrderStatus(int orderId, int statusId, string account)
         {
             try
             {
@@ -209,16 +209,19 @@ namespace DataAccess
                         throw new Exception();
                     }
                     //Check status id
-                    if(statusId == 3) //Add solved date for order if status change to solved
+                    if(statusId == 3) //Add solved date and solved by for order if status change to solved
                     {
                         updateOrder.SolvedDate = DateTime.Today;
+                        updateOrder.SolvedBy = account;
                     }
                     else if(statusId == 1 || statusId == 2)
                     {
                         updateOrder.SolvedDate = null;
+                        updateOrder.SolvedBy = null;
                     }
                     //Update order's status
                     updateOrder.StatusId = statusId;
+
                     context.Entry<Order>(updateOrder).State = EntityState.Modified;
                     context.SaveChanges();
                 }
@@ -228,5 +231,58 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
         }
+
+        public static int CountTotalOrderSolvedByAccount(string account)
+        {
+            int total;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    total = context.Orders.Where(o => o.SolvedBy.Equals(account)).Count();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return total;
+        }
+
+        public static int[] CountSolvedOrderByStaffInAYear(string account)
+        {
+            int[] totals = new int[12];
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Get list order from the first date of this year to current date
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    List<OrderDTO> orders = context.Orders
+                        .Where(o => o.SolvedBy.Equals(account))
+                        .Where(o => o.SolvedDate.Value.Year == DateTime.Today.Year)
+                        .ProjectTo<OrderDTO>(config).ToList();
+
+                    //Count total orders by month
+                    for (int i = 0; i < 12; i++)
+                    {
+                        foreach (OrderDTO o in orders)
+                        {
+                            if (o.SolvedDate.Value.Month == i + 1)
+                            {
+                                totals[i]++;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return totals;
+        }
     }
+   
 }

@@ -8,7 +8,7 @@ export interface User {
     googleUserId: string;
     email: string;
     displayName: string;
-    active: boolean;
+    statusId: number;
     profileImageLink: string;
     phoneNumber: string;
     facebookUrl: string;

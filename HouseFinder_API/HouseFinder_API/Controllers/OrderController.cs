@@ -1,5 +1,6 @@
 ﻿using BusinessObjects;
 using DataAccess.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
@@ -47,12 +48,18 @@ namespace HouseFinder_API.Controllers
         }
 
         //Update reservation
+        [Authorize]
         [HttpPut("{orderId}/{statusId}")]
         public IActionResult UpdateReservation(int orderId, int statusId)
         {
             try
             {
-                orderRepository.UpdateOrderStatus(orderId, statusId);
+                string uid = HttpContext.Session.GetString("User");
+                if (uid == null)
+                {
+                    return Forbid();
+                }
+                orderRepository.UpdateOrderStatus(orderId, statusId, uid);
                 return Ok();
             }
             catch (Exception e)
@@ -60,6 +67,31 @@ namespace HouseFinder_API.Controllers
 
                 return BadRequest(e.Message);
             }
+        }
+
+        //Count total order
+        [Authorize]
+        [HttpGet("CountTotalOrderSolvedBy")]
+        public IActionResult CountTotalOrderSolvedBy()
+        {
+            string uid = HttpContext.Session.GetString("User");
+            if(uid == null)
+            {
+                return Forbid();
+            }
+            return Ok(orderRepository.CountTotalOrderSolvedByAccount(uid));
+        }
+
+        [Authorize]
+        [HttpGet("CountSolvedOrderByStaffInAYear")]
+        public IActionResult CountSolvedOrderByStaffInAYear()
+        {
+            string uid = HttpContext.Session.GetString("User");
+            if (uid == null)
+            {
+                return Forbid();
+            }
+            return Ok(orderRepository.CountSolvedOrderByStaffInAYear(uid));
         }
 
         //[User] Add Order
