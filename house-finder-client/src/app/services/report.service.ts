@@ -15,9 +15,10 @@ export class ReportService {
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    withCredentials: true
   };
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) { }
 
   //POST: [Report] Send Report
   addReport(report: Report): Observable<any> {
