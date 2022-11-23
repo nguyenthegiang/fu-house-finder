@@ -103,8 +103,7 @@ export class HouseDetailComponent implements OnInit {
       reportContent: inputReportContent,
       statusId: 1,
       deleted: false,
-      reportedDate: new Date(),
-      solvedDate: new Date(),
+      reportedDate: new Date()
     };
 
     this.reportService.addReport(report).subscribe(() => this.goBack());
