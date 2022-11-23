@@ -3,7 +3,7 @@ import { Staff } from "./staff";
 //DTO: Report
 export interface Report {
     reportContent: string;
-    studentId: string;
+    studentId?: string;
     houseId: number;
     statusId: number;
     deleted: boolean;

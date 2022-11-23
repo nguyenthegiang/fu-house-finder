@@ -10,15 +10,12 @@
             <div class="modal-body">
                 <form>
                     <div class="row">
-                        <!-- roomName -->
-                        <div class="col-md-6">Mã số sinh viên
-                            <br>
-                            <input type="text" class="form-control" id="roomName" name="roomName">
-                        </div>
-                        <!-- area -->
+
+                        <!-- name -->
                         <div class="col-md-6 ml-auto">Tên
                             <br>
-                            <input type="text" class="form-control" id="areaByMeters" name="areaByMeters">
+                            <input type="text" class="form-control" id="studentName"
+                                [(ngModel)]="orderDetail.studentName" name="studentName">
                         </div>
                     </div>
                     <div class="row">
