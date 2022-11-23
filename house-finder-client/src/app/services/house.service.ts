@@ -339,9 +339,11 @@ export class HouseService {
   }
 
   //[Staff/list-report] Filter reported houses
-   filterReportedHouse(
+  filterReportedHouse(
     pageSize: number,
     pageNumber: number,
+    orderBy?: string,
+    statusId? : string,
   ): Observable<ReportHouse[]>{
     //[Paging] count Skip and Top from pageSize & pageNumber
     const skip = pageSize * (pageNumber - 1);
@@ -350,6 +352,15 @@ export class HouseService {
     //define API here to append query options into it later
     var filterAPIUrl = this.APIUrl + `/GetReportedHouses`;
     filterAPIUrl += `?$skip=${skip}&$top=${top}`;
+
+    if (orderBy != undefined) {
+      filterAPIUrl += `&$orderby=NumberOfReport ${orderBy}`;
+    }
+
+    //[Filter] add filter by status if has
+    if (statusId != undefined) {
+      filterAPIUrl += `&$filter=Landlord/StatusId eq ${statusId}`;
+    }
     console.log(filterAPIUrl);
     return this.http.get<ReportHouse[]>(filterAPIUrl);
   }

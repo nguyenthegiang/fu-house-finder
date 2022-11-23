@@ -132,6 +132,9 @@
                   <th scope="col">Tên sinh viên</th>
                   <th scope="col">Nhà trọ</th>
                   <th scope="col">Ngày báo cáo</th>
+                  <th scope="col">Ngày giải quyết</th>
+                  <th scope="col">Người giải quyết</th>
+                  <th scope="col">Trạng thái</th>
                   <th scope="col">Nội dung</th>
                 </tr>
               </thead>
@@ -143,7 +146,27 @@
                   <td>{{ report.student.displayName }}</td>
                   <td>{{ report.house.houseName }}</td>
                   <td>{{ report.reportedDate | date: "dd/MM/yyyy" }}</td>
-                  <td>{{ report.reportContent }}</td>
+                  <td>{{ report.solvedDate| date: "dd/MM/yyyy" }}</td>
+                  <td id="md"><div *ngIf="report.solvedByNavigation">{{ report.solvedByNavigation.displayName }}</div></td>
+                  <td
+                *ngIf="report.status.statusName === 'Unsolved'"
+                style="color: red"
+              >
+                Chưa giải quyết
+              </td>
+              <td
+                *ngIf="report.status.statusName === 'Processing'"
+                style="color: orange"
+              >
+                Đang giải quyết
+              </td>
+              <td
+                *ngIf="report.status.statusName === 'Solved'"
+                style="color: green"
+              >
+                Đã giải quyết
+              </td>
+                  <td><div class="d-inline-block text-truncate" style="max-width: 350px;">{{ report.reportContent }}</div></td>
                 </tr>
               </tbody>
             </table>
@@ -249,19 +272,26 @@
               <!-- Order by -->
               <div class="col-10 col-md-6">
                 <label class="form-label">Trạng thái</label>
-                <select class="form-select">
+                <select
+                  #selectedActiveStatus
+                  class="form-select"
+                  (change)="onActiveStatusSelected(selectedActiveStatus.value)">
                   <option>Chọn sắp xếp</option>
-                  <option>Đang hoạt động</option>
-                  <option>Dừng hoạt động</option>
+                  <option value="1">Đang hoạt động</option>
+                  <option value="0">Dừng hoạt động</option>
                 </select>
               </div>
               <!-- Order by -->
               <div class="col-10 col-md-6">
                 <label class="form-label">Sắp xếp</label>
-                <select class="form-select">
+                <select
+                  #selectedHouseOrderBy
+                  class="form-select"
+                  (change)="onHouseOrderBySelected(selectedHouseOrderBy.value)"
+                >
                   <option>Chọn sắp xếp</option>
-                  <option>Báo cáo nhiều nhất</option>
-                  <option>Báo cáo ít nhất</option>
+                  <option value="desc">Báo cáo nhiều nhất</option>
+                  <option value="asc">Báo cáo ít nhất</option>
                 </select>
               </div>
             </div>
@@ -292,7 +322,7 @@
                         class="form-check-input"
                         type="checkbox"
                         id="flexSwitchCheckChecked"
-                        [checked]="house.landlord.active == true"
+                        [checked]="house.landlord.statusId == 1"
                       />
                     </div>
                   </td>

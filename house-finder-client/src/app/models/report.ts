@@ -1,3 +1,5 @@
+import { Staff } from "./staff";
+
 //DTO: Report
 export interface Report {
     reportContent: string;
@@ -6,9 +8,7 @@ export interface Report {
     statusId: number;
     deleted: boolean;
     reportedDate: Date;
-    solvedDate: Date;
-    solvedBy?: string;
-
-
+    solvedDate?: Date;
+    solvedByNavigation?: Staff;
     //no need for createdDate & lastModifiedDate
 }
