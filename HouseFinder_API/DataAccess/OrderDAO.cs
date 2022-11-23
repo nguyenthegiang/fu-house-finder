@@ -228,5 +228,23 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
         }
+
+        public static int CountTotalOrderSolvedByAccount(string account)
+        {
+            int total;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    total = context.Orders.Where(o => o.SolvedBy.Equals(account)).Count();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return total;
+        }
     }
+   
 }

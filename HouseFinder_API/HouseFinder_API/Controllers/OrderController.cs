@@ -61,6 +61,13 @@ namespace HouseFinder_API.Controllers
             }
         }
 
+        //
+        [HttpGet("CountTotalOrderSolvedBy/{account}")]
+        public int CountTotalOrderSolvedBy(string account)
+        {
+            return orderRepository.CountTotalOrderSolvedByAccount(account);
+        }
+
         //[User] Add Order
         [HttpPost]
         public IActionResult Post([FromBody] Order order)

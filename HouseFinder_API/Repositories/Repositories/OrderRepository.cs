@@ -20,5 +20,7 @@ namespace Repositories.Repositories
         public void UpdateOrderStatus(int orderId, int statusId) => OrderDAO.UpdateOrderStatus(orderId, statusId);
 
         public void AddOrder(Order order) => OrderDAO.AddOrder(order);
+
+        public int CountTotalOrderSolvedByAccount(string account) => OrderDAO.CountTotalOrderSolvedByAccount(account);
     }
 }
