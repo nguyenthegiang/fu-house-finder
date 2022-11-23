@@ -9,17 +9,14 @@ import { OrderService } from 'src/app/services/order.service';
 export class CreateOrderComponent implements OnInit {
   orderDetail: Order = {
     orderId: 0,
-    studentId: 'HE153046',
-    studentName: 'HE153046',
-    phoneNumber: '0987206969',
-    email: 'thongdz@gmail.com',
-    orderContent: 'em uoc mo duoc lam sieu nhan',
+    studentName: '',
+    phoneNumber: '',
+    email: '',
+    orderContent: '',
     status: {
       statusId: 1,
       statusName: 'Unsolved'
     },
-    orderedDate: new Date(),
-    solvedDate: new Date()
   }
   constructor(
     private orderService: OrderService
@@ -30,8 +27,8 @@ export class CreateOrderComponent implements OnInit {
   ngOnInit(): void {
 
   }
-  addOrder(order: Order) {
-    this.orderService.addOrder(order).subscribe(() => this.goBack());
+  addOrder() {
+    this.orderService.addOrder(this.orderDetail).subscribe(() => this.goBack());
   }
   goBack(): void {
     window.location.reload();
