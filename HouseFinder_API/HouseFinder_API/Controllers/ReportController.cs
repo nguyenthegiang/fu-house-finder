@@ -37,6 +37,7 @@ namespace HouseFinder_API.Controllers
                 }
                 //Set default date
                 report.ReportedDate = DateTime.Now;
+                report.SolvedDate = null;
                 //get user by userId
                 UserDTO user = userReposiotry.GetUserByID(uid);
                 report.StudentId = user.UserId;

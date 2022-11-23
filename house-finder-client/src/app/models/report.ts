@@ -6,7 +6,7 @@ export interface Report {
     statusId: number;
     deleted: boolean;
     reportedDate: Date;
-    solvedDate: Date;
+    solvedDate?: Date;
     solvedBy?: string;
 
 
