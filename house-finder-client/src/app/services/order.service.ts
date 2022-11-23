@@ -121,7 +121,7 @@ export class OrderService {
 
   //[Staff/list-order] Update order's status
   updateOrderStatus(orderId: number, statusId: number): Observable<any> {
-    return this.http.put<any>(this.APIUrl + "/" + orderId + "/" + statusId, this.httpOptions);
+    return this.http.put<any>(this.APIUrl + "/" + orderId + "/" + statusId, this.httpOptions, {withCredentials: true});
   }
 
   //POST Order for user

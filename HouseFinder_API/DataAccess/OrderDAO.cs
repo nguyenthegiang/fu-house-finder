@@ -197,7 +197,7 @@ namespace DataAccess
             }
         }
         
-        public static void UpdateOrderStatus(int orderId, int statusId)
+        public static void UpdateOrderStatus(int orderId, int statusId, string account)
         {
             try
             {
@@ -209,16 +209,19 @@ namespace DataAccess
                         throw new Exception();
                     }
                     //Check status id
-                    if(statusId == 3) //Add solved date for order if status change to solved
+                    if(statusId == 3) //Add solved date and solved by for order if status change to solved
                     {
                         updateOrder.SolvedDate = DateTime.Today;
+                        updateOrder.SolvedBy = account;
                     }
                     else if(statusId == 1 || statusId == 2)
                     {
                         updateOrder.SolvedDate = null;
+                        updateOrder.SolvedBy = null;
                     }
                     //Update order's status
                     updateOrder.StatusId = statusId;
+
                     context.Entry<Order>(updateOrder).State = EntityState.Modified;
                     context.SaveChanges();
                 }

@@ -17,7 +17,7 @@ namespace Repositories.Repositories
         public int[] GetSolvedlOrderByMonth() => OrderDAO.GetSolvedOrderByMonth();
         public int[] GetTotalOrderByMonth() => OrderDAO.GetTotalOrderByMonth();
 
-        public void UpdateOrderStatus(int orderId, int statusId) => OrderDAO.UpdateOrderStatus(orderId, statusId);
+        public void UpdateOrderStatus(int orderId, int statusId, string account) => OrderDAO.UpdateOrderStatus(orderId, statusId, account);
 
         public void AddOrder(Order order) => OrderDAO.AddOrder(order);
 

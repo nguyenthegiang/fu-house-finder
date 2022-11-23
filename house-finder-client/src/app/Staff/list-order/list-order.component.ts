@@ -53,7 +53,6 @@ export class ListOrderComponent implements OnInit {
   ngOnInit(): void {
     this.selectedOrderBy = 'desc';
     this.filterOrder(true);
-    //this.filterOrder(false);
 
     // (Paging) Count available Houses for total number of pages
     this.orderService.countTotalOrder().subscribe((data) => {
@@ -85,7 +84,6 @@ export class ListOrderComponent implements OnInit {
     // Call API: go to Page Number
     this.pageNumber = pageNumber;
     this.filterOrder(false);
-    //this.scrollToTop();
   }
 
   // Go to top of Page: used whenever user filter/paging data -> refresh list data

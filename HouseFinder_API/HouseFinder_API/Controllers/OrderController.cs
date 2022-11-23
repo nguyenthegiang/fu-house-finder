@@ -47,12 +47,18 @@ namespace HouseFinder_API.Controllers
         }
 
         //Update reservation
+        [Authorize]
         [HttpPut("{orderId}/{statusId}")]
         public IActionResult UpdateReservation(int orderId, int statusId)
         {
             try
             {
-                orderRepository.UpdateOrderStatus(orderId, statusId);
+                string uid = HttpContext.Session.GetString("User");
+                if (uid == null)
+                {
+                    return Forbid();
+                }
+                orderRepository.UpdateOrderStatus(orderId, statusId, uid);
                 return Ok();
             }
             catch (Exception e)
@@ -62,7 +68,7 @@ namespace HouseFinder_API.Controllers
             }
         }
 
-        //
+        //Count total order
         [Authorize]
         [HttpGet("CountTotalOrderSolvedBy")]
         public IActionResult CountTotalOrderSolvedBy()
