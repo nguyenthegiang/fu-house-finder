@@ -128,4 +128,9 @@ export class OrderService {
   addOrder(order: Order): Observable<any> {
     return this.http.post<any>(this.APIUrl, order, this.httpOptions);
   }
+
+  //Count total order solved by current staff
+  countTotalOrderSolvedByAccount() : Observable<number>{
+    return this.http.get<number>(this.APIUrl + "/CountTotalOrderSolvedBy", {withCredentials: true});
+  }
 }

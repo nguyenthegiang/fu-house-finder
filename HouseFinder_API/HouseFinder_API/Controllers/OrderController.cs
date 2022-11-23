@@ -1,5 +1,6 @@
 ﻿using BusinessObjects;
 using DataAccess.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
@@ -62,10 +63,16 @@ namespace HouseFinder_API.Controllers
         }
 
         //
-        [HttpGet("CountTotalOrderSolvedBy/{account}")]
-        public int CountTotalOrderSolvedBy(string account)
+        [Authorize]
+        [HttpGet("CountTotalOrderSolvedBy")]
+        public IActionResult CountTotalOrderSolvedBy()
         {
-            return orderRepository.CountTotalOrderSolvedByAccount(account);
+            string uid = HttpContext.Session.GetString("User");
+            if(uid == null)
+            {
+                return Forbid();
+            }
+            return Ok(orderRepository.CountTotalOrderSolvedByAccount(uid));
         }
 
         //[User] Add Order

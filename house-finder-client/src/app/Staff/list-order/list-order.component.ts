@@ -42,6 +42,8 @@ export class ListOrderComponent implements OnInit {
   selectedOrder: Order | undefined;
   selectedStatusIdToUpdate: number | undefined;
 
+  totalOfSolvedOrder: number | undefined;
+
   constructor(
     private orderService: OrderService,
     private orderStatusService: OrderStatusService,
@@ -70,6 +72,12 @@ export class ListOrderComponent implements OnInit {
     this.orderStatusService.getAllStatus().subscribe((data) => {
       this.statuses = data;
     });
+
+    this.orderService.countTotalOrderSolvedByAccount().subscribe((data) => {
+      this.totalOfSolvedOrder = data;
+      console.log("ĐÃ GIẢI QUYẾT: " + this.totalOfSolvedOrder);
+    });
+
   }
 
   //[Paging] User click on a Page number -> Go to that page
