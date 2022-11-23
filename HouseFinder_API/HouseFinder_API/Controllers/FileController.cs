@@ -26,6 +26,7 @@ namespace HouseFinder_API.Controllers
         private IHouseRepository housesRepository = new HouseRepository();
         private IRoomRepository roomsRepository = new RoomRepository();
         private IUserReposiotry userReposiotry = new UserRepository();
+        private IRoomImageRepository roomImageRepository = new RoomImageRepository();
 
         //Used for Upload file to Amazon S3 Server
         private readonly IStorageRepository storageRepository;
@@ -151,6 +152,30 @@ namespace HouseFinder_API.Controllers
                 }
             }
             roomsRepository.CreateRooms(roomList);
+        }
+
+        //[Authorize]
+        [HttpPost("room/image")]
+        public async Task<IActionResult> UploadRoomImage(List<IFormFile> files, [FromBody] RoomImageInfoDTO room)
+        {
+            string uid = HttpContext.Session.GetString("User");
+            string dir = $"user/{uid}/House/{room.HouseId}/{room.RoomId}";
+            List<ImagesOfRoom> images = new List<ImagesOfRoom>();
+            for (int i=0; i < files.Count; i++)
+            {
+                var path = $"{dir}/{files[i].FileName}";
+                Stream fs = files[i].OpenReadStream();
+                await storageRepository.UploadFileAsync(path, fs);
+                ImagesOfRoom image = new ImagesOfRoom();
+                image.CreatedBy = uid;
+                image.CreatedDate = DateTime.UtcNow;
+                image.LastModifiedBy = uid;
+                image.RoomId = room.RoomId;
+                image.ImageLink = path;
+                images.Add(image);
+            }
+            roomImageRepository.CreateRoomImages(images);
+            return Ok();
         }
 
         private bool checkXlsxMimeType(IFormFile file)
