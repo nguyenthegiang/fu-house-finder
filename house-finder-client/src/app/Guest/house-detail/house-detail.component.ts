@@ -98,7 +98,7 @@ export class HouseDetailComponent implements OnInit {
     var user = null;
     user = localStorage.getItem("user");
     if (user === null) {
-      alert("Dang nhap de su dung tinh nang nay")
+      alert("Đăng nhập để xử dụng tính năng này!")
     } else {
       inputReportContent = inputReportContent.trim();
 
