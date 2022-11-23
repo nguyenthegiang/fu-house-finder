@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Order } from '../models/order';
 //environment variable for API URL
 import { environment } from 'src/environments/environment';
+import { CreateOrder } from '../models/createOrder';
 
 @Injectable({
   providedIn: 'root'
@@ -126,7 +127,7 @@ export class OrderService {
   }
 
   //POST Order for user
-  addOrder(order: Order): Observable<any> {
+  addOrder(order: CreateOrder): Observable<any> {
     return this.http.post<any>(this.APIUrl, order, this.httpOptions);
   }
 }
