@@ -13,7 +13,8 @@ export class OrderService {
   readonly APIUrl = `${environment.api_url}/Order`;
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    withCredentials: true
   };
 
   constructor(private http: HttpClient) { }
@@ -46,7 +47,7 @@ export class OrderService {
     filterAPIUrl += `?$skip=${skip}&$top=${top}`;
 
     //[Filter] check if user has at least 1 filter
-    if ((statusId != undefined && statusId != 0) || fromDate || toDate ) {
+    if ((statusId != undefined && statusId != 0) || fromDate || toDate) {
       //add filter to API
       filterAPIUrl += `&$filter=`;
     }

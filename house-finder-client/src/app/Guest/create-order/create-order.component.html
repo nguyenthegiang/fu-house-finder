@@ -1,4 +1,4 @@
-<!-- <button type="button" class="btn btn-primary">Primary</button> -->
+                                                                                                                                                                                                                                                                       <!-- <button type="button" class="btn btn-primary">Primary</button> -->
 
 <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -22,12 +22,12 @@
                         <!-- price -->
                         <div class="col-md-6">Số điện thoại
                             <br>
-                            <input type="text" class="form-control" id="pricePerMonth" name="pricePerMonth">
+                            <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="orderDetail.phoneNumber" name="phoneNumber">
                         </div>
                         <!-- building -->
                         <div class="col-md-6 ml-auto">Email
                             <br>
-                            <input type="text" class="form-control" id="buildingNumber" name="buildingNumber">
+                            <input type="text" class="form-control" id="email" [(ngModel)]="orderDetail.email" name="email">
                         </div>
                     </div>
 
@@ -35,13 +35,13 @@
                         <!-- info -->
                         <div class="col-md-6">Nguyện vọng
                             <br>
-                            <input type="text" class="form-control" id="information" name="information">
+                            <input type="text" class="form-control" id="orderContent" [(ngModel)]="orderDetail.orderContent" name="orderContent">
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Send message</button>
+                <button type="button" class="btn btn-primary" (click)="addOrder()">Send message</button>
             </div>
         </div>
