@@ -9,14 +9,19 @@ import { FileService } from 'src/app/services/file.service';
 export class MultipleComponent implements OnInit {
 
   file: File | any; 
+  images: File[] | any;
 
   constructor(private fileService: FileService) { }
 
   ngOnInit(): void {
   }
 
-  onChange(event: any){
+  onTemplateChange(event: any){
     this.file = event.target.files[0];
+  }
+  
+  onImagesChange(event: any){
+    this.images = event.target.files;
   }
 
   downloadTemplate(){
@@ -34,6 +39,10 @@ export class MultipleComponent implements OnInit {
 
   uploadDataFile(){
     this.fileService.uploadFile(this.file).subscribe(()=>{});
+  }
+
+  uploadImageFiles(){
+    
   }
 
 }

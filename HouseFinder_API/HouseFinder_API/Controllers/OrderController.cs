@@ -96,7 +96,7 @@ namespace HouseFinder_API.Controllers
 
         //[User] Add Order
         [HttpPost]
-        public IActionResult Post([FromBody] Order order)
+        public IActionResult Post(Order order)
         {
             try
             {
@@ -116,9 +116,9 @@ namespace HouseFinder_API.Controllers
                 orderRepository.AddOrder(order);
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
             }
         }
 
