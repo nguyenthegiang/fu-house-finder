@@ -509,6 +509,16 @@ GETDATE(), GETDATE(), N'HE150432', N'HE150432');
 INSERT INTO [dbo].[Users] VALUES (N'SA000001', null, null, N'thanhle@gmail.com', N'AQAAAAEAACcQAAAAEJCloD0i7VZc1j5n/6cOh78keYPynrQMmdYV7Fx3/5XhDLwtreP8uf9ewo1MON/Yag==', N'Lê Thành', 1, 'image_profile_1.jpg', null, null, null, null, null, 3, 
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
 
+--Staff 1: password: staff1
+INSERT INTO [dbo].[Users] VALUES (N'SA000002', null, null, N'staff1@gmail.com', N'AQAAAAEAACcQAAAAEJ6terEdHspNiQOFq3pzt95u+VQO6wPiI0B62BYFJyAGmLw50xZ2BujQxRqT9VW48g==', N'Staff 1', 1, 'image_profile_1.jpg', null, null, null, null, null, 5, 
+GETDATE(), GETDATE(), N'SA000001', N'SA000001');
+--Staff 2: password: staff2
+INSERT INTO [dbo].[Users] VALUES (N'SA000003', null, null, N'staff2@gmail.com', N'AQAAAAEAACcQAAAAEIj0qS8ZMgR4ywTf/+bRbZ9yCOCsIKRq8Bt5OMtqveEdDpPiKNeRNgGpDjmWOplcCQ==', N'Staff 2', 1, 'image_profile_1.jpg', null, null, null, null, null, 5, 
+GETDATE(), GETDATE(), N'SA000001', N'SA000001');
+--Staff 3: password: staff3
+INSERT INTO [dbo].[Users] VALUES (N'SA000004', null, null, N'staff3@gmail.com', N'AQAAAAEAACcQAAAAEBNK66cHcOumVmzeJ1JGPJqCDgC0l6mRa0RrjeNZy+9J0Hi2E4GXf9aOY0aRSMhODw==', N'Staff 3', 1, 'image_profile_1.jpg', null, null, null, null, null, 6, 
+GETDATE(), GETDATE(), N'SA000001', N'SA000001');
+
 --Landlords
 INSERT INTO [dbo].[Users] VALUES (N'LA000001', null, null, N'tamle@gmail.com', N'tamle', N'Tâm Lê', 1, 'image_profile_1.jpg', '0987654321', 'facebook.com/tamle12', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2, 
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
@@ -2017,23 +2027,23 @@ INSERT INTO [dbo].[Reports] VALUES (N'Lorem ipsum2', N'HE153046', 7, 1, 0,
 INSERT INTO [dbo].[Reports] VALUES (N'Lorem ipsum3', N'HE153046', 7, 1, 0,
 '11/21/2022', NULL, NULL);
 INSERT INTO [dbo].[Reports] VALUES (N'Lorem ipsum4', N'HE153046', 7, 1, 0,
-'11/21/2022', NULL, NULL);
+'11/21/2022', '11/22/2022', 'SA000004');
 INSERT INTO [dbo].[Reports] VALUES (N'Lorem ipsum5', N'HE153046', 6, 2, 0,
 '11/21/2022', NULL, NULL);
 INSERT INTO [dbo].[Reports] VALUES (N'Lorem ipsum síu amats relid deisnt huyen bui ngoc dep trai alo1234 alo alo .,23... điện đèn tăng giá', N'HE153046', 6, 2, 0,
 '11/21/2022', NULL, NULL);
 INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tự ý vào phòng của bạn và tháo bóng đèn điện trong nhà vệ sinh của bạn', N'HE153046', 4, 1, 0,
-'01/05/2022', NULL, NULL);
+'01/05/2022', '02/21/2022', 'SA000004');
 INSERT INTO [dbo].[Reports] VALUES (N'Chủ trọ tự ý vào phòng của bạn và tháo bóng đèn điện trong nhà vệ sinh của bạn', N'HE153046', 4, 1, 0,
-'11/21/2022', NULL, NULL);
+'11/01/2022', '11/23/2022', 'SA000004');
 INSERT INTO [dbo].[Reports] VALUES (N'The Test is used by organisations to determine whether an employee is suitable for a particular task. If you work or want to work for a large organisation, particularily in Asia, then the TOEIC test will be useful to you. In some countries you can also take a Speaking and Writing exam along with the Reading and Listening. đèn điện', N'HE153046', 4, 1, 0,
-'11/21/2022', NULL, NULL);
+'11/21/2022', '11/22/2022', 'SA000004');
 INSERT INTO [dbo].[Reports] VALUES (N'TOEIC, viết tắt của Test of English for International Communication – Bài kiểm tra tiếng Anh giao tiếp quốc tế, là một chứng chỉ tiếng Anh quốc tế về giao tiếp dành cho người đi làm không phải là người sử dụng tiếng Anh làm tiếng mẹ đẻ, đặc biệt là những đối tượng muốn sử dụng tiếng Anh trong môi trường giao tiếp và đèn điện', N'HE153046', 4, 1, 0,
-'11/21/2022', NULL, NULL);
+'11/21/2022', '11/22/2022', 'SA000003');
 INSERT INTO [dbo].[Reports] VALUES (N'đèn TOEIC, viết tắt của Test of English for International Communication – Bài kiểm tra tiếng Anh giao tiếp quốc tế, là một chứng chỉ tiếng Anh quốc tế về giao tiếp dành cho người đi làm không phải là người sử dụng tiếng Anh làm tiếng mẹ đẻ, đặc biệt là những đối tượng muốn sử dụng tiếng Anh trong môi trường giao tiếp và điện', N'HE153046', 4, 1, 0,
-'11/21/2022', NULL, NULL);
+'11/21/2022', '11/22/2022', 'SA000002');
 INSERT INTO [dbo].[Reports] VALUES (N'đèn, viết tắt của Test of English for International Communication – Bài kiểm tra tiếng Anh giao tiếp quốc tế, là một chứng chỉ tiếng Anh quốc tế về giao tiếp dành cho người đi làm không phải là người sử dụng tiếng Anh làm tiếng mẹ đẻ, đặc biệt là những đối tượng muốn sử dụng tiếng Anh trong môi trường giao tiếp và điện', N'HE153046', 4, 2, 0,
-'11/21/2022', NULL, NULL);
+'11/21/2022', '11/22/2022', 'SA000002');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
