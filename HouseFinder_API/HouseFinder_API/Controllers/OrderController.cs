@@ -82,6 +82,7 @@ namespace HouseFinder_API.Controllers
             return Ok(orderRepository.CountTotalOrderSolvedByAccount(uid));
         }
 
+        [Authorize]
         [HttpGet("CountSolvedOrderByStaffInAYear")]
         public IActionResult CountSolvedOrderByStaffInAYear()
         {

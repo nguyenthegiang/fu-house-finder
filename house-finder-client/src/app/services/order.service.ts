@@ -133,4 +133,8 @@ export class OrderService {
   countTotalOrderSolvedByAccount() : Observable<number>{
     return this.http.get<number>(this.APIUrl + "/CountTotalOrderSolvedBy", {withCredentials: true});
   }
+
+  CountSolvedOrderByStaffInAYear() : Observable<number[]>{
+    return this.http.get<number[]>(this.APIUrl + "/CountSolvedOrderByStaffInAYear", {withCredentials: true});
+  }
 }
