@@ -129,5 +129,11 @@ namespace HouseFinder_API.Controllers
             return Ok(totals);
         }
 
+        [HttpGet("CountSolvedOrderByMonth")]
+        public IActionResult CountSolvedOrderByMonth()
+        {
+            int[] totals = orderRepository.CountSolvedOrderByMonth();
+            return Ok(totals);
+        }
     }
 }
