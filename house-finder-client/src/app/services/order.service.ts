@@ -108,12 +108,12 @@ export class OrderService {
 
   //[Staff/dashboard] Get total order by month for bar chart
   getTotalOrderByMonth(): Observable<number[]> {
-    return this.http.get<number[]>(this.APIUrl + "/GetTotalOrderByMonth");
+    return this.http.get<number[]>(this.APIUrl + "/CountTotalOrderOrderedInMonth");
   }
 
   //[Staff/dashboard] Get total order by month for bar chart
   getSolvedOrderByMonth(): Observable<number[]> {
-    return this.http.get<number[]>(this.APIUrl + "/GetSolvedOrderByMonth");
+    return this.http.get<number[]>(this.APIUrl + "/CountTotalOrderSolvedInMonth");
   }
 
   //[Staff/list-order] Filter orders by status
@@ -136,7 +136,15 @@ export class OrderService {
     return this.http.get<number>(this.APIUrl + "/CountTotalOrderSolvedBy", {withCredentials: true});
   }
 
-  CountSolvedOrderByStaffInAYear() : Observable<number[]>{
+  countSolvedOrderByStaffInAYear() : Observable<number[]>{
     return this.http.get<number[]>(this.APIUrl + "/CountSolvedOrderByStaffInAYear", {withCredentials: true});
+  }
+
+  countTotalOrderByMonth() : Observable<number[]>{
+    return this.http.get<number[]>(this.APIUrl + "/CountTotalOrderByMonth", {withCredentials: true});
+  }
+
+  countSolvedOrderByMonth() : Observable<number[]>{
+    return this.http.get<number[]>(this.APIUrl + "/CountSolvedOrderByMonth", {withCredentials: true});
   }
 }

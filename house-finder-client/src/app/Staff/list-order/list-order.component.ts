@@ -84,7 +84,7 @@ export class ListOrderComponent implements OnInit {
     });
 
     //Call API: create a bar chart show number of solved orders by this staff in a year
-    this.orderService.CountSolvedOrderByStaffInAYear().subscribe((data) =>{
+    this.orderService.countSolvedOrderByStaffInAYear().subscribe((data) =>{
       this.totalofSolvedOrderInYear = data;
       //Create order chart
       var solvedOrderChart = new Chart('solvedOrderChart', {

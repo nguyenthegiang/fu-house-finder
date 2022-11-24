@@ -5,28 +5,36 @@
     <!-- Page content -->
     <div class="row">
       <div class="col-12 col-sm-3">
-        <div class="p-2 mb-5 d-flex flex-column justify-content-center align-items-center border house">
+        <div
+          class="p-2 mb-5 d-flex flex-column justify-content-center align-items-center border house"
+        >
           <h5>Tổng nhà trọ</h5>
           <span>{{ totalHouses }}</span>
         </div>
       </div>
 
       <div class="col-12 col-sm-3">
-        <div class="p-2 mb-5 d-flex flex-column justify-content-center align-items-center border room">
+        <div
+          class="p-2 mb-5 d-flex flex-column justify-content-center align-items-center border room"
+        >
           <h5>Tổng phòng trọ</h5>
           <span>{{ totalRooms }}</span>
         </div>
       </div>
 
       <div class="col-12 col-sm-3">
-        <div class="p-2 mb-5 d-flex flex-column justify-content-center align-items-center border capacity">
+        <div
+          class="p-2 mb-5 d-flex flex-column justify-content-center align-items-center border capacity"
+        >
           <h5>Sức chứa</h5>
           <span>{{ availableCapNum }}</span>
         </div>
       </div>
 
       <div class="col-12 col-sm-3">
-        <div class="p-2 mb-5 d-flex flex-column justify-content-center align-items-center border landlord">
+        <div
+          class="p-2 mb-5 d-flex flex-column justify-content-center align-items-center border landlord"
+        >
           <h5>Tổng số chủ trọ</h5>
           <span>{{ totalLandlords }}</span>
         </div>
@@ -53,17 +61,27 @@
         <canvas id="orderChart"></canvas>
       </div>
       <div class="col-12 col-sm-6 mb-5">
+        <canvas id="orderBurnUpChart"></canvas>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-12 col-sm-6 mb-5">
         <canvas id="reportChart"></canvas>
       </div>
     </div>
 
-    <div class="row w-100 d-flex justify-content-between shadow-sm mb-5 bg-body">
+    <div
+      class="row w-100 d-flex justify-content-between shadow-sm mb-5 bg-body"
+    >
       <!-- House available count -->
       <div class="col-12 col-md-4 border">
-        <div class="p-2 d-flex flex-column justify-content-center align-items-center">
+        <div
+          class="p-2 d-flex flex-column justify-content-center align-items-center"
+        >
           <div class="fs-4 d-flex align-items-center text-danger">
             <span>
-              {{totalVillage}}
+              {{ totalVillage }}
             </span>
           </div>
           <h6 class="font-weight-bold text-center">Số thôn/xóm có trọ</h6>
@@ -72,10 +90,12 @@
 
       <!-- Room available count -->
       <div class="col-12 col-md-4 border">
-        <div class="p-2 d-flex flex-column justify-content-center align-items-center">
+        <div
+          class="p-2 d-flex flex-column justify-content-center align-items-center"
+        >
           <div class="fs-4 d-flex align-items-center text-danger">
             <span>
-              {{totalCommune}}
+              {{ totalCommune }}
             </span>
           </div>
           <h6 class="font-weight-bold text-center">Số phường/xã có trọ</h6>
@@ -84,10 +104,12 @@
 
       <!-- Capacity available count -->
       <div class="col-12 col-md-4 border">
-        <div class="p-2 d-flex flex-column justify-content-center align-items-center">
+        <div
+          class="p-2 d-flex flex-column justify-content-center align-items-center"
+        >
           <div class="fs-4 d-flex align-items-center text-danger">
             <span>
-              {{totalDistrict}}
+              {{ totalDistrict }}
             </span>
           </div>
           <h6 class="font-weight-bold text-center">Số quận/huyện có trọ</h6>
