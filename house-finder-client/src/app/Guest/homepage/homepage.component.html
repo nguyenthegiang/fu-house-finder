@@ -504,12 +504,17 @@
   </div>
   <!-- End Main content -->
 
-  <!-- Send Order button -->
   <div class=" bottom-0 end-0 me-5">
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#orderModal"
-      data-bs-whatever="@getbootstrap"
-      title="Không tìm được phòng trọ mong muốn? Bấm vào đây!">Đăng ký gửi order
-    </button>
+    <div class="position-fixed bottom-0 end-0">
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#orderModal"
+        data-bs-whatever="@getbootstrap">
+        <div data-bs-toggle="tooltip" data-bs-placement="right"
+          data-bs-title="Không tìm được phòng trọ mong muốn? Bấm vào đây!">
+          Đăng ký yêu cầu phòng trọ
+        </div>
+      </button>
+    </div>
+
     <app-create-order></app-create-order>
   </div>
 </div>
