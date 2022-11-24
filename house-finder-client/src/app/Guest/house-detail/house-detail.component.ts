@@ -41,6 +41,8 @@ export class HouseDetailComponent implements OnInit {
   partiallyAvailableRoom: number = 0;
   availableSlot: number = 0;
 
+  inputReportContent: string = '';
+
   constructor(
     private route: ActivatedRoute,
     private houseService: HouseService,
@@ -94,24 +96,25 @@ export class HouseDetailComponent implements OnInit {
   }
 
   //Send the Report for House
-  sendReport(inputReportContent: string) {
+  sendReport() {
     var user = null;
     user = localStorage.getItem("user");
     if (user === null) {
-      alert("Đăng nhập để xử dụng tính năng này!")
+      alert("Đăng nhập để xử dụng tính năng này!");
+      return;
     } else {
-      inputReportContent = inputReportContent.trim();
+      this.inputReportContent = this.inputReportContent.trim();
 
       //Create Report
       const report: Report = {
         houseId: this.houseDetail!.houseId,
-        reportContent: inputReportContent,
+        reportContent: this.inputReportContent,
         statusId: 1,
         deleted: false,
         reportedDate: new Date()
       };
 
-      this.reportService.addReport(report).subscribe(() => this.goBack());
+      this.reportService.addReport(report).subscribe();
     }
 
   }
