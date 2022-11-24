@@ -16,6 +16,14 @@
   box-shadow: 0 0.0625rem 0.125rem 0 rgb(0 0 0 / 10%);
 
   border: 1px solid white;
+
+  //Image
+  #houseItemImage {
+    width: 100%;
+    height: 200px;
+    background-position: center center;
+    background-repeat: no-repeat;
+  }
 }
 
 .houseCardItem:hover {
@@ -107,4 +115,21 @@
 // hover effect for <a> in Paging
 .hoverableLink:hover {
   cursor: pointer;
+}
+
+//Button [Create Order]
+.createOrderButton {
+  background-color: white;
+  border: 2px solid #ee4d2d;
+  color: #ee4d2d;
+
+  // Border Radius: Top
+  border-radius: 0.325rem 0.325rem 0 0;
+
+  //display over all
+  z-index: 999999 !important;
+}
+.createOrderButton:hover { 
+  background-color: #ee4d2d;
+  color: white;
 }
