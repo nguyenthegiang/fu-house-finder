@@ -10,7 +10,7 @@
                     <div class="row">
 
                         <!-- name -->
-                        <div class="col-md-6 ml-auto">Tên
+                        <div class="col-12">Tên
                             <br>
                             <input type="text" class="form-control" id="studentName"
                                 [(ngModel)]="orderDetail.studentName" name="studentName">
@@ -18,28 +18,42 @@
                     </div>
                     <div class="row">
                         <!-- price -->
-                        <div class="col-md-6">Số điện thoại
+                        <div class="col-12">Số điện thoại
                             <br>
-                            <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="orderDetail.phoneNumber" name="phoneNumber">
+                            <input type="text" class="form-control" id="phoneNumber"
+                                [(ngModel)]="orderDetail.phoneNumber"
+                                pattern="^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$"
+                                name="phoneNumber" #phoneNumber="ngModel">
+                            <span class="help-block" *ngIf="phoneNumber.errors?.pattern && phoneNumber.touched"> Số điện
+                                thoại không
+                                đúng</span>
                         </div>
                         <!-- building -->
-                        <div class="col-md-6 ml-auto">Email
+                        <div class="col-12">Email
                             <br>
-                            <input type="text" class="form-control" id="email" [(ngModel)]="orderDetail.email" name="email">
+                            <input type="text" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                                id="email" [(ngModel)]="orderDetail.email" name="email" #email="ngModel">
+                            <span class="help-block" *ngIf="email.errors?.pattern && email.touched"> Email không
+                                đúng</span>
                         </div>
                     </div>
 
                     <div class="row">
                         <!-- info -->
-                        <div class="col-md-6">Nguyện vọng
+                        <div class="col-12">Nguyện vọng
                             <br>
-                            <input type="text" class="form-control" id="orderContent" [(ngModel)]="orderDetail.orderContent" name="orderContent">
+                            <textarea type="text" class="form-control" id="orderContent" rows="5"
+                                [(ngModel)]="orderDetail.orderContent" name="orderContent"></textarea>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" (click)="addOrder()">Send message</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" (click)="addOrder()" [disabled]="!orderDetail.studentName ||
+                !orderDetail.phoneNumber || !orderDetail.orderContent ||
+                !orderDetail.email || !email.errors?.pattern== false || !phoneNumber.errors?.pattern== false">
+                    Gửi yêu cầu
+                </button>
             </div>
         </div>
