@@ -31,7 +31,7 @@ export class CreateOrderComponent implements OnInit {
     if (user === null) {
       alert("Đăng nhập để xử dụng tính năng này!")
     } else {
-    this.orderService.addOrder(this.orderDetail).subscribe(() => this.goBack());
+      this.orderService.addOrder(this.orderDetail).subscribe();
     }
   }
   goBack(): void {
