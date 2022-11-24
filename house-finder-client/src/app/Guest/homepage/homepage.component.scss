@@ -116,3 +116,14 @@
 .hoverableLink:hover {
   cursor: pointer;
 }
+
+//Button [Create Order]
+.createOrderButton {
+  background-color: #F37125;
+
+  // Border Radius: Top
+  border-radius: 0.325rem 0.325rem 0 0;
+}
+.createOrderButton:hover { 
+  background-color: #ee4d2d;
+}
