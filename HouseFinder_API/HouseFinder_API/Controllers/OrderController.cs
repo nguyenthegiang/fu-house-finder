@@ -33,18 +33,18 @@ namespace HouseFinder_API.Controllers
         }
 
         //GET: api/Order/GetTotalOrderByMonth
-        [HttpGet("GetTotalOrderByMonth")]
-        public int[] GetTotalOrderByMonth()
+        [HttpGet("CountTotalOrderOrderedInMonth")]
+        public IActionResult CountTotalOrderOrderedInMonth()
         {
-            int[] totals = orderRepository.GetTotalOrderByMonth();
-            return totals;
+            int[] totals = orderRepository.CountTotalOrderOrderedInMonth();
+            return Ok(totals);
         }
         //GET: api/Order/GetSolvedOrderByMonth
-        [HttpGet("GetSolvedOrderByMonth")]
-        public int[] GetSolvedOrderByMonth()
+        [HttpGet("CountTotalOrderSolvedInMonth")]
+        public IActionResult CountTotalOrderSolvedInMonth()
         {
-            int[] totals = orderRepository.GetSolvedlOrderByMonth();
-            return totals;
+            int[] totals = orderRepository.CountTotalOrderSolvedInMonth();
+            return Ok(totals);
         }
 
         //Update reservation
@@ -120,6 +120,13 @@ namespace HouseFinder_API.Controllers
             {
                 return BadRequest(e.Message);
             }
+        }
+
+        [HttpGet("CountTotalOrderByMonth")]
+        public IActionResult CountTotalOrderByMonth()
+        {
+            int[] totals = orderRepository.CountTotalOrderByMonth();
+            return Ok(totals);
         }
 
     }

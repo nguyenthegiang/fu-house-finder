@@ -12,12 +12,13 @@ namespace Repositories.IRepository
     {
         public List<OrderDTO> GetAllOrder();
         public int CountTotalOrder();
-        public int[] GetTotalOrderByMonth();
-        public int[] GetSolvedlOrderByMonth();
+        public int[] CountTotalOrderOrderedInMonth();
+        public int[] CountTotalOrderSolvedInMonth();
         public void UpdateOrderStatus(int orderId, int statusId, string account);
         public void AddOrder(Order order);
         public int CountTotalOrderSolvedByAccount(string account);
         public int[] CountSolvedOrderByStaffInAYear(string account);
+        public int[] CountTotalOrderByMonth();
 
     }
 }

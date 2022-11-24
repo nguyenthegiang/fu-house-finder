@@ -76,7 +76,7 @@ namespace DataAccess
             return total;
         }
 
-        public static int[] GetTotalOrderByMonth()
+        public static int[] CountTotalOrderOrderedInMonth()
         {
             int[] totals = new int[12];
             try
@@ -117,7 +117,7 @@ namespace DataAccess
         }
 
         //Calculate number of solved order by month
-        public static int[] GetSolvedOrderByMonth()
+        public static int[] CountTotalOrderSolvedInMonth()
         {
             int[] totals = new int[12];
             try
@@ -275,6 +275,44 @@ namespace DataAccess
                             }
                         }
                     }
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return totals;
+        }
+
+        public static int[] CountTotalOrderByMonth()
+        {
+            int[] totals = new int[12];
+            int[] orderEachMonth = CountTotalOrderOrderedInMonth();
+            try
+            {
+                totals[0] = orderEachMonth[0];
+                for (int i = 1; i < totals.Length; i++)
+                {
+                    totals[i] = totals[i - 1] + orderEachMonth[i];
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return totals;
+        }
+
+        public static int[] CountSolvedOrderByMonth()
+        {
+            int[] totals = new int[12];
+            int[] orderEachMonth = CountTotalOrderSolvedInMonth();
+            try
+            {
+                totals[0] = orderEachMonth[0];
+                for (int i = 1; i < totals.Length; i++)
+                {
+                    totals[i] = totals[i - 1] + orderEachMonth[i];
                 }
             }
             catch (Exception e)
