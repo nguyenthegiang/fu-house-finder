@@ -10,7 +10,7 @@
                     <div class="row">
 
                         <!-- name -->
-                        <div class="col-md-6 ml-auto">Tên
+                        <div class="col-12">Tên
                             <br>
                             <input type="text" class="form-control" id="studentName"
                                 [(ngModel)]="orderDetail.studentName" name="studentName">
@@ -18,7 +18,7 @@
                     </div>
                     <div class="row">
                         <!-- price -->
-                        <div class="col-md-6">Số điện thoại
+                        <div class="col-12">Số điện thoại
                             <br>
                             <input type="text" class="form-control" id="phoneNumber"
                                 [(ngModel)]="orderDetail.phoneNumber"
@@ -29,7 +29,7 @@
                                 đúng</span>
                         </div>
                         <!-- building -->
-                        <div class="col-md-6 ml-auto">Email
+                        <div class="col-12">Email
                             <br>
                             <input type="text" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
                                 id="email" [(ngModel)]="orderDetail.email" name="email" #email="ngModel">
@@ -40,7 +40,7 @@
 
                     <div class="row">
                         <!-- info -->
-                        <div class="col-md-6">Nguyện vọng
+                        <div class="col-12">Nguyện vọng
                             <br>
                             <input type="text" class="form-control" id="orderContent"
                                 [(ngModel)]="orderDetail.orderContent" name="orderContent">
@@ -49,11 +49,11 @@
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" (click)="addOrder()" [disabled]="!orderDetail.studentName || 
-                !orderDetail.phoneNumber || !orderDetail.orderContent || 
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" (click)="addOrder()" [disabled]="!orderDetail.studentName ||
+                !orderDetail.phoneNumber || !orderDetail.orderContent ||
                 !orderDetail.email || !email.errors?.pattern== false || !phoneNumber.errors?.pattern== false">
-                    Send message
+                    Gửi yêu cầu
                 </button>
             </div>
         </div>
