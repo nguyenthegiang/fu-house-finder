@@ -506,16 +506,12 @@
 
   <!-- Create Order -->
   <div class=" bottom-0 end-0 me-5">
-    <div class="position-fixed bottom-0 end-0">
-      <button type="button" class="btn btn-primary border border-0 fw-semibold createOrderButton" data-bs-toggle="modal"
-        data-bs-target="#orderModal" data-bs-whatever="@getbootstrap">
-        <div data-bs-toggle="tooltip" data-bs-placement="right"
-          data-bs-title="Không tìm được phòng trọ mong muốn? Bấm vào đây!">
-          <i class="fa-solid fa-pen-to-square"></i>
-          Đăng ký yêu cầu phòng trọ
-        </div>
-      </button>
-    </div>
+    <button type="button"
+      class="btn btn-primary fw-semibold position-fixed bottom-0 end-0 me-5 createOrderButton"
+      data-bs-toggle="modal" data-bs-target="#orderModal" data-bs-whatever="@getbootstrap">
+      <i class="fa-solid fa-pen-to-square"></i>
+      Đăng ký yêu cầu phòng trọ
+    </button>
 
     <app-create-order></app-create-order>
   </div>

@@ -119,11 +119,17 @@
 
 //Button [Create Order]
 .createOrderButton {
-  background-color: #F37125;
+  background-color: white;
+  border: 2px solid #ee4d2d;
+  color: #ee4d2d;
 
   // Border Radius: Top
   border-radius: 0.325rem 0.325rem 0 0;
+
+  //display over all
+  z-index: 999999 !important;
 }
 .createOrderButton:hover { 
   background-color: #ee4d2d;
+  color: white;
 }
