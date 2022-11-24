@@ -25,7 +25,14 @@ export class CreateOrderComponent implements OnInit {
 
   }
   addOrder() {
+    //Check if user has logged in
+    var user = null;
+    user = localStorage.getItem("user");
+    if (user === null) {
+      alert("Đăng nhập để xử dụng tính năng này!")
+    } else {
     this.orderService.addOrder(this.orderDetail).subscribe(() => this.goBack());
+    }
   }
   goBack(): void {
     window.location.reload();
