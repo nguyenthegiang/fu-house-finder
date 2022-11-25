@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ImagesOfRoomUploadData, ImagesOfRoomUploadFileData } from 'src/app/models/imagesOfRoom';
 import { FileService } from 'src/app/services/file.service';
 
 @Component({
@@ -10,6 +11,7 @@ export class MultipleComponent implements OnInit {
 
   file: File | any; 
   images: File[] | any;
+  houseId: number | any;
 
   constructor(private fileService: FileService) { }
 
@@ -38,11 +40,32 @@ export class MultipleComponent implements OnInit {
   }
 
   uploadDataFile(){
-    this.fileService.uploadFile(this.file).subscribe(()=>{});
+    this.fileService.uploadDataFile(this.file).subscribe((resp)=>{});
   }
 
   uploadImageFiles(){
-    
+    var uploadData: Array<ImagesOfRoomUploadFileData> = [];
+    this.images.forEach((image: File) => {
+      var name = image.name;
+      var roomName = name.split("-")[0];
+      try {
+        var building = Number(name.split("-")[1]);
+        var floor = Number(name.split("-")[2]);
+        var imageIndex = Number(name.split("-")[3]);
+        uploadData.push({
+          image: image,
+          data: {
+            building: building,
+            roomName: roomName,
+            floor: floor,
+            imageIndex: imageIndex,
+            houseId: this.houseId
+          }
+        });
+      } catch (error) {
+        console.log("invalid file name");
+      }
+    });
   }
 
 }

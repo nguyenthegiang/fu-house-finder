@@ -156,24 +156,31 @@ namespace HouseFinder_API.Controllers
 
         //[Authorize]
         [HttpPost("room/image")]
-        public async Task<IActionResult> UploadRoomImage(List<IFormFile> files, [FromBody] RoomImageInfoDTO room)
+        public async Task<IActionResult> UploadRoomImage(IFormFile file, [FromBody] RoomImageInfoDTO room)
         {
             string uid = HttpContext.Session.GetString("User");
-            string dir = $"user/{uid}/House/{room.HouseId}/{room.RoomId}";
-            List<ImagesOfRoom> images = new List<ImagesOfRoom>();
-            for (int i=0; i < files.Count; i++)
+            RoomDTO roomDTO = roomsRepository.GetRoomByHouseIdAndBuildingAndFloorAndRoomName(
+                room.HouseId,
+                room.BuildingNumber,
+                room.FloorNumber,
+                room.RoomName
+                );
+            if (roomDTO == null)
             {
-                var path = $"{dir}/{files[i].FileName}";
-                Stream fs = files[i].OpenReadStream();
-                await storageRepository.UploadFileAsync(path, fs);
-                ImagesOfRoom image = new ImagesOfRoom();
-                image.CreatedBy = uid;
-                image.CreatedDate = DateTime.UtcNow;
-                image.LastModifiedBy = uid;
-                image.RoomId = room.RoomId;
-                image.ImageLink = path;
-                images.Add(image);
+                return NotFound("Room data for this image is not found!");
             }
+            string dir = $"user/{uid}/House/{room.HouseId}/{roomDTO.RoomId}";
+            List<ImagesOfRoom> images = new List<ImagesOfRoom>();
+            var path = $"{dir}/{file.FileName}";
+            Stream fs = file.OpenReadStream();
+            await storageRepository.UploadFileAsync(path, fs);
+            ImagesOfRoom image = new ImagesOfRoom();
+            image.CreatedBy = uid;
+            image.CreatedDate = DateTime.UtcNow;
+            image.LastModifiedBy = uid;
+            image.RoomId = roomDTO.RoomId;
+            image.ImageLink = path;
+            images.Add(image);
             roomImageRepository.CreateRoomImages(images);
             return Ok();
         }

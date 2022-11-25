@@ -4,3 +4,16 @@ export interface ImagesOfRoom {
   imageLink: string;
   roomId: number;
 }
+
+export interface ImagesOfRoomUploadData{
+  roomName: string;
+  building: number;
+  floor: number;
+  imageIndex: number;
+  houseId: number;
+}
+
+export interface ImagesOfRoomUploadFileData{
+  data: ImagesOfRoomUploadData;
+  image: File;
+}

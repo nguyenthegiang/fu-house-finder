@@ -111,7 +111,29 @@ namespace DataAccess
 
             return houseDTO;
         }
-
+        public static RoomDTO GetRoomByHouseIdAndBuildingAndFloorAndRoomName(int HouseId, int Building, int Floor, string RoomName)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    MapperConfiguration config = new MapperConfiguration(cfg => 
+                        cfg.AddProfile(new MapperProfile())
+                    );
+                    RoomDTO room = context.Rooms.Where(r =>
+                        r.HouseId == HouseId
+                        && r.BuildingNumber == Building
+                        && r.FloorNumber == Floor
+                        && r.RoomName == RoomName
+                    ).ProjectTo<RoomDTO>(config).FirstOrDefault();
+                    return room;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
         /**
          Create room
          Add a new Room to the Database
