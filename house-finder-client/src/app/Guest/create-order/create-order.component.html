@@ -1,9 +1,8 @@
 <div class="modal fade" id="orderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header text-white">
                 <h5 class="modal-title" id="orderModalLabel">Đăng ký yêu cầu phòng trọ</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form>
@@ -13,7 +12,7 @@
                         <div class="col-12">Tên
                             <br>
                             <input type="text" class="form-control" id="studentName"
-                                [(ngModel)]="orderDetail.studentName" name="studentName">
+                                [(ngModel)]="orderDetail.studentName" name="studentName"><br>
                         </div>
                     </div>
                     <div class="row">
@@ -26,7 +25,7 @@
                                 name="phoneNumber" #phoneNumber="ngModel">
                             <span class="help-block" *ngIf="phoneNumber.errors?.pattern && phoneNumber.touched"> Số điện
                                 thoại không
-                                đúng</span>
+                                đúng</span><br>
                         </div>
                         <!-- building -->
                         <div class="col-12">Email
@@ -34,7 +33,7 @@
                             <input type="text" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
                                 id="email" [(ngModel)]="orderDetail.email" name="email" #email="ngModel">
                             <span class="help-block" *ngIf="email.errors?.pattern && email.touched"> Email không
-                                đúng</span>
+                                đúng</span><br>
                         </div>
                     </div>
 
@@ -43,14 +42,14 @@
                         <div class="col-12">Nguyện vọng
                             <br>
                             <textarea type="text" class="form-control" id="orderContent" rows="5"
-                                [(ngModel)]="orderDetail.orderContent" name="orderContent"></textarea>
+                                [(ngModel)]="orderDetail.orderContent" name="orderContent"></textarea><br>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                <button type="button" class="btn text-white" style="background-color: #ee4d2d; border-color: #ee4d2d;" (click)="addOrder()" [disabled]="!orderDetail.studentName ||
+                <button type="button" id="btn" class="btn text-white" (click)="addOrder()" [disabled]="!orderDetail.studentName ||
                 !orderDetail.phoneNumber || !orderDetail.orderContent ||
                 !orderDetail.email || !email.errors?.pattern== false || !phoneNumber.errors?.pattern== false">
                     Gửi yêu cầu
