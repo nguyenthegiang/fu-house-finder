@@ -1,4 +1,5 @@
 using BusinessObjects;
+using DataAccess.DTO;
 using HouseFinder_API.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
@@ -41,7 +42,7 @@ namespace HouseFinder.Test
             var data = campusController.GetAllCampuses();
 
             //ASSERT
-            Assert.IsInstanceOf<OkResult>(data);
+            Assert.IsInstanceOf<ActionResult<IEnumerable<CampusDTO>>>(data);
         }
 
         #endregion GetAllCampuses
