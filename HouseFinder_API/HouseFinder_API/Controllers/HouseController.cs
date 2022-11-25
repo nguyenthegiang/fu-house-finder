@@ -113,7 +113,7 @@ namespace HouseFinder_API.Controllers
 
         //PUT: api/Houses
         [HttpPut]
-        public IActionResult UpdateHouseByHouseId(House house)
+        public IActionResult UpdateHouse(House house)
         {
             try
             {
