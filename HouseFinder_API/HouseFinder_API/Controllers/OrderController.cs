@@ -137,15 +137,15 @@ namespace HouseFinder_API.Controllers
         }
 
         [Authorize]
-        [HttpGet("CountSolvedOrderByStaffInDate/{date}")]
-        public IActionResult CountSolvedOrderByStaffInDate(DateTime date)
+        [HttpGet("CountOrderSolvedByStaffInADay/{date}")]
+        public IActionResult CountOrderSolvedByStaffInADay(DateTime date)
         {
             string uid = HttpContext.Session.GetString("User");
             if (uid == null)
             {
                 return Forbid();
             }
-            return Ok(orderRepository.CountSolvedOrderByStaffInDate(date, uid));
+            return Ok(orderRepository.CountOrderSolvedByStaffInADay(date, uid));
         }
     }
 }

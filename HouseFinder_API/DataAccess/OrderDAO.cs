@@ -322,7 +322,7 @@ namespace DataAccess
             return totals;
         }
 
-        public static int CountSolvedOrderByStaffInDate(DateTime date, string account)
+        public static int CountOrderSolvedByStaffInADay(DateTime date, string account)
         {
             int total;
             try
@@ -338,6 +338,8 @@ namespace DataAccess
             }
             return total;
         }
+
+        public static int Count
     }
    
 }
