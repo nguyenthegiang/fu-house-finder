@@ -112,7 +112,7 @@ namespace HouseFinder.Test
         /**
          * Method: GetAvailableHouses()
          * Scenario: None
-         * Expected behavior: Returns ActionResult
+         * Expected behavior: Returns matching result data
          */
         [Test]
         public void GetAvailableHouses_MatchResult()
@@ -136,5 +136,28 @@ namespace HouseFinder.Test
         }
 
         #endregion GetAvailableHouses
+
+        #region GetHouseById
+
+        /**
+         * Method: GetHouseById()
+         * Scenario: Input HouseId: 1 (valid)
+         * Expected behavior: Returns ActionResult
+         */
+        [Test]
+        public void GetHouseById_ValidId_Returns_OkResult()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+            int houseId = 1;
+
+            //ACT
+            var data = houseController.GetHouseById(houseId);
+
+            //ASSERT
+            Assert.IsInstanceOf<OkObjectResult>(data);
+        }
+
+        #endregion GetHouseById
     }
 }
