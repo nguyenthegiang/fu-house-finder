@@ -357,5 +357,11 @@ namespace HouseFinder.Test
 
         #endregion DeleteHouse
 
+        #region IncreaseView
+
+
+
+        #endregion IncreaseView
+
     }
 }

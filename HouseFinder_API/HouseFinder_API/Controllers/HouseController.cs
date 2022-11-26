@@ -112,10 +112,10 @@ namespace HouseFinder_API.Controllers
                 houseRepository.IncreaseView(HouseId);
                 return Ok();
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
-                return BadRequest(e.Message);
+                return NotFound();
             }
         }
 
