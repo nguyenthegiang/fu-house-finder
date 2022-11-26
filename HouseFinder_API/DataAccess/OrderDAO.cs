@@ -321,6 +321,23 @@ namespace DataAccess
             }
             return totals;
         }
+
+        public static int CountSolvedOrderByStaffInDate(DateTime date, string account)
+        {
+            int total;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    total = context.Orders.Where(o => o.SolvedBy.Equals(account)).Where(o => o.SolvedDate == date).Count();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return total;
+        }
     }
    
 }

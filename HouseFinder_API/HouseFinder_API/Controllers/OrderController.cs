@@ -135,5 +135,17 @@ namespace HouseFinder_API.Controllers
             int[] totals = orderRepository.CountSolvedOrderByMonth();
             return Ok(totals);
         }
+
+        [Authorize]
+        [HttpGet("CountSolvedOrderByStaffInDate/{date}")]
+        public IActionResult CountSolvedOrderByStaffInDate(DateTime date)
+        {
+            string uid = HttpContext.Session.GetString("User");
+            if (uid == null)
+            {
+                return Forbid();
+            }
+            return Ok(orderRepository.CountSolvedOrderByStaffInDate(date, uid));
+        }
     }
 }

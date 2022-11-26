@@ -20,6 +20,7 @@ namespace Repositories.IRepository
         public int[] CountSolvedOrderByStaffInAYear(string account);
         public int[] CountTotalOrderByMonth();
         public int[] CountSolvedOrderByMonth();
+        public int CountSolvedOrderByStaffInDate(DateTime date, string account);
 
     }
 }

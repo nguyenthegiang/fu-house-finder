@@ -36,3 +36,28 @@
   background-color: rgb(147, 147, 147);
   border-radius: 5px;
 }
+.year, .month, .week, .day{
+  padding: 10px;
+    border-radius: 10px;
+    color: white;
+    span{
+      font-size: 30px;
+      font-weight: 600;
+    }
+}
+
+.year{
+  background-image: linear-gradient(to bottom right, #e4417e, #b558a0);
+}
+
+.month{
+  background-image: linear-gradient(to bottom right, #8f6fb8, #5349b1);
+}
+
+.week{
+  background-image: linear-gradient(to bottom right, #4bbae0, #5f8fcf);
+}
+
+.day{
+  background-image: linear-gradient(to bottom right, #f5b22f, #f5744e);
+}
