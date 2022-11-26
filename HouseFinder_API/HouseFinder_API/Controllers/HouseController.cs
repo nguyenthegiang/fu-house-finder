@@ -126,7 +126,7 @@ namespace HouseFinder_API.Controllers
             try
             {
                 List<HouseDTO> houseDTOs = houseRepository.GetListHousesByLandlordId(LandlordId);
-                if (houseDTOs == null || houseDTOs.Count == 0)
+                if (houseDTOs == null)
                 {
                     return NotFound();
                 }
