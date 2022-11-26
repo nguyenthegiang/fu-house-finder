@@ -24,6 +24,54 @@ namespace HouseFinder.Test
         public void Setup()
         {
             scope = new TransactionScope();     //create scope
+
+            //ARRANGE
+            //Add some dummy data for test
+            FUHouseFinderContext context = new FUHouseFinderContext();
+            context.Houses.AddRange(
+                new House()
+                {
+                    HouseName = "Test House 1",
+                    View = 0,
+                    Information = "Test Info 1",
+                    AddressId = 1,
+                    VillageId = 1,
+                    LandlordId = "LA000001",
+                    CampusId = 1,
+                    DistanceToCampus = 1,
+                    PowerPrice = 100,
+                    WaterPrice = 100,
+                    FingerprintLock = true,
+                    Camera = true,
+                    Parking = true,
+                    Deleted = false,
+                    CreatedDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
+                    CreatedBy = "LA000001",
+                    LastModifiedBy = "LA000001"
+                },
+                new House()
+                {
+                    HouseName = "Test House 2",
+                    View = 0,
+                    Information = "Test Info 2",
+                    AddressId = 1,
+                    VillageId = 1,
+                    LandlordId = "LA000001",
+                    CampusId = 1,
+                    DistanceToCampus = 1,
+                    PowerPrice = 100,
+                    WaterPrice = 100,
+                    FingerprintLock = true,
+                    Camera = true,
+                    Parking = true,
+                    Deleted = false,
+                    CreatedDate = DateTime.Now,
+                    LastModifiedDate = DateTime.Now,
+                    CreatedBy = "LA000001",
+                    LastModifiedBy = "LA000001"
+                }
+            );
         }
 
         [TearDown]
