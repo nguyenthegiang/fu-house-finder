@@ -359,7 +359,45 @@ namespace HouseFinder.Test
 
         #region IncreaseView
 
+        /**
+         * Method: IncreaseView()
+         * Scenario: Input HouseId: 1 (valid)
+         * Expected behavior: Returns OkResult
+         */
+        [Test]
+        public void IncreaseView_ValidId_Returns_OkResult()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+            int houseId = 1;
 
+            //ACT
+            var data = houseController.IncreaseView(houseId);
+
+            //ASSERT
+            Assert.IsInstanceOf<OkResult>(data);
+        }
+
+        /**
+         * Method: IncreaseView()
+         * Scenario: Input HouseId: -1, 0, 1000 (invalid)
+         * Expected behavior: Returns OkResult
+         */
+        [TestCase(-1)]
+        [TestCase(0)]
+        [TestCase(1000)]
+        public void IncreaseView_InvalidId_Returns_NotFoundResult()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+            int houseId = 1;
+
+            //ACT
+            var data = houseController.IncreaseView(houseId);
+
+            //ASSERT
+            Assert.IsInstanceOf<OkResult>(data);
+        }
 
         #endregion IncreaseView
 
