@@ -484,5 +484,28 @@ namespace HouseFinder.Test
 
         #endregion IncreaseView
 
+        #region GetListHousesByLandlordId
+
+        /**
+         * Method: GetListHousesByLandlordId()
+         * Scenario: Input HouseId: "LA000001" (valid)
+         * Expected behavior: Returns OkObjectResult
+         */
+        [Test]
+        public void GetListHousesByLandlordId_ValidId_Returns_OkObjectResult()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+            string landlordId = "LA000001";
+
+            //ACT
+            var data = houseController.GetListHousesByLandlordId(landlordId);
+
+            //ASSERT
+            Assert.IsInstanceOf<OkObjectResult>(data);
+        }
+
+        #endregion GetListHousesByLandlordId
+
     }
 }
