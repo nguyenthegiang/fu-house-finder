@@ -91,7 +91,7 @@ namespace HouseFinder.Test
 
             //Test matching data
             Assert.AreEqual("Trọ Tâm Lê", results[0].HouseName);
-            Assert.AreEqual(45, results[0].View);
+            Assert.AreEqual(50, results[0].View);
 
             Assert.AreEqual("Trọ Tâm Thảo", results[1].HouseName);
             Assert.AreEqual(34, results[1].View);
@@ -168,7 +168,53 @@ namespace HouseFinder.Test
 
         #region UpdateHouse
 
+        /**
+         * Method: UpdateHouse()
+         * Scenario: Input House: valid
+         * Expected behavior: Returns OkObjectResult
+         */
+        [Test]
+        public void UpdateHouse_ValidData_OkObjectResult()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+            int houseId = 2;
 
+            //ACT
+
+            //Get existing House
+            var data = houseController.GetHouseById(houseId);
+            //Using FluentAssertion to convert result data: from IActionResult to DTO/Model
+            var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
+            HouseDTO existingHouse = okResult.Value.Should().BeAssignableTo<HouseDTO>().Subject;
+
+            //Update House
+            House houseToUpdate = new House();
+            houseToUpdate.HouseId = existingHouse.HouseId;
+            houseToUpdate.HouseName = "Trọ Tâm Thảo Test Update";   //update name
+            houseToUpdate.View = existingHouse.View;
+            houseToUpdate.Information = existingHouse.Information;
+            houseToUpdate.AddressId = existingHouse.AddressId;
+            houseToUpdate.VillageId = existingHouse.VillageId;
+            houseToUpdate.LandlordId = existingHouse.LandlordId;
+            houseToUpdate.CampusId = existingHouse.CampusId;
+            houseToUpdate.DistanceToCampus = existingHouse.DistanceToCampus;
+            houseToUpdate.PowerPrice = existingHouse.PowerPrice;
+            houseToUpdate.WaterPrice = existingHouse.WaterPrice;
+            houseToUpdate.FingerprintLock = existingHouse.FingerprintLock;
+            houseToUpdate.Camera = existingHouse.Camera;
+            houseToUpdate.Parking = existingHouse.Parking;
+            houseToUpdate.Deleted = existingHouse.Deleted;
+            houseToUpdate.CreatedDate = existingHouse.CreatedDate;
+            houseToUpdate.LastModifiedDate = existingHouse.LastModifiedDate;
+            houseToUpdate.CreatedBy = existingHouse.CreatedBy;
+            houseToUpdate.LastModifiedBy = existingHouse.LastModifiedBy;
+
+            var updatedData = houseController.UpdateHouse(houseToUpdate);
+
+            //ASSERT
+            Assert.IsInstanceOf<OkResult>(updatedData);
+        }
 
         #endregion UpdateHouse
 
