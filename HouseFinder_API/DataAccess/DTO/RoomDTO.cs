@@ -40,10 +40,4 @@ namespace DataAccess.DTO
         //RoomTypeId, for Home Page - Filter available Rooms
         public int? RoomTypeId { get; set; }
     }
-
-    public class RoomImageInfoDTO
-    {
-        public int HouseId { get; set; }
-        public int RoomId { get; set; }
-    }
 }

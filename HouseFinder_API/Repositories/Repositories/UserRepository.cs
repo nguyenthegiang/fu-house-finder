@@ -2,6 +2,7 @@
 using DataAccess.DTO;
 using Microsoft.AspNetCore.Identity;
 using Repositories.IRepository;
+using System;
 using System.Collections.Generic;
 
 namespace Repositories.Repositories
@@ -39,18 +40,33 @@ namespace Repositories.Repositories
         }
         public ResponseDTO Register(RegisterDTO register)
         {
-            ResponseDTO user = UserDAO.Register(
-                register.FacebookUserId, 
-                register.GoogleUserId, 
-                register.Email, 
-                register.DisplayName,
-                (int)register.RoleId,
-                register.IdentityCardFrontSideImageLink,
-                register.IdentityCardBackSideImageLink, 
-                register.PhoneNumber,
-                register.FacebookUrl
-            );
-            return user;
+            try
+            {
+                if (register.RoleName == "student")
+                {
+                    register.RoleId = 1;
+                }
+                else if (register.RoleName == "landlord")
+                {
+                    register.RoleId = 2;
+                }
+                ResponseDTO user = UserDAO.Register(
+                    register.FacebookUserId,
+                    register.GoogleUserId,
+                    register.Email,
+                    register.DisplayName,
+                    (int)register.RoleId,
+                    register.IdentityCardFrontSideImageLink,
+                    register.IdentityCardBackSideImageLink,
+                    register.PhoneNumber,
+                    register.FacebookUrl
+                );
+                return user;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
         public void UpdateUserIdCardImage(UserDTO user)
         {

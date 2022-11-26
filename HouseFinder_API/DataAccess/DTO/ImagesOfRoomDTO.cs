@@ -17,4 +17,12 @@ namespace DataAccess.DTO
         public string CreatedBy { get; set; }
         public string LastModifiedBy { get; set; }
     }
+
+    public class RoomImageInfoDTO
+    {
+        public int HouseId { get; set; }
+        public string RoomName { get; set; }
+        public int BuildingNumber { get; set; }
+        public int FloorNumber { get; set; }
+    }
 }
