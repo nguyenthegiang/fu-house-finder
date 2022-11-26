@@ -25,7 +25,7 @@ namespace HouseFinder.Test
         public void Setup()
         {
             scope = new TransactionScope();     //create scope
-            
+
             /*
             //ARRANGE
             //Add some dummy data for test
@@ -154,7 +154,7 @@ namespace HouseFinder.Test
 
             //ACT
             var data = houseController.GetHouseById(houseId);
-            
+
             //Using FluentAssertion to convert result data: from IActionResult to DTO/Model
             var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
             HouseDTO house = okResult.Value.Should().BeAssignableTo<HouseDTO>().Subject;
@@ -287,7 +287,7 @@ namespace HouseFinder.Test
             //Update House
             House houseToUpdate = new House();
             houseToUpdate.HouseId = -1; //update id (not exist)
-            houseToUpdate.HouseName = existingHouse.HouseName;   
+            houseToUpdate.HouseName = existingHouse.HouseName;
             houseToUpdate.View = existingHouse.View;
             houseToUpdate.Information = existingHouse.Information;
             houseToUpdate.AddressId = existingHouse.AddressId;
@@ -434,7 +434,7 @@ namespace HouseFinder.Test
         /**
          * Method: IncreaseView()
          * Scenario: Input HouseId: -1, 0, 1000 (invalid)
-         * Expected behavior: Returns OkResult
+         * Expected behavior: Not Found Result
          */
         [TestCase(-1)]
         [TestCase(0)]
@@ -449,6 +449,37 @@ namespace HouseFinder.Test
 
             //ASSERT
             Assert.IsInstanceOf<NotFoundResult>(data);
+        }
+
+        /**
+         * Method: IncreaseView()
+         * Scenario: Input HouseId: 2 (valid)
+         * Expected behavior: Returns Check value got updated
+         */
+        [Test]
+        public void IncreaseView_ValidId_MatchUpdatedValue()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+            int houseId = 2;
+
+            //Store old data
+            var data = houseController.GetHouseById(houseId);
+            var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
+            HouseDTO existingHouse = okResult.Value.Should().BeAssignableTo<HouseDTO>().Subject;
+            int existingHouseView = (int)existingHouse.View;
+
+            //ACT
+            houseController.IncreaseView(houseId);
+
+            //Check updated data
+            data = houseController.GetHouseById(houseId);
+            okResult = data.Should().BeOfType<OkObjectResult>().Subject;
+            HouseDTO updatedHouse = okResult.Value.Should().BeAssignableTo<HouseDTO>().Subject;
+            int updatedHouseView = (int)updatedHouse.View;
+
+            //ASSERT
+            Assert.AreEqual(updatedHouseView, existingHouseView + 1);
         }
 
         #endregion IncreaseView
