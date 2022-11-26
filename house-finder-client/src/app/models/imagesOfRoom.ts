@@ -7,9 +7,8 @@ export interface ImagesOfRoom {
 
 export interface ImagesOfRoomUploadData{
   roomName: string;
-  building: number;
-  floor: number;
-  imageIndex: number;
+  buildingNumber: number;
+  floorNumber: number;
   houseId: number;
 }
 

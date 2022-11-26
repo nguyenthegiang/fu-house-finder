@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { MatProgressBar } from '@angular/material/progress-bar';
 import { ImagesOfRoomUploadData, ImagesOfRoomUploadFileData } from 'src/app/models/imagesOfRoom';
 import { FileService } from 'src/app/services/file.service';
 
@@ -10,8 +11,9 @@ import { FileService } from 'src/app/services/file.service';
 export class MultipleComponent implements OnInit {
 
   file: File | any; 
-  images: File[] | any;
+  images: any;
   houseId: number | any;
+  matProgressBarValue = 0;
 
   constructor(private fileService: FileService) { }
 
@@ -45,26 +47,39 @@ export class MultipleComponent implements OnInit {
 
   uploadImageFiles(){
     var uploadData: Array<ImagesOfRoomUploadFileData> = [];
-    this.images.forEach((image: File) => {
-      var name = image.name;
+    
+    for (var i=0; i<this.images.length; i++) {
+      var name = this.images[i].name;
       var roomName = name.split("-")[0];
-      try {
-        var building = Number(name.split("-")[1]);
-        var floor = Number(name.split("-")[2]);
-        var imageIndex = Number(name.split("-")[3]);
-        uploadData.push({
-          image: image,
-          data: {
-            building: building,
-            roomName: roomName,
-            floor: floor,
-            imageIndex: imageIndex,
-            houseId: this.houseId
-          }
-        });
-      } catch (error) {
+      var building = Number(name.split("-")[1]);
+      var floor = Number(name.split("-")[2]);
+      var imageIndex = Number(name.split("-")[3].split(".")[0]);
+
+      if (isNaN(building) || isNaN(floor) || isNaN(imageIndex)) {
         console.log("invalid file name");
+        continue;
       }
+      uploadData.push({
+        image: this.images[i],
+        data: {
+          buildingNumber: building,
+          roomName: roomName,
+          floorNumber: floor,
+          houseId: 1
+        }
+      });
+    };
+
+    var progress = 0;
+    uploadData.forEach((data: ImagesOfRoomUploadFileData) =>{
+      this.fileService.uploadRoomImageFile(data.data, data.image).subscribe(resp => {
+        progress += 1;
+        this.matProgressBarValue = progress / uploadData.length * 100;
+      },
+      err => {
+        progress += 1;
+        this.matProgressBarValue = progress / uploadData.length * 100;
+      });
     });
   }
 

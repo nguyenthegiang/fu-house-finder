@@ -33,9 +33,9 @@ export class FileService {
     const formData = new FormData();
 
     formData.append("file", file, file.name);
-    formData.append("data", JSON.stringify(data));
+    formData.append("room", JSON.stringify(data));
 
-    return this.http.post(this.APIUrl + "room/image", formData, {withCredentials: true})
+    return this.http.post(this.APIUrl + "/room/image", formData, {withCredentials: true})
   }
 
   uploadIDC(frontFile: File, backFile: File){
@@ -47,9 +47,7 @@ export class FileService {
       
     // Make http post request over api
     // with formData as req
-    let headers = new HttpHeaders();
-    headers.append("Authorization", "Bearer "+ localStorage.getItem('user'));
 
-    return this.http.post(this.APIUrl + '/idc/upload', formData, {headers: headers,  withCredentials: true});
+    return this.http.post(this.APIUrl + '/idc/upload', formData, {withCredentials: true});
   }
 }
