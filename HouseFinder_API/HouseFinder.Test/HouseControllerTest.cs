@@ -312,6 +312,59 @@ namespace HouseFinder.Test
             Assert.IsInstanceOf<BadRequestObjectResult>(updatedData);
         }
 
+        /**
+         * Method: UpdateHouse()
+         * Scenario: Input House: valid
+         * Expected behavior: Check value got updated
+         */
+        [Test]
+        public void UpdateHouse_ValidData_MatchUpdatedValue()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+            int houseId = 2;
+
+            //ACT
+
+            //Get existing House
+            var data = houseController.GetHouseById(houseId);
+            //Using FluentAssertion to convert result data: from IActionResult to DTO/Model
+            var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
+            HouseDTO existingHouse = okResult.Value.Should().BeAssignableTo<HouseDTO>().Subject;
+
+            //Update House
+            House houseToUpdate = new House();
+            houseToUpdate.HouseId = existingHouse.HouseId;
+            houseToUpdate.HouseName = "Trọ Tâm Thảo Test Update";   //update name
+            houseToUpdate.View = existingHouse.View;
+            houseToUpdate.Information = existingHouse.Information;
+            houseToUpdate.AddressId = existingHouse.AddressId;
+            houseToUpdate.VillageId = existingHouse.VillageId;
+            houseToUpdate.LandlordId = existingHouse.LandlordId;
+            houseToUpdate.CampusId = existingHouse.CampusId;
+            houseToUpdate.DistanceToCampus = existingHouse.DistanceToCampus;
+            houseToUpdate.PowerPrice = existingHouse.PowerPrice;
+            houseToUpdate.WaterPrice = existingHouse.WaterPrice;
+            houseToUpdate.FingerprintLock = existingHouse.FingerprintLock;
+            houseToUpdate.Camera = existingHouse.Camera;
+            houseToUpdate.Parking = existingHouse.Parking;
+            houseToUpdate.Deleted = existingHouse.Deleted;
+            houseToUpdate.CreatedDate = existingHouse.CreatedDate;
+            houseToUpdate.LastModifiedDate = existingHouse.LastModifiedDate;
+            houseToUpdate.CreatedBy = existingHouse.CreatedBy;
+            houseToUpdate.LastModifiedBy = existingHouse.LastModifiedBy;
+
+            houseController.UpdateHouse(houseToUpdate);
+
+            //Check updated data
+            data = houseController.GetHouseById(houseId);
+            //Using FluentAssertion to convert result data: from IActionResult to DTO/Model
+            okResult = data.Should().BeOfType<OkObjectResult>().Subject;
+            HouseDTO updatedHouse = okResult.Value.Should().BeAssignableTo<HouseDTO>().Subject;
+            //ASSERT
+            Assert.AreEqual("Trọ Tâm Thảo Test Update", updatedHouse.HouseName);
+        }
+
         #endregion UpdateHouse
 
         #region DeleteHouse
