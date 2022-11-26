@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace DataAccess.DTO
@@ -56,6 +57,7 @@ namespace DataAccess.DTO
     public class ResponseDTO
     {
         public string AccessToken { get; set; }
+        [JsonIgnore]
         public string UserId { get; set; }
         public string FacebookUserId { get; set; }
         public string GoogleUserId { get; set; }

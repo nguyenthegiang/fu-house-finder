@@ -122,12 +122,13 @@ export class LoginComponent implements OnInit {
         if (resp.status === 'connected') {  // The current login status of the person.
           // Logged into your webpage and Facebook.
           FB.api('/me', (response: any) => {
-            this.userService.loginFacebook(response.id).subscribe(resp => {
-              localStorage.setItem('user', resp.displayName);
-              localStorage.setItem("role", resp.roleName);
-              this.ngZone.run(() => { this.router.navigate(['/home']); });
-            },
-              async error => {
+            this.userService.loginFacebook(response.id).subscribe(async resp => {
+              if (resp.status == 200){
+                localStorage.setItem('user', resp.user.displayName);
+                localStorage.setItem("role", resp.user.roleName);
+                this.ngZone.run(() => { this.router.navigate(['/home']); });
+              }
+              else if (resp.status == 404){
                 this.facebookId = response.id;
                 this.name = response.name;
                 await this.triggerRoleModal();
@@ -137,9 +138,11 @@ export class LoginComponent implements OnInit {
                 else if (this.role == 'student'){
                   this.ngZone.run(() => { this.registerStudent() });
                 }
-              });
+              }
+            });
           });
         } else {                                 // Not logged into your webpage or we are unable to tell.
+        
         }
       });
     }
@@ -155,19 +158,21 @@ export class LoginComponent implements OnInit {
       console.error('Error while trying to decode token', e);
     }
     let user = this.userService.loginGoogle(response?.credential).subscribe(
-      resp => {
-        localStorage.setItem('user', resp.displayName);
-        localStorage.setItem("role", resp.roleName);
-        this.ngZone.run(() => { this.router.navigate(['/home']); });
-      },
-      async error => {
-        this.googleIdToken = response?.credential;
-        await this.triggerRoleModal();
-        if (this.role == 'landlord') {
-          this.ngZone.run(() => { this.triggerRegister() });
+      async resp => {
+        if (resp.status == 200){
+          localStorage.setItem('user', resp.user.displayName);
+          localStorage.setItem("role", resp.user.roleName);
+          this.ngZone.run(() => { this.router.navigate(['/home']); });
         }
-        else if (this.role == 'student'){
-          this.ngZone.run(() => { this.registerStudent() });
+        else if (resp.status == 404){
+          this.googleIdToken = response?.credential;
+          await this.triggerRoleModal();
+          if (this.role == 'landlord') {
+            this.ngZone.run(() => { this.triggerRegister() });
+          }
+          else if (this.role == 'student'){
+            this.ngZone.run(() => { this.registerStudent() });
+          }
         }
       }
     );
@@ -179,12 +184,17 @@ export class LoginComponent implements OnInit {
       this.loginForm.controls['password'].value
     ).subscribe(
       resp => {
-        localStorage.setItem('user', resp.displayName);
-        localStorage.setItem("role", resp.roleName);
-        this.ngZone.run(() => { this.router.navigate(['/Admin/list-staff']); });
-      },
-      error => {
-        alert('invalid username - password');
+        if (resp.status == 200){
+          localStorage.setItem('user', resp.user.displayName);
+          localStorage.setItem("role", resp.user.roleName);
+          this.ngZone.run(() => { this.router.navigate(['/Admin/list-staff']); });
+        }
+        else if (resp.status == 404){
+          alert('invalid username - password');
+        }
+        else if (resp.status == 403){
+
+        }
       }
     )
   }

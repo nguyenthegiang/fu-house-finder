@@ -58,20 +58,20 @@ namespace HouseFinder_API.Controllers
                 }
                 catch (Exception)
                 {
-                    return Forbid();
+                    return Ok(new { Status = 403 });
                 }
             }
             ResponseDTO user = userReposiotry.Login(login);
             if (user == null)
-                return NotFound();
+                return Ok(new { Status = 404 });
             string token = this.auth.Authenticate(user);
             if (token == null)
-                return NotFound();
+                return Ok(new { Status = 404 });
             HttpContext.Session.SetString("Token", token);
             HttpContext.Session.SetString("User", user.UserId);
             HttpContext.Response.Cookies.Append("X-Access-Token", token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
             user.AccessToken = token;
-            return Ok(user);
+            return Ok(new { Status = 200, User = user } );
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDTO register)
@@ -91,7 +91,7 @@ namespace HouseFinder_API.Controllers
                 }
                 catch (Exception)
                 {
-                    return Forbid();
+                    return Ok(new { Status = 403 });
                 }
             }
             ResponseDTO user = userReposiotry.Register(register);
@@ -100,7 +100,7 @@ namespace HouseFinder_API.Controllers
             HttpContext.Session.SetString("User", user.UserId);
             HttpContext.Response.Cookies.Append("X-Access-Token", token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
             user.AccessToken = token;
-            return Ok(user);
+            return Ok(new { Status = 200, User = user });
         }
         [Authorize]
         [HttpGet("test")]
