@@ -158,6 +158,26 @@ namespace HouseFinder.Test
             Assert.IsInstanceOf<OkObjectResult>(data);
         }
 
+        /**
+         * Method: GetHouseById()
+         * Scenario: Input HouseId: 1 (valid)
+         * Expected behavior: Returns ActionResult
+         */
+        [TestCase(0)]
+        [TestCase(-1)]
+        [TestCase(1000)]
+        public void GetHouseById_InvalidId_Returns_NotFoundResult(int HouseId)
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+
+            //ACT
+            var data = houseController.GetHouseById(HouseId);
+
+            //ASSERT
+            Assert.IsInstanceOf<NotFoundResult>(data);
+        }
+
         #endregion GetHouseById
     }
 }
