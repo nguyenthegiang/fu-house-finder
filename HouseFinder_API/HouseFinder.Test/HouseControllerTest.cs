@@ -143,7 +143,7 @@ namespace HouseFinder.Test
         /**
          * Method: GetHouseById()
          * Scenario: Input HouseId: 2 (valid)
-         * Expected behavior: Returns OkObjectResult
+         * Expected behavior: Check matching result data
          */
         [Test]
         public void GetHouseById_ValidId_MatchResult()
@@ -516,6 +516,7 @@ namespace HouseFinder.Test
         [TestCase(".,--+!1@")]
         [TestCase(" ")]
         [TestCase("13456789")]
+        [TestCase(null)]
 
         public void GetListHousesByLandlordId_InvalidId_Returns_NotFoundResult(string landlordId)
         {
@@ -527,6 +528,34 @@ namespace HouseFinder.Test
 
             //ASSERT
             Assert.IsInstanceOf<NotFoundResult>(data);
+        }
+
+        /**
+         * Method: GetListHousesByLandlordId()
+         * Scenario: Input HouseId: Valid
+         * Expected behavior: Check matching result data
+         */
+        [TestCase]
+
+        public void GetListHousesByLandlordId_ValidId_Returns_MatchResult()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+            string landlordId = "LA000001";
+
+            //ACT
+            var data = houseController.GetListHousesByLandlordId(landlordId);
+
+            //Using FluentAssertion to convert result data: from IActionResult to DTO/Model
+            var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
+            List<HouseDTO> houses = okResult.Value.Should().BeAssignableTo<List<HouseDTO>>().Subject;
+
+            //ASSERT
+            Assert.AreEqual("Trọ Tâm Lê", houses[0].HouseName);
+            Assert.AreEqual(50, houses[0].View);
+
+            Assert.AreEqual("Trọ Linh Lê", houses[1].HouseName);
+            Assert.AreEqual(72, houses[1].View);
         }
 
         #endregion GetListHousesByLandlordId

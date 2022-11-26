@@ -139,7 +139,6 @@ namespace HouseFinder_API.Controllers
             {
                 return BadRequest();
             }
-
         }
 
         //GET: api/Houses/GetMoneyForNotRentedRooms?HouseId=
