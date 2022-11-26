@@ -1148,7 +1148,7 @@ INSERT INTO [dbo].[Villages] VALUES (N'13KP Long Hòa', 60, GETDATE());
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
-INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Lê', 34, N'Rất đẹp', 6, 3, N'LA000001', 1, 4.5, 3700, 1200, 0, 0, 0 , 0, GETDATE(), GETDATE(), N'LA000001', N'LA000001');
+INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Lê', 50, N'Rất đẹp', 6, 3, N'LA000001', 1, 4.5, 3700, 1200, 0, 0, 0 , 0, GETDATE(), GETDATE(), N'LA000001', N'LA000001');
 INSERT INTO [dbo].[Houses] VALUES (N'Trọ Tâm Thảo', 34, N'Rất đẹp', 7, 3, N'LA000002', 1, 3.5, 3500, 1300, 0, 1, 0, 0, GETDATE(), GETDATE(), N'LA000002', N'LA000002');
 INSERT INTO [dbo].[Houses] VALUES (N'Trọ Hòa Lạc Yên Lạc Viên', 76, N'Vị trí trung tâm khu giao lộ ngã tư Hòa Lạc. Cảnh quan trong lành, yên tĩnh', 8, 3, N'LA000003', 1, 5.5, 3400, 1500, 0, 0, 0 , 0, GETDATE(), GETDATE(), N'LA000003', N'LA000003');
 INSERT INTO [dbo].[Houses] VALUES (N'Nhà trọ Bình Yên', 87, N'Không chung chủ, giờ giấc thoải mái', 9, 3, N'LA000004', 1, 6.5, 3500, 1300, 0, 0, 0, 0, GETDATE(), GETDATE(), N'LA000004', N'LA000004');
