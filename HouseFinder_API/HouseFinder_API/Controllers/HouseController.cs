@@ -43,15 +43,22 @@ namespace HouseFinder_API.Controllers
         [HttpGet("{HouseId}")]
         public IActionResult GetHouseById(int HouseId)
         {
-            HouseDTO houseDTO = houseRepository.GetHouseById(HouseId);
-            if (houseDTO == null)
+            try
+            {
+                HouseDTO houseDTO = houseRepository.GetHouseById(HouseId);
+                if (houseDTO == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(houseDTO);
+                }
+            } catch (Exception)
             {
                 return NotFound();
             }
-            else
-            {
-                return Ok(houseDTO);
-            }
+
         }
 
         /**
