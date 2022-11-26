@@ -386,17 +386,16 @@ namespace HouseFinder.Test
         [TestCase(-1)]
         [TestCase(0)]
         [TestCase(1000)]
-        public void IncreaseView_InvalidId_Returns_NotFoundResult()
+        public void IncreaseView_InvalidId_Returns_NotFoundResult(int houseId)
         {
             //ARRANGE
             var houseController = new HouseController();
-            int houseId = 1;
 
             //ACT
             var data = houseController.IncreaseView(houseId);
 
             //ASSERT
-            Assert.IsInstanceOf<OkResult>(data);
+            Assert.IsInstanceOf<NotFoundResult>(data);
         }
 
         #endregion IncreaseView
