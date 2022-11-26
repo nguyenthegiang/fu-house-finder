@@ -44,7 +44,7 @@ export class UserService {
     return this.http.post<any>(this.APIUrl + "/register",
     {
       "googleIdToken": googleIdToken,
-      "roleId": 1,
+      "roleId": 0,
     },
     {withCredentials: true});
   }
@@ -69,7 +69,7 @@ export class UserService {
     return this.http.post<User>(this.APIUrl + "/register", {
       "facebookUserId": facebookId,
       "displayName": name,
-      "roleId": 1
+      "roleId": 0
     },
     {withCredentials: true});
   }
