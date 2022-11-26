@@ -136,8 +136,7 @@ namespace HouseFinder_API.Controllers
             return Ok(totals);
         }
 
-        [Authorize]
-        [HttpGet("CountOrderSolvedByStaffInADay/{date}")]
+        [HttpGet("CountOrderSolvedByStaffInADay")]
         public IActionResult CountOrderSolvedByStaffInADay(DateTime date)
         {
             string uid = HttpContext.Session.GetString("User");

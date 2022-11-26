@@ -339,7 +339,6 @@ namespace DataAccess
             return total;
         }
 
-        public static int Count
     }
    
 }

@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
@@ -10,6 +11,7 @@ import { OrderStatusService } from 'src/app/services/orderStatus.service';
   selector: 'app-list-order',
   templateUrl: './list-order.component.html',
   styleUrls: ['./list-order.component.scss'],
+  providers: [DatePipe],
 })
 export class ListOrderComponent implements OnInit {
   //List of orders
@@ -47,18 +49,30 @@ export class ListOrderComponent implements OnInit {
 
   //Bar chart
   totalofSolvedOrderInYear: number[] | undefined;
+  totalofSolvedOrderInDay: number | undefined;
+
+  //Statistic
   //Get current year
   currentYear: number = new Date().getFullYear();
 
   constructor(
     private orderService: OrderService,
     private orderStatusService: OrderStatusService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private datePipe: DatePipe,
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.selectedOrderBy = 'desc';
     this.filterOrder(true);
+
+    let currentDate = this.datePipe.transform((new Date), 'yyyy-MM-dd') + "";
+
+    this.orderService.countOrderSolvedByStaffInADay(currentDate).subscribe((data) =>{
+      this.totalofSolvedOrderInDay = data;
+    })
 
     // (Paging) Count available Houses for total number of pages
     this.orderService.countTotalOrder().subscribe((data) => {

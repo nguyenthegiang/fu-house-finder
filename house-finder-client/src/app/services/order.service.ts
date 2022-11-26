@@ -147,4 +147,8 @@ export class OrderService {
   countSolvedOrderByMonth() : Observable<number[]>{
     return this.http.get<number[]>(this.APIUrl + "/CountSolvedOrderByMonth", {withCredentials: true});
   }
+
+  countOrderSolvedByStaffInADay(date: string) :Observable<number>{
+    return this.http.get<number>(this.APIUrl + "/CountOrderSolvedByStaffInADay?date=" + date, {withCredentials: true});
+  }
 }
