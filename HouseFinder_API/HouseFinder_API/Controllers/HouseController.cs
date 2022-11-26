@@ -20,14 +20,16 @@ namespace HouseFinder_API.Controllers
     public class HouseController : ControllerBase
     {
         private IHouseRepository houseRepository = new HouseRepository();
-        
+
 
         //GET: api/Houses
         //[HttpGet]
         //public ActionResult<IEnumerable<HouseDTO>> GetAllHouses() => housesRepository.GetAllHouses();
 
-        //GET: api/Houses/availableHouses
-        //[Home Page] List available Houses (using OData)
+        /**
+         * GET: api/Houses/availableHouses
+         * [Home Page] List available Houses (using OData)
+         */
         [EnableQuery]
         [HttpGet("availableHouses")]
         public ActionResult<IEnumerable<AvailableHouseDTO>> GetAvailableHouses() => houseRepository.GetAvailableHouses();
@@ -39,7 +41,9 @@ namespace HouseFinder_API.Controllers
         //    return housesRepository.GetHouseByName(name);
         //}
 
-        //GET: api/Houses/HouseId
+        /**
+         *  GET: api/Houses/HouseId
+         */
         [HttpGet("{HouseId}")]
         public IActionResult GetHouseById(int HouseId)
         {
@@ -58,7 +62,41 @@ namespace HouseFinder_API.Controllers
             {
                 return NotFound();
             }
+        }
 
+        /**
+         * PUT: api/Houses
+         */
+        [HttpPut]
+        public IActionResult UpdateHouse(House house)
+        {
+            try
+            {
+                houseRepository.UpdateHouseByHouseId(house);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
+
+        /**
+         * DELETE: api/House?houseId=
+         */
+        [HttpDelete()]
+        public IActionResult DeleteHouse(int houseId)
+        {
+            try
+            {
+                houseRepository.DeleteHouseByHouseId(houseId);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
         }
 
         /**
@@ -117,37 +155,6 @@ namespace HouseFinder_API.Controllers
         //[Staff - Dashboard] For statistic report
         [HttpGet("CountAvailableHouse")]
         public int CountAvailableHouse() => houseRepository.CountAvailableHouse();
-
-        //PUT: api/Houses
-        [HttpPut]
-        public IActionResult UpdateHouse(House house)
-        {
-            try
-            {
-                houseRepository.UpdateHouseByHouseId(house);
-                return Ok();
-            }
-            catch (Exception e)
-            {
-
-                return BadRequest(e.Message);
-            }
-        }
-
-        //DELETE: api/House?houseId=
-        [HttpDelete()]
-        public IActionResult DeleteHouse(int houseId)
-        {
-            try
-            {
-                houseRepository.DeleteHouseByHouseId(houseId);
-                return Ok();
-            }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
-        }
 
         /**
          * GET: api/Houses/Distance

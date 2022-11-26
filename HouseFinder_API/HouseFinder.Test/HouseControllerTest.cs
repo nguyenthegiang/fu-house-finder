@@ -25,63 +25,23 @@ namespace HouseFinder.Test
         public void Setup()
         {
             scope = new TransactionScope();     //create scope
-
+            
             /*
             //ARRANGE
             //Add some dummy data for test
             FUHouseFinderContext context = new FUHouseFinderContext();
-            context.Houses.Add(
-                new House()
-                {
-                    HouseName = "Test House 1",
-                    View = 0,
-                    Information = "Test Info 1",
-                    AddressId = 1,
-                    VillageId = 1,
-                    LandlordId = "LA000001",
-                    CampusId = 1,
-                    DistanceToCampus = 1,
-                    PowerPrice = 100,
-                    WaterPrice = 100,
-                    FingerprintLock = true,
-                    Camera = true,
-                    Parking = true,
-                    Deleted = false,
-                    CreatedDate = DateTime.UtcNow,
-                    LastModifiedDate = DateTime.UtcNow,
-                    CreatedBy = "LA000001",
-                    LastModifiedBy = "LA000001",
-                    Rooms =
-                    {
-                            new Room()
-                            {
-                                RoomName = "Test Room 1",
-                                PricePerMonth = 100,
-                                Information = "Test Info Room 1",
-                                AreaByMeters = 10,
-                                Fridge = true,
-                                Kitchen = true,
-                                WashingMachine = true,
-                                Desk = true,
-                                NoLiveWithHost = true,
-                                Bed = true,
-                                ClosedToilet = true,
-                                MaxAmountOfPeople = 1,
-                                CurrentAmountOfPeople = 1,
-                                BuildingNumber = 1,
-                                FloorNumber = 1,
-                                StatusId = 1,
-                                RoomTypeId = 1,
-                                Deleted = false,
-                                CreatedDate = DateTime.UtcNow,
-                                LastModifiedDate = DateTime.UtcNow,
-                                CreatedBy = "LA000001",
-                                LastModifiedBy = "LA000001"
-                            }
-                    }
-                }
-            );
-            context.SaveChanges();*/
+            context.Houses.Add( new House()
+                { HouseName = "Test House 1", View = 0, Information = "Test Info 1", AddressId = 1, VillageId = 1, LandlordId = "LA000001",
+                  CampusId = 1, DistanceToCampus = 1, PowerPrice = 100, WaterPrice = 100, FingerprintLock = true, Camera = true, 
+                  Parking = true, Deleted = false, CreatedDate = DateTime.UtcNow, LastModifiedDate = DateTime.UtcNow, CreatedBy = "LA000001",
+                  LastModifiedBy = "LA000001",
+                  Rooms = { new Room() { RoomName = "Test Room 1", PricePerMonth = 100, Information = "Test Info Room 1", AreaByMeters = 10,
+                  Fridge = true, Kitchen = true, WashingMachine = true, Desk = true, NoLiveWithHost = true, Bed = true, ClosedToilet = true,
+                  MaxAmountOfPeople = 1, CurrentAmountOfPeople = 1, BuildingNumber = 1, FloorNumber = 1, StatusId = 1, RoomTypeId = 1,
+                  Deleted = false, CreatedDate = DateTime.UtcNow, LastModifiedDate = DateTime.UtcNow, CreatedBy = "LA000001", LastModifiedBy = "LA000001"
+                  } } } );
+            context.SaveChanges();
+            */
         }
 
         [TearDown]
@@ -205,5 +165,12 @@ namespace HouseFinder.Test
         }
 
         #endregion GetHouseById
+
+        #region UpdateHouse
+
+
+
+        #endregion UpdateHouse
+
     }
 }
