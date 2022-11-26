@@ -58,12 +58,16 @@ namespace HouseFinder_API.Controllers
                 }
                 catch (Exception)
                 {
-                    return Ok(new { Status = 403 });
+                    return Ok(new { Status = 500 });
                 }
             }
             ResponseDTO user = userReposiotry.Login(login);
             if (user == null)
                 return Ok(new { Status = 404 });
+            if (user.StatusId == 0)
+            {
+                return Ok(new { Status = 403 });
+            }
             string token = this.auth.Authenticate(user);
             if (token == null)
                 return Ok(new { Status = 404 });
@@ -91,7 +95,7 @@ namespace HouseFinder_API.Controllers
                 }
                 catch (Exception)
                 {
-                    return Ok(new { Status = 403 });
+                    return Ok(new { Status = 500 });
                 }
             }
             ResponseDTO user = userReposiotry.Register(register);

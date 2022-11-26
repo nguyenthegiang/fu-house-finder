@@ -128,6 +128,9 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem("role", resp.user.roleName);
                 this.ngZone.run(() => { this.router.navigate(['/home']); });
               }
+              else if (resp.status == 403){
+                alert("Your Account Has been Blocked!");
+              }
               else if (resp.status == 404){
                 this.facebookId = response.id;
                 this.name = response.name;
@@ -164,6 +167,9 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("role", resp.user.roleName);
           this.ngZone.run(() => { this.router.navigate(['/home']); });
         }
+        else if (resp.status == 403){
+          alert("Your Account Has been Blocked!");
+        }
         else if (resp.status == 404){
           this.googleIdToken = response?.credential;
           await this.triggerRoleModal();
@@ -189,11 +195,11 @@ export class LoginComponent implements OnInit {
           localStorage.setItem("role", resp.user.roleName);
           this.ngZone.run(() => { this.router.navigate(['/Admin/list-staff']); });
         }
+        else if (resp.status == 403){
+          alert("Your Account Has been Blocked!");
+        }
         else if (resp.status == 404){
           alert('invalid username - password');
-        }
-        else if (resp.status == 403){
-
         }
       }
     )

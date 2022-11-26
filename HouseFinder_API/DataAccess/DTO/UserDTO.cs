@@ -64,5 +64,6 @@ namespace DataAccess.DTO
         public string Email { get; set; }
         public string DisplayName { get; set; }
         public string RoleName { get; set; }
+        public int StatusId { get; set; }
     }
 }
