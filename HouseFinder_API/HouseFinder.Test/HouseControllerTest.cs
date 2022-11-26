@@ -87,14 +87,14 @@ namespace HouseFinder.Test
             //ASSERT
             Assert.IsInstanceOf<ActionResult<IEnumerable<AvailableHouseDTO>>>(data);
 
-            List<AvailableHouseDTO> results = data.Value.ToList();
+            List<AvailableHouseDTO> houses = data.Value.ToList();
 
             //Test matching data
-            Assert.AreEqual("Trọ Tâm Lê", results[0].HouseName);
-            Assert.AreEqual(50, results[0].View);
+            Assert.AreEqual("Trọ Tâm Lê", houses[0].HouseName);
+            Assert.AreEqual(50, houses[0].View);
 
-            Assert.AreEqual("Trọ Tâm Thảo", results[1].HouseName);
-            Assert.AreEqual(34, results[1].View);
+            Assert.AreEqual("Trọ Tâm Thảo", houses[1].HouseName);
+            Assert.AreEqual(34, houses[1].View);
         }
 
         #endregion GetAvailableHouses
@@ -313,6 +313,49 @@ namespace HouseFinder.Test
         }
 
         #endregion UpdateHouse
+
+        #region DeleteHouse
+
+        /**
+         * Method: DeleteHouse()
+         * Scenario: Input HouseId: valid
+         * Expected behavior: Returns OkResult
+         */
+        [Test]
+        public void DeleteHouse_ValidData_OkResult()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+            int houseId = 2;
+
+            //ACT
+            var data = houseController.DeleteHouse(houseId);
+
+            //ASSERT
+            Assert.IsInstanceOf<OkResult>(data);
+        }
+
+        /**
+         * Method: DeleteHouse()
+         * Scenario: Input HouseId: invalid
+         * Expected behavior: Returns BadRequest
+         */
+        [TestCase(-1)]
+        [TestCase(0)]
+        [TestCase(2000)]
+        public void DeleteHouse_InvalidData_BadRequestResult(int houseId)
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+
+            //ACT
+            var data = houseController.DeleteHouse(houseId);
+
+            //ASSERT
+            Assert.IsInstanceOf<BadRequestResult>(data);
+        }
+
+        #endregion DeleteHouse
 
     }
 }
