@@ -144,6 +144,8 @@ namespace DataAccess
         public static ResponseDTO Register(string fid, string gid, string email, string name, int role, string identityCardFrontSideImageLink, string identityCardBackSideImageLink, string phonenumber, string facebookUrl)
         {
             ResponseDTO userDTO;
+            try
+            {
                 using (var context = new FUHouseFinderContext())
                 {
                     //Get by Id, include Address
@@ -188,6 +190,11 @@ namespace DataAccess
                             .FirstOrDefault();
                     }
                 }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
             return userDTO;
         }
 

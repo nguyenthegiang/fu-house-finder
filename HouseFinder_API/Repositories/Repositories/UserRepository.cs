@@ -40,26 +40,33 @@ namespace Repositories.Repositories
         }
         public ResponseDTO Register(RegisterDTO register)
         {
-            if (register.RoleName == "student")
+            try
             {
-                register.RoleId = 1;
+                if (register.RoleName == "student")
+                {
+                    register.RoleId = 1;
+                }
+                else if (register.RoleName == "landlord")
+                {
+                    register.RoleId = 2;
+                }
+                ResponseDTO user = UserDAO.Register(
+                    register.FacebookUserId,
+                    register.GoogleUserId,
+                    register.Email,
+                    register.DisplayName,
+                    (int)register.RoleId,
+                    register.IdentityCardFrontSideImageLink,
+                    register.IdentityCardBackSideImageLink,
+                    register.PhoneNumber,
+                    register.FacebookUrl
+                );
+                return user;
             }
-            else if (register.RoleName == "landlord")
+            catch (Exception e)
             {
-                register.RoleId = 2;
+                throw new Exception(e.Message);
             }
-            ResponseDTO user = UserDAO.Register(
-                register.FacebookUserId, 
-                register.GoogleUserId, 
-                register.Email, 
-                register.DisplayName,
-                (int)register.RoleId,
-                register.IdentityCardFrontSideImageLink,
-                register.IdentityCardBackSideImageLink, 
-                register.PhoneNumber,
-                register.FacebookUrl
-            );
-            return user;
         }
         public void UpdateUserIdCardImage(UserDTO user)
         {
