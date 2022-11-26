@@ -25,10 +25,11 @@ namespace HouseFinder.Test
         {
             scope = new TransactionScope();     //create scope
 
+            /*
             //ARRANGE
             //Add some dummy data for test
             FUHouseFinderContext context = new FUHouseFinderContext();
-            context.Houses.AddRange(
+            context.Houses.Add(
                 new House()
                 {
                     HouseName = "Test House 1",
@@ -45,33 +46,41 @@ namespace HouseFinder.Test
                     Camera = true,
                     Parking = true,
                     Deleted = false,
-                    CreatedDate = DateTime.Now,
-                    LastModifiedDate = DateTime.Now,
+                    CreatedDate = DateTime.UtcNow,
+                    LastModifiedDate = DateTime.UtcNow,
                     CreatedBy = "LA000001",
-                    LastModifiedBy = "LA000001"
-                },
-                new House()
-                {
-                    HouseName = "Test House 2",
-                    View = 0,
-                    Information = "Test Info 2",
-                    AddressId = 1,
-                    VillageId = 1,
-                    LandlordId = "LA000001",
-                    CampusId = 1,
-                    DistanceToCampus = 1,
-                    PowerPrice = 100,
-                    WaterPrice = 100,
-                    FingerprintLock = true,
-                    Camera = true,
-                    Parking = true,
-                    Deleted = false,
-                    CreatedDate = DateTime.Now,
-                    LastModifiedDate = DateTime.Now,
-                    CreatedBy = "LA000001",
-                    LastModifiedBy = "LA000001"
+                    LastModifiedBy = "LA000001",
+                    Rooms =
+                    {
+                            new Room()
+                            {
+                                RoomName = "Test Room 1",
+                                PricePerMonth = 100,
+                                Information = "Test Info Room 1",
+                                AreaByMeters = 10,
+                                Fridge = true,
+                                Kitchen = true,
+                                WashingMachine = true,
+                                Desk = true,
+                                NoLiveWithHost = true,
+                                Bed = true,
+                                ClosedToilet = true,
+                                MaxAmountOfPeople = 1,
+                                CurrentAmountOfPeople = 1,
+                                BuildingNumber = 1,
+                                FloorNumber = 1,
+                                StatusId = 1,
+                                RoomTypeId = 1,
+                                Deleted = false,
+                                CreatedDate = DateTime.UtcNow,
+                                LastModifiedDate = DateTime.UtcNow,
+                                CreatedBy = "LA000001",
+                                LastModifiedBy = "LA000001"
+                            }
+                    }
                 }
             );
+            context.SaveChanges();*/
         }
 
         [TearDown]
@@ -118,6 +127,12 @@ namespace HouseFinder.Test
             Assert.IsInstanceOf<ActionResult<IEnumerable<AvailableHouseDTO>>>(data);
 
             List<AvailableHouseDTO> results = data.Value.ToList();
+
+            Assert.AreEqual("Trọ Tâm Lê", results[0].HouseName);
+            Assert.AreEqual(45, results[0].View);
+
+            Assert.AreEqual("Trọ Tâm Thảo", results[1].HouseName);
+            Assert.AreEqual(34, results[1].View);
         }
 
         #endregion GetAvailableHouses
