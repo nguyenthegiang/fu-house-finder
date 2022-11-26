@@ -230,7 +230,6 @@ namespace HouseFinder_API.Controllers
         {
             try
             {
-
                 roomRepository.ChangeStatusRoom(statusId, roomId);
                 return Ok();
             }
