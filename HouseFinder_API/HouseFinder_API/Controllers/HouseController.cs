@@ -112,10 +112,10 @@ namespace HouseFinder_API.Controllers
                 houseRepository.IncreaseView(HouseId);
                 return Ok();
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
-                return BadRequest(e.Message);
+                return NotFound();
             }
         }
 
@@ -123,14 +123,21 @@ namespace HouseFinder_API.Controllers
         [HttpGet("GetHousesByLandlord")]
         public IActionResult GetListHousesByLandlordId(string LandlordId)
         {
-            List<HouseDTO> houseDTOs = houseRepository.GetListHousesByLandlordId(LandlordId);
-            if (houseDTOs == null)
+            try
             {
-                return NotFound();
+                List<HouseDTO> houseDTOs = houseRepository.GetListHousesByLandlordId(LandlordId);
+                if (houseDTOs == null || houseDTOs.Count == 0)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(houseDTOs);
+                }
             }
-            else
+            catch (Exception)
             {
-                return Ok(houseDTOs);
+                return BadRequest();
             }
         }
 

@@ -25,7 +25,7 @@ namespace HouseFinder.Test
         public void Setup()
         {
             scope = new TransactionScope();     //create scope
-            
+
             /*
             //ARRANGE
             //Add some dummy data for test
@@ -143,7 +143,7 @@ namespace HouseFinder.Test
         /**
          * Method: GetHouseById()
          * Scenario: Input HouseId: 2 (valid)
-         * Expected behavior: Returns OkObjectResult
+         * Expected behavior: Check matching result data
          */
         [Test]
         public void GetHouseById_ValidId_MatchResult()
@@ -154,7 +154,7 @@ namespace HouseFinder.Test
 
             //ACT
             var data = houseController.GetHouseById(houseId);
-            
+
             //Using FluentAssertion to convert result data: from IActionResult to DTO/Model
             var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
             HouseDTO house = okResult.Value.Should().BeAssignableTo<HouseDTO>().Subject;
@@ -287,7 +287,7 @@ namespace HouseFinder.Test
             //Update House
             House houseToUpdate = new House();
             houseToUpdate.HouseId = -1; //update id (not exist)
-            houseToUpdate.HouseName = existingHouse.HouseName;   
+            houseToUpdate.HouseName = existingHouse.HouseName;
             houseToUpdate.View = existingHouse.View;
             houseToUpdate.Information = existingHouse.Information;
             houseToUpdate.AddressId = existingHouse.AddressId;
@@ -310,6 +310,59 @@ namespace HouseFinder.Test
 
             //ASSERT
             Assert.IsInstanceOf<BadRequestObjectResult>(updatedData);
+        }
+
+        /**
+         * Method: UpdateHouse()
+         * Scenario: Input House: valid
+         * Expected behavior: Check value got updated
+         */
+        [Test]
+        public void UpdateHouse_ValidData_MatchUpdatedValue()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+            int houseId = 2;
+
+            //ACT
+
+            //Get existing House
+            var data = houseController.GetHouseById(houseId);
+            //Using FluentAssertion to convert result data: from IActionResult to DTO/Model
+            var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
+            HouseDTO existingHouse = okResult.Value.Should().BeAssignableTo<HouseDTO>().Subject;
+
+            //Update House
+            House houseToUpdate = new House();
+            houseToUpdate.HouseId = existingHouse.HouseId;
+            houseToUpdate.HouseName = "Trọ Tâm Thảo Test Update";   //update name
+            houseToUpdate.View = existingHouse.View;
+            houseToUpdate.Information = existingHouse.Information;
+            houseToUpdate.AddressId = existingHouse.AddressId;
+            houseToUpdate.VillageId = existingHouse.VillageId;
+            houseToUpdate.LandlordId = existingHouse.LandlordId;
+            houseToUpdate.CampusId = existingHouse.CampusId;
+            houseToUpdate.DistanceToCampus = existingHouse.DistanceToCampus;
+            houseToUpdate.PowerPrice = existingHouse.PowerPrice;
+            houseToUpdate.WaterPrice = existingHouse.WaterPrice;
+            houseToUpdate.FingerprintLock = existingHouse.FingerprintLock;
+            houseToUpdate.Camera = existingHouse.Camera;
+            houseToUpdate.Parking = existingHouse.Parking;
+            houseToUpdate.Deleted = existingHouse.Deleted;
+            houseToUpdate.CreatedDate = existingHouse.CreatedDate;
+            houseToUpdate.LastModifiedDate = existingHouse.LastModifiedDate;
+            houseToUpdate.CreatedBy = existingHouse.CreatedBy;
+            houseToUpdate.LastModifiedBy = existingHouse.LastModifiedBy;
+
+            houseController.UpdateHouse(houseToUpdate);
+
+            //Check updated data
+            data = houseController.GetHouseById(houseId);
+            //Using FluentAssertion to convert result data: from IActionResult to DTO/Model
+            okResult = data.Should().BeOfType<OkObjectResult>().Subject;
+            HouseDTO updatedHouse = okResult.Value.Should().BeAssignableTo<HouseDTO>().Subject;
+            //ASSERT
+            Assert.AreEqual("Trọ Tâm Thảo Test Update", updatedHouse.HouseName);
         }
 
         #endregion UpdateHouse
@@ -356,6 +409,156 @@ namespace HouseFinder.Test
         }
 
         #endregion DeleteHouse
+
+        #region IncreaseView
+
+        /**
+         * Method: IncreaseView()
+         * Scenario: Input HouseId: 1 (valid)
+         * Expected behavior: Returns OkResult
+         */
+        [Test]
+        public void IncreaseView_ValidId_Returns_OkResult()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+            int houseId = 1;
+
+            //ACT
+            var data = houseController.IncreaseView(houseId);
+
+            //ASSERT
+            Assert.IsInstanceOf<OkResult>(data);
+        }
+
+        /**
+         * Method: IncreaseView()
+         * Scenario: Input HouseId: -1, 0, 1000 (invalid)
+         * Expected behavior: Not Found Result
+         */
+        [TestCase(-1)]
+        [TestCase(0)]
+        [TestCase(1000)]
+        public void IncreaseView_InvalidId_Returns_NotFoundResult(int houseId)
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+
+            //ACT
+            var data = houseController.IncreaseView(houseId);
+
+            //ASSERT
+            Assert.IsInstanceOf<NotFoundResult>(data);
+        }
+
+        /**
+         * Method: IncreaseView()
+         * Scenario: Input HouseId: 2 (valid)
+         * Expected behavior: Returns Check value got updated
+         */
+        [Test]
+        public void IncreaseView_ValidId_MatchUpdatedValue()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+            int houseId = 2;
+
+            //Store old data
+            var data = houseController.GetHouseById(houseId);
+            var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
+            HouseDTO existingHouse = okResult.Value.Should().BeAssignableTo<HouseDTO>().Subject;
+            int existingHouseView = (int)existingHouse.View;
+
+            //ACT
+            houseController.IncreaseView(houseId);
+
+            //Check updated data
+            data = houseController.GetHouseById(houseId);
+            okResult = data.Should().BeOfType<OkObjectResult>().Subject;
+            HouseDTO updatedHouse = okResult.Value.Should().BeAssignableTo<HouseDTO>().Subject;
+            int updatedHouseView = (int)updatedHouse.View;
+
+            //ASSERT
+            Assert.AreEqual(updatedHouseView, existingHouseView + 1);
+        }
+
+        #endregion IncreaseView
+
+        #region GetListHousesByLandlordId
+
+        /**
+         * Method: GetListHousesByLandlordId()
+         * Scenario: Input LandlordId: "LA000001" (valid)
+         * Expected behavior: Returns OkObjectResult
+         */
+        [Test]
+        public void GetListHousesByLandlordId_ValidId_Returns_OkObjectResult()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+            string landlordId = "LA000001";
+
+            //ACT
+            var data = houseController.GetListHousesByLandlordId(landlordId);
+
+            //ASSERT
+            Assert.IsInstanceOf<OkObjectResult>(data);
+        }
+
+        /**
+         * Method: GetListHousesByLandlordId()
+         * Scenario: Input HouseId: Invalid
+         * Expected behavior: Returns NotFoundResult
+         */
+        [TestCase("")]
+        [TestCase("LA000000")]
+        [TestCase("LALALA")]
+        [TestCase(".,--+!1@")]
+        [TestCase(" ")]
+        [TestCase("13456789")]
+        [TestCase(null)]
+
+        public void GetListHousesByLandlordId_InvalidId_Returns_NotFoundResult(string landlordId)
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+
+            //ACT
+            var data = houseController.GetListHousesByLandlordId(landlordId);
+
+            //ASSERT
+            Assert.IsInstanceOf<NotFoundResult>(data);
+        }
+
+        /**
+         * Method: GetListHousesByLandlordId()
+         * Scenario: Input HouseId: Valid
+         * Expected behavior: Check matching result data
+         */
+        [TestCase]
+
+        public void GetListHousesByLandlordId_ValidId_Returns_MatchResult()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+            string landlordId = "LA000001";
+
+            //ACT
+            var data = houseController.GetListHousesByLandlordId(landlordId);
+
+            //Using FluentAssertion to convert result data: from IActionResult to DTO/Model
+            var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
+            List<HouseDTO> houses = okResult.Value.Should().BeAssignableTo<List<HouseDTO>>().Subject;
+
+            //ASSERT
+            Assert.AreEqual("Trọ Tâm Lê", houses[0].HouseName);
+            Assert.AreEqual(50, houses[0].View);
+
+            Assert.AreEqual("Trọ Linh Lê", houses[1].HouseName);
+            Assert.AreEqual(72, houses[1].View);
+        }
+
+        #endregion GetListHousesByLandlordId
 
     }
 }
