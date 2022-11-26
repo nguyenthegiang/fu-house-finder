@@ -87,14 +87,14 @@ namespace HouseFinder.Test
             //ASSERT
             Assert.IsInstanceOf<ActionResult<IEnumerable<AvailableHouseDTO>>>(data);
 
-            List<AvailableHouseDTO> results = data.Value.ToList();
+            List<AvailableHouseDTO> houses = data.Value.ToList();
 
             //Test matching data
-            Assert.AreEqual("Trọ Tâm Lê", results[0].HouseName);
-            Assert.AreEqual(50, results[0].View);
+            Assert.AreEqual("Trọ Tâm Lê", houses[0].HouseName);
+            Assert.AreEqual(50, houses[0].View);
 
-            Assert.AreEqual("Trọ Tâm Thảo", results[1].HouseName);
-            Assert.AreEqual(34, results[1].View);
+            Assert.AreEqual("Trọ Tâm Thảo", houses[1].HouseName);
+            Assert.AreEqual(34, houses[1].View);
         }
 
         #endregion GetAvailableHouses
@@ -216,7 +216,146 @@ namespace HouseFinder.Test
             Assert.IsInstanceOf<OkResult>(updatedData);
         }
 
+        /**
+         * Method: UpdateHouse()
+         * Scenario: Input House: invalid
+         * Expected behavior: Returns BadRequestResult
+         */
+        [Test]
+        public void UpdateHouse_InvalidData_BadRequestResult()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+            int houseId = 2;
+
+            //ACT
+
+            //Get existing House
+            var data = houseController.GetHouseById(houseId);
+            //Using FluentAssertion to convert result data: from IActionResult to DTO/Model
+            var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
+            HouseDTO existingHouse = okResult.Value.Should().BeAssignableTo<HouseDTO>().Subject;
+
+            //Update House
+            House houseToUpdate = new House();
+            houseToUpdate.HouseId = existingHouse.HouseId;
+            houseToUpdate.HouseName = null;   //update name
+            houseToUpdate.View = existingHouse.View;
+            houseToUpdate.Information = existingHouse.Information;
+            houseToUpdate.AddressId = existingHouse.AddressId;
+            houseToUpdate.VillageId = existingHouse.VillageId;
+            houseToUpdate.LandlordId = existingHouse.LandlordId;
+            houseToUpdate.CampusId = existingHouse.CampusId;
+            houseToUpdate.DistanceToCampus = existingHouse.DistanceToCampus;
+            houseToUpdate.PowerPrice = existingHouse.PowerPrice;
+            houseToUpdate.WaterPrice = existingHouse.WaterPrice;
+            houseToUpdate.FingerprintLock = existingHouse.FingerprintLock;
+            houseToUpdate.Camera = existingHouse.Camera;
+            houseToUpdate.Parking = existingHouse.Parking;
+            houseToUpdate.Deleted = existingHouse.Deleted;
+            houseToUpdate.CreatedDate = existingHouse.CreatedDate;
+            houseToUpdate.LastModifiedDate = existingHouse.LastModifiedDate;
+            houseToUpdate.CreatedBy = existingHouse.CreatedBy;
+            houseToUpdate.LastModifiedBy = existingHouse.LastModifiedBy;
+
+            var updatedData = houseController.UpdateHouse(houseToUpdate);
+
+            //ASSERT
+            Assert.IsInstanceOf<BadRequestObjectResult>(updatedData);
+        }
+
+        /**
+         * Method: UpdateHouse()
+         * Scenario: Input House: invalid - not found Id
+         * Expected behavior: Returns BadRequestResult
+         */
+        [Test]
+        public void UpdateHouse_NotFoundId_BadRequestResult()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+            int houseId = 2;
+
+            //ACT
+
+            //Get existing House
+            var data = houseController.GetHouseById(houseId);
+            //Using FluentAssertion to convert result data: from IActionResult to DTO/Model
+            var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
+            HouseDTO existingHouse = okResult.Value.Should().BeAssignableTo<HouseDTO>().Subject;
+
+            //Update House
+            House houseToUpdate = new House();
+            houseToUpdate.HouseId = -1; //update id (not exist)
+            houseToUpdate.HouseName = existingHouse.HouseName;   
+            houseToUpdate.View = existingHouse.View;
+            houseToUpdate.Information = existingHouse.Information;
+            houseToUpdate.AddressId = existingHouse.AddressId;
+            houseToUpdate.VillageId = existingHouse.VillageId;
+            houseToUpdate.LandlordId = existingHouse.LandlordId;
+            houseToUpdate.CampusId = existingHouse.CampusId;
+            houseToUpdate.DistanceToCampus = existingHouse.DistanceToCampus;
+            houseToUpdate.PowerPrice = existingHouse.PowerPrice;
+            houseToUpdate.WaterPrice = existingHouse.WaterPrice;
+            houseToUpdate.FingerprintLock = existingHouse.FingerprintLock;
+            houseToUpdate.Camera = existingHouse.Camera;
+            houseToUpdate.Parking = existingHouse.Parking;
+            houseToUpdate.Deleted = existingHouse.Deleted;
+            houseToUpdate.CreatedDate = existingHouse.CreatedDate;
+            houseToUpdate.LastModifiedDate = existingHouse.LastModifiedDate;
+            houseToUpdate.CreatedBy = existingHouse.CreatedBy;
+            houseToUpdate.LastModifiedBy = existingHouse.LastModifiedBy;
+
+            var updatedData = houseController.UpdateHouse(houseToUpdate);
+
+            //ASSERT
+            Assert.IsInstanceOf<BadRequestObjectResult>(updatedData);
+        }
+
         #endregion UpdateHouse
+
+        #region DeleteHouse
+
+        /**
+         * Method: DeleteHouse()
+         * Scenario: Input HouseId: valid
+         * Expected behavior: Returns OkResult
+         */
+        [Test]
+        public void DeleteHouse_ValidData_OkResult()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+            int houseId = 2;
+
+            //ACT
+            var data = houseController.DeleteHouse(houseId);
+
+            //ASSERT
+            Assert.IsInstanceOf<OkResult>(data);
+        }
+
+        /**
+         * Method: DeleteHouse()
+         * Scenario: Input HouseId: invalid
+         * Expected behavior: Returns BadRequest
+         */
+        [TestCase(-1)]
+        [TestCase(0)]
+        [TestCase(2000)]
+        public void DeleteHouse_InvalidData_BadRequestResult(int houseId)
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+
+            //ACT
+            var data = houseController.DeleteHouse(houseId);
+
+            //ASSERT
+            Assert.IsInstanceOf<BadRequestResult>(data);
+        }
+
+        #endregion DeleteHouse
 
     }
 }

@@ -58,7 +58,8 @@ namespace HouseFinder_API.Controllers
                 {
                     return Ok(houseDTO);
                 }
-            } catch (Exception)
+            }
+            catch (Exception)
             {
                 return NotFound();
             }
@@ -77,7 +78,6 @@ namespace HouseFinder_API.Controllers
             }
             catch (Exception e)
             {
-
                 return BadRequest(e.Message);
             }
         }
@@ -202,7 +202,8 @@ namespace HouseFinder_API.Controllers
                 {
                     return BadRequest(e.Message);
                 }
-            } catch (Exception)
+            }
+            catch (Exception)
             {
                 return BadRequest();
             }
