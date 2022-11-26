@@ -18,7 +18,7 @@ namespace HouseFinder_API.Controllers
 
         //GET: api/Status/getByHouseId?HouseId=
         [HttpGet("getByHouseId")]
-        public IActionResult GetRStatusByHouseId(int HouseId)
+        public IActionResult GetRoomStatusByHouseId(int HouseId)
         {
             List<RoomStatusDTO> statusDTO = statusRepository.GetStatusesByHouseId(HouseId);
             if (statusDTO == null)

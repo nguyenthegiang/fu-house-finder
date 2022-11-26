@@ -16,7 +16,8 @@
         <input type="file" id="room-data-file" class="d-none" accept=".xlsx" (change)="onTemplateChange($event)"/>
         <input type="file" id="room-images" class="d-none" 
             accept=".xlsx" (change)="onImagesChange($event)" webkitdirectory directory multiple/>
-        <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+        <mat-progress-bar mode="determinate" [value]="matProgressBarValue"></mat-progress-bar>
+        <button class="form-control m-3 p-3" style="width: 200px; height: 50px;" (click)="uploadImageFiles()">Submit Image</button>
     </div>
     <div class="row"></div>
 </div>

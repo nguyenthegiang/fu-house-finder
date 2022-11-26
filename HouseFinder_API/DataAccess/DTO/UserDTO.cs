@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace DataAccess.DTO
@@ -45,6 +46,7 @@ namespace DataAccess.DTO
         public string IdentityCardFrontSideImageLink { get; set; }
         public string IdentityCardBackSideImageLink { get; set; }
         public int? RoleId { get; set; }
+        public string RoleName { get; set; }
     }
     public class LoginDTO
     {
@@ -56,11 +58,13 @@ namespace DataAccess.DTO
     public class ResponseDTO
     {
         public string AccessToken { get; set; }
+        [JsonIgnore]
         public string UserId { get; set; }
         public string FacebookUserId { get; set; }
         public string GoogleUserId { get; set; }
         public string Email { get; set; }
         public string DisplayName { get; set; }
         public string RoleName { get; set; }
+        public int StatusId { get; set; }
     }
 }
