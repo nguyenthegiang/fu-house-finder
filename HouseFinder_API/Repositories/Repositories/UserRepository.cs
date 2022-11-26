@@ -2,6 +2,7 @@
 using DataAccess.DTO;
 using Microsoft.AspNetCore.Identity;
 using Repositories.IRepository;
+using System;
 using System.Collections.Generic;
 
 namespace Repositories.Repositories
@@ -39,6 +40,14 @@ namespace Repositories.Repositories
         }
         public ResponseDTO Register(RegisterDTO register)
         {
+            if (register.RoleName == "student")
+            {
+                register.RoleId = 1;
+            }
+            else if (register.RoleName == "landlord")
+            {
+                register.RoleId = 2;
+            }
             ResponseDTO user = UserDAO.Register(
                 register.FacebookUserId, 
                 register.GoogleUserId, 

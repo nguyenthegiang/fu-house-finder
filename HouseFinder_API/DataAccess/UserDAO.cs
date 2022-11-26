@@ -144,8 +144,6 @@ namespace DataAccess
         public static ResponseDTO Register(string fid, string gid, string email, string name, int role, string identityCardFrontSideImageLink, string identityCardBackSideImageLink, string phonenumber, string facebookUrl)
         {
             ResponseDTO userDTO;
-            try
-            {
                 using (var context = new FUHouseFinderContext())
                 {
                     //Get by Id, include Address
@@ -162,7 +160,7 @@ namespace DataAccess
                             index = Int32.Parse(lastUser.UserId.Substring(2)) + 1;
                         }
 
-                        string userPrefix = role == 0 ? "HE" : "LA";
+                        string userPrefix = role == 1 ? "HE" : "LA";
 
                         User user = new User();
                         user.UserId = userPrefix + index.ToString("D6");
@@ -180,7 +178,7 @@ namespace DataAccess
                         user.CreatedDate = DateTime.UtcNow;
                         user.LastModifiedBy = user.UserId;
                         user.LastModifiedDate = DateTime.UtcNow;
-                        int status = role == 1 ? 2 : 1;
+                        int status = role == 2 ? 2 : 1;
                         user.StatusId = status;
                         context.Users.Add(user);
                         context.SaveChanges();
@@ -190,11 +188,6 @@ namespace DataAccess
                             .FirstOrDefault();
                     }
                 }
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
             return userDTO;
         }
 
