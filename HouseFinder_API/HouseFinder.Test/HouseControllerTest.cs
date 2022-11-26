@@ -488,7 +488,7 @@ namespace HouseFinder.Test
 
         /**
          * Method: GetListHousesByLandlordId()
-         * Scenario: Input HouseId: "LA000001" (valid)
+         * Scenario: Input LandlordId: "LA000001" (valid)
          * Expected behavior: Returns OkObjectResult
          */
         [Test]
@@ -503,6 +503,30 @@ namespace HouseFinder.Test
 
             //ASSERT
             Assert.IsInstanceOf<OkObjectResult>(data);
+        }
+
+        /**
+         * Method: GetListHousesByLandlordId()
+         * Scenario: Input HouseId: Invalid
+         * Expected behavior: Returns NotFoundResult
+         */
+        [TestCase("")]
+        [TestCase("LA000000")]
+        [TestCase("LALALA")]
+        [TestCase(".,--+!1@")]
+        [TestCase(" ")]
+        [TestCase("13456789")]
+
+        public void GetListHousesByLandlordId_InvalidId_Returns_NotFoundResult(string landlordId)
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+
+            //ACT
+            var data = houseController.GetListHousesByLandlordId(landlordId);
+
+            //ASSERT
+            Assert.IsInstanceOf<NotFoundResult>(data);
         }
 
         #endregion GetListHousesByLandlordId
