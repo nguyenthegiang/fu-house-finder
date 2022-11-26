@@ -508,7 +508,7 @@ namespace HouseFinder.Test
         /**
          * Method: GetListHousesByLandlordId()
          * Scenario: Input HouseId: Invalid
-         * Expected behavior: Returns NotFoundResult
+         * Expected behavior: Returns OkObjectResult with Empty List
          */
         [TestCase("")]
         [TestCase("LA000000")]
@@ -518,16 +518,19 @@ namespace HouseFinder.Test
         [TestCase("13456789")]
         [TestCase(null)]
 
-        public void GetListHousesByLandlordId_InvalidId_Returns_NotFoundResult(string landlordId)
+        public void GetListHousesByLandlordId_InvalidId_Returns_EmptyList(string landlordId)
         {
             //ARRANGE
             var houseController = new HouseController();
 
             //ACT
             var data = houseController.GetListHousesByLandlordId(landlordId);
+            //Using FluentAssertion to convert result data: from IActionResult to DTO/Model
+            var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
+            List<HouseDTO> houses = okResult.Value.Should().BeAssignableTo<List<HouseDTO>>().Subject;
 
             //ASSERT
-            Assert.IsInstanceOf<NotFoundResult>(data);
+            Assert.AreEqual(0, houses.Count);
         }
 
         /**
