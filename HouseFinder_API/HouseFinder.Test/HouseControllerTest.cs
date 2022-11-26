@@ -9,6 +9,7 @@ using HouseFinder_API.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
 using System.Transactions;
+using FluentAssertions;
 
 namespace HouseFinder.Test
 {
@@ -128,6 +129,7 @@ namespace HouseFinder.Test
 
             List<AvailableHouseDTO> results = data.Value.ToList();
 
+            //Test matching data
             Assert.AreEqual("Trọ Tâm Lê", results[0].HouseName);
             Assert.AreEqual(45, results[0].View);
 
@@ -191,13 +193,15 @@ namespace HouseFinder.Test
             int houseId = 2;
 
             //ACT
-            //var data = houseController.GetHouseById(houseId);
-            //var okResult = data.Sh
-            //HouseDTO result = data.Value;
+            var data = houseController.GetHouseById(houseId);
+            
+            //Using FluentAssertion to convert result data: from IActionResult to DTO/Model
+            var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
+            HouseDTO house = okResult.Value.Should().BeAssignableTo<HouseDTO>().Subject;
 
             //ASSERT
-            //Assert.AreEqual("Trọ Tâm Thảo", result.HouseId);
-            //Assert.AreEqual(34, result.View);
+            Assert.AreEqual("Trọ Tâm Thảo", house.HouseName);
+            Assert.AreEqual(34, house.View);
         }
 
         #endregion GetHouseById
