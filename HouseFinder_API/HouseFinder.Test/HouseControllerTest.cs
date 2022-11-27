@@ -626,6 +626,44 @@ namespace HouseFinder.Test
 
         #endregion GetMoneyForNotRentedRooms
 
+        #region CountTotalHouse
 
+        /**
+         * Method: CountTotalHouse()
+         * Scenario: None
+         * Expected behavior: Returns int
+         */
+        [Test]
+        public void CountTotalHouse_Returns_Int()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+
+            //ACT
+            var data = houseController.CountTotalHouse();
+
+            //ASSERT
+            Assert.IsInstanceOf<int>(data);
+        }
+
+        ///**
+        // * Method: CountTotalHouse()
+        // * Scenario: None
+        // * Expected behavior: Matching result data
+        // */
+        //[Test]
+        //public void CountTotalHouse_MatchResult()
+        //{
+        //    //ARRANGE
+        //    var houseController = new HouseController();
+
+        //    //ACT
+        //    var data = houseController.CountTotalHouse();
+
+        //    //ASSERT
+        //    Assert.IsInstanceOf<int>(data);
+        //}
+
+        #endregion CountTotalHouse
     }
 }
