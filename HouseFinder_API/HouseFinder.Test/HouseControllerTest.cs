@@ -646,23 +646,23 @@ namespace HouseFinder.Test
             Assert.IsInstanceOf<int>(data);
         }
 
-        ///**
-        // * Method: CountTotalHouse()
-        // * Scenario: None
-        // * Expected behavior: Matching result data
-        // */
-        //[Test]
-        //public void CountTotalHouse_MatchResult()
-        //{
-        //    //ARRANGE
-        //    var houseController = new HouseController();
+        /**
+         * Method: CountTotalHouse()
+         * Scenario: None
+         * Expected behavior: Matching result data
+         */
+        [Test]
+        public void CountTotalHouse_MatchResult()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
 
-        //    //ACT
-        //    var data = houseController.CountTotalHouse();
+            //ACT
+            var data = houseController.CountTotalHouse();
 
-        //    //ASSERT
-        //    Assert.IsInstanceOf<int>(data);
-        //}
+            //ASSERT
+            Assert.AreEqual(31, data);
+        }
 
         #endregion CountTotalHouse
     }
