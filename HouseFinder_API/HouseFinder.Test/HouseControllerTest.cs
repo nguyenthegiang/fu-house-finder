@@ -745,5 +745,27 @@ namespace HouseFinder.Test
         }
 
         #endregion CountTotalReportedHouse
+
+        #region GetReportedHouses
+
+        /**
+         * Method: GetReportedHouses()
+         * Scenario: None
+         * Expected behavior: Returns ActionResult
+         */
+        [Test]
+        public void GetReportedHouses_Returns_ActionResult()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+
+            //ACT
+            var data = houseController.GetReportedHouses();
+
+            //ASSERT
+            Assert.IsInstanceOf<ActionResult<IEnumerable<ReportHouseDTO>>>(data);
+        }
+
+        #endregion GetReportedHouses
     }
 }
