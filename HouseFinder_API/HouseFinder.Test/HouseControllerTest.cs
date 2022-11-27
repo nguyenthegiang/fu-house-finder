@@ -584,24 +584,26 @@ namespace HouseFinder.Test
             Assert.IsInstanceOf<Decimal>(data);
         }
 
-        ///**
-        // * Method: GetMoneyForNotRentedRooms()
-        // * Scenario: Input HouseId: invalid
-        // * Expected behavior: Returns 0
-        // */
-        //[Test]
-        //public void GetMoneyForNotRentedRoomsInvalidId_Returns_Zero(int houseId)
-        //{
-        //    //ARRANGE
-        //    var houseController = new HouseController();
-        //    int houseId = 1;
+        /**
+         * Method: GetMoneyForNotRentedRooms()
+         * Scenario: Input HouseId: invalid
+         * Expected behavior: Returns 0
+         */
+        [TestCase(-1)]
+        [TestCase(0)]
+        [TestCase(1000)]
+        [TestCase(null)]
+        public void GetMoneyForNotRentedRoomsInvalidId_Returns_Zero(int houseId)
+        {
+            //ARRANGE
+            var houseController = new HouseController();
 
-        //    //ACT
-        //    var data = houseController.GetMoneyForNotRentedRooms(houseId);
+            //ACT
+            var data = houseController.GetMoneyForNotRentedRooms(houseId);
 
-        //    //ASSERT
-        //    Assert.IsInstanceOf<Decimal>(data);
-        //}
+            //ASSERT
+            Assert.IsInstanceOf<Decimal>(data);
+        }
 
         #endregion GetMoneyForNotRentedRooms
     }
