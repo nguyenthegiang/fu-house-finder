@@ -144,6 +144,7 @@ export class HomepageComponent implements OnInit {
       this.pageNumber = 1;
     }
 
+    //Get data
     this.houseService.filterAvailableHouses(
       this.pageSize,
       this.pageNumber,
@@ -227,6 +228,13 @@ export class HomepageComponent implements OnInit {
       }
     });
 
+    //Reset lower Region Filter
+    this.selectedDistrictId = undefined;
+    this.selectedCommuneId = undefined;
+    this.selectedVillageId = undefined;
+    this.communesOfSelectedDistrict = [];
+    this.villagesOfSelectedCommune = [];
+
     // Call API: update list houses with the campus user chose
     this.selectedCampusId = numberCampusId;
     this.filterHouse(true);
@@ -255,6 +263,9 @@ export class HomepageComponent implements OnInit {
         return;
       }
     });
+
+    //Reset lower Region Filter
+    this.villagesOfSelectedCommune = [];
 
     //no need for filtering by commune & village 
     this.selectedCommuneId = undefined;
