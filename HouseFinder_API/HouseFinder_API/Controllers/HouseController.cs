@@ -162,6 +162,15 @@ namespace HouseFinder_API.Controllers
         [HttpGet("CountAvailableHouse")]
         public int CountAvailableHouse() => houseRepository.CountAvailableHouse();
 
+        /**
+         * GET: api/House/CountTotalReportedHouse
+         */
+        [HttpGet("CountTotalReportedHouse")]
+        public int CountTotalReportedHouse() => houseRepository.CountTotalReportedHouse();
+
+        /**
+         * GET: api/House/GetReportedHouses
+         */
         [EnableQuery]
         [HttpGet("GetReportedHouses")]
         public ActionResult<IEnumerable<ReportHouseDTO>> GetReportedHouses()
@@ -176,9 +185,6 @@ namespace HouseFinder_API.Controllers
                 return Ok(houses);
             }
         }
-
-        [HttpGet("CountTotalReportedHouse")]
-        public int CountTotalReportedHouse() => houseRepository.CountTotalReportedHouse();
 
         /**
          * GET: api/Houses/Distance

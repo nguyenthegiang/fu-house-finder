@@ -705,5 +705,45 @@ namespace HouseFinder.Test
         }
 
         #endregion CountAvailableHouse
+
+        #region CountTotalReportedHouse
+
+        /**
+         * Method: CountTotalReportedHouse()
+         * Scenario: None
+         * Expected behavior: Returns int
+         */
+        [Test]
+        public void CountTotalReportedHouse_Returns_Int()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+
+            //ACT
+            var data = houseController.CountTotalReportedHouse();
+
+            //ASSERT
+            Assert.IsInstanceOf<int>(data);
+        }
+
+        /**
+         * Method: CountTotalReportedHouse()
+         * Scenario: None
+         * Expected behavior: Matching result data
+         */
+        [Test]
+        public void CountTotalReportedHouse_MatchResult()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+
+            //ACT
+            var data = houseController.CountTotalReportedHouse();
+
+            //ASSERT
+            Assert.AreEqual(11, data);
+        }
+
+        #endregion CountTotalReportedHouse
     }
 }
