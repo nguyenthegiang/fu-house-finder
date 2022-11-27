@@ -177,7 +177,6 @@ namespace HouseFinder_API.Controllers
 
         [HttpGet("CountTotalReportedHouse")]
         public int CountTotalReportedHouse() => houseRepository.CountTotalReportedHouse();
-    }
 
         /**
          * GET: api/Houses/Distance
