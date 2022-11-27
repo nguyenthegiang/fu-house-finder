@@ -1,5 +1,6 @@
 ﻿using BusinessObjects;
 using DataAccess.DTO;
+using HouseFinder_API.Helper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -57,11 +58,11 @@ namespace HouseFinder_API.Controllers
             if (!checkXlsxMimeType(File))
                 return BadRequest("Invalid File Type");
             XSSFWorkbook wb = new XSSFWorkbook(fs);
-            LoadDataAsync(wb);
+            LoadData(wb);
             return Ok();
         }
 
-        private void LoadDataAsync(XSSFWorkbook wb)
+        private HouseDTO LoadData(XSSFWorkbook wb)
         {
             List<string> errors = new List<string>();
             ISheet houseSheet = wb.GetSheetAt(0);
@@ -152,28 +153,38 @@ namespace HouseFinder_API.Controllers
                 }
             }
             roomsRepository.CreateRooms(roomList);
+            return house;
         }
-
+        
         //[Authorize]
         [HttpPost("room/image")]
-        public async Task<IActionResult> UploadRoomImage(List<IFormFile> files, [FromBody] RoomImageInfoDTO room)
+        public async Task<IActionResult> UploadRoomImage(IFormFile File, [ModelBinder(typeof(JsonModelBinder))] RoomImageInfoDTO Room)
         {
+            Console.WriteLine(File.FileName);
+            Console.WriteLine(Room.RoomName);
             string uid = HttpContext.Session.GetString("User");
-            string dir = $"user/{uid}/House/{room.HouseId}/{room.RoomId}";
-            List<ImagesOfRoom> images = new List<ImagesOfRoom>();
-            for (int i=0; i < files.Count; i++)
+            RoomDTO roomDTO = roomsRepository.GetRoomByHouseIdAndBuildingAndFloorAndRoomName(
+                Room.HouseId,
+                Room.BuildingNumber,
+                Room.FloorNumber,
+                Room.RoomName
+                );
+            if (roomDTO == null)
             {
-                var path = $"{dir}/{files[i].FileName}";
-                Stream fs = files[i].OpenReadStream();
-                await storageRepository.UploadFileAsync(path, fs);
-                ImagesOfRoom image = new ImagesOfRoom();
-                image.CreatedBy = uid;
-                image.CreatedDate = DateTime.UtcNow;
-                image.LastModifiedBy = uid;
-                image.RoomId = room.RoomId;
-                image.ImageLink = path;
-                images.Add(image);
+                return NotFound("Room data for this image is not found!");
             }
+            string dir = $"user/{uid}/House/{Room.HouseId}/{roomDTO.RoomId}";
+            List<ImagesOfRoom> images = new List<ImagesOfRoom>();
+            var path = $"{dir}/{File.FileName}";
+            Stream fs = File.OpenReadStream();
+            // await storageRepository.UploadFileAsync(path, fs);
+            ImagesOfRoom image = new ImagesOfRoom();
+            image.CreatedBy = uid;
+            image.CreatedDate = DateTime.UtcNow;
+            image.LastModifiedBy = uid;
+            image.RoomId = roomDTO.RoomId;
+            image.ImageLink = path;
+            images.Add(image);
             roomImageRepository.CreateRoomImages(images);
             return Ok();
         }
@@ -233,5 +244,10 @@ namespace HouseFinder_API.Controllers
 
             return Ok();
         }
+    }
+    public class FileUpload
+    {
+        public IFormFile File { get; set; }
+        public String Room { get; set; }
     }
 }

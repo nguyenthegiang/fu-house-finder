@@ -75,24 +75,15 @@ export class HomepageComponent implements OnInit {
     //(List) Get available Houses - default: page 1, 9 items
     this.filterHouse(false);
 
-    // (Paging) Count available Houses for total number of pages
-    this.houseService.countTotalAvailableHouse().subscribe(data => {
-      this.countAvailableHouses = data;
-
-      // (Paging) Calculate number of pages
-      this.pageCount = Math.ceil(this.countAvailableHouses / this.pageSize);  //divide & round up
-
-      // (Paging) Render pageList based on pageCount
-      this.pageList = Array.from({ length: this.pageCount }, (_, i) => i + 1);
-      //pageList is now an array like {1, 2, 3, ..., n | n = pageCount}
-    });
-
     //(Statistics)
     this.roomService.countAvailableRooms().subscribe(data => {
       this.countAvailableRooms = data;
     });
     this.roomService.countAvailableCapacity().subscribe(data => {
       this.countAvailableCapacity = data;
+    });
+    this.houseService.countTotalAvailableHouse().subscribe(data => {
+      this.countAvailableHouses = data;
     });
 
     //(Filter) Get all Campuses (with their Districts, Communes, Villages)
@@ -173,6 +164,33 @@ export class HomepageComponent implements OnInit {
     ).subscribe(data => {
       this.houses = data;
       this.scrollToTop();
+    });
+
+    //For Paging: Count total number of items
+    this.houseService.filterAvailableHouses(
+      1000,
+      1,
+      this.selectedRoomTypeIds,
+      this.selectedHouseUtilities,
+      this.selectedRoomUtilities,
+      this.searchName,
+      this.selectedCampusId,
+      this.maxPrice,
+      this.minPrice,
+      this.maxDistance,
+      this.minDistance,
+      this.selectedDistrictId,
+      this.selectedCommuneId,
+      this.selectedVillageId,
+      this.selectedRate,
+      this.selectedOrderValue,
+    ).subscribe(data => {
+      // (Paging) Calculate number of pages
+      this.pageCount = Math.ceil(data.length / this.pageSize);  //divide & round up
+
+      // (Paging) Render pageList based on pageCount
+      this.pageList = Array.from({ length: this.pageCount }, (_, i) => i + 1);
+      //pageList is now an array like {1, 2, 3, ..., n | n = pageCount}
     });
   }
 

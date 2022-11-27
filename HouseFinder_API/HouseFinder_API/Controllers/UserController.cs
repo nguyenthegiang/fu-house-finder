@@ -45,9 +45,9 @@ namespace HouseFinder_API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDTO login)
         {
-            if (login.GoogleUserId != null)
+            try
             {
-                try
+                if (login.GoogleUserId != null)
                 {
                     var validationSettings = new GoogleJsonWebSignature.ValidationSettings
                     {
@@ -56,51 +56,58 @@ namespace HouseFinder_API.Controllers
                     var payload = await GoogleJsonWebSignature.ValidateAsync(login.GoogleUserId, validationSettings);
                     login.GoogleUserId = payload.Subject;
                 }
-                catch (Exception)
+                ResponseDTO user = userReposiotry.Login(login);
+                if (user == null)
+                    return Ok(new { Status = 404 });
+                if (user.StatusId == 0)
                 {
-                    return Forbid();
+                    return Ok(new { Status = 403 });
                 }
+                string token = this.auth.Authenticate(user);
+                if (token == null)
+                    return Ok(new { Status = 404 });
+                HttpContext.Session.SetString("Token", token);
+                HttpContext.Session.SetString("User", user.UserId);
+                HttpContext.Response.Cookies.Append("X-Access-Token", token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+                if (user.StatusId == 2)
+                {
+                    return Ok(new { Status = 201, User = user });
+                }
+                return Ok(new { Status = 200, User = user });
             }
-            ResponseDTO user = userReposiotry.Login(login);
-            if (user == null)
-                return NotFound();
-            string token = this.auth.Authenticate(user);
-            if (token == null)
-                return NotFound();
-            HttpContext.Session.SetString("Token", token);
-            HttpContext.Session.SetString("User", user.UserId);
-            HttpContext.Response.Cookies.Append("X-Access-Token", token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
-            user.AccessToken = token;
-            return Ok(user);
+            catch (Exception)
+            {
+                return Ok(new { Status = 500, Message = "Login Error!" });
+            }
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDTO register)
         {
-            if (register.GoogleIdToken != null)
+            try
             {
-                var validationSettings = new GoogleJsonWebSignature.ValidationSettings
+                if (register.GoogleIdToken != null)
                 {
-                    Audience = new string[] { Configuration.GetSection("Google").GetSection("Audience").Value }
-                };
-                try
-                {
+                    var validationSettings = new GoogleJsonWebSignature.ValidationSettings
+                    {
+                        Audience = new string[] { Configuration.GetSection("Google").GetSection("Audience").Value }
+                    };
                     var payload = await GoogleJsonWebSignature.ValidateAsync(register.GoogleIdToken, validationSettings);
                     register.GoogleUserId = payload.Subject;
                     register.Email = payload.Email;
                     register.DisplayName = payload.Name;
                 }
-                catch (Exception)
-                {
-                    return Forbid();
-                }
+                ResponseDTO user = userReposiotry.Register(register);
+                string token = this.auth.Authenticate(user);
+                HttpContext.Session.SetString("Token", token);
+                HttpContext.Session.SetString("User", user.UserId);
+                HttpContext.Response.Cookies.Append("X-Access-Token", token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+                user.AccessToken = token;
+                return Ok(new { Status = 200, User = user });
             }
-            ResponseDTO user = userReposiotry.Register(register);
-            string token = this.auth.Authenticate(user);
-            HttpContext.Session.SetString("Token", token);
-            HttpContext.Session.SetString("User", user.UserId);
-            HttpContext.Response.Cookies.Append("X-Access-Token", token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
-            user.AccessToken = token;
-            return Ok(user);
+            catch (Exception)
+            {
+                return Ok(new { Status = 500, Message = "Register Error!" });
+            }
         }
         [Authorize]
         [HttpGet("test")]

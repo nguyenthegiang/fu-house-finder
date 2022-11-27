@@ -28,23 +28,23 @@ export class UserService {
     return this.http.get<User[]>(this.APIUrl + "/staff");
   }
 
-  loginFacebook(facebookUserId: string): Observable<User> {
-    return this.http.post<User>(this.APIUrl + "/login", {"facebookUserId": facebookUserId}, {withCredentials: true});
+  loginFacebook(facebookUserId: string): Observable<any> {
+    return this.http.post<any>(this.APIUrl + "/login", {"facebookUserId": facebookUserId}, {withCredentials: true});
   }
 
-  loginGoogle(googleUserId: string): Observable<User>{
-    return this.http.post<User>(this.APIUrl + "/login", {"googleUserId": googleUserId}, {withCredentials: true});
+  loginGoogle(googleUserId: string): Observable<any>{
+    return this.http.post<any>(this.APIUrl + "/login", {"googleUserId": googleUserId}, {withCredentials: true});
   }
 
-  loginEmailPassword(email: string, password: string): Observable<User>{
-    return this.http.post<User>(this.APIUrl + "/login", {"email": email, "password": password}, {withCredentials: true});
+  loginEmailPassword(email: string, password: string): Observable<any>{
+    return this.http.post<any>(this.APIUrl + "/login", {"email": email, "password": password}, {withCredentials: true});
   }
 
-  registerStudentGoogle(googleIdToken: string){
-    return this.http.post<User>(this.APIUrl + "/register",
+  registerStudentGoogle(googleIdToken: string): Observable<any>{
+    return this.http.post<any>(this.APIUrl + "/register",
     {
       "googleIdToken": googleIdToken,
-      "roleId": 1,
+      "roleName": "student",
     },
     {withCredentials: true});
   }
@@ -53,23 +53,23 @@ export class UserService {
       googleIdToken: string,
       phonenumber: string,
       facebookUrl: string
-    ){
-    return this.http.post<User>(
+    ): Observable<any>{
+    return this.http.post<any>(
       this.APIUrl + "/register",
       {
         "googleIdToken": googleIdToken,
         "phonenumber": phonenumber,
         "facebookUrl": facebookUrl,
-        "roleId": 2
+        "roleName": "landlord"
       },
       {withCredentials: true});
   }
 
-  registerStudentFacebook(facebookId: string, name: string){
+  registerStudentFacebook(facebookId: string, name: string): Observable<any>{
     return this.http.post<User>(this.APIUrl + "/register", {
       "facebookUserId": facebookId,
       "displayName": name,
-      "roleId": 1
+      "roleName": "student"
     },
     {withCredentials: true});
   }
@@ -79,15 +79,15 @@ export class UserService {
     name: string,
     phonenumber: string,
     facebookUrl: string
-  ){
-  return this.http.post<User>(
+  ): Observable<any>{
+  return this.http.post<any>(
     this.APIUrl + "/register",
     {
       "facebookUserId": facebookId,
       "displayName": name,
       "phonenumber": phonenumber,
       "facebookUrl": facebookUrl,
-      "roleId": 2
+      "roleName": "landlord"
     },
     {withCredentials: true});
   }

@@ -53,5 +53,8 @@ namespace Repositories.Repositories
         public int? CountTotalCapacity() => RoomDAO.CountTotalCapacity();
 
         public int? CountTotallyAvailableRoom() => RoomDAO.CountTotallyAvailableRoom();
+
+        public RoomDTO GetRoomByHouseIdAndBuildingAndFloorAndRoomName(int HouseId, int Building, int Floor, string RoomName)
+            => RoomDAO.GetRoomByHouseIdAndBuildingAndFloorAndRoomName(HouseId, Building, Floor, RoomName);
     }
 }
