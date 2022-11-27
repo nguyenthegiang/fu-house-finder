@@ -126,3 +126,22 @@
     </mat-step>
   </mat-stepper>
 </ng-template>
+<swal
+  #landLordAccountLockedAlert
+  title="Khóa tài khoản"
+  text="Tài khoản của bạn đã bị khóa do vi phạm điều khoản của chúng tôi. Vui lòng trình diện tại cơ sở Đại học FPT gần nhất để làm thủ tục mở khóa tài khoản"
+  icon="error"
+  [focusCancel]="true"
+>
+</swal>
+
+<swal
+  #serverErrorAlert
+  [toast]="true"
+  position="top-end"
+  [timer]="3000"
+  [timerProgressBar]="true"
+  title="Lỗi Server"
+  icon="error"
+>
+</swal>

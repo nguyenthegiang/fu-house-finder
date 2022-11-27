@@ -48,6 +48,7 @@ import { StaffLandlordDetailInfoComponent } from './Staff/staff-landlord-detail/
 import { DashboardInfoComponent } from './Landlord/dashboard/dashboard-info/dashboard-info.component';
 import { ListHouseInfoComponent } from './Staff/list-house/list-house-info/list-house-info.component';
 import { CreateOrderComponent } from './Guest/create-order/create-order.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 @NgModule({
   declarations: [
@@ -104,6 +105,7 @@ import { CreateOrderComponent } from './Guest/create-order/create-order.componen
     ReactiveFormsModule,
     MaterialModule,
     BrowserAnimationsModule,
+    SweetAlert2Module.forRoot(),
   ],
   bootstrap: [AppComponent]
 })

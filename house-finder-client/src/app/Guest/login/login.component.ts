@@ -1,14 +1,13 @@
-import { Component, ElementRef, NgZone, OnInit, Renderer2, TemplateRef, ViewChild, ViewContainerRef } from '@angular/core';
-import { User } from '../../models/user';
+import { Component, ElementRef, NgZone, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { CredentialResponse } from 'google-one-tap';
 import { Router } from '@angular/router';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { MatDialog } from '@angular/material/dialog';
 import { RoleModalComponent } from './role-modal/role-modal.component';
 import { FileService } from 'src/app/services/file.service';
-
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +20,8 @@ export class LoginComponent implements OnInit {
   @ViewChild('roleModal') roleModal: ElementRef | undefined;
   @ViewChild('registerTemplate') registerTemplate: TemplateRef<any> | any;
   @ViewChild('loginTemplate') loginTemplate: TemplateRef<any> | any;
+  @ViewChild('landLordAccountLockedAlert') private landLordAccountLockedAlert: SwalComponent | undefined;
+  @ViewChild('serverErrorAlert') private serverErrorAlert: SwalComponent | undefined;
 
   login = true;
   frontImgSrc = '';
@@ -129,7 +130,7 @@ export class LoginComponent implements OnInit {
                 this.ngZone.run(() => { this.router.navigate(['/home']); });
               }
               else if (resp.status == 403){
-                alert("Your Account Has been Blocked!");
+                this.landLordAccountLockedAlert?.fire();
               }
               else if (resp.status == 404){
                 this.facebookId = response.id;
@@ -141,6 +142,9 @@ export class LoginComponent implements OnInit {
                 else if (this.role == 'student'){
                   this.ngZone.run(() => { this.registerStudent() });
                 }
+              }
+              else if (resp.status == 500){
+                this.serverErrorAlert?.fire();
               }
             });
           });
@@ -168,7 +172,7 @@ export class LoginComponent implements OnInit {
           this.ngZone.run(() => { this.router.navigate(['/home']); });
         }
         else if (resp.status == 403){
-          alert("Your Account Has been Blocked!");
+          this.landLordAccountLockedAlert?.fire();
         }
         else if (resp.status == 404){
           this.googleIdToken = response?.credential;
@@ -179,6 +183,9 @@ export class LoginComponent implements OnInit {
           else if (this.role == 'student'){
             this.ngZone.run(() => { this.registerStudent() });
           }
+        }
+        else if (resp.status == 500){
+          this.serverErrorAlert?.fire();
         }
       }
     );
@@ -196,10 +203,13 @@ export class LoginComponent implements OnInit {
           this.ngZone.run(() => { this.router.navigate(['/Admin/list-staff']); });
         }
         else if (resp.status == 403){
-          alert("Your Account Has been Blocked!");
+          this.landLordAccountLockedAlert?.fire();
         }
         else if (resp.status == 404){
           alert('invalid username - password');
+        }
+        else if (resp.status == 500){
+          this.serverErrorAlert?.fire();
         }
       }
     )
