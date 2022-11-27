@@ -665,5 +665,27 @@ namespace HouseFinder.Test
         }
 
         #endregion CountTotalHouse
+
+        #region CountAvailableHouse
+
+        /**
+         * Method: CountAvailableHouse()
+         * Scenario: None
+         * Expected behavior: Returns int
+         */
+        [Test]
+        public void CountAvailableHouse_Returns_Int()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+
+            //ACT
+            var data = houseController.CountAvailableHouse();
+
+            //ASSERT
+            Assert.IsInstanceOf<int>(data);
+        }
+
+        #endregion CountAvailableHouse
     }
 }
