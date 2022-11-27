@@ -766,6 +766,33 @@ namespace HouseFinder.Test
             Assert.IsInstanceOf<ActionResult<IEnumerable<ReportHouseDTO>>>(data);
         }
 
+        /**
+         * Method: GetReportedHouses()
+         * Scenario: None
+         * Expected behavior: Returns matching result data
+         */
+        [Test]
+        public void GetReportedHouses_MatchResult()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+
+            //ACT
+            var data = houseController.GetReportedHouses();
+
+            //ASSERT
+            Assert.IsInstanceOf<ActionResult<IEnumerable<ReportHouseDTO>>>(data);
+
+            List<ReportHouseDTO> houses = data.Value.ToList();
+
+            //Test matching data
+            Assert.AreEqual("Trọ Tâm Lê", houses[0].HouseName);
+            Assert.AreEqual(5, houses[0].NumberOfReport);
+
+            Assert.AreEqual("Trọ Tâm Thảo", houses[1].HouseName);
+            Assert.AreEqual(1, houses[1].NumberOfReport);
+        }
+
         #endregion GetReportedHouses
     }
 }
