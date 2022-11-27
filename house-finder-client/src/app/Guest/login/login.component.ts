@@ -23,7 +23,8 @@ export class LoginComponent implements OnInit {
   @ViewChild('landLordAccountLockedAlert') private landLordAccountLockedAlert: SwalComponent | undefined;
   @ViewChild('serverErrorAlert') private serverErrorAlert: SwalComponent | undefined;
   @ViewChild('invalidEmailPasswordAlert') private invalidEmailPasswordAlert: SwalComponent | undefined;
-
+  @ViewChild('landLordAccountConfirmAlert') private landLordAccountConfirmAlert: SwalComponent | undefined;
+  
   login = true;
   frontImgSrc = '';
   backImgSrc = '';
@@ -128,7 +129,12 @@ export class LoginComponent implements OnInit {
               if (resp.status == 200){
                 localStorage.setItem('user', resp.user.displayName);
                 localStorage.setItem("role", resp.user.roleName);
-                this.ngZone.run(() => { this.router.navigate(['/home']); });
+                this.navigate('home');
+              }
+              else if (resp.status == 201){
+                localStorage.setItem('user', resp.user.displayName);
+                localStorage.setItem("role", resp.user.roleName);
+                this.landLordAccountConfirmAlert?.fire();
               }
               else if (resp.status == 403){
                 this.landLordAccountLockedAlert?.fire();
@@ -170,7 +176,12 @@ export class LoginComponent implements OnInit {
         if (resp.status == 200){
           localStorage.setItem('user', resp.user.displayName);
           localStorage.setItem("role", resp.user.roleName);
-          this.ngZone.run(() => { this.router.navigate(['/home']); });
+          this.navigate('home');
+        }
+        else if (resp.status == 201){
+          localStorage.setItem('user', resp.user.displayName);
+          localStorage.setItem("role", resp.user.roleName);
+          this.landLordAccountConfirmAlert?.fire();
         }
         else if (resp.status == 403){
           this.landLordAccountLockedAlert?.fire();
@@ -201,7 +212,7 @@ export class LoginComponent implements OnInit {
         if (resp.status == 200){
           localStorage.setItem('user', resp.user.displayName);
           localStorage.setItem("role", resp.user.roleName);
-          this.ngZone.run(() => { this.router.navigate(['/Admin/list-staff']); });
+          this.navigate('/Admin/list-staff');
         }
         else if (resp.status == 403){
           this.landLordAccountLockedAlert?.fire();
@@ -231,7 +242,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('user', resp.user.displayName);
           localStorage.setItem("role", resp.user.roleName);
           this.user = resp;
-          this.router.navigate(['/home']);
+          this.navigate('home');
         }
         else if (resp.status == 500){
           this.serverErrorAlert?.fire();
@@ -244,7 +255,7 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('user', resp.user.displayName);
           localStorage.setItem("role", resp.user.roleName);
           this.user = resp;
-          this.router.navigate(['/home']);
+          this.navigate('/home');
         }
         else if (resp.status == 500){
           this.serverErrorAlert?.fire();
@@ -267,7 +278,7 @@ export class LoginComponent implements OnInit {
           this.fileService.uploadIDC(this.frontImg, this.backImg).subscribe(resp => {});
           localStorage.setItem('user', resp.user.displayName);
           localStorage.setItem("role", resp.user.roleName);
-          this.router.navigate(['/home']);
+          this.navigate('/home');
         }
         else if (resp.status == 500){
           this.serverErrorAlert?.fire();
@@ -285,7 +296,7 @@ export class LoginComponent implements OnInit {
           this.fileService.uploadIDC(this.frontImg, this.backImg).subscribe(resp => {});
           localStorage.setItem('user', resp.user.displayName);
           localStorage.setItem("role", resp.user.roleName);
-          this.router.navigate(['/home']);
+          this.navigate('/home');
         }
         else if (resp.status == 500){
           this.serverErrorAlert?.fire();
@@ -327,6 +338,9 @@ export class LoginComponent implements OnInit {
         this.backImg = file;
       }
     }
+  }
+  navigate(path: string){
+    this.ngZone.run(() => { this.router.navigate([path]); });
   }
 
 }
