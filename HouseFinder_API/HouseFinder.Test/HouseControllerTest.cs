@@ -563,5 +563,46 @@ namespace HouseFinder.Test
 
         #endregion GetListHousesByLandlordId
 
+        #region GetMoneyForNotRentedRooms
+
+        /**
+         * Method: GetMoneyForNotRentedRooms()
+         * Scenario: Input HouseId: 1 (valid)
+         * Expected behavior: Returns Decimal
+         */
+        [Test]
+        public void GetMoneyForNotRentedRooms_ValidId_Returns_Decimal()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+            int houseId = 1;
+
+            //ACT
+            var data = houseController.GetMoneyForNotRentedRooms(houseId);
+
+            //ASSERT
+            Assert.IsInstanceOf<Decimal>(data);
+        }
+
+        ///**
+        // * Method: GetMoneyForNotRentedRooms()
+        // * Scenario: Input HouseId: invalid
+        // * Expected behavior: Returns 0
+        // */
+        //[Test]
+        //public void GetMoneyForNotRentedRoomsInvalidId_Returns_Zero(int houseId)
+        //{
+        //    //ARRANGE
+        //    var houseController = new HouseController();
+        //    int houseId = 1;
+
+        //    //ACT
+        //    var data = houseController.GetMoneyForNotRentedRooms(houseId);
+
+        //    //ASSERT
+        //    Assert.IsInstanceOf<Decimal>(data);
+        //}
+
+        #endregion GetMoneyForNotRentedRooms
     }
 }

@@ -119,7 +119,9 @@ namespace HouseFinder_API.Controllers
             }
         }
 
-        //GET: api/Houses/GetHousesByLandlord?LandlordId=
+        /**
+         * GET: api/Houses/GetHousesByLandlord?LandlordId=
+         */
         [HttpGet("GetHousesByLandlord")]
         public IActionResult GetListHousesByLandlordId(string LandlordId)
         {
@@ -141,7 +143,9 @@ namespace HouseFinder_API.Controllers
             }
         }
 
-        //GET: api/Houses/GetMoneyForNotRentedRooms?HouseId=
+        /**
+         * GET: api/Houses/GetMoneyForNotRentedRooms?HouseId=
+         */
         [HttpGet("GetMoneyForNotRentedRooms")]
         public Decimal? GetMoneyForNotRentedRooms(int HouseId)
         {
@@ -158,10 +162,30 @@ namespace HouseFinder_API.Controllers
         }
 
         //GET: api/Houses/CountAvailableHouse
-        //[Home Page] For Paging
         //[Staff - Dashboard] For statistic report
         [HttpGet("CountAvailableHouse")]
         public int CountAvailableHouse() => houseRepository.CountAvailableHouse();
+
+        [EnableQuery]
+        [HttpGet("GetReportedHouses")]
+        public ActionResult<IEnumerable<ReportHouseDTO>> GetReportedHouses()
+        {
+            List<ReportHouseDTO> houses = houseRepository.GetListReportHouse();
+            if (houses == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(houses);
+            }
+        }
+
+        [HttpGet("CountTotalReportedHouse")]
+        public int CountTotalReportedHouse()
+        {
+            return houseRepository.CountTotalReportedHouse();
+        }
 
         /**
          * GET: api/Houses/Distance
@@ -214,27 +238,6 @@ namespace HouseFinder_API.Controllers
             {
                 return BadRequest();
             }
-        }
-
-        [EnableQuery]
-        [HttpGet("GetReportedHouses")]
-        public ActionResult<IEnumerable<ReportHouseDTO>> GetReportedHouses()
-        {
-            List<ReportHouseDTO> houses = houseRepository.GetListReportHouse();
-            if (houses == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                return Ok(houses);
-            }
-        }
-
-        [HttpGet("CountTotalReportedHouse")]
-        public int CountTotalReportedHouse()
-        {
-            return houseRepository.CountTotalReportedHouse();
         }
     }
 }
