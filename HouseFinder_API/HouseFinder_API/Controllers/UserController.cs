@@ -69,12 +69,11 @@ namespace HouseFinder_API.Controllers
                 HttpContext.Session.SetString("Token", token);
                 HttpContext.Session.SetString("User", user.UserId);
                 HttpContext.Response.Cookies.Append("X-Access-Token", token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
-                user.AccessToken = token;
+                if (user.StatusId == 2)
+                {
+                    return Ok(new { Status = 201, User = user });
+                }
                 return Ok(new { Status = 200, User = user });
-            }
-            catch (InvalidJwtException)
-            {
-                return Ok(new { Status = 500, Message = "Google Connection Error!" });
             }
             catch (Exception)
             {
@@ -104,10 +103,6 @@ namespace HouseFinder_API.Controllers
                 HttpContext.Response.Cookies.Append("X-Access-Token", token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
                 user.AccessToken = token;
                 return Ok(new { Status = 200, User = user });
-            }
-            catch (InvalidJwtException)
-            {
-                return Ok(new { Status = 500, Message = "Google Connection Error!" });
             }
             catch (Exception)
             {
