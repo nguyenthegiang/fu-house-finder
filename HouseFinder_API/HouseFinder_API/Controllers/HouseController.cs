@@ -164,6 +164,8 @@ namespace HouseFinder_API.Controllers
 
         /**
          * GET: api/House/CountTotalReportedHouse
+         * [Home Page]
+         * [Staff - Dashboard]
          */
         [HttpGet("CountTotalReportedHouse")]
         public int CountTotalReportedHouse() => houseRepository.CountTotalReportedHouse();

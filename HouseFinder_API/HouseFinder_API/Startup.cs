@@ -59,7 +59,7 @@ namespace HouseFinder_API
             });
 
             //Configure OData service
-            services.AddControllers().AddOData(option => option.Select().Filter().Count().OrderBy().Expand().SetMaxTop(100));
+            services.AddControllers().AddOData(option => option.Select().Filter().Count().OrderBy().Expand().SetMaxTop(1000));
             //services.AddDbContext<FUHouseFinderContext>(option =>
             //{
             //    option.UseSqlServer(Configuration.GetConnectionString("DBContext"));
