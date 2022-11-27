@@ -22,6 +22,7 @@ export class LoginComponent implements OnInit {
   @ViewChild('loginTemplate') loginTemplate: TemplateRef<any> | any;
   @ViewChild('landLordAccountLockedAlert') private landLordAccountLockedAlert: SwalComponent | undefined;
   @ViewChild('serverErrorAlert') private serverErrorAlert: SwalComponent | undefined;
+  @ViewChild('invalidEmailPasswordAlert') private invalidEmailPasswordAlert: SwalComponent | undefined;
 
   login = true;
   frontImgSrc = '';
@@ -206,7 +207,7 @@ export class LoginComponent implements OnInit {
           this.landLordAccountLockedAlert?.fire();
         }
         else if (resp.status == 404){
-          alert('invalid username - password');
+          this.invalidEmailPasswordAlert?.fire();
         }
         else if (resp.status == 500){
           this.serverErrorAlert?.fire();
@@ -226,18 +227,28 @@ export class LoginComponent implements OnInit {
   registerStudent(): void {
     if (this.googleIdToken != undefined) {
       this.userService.registerStudentGoogle(this.googleIdToken).subscribe(resp => {
-        localStorage.setItem('user', resp.displayName);
-        localStorage.setItem("role", resp.roleName);
-        this.user = resp;
-        this.router.navigate(['/home']);
+        if (resp.status == 200){
+          localStorage.setItem('user', resp.user.displayName);
+          localStorage.setItem("role", resp.user.roleName);
+          this.user = resp;
+          this.router.navigate(['/home']);
+        }
+        else if (resp.status == 500){
+          this.serverErrorAlert?.fire();
+        }
       });
     }
     else if (this.facebookId != undefined && this.name != undefined) {
       this.userService.registerStudentFacebook(this.facebookId, this.name).subscribe(resp => {
-        localStorage.setItem('user', resp.displayName);
-        localStorage.setItem("role", resp.roleName);
-        this.user = resp;
-        this.router.navigate(['/home']);
+        if (resp.status == 200){
+          localStorage.setItem('user', resp.user.displayName);
+          localStorage.setItem("role", resp.user.roleName);
+          this.user = resp;
+          this.router.navigate(['/home']);
+        }
+        else if (resp.status == 500){
+          this.serverErrorAlert?.fire();
+        }
       });
     }
   }
@@ -252,10 +263,15 @@ export class LoginComponent implements OnInit {
         phonenumber,
         facebookUrl
       ).subscribe(resp => {
-        this.fileService.uploadIDC(this.frontImg, this.backImg).subscribe(resp => {});
-        localStorage.setItem('user', resp.displayName);
-        localStorage.setItem("role", resp.roleName);
-        this.router.navigate(['/home']);
+        if (resp.status == 200){
+          this.fileService.uploadIDC(this.frontImg, this.backImg).subscribe(resp => {});
+          localStorage.setItem('user', resp.user.displayName);
+          localStorage.setItem("role", resp.user.roleName);
+          this.router.navigate(['/home']);
+        }
+        else if (resp.status == 500){
+          this.serverErrorAlert?.fire();
+        }
       });
     }
     else if (this.facebookId != undefined && this.name != undefined) {
@@ -265,10 +281,15 @@ export class LoginComponent implements OnInit {
         phonenumber,
         facebookUrl
       ).subscribe(resp => {
-        this.fileService.uploadIDC(this.frontImg, this.backImg).subscribe(resp => {});
-        localStorage.setItem('user', resp.displayName);
-        localStorage.setItem("role", resp.roleName);
-        this.router.navigate(['/home']);
+        if (resp.status == 200){
+          this.fileService.uploadIDC(this.frontImg, this.backImg).subscribe(resp => {});
+          localStorage.setItem('user', resp.user.displayName);
+          localStorage.setItem("role", resp.user.roleName);
+          this.router.navigate(['/home']);
+        }
+        else if (resp.status == 500){
+          this.serverErrorAlert?.fire();
+        }
       });
     }
   }

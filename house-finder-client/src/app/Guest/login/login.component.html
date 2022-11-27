@@ -134,7 +134,14 @@
   [focusCancel]="true"
 >
 </swal>
-
+<swal
+  #invalidEmailPasswordAlert
+  title="Đăng nhập không hợp lệ"
+  text="Email hoặc Password không hợp lệ"
+  icon="error"
+  [focusCancel]="true"
+>
+</swal>
 <swal
   #serverErrorAlert
   [toast]="true"
