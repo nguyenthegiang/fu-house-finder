@@ -119,7 +119,9 @@ namespace HouseFinder_API.Controllers
             }
         }
 
-        //GET: api/Houses/GetHousesByLandlord?LandlordId=
+        /**
+         * GET: api/Houses/GetHousesByLandlord?LandlordId=
+         */
         [HttpGet("GetHousesByLandlord")]
         public IActionResult GetListHousesByLandlordId(string LandlordId)
         {
@@ -141,27 +143,48 @@ namespace HouseFinder_API.Controllers
             }
         }
 
-        //GET: api/Houses/GetMoneyForNotRentedRooms?HouseId=
+        /**
+         * GET: api/Houses/GetMoneyForNotRentedRooms?HouseId=
+         */
         [HttpGet("GetMoneyForNotRentedRooms")]
-        public Decimal? GetMoneyForNotRentedRooms(int HouseId)
-        {
-            Decimal? total = houseRepository.GetMoneyForNotRentedRooms(HouseId);
-            return total;
-        }
+        public Decimal? GetMoneyForNotRentedRooms(int HouseId) => houseRepository.GetMoneyForNotRentedRooms(HouseId);
 
-        //GET: api/Houses/CountTotalHouse
+        /**
+         * GET: api/Houses/CountTotalHouse
+         */
         [HttpGet("CountTotalHouse")]
-        public int CountTotalHouse()
-        {
-            int totalHouse = houseRepository.CountTotalHouse();
-            return totalHouse;
-        }
+        public int CountTotalHouse() => houseRepository.CountTotalHouse();
 
-        //GET: api/Houses/CountAvailableHouse
-        //[Home Page] For Paging
-        //[Staff - Dashboard] For statistic report
+        /**
+         * GET: api/Houses/CountAvailableHouse
+         * [Staff - Dashboard] For statistic report
+         */
         [HttpGet("CountAvailableHouse")]
         public int CountAvailableHouse() => houseRepository.CountAvailableHouse();
+
+        /**
+         * GET: api/House/CountTotalReportedHouse
+         */
+        [HttpGet("CountTotalReportedHouse")]
+        public int CountTotalReportedHouse() => houseRepository.CountTotalReportedHouse();
+
+        /**
+         * GET: api/House/GetReportedHouses
+         */
+        [EnableQuery]
+        [HttpGet("GetReportedHouses")]
+        public ActionResult<IEnumerable<ReportHouseDTO>> GetReportedHouses()
+        {
+            List<ReportHouseDTO> houses = houseRepository.GetListReportHouse();
+            if (houses == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(houses);
+            }
+        }
 
         /**
          * GET: api/Houses/Distance
@@ -214,27 +237,6 @@ namespace HouseFinder_API.Controllers
             {
                 return BadRequest();
             }
-        }
-
-        [EnableQuery]
-        [HttpGet("GetReportedHouses")]
-        public ActionResult<IEnumerable<ReportHouseDTO>> GetReportedHouses()
-        {
-            List<ReportHouseDTO> houses = houseRepository.GetListReportHouse();
-            if (houses == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                return Ok(houses);
-            }
-        }
-
-        [HttpGet("CountTotalReportedHouse")]
-        public int CountTotalReportedHouse()
-        {
-            return houseRepository.CountTotalReportedHouse();
         }
     }
 }
