@@ -686,6 +686,24 @@ namespace HouseFinder.Test
             Assert.IsInstanceOf<int>(data);
         }
 
+        /**
+         * Method: CountAvailableHouse()
+         * Scenario: None
+         * Expected behavior: Matching result data
+         */
+        [Test]
+        public void CountAvailableHouse_MatchResult()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+
+            //ACT
+            var data = houseController.CountAvailableHouse();
+
+            //ASSERT
+            Assert.AreEqual(29, data);
+        }
+
         #endregion CountAvailableHouse
     }
 }
