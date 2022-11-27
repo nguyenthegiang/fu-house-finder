@@ -147,19 +147,13 @@ namespace HouseFinder_API.Controllers
          * GET: api/Houses/GetMoneyForNotRentedRooms?HouseId=
          */
         [HttpGet("GetMoneyForNotRentedRooms")]
-        public Decimal? GetMoneyForNotRentedRooms(int HouseId)
-        {
-            Decimal? total = houseRepository.GetMoneyForNotRentedRooms(HouseId);
-            return total;
-        }
+        public Decimal? GetMoneyForNotRentedRooms(int HouseId) => houseRepository.GetMoneyForNotRentedRooms(HouseId);
 
-        //GET: api/Houses/CountTotalHouse
+        /**
+         * GET: api/Houses/CountTotalHouse
+         */
         [HttpGet("CountTotalHouse")]
-        public int CountTotalHouse()
-        {
-            int totalHouse = houseRepository.CountTotalHouse();
-            return totalHouse;
-        }
+        public int CountTotalHouse() => houseRepository.CountTotalHouse();
 
         //GET: api/Houses/CountAvailableHouse
         //[Staff - Dashboard] For statistic report
@@ -182,10 +176,8 @@ namespace HouseFinder_API.Controllers
         }
 
         [HttpGet("CountTotalReportedHouse")]
-        public int CountTotalReportedHouse()
-        {
-            return houseRepository.CountTotalReportedHouse();
-        }
+        public int CountTotalReportedHouse() => houseRepository.CountTotalReportedHouse();
+    }
 
         /**
          * GET: api/Houses/Distance

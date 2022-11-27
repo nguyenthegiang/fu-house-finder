@@ -625,5 +625,7 @@ namespace HouseFinder.Test
         }
 
         #endregion GetMoneyForNotRentedRooms
+
+
     }
 }
