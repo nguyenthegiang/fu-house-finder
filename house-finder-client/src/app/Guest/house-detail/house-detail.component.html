@@ -144,11 +144,10 @@
             <th scope="col" id="md">Tiện ích</th>
             <th scope="col">Diện tích</th>
             <th scope="col" id="md">Số người ở</th>
-            <th scope="col">Tùy chọn</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let dataItem of availableRooms">
+          <tr *ngFor="let dataItem of availableRooms" (click)="viewRoom(dataItem.roomId)" style="cursor: pointer;">
             <!-- Room name -->
             <td><b>{{dataItem.roomName}}</b></td>
 
@@ -241,17 +240,6 @@
               <span *ngIf="dataItem.status.statusName === 'Occupied'">Đã thuê</span>
               <span *ngIf="dataItem.status.statusName === 'Disabled'">Không dùng được</span>
             </td> -->
-
-            <td>
-              <!-- Detail button -->
-              <a class="text-decoration-none text-primary me-2" data-toggle="modal" data-target="#updateModal"
-                data-whatever="@getbootstrap" (click)="viewRoom(dataItem.roomId)" style="cursor: pointer;">
-                <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
-                  title="Chi tiết">
-                  info
-                </span>
-              </a>
-            </td>
           </tr>
         </tbody>
       </table>
