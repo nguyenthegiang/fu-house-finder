@@ -52,19 +52,18 @@
                   </div>
                 </div>
               </th>
-              <th scope="col">Trạng thái</th>
-              <th scope="col">Tùy chọn</th>
+              <th scope="col">Hành động</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let dataItem of landlords; let i=index;">
+            <tr *ngFor="let dataItem of landlords; let i=index;" (click)="viewHouse(dataItem.userId)" style="cursor: pointer;">
               <td id="md"><b>{{i+1}}</b></td>
               <td>{{dataItem.userId}}</td>
               <td>{{dataItem.displayName}}</td>
               <td id="md">{{dataItem.phoneNumber}}</td>
               <!-- <td>{{dataItem.address.addresses}}</td> -->
               <td id="md"><a target="_blank" class="text-decoration-none"
-                  href="{{dataItem.facebookUrl}}">{{dataItem.displayName}}</a></td>
+                  href="{{dataItem.facebookUrl}}"><i class="fa-brands fa-facebook"></i></a></td>
 
               <!-- Statistics -->
               <td id="md">
@@ -77,14 +76,6 @@
                   <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
                   <label id="md" class="form-check-label" for="flexSwitchCheckChecked">Hoạt động</label>
                 </div>
-              </td>
-
-              <td>
-                <a class="text-decoration-none text-primary" (click)="viewHouse(dataItem.userId)" data-bs-toggle="tooltip" data-bs-placement="top" title="Chi tiết" style="cursor: pointer;">
-                  <span id="btn" class="material-symbols-outlined">
-                    info
-                  </span>
-                </a>
               </td>
             </tr>
           </tbody>
