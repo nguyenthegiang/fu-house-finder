@@ -540,7 +540,7 @@ namespace HouseFinder.Test
          */
         [TestCase]
 
-        public void GetListHousesByLandlordId_ValidId_Returns_MatchResult()
+        public void GetListHousesByLandlordId_ValidId_MatchResult()
         {
             //ARRANGE
             var houseController = new HouseController();
@@ -603,6 +603,25 @@ namespace HouseFinder.Test
 
             //ASSERT
             Assert.IsInstanceOf<Decimal>(data);
+        }
+
+        /**
+         * Method: GetMoneyForNotRentedRooms()
+         * Scenario: Input HouseId: 1 (valid)
+         * Expected behavior: Matching result data
+         */
+        [Test]
+        public void GetMoneyForNotRentedRooms_ValidId_MatchResult()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+            int houseId = 1;
+
+            //ACT
+            var data = houseController.GetMoneyForNotRentedRooms(houseId);
+
+            //ASSERT
+            Assert.AreEqual(16500000, data);
         }
 
         #endregion GetMoneyForNotRentedRooms
