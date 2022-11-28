@@ -108,11 +108,10 @@
                 <th scope="col" id="md">Ngày giải quyết</th>
                 <th scope="col" id="md">Người giải quyết</th>
                 <th scope="col">Trạng thái</th>
-                <th scope="col"></th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let order of orders; let i = index">
+              <tr *ngFor="let order of orders; let i = index" data-bs-toggle="modal" data-bs-target="#selectedOrderModal" (click)="changeSelectedOrder(order.orderId)" style="cursor: pointer">
                 <td id="md">
                   <b>{{ (pageNumber - 1) * pageSize + i + 1 }}</b>
                 </td>
@@ -142,27 +141,6 @@
                   style="color: green"
                 >
                   Đã giải quyết
-                </td>
-                <td>
-                  <!-- Button trigger modal -->
-                  <a
-                    type="button"
-                    class="text-decoration-none text-primary"
-                    data-bs-toggle="modal"
-                    data-bs-target="#selectedOrderModal"
-                    (click)="changeSelectedOrder(order.orderId)"
-                    style="cursor: pointer"
-                  >
-                    <span
-                      id="btn"
-                      class="material-symbols-outlined"
-                      data-bs-toggle="tooltip"
-                      data-bs-placement="top"
-                      title="Chi tiết"
-                    >
-                      info
-                    </span>
-                  </a>
                 </td>
               </tr>
             </tbody>
