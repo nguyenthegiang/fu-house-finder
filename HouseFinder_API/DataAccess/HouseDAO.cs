@@ -486,5 +486,25 @@ namespace DataAccess
             return GetListReportHouse().Count();
         }
 
+        public static List<HouseDTO> GetHouses()
+        {
+            List<HouseDTO> houseDTOs;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //include address
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    //Get by LandlordId
+                    houseDTOs = context.Houses.Where(h => h.Deleted == false).ProjectTo<HouseDTO>(config).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return houseDTOs;
+        }
     }
 }

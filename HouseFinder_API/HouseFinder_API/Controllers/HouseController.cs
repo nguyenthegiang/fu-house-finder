@@ -240,5 +240,9 @@ namespace HouseFinder_API.Controllers
                 return BadRequest();
             }
         }
+
+        [EnableQuery]
+        [HttpGet("allHouses")]
+        public ActionResult<IEnumerable<HouseDTO>> GetHouses() => houseRepository.GetHouses();
     }
 }

@@ -42,5 +42,7 @@ namespace Repositories.Repositories
         public List<ReportHouseDTO> GetListReportHouse() => HouseDAO.GetListReportHouse();
 
         public int CountTotalReportedHouse() => HouseDAO.CountTotalReportedHouse();
+
+        public List<HouseDTO> GetHouses() => HouseDAO.GetHouses();
     }
 }
