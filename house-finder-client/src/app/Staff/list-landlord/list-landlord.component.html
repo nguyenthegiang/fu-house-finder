@@ -38,7 +38,6 @@
               <th scope="col">Id</th>
               <th scope="col">Họ Tên</th>
               <th scope="col" id="md">Số Điện Thoại</th>
-              <th scope="col" id="md">Facebook</th>
               <th scope="col" id="md">
                 <div class="row">
                   <div class="col">
@@ -62,8 +61,6 @@
               <td>{{dataItem.displayName}}</td>
               <td id="md">{{dataItem.phoneNumber}}</td>
               <!-- <td>{{dataItem.address.addresses}}</td> -->
-              <td id="md"><a target="_blank" class="text-decoration-none"
-                  href="{{dataItem.facebookUrl}}"><i class="fa-brands fa-facebook"></i></a></td>
 
               <!-- Statistics -->
               <td id="md">
@@ -71,7 +68,10 @@
               </td>
 
               <!-- Room status -->
-              <td>
+              <td class="d-flex">
+                <a target="_blank" class="text-decoration-none me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Fcebook chủ trọ" href="{{dataItem.facebookUrl}}">
+                  <i class="fa-brands fa-facebook fs-4"></i>
+                </a>
                 <div class="form-check form-switch">
                   <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
                   <label id="md" class="form-check-label" for="flexSwitchCheckChecked">Hoạt động</label>
