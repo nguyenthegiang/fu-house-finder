@@ -27,14 +27,19 @@ export class CreateOrderComponent implements OnInit {
     user = localStorage.getItem("user");
     if (user === null) {
       //user not logged in => Alert
-      alert("Đăng nhập để xử dụng tính năng này!")
+      this.alertUserNotLoggedIn();
     } else {
       //Check user logged in from Server => if not => alert
       this.orderService.addOrder(this.orderDetail).subscribe(
         data => {},
-        error => alert("Đăng nhập để xử dụng tính năng này!")
+        error => this.alertUserNotLoggedIn()
       );
     }
+  }
+
+  //Alert when create order failed
+  alertUserNotLoggedIn() {
+    alert("Vui lòng đăng nhập để xử dụng tính năng này!");
   }
 
   goBack(): void {

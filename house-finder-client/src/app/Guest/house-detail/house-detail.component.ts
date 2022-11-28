@@ -100,7 +100,7 @@ export class HouseDetailComponent implements OnInit {
     var user = null;
     user = localStorage.getItem("user");
     if (user === null) {
-      alert("Đăng nhập để xử dụng tính năng này!");
+      this.alertUserNotLoggedIn();
       return;
     } else {
       this.inputReportContent = this.inputReportContent.trim();
@@ -114,10 +114,18 @@ export class HouseDetailComponent implements OnInit {
         reportedDate: new Date()
       };
 
-      this.reportService.addReport(report).subscribe();
+      this.reportService.addReport(report).subscribe(
+        data => {},
+        error => this.alertUserNotLoggedIn()
+      );
     }
-
   }
+
+  //Alert when create order failed
+  alertUserNotLoggedIn() {
+    alert("Vui lòng đăng nhập để xử dụng tính năng này!");
+  }
+
   goBack(): void {
     window.location.reload();
   }

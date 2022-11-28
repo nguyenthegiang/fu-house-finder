@@ -33,8 +33,10 @@ namespace HouseFinder_API.Controllers
                 string uid = HttpContext.Session.GetString("User");
                 if (uid == null)
                 {
-                    return Forbid();
+                    //user not logged in => throw error for alert
+                    return Ok(new { Status = 403 });
                 }
+
                 //Set default date
                 report.ReportedDate = DateTime.Now;
                 report.SolvedDate = null;
@@ -43,6 +45,7 @@ namespace HouseFinder_API.Controllers
                 report.StudentId = user.UserId;
                 //Add to DB
                 reportRepository.AddReport(report);
+
                 return Ok();
             }
             catch (Exception)
