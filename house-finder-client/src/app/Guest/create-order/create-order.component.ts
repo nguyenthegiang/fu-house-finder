@@ -31,8 +31,12 @@ export class CreateOrderComponent implements OnInit {
     } else {
       //Check user logged in from Server => if not => alert
       this.orderService.addOrder(this.orderDetail).subscribe(
-        data => {},
-        error => this.alertUserNotLoggedIn()
+        data => {
+          if (data.status == 403) {
+            this.alertUserNotLoggedIn();
+          }
+        },
+        error => {}
       );
     }
   }

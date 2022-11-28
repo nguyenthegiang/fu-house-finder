@@ -115,8 +115,12 @@ export class HouseDetailComponent implements OnInit {
       };
 
       this.reportService.addReport(report).subscribe(
-        data => {},
-        error => this.alertUserNotLoggedIn()
+        data => {
+          if (data.status == 403) {
+            this.alertUserNotLoggedIn();
+          }
+        },
+        error => {}
       );
     }
   }
