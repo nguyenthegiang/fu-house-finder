@@ -12,6 +12,7 @@ namespace Repositories.Repositories
 {
     public class HouseRepository : IHouseRepository
     {
+        public List<HouseDTO> GetAllHouses() => HouseDAO.GetAllHouses();
         public HouseDTO CreateHouse(string houseName, string information, string _address, string ggAddress, string villageName, string landlordId, string campusName,
             decimal powerPrice, decimal waterPrice, bool fingerprintLock, bool camera, bool parking)
         {
@@ -42,7 +43,5 @@ namespace Repositories.Repositories
         public List<ReportHouseDTO> GetListReportHouse() => HouseDAO.GetListReportHouse();
 
         public int CountTotalReportedHouse() => HouseDAO.CountTotalReportedHouse();
-
-        public List<HouseDTO> GetHouses() => HouseDAO.GetHouses();
     }
 }

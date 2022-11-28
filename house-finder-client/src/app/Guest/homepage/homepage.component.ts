@@ -21,7 +21,7 @@ import { RoomTypeService } from '../../services/room-type.service';
 })
 export class HomepageComponent implements OnInit {
   //List of available houses to display in Main Content
-  houses: HouseHomePage[] = [];
+  houses: HouseHomePage[] | undefined;
 
   //to display in [Statistics]
   countAvailableRooms: number = 0;
@@ -62,6 +62,9 @@ export class HomepageComponent implements OnInit {
   //[Order by] Selected Order value
   selectedOrderValue: string | undefined;
 
+  //For Placeholder
+  placeHolderItemCount: number[] = [];
+
   constructor(
     private houseService: HouseService,
     private campusService: CampusService,
@@ -70,6 +73,9 @@ export class HomepageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    //init array for placeholder loop
+    this.placeHolderItemCount = Array.from({ length: this.pageSize }, (_, i) => i + 1);
+
     //Call APIs:
 
     //(List) Get available Houses - default: page 1, 9 items
@@ -139,11 +145,15 @@ export class HomepageComponent implements OnInit {
 
   // Call API to update list house with selected Filter value & Paging
   filterHouse(resetPaging: boolean) {
+    //Before calling API: reset list house to change screen to loading
+    this.houses = undefined;
+
     //if user filter -> reset Paging (back to page 1)
     if (resetPaging) {
       this.pageNumber = 1;
     }
 
+    //Get data
     this.houseService.filterAvailableHouses(
       this.pageSize,
       this.pageNumber,
@@ -227,6 +237,13 @@ export class HomepageComponent implements OnInit {
       }
     });
 
+    //Reset lower Region Filter
+    this.selectedDistrictId = undefined;
+    this.selectedCommuneId = undefined;
+    this.selectedVillageId = undefined;
+    this.communesOfSelectedDistrict = [];
+    this.villagesOfSelectedCommune = [];
+
     // Call API: update list houses with the campus user chose
     this.selectedCampusId = numberCampusId;
     this.filterHouse(true);
@@ -255,6 +272,9 @@ export class HomepageComponent implements OnInit {
         return;
       }
     });
+
+    //Reset lower Region Filter
+    this.villagesOfSelectedCommune = [];
 
     //no need for filtering by commune & village 
     this.selectedCommuneId = undefined;

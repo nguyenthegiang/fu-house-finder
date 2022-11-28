@@ -22,9 +22,11 @@ namespace HouseFinder_API.Controllers
         private IHouseRepository houseRepository = new HouseRepository();
 
 
-        //GET: api/Houses
-        //[HttpGet]
-        //public ActionResult<IEnumerable<HouseDTO>> GetAllHouses() => housesRepository.GetAllHouses();
+        /**
+         * GET: api/Houses
+         */
+        [HttpGet]
+        public ActionResult<IEnumerable<HouseDTO>> GetAllHouses() => houseRepository.GetAllHouses();
 
         /**
          * GET: api/Houses/availableHouses
@@ -240,9 +242,5 @@ namespace HouseFinder_API.Controllers
                 return BadRequest();
             }
         }
-
-        [EnableQuery]
-        [HttpGet("allHouses")]
-        public ActionResult<IEnumerable<HouseDTO>> GetHouses() => houseRepository.GetHouses();
     }
 }
