@@ -47,7 +47,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-        <button type="button" id="btn" class="btn text-white" (click)="addOrder()" [disabled]="!orderDetail.studentName ||
+        <button type="button" id="btn" class="btn text-white" data-bs-dismiss="modal" (click)="addOrder()" [disabled]="!orderDetail.studentName ||
           !orderDetail.phoneNumber || !orderDetail.orderContent ||
           !orderDetail.email || !email.errors?.pattern== false || !phoneNumber.errors?.pattern== false">
           Gửi yêu cầu
