@@ -305,11 +305,10 @@
                   <th scope="col" id="md">Chủ trọ</th>
                   <th scope="col">Số lượt báo cáo</th>
                   <th scope="col">Trạng thái chủ trọ</th>
-                  <th scope="col">Tùy chọn</th>
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let house of houses; let i = index">
+                <tr *ngFor="let house of houses; let i = index" (click)="changeSelectedHouse(house.houseId)" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#listReportModal">
                   <td id="md">
                     <b>{{ (housePageNumber - 1) * housePageSize + i + 1 }}</b>
                   </td>
@@ -325,20 +324,6 @@
                         [checked]="house.landlord.statusId == 1"
                       />
                     </div>
-                  </td>
-                  <td>
-                    <!-- Button trigger modal -->
-                    <a
-                      class="text-decoration-none text-primary"
-                      type="button"
-                      data-bs-toggle="modal"
-                      data-bs-target="#listReportModal"
-                      (click)="changeSelectedHouse(house.houseId)"
-                    >
-                      <span id="btn" class="material-symbols-outlined">
-                        info
-                      </span>
-                    </a>
                   </td>
                 </tr>
               </tbody>
