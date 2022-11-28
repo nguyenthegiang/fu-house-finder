@@ -1,5 +1,4 @@
 <app-staff-header></app-staff-header>
-<app-staff-navbar></app-staff-navbar>
 
 <div class="row" *ngIf="landlordDetail">
   <!-- Landlord's avatar -->
@@ -103,11 +102,10 @@
                 </div>
               </th>
               <th scope="col" id="md">Tiện ích</th>
-              <th scope="col">Tùy chọn</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let dataItem of houses; let i=index;">
+            <tr *ngFor="let dataItem of houses; let i=index;" (click)="viewRoom(dataItem.houseId)" style="cursor: pointer;">
               <td id="md"><b>{{i+1}}</b></td>
 
               <!-- House id -->
@@ -148,14 +146,6 @@
                     </span>
                   </div>
                 </div>
-              </td>
-
-              <td>
-                <a class="text-decoration-none text-primary" (click)="viewRoom(dataItem.houseId)" data-bs-toggle="tooltip" data-bs-placement="top" title="Chi tiết" style="cursor: pointer;">
-                  <span id="btn" class="material-symbols-outlined">
-                    info
-                  </span>
-                </a>
               </td>
             </tr>
           </tbody>
