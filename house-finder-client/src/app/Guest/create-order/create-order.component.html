@@ -21,16 +21,17 @@
               <input type="text" class="form-control" id="phoneNumber" [(ngModel)]="orderDetail.phoneNumber"
                 pattern="^(0?)(3[2-9]|5[6|8|9]|7[0|6-9]|8[0-6|8|9]|9[0-4|6-9])[0-9]{7}$" name="phoneNumber"
                 #phoneNumber="ngModel">
-              <span class="help-block text-danger" *ngIf="orderDetail.phoneNumber !== '' && phoneNumber.errors?.pattern && phoneNumber.touched"> Số điện
-                thoại không
-                đúng</span>
+              <span class="help-block text-danger"
+                *ngIf="orderDetail.phoneNumber !== '' && phoneNumber.errors?.pattern && phoneNumber.touched"> Số điện
+                thoại không đúng</span>
             </div>
             <!-- building -->
             <div class="col-12 mt-2">
               <label for="email">Email</label>
               <input type="text" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="email"
                 [(ngModel)]="orderDetail.email" name="email" #email="ngModel">
-              <span class="help-block text-danger" *ngIf="orderDetail.email !== '' && email.errors?.pattern && email.touched"> Email không
+              <span class="help-block text-danger"
+                *ngIf="orderDetail.email !== '' && email.errors?.pattern && email.touched"> Email không
                 đúng</span>
             </div>
           </div>

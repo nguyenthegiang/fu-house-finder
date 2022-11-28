@@ -22,8 +22,8 @@ export class CreateOrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
   }
+
   addOrder() {
     //Check if user has logged in
     var user = null;
