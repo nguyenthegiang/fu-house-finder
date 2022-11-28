@@ -25,7 +25,7 @@ export class HouseService {
   //Unused
   //Get List of all Houses
   getAllHouses(): Observable<House[]> {
-    return this.http.get<House[]>(this.APIUrl);
+    return this.http.get<House[]>(this.APIUrl + "allHouses");
   }
 
   //Unused
@@ -321,7 +321,7 @@ export class HouseService {
 
   /**
    * Get total of available houses
-   * [Staff][Dashboard] 
+   * [Staff][Dashboard]
    * [Home Page]
    */
   countTotalAvailableHouse(): Observable<any> {
