@@ -17,25 +17,27 @@ export class CreateOrderComponent implements OnInit {
   }
   constructor(
     private orderService: OrderService
-  ) {
+  ) { }
 
-  }
+  ngOnInit(): void { }
 
-  ngOnInit(): void {
-
-  }
   addOrder() {
     //Check if user has logged in
     var user = null;
     user = localStorage.getItem("user");
     if (user === null) {
+      //user not logged in => Alert
       alert("Đăng nhập để xử dụng tính năng này!")
     } else {
-      this.orderService.addOrder(this.orderDetail).subscribe();
+      //Check user logged in from Server => if not => alert
+      this.orderService.addOrder(this.orderDetail).subscribe(
+        data => {},
+        error => alert("Đăng nhập để xử dụng tính năng này!")
+      );
     }
   }
+
   goBack(): void {
     window.location.reload();
   }
-
 }

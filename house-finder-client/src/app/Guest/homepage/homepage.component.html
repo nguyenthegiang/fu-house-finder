@@ -328,8 +328,8 @@
 
       <!-- Placeholder: Display when List House is Loading -->
       <div class="row" *ngIf="!houses">
-        <div class="col-12 col-md-6 col-lg-4" *ngFor="let placeholderItem of placeHolderItemCount">
-          <div class="card rounded houseCardItem">
+        <div class="col-12 col-md-6 col-xl-4" *ngFor="let placeholderItem of placeHolderItemCount">
+          <div class="card rounded placeHolderHouseCardItem">
             <img class="card-img-top" id="houseItemImage" src="../assets/image/HouseItem_Image_PlaceHolder.png"
               alt="House Image">
 
@@ -368,10 +368,18 @@
         </div>
       </div>
 
+      <!-- Notification: No House Found -->
+      <div class="row" *ngIf="houses && houses.length <= 0">
+        <h3 class="text-center">
+          <i class="fa-regular fa-face-frown"></i>
+          Rất tiếc, chúng tôi không tìm thấy nhà trọ bạn mong muốn 
+        </h3>
+      </div>
+
       <!-- List of Houses -->
-      <div class="row" *ngIf="houses">
+      <div class="row" *ngIf="houses && houses.length > 0">
         <!---------------- House Item ---------------->
-        <div class="col-12 col-md-6 col-lg-4" *ngFor="let house of houses">
+        <div class="col-12 col-md-6 col-xl-4" *ngFor="let house of houses">
           <!-- Item onClick: to House Detail -->
           <div class="card rounded houseCardItem" routerLink="/house-detail/{{house.houseId}}">
 
