@@ -28,3 +28,13 @@
   background-color: rgb(147, 147, 147);
   border-radius: 5px;
 }
+
+.clearSearchBtn{
+  border-top: 1px solid #dee2e6;
+  border-bottom: 1px solid #dee2e6;
+  background-color: white;
+
+  span{
+    color: #6c757d;
+  }
+}

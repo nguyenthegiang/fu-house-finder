@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { House } from 'src/app/models/house';
 import { HouseService } from 'src/app/services/house.service';
@@ -17,7 +17,9 @@ export class ListHouseComponent implements OnInit {
   houseCount: number = 0;
   roomCount: number = 0;
   roomAvailableCount: number = 0;
-  searchValue: string | undefined;
+  searchName: string | undefined;
+
+  @ViewChild('searchValue') searchValue: any;
 
   constructor(private houseService: HouseService,
     private router: Router)
@@ -37,10 +39,20 @@ export class ListHouseComponent implements OnInit {
   }
 
   search(searchValue: string)
-  {}
+  {
+    this.searchName = searchValue;
+  }
 
   changeBreadcrumbStatus()
   {
     localStorage.setItem('breadcrumb','false');
+  }
+
+  handleClear(){
+    this.searchValue.nativeElement.value = ' ';
+    this.searchName = undefined;
+    this.houseService.getAvailableHouses().subscribe(data => {
+      this.houses = data;
+    });
   }
 }
