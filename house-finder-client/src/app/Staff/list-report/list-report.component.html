@@ -266,20 +266,29 @@
                     <!-- Press enter to search  -->
                     <input
                       type="text"
-                      class="form-control"
+                      class="form-control border border-end-0"
                       placeholder="Nhập từ khóa tìm kiếm"
                       aria-label="search_house_by_name"
                       aria-describedby="button-addon2"
                       placeholder="Nhập tên nhà tìm kiếm"
-                      #searchValue
-                      (keydown.enter)="search(searchValue.value)"
+                      #searchHouseName
+                      (keydown.enter)="searchReportedHouse(searchHouseName.value)"
                     />
+                    <!-- Click button to clear search -->
+                    <button
+                      *ngIf="searchHouse != undefined"
+                      class="clearSearchBtn"
+                      type="button"
+                      (click)="handleClearHouse()" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Xóa"
+                    >
+                      <span class="material-symbols-outlined"> close </span>
+                    </button>
                     <!-- Click button to search -->
                     <button
                       class="btn btn-outline-secondary"
                       type="button"
                       id="button-addon2"
-                      (click)="search(searchValue.value)"
+                      (click)="searchReportedHouse(searchHouseName.value)"
                     >
                       <i class="fa-solid fa-magnifying-glass"></i>
                     </button>

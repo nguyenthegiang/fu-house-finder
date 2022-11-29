@@ -1,3 +1,4 @@
+import { ValueConverter } from '@angular/compiler/src/render3/view/template';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { Report } from 'src/app/models/report';
@@ -33,6 +34,7 @@ export class ListReportComponent implements OnInit {
   //Filter house
   selectedOrderByHouse: string | undefined;
   selectedActiveStatus: string | undefined;
+  searchHouse: string | undefined;
 
   //(Paging) for Reports
   totalReport = 0; //items count
@@ -49,6 +51,8 @@ export class ListReportComponent implements OnInit {
   housePageList: number[] = [];
 
   @ViewChild('searchReportContent') searchReportContent: any;
+  @ViewChild('searchHouseName') searchHouseName: any;
+
 
   constructor(
     private reportService: ReportService,
@@ -92,7 +96,9 @@ export class ListReportComponent implements OnInit {
     });
   }
 
-  search(searchValue: string) {}
+  searchReportedHouse(searchValue: string) {
+    this.searchHouse = searchValue;
+  }
 
   //Show modal
   changeSelectedHouse(houseId: number) {
@@ -199,5 +205,10 @@ export class ListReportComponent implements OnInit {
     this.searchReportContent.nativeElement.value = ' ';
     this.searchName = undefined;
     this.filterReport(true);
+  }
+  handleClearHouse(){
+    this.searchHouseName.nativeElement.value = ' ';
+    this.searchHouse = undefined;
+    this.filterReportedHouse(true);
   }
 }
