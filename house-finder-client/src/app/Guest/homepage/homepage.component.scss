@@ -156,6 +156,14 @@
 
 #buttonTriggerOffcanvas {
   display: none;
+
+  button {
+    background-color: #e96136;
+    border: none;
+  }
+  button:hover {
+    background-color: #ee4d2d;
+  }
 }
 
 /*************Responsive*************/

@@ -14,7 +14,8 @@
       <div class="offcanvas-header text-white orangeBackround">
         <h5 class="offcanvas-title" id="offcanvasExampleLabel">LỌC KẾT QUẢ</h5>
         <a href="/home" class="text-white">Đặt lại bộ lọc</a>
-        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
 
       <!-- Offcanvas Body -->
@@ -437,10 +438,15 @@
       <div class="d-flex justify-content-between mb-3">
         <!-- Button Trigger Offcanvas (only display in small screen) -->
         <div id="buttonTriggerOffcanvas" class="w-25">
-          <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasFilterColumn" aria-controls="offcanvasFilterColumn">
-            Trigger offcanvas
-          </button>
+          <div class="row">
+            <div class="col-9">
+              <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasFilterColumn" aria-controls="offcanvasFilterColumn">
+                Lọc phòng trọ
+              </button>
+            </div>
+            <div class="col-3"></div>
+          </div>
         </div>
 
         <!-- Search bar -->
