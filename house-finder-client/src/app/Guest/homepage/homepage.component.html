@@ -3,15 +3,18 @@
 
 <!-- Body -->
 <div class="container-fluid backgroundGray">
-  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasFilterColumn" aria-controls="offcanvasFilterColumn">
-    Button with data-bs-target
+  <!-- Button Trigger Offcanvas (only display in small screen) -->
+  <button id="buttonTriggerOffcanvas" class="btn btn-primary" type="button" data-bs-toggle="offcanvas"
+    data-bs-target="#offcanvasFilterColumn" aria-controls="offcanvasFilterColumn">
+    Trigger offcanvas
   </button>
   <br>
   <!-- Content -->
   <div class="d-flex justify-content-between">
-    
+
     <!-- Offcanvas: For Filter column in Responsive -->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasFilterColumn" aria-labelledby="offcanvasFilterColumnLabel">
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasFilterColumn"
+      aria-labelledby="offcanvasFilterColumnLabel">
       <!-- Offcanvas Header -->
       <div class="offcanvas-header text-white orangeBackround">
         <h5 class="offcanvas-title" id="offcanvasExampleLabel">LỌC KẾT QUẢ</h5>
@@ -37,11 +40,11 @@
                 </select>
               </div>
             </div>
-    
+
             <!-- Regions -->
             <div>
               <h6 class="font-weight-bold mb-2">Khu vực:</h6>
-    
+
               <!-- District -->
               <div class="d-flex justify-content-between align-items-center my-2">
                 <div class="me-2">Huyện/Quận</div>
@@ -56,7 +59,7 @@
                   </select>
                 </div>
               </div>
-    
+
               <!-- Commune -->
               <div class="d-flex justify-content-between align-items-center mb-2">
                 <div class="me-2">Phường/Xã</div>
@@ -71,7 +74,7 @@
                   </select>
                 </div>
               </div>
-    
+
               <!-- Village -->
               <div class="d-flex justify-content-between align-items-center">
                 <div class="me-2">Thôn/Xóm</div>
@@ -88,7 +91,7 @@
               </div>
             </div>
             <hr>
-    
+
             <!-- Distance to university -->
             <div>
               <h6 class="font-weight-bold mb-2">Khoảng cách đến trường:
@@ -108,7 +111,7 @@
               </div>
             </div>
             <hr>
-    
+
             <!-- Price -->
             <div>
               <div>
@@ -128,7 +131,7 @@
               </div>
             </div>
             <hr>
-    
+
             <!-- Room Types -->
             <div>
               <h6 class="font-weight-bold mb-2">Loại phòng:</h6>
@@ -144,11 +147,11 @@
               </div>
             </div>
             <hr>
-    
+
             <!-- Other utilities -->
             <div>
               <h6 class="font-weight-bold mb-2">Tiện ích khác:</h6>
-    
+
               <!-- House Utility -->
               <div class="form-check" *ngFor="let houseUtility of houseUtilities" id="listHouseUtility">
                 <!-- Select utility -->
@@ -159,7 +162,7 @@
                 </label>
               </div>
               <br>
-    
+
               <!-- Room Utility -->
               <div class="form-check" *ngFor="let roomUtility of roomUtilities" id="listRoomUtility">
                 <!-- Select utility -->
@@ -171,11 +174,11 @@
               </div>
             </div>
             <hr>
-    
+
             <!-- Filter by Rates -->
             <div>
               <h6 class="font-weight-bold mb-2">Đánh giá:</h6>
-    
+
               <!-- Select Rate (can only select 1) -->
               <div class="form-check rateForm">
                 <input class="form-check-input" type="radio" name="filterRate" id="5star" (click)="onRateSelected(5)">
@@ -184,7 +187,7 @@
                   <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i>
                 </label>
               </div>
-    
+
               <div class="form-check rateForm">
                 <input class="form-check-input" type="radio" name="filterRate" id="4star" (click)="onRateSelected(4)">
                 <label class="form-check-label" for="4star">
@@ -192,7 +195,7 @@
                   <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i> trở lên
                 </label>
               </div>
-    
+
               <div class="form-check rateForm">
                 <input class="form-check-input" type="radio" name="filterRate" id="3star" (click)="onRateSelected(3)">
                 <label class="form-check-label" for="3star">
@@ -200,7 +203,7 @@
                   <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i> trở lên
                 </label>
               </div>
-    
+
               <div class="form-check rateForm">
                 <input class="form-check-input" type="radio" name="filterRate" id="2star" (click)="onRateSelected(2)">
                 <label class="form-check-label" for="2star">
@@ -208,7 +211,7 @@
                   <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i> trở lên
                 </label>
               </div>
-    
+
               <div class="form-check rateForm">
                 <input class="form-check-input" type="radio" name="filterRate" id="1star" (click)="onRateSelected(1)">
                 <label class="form-check-label" for="1star">
@@ -570,7 +573,7 @@
       <div class="row" *ngIf="houses && houses.length <= 0">
         <h3 class="text-center">
           <i class="fa-regular fa-face-frown"></i>
-          Rất tiếc, chúng tôi không tìm thấy nhà trọ bạn mong muốn 
+          Rất tiếc, chúng tôi không tìm thấy nhà trọ bạn mong muốn
         </h3>
       </div>
 

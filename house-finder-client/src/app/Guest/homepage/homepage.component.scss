@@ -154,12 +154,21 @@
   color: white;
 }
 
-/*************Responsive*************/
+#buttonTriggerOffcanvas {
+  display: none;
+}
 
-//Filter column: Only appear in big screen
+/*************Responsive*************/
 @media only screen and (max-width: 768px) {
+  //Only appear in big screen
   #filterColumn
   {
     display: none;
   }
+
+  //Only appear in small screen
+  #buttonTriggerOffcanvas {
+    display: block;
+  }
 }
+
