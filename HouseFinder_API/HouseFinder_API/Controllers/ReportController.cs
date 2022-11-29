@@ -46,7 +46,7 @@ namespace HouseFinder_API.Controllers
                 //Add to DB
                 reportRepository.AddReport(report);
 
-                return Ok();
+                return Ok(new { Status = 200 });
             }
             catch (Exception)
             {

@@ -2,7 +2,7 @@ import { User } from '../../models/user';
 import { CampusService } from '../../services/campus.service';
 import { UserService } from '../../services/user.service';
 import { House } from '../../models/house';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HouseService } from '../../services/house.service';
 import { RoomService } from '../../services/room.service';
@@ -11,6 +11,7 @@ import { Room } from '../../models/room';
 import { ReportService } from '../../services/report.service';
 import { Report } from '../../models/report';
 import { environment } from 'src/environments/environment'; //environment variable
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-house-detail',
@@ -42,6 +43,7 @@ export class HouseDetailComponent implements OnInit {
   availableSlot: number = 0;
 
   inputReportContent: string = '';
+  @ViewChild('reportSuccessAlert') private reportSuccessAlert: SwalComponent | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -118,9 +120,11 @@ export class HouseDetailComponent implements OnInit {
         data => {
           if (data.status == 403) {
             this.alertUserNotLoggedIn();
+          } else if (data.status == 200) {
+            this.reportSuccessAlert?.fire();
           }
         },
-        error => {}
+        error => { }
       );
     }
   }
