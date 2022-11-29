@@ -38,3 +38,19 @@
     color: #6c757d;
   }
 }
+
+// Dark Paging
+.page-link {
+  color: black;
+}
+
+.page-link.active {
+  color: white !important;
+  background-color: #6c757d !important;
+  border-color: #6c757d !important;
+}
+
+// hover effect for <a> in Paging
+.hoverableLink:hover {
+  cursor: pointer;
+}
