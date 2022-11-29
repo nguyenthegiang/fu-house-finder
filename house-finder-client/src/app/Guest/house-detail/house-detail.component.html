@@ -8,7 +8,8 @@
 
 <nav class="mx-1 mx-md-5 mt-3 ps-3 fs-6" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a class="text-danger" onclick="history.back()" style="cursor: pointer;">Trang chủ</a></li>
+    <li class="breadcrumb-item"><a class="text-danger" onclick="history.back()" style="cursor: pointer;">Trang chủ</a>
+    </li>
     <li class="breadcrumb-item" aria-current="page">></li>
     <li class="breadcrumb-item active" aria-current="page">Chi tiết nhà trọ</li>
   </ol>
@@ -294,25 +295,28 @@
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
   <div class="modal-dialog">
-      <div class="modal-content">
-          <div class="modal-header text-white">
-              <h5 class="modal-title" id="orderModalLabel">Báo cáo nhà trọ</h5>
-          </div>
-          <div class="modal-body">
-              <form>
-                  <div class="row">
-                      <!-- name -->
-                      <div class="col-12">Lý do
-                        <textarea type="text" rows="5" class="form-control" id="message-text" name="inputReportContent"
-                          [(ngModel)]="inputReportContent"></textarea>
-                      </div>
-                  </div>
-              </form>
-          </div>
-          <div class="modal-footer">
-            <button (click)="sendReport()" id="btnAdd" type="button" class="btn text-white"
-                data-bs-dismiss="modal" [disabled]="!inputReportContent">Báo
-                cáo</button>
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-          </div>
+    <div class="modal-content">
+      <div class="modal-header text-white">
+        <h5 class="modal-title" id="orderModalLabel">Báo cáo nhà trọ</h5>
       </div>
+      <div class="modal-body">
+        <form>
+          <div class="row">
+            <!-- name -->
+            <div class="col-12">Lý do
+              <textarea type="text" rows="5" class="form-control" id="message-text" name="inputReportContent"
+                [(ngModel)]="inputReportContent"></textarea>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button (click)="sendReport()" id="btnAdd" type="button" class="btn text-white" data-bs-dismiss="modal"
+          [disabled]="!inputReportContent">Báo
+          cáo</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+      </div>
+    </div>
+    <swal #reportSuccessAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
+      title="Gửi báo cáo thành công" icon="success">
+    </swal>
