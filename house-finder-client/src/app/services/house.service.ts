@@ -22,8 +22,10 @@ export class HouseService {
 
   constructor(private http: HttpClient) { }
 
-  //Unused
-  //Get List of all Houses
+  /**
+   * [Staff - List Houses]
+   * Get List of all Houses
+   * */
   getAllHouses(): Observable<House[]> {
     return this.http.get<House[]>(this.APIUrl);
   }
@@ -34,7 +36,9 @@ export class HouseService {
     return this.http.get<House[]>(this.APIUrl + "/availableHouses");
   }
 
-  //[Home Page] Filter available Houses using OData
+  /**
+   * [Home Page] Filter available Houses using OData
+   */
   filterAvailableHouses(
     pageSize: number,
     pageNumber: number,
@@ -317,8 +321,11 @@ export class HouseService {
     return this.http.get<any>(this.APIUrl + "/CountTotalHouse");
   }
 
-  //[Staff][Dashboard] Get total of available houses
-  //[Home Page] For Paging
+  /**
+   * Get total of available houses
+   * [Staff][Dashboard]
+   * [Home Page]
+   */
   countTotalAvailableHouse(): Observable<any> {
     return this.http.get<any>(this.APIUrl + "/CountAvailableHouse");
   }

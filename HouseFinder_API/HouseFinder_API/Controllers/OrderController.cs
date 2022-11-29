@@ -94,18 +94,23 @@ namespace HouseFinder_API.Controllers
             return Ok(orderRepository.CountSolvedOrderByStaffInAYear(uid));
         }
 
-        //[User] Add Order
+        /**
+         * [Home Page] Create Order
+         */
         [HttpPost]
-        public IActionResult Post(Order order)
+        public IActionResult CreeateOrder(Order order)
         {
             try
             {
+                //Get UserId
                 string uid = HttpContext.Session.GetString("User");
                 if (uid == null)
                 {
-                    return Forbid();
+                    //user not logged in => throw error for alert
+                    return Ok(new { Status = 403 });
                 }
                 UserDTO user = userReposiotry.GetUserByID(uid);
+
                 //Set default status
                 order.StatusId = 1;
                 //Set default date
@@ -114,6 +119,7 @@ namespace HouseFinder_API.Controllers
                 order.StudentId = user.UserId;
                 //Add to DB
                 orderRepository.AddOrder(order);
+
                 return Ok();
             }
             catch (Exception e)

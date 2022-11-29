@@ -15,6 +15,31 @@ namespace DataAccess
     public class HouseDAO
     {
         /**
+         * [Staff - List Houses]
+         * Get all undeleted houses
+         */
+        public static List<HouseDTO> GetAllHouses()
+        {
+            List<HouseDTO> houseDTOs;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //include address
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    //Get by LandlordId
+                    houseDTOs = context.Houses.Where(h => h.Deleted == false).ProjectTo<HouseDTO>(config).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return houseDTOs;
+        }
+
+        /**
          Add a new House into the Database
          */
         public static HouseDTO CreateHouse(string houseName, string information, int addressId, int villageId, string landlordId, int campusId,
@@ -123,37 +148,6 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
         }
-        ////(Unused) Get list of houses, with Address & Images
-        //public static List<HouseDTO> GetAllHouses()
-        //{
-        //    List<HouseDTO> houseDTOs;
-        //    try
-        //    {
-        //        using (var context = new FUHouseFinderContext())
-        //        {
-        //            //include address, images
-        //            MapperConfiguration config;
-        //            config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-        //            houseDTOs = context.Houses
-        //                //unnecessary includes
-        //                //.Include(house => house.Address)
-        //                //.Include(house => house.ImagesOfHouses)
-        //                .ProjectTo<HouseDTO>(config).ToList();
-
-        //            //find lowest room price & highest room price
-        //            for (int i = 0; i < houseDTOs.Count; i++)
-        //            {
-        //                houseDTOs[i] = RoomDAO.GetRoomPriceById(houseDTOs[i]);
-        //            }
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        throw new Exception(e.Message);
-        //    }
-
-        //    return houseDTOs;
-        //}
 
         /**
          * [Home Page] Get list of available houses, with Address, Images & Rooms
@@ -485,6 +479,5 @@ namespace DataAccess
         {
             return GetListReportHouse().Count();
         }
-
     }
 }

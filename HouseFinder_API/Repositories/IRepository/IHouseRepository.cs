@@ -10,6 +10,7 @@ namespace Repositories.IRepository
 {
     public interface IHouseRepository
     {
+        public List<HouseDTO> GetAllHouses();
         public HouseDTO CreateHouse(string houseName, string information, string _address, string ggAddress, string villageName, string landlordId, string campusName,
             decimal powerPrice, decimal waterPrice, bool fingerprintLock, bool camera, bool parking);
         //public List<HouseDTO> GetAllHouses();

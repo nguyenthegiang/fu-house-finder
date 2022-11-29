@@ -123,17 +123,19 @@ export class OrderService {
 
   //[Staff/list-order] Update order's status
   updateOrderStatus(orderId: number, statusId: number): Observable<any> {
-    return this.http.put<any>(this.APIUrl + "/" + orderId + "/" + statusId, this.httpOptions, {withCredentials: true});
+    return this.http.put<any>(this.APIUrl + "/" + orderId + "/" + statusId, this.httpOptions, { withCredentials: true });
   }
 
-  //POST Order for user
+  /**
+   * [Home Page] Create Order
+   */
   addOrder(order: CreateOrder): Observable<any> {
     return this.http.post<any>(this.APIUrl, order, this.httpOptions);
   }
 
   //Count total order solved by current staff
-  countTotalOrderSolvedByAccount() : Observable<number>{
-    return this.http.get<number>(this.APIUrl + "/CountTotalOrderSolvedBy", {withCredentials: true});
+  countTotalOrderSolvedByAccount(): Observable<number> {
+    return this.http.get<number>(this.APIUrl + "/CountTotalOrderSolvedBy", { withCredentials: true });
   }
 
   countSolvedOrderByStaffInAYear() : Observable<number[]>{

@@ -21,7 +21,7 @@ import { RoomTypeService } from '../../services/room-type.service';
 })
 export class HomepageComponent implements OnInit {
   //List of available houses to display in Main Content
-  houses: HouseHomePage[] = [];
+  houses: HouseHomePage[] | undefined;
 
   //to display in [Statistics]
   countAvailableRooms: number = 0;
@@ -62,6 +62,9 @@ export class HomepageComponent implements OnInit {
   //[Order by] Selected Order value
   selectedOrderValue: string | undefined;
 
+  //For Placeholder
+  placeHolderItemCount: number[] = [];
+
   constructor(
     private houseService: HouseService,
     private campusService: CampusService,
@@ -70,22 +73,13 @@ export class HomepageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    //init array for placeholder loop
+    this.placeHolderItemCount = Array.from({ length: this.pageSize }, (_, i) => i + 1);
+
     //Call APIs:
 
     //(List) Get available Houses - default: page 1, 9 items
     this.filterHouse(false);
-
-    // (Paging) Count available Houses for total number of pages
-    this.houseService.countTotalAvailableHouse().subscribe(data => {
-      this.countAvailableHouses = data;
-
-      // (Paging) Calculate number of pages
-      this.pageCount = Math.ceil(this.countAvailableHouses / this.pageSize);  //divide & round up
-
-      // (Paging) Render pageList based on pageCount
-      this.pageList = Array.from({ length: this.pageCount }, (_, i) => i + 1);
-      //pageList is now an array like {1, 2, 3, ..., n | n = pageCount}
-    });
 
     //(Statistics)
     this.roomService.countAvailableRooms().subscribe(data => {
@@ -93,6 +87,9 @@ export class HomepageComponent implements OnInit {
     });
     this.roomService.countAvailableCapacity().subscribe(data => {
       this.countAvailableCapacity = data;
+    });
+    this.houseService.countTotalAvailableHouse().subscribe(data => {
+      this.countAvailableHouses = data;
     });
 
     //(Filter) Get all Campuses (with their Districts, Communes, Villages)
@@ -148,11 +145,15 @@ export class HomepageComponent implements OnInit {
 
   // Call API to update list house with selected Filter value & Paging
   filterHouse(resetPaging: boolean) {
+    //Before calling API: reset list house to change screen to loading
+    this.houses = undefined;
+
     //if user filter -> reset Paging (back to page 1)
     if (resetPaging) {
       this.pageNumber = 1;
     }
 
+    //Get data
     this.houseService.filterAvailableHouses(
       this.pageSize,
       this.pageNumber,
@@ -173,6 +174,33 @@ export class HomepageComponent implements OnInit {
     ).subscribe(data => {
       this.houses = data;
       this.scrollToTop();
+    });
+
+    //For Paging: Count total number of items
+    this.houseService.filterAvailableHouses(
+      1000,
+      1,
+      this.selectedRoomTypeIds,
+      this.selectedHouseUtilities,
+      this.selectedRoomUtilities,
+      this.searchName,
+      this.selectedCampusId,
+      this.maxPrice,
+      this.minPrice,
+      this.maxDistance,
+      this.minDistance,
+      this.selectedDistrictId,
+      this.selectedCommuneId,
+      this.selectedVillageId,
+      this.selectedRate,
+      this.selectedOrderValue,
+    ).subscribe(data => {
+      // (Paging) Calculate number of pages
+      this.pageCount = Math.ceil(data.length / this.pageSize);  //divide & round up
+
+      // (Paging) Render pageList based on pageCount
+      this.pageList = Array.from({ length: this.pageCount }, (_, i) => i + 1);
+      //pageList is now an array like {1, 2, 3, ..., n | n = pageCount}
     });
   }
 
@@ -209,6 +237,13 @@ export class HomepageComponent implements OnInit {
       }
     });
 
+    //Reset lower Region Filter
+    this.selectedDistrictId = undefined;
+    this.selectedCommuneId = undefined;
+    this.selectedVillageId = undefined;
+    this.communesOfSelectedDistrict = [];
+    this.villagesOfSelectedCommune = [];
+
     // Call API: update list houses with the campus user chose
     this.selectedCampusId = numberCampusId;
     this.filterHouse(true);
@@ -237,6 +272,9 @@ export class HomepageComponent implements OnInit {
         return;
       }
     });
+
+    //Reset lower Region Filter
+    this.villagesOfSelectedCommune = [];
 
     //no need for filtering by commune & village 
     this.selectedCommuneId = undefined;

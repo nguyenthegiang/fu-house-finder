@@ -540,7 +540,7 @@ namespace HouseFinder.Test
          */
         [TestCase]
 
-        public void GetListHousesByLandlordId_ValidId_Returns_MatchResult()
+        public void GetListHousesByLandlordId_ValidId_MatchResult()
         {
             //ARRANGE
             var houseController = new HouseController();
@@ -563,5 +563,236 @@ namespace HouseFinder.Test
 
         #endregion GetListHousesByLandlordId
 
+        #region GetMoneyForNotRentedRooms
+
+        /**
+         * Method: GetMoneyForNotRentedRooms()
+         * Scenario: Input HouseId: 1 (valid)
+         * Expected behavior: Returns Decimal
+         */
+        [Test]
+        public void GetMoneyForNotRentedRooms_ValidId_Returns_Decimal()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+            int houseId = 1;
+
+            //ACT
+            var data = houseController.GetMoneyForNotRentedRooms(houseId);
+
+            //ASSERT
+            Assert.IsInstanceOf<Decimal>(data);
+        }
+
+        /**
+         * Method: GetMoneyForNotRentedRooms()
+         * Scenario: Input HouseId: invalid
+         * Expected behavior: Returns 0
+         */
+        [TestCase(-1)]
+        [TestCase(0)]
+        [TestCase(1000)]
+        [TestCase(null)]
+        public void GetMoneyForNotRentedRoomsInvalidId_Returns_Zero(int houseId)
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+
+            //ACT
+            var data = houseController.GetMoneyForNotRentedRooms(houseId);
+
+            //ASSERT
+            Assert.IsInstanceOf<Decimal>(data);
+        }
+
+        /**
+         * Method: GetMoneyForNotRentedRooms()
+         * Scenario: Input HouseId: 1 (valid)
+         * Expected behavior: Matching result data
+         */
+        [Test]
+        public void GetMoneyForNotRentedRooms_ValidId_MatchResult()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+            int houseId = 1;
+
+            //ACT
+            var data = houseController.GetMoneyForNotRentedRooms(houseId);
+
+            //ASSERT
+            Assert.AreEqual(16500000, data);
+        }
+
+        #endregion GetMoneyForNotRentedRooms
+
+        #region CountTotalHouse
+
+        /**
+         * Method: CountTotalHouse()
+         * Scenario: None
+         * Expected behavior: Returns int
+         */
+        [Test]
+        public void CountTotalHouse_Returns_Int()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+
+            //ACT
+            var data = houseController.CountTotalHouse();
+
+            //ASSERT
+            Assert.IsInstanceOf<int>(data);
+        }
+
+        /**
+         * Method: CountTotalHouse()
+         * Scenario: None
+         * Expected behavior: Matching result data
+         */
+        [Test]
+        public void CountTotalHouse_MatchResult()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+
+            //ACT
+            var data = houseController.CountTotalHouse();
+
+            //ASSERT
+            Assert.AreEqual(31, data);
+        }
+
+        #endregion CountTotalHouse
+
+        #region CountAvailableHouse
+
+        /**
+         * Method: CountAvailableHouse()
+         * Scenario: None
+         * Expected behavior: Returns int
+         */
+        [Test]
+        public void CountAvailableHouse_Returns_Int()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+
+            //ACT
+            var data = houseController.CountAvailableHouse();
+
+            //ASSERT
+            Assert.IsInstanceOf<int>(data);
+        }
+
+        /**
+         * Method: CountAvailableHouse()
+         * Scenario: None
+         * Expected behavior: Matching result data
+         */
+        [Test]
+        public void CountAvailableHouse_MatchResult()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+
+            //ACT
+            var data = houseController.CountAvailableHouse();
+
+            //ASSERT
+            Assert.AreEqual(29, data);
+        }
+
+        #endregion CountAvailableHouse
+
+        #region CountTotalReportedHouse
+
+        /**
+         * Method: CountTotalReportedHouse()
+         * Scenario: None
+         * Expected behavior: Returns int
+         */
+        [Test]
+        public void CountTotalReportedHouse_Returns_Int()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+
+            //ACT
+            var data = houseController.CountTotalReportedHouse();
+
+            //ASSERT
+            Assert.IsInstanceOf<int>(data);
+        }
+
+        /**
+         * Method: CountTotalReportedHouse()
+         * Scenario: None
+         * Expected behavior: Matching result data
+         */
+        [Test]
+        public void CountTotalReportedHouse_MatchResult()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+
+            //ACT
+            var data = houseController.CountTotalReportedHouse();
+
+            //ASSERT
+            Assert.AreEqual(11, data);
+        }
+
+        #endregion CountTotalReportedHouse
+
+        #region GetReportedHouses
+
+        /**
+         * Method: GetReportedHouses()
+         * Scenario: None
+         * Expected behavior: Returns ActionResult
+         */
+        [Test]
+        public void GetReportedHouses_Returns_ActionResult()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+
+            //ACT
+            var data = houseController.GetReportedHouses();
+
+            //ASSERT
+            Assert.IsInstanceOf<ActionResult<IEnumerable<ReportHouseDTO>>>(data);
+        }
+
+        /**
+         * Method: GetReportedHouses()
+         * Scenario: None
+         * Expected behavior: Returns matching result data
+         */
+        [Test]
+        public void GetReportedHouses_MatchResult()
+        {
+            //ARRANGE
+            var houseController = new HouseController();
+
+            //ACT
+            var data = houseController.GetReportedHouses();
+
+            //ASSERT
+            Assert.IsInstanceOf<ActionResult<IEnumerable<ReportHouseDTO>>>(data);
+
+            List<ReportHouseDTO> houses = data.Value.ToList();
+
+            //Test matching data
+            Assert.AreEqual("Trọ Tâm Lê", houses[0].HouseName);
+            Assert.AreEqual(5, houses[0].NumberOfReport);
+
+            Assert.AreEqual("Trọ Tâm Thảo", houses[1].HouseName);
+            Assert.AreEqual(1, houses[1].NumberOfReport);
+        }
+
+        #endregion GetReportedHouses
     }
 }
