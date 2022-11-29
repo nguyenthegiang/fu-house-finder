@@ -39,8 +39,8 @@ export class ListHouseComponent implements OnInit {
   search(searchValue: string)
   {}
 
-  changeBreadcumbStatus()
+  changeBreadcrumbStatus()
   {
-    localStorage.setItem('token','false');
+    localStorage.setItem('breadcrumb','false');
   }
 }
