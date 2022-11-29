@@ -17,6 +17,7 @@ export class CreateOrderComponent implements OnInit {
     statusId: 1
   }
   @ViewChild('orderSuccessAlert') private orderSuccessAlert: SwalComponent | undefined;
+  @ViewChild('orderErrorAlert') private orderErrorAlert: SwalComponent | undefined;
   constructor(
     private orderService: OrderService
   ) { }
@@ -29,13 +30,13 @@ export class CreateOrderComponent implements OnInit {
     user = localStorage.getItem("user");
     if (user === null) {
       //user not logged in => Alert
-      this.alertUserNotLoggedIn();
+      this.orderErrorAlert?.fire();
     } else {
       //Check user logged in from Server => if not => alert
       this.orderService.addOrder(this.orderDetail).subscribe(
         data => {
           if (data.status == 403) {
-            this.alertUserNotLoggedIn();
+            this.orderErrorAlert?.fire();
           } else if (data.status == 200) {
             this.orderSuccessAlert?.fire();
           }
