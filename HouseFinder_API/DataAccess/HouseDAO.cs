@@ -138,6 +138,12 @@ namespace DataAccess
                         i.Deleted = true;
                         context.ImagesOfHouses.Update(i);
                     }
+                    List<Report> reports = context.Reports.Where(r => r.HouseId == houseId).ToList();
+                    foreach(Report r in reports)
+                    {
+                        r.Deleted = true;
+                        context.Reports.Update(r);
+                    }
                     context.Entry<House>(updatedHouse).State = EntityState.Detached;
                     context.Houses.Update(updatedHouse);
                     context.SaveChanges();
