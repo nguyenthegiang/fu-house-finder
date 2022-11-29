@@ -29,6 +29,8 @@ export class StaffHouseDetailComponent implements OnInit {
   //{Search} input value
   searchValue: string | undefined;
 
+  checkBreadcumb: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private roomService: RoomService,
@@ -45,6 +47,16 @@ export class StaffHouseDetailComponent implements OnInit {
       this.houseDetail = data;
     });
     this.getListRoom();
+
+    if(localStorage.getItem('token') == 'true')
+    {
+      this.checkBreadcumb = true;
+    }
+
+    if(localStorage.getItem('token') == 'false')
+    {
+      this.checkBreadcumb = false;
+    }
   }
 
   getListRoom() {

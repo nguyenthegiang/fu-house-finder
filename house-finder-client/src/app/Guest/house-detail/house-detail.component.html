@@ -6,8 +6,16 @@
   </div>
 </div>
 
+<nav class="mx-1 mx-md-5 mt-3 ps-3 fs-6" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a class="text-danger" onclick="history.back()" style="cursor: pointer;">Trang chủ</a></li>
+    <li class="breadcrumb-item" aria-current="page">></li>
+    <li class="breadcrumb-item active" aria-current="page">Chi tiết nhà trọ</li>
+  </ol>
+</nav>
+
 <!-- Only Display when House Detail is loaded -->
-<div class="mx-1 mx-md-5 my-5 d-flex justify-content-center" *ngIf="houseDetail && landlordDetail">
+<div class="mx-1 mx-md-5 mb-5 mt-3 d-flex justify-content-center" *ngIf="houseDetail && landlordDetail">
   <div class="row w-100 d-flex justify-content-evenly">
     <div class="col-12 col-md-7">
       <!-- House images -->
@@ -69,7 +77,7 @@
       </div>
     </div>
 
-    <div class="col-12 col-md-4">
+    <div class="col-12 col-md-5">
       <!-- Landlord information -->
       <div class="landlordInformation border border-secondary rounded p-2">
         <h3 class="text-center">Thông tin chủ trọ</h3>

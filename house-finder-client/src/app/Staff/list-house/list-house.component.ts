@@ -38,4 +38,9 @@ export class ListHouseComponent implements OnInit {
 
   search(searchValue: string)
   {}
+
+  changeBreadcumbStatus()
+  {
+    localStorage.setItem('token','false');
+  }
 }
