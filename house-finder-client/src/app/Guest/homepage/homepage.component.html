@@ -2,7 +2,7 @@
 <app-header></app-header>
 
 <!-- Body -->
-<div class="bg-light px-2 pt-4">
+<div class="bg-light px-2 pt-5">
   <!-- Content -->
   <div class="row d-flex justify-content-evenly">
     <!-- Offcanvas: For Filter column in Responsive -->
@@ -446,7 +446,7 @@
 
         <!-- Search bar -->
         <div class="col-5">
-          <div class="input-group">
+          <div class="input-group w-100">
             <!-- Press enter to search  -->
             <input type="text" class="form-control" placeholder="Nhập tên trọ" aria-label="search_house_by_name"
               aria-describedby="button-addon2" #searchHouseName
@@ -475,10 +475,11 @@
       <!-- End Rooms Count Available -->
 
       <!-- Statistics -->
-      <div class="row border shadow-sm my-3 p-2 bg-body rounded mx-1">
+      <div class="d-flex justify-content-between border shadow-sm my-3 p-2 bg-body rounded">
+        <div class="row w-100">
           <!-- House available count -->
           <div class="col-12 col-md-4">
-            <div class="border d-flex flex-column justify-content-center align-items-center">
+            <div class="border-end d-flex flex-column justify-content-center align-items-center pe-4">
               <div class="fs-4 d-flex align-items-center text-danger">
                 <span class="material-symbols-outlined fs-3 me-1">
                   home
@@ -493,7 +494,7 @@
 
           <!-- Room available count -->
           <div class="col-12 col-md-4">
-            <div class="border d-flex flex-column justify-content-center align-items-center">
+            <div class="border-end d-flex flex-column justify-content-center align-items-center pe-4">
               <div class="fs-4 d-flex align-items-center text-danger">
                 <span class="material-symbols-outlined me-1">
                   door_back
@@ -508,7 +509,7 @@
 
           <!-- Capacity available count -->
           <div class="col-12 col-md-4">
-            <div class="border d-flex flex-column justify-content-center align-items-center">
+            <div class="d-flex flex-column justify-content-center align-items-center pe-4">
               <div class="fs-4 d-flex align-items-center text-danger">
                 <span class="material-symbols-outlined me-1">
                   bed
@@ -520,6 +521,7 @@
               <h6 class="font-weight-bold text-center">Chỗ trống</h6>
             </div>
           </div>
+        </div>
       </div>
       <!-- End Statistics -->
 
