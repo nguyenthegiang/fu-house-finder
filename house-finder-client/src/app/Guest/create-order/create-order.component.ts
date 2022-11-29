@@ -45,12 +45,6 @@ export class CreateOrderComponent implements OnInit {
       );
     }
   }
-
-  //Alert when create order failed
-  alertUserNotLoggedIn() {
-    alert("Vui lòng đăng nhập để xử dụng tính năng này!");
-  }
-
   goBack(): void {
     window.location.reload();
   }
