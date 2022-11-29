@@ -90,6 +90,6 @@ export class StaffLandlordDetailComponent implements OnInit {
 
   changeBreadcumbStatus()
   {
-    localStorage.setItem('token','true');
+    localStorage.setItem('breadcumb','true');
   }
 }

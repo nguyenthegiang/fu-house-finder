@@ -48,12 +48,12 @@ export class StaffHouseDetailComponent implements OnInit {
     });
     this.getListRoom();
 
-    if(localStorage.getItem('token') == 'true')
+    if(localStorage.getItem('breadcumb') == 'true')
     {
       this.checkBreadcumb = true;
     }
 
-    if(localStorage.getItem('token') == 'false')
+    if(localStorage.getItem('breadcumb') == 'false')
     {
       this.checkBreadcumb = false;
     }
