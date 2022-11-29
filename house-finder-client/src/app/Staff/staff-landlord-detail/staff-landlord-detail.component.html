@@ -112,7 +112,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let dataItem of houses; let i=index;" (click)="viewRoom(dataItem.houseId)" style="cursor: pointer;">
+            <tr *ngFor="let dataItem of houses; let i=index;" (click)="viewRoom(dataItem.houseId); changeBreadcumbStatus()" style="cursor: pointer;">
               <td id="md"><b>{{i+1}}</b></td>
 
               <!-- House id -->

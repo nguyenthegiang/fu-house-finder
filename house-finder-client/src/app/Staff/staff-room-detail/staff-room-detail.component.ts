@@ -20,6 +20,8 @@ export class StaffRoomDetailComponent implements OnInit {
   //Landlord of this house
   landlordDetail: User | undefined;
 
+  checkBreadcumb: boolean = false;
+
   constructor(private route: ActivatedRoute,
     private houseService: HouseService,
     private roomService: RoomService,
@@ -43,5 +45,15 @@ export class StaffRoomDetailComponent implements OnInit {
         });
       });
     });
+
+    if(localStorage.getItem('token') == 'true')
+    {
+      this.checkBreadcumb = true;
+    }
+
+    if(localStorage.getItem('token') == 'false')
+    {
+      this.checkBreadcumb = false;
+    }
   }
 }

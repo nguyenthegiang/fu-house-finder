@@ -1,5 +1,16 @@
 <app-header></app-header>
-<div class="mx-1 mx-md-5 mb-5 mt-4 d-flex justify-content-center" *ngIf="roomDetail && landlordDetail">
+
+<nav class="mx-1 mx-md-5 mt-3 ps-3 fs-6" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a class="text-danger" onclick="history.back(); history.back()" style="cursor: pointer;">Trang chủ</a></li>
+    <li class="breadcrumb-item" aria-current="page">></li>
+    <li class="breadcrumb-item"><a class="text-danger" onclick="history.back()" style="cursor: pointer;">Chi tiết nhà trọ</a></li>
+    <li class="breadcrumb-item" aria-current="page">></li>
+    <li class="breadcrumb-item active" aria-current="page">Chi tiết phòng trọ</li>
+  </ol>
+</nav>
+
+<div class="mx-1 mx-md-5 mb-5 d-flex justify-content-center" *ngIf="roomDetail && landlordDetail">
   <div class="row w-100 d-flex justify-content-evenly">
     <div class="col-12 col-md-7 mt-4">
       <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
