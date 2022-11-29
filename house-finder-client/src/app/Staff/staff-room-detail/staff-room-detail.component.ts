@@ -46,12 +46,12 @@ export class StaffRoomDetailComponent implements OnInit {
       });
     });
 
-    if(localStorage.getItem('breadcumb') == 'true')
+    if(localStorage.getItem('breadcrumb') == 'true')
     {
       this.checkBreadcumb = true;
     }
 
-    if(localStorage.getItem('breadcumb') == 'false')
+    if(localStorage.getItem('breadcrumb') == 'false')
     {
       this.checkBreadcumb = false;
     }

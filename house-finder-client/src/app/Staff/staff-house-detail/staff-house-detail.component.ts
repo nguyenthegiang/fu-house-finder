@@ -29,7 +29,7 @@ export class StaffHouseDetailComponent implements OnInit {
   //{Search} input value
   searchValue: string | undefined;
 
-  checkBreadcumb: boolean = false;
+  checkBreadcrumb: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -48,14 +48,14 @@ export class StaffHouseDetailComponent implements OnInit {
     });
     this.getListRoom();
 
-    if(localStorage.getItem('breadcumb') == 'true')
+    if(localStorage.getItem('breadcrumb') == 'true')
     {
-      this.checkBreadcumb = true;
+      this.checkBreadcrumb = true;
     }
 
-    if(localStorage.getItem('breadcumb') == 'false')
+    if(localStorage.getItem('breadcrumb') == 'false')
     {
-      this.checkBreadcumb = false;
+      this.checkBreadcrumb = false;
     }
   }
 

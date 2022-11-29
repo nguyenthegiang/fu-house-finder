@@ -88,8 +88,8 @@ export class StaffLandlordDetailComponent implements OnInit {
   search(searchValue: string)
   {}
 
-  changeBreadcumbStatus()
+  changeBreadcrumbStatus()
   {
-    localStorage.setItem('breadcumb','true');
+    localStorage.setItem('breadcrumb','true');
   }
 }
