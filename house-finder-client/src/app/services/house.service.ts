@@ -22,8 +22,10 @@ export class HouseService {
 
   constructor(private http: HttpClient) { }
 
-  //Unused
-  //Get List of all Houses
+  /**
+   * [Staff - List Houses]
+   * Get List of all Houses
+   * */
   getAllHouses(): Observable<House[]> {
     return this.http.get<House[]>(this.APIUrl);
   }
@@ -321,7 +323,7 @@ export class HouseService {
 
   /**
    * Get total of available houses
-   * [Staff][Dashboard] 
+   * [Staff][Dashboard]
    * [Home Page]
    */
   countTotalAvailableHouse(): Observable<any> {

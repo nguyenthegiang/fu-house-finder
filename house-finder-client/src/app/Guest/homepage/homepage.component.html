@@ -326,10 +326,60 @@
       </div>
       <!-- End Statistics -->
 
+      <!-- Placeholder: Display when List House is Loading -->
+      <div class="row" *ngIf="!houses">
+        <div class="col-12 col-md-6 col-xl-4" *ngFor="let placeholderItem of placeHolderItemCount">
+          <div class="card rounded placeHolderHouseCardItem">
+            <img class="card-img-top" id="houseItemImage" src="../assets/image/HouseItem_Image_PlaceHolder.png"
+              alt="House Image">
+
+            <div class="card-body rounded-bottom ">
+              <h5 class="card-title text-center font-weight-bold placeholder-glow">
+                <span class="placeholder col-6"></span>
+              </h5>
+
+              <div class="card-text text-truncate maxWidthText orangeText fs-5 placeholder-glow">
+                <span class="placeholder col-4"></span>
+              </div>
+
+              <div class="card-text grayText placeholder-glow">
+                <span class="placeholder col-7"></span>
+              </div>
+
+              <div class="card-text text-truncate maxWidthText grayText placeholder-glow">
+                <span class="placeholder col-12"></span>
+              </div>
+
+              <div class="card-text grayText placeholder-glow">
+                <span class="placeholder col-2"></span>
+                <span>&nbsp;</span>
+                <span class="placeholder col-2"></span>
+              </div>
+
+              <div class="card-text text-truncate maxWidthText grayText placeholder-glow">
+                <span class="placeholder col-3"></span>
+              </div>
+
+              <div class="card-text placeholder-glow">
+                <span class="placeholder col-5"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Notification: No House Found -->
+      <div class="row" *ngIf="houses && houses.length <= 0">
+        <h3 class="text-center">
+          <i class="fa-regular fa-face-frown"></i>
+          Rất tiếc, chúng tôi không tìm thấy nhà trọ bạn mong muốn 
+        </h3>
+      </div>
+
       <!-- List of Houses -->
-      <div class="row">
+      <div class="row" *ngIf="houses && houses.length > 0">
         <!---------------- House Item ---------------->
-        <div class="col-4" *ngFor="let house of houses">
+        <div class="col-12 col-md-6 col-xl-4" *ngFor="let house of houses">
           <!-- Item onClick: to House Detail -->
           <div class="card rounded houseCardItem" routerLink="/house-detail/{{house.houseId}}">
 
@@ -506,8 +556,7 @@
 
   <!-- Create Order -->
   <div class=" bottom-0 end-0 me-5">
-    <button type="button"
-      class="btn btn-primary fw-semibold position-fixed bottom-0 end-0 me-5 createOrderButton"
+    <button type="button" class="btn btn-primary fw-semibold position-fixed bottom-0 end-0 me-5 createOrderButton"
       data-bs-toggle="modal" data-bs-target="#orderModal" data-bs-whatever="@getbootstrap">
       <i class="fa-solid fa-pen-to-square"></i>
       Đăng ký yêu cầu phòng trọ

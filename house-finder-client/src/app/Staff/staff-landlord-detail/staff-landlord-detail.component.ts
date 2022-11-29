@@ -87,4 +87,9 @@ export class StaffLandlordDetailComponent implements OnInit {
 
   search(searchValue: string)
   {}
+
+  changeBreadcumbStatus()
+  {
+    localStorage.setItem('token','true');
+  }
 }
