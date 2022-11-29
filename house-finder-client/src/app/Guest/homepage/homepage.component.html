@@ -3,9 +3,226 @@
 
 <!-- Body -->
 <div class="container-fluid backgroundGray">
+  <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasFilterColumn" aria-controls="offcanvasFilterColumn">
+    Button with data-bs-target
+  </button>
   <br>
   <!-- Content -->
   <div class="d-flex justify-content-between">
+    
+    <!-- Offcanvas: For Filter column in Responsive -->
+    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasFilterColumn" aria-labelledby="offcanvasFilterColumnLabel">
+      <!-- Offcanvas Header -->
+      <div class="offcanvas-header text-white orangeBackround">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">LỌC KẾT QUẢ</h5>
+        <a href="/home" class="text-white">Đặt lại bộ lọc</a>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+
+      <!-- Offcanvas Body -->
+      <div class="offcanvas-body">
+        <div class="bg-white">
+          <div class="container">
+            <div class="d-flex justify-content-between align-items-center pt-3">
+              <!-- Campus -->
+              <h6 class="font-weight-bold">Cơ sở</h6>
+              <div>
+                <!-- When select 1 Campus -> change list of District accordingly -->
+                <select #selectCampus class="form-select" aria-label="select-campus"
+                  (change)="onCampusSelected(selectCampus.value)">
+                  <option class="disableOption" disabled selected>Chọn cơ sở</option>
+                  <!-- List of Campuses to choose -->
+                  <option *ngFor=" let campus of campuses" value="{{campus.campusId}}">
+                    {{campus.campusName}}</option>
+                </select>
+              </div>
+            </div>
+    
+            <!-- Regions -->
+            <div>
+              <h6 class="font-weight-bold mb-2">Khu vực:</h6>
+    
+              <!-- District -->
+              <div class="d-flex justify-content-between align-items-center my-2">
+                <div class="me-2">Huyện/Quận</div>
+                <div>
+                  <!-- When select 1 District -> change list of Communes accordingly -->
+                  <select #selectDistrict class="form-select selectRegion" aria-label="select-district"
+                    (change)="onDistrictSelected(selectDistrict.value)" (click)="onDistrictClicked()">
+                    <option class="disableOption" disabled selected>Chọn quận/huyện</option>
+                    <!-- List all Districts of selected Campus-->
+                    <option *ngFor=" let district of districtsOfSelectedCampus" value="{{district.districtId}}">
+                      {{district.districtName}}</option>
+                  </select>
+                </div>
+              </div>
+    
+              <!-- Commune -->
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <div class="me-2">Phường/Xã</div>
+                <div>
+                  <!-- When select 1 Communes -> change list of Villages accordingly -->
+                  <select #selectCommune class="form-select selectRegion" aria-label="select-commune"
+                    (change)="onCommuneSelected(selectCommune.value)">
+                    <option class="disableOption" disabled selected>Chọn phường/xã</option>
+                    <!-- List all Communes of selected District -->
+                    <option *ngFor="let commune of communesOfSelectedDistrict" value="{{commune.communeId}}">
+                      {{commune.communeName}}</option>
+                  </select>
+                </div>
+              </div>
+    
+              <!-- Village -->
+              <div class="d-flex justify-content-between align-items-center">
+                <div class="me-2">Thôn/Xóm</div>
+                <div>
+                  <!-- When select 1 Village -> call API -->
+                  <select #selectVillage class="form-select selectRegion" aria-label="select-village"
+                    (change)="onVillageSelected(selectVillage.value)">
+                    <option class="disableOption" disabled selected>Chọn thôn/xóm</option>
+                    <!-- List all Villages of selected Commune -->
+                    <option *ngFor="let village of villagesOfSelectedCommune" value="{{village.villageId}}">
+                      {{village.villageName}}</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <hr>
+    
+            <!-- Distance to university -->
+            <div>
+              <h6 class="font-weight-bold mb-2">Khoảng cách đến trường:
+                <span class="badge bg-secondary text-white">km</span>&nbsp;
+                <span class="badge bg-secondary text-white"><i class="fa-solid fa-motorcycle"></i></span>
+              </h6>
+              <!-- select max - min number -->
+              <div style="display: flex;">
+                <input #minDistance type="number" style="width: 50%;" min="0">
+                &nbsp;-&nbsp;
+                <input #maxDistance type="number" style="width: 50%;" min="0">
+              </div>
+              <!-- submit button -->
+              <div class="pt-2">
+                <button type="button" class="btn btn-outline-secondary btn-sm"
+                  (click)="onDistanceSelected(minDistance.value, maxDistance.value)">Áp dụng</button>
+              </div>
+            </div>
+            <hr>
+    
+            <!-- Price -->
+            <div>
+              <div>
+                <h6 class="font-weight-bold mb-2">Giá tiền: <span class="badge bg-secondary text-white">VND/Tháng</span>
+                </h6>
+                <!-- select max - min number -->
+                <div style="display: flex;">
+                  <input #minPrice type="number" style="width: 50%;" min="0">
+                  &nbsp;-&nbsp;
+                  <input #maxPrice type="number" style="width: 50%;" min="0">
+                </div>
+                <!-- submit button -->
+                <div class="pt-2">
+                  <button type="button" class="btn btn-outline-secondary btn-sm"
+                    (click)="onPriceSelected(minPrice.value, maxPrice.value)">Áp dụng</button>
+                </div>
+              </div>
+            </div>
+            <hr>
+    
+            <!-- Room Types -->
+            <div>
+              <h6 class="font-weight-bold mb-2">Loại phòng:</h6>
+              <div>
+                <div class="form-check" *ngFor="let roomType of roomTypes">
+                  <!-- Select room type -->
+                  <input class="form-check-input" type="checkbox" value="{{roomType.roomTypeId}}"
+                    id="{{roomType.roomTypeName}}" (change)="onRoomTypeSelected($event, roomType.roomTypeId)">
+                  <label class="form-check-label" for="{{roomType.roomTypeName}}">
+                    {{roomType.roomTypeName}}
+                  </label>
+                </div>
+              </div>
+            </div>
+            <hr>
+    
+            <!-- Other utilities -->
+            <div>
+              <h6 class="font-weight-bold mb-2">Tiện ích khác:</h6>
+    
+              <!-- House Utility -->
+              <div class="form-check" *ngFor="let houseUtility of houseUtilities" id="listHouseUtility">
+                <!-- Select utility -->
+                <input class="form-check-input" type="checkbox" value="{{houseUtility.utilityName}}"
+                  id="{{houseUtility.utilityName}}" (change)="onHouseUtilitySelected($event, houseUtility.utilityName)">
+                <label class="form-check-label" for="{{houseUtility.utilityName}}">
+                  {{houseUtility.displayName}}
+                </label>
+              </div>
+              <br>
+    
+              <!-- Room Utility -->
+              <div class="form-check" *ngFor="let roomUtility of roomUtilities" id="listRoomUtility">
+                <!-- Select utility -->
+                <input class="form-check-input" type="checkbox" value="{{roomUtility.utilityName}}"
+                  id="{{roomUtility.utilityName}}" (change)="onRoomUtilitySelected($event, roomUtility.utilityName)">
+                <label class="form-check-label" for="{{roomUtility.utilityName}}">
+                  {{roomUtility.displayName}}
+                </label>
+              </div>
+            </div>
+            <hr>
+    
+            <!-- Filter by Rates -->
+            <div>
+              <h6 class="font-weight-bold mb-2">Đánh giá:</h6>
+    
+              <!-- Select Rate (can only select 1) -->
+              <div class="form-check rateForm">
+                <input class="form-check-input" type="radio" name="filterRate" id="5star" (click)="onRateSelected(5)">
+                <label class="form-check-label" for="5star">
+                  <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i>
+                </label>
+              </div>
+    
+              <div class="form-check rateForm">
+                <input class="form-check-input" type="radio" name="filterRate" id="4star" (click)="onRateSelected(4)">
+                <label class="form-check-label" for="4star">
+                  <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i> trở lên
+                </label>
+              </div>
+    
+              <div class="form-check rateForm">
+                <input class="form-check-input" type="radio" name="filterRate" id="3star" (click)="onRateSelected(3)">
+                <label class="form-check-label" for="3star">
+                  <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i>
+                  <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i> trở lên
+                </label>
+              </div>
+    
+              <div class="form-check rateForm">
+                <input class="form-check-input" type="radio" name="filterRate" id="2star" (click)="onRateSelected(2)">
+                <label class="form-check-label" for="2star">
+                  <i class="fa-solid fa-star"></i> <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i>
+                  <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i> trở lên
+                </label>
+              </div>
+    
+              <div class="form-check rateForm">
+                <input class="form-check-input" type="radio" name="filterRate" id="1star" (click)="onRateSelected(1)">
+                <label class="form-check-label" for="1star">
+                  <i class="fa-solid fa-star"></i> <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i>
+                  <i class="fa-regular fa-star"></i> <i class="fa-regular fa-star"></i> trở lên
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Offcanvas -->
+
     <!-- Filter Column -->
     <div class="w-25 bg-white mx-5 rounded h-100">
       <div class="d-flex justify-content-between align-items-center p-3 rounded-top text-white orangeBackround">
@@ -123,25 +340,6 @@
           </div>
         </div>
         <hr>
-
-        <!-- <div>
-            <div class=" ranges-container">
-                <div class="range d-flex justify-content-between align-items-center">
-                  <input type="range" min="0" max="20000000" label="Min" value="0" class="w-75">
-                  <span>
-                    <span class="text-mute">Min: </span>
-                    <span>0</span>
-                  </span>
-                </div>
-                <div class="range d-flex justify-content-between align-items-center">
-                  <input type="range" min="0" max="20000000" label="Max" value="20000000" class="w-75">
-                  <span>
-                    <span class="text-mute">Max: </span>
-                    <span>20</span>
-                  </span>
-                </div>
-            </div>
-          </div> -->
 
         <!-- Room Types -->
         <div>
