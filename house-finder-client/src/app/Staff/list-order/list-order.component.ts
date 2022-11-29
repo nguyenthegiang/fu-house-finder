@@ -70,6 +70,12 @@ export class ListOrderComponent implements OnInit {
 
     let currentDate = this.datePipe.transform((new Date), 'yyyy-MM-dd') + "";
 
+    let yesterday = new Date()
+    yesterday.setDate(yesterday.getDate() - 1)
+    console.log("Date: " + yesterday);
+    let previousDate = yesterday.getFullYear() + "-" + (yesterday.getMonth() + 1) + "-" + yesterday.getDate();
+    console.log("Date: " + previousDate);
+
     this.orderService.countOrderSolvedByStaffInADay(currentDate).subscribe((data) =>{
       this.totalofSolvedOrderInDay = data;
     })

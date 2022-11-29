@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { Report } from 'src/app/models/report';
 import { ReportHouse } from 'src/app/models/reportHouse';
 import { StaffReport } from 'src/app/models/staffReport';
@@ -48,6 +48,8 @@ export class ListReportComponent implements OnInit {
   housePageCount = 0; // number of pages
   housePageList: number[] = [];
 
+  @ViewChild('searchReportContent') searchReportContent: any;
+
   constructor(
     private reportService: ReportService,
     private houseService: HouseService,
@@ -61,7 +63,6 @@ export class ListReportComponent implements OnInit {
     // (Paging for Reports) Count available Houses for total number of pages
     this.reportService.countTotalReport().subscribe((data) => {
       this.totalReport = data;
-      console.log(data);
 
       // (Paging) Calculate number of pages
       this.reportPageCount = Math.ceil(this.totalReport / this.reportPageSize); //divide & round up
@@ -137,7 +138,6 @@ export class ListReportComponent implements OnInit {
     if (!searchReportContent.trim()) {
       return;
     }
-
     // Call API (filter by name contains)
     this.searchName = searchReportContent;
     this.filterReport(true);
@@ -193,5 +193,11 @@ export class ListReportComponent implements OnInit {
         this.houses = data;
         this.scrollToTop();
       });
+  }
+
+  handleClear(){
+    this.searchReportContent.nativeElement.value = ' ';
+    this.searchName = undefined;
+    this.filterReport(true);
   }
 }
