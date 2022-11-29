@@ -153,3 +153,13 @@
   background-color: #ee4d2d;
   color: white;
 }
+
+/*************Responsive*************/
+
+//Filter column: Only appear in big screen
+@media only screen and (max-width: 768px) {
+  #filterColumn
+  {
+    display: none;
+  }
+}
