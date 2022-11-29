@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { CreateOrder } from 'src/app/models/createOrder';
 import { OrderService } from 'src/app/services/order.service';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 @Component({
   selector: 'app-create-order',
   templateUrl: './create-order.component.html',
@@ -15,6 +16,7 @@ export class CreateOrderComponent implements OnInit {
     orderContent: '',
     statusId: 1
   }
+  @ViewChild('orderSuccessAlert') private orderSuccessAlert: SwalComponent | undefined;
   constructor(
     private orderService: OrderService
   ) { }
@@ -34,9 +36,11 @@ export class CreateOrderComponent implements OnInit {
         data => {
           if (data.status == 403) {
             this.alertUserNotLoggedIn();
+          } else if (data.status == 200) {
+            this.orderSuccessAlert?.fire();
           }
         },
-        error => {}
+        error => { }
       );
     }
   }

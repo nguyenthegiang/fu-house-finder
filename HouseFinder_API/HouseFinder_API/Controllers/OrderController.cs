@@ -120,7 +120,7 @@ namespace HouseFinder_API.Controllers
                 //Add to DB
                 orderRepository.AddOrder(order);
 
-                return Ok();
+                return Ok(new { Status = 200 });
             }
             catch (Exception e)
             {
