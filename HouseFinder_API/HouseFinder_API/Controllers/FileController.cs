@@ -38,7 +38,7 @@ namespace HouseFinder_API.Controllers
             Environment = _environment;
             this.storageRepository = storageRepository;
         }
-        
+
         [HttpGet("download")]
         public IActionResult DownloadFile()
         {
@@ -155,7 +155,7 @@ namespace HouseFinder_API.Controllers
             roomsRepository.CreateRooms(roomList);
             return house;
         }
-        
+
         //[Authorize]
         [HttpPost("room/image")]
         public async Task<IActionResult> UploadRoomImage(IFormFile File, [ModelBinder(typeof(JsonModelBinder))] RoomImageInfoDTO Room)
@@ -221,7 +221,7 @@ namespace HouseFinder_API.Controllers
             var backImg = "";
 
             //Upload identity card images (front & back) to Server
-            for (int i=0; i<2; i++)
+            for (int i = 0; i < 2; i++)
             {
                 //Path to file in Server
                 var path = $"{dir}/{files[i].FileName}";
