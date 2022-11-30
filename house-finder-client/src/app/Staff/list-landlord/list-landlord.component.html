@@ -17,12 +17,32 @@
             <div class="text-center my-4">
               <div class="input-group">
                 <!-- Press enter to search  -->
-                <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm"
-                  aria-label="search_house_by_name" aria-describedby="button-addon2" #searchValue
-                  (keydown.enter)="search(searchValue.value)">
+                <input
+                  type="text"
+                  class="form-control border border-end-0"
+                  placeholder="Nhập từ khóa tìm kiếm"
+                  aria-label="search_house_by_name"
+                  aria-describedby="button-addon2"
+                  #searchValue
+                  (keydown.enter)="search(searchValue.value)"
+                />
+                <!-- Click button to clear search -->
+                <button
+                  *ngIf="searchName"
+                  class="clearSearchBtn"
+                  type="button"
+                  (click)="handleClear()"
+                  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Xóa"
+                >
+                  <span class="material-symbols-outlined"> close </span>
+                </button>
                 <!-- Click button to search -->
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2"
-                  (click)="search(searchValue.value)">
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  id="button-addon2"
+                  (click)="search(searchValue.value)"
+                >
                   <i class="fa-solid fa-magnifying-glass"></i>
                 </button>
               </div>
@@ -40,42 +60,61 @@
               <th scope="col" id="md">Số Điện Thoại</th>
               <th scope="col" id="md">
                 <div class="row">
-                  <div class="col">
-                    Tổng nhà
-                  </div>
-                  <div class="col">
-                    Tổng phòng
-                  </div>
-                  <div class="col">
-                    Phòng trống
-                  </div>
+                  <div class="col">Tổng nhà</div>
+                  <div class="col">Tổng phòng</div>
+                  <div class="col">Phòng trống</div>
                 </div>
               </th>
               <th scope="col">Hành động</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let dataItem of landlords; let i=index;" (click)="viewHouse(dataItem.userId)" style="cursor: pointer;">
-              <td id="md"><b>{{i+1}}</b></td>
-              <td>{{dataItem.userId}}</td>
-              <td>{{dataItem.displayName}}</td>
-              <td id="md">{{dataItem.phoneNumber}}</td>
+            <tr
+              *ngFor="let dataItem of landlords; let i = index"
+              (click)="viewHouse(dataItem.userId)"
+              style="cursor: pointer"
+            >
+              <td id="md">
+                <b>{{ i + 1 }}</b>
+              </td>
+              <td>{{ dataItem.userId }}</td>
+              <td>{{ dataItem.displayName }}</td>
+              <td id="md">{{ dataItem.phoneNumber }}</td>
               <!-- <td>{{dataItem.address.addresses}}</td> -->
 
               <!-- Statistics -->
               <td id="md">
-                <app-landlord-detail-info [landlordId]="dataItem.userId"></app-landlord-detail-info>
+                <app-landlord-detail-info
+                  [landlordId]="dataItem.userId"
+                ></app-landlord-detail-info>
               </td>
 
               <!-- Room status -->
               <td class="d-flex">
-                <a target="_blank" class="text-decoration-none me-3" data-bs-toggle="tooltip" data-bs-placement="top" title="Fcebook chủ trọ" href="{{dataItem.facebookUrl}}">
+                <a
+                  target="_blank"
+                  class="text-decoration-none me-3"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  title="Fcebook chủ trọ"
+                  href="{{ dataItem.facebookUrl }}"
+                >
                   <i class="fa-brands fa-facebook fs-4"></i>
                 </a>
 
                 <div class="form-check form-switch">
-                  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-                  <label id="md" class="form-check-label" for="flexSwitchCheckChecked">Hoạt động</label>
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    id="flexSwitchCheckChecked"
+                    checked
+                  />
+                  <label
+                    id="md"
+                    class="form-check-label"
+                    for="flexSwitchCheckChecked"
+                    >Hoạt động</label
+                  >
                 </div>
               </td>
             </tr>
