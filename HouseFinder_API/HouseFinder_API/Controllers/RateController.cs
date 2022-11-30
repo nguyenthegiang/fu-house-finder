@@ -16,7 +16,10 @@ namespace HouseFinder_API.Controllers
     {
         private IRateRepository rateRepository = new RateRepository();
 
-        //POST: api/Rate
+        /**
+         * POST: api/Rate
+         * [House Detail] Student gives rate & comments
+         */
         [HttpPost]
         public IActionResult CreateRate(int houseId, int star, string comment)
         {

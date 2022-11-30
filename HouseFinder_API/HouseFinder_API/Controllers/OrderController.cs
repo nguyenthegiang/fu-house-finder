@@ -47,19 +47,25 @@ namespace HouseFinder_API.Controllers
             return Ok(totals);
         }
 
-        //Update reservation
+        /**
+         * [Staff/list-order] Change order status of 1 Order
+         */
         [Authorize]
         [HttpPut("{orderId}/{statusId}")]
-        public IActionResult UpdateReservation(int orderId, int statusId)
+        public IActionResult UpdateOrderStatus(int orderId, int statusId)
         {
             try
             {
+                //Get user id from Session as Staff that makes this update
                 string uid = HttpContext.Session.GetString("User");
                 if (uid == null)
                 {
                     return Forbid();
                 }
+
+                //Update to Database
                 orderRepository.UpdateOrderStatus(orderId, statusId, uid);
+
                 return Ok();
             }
             catch (Exception e)
