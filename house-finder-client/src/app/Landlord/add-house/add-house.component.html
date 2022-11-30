@@ -86,19 +86,19 @@
     <div class="col-12 col-md-5">
       <div class="mb-3">
         <label for="exampleInput5" class="form-label"><b>Ảnh nhà (1)</b></label>
-        <input type="file" class="form-control" id="exampleInput5" accept="image/*" required>
+        <input type="file" class="form-control" id="exampleInput5" accept="image/*" (change)="loadImage($event,1)" required>
         <div class="invalid-feedback mb-3 d-block" *ngIf="!houseImg1">Không được để trống</div>
       </div>
 
       <div class="mb-3">
         <label for="exampleInput6" class="form-label"><b>Ảnh nhà (2)</b></label>
-        <input type="file" class="form-control" id="exampleInput6" accept="image/*" required>
+        <input type="file" class="form-control" id="exampleInput6" accept="image/*" (change)="loadImage($event,2)" required>
         <div class="invalid-feedback mb-3 d-block" *ngIf="!houseImg2">Không được để trống</div>
       </div>
 
       <div class="mb-3">
         <label for="exampleInput7" class="form-label"><b>Ảnh nhà (3)</b></label>
-        <input type="file" class="form-control" id="exampleInput7" accept="image/*" required>
+        <input type="file" class="form-control" id="exampleInput7" accept="image/*" (change)="loadImage($event,3)" required>
         <div class="invalid-feedback mb-3 d-block" *ngIf="!houseImg3">Không được để trống</div>
       </div>
 

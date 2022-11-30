@@ -28,6 +28,7 @@ namespace HouseFinder_API.Controllers
         private IRoomRepository roomsRepository = new RoomRepository();
         private IUserReposiotry userReposiotry = new UserRepository();
         private IRoomImageRepository roomImageRepository = new RoomImageRepository();
+        private IHouseImageRepository houseImageRepository = new HouseImageRepository();
 
         //Used for Upload file to Amazon S3 Server
         private readonly IStorageRepository storageRepository;
@@ -141,8 +142,6 @@ namespace HouseFinder_API.Controllers
         [HttpPost("room/image")]
         public async Task<IActionResult> UploadRoomImage(IFormFile File, [ModelBinder(typeof(JsonModelBinder))] RoomImageInfoDTO Room)
         {
-            Console.WriteLine(File.FileName);
-            Console.WriteLine(Room.RoomName);
             string uid = HttpContext.Session.GetString("User");
             RoomDTO roomDTO = roomsRepository.GetRoomByHouseIdAndBuildingAndFloorAndRoomName(
                 Room.HouseId,
@@ -225,10 +224,28 @@ namespace HouseFinder_API.Controllers
 
             return Ok();
         }
-    }
-    public class FileUpload
-    {
-        public IFormFile File { get; set; }
-        public String Room { get; set; }
+
+        [Authorize]
+        [HttpPost("house/image/{HouseId:int}")]
+        public async Task<IActionResult> UploadHouseImage(List<IFormFile> files, [FromRoute] int HouseId)
+        {
+            string uid = HttpContext.Session.GetString("User");
+            if (String.IsNullOrWhiteSpace(uid))
+            {
+                return Forbid();
+            }
+            string dir = $"user/{uid}/House/{HouseId}";
+            foreach (var file in files)
+            {
+                var path = $"{dir}/{file.FileName}";
+                Stream fs = file.OpenReadStream();
+                // await storageRepository.UploadFileAsync(path, fs);
+                ImagesOfHouseDTO img = new ImagesOfHouseDTO();
+                img.HouseId = HouseId;
+                img.ImageLink = path;
+                houseImageRepository.CreateHouseImage(img, uid);
+            }
+            return Ok();
+        }
     }
 }

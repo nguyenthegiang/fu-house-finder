@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
+import { FileService } from 'src/app/services/file.service';
 import { HouseService } from 'src/app/services/house.service';
 declare const google: any;  //For Google Map
 
@@ -31,6 +32,9 @@ export class AddHouseComponent implements OnInit {
   houseImg1 = true;
   houseImg2 = true;
   houseImg3 = true;
+  img1: File | any;
+  img2: File | any;
+  img3: File | any;
 
   houseForm = this.formBuilder.group({
     houseName: ['', Validators.required],
@@ -46,12 +50,15 @@ export class AddHouseComponent implements OnInit {
     parking: [false, ],
     address: ['', Validators.required],
     googleAddress: ['-25.363,105.527064', Validators.required],
-    houseImg1: [undefined, Validators.required],
-    houseImg2: [undefined, Validators.required],
-    houseImg3: [undefined, Validators.required],
+    houseImg1: [, Validators.required],
+    houseImg2: [, Validators.required],
+    houseImg3: [, Validators.required],
   }); 
 
-  constructor(private formBuilder: FormBuilder, private houseService: HouseService) { }
+  constructor(
+    private formBuilder: FormBuilder, 
+    private houseService: HouseService,
+    private fileService: FileService) { }
 
   ngOnInit(): void {
     this.initMap();
@@ -155,9 +162,9 @@ export class AddHouseComponent implements OnInit {
     else {
       this.houseImg3 = true;
     }
-    if (!(this.houseName || this.information || this.campus || this.district || this.commune || this.village
-      || this.powerPrice || this.waterPrice || this.address || this.googleAddress || this.houseImg1
-      || this.houseImg2 || this.houseImg3)){
+    if (!(this.houseName && this.information && this.campus && this.district && this.commune && this.village
+      && this.powerPrice && this.waterPrice && this.address && this.googleAddress && this.houseImg1
+      && this.houseImg2 && this.houseImg3)){
         return;
       }
 
@@ -189,6 +196,7 @@ export class AddHouseComponent implements OnInit {
       this.houseForm.controls['camera'].value,
       this.houseForm.controls['parking'].value,
     ).subscribe(resp => {
+      this.fileService.uploadHouseImageFile(this.img1, this.img2, this.img3, resp.houseId)
       this.addRoom?.fire();
     },
     error => {
@@ -203,5 +211,18 @@ export class AddHouseComponent implements OnInit {
   logout()
   {
     window.location.href = "/login";
+  }
+  loadImage(event: any, index: number){
+    if (event.target.files && event.target.files[0]) {
+      if (index == 1){
+        this.img1 = event.target.files[0];
+      }
+      else if (index == 2){
+        this.img2 = event.target.files[0];
+      }
+      else if (index == 3){
+        this.img3 = event.target.files[0];
+      }
+    }
   }
 }
