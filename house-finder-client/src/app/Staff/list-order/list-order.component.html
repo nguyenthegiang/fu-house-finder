@@ -1,22 +1,22 @@
 <app-staff-header></app-staff-header>
 
-<div class="container-fluid m-0 backgroundGray">
+<div class="container-fluid m-0 bg-light">
   <div class="row px-3 pt-3">
     <div class="col-8">
-      <div class="p-4 backgroundWhite" style="height: 100%">
+      <div class="row d-flex align-items-end p-4 backgroundWhite" style="height: 100%">
         <h6>Bạn đã giải quyết tổng số:</h6>
         <span>{{ totalOfSolvedOrder }} đơn</span>
         <div class="row">
           <div class="col-3">
             <div class="justify-content-center align-items-center year">
               <h6>Tổng số đơn trong năm</h6>
-              <span>{{ totalOfSolvedOrder }}</span>
+              <span>{{ totalofSolvedOrderInCurrentYear }}</span>
             </div>
           </div>
           <div class="col-3">
             <div class="justify-content-center align-items-center month">
               <h6>Tổng số đơn trong tháng</h6>
-              <span>{{ totalOfSolvedOrder }}</span>
+              <span>{{ totalofSolvedOrderInMonth }}</span>
             </div>
           </div>
           <div class="col-3">
@@ -29,6 +29,10 @@
             <div class="justify-content-center align-items-center day">
               <h6>Tổng số đơn trong ngày</h6>
               <span>{{ totalofSolvedOrderInDay }}</span>
+              <!-- <span class="material-symbols-outlined">
+                trending_up
+              </span>
+              <span>15%</span> -->
             </div>
           </div>
         </div>
@@ -37,11 +41,11 @@
 
     <div class="col-4">
       <div class="p-4 backgroundWhite position-relative">
-        <select class="btn position-absolute top-0 end-0" type="button">
+        <!-- <select class="btn position-absolute top-0 end-0" type="button">
           <option>This week</option>
           <option>This month</option>
           <option>This year</option>
-        </select>
+        </select> -->
         <canvas id="solvedOrderChart"></canvas>
       </div>
     </div>

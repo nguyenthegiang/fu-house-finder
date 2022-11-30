@@ -49,11 +49,15 @@ export class ListOrderComponent implements OnInit {
 
   //Bar chart
   totalofSolvedOrderInYear: number[] | undefined;
-  totalofSolvedOrderInDay: number | undefined;
+  totalofSolvedOrderInDay: number = 0;
+  totalofSolvedOrderInMonth: number = 0;
+  totalofSolvedOrderInCurrentYear: number = 0;
 
   //Statistic
   //Get current year
   currentYear: number = new Date().getFullYear();
+  //Get current month
+  currentMonth: number = new Date().getMonth();
 
   constructor(
     private orderService: OrderService,
@@ -70,11 +74,9 @@ export class ListOrderComponent implements OnInit {
 
     let currentDate = this.datePipe.transform((new Date), 'yyyy-MM-dd') + "";
 
-    let yesterday = new Date()
-    yesterday.setDate(yesterday.getDate() - 1)
-    console.log("Date: " + yesterday);
-    let previousDate = yesterday.getFullYear() + "-" + (yesterday.getMonth() + 1) + "-" + yesterday.getDate();
-    console.log("Date: " + previousDate);
+    //let yesterday = new Date()
+    // yesterday.setDate(yesterday.getDate() - 1)
+    // let previousDate = yesterday.getFullYear() + "-" + (yesterday.getMonth() + 1) + "-" + yesterday.getDate();
 
     this.orderService.countOrderSolvedByStaffInADay(currentDate).subscribe((data) =>{
       this.totalofSolvedOrderInDay = data;
@@ -106,6 +108,18 @@ export class ListOrderComponent implements OnInit {
     //Call API: create a bar chart show number of solved orders by this staff in a year
     this.orderService.countSolvedOrderByStaffInAYear().subscribe((data) =>{
       this.totalofSolvedOrderInYear = data;
+
+      //
+      this.totalofSolvedOrderInMonth = this.totalofSolvedOrderInYear[this.currentMonth];
+
+      //
+      var num = 0;
+      this.totalofSolvedOrderInYear.forEach(function(value){
+        console.log(value);
+        num += value;
+      })
+      this.totalofSolvedOrderInCurrentYear = num;
+
       //Create order chart
       var solvedOrderChart = new Chart('solvedOrderChart', {
         type: 'bar',
@@ -144,7 +158,7 @@ export class ListOrderComponent implements OnInit {
             title: {
               display: true,
               text:
-                'Thống kê số lượng đăng ký đã giải quyết năm ' + this.currentYear,
+                'Thống kê số lượng đăng ký bạn đã giải quyết trong năm ' + this.currentYear,
             },
           },
         },

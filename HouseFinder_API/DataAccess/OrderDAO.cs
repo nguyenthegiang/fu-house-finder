@@ -209,15 +209,20 @@ namespace DataAccess
                         throw new Exception();
                     }
                     //Check status id
-                    if(statusId == 3) //Add solved date and solved by for order if status change to solved
-                    {
-                        updateOrder.SolvedDate = DateTime.Today;
-                        updateOrder.SolvedBy = account;
-                    }
-                    else if(statusId == 1 || statusId == 2)
+                    if(statusId == 1)
                     {
                         updateOrder.SolvedDate = null;
                         updateOrder.SolvedBy = null;
+                    }
+                    else if(statusId == 2)
+                    {
+                        updateOrder.SolvedDate = null;
+                        updateOrder.SolvedBy = account;
+                    }
+                    else if (statusId == 3) //Add solved date and solved by for order if status change to solved
+                    {
+                        updateOrder.SolvedDate = DateTime.Today;
+                        updateOrder.SolvedBy = account;
                     }
                     //Update order's status
                     updateOrder.StatusId = statusId;
