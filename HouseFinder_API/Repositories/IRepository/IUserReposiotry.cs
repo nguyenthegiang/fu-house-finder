@@ -18,5 +18,6 @@ namespace Repositories.IRepository
         public void UpdateUserIdCardImage(UserDTO user);
         public int CountActiveLandlord();
         public int CountInactiveLandlord();
+        public List<UserDTO> GetLandlordSignupRequest();
     }
 }
