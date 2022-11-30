@@ -200,4 +200,8 @@ export class AddHouseComponent implements OnInit {
 
   }
 
+  logout()
+  {
+    window.location.href = "/login";
+  }
 }

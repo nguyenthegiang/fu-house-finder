@@ -47,6 +47,7 @@ import { DashboardInfoComponent } from './Landlord/dashboard/dashboard-info/dash
 import { ListHouseInfoComponent } from './Staff/list-house/list-house-info/list-house-info.component';
 import { CreateOrderComponent } from './Guest/create-order/create-order.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { LandlordHeaderComponent } from './Common/landlord-header/landlord-header.component';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
     DashboardInfoComponent,
     ListHouseInfoComponent,
     CreateOrderComponent,
+    LandlordHeaderComponent,
   ],
   imports: [
     BrowserModule,

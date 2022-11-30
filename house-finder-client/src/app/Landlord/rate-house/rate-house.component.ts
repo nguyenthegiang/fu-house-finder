@@ -12,4 +12,9 @@ export class RateHouseComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  logout()
+  {
+    window.location.href = "/login";
+  }
 }

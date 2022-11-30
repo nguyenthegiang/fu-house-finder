@@ -191,4 +191,9 @@ export class UpdateHouseComponent implements OnInit
   {
     window.location.reload();
   }
+
+  logout()
+  {
+    window.location.href = "/login";
+  }
 }
