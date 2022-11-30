@@ -103,4 +103,8 @@ export class UserService {
   countInactiveLandlords():Observable<number>{
     return this.http.get<number>(this.APIUrl + "/CountInactiveLandlord");
   }
+
+  getLandlordSignUpRequest():Observable<User[]>{
+    return this.http.get<User[]>(this.APIUrl + "/LandlordSignupRequest");
+  }
 }
