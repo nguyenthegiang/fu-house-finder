@@ -12,4 +12,8 @@ export class AddHouseComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  logout()
+  {
+    window.location.href = "/login";
+  }
 }
