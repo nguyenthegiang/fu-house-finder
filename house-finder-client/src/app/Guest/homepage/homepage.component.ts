@@ -27,6 +27,9 @@ export class HomepageComponent implements OnInit {
   countAvailableRooms: number = 0;
   countAvailableCapacity: number = 0;
 
+  //to display in count
+  countFilterHouses: number = 0;
+
   //(Paging)
   countAvailableHouses = 0; //items count
   pageSize = 9;             //number of items per page
@@ -147,6 +150,7 @@ export class HomepageComponent implements OnInit {
   filterHouse(resetPaging: boolean) {
     //Before calling API: reset list house to change screen to loading
     this.houses = undefined;
+    this.countFilterHouses = 0;
 
     //if user filter -> reset Paging (back to page 1)
     if (resetPaging) {
@@ -195,6 +199,9 @@ export class HomepageComponent implements OnInit {
       this.selectedRate,
       this.selectedOrderValue,
     ).subscribe(data => {
+      //Store list house count
+      this.countFilterHouses = data.length;
+
       // (Paging) Calculate number of pages
       this.pageCount = Math.ceil(data.length / this.pageSize);  //divide & round up
 
