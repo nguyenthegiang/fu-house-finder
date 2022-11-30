@@ -44,8 +44,7 @@ namespace DataAccess.DTO
         public string Information { get; set; }
         public string Address { get; set; }
         public string GoogleAddress { get; set; }
-        public int? VillageId { get; set; }
-        [JsonIgnore]
+        public int VillageId { get; set; }
         public string LandlordId { get; set; }
         public int CampusId { get; set; }
         public double DistanceToCampus { get; set; }

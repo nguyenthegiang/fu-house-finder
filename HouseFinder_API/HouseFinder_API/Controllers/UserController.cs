@@ -113,7 +113,7 @@ namespace HouseFinder_API.Controllers
         [HttpGet("test")]
         public IActionResult TestAuthorize()
         {
-            return Ok();
+            return Ok(new { UID = HttpContext.Session.GetString("User") });
         }
 
         [HttpGet("generate_password")]

@@ -18,7 +18,7 @@ namespace Repositories.Repositories
             AddressDTO address = AddressDAO.CreateAddress(house.Address, house.GoogleAddress);
             HouseDTO houseDTO = HouseDAO.CreateHouse(house.HouseName, house.Information, address.AddressId, (int)house.VillageId,
                 house.LandlordId, (int)house.CampusId, house.PowerPrice, house.WaterPrice, (bool)house.FingerprintLock, 
-                (bool)house.Camera, (bool)house.Parking);
+                (bool)house.Camera, (bool)house.Parking, house.DistanceToCampus);
             return houseDTO;
         }
         //public List<HouseDTO> GetAllHouses() => HouseDAO.GetAllHouses();

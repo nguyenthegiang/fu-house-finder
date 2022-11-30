@@ -23,6 +23,8 @@ namespace DataAccess
                     Address address = new Address();
                     address.Addresses = _address;
                     address.GoogleMapLocation = googleAddress;
+                    address.CreatedDate = DateTime.UtcNow;
+                    address.LastModifiedDate = DateTime.UtcNow;
                     context.Addresses.Add(address);
                     context.SaveChanges();
                     return mapper.Map<AddressDTO>(address);

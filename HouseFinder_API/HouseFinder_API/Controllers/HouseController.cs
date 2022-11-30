@@ -75,12 +75,16 @@ namespace HouseFinder_API.Controllers
             try
             {
                 house.LandlordId = HttpContext.Session.GetString("User");
+                if (String.IsNullOrWhiteSpace(house.LandlordId))
+                {
+                    return Forbid();
+                }
                 HouseDTO houseDTO = houseRepository.CreateHouse(house);
                 return Ok(houseDTO);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return BadRequest();
+                return BadRequest(e.Message);
             }
         }
 

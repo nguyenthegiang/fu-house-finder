@@ -381,7 +381,7 @@ export class HouseService {
     distanceToCampus: number,
     powerPrice: number,
     waterPrice: number,
-    fingerprintlock: boolean,
+    fingerprintLock: boolean,
     camera: boolean,
     parking: boolean
   ): Observable<any>{
@@ -395,7 +395,7 @@ export class HouseService {
       distanceToCampus: distanceToCampus,
       powerPrice: powerPrice,
       waterPrice: waterPrice,
-      fingerprintlock: fingerprintlock,
+      fingerprintLock: fingerprintLock,
       camera: camera,
       parking: parking},
       {withCredentials: true}
