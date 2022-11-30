@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { HouseService } from 'src/app/services/house.service';
 import { RoomService } from 'src/app/services/room.service';
 
@@ -17,7 +18,8 @@ export class StaffHeaderComponent implements OnInit
   availableCapacity: number = 0;
 
   constructor(private houseService: HouseService,
-    private roomService: RoomService)
+    private roomService: RoomService,
+    private router: Router)
   { }
 
   ngOnInit(): void
@@ -55,5 +57,35 @@ export class StaffHeaderComponent implements OnInit
 
   login(){
     window.location.href = "/login";
+  }
+
+  isDashboardRoute()
+  {
+    return this.router.url === "/Staff/dashboard";
+  }
+
+  isListLandlordRoute()
+  {
+    return this.router.url === "/Staff/list-landlord";
+  }
+
+  isListHouseRoute()
+  {
+    return this.router.url === "/Staff/list-house";
+  }
+
+  isListReportRoute()
+  {
+    return this.router.url === "/Staff/list-report";
+  }
+
+  isListRequestRoute()
+  {
+    return this.router.url === "/Staff/list-landlord-signup-request";
+  }
+
+  isListOrderRoute()
+  {
+    return this.router.url === "/Staff/list-order";
   }
 }
