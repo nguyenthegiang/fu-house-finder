@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { HouseService } from 'src/app/services/house.service';
 declare const google: any;  //For Google Map
 
@@ -8,7 +9,9 @@ declare const google: any;  //For Google Map
   templateUrl: './add-house.component.html',
   styleUrls: ['./add-house.component.scss']
 })
-export class AddHouseComponent implements OnInit {
+export class AddHouseComponent implements OnInit {  
+  @ViewChild('serverErrorAlert') private serverErrorAlert: SwalComponent | undefined;
+  @ViewChild('addRoom') private addRoom: SwalComponent | undefined;
   map: any;
   marker: any;
   distanceService: any;
@@ -186,10 +189,15 @@ export class AddHouseComponent implements OnInit {
       this.houseForm.controls['camera'].value,
       this.houseForm.controls['parking'].value,
     ).subscribe(resp => {
-      console.log(resp);
+      this.addRoom?.fire();
+    },
+    error => {
+      this.serverErrorAlert?.fire();
     });
   }
 
+  navAddRoom(){
 
+  }
 
 }

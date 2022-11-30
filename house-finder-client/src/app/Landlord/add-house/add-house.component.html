@@ -126,3 +126,21 @@
     </div>
   </form>
 </div>
+<swal
+  #serverErrorAlert
+  [toast]="true"
+  position="top-end"
+  [timer]="3000"
+  [timerProgressBar]="true"
+  title="Lỗi Server"
+  icon="error">
+</swal>
+<swal
+  #addRoom
+  title="Thêm phòng"
+  text="Bạn có muốn thêm phòng cho nhà trọ?"
+  icon="question"
+  [showCancelButton]="true"
+  [focusCancel]="true"
+  (confirm)="navAddRoom()">
+</swal>
