@@ -98,7 +98,7 @@ namespace HouseFinder_API.Controllers
          * [Home Page] Create Order
          */
         [HttpPost]
-        public IActionResult CreeateOrder(Order order)
+        public IActionResult CreateOrder(Order order)
         {
             try
             {
