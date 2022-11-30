@@ -14,7 +14,7 @@ export class LandlordHeaderComponent implements OnInit {
 
   backHome() {
     //use reload() so that when user is already in home -> they will get a reload of page
-    window.location.href = "/dashboard";
+    window.location.href = "/Landlord/dashboard";
   }
 
   logout(){

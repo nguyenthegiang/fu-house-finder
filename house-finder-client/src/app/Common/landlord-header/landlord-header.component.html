@@ -1,13 +1,28 @@
 <!--Header-->
-<div>
-  <div class="navbar nav d-flex justify-content-between text-white orangeBackround">
-    <div class="d-flex justify-content-center align-items-center" id="btn">
-      <a href="/Landlord/dashboard" class="text-white text-decoration-none mx-2">Dashboard</a>
-    </div>
+<div class="navbar nav d-flex justify-content-between text-center text-white orangeBackround">
+  <div class="logo col-12 col-md-2 my-2">
+    <!-- Link back to Home -->
+    <a (click)="backHome()" id="app-name" style="cursor: pointer;">
+      <img src="/assets/image/Logo.png" alt="..." width="70px">
+      <h6>FU House Finder</h6>
+    </a>
+  </div>
 
-    <div class="d-flex justify-content-center align-items-center" id="btn">
-      <div>Chủ trọ</div>
-      <button class="btn btn-light mx-3" id="loginButton" (click)="logout()">Đăng xuất</button>
+  <div class="col-12 col-md-8 my-2">
+    <h1>TÌM TRỌ SINH VIÊN FPT</h1>
+    <div>
+      <a href="/Landlord/dashboard" class="text-white text-decoration-none mx-2" id="link">Trang chủ</a>|
+      <a href="https://daihoc.fpt.edu.vn/tuyen-sinh/" target="_blank" class="text-white text-decoration-none mx-2"
+        id="link">Tuyển sinh</a>|
+      <a href="https://daihoc.fpt.edu.vn/lien-he-voi-chung-toi/" target="_blank"
+        class="text-white text-decoration-none mx-2" id="link">Liên hệ</a>|
+      <a href="https://daihoc.fpt.edu.vn/gioi-thieu-dai-hoc-fpt/" target="_blank"
+        class="text-white text-decoration-none mx-2" id="link">Giới thiệu</a>
     </div>
+  </div>
+
+  <div class="col-12 col-md-2 d-flex justify-content-center align-items-center" id="btn">
+    <div>Chủ trọ</div>
+    <button class="btn btn-light mx-3" id="loginButton" (click)="logout()">Đăng xuất</button>
   </div>
 </div>
