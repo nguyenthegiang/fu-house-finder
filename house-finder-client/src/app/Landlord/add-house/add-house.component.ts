@@ -196,8 +196,10 @@ export class AddHouseComponent implements OnInit {
       this.houseForm.controls['camera'].value,
       this.houseForm.controls['parking'].value,
     ).subscribe(resp => {
-      this.fileService.uploadHouseImageFile(this.img1, this.img2, this.img3, resp.houseId)
-      this.addRoom?.fire();
+      this.fileService.uploadHouseImageFile(this.img1, this.img2, this.img3, resp.houseId).subscribe(
+        resp => this.addRoom?.fire(),
+        err => this.serverErrorAlert?.fire()
+      )
     },
     error => {
       this.serverErrorAlert?.fire();
