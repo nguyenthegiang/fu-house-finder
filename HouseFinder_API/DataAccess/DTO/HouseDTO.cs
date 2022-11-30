@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace DataAccess.DTO
@@ -35,5 +36,23 @@ namespace DataAccess.DTO
 
         //List Images of this House
         public virtual ICollection<ImagesOfHouseDTO> ImagesOfHouses { get; set; }
+    }
+
+    public class CreateHouseDTO
+    {
+        public string HouseName { get; set; }
+        public string Information { get; set; }
+        public string Address { get; set; }
+        public string GoogleAddress { get; set; }
+        public int? VillageId { get; set; }
+        [JsonIgnore]
+        public string LandlordId { get; set; }
+        public int CampusId { get; set; }
+        public double DistanceToCampus { get; set; }
+        public decimal PowerPrice { get; set; }
+        public decimal WaterPrice { get; set; }
+        public bool FingerprintLock { get; set; }
+        public bool Camera { get; set; }
+        public bool Parking { get; set; }
     }
 }

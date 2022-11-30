@@ -5,7 +5,6 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { StringMap } from '@angular/compiler/src/compiler_facade_interface';
 //environment variable for API URL
 import { environment } from 'src/environments/environment';
 import { ReportHouse } from '../models/reportHouse';
@@ -370,5 +369,36 @@ export class HouseService {
     }
     console.log(filterAPIUrl);
     return this.http.get<ReportHouse[]>(filterAPIUrl);
+  }
+
+  createHouse(
+    houseName: string,
+    information: string,
+    address: string,
+    googleAddress: string,
+    villageId: number,
+    campusId: number,
+    distanceToCampus: number,
+    powerPrice: number,
+    waterPrice: number,
+    fingerprintlock: boolean,
+    camera: boolean,
+    parking: boolean
+  ): Observable<any>{
+    return this.http.post<any>(this.APIUrl, 
+      {houseName: houseName,
+      information: information,
+      address: address,
+      googleAddress: googleAddress,
+      villageId: villageId,
+      campusId: campusId,
+      distanceToCampus: distanceToCampus,
+      powerPrice: powerPrice,
+      waterPrice: waterPrice,
+      fingerprintlock: fingerprintlock,
+      camera: camera,
+      parking: parking},
+      {withCredentials: true}
+    );
   }
 }

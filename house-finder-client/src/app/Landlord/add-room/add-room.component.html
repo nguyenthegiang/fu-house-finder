@@ -1,21 +1,84 @@
 <div class="ms-5 me-5 mt-2">
     <div class="row">
-        <ul class="nav nav-tabs" role="tablist">
-            <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="single-tab" data-bs-toggle="tab" data-bs-target="#single" type="button" role="tab" aria-controls="single" aria-selected="true" style="font-size: 20px;" (click)="updateForm('single')">Thêm 1 phòng</button>
-            </li>
-            <li class="nav-item" role="presentation">
-                <button class="nav-link" id="multiple-tab" data-bs-toggle="tab" data-bs-target="#multiple" type="button" role="tab" aria-controls="multiple" aria-selected="false" style="font-size: 20px;" (click)="updateForm('multiple')">Thêm nhiều phòng</button>
-            </li>
-        </ul>
-        <div class="tab-content" id="myTabContent" style="height: 550px;">
-            <div class="tab-pane fade show active" id="single" role="tabpanel" aria-labelledby="single-tab">
-                <app-single></app-single>
+        <form class="row col-12" [formGroup]="houseForm" (ngSubmit)="submitHouse()">
+            <div class="col-12">
+                <label for="house_name">Tên Nhà Trọ</label>
+                <input class="form-control mb-2" style="width: 200px; height: 50px;" id="house_name">
             </div>
-            <div class="tab-pane fade" id="multiple" role="tabpanel" aria-labelledby="multiple-tab">
-                <app-multiple></app-multiple>
+            <div class="col-6">
+                <label for="village">Phường</label>
+                <select class="form-control mb-2" style="width: 200px; height: 50px;" id="village">
+
+                </select>
+            </div>
+            <div class="col-6">
+                <label for="campus">Campus</label>
+                <select class="form-control mb-2" style="width: 200px; height: 50px;" id="campus">
+                    
+                </select>
+            </div>
+            <div class="col-6">
+                <label for="power_price">Giá điện</label>
+                <input class="form-control mb-2" style="width: 200px; height: 50px;" id="power_price" type="number">
+    
+                <label for="water_price">Giá nước</label>
+                <input class="form-control mb-2" style="width: 200px; height: 50px;" id="water_price" type="number">
+    
+            </div>
+            <div class="col-6 d-flex align-items-center">
+                <label for="fingerprint">Khóa vân tay</label>
+                <input style="width: 50px; height: 20px; display: inline;" id="fingerprint" type="checkbox">
+
+                <label for="camera">Camera</label>
+                <input style="width: 50px; height: 20px; display: inline;" id="camera" type="checkbox">
+
+                <label for="parking">Nơi đậu xe</label>
+                <input style="width: 50px; height: 20px; display: inline;" id="parking" type="checkbox">
+            </div>
+            
+            <div class="col-6 d-flex flex-column justify-content-center">
+                <label for="information" style="display: block;">Thông tin Nhà Trọ</label>
+                <textarea rows="" cols="" class="form-control mb-2 h-100" type="text" id="information">
+                </textarea>
+            </div>
+
+            <div class="col-6 d-flex flex-column justify-content-center">
+                <div>
+                    <label for="address">Địa chỉ</label>
+                    <input class="form-control mb-2" style="height: 50px;"  id="address">
+                </div>
+                <div>
+                    <div>Địa điểm Google Maps</div>
+                    <input class="form-control mb-2 d-none" id="google_address" value="-25.363,105.527064" readonly>
+                    <div id="google-map" style="height: 250px; background-color:aqua;">
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 d-flex justify-content-center">
+                <button class="form-control" type="submit" style="width: 100px;height: 50px;">Lưu</button>
+            </div>
+        </form>
+        <!--
+            
+        <div class="col-6">
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="single-tab" data-bs-toggle="tab" data-bs-target="#single" type="button" role="tab" aria-controls="single" aria-selected="true" style="font-size: 20px;" (click)="updateForm('single')">Thêm 1 phòng</button>
+                </li>
+                <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="multiple-tab" data-bs-toggle="tab" data-bs-target="#multiple" type="button" role="tab" aria-controls="multiple" aria-selected="false" style="font-size: 20px;" (click)="updateForm('multiple')">Thêm nhiều phòng</button>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent" style="height: 550px;">
+                <div class="tab-pane fade show active" id="single" role="tabpanel" aria-labelledby="single-tab">
+                    <app-single></app-single>
+                </div>
+                <div class="tab-pane fade" id="multiple" role="tabpanel" aria-labelledby="multiple-tab">
+                    <app-multiple></app-multiple>
+                </div>
             </div>
         </div>
+        -->
     </div>
     <div class="row d-flex justify-content-end p-5">
         <button class="border-0 m-3 form-control" style="height: 50px; width: 300px; background-color: #BCBAB5;" (click)="submitForm()">
