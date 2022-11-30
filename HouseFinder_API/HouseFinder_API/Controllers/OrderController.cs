@@ -33,18 +33,18 @@ namespace HouseFinder_API.Controllers
         }
 
         //GET: api/Order/GetTotalOrderByMonth
-        [HttpGet("GetTotalOrderByMonth")]
-        public int[] GetTotalOrderByMonth()
+        [HttpGet("CountTotalOrderOrderedInMonth")]
+        public IActionResult CountTotalOrderOrderedInMonth()
         {
-            int[] totals = orderRepository.GetTotalOrderByMonth();
-            return totals;
+            int[] totals = orderRepository.CountTotalOrderOrderedInMonth();
+            return Ok(totals);
         }
         //GET: api/Order/GetSolvedOrderByMonth
-        [HttpGet("GetSolvedOrderByMonth")]
-        public int[] GetSolvedOrderByMonth()
+        [HttpGet("CountTotalOrderSolvedInMonth")]
+        public IActionResult CountTotalOrderSolvedInMonth()
         {
-            int[] totals = orderRepository.GetSolvedlOrderByMonth();
-            return totals;
+            int[] totals = orderRepository.CountTotalOrderSolvedInMonth();
+            return Ok(totals);
         }
 
         //Update reservation
@@ -128,5 +128,29 @@ namespace HouseFinder_API.Controllers
             }
         }
 
+        [HttpGet("CountTotalOrderByMonth")]
+        public IActionResult CountTotalOrderByMonth()
+        {
+            int[] totals = orderRepository.CountTotalOrderByMonth();
+            return Ok(totals);
+        }
+
+        [HttpGet("CountSolvedOrderByMonth")]
+        public IActionResult CountSolvedOrderByMonth()
+        {
+            int[] totals = orderRepository.CountSolvedOrderByMonth();
+            return Ok(totals);
+        }
+
+        [HttpGet("CountOrderSolvedByStaffInADay")]
+        public IActionResult CountOrderSolvedByStaffInADay(DateTime date)
+        {
+            string uid = HttpContext.Session.GetString("User");
+            if (uid == null)
+            {
+                return Forbid();
+            }
+            return Ok(orderRepository.CountOrderSolvedByStaffInADay(date, uid));
+        }
     }
 }
