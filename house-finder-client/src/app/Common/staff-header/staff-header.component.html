@@ -4,12 +4,23 @@
 
   <div class="col-12 col-md-9">
     <div id="link">
-      <a href="/Staff/dashboard" class="text-white text-decoration-none mx-2">Dashboard</a>
-      <a href="/Staff/list-landlord" class="text-white text-decoration-none mx-2">Danh sách chủ trọ</a>
-      <a href="/Staff/list-house" class="text-white text-decoration-none mx-2">Danh sách nhà trọ</a>
-      <a href="/Staff/list-report" class="text-white text-decoration-none mx-2">Báo cáo</a>
-      <a href="/Staff/list-landlord-signup-request" class="text-white text-decoration-none mx-2">Chủ trọ đăng ký</a>
-      <a href="/Staff/list-order" class="text-white text-decoration-none mx-2">Nguyện vọng</a>
+      <a *ngIf="!isDashboardRoute()" href="/Staff/dashboard" class="text-white text-decoration-none mx-2">Dashboard</a>
+      <a *ngIf="isDashboardRoute()" href="/Staff/dashboard" class="text-white text-decoration-underline mx-2">Dashboard</a>
+
+      <a *ngIf="!isListLandlordRoute()" href="/Staff/list-landlord" class="text-white text-decoration-none mx-2">Danh sách chủ trọ</a>
+      <a *ngIf="isListLandlordRoute()" href="/Staff/list-landlord" class="text-white text-decoration-underline mx-2">Danh sách chủ trọ</a>
+
+      <a *ngIf="!isListHouseRoute()" href="/Staff/list-house" class="text-white text-decoration-none mx-2">Danh sách nhà trọ</a>
+      <a *ngIf="isListHouseRoute()" href="/Staff/list-house" class="text-white text-decoration-underline mx-2">Danh sách nhà trọ</a>
+
+      <a *ngIf="!isListReportRoute()" href="/Staff/list-report" class="text-white text-decoration-none mx-2">Báo cáo</a>
+      <a *ngIf="isListReportRoute()" href="/Staff/list-report" class="text-white text-decoration-underline mx-2">Báo cáo</a>
+
+      <a *ngIf="!isListRequestRoute()" href="/Staff/list-landlord-signup-request" class="text-white text-decoration-none mx-2">Chủ trọ đăng ký</a>
+      <a *ngIf="isListRequestRoute()" href="/Staff/list-landlord-signup-request" class="text-white text-decoration-underline mx-2">Chủ trọ đăng ký</a>
+
+      <a *ngIf="!isListOrderRoute()" href="/Staff/list-order" class="text-white text-decoration-none mx-2">Nguyện vọng</a>
+      <a *ngIf="isListOrderRoute()" href="/Staff/list-order" class="text-white text-decoration-underline mx-2">Nguyện vọng</a>
     </div>
   </div>
 

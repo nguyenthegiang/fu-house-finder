@@ -525,6 +525,13 @@
       </div>
       <!-- End Statistics -->
 
+      <!-- List House Count -->
+      <div class="d-flex justify-content-end">
+        <div>
+          Tìm thấy {{countFilterHouses}} nhà trọ
+        </div>
+      </div>
+
       <!-- Placeholder: Display when List House is Loading -->
       <div class="row" *ngIf="!houses">
         <div class="col-12 col-md-6 col-xl-4" *ngFor="let placeholderItem of placeHolderItemCount">
