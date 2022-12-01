@@ -1,23 +1,64 @@
 <div class="container">
-    <div class="row m-0 p-0">
-        <button class="border-0 m-3 form-control" style="height: 50px; width: 300px; background-color: #BCBAB5;" (click)="downloadTemplate()">
-            <span class="me-3"><i class="fa-solid fa-download"></i></span> Download Template
-        </button>
-        <button class="border-0 m-3 p-0 form-control" style="height: 50px; width: 300px; background-color: #BCBAB5;">
-            <label for="room-data-file" style="height: 40px; width: 290px; background-color: #BCBAB5; margin: auto; text-align: center; display: flex; align-items: center; justify-content: center;">
-                <span class="me-3"><i class="fa-solid fa-upload"></i></span> Upload Template
-            </label>
-        </button>
-        <button class="border-0 m-3 p-0 form-control" style="height: 50px; width: 300px; background-color: #BCBAB5;">
-            <label for="room-images" style="height: 40px; width: 290px; background-color: #BCBAB5; margin: auto; text-align: center; display: flex; align-items: center; justify-content: center;">
-                <span class="me-3"><i class="fa-solid fa-upload"></i></span> Upload Image
-            </label>
-        </button>
-        <input type="file" id="room-data-file" class="d-none" accept=".xlsx" (change)="onTemplateChange($event)"/>
-        <input type="file" id="room-images" class="d-none" 
-            accept=".xlsx" (change)="onImagesChange($event)" webkitdirectory directory multiple/>
-        <mat-progress-bar mode="determinate" [value]="matProgressBarValue"></mat-progress-bar>
-        <button class="form-control m-3 p-3" style="width: 200px; height: 50px;" (click)="uploadImageFiles()">Submit Image</button>
+    <div class="row m-0 p-0 d-flex justify-content-center">
+        <div class="col-10">
+            <div class="row m-3 mb-5">
+                <div class="col-6">
+                    <button class="border-0 m-0 form-control" style="height: 50px; width: 300px; background-color: #BCBAB5;" (click)="downloadTemplate()">
+                        <span class="me-3"><i class="fa-solid fa-download"></i></span> Download Template
+                    </button>
+                </div>
+                <div class="col-6 d-flex align-items-end" [ngClass]="{'d-none' : !progressDisplay}">
+                    <mat-progress-bar class="row mt-3" style="height: 10px;" mode="determinate" [value]="matProgressBarValue"></mat-progress-bar>
+                </div>
+            </div>
+            <div class="row m-3">
+                <div class="col-6">
+                    <button class="border-0 m-0 p-0 form-control" style="height: 50px; width: 300px; background-color: #BCBAB5;">
+                        <label for="room-data-file" style="height: 40px; width: 290px; background-color: #BCBAB5; text-align: center; display: flex; align-items: center; justify-content: center;">
+                            <span class="me-3"><i class="fa-solid fa-upload"></i></span> Upload Template
+                        </label>
+                    </button>
+                </div>
+                <input type="file" id="room-data-file" class="d-none" accept=".xlsx" (change)="onTemplateChange($event)"/>
+                <div class="col-6" style="height: 100px; background-color: aqua;" #templateFile></div>
+            </div>
+            <div class="row m-3">
+                <div class="col-6">
+                    <button class="border-0 m-0 p-0 form-control" style="height: 50px; width: 300px; background-color: #BCBAB5;">
+                        <label for="room-images" style="height: 40px; width: 290px; background-color: #BCBAB5; text-align: center; display: flex; align-items: center; justify-content: center;">
+                            <span class="me-3"><i class="fa-solid fa-upload"></i></span> Upload Image
+                        </label>
+                    </button>
+                </div>
+                <div class="col-6">
+                    <div class="row" style="height: 350px; background-color:antiquewhite; overflow-y: auto;" #imageFiles>
+                        <div class="col-5 m-2" style="background-color: aquamarine; height: 40px;"></div>
+                        <div class="col-5 m-2" style="background-color: aquamarine; height: 40px;"></div>
+                        <div class="col-5 m-2" style="background-color: aquamarine; height: 40px;"></div>
+                        <div class="col-5 m-2" style="background-color: aquamarine; height: 40px;"></div>
+                        <div class="col-5 m-2" style="background-color: aquamarine; height: 40px;"></div>
+                        <div class="col-5 m-2" style="background-color: aquamarine; height: 40px;"></div>
+                        <div class="col-5 m-2" style="background-color: aquamarine; height: 40px;"></div>
+                        <div class="col-5 m-2" style="background-color: aquamarine; height: 40px;"></div>
+                        <div class="col-5 m-2" style="background-color: aquamarine; height: 40px;"></div>
+                        <div class="col-5 m-2" style="background-color: aquamarine; height: 40px;"></div>
+                        <div class="col-5 m-2" style="background-color: aquamarine; height: 40px;"></div>
+                        <div class="col-5 m-2" style="background-color: aquamarine; height: 40px;"></div>
+                        <div class="col-5 m-2" style="background-color: aquamarine; height: 40px;"></div>
+                        <div class="col-5 m-2" style="background-color: aquamarine; height: 40px;"></div>
+                        <div class="col-5 m-2" style="background-color: aquamarine; height: 40px;"></div>
+                        <div class="col-5 m-2" style="background-color: aquamarine; height: 40px;"></div>
+                        <div class="col-5 m-2" style="background-color: aquamarine; height: 40px;"></div>
+                        <div class="col-5 m-2" style="background-color: aquamarine; height: 40px;"></div>
+                        <div class="col-5 m-2" style="background-color: aquamarine; height: 40px;"></div>
+                        <div class="col-5 m-2" style="background-color: aquamarine; height: 40px;"></div>
+                        <div class="col-5 m-2" style="background-color: aquamarine; height: 40px;"></div>
+                    </div>
+                </div>
+                <input type="file" id="room-images" class="d-none" 
+                    accept="image/*" (change)="onImagesChange($event)" webkitdirectory/>
+            </div>
+        </div>
     </div>
     <div class="row"></div>
 </div>

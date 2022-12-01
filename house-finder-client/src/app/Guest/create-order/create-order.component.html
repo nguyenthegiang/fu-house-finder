@@ -28,7 +28,7 @@
             <!-- building -->
             <div class="col-12 mt-2">
               <label for="email">Email</label>
-              <input type="text" class="form-control" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" id="email"
+              <input type="text" class="form-control" pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]{2,3}$" id="email"
                 [(ngModel)]="orderDetail.email" name="email" #email="ngModel">
               <span class="help-block text-danger"
                 *ngIf="orderDetail.email !== '' && email.errors?.pattern && email.touched"> Email không
@@ -59,4 +59,7 @@
 </div>
 <swal #orderSuccessAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
   title="Gửi đơn thành công" icon="success">
+</swal>
+<swal #orderErrorAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
+  title="Vui lòng đăng nhập để xử dụng tính năng này!" icon="error">
 </swal>

@@ -12,6 +12,7 @@ using DataAccess.DTO;
 using Microsoft.AspNetCore.OData.Query;
 using DataAccess;
 using System.Net.Http;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HouseFinder_API.Controllers
 {
@@ -64,6 +65,26 @@ namespace HouseFinder_API.Controllers
             catch (Exception)
             {
                 return NotFound();
+            }
+        }
+
+        [Authorize]
+        [HttpPost]
+        public IActionResult CreateHouse(CreateHouseDTO house)
+        {
+            try
+            {
+                house.LandlordId = HttpContext.Session.GetString("User");
+                if (String.IsNullOrWhiteSpace(house.LandlordId))
+                {
+                    return Forbid();
+                }
+                HouseDTO houseDTO = houseRepository.CreateHouse(house);
+                return Ok(houseDTO);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
             }
         }
 

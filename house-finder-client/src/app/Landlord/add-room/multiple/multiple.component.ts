@@ -14,6 +14,7 @@ export class MultipleComponent implements OnInit {
   images: any;
   houseId: number | any;
   matProgressBarValue = 0;
+  progressDisplay = false;
 
   constructor(private fileService: FileService) { }
 
@@ -41,33 +42,41 @@ export class MultipleComponent implements OnInit {
       });
   }
 
-  uploadDataFile(){
-    this.fileService.uploadDataFile(this.file).subscribe((resp)=>{});
+  async uploadDataFile(houseId: number){
+    await this.fileService.uploadDataFile(this.file, houseId).toPromise();
   }
 
-  uploadImageFiles(){
+  uploadImageFiles(houseId: number){
+    this.progressDisplay = true;
     var uploadData: Array<ImagesOfRoomUploadFileData> = [];
     
     for (var i=0; i<this.images.length; i++) {
-      var name = this.images[i].name;
-      var roomName = name.split("-")[0];
-      var building = Number(name.split("-")[1]);
-      var floor = Number(name.split("-")[2]);
-      var imageIndex = Number(name.split("-")[3].split(".")[0]);
-
-      if (isNaN(building) || isNaN(floor) || isNaN(imageIndex)) {
-        console.log("invalid file name");
+      if (!this.images[i].type.includes('image')){
         continue;
       }
-      uploadData.push({
-        image: this.images[i],
-        data: {
-          buildingNumber: building,
-          roomName: roomName,
-          floorNumber: floor,
-          houseId: 1
+      try {
+        var name = this.images[i].name;
+        var roomName = name.split("-")[0];
+        var building = Number(name.split("-")[1]);
+        var floor = Number(name.split("-")[2]);
+        var imageIndex = Number(name.split("-")[3].split(".")[0]);
+
+        if (isNaN(building) || isNaN(floor) || isNaN(imageIndex)) {
+          console.log("invalid file name");
+          continue;
         }
-      });
+        uploadData.push({
+          image: this.images[i],
+          data: {
+            buildingNumber: building,
+            roomName: roomName,
+            floorNumber: floor,
+            houseId: houseId
+          }
+        });
+      } catch (error) {
+        continue;
+      }
     };
 
     var progress = 0;
@@ -75,12 +84,15 @@ export class MultipleComponent implements OnInit {
       this.fileService.uploadRoomImageFile(data.data, data.image).subscribe(resp => {
         progress += 1;
         this.matProgressBarValue = progress / uploadData.length * 100;
+        if (progress == uploadData.length) this.progressDisplay = false;
       },
       err => {
         progress += 1;
         this.matProgressBarValue = progress / uploadData.length * 100;
+        if (progress == uploadData.length) this.progressDisplay = false;
       });
     });
+    if (progress == uploadData.length) this.progressDisplay = false;
   }
 
 }

@@ -39,6 +39,10 @@ export class DashboardStaffComponent implements OnInit {
   //Array of total orders by month
   reportByMonth: number[] | undefined;
 
+  //Burn up chart
+  orderByMonthForBurnUp: number[] | undefined;
+  orderSolvedByMonthForBurnUp: number[] | undefined;
+
   //Get current year
   currentYear: number = new Date().getFullYear();
 
@@ -107,14 +111,41 @@ export class DashboardStaffComponent implements OnInit {
       });
     });
 
-    //Call API: get total of available rooms
-    this.roomService.countAvailableRooms().subscribe((data) => {
-      this.availabelRoomsNum = data;
-    });
-
     //Call API: get number of total rooms
     this.roomService.CountTotalRoom().subscribe((data) => {
       this.totalRooms = data;
+
+      //Call API: get total of available rooms
+      this.roomService.countAvailableRooms().subscribe((data) => {
+        this.availabelRoomsNum = data;
+
+        var roomChart = new Chart('roomChart', {
+          type: 'pie',
+          data: {
+            labels: ['Hết chỗ', 'Còn trống'],
+            datasets: [
+              {
+                data: [
+                  this.totalRooms - this.availabelRoomsNum,
+                  this.availabelRoomsNum,
+                ],
+                backgroundColor: ['#ff9020', '#2fcaca'],
+              },
+            ],
+          },
+          options: {
+            plugins: {
+              title: {
+                display: true,
+                text: 'Thống kê số phòng trọ',
+                font: {
+                  size: 15,
+                },
+              },
+            },
+          },
+        });
+      });
     });
 
     //Call API: get total of available capacity
@@ -130,7 +161,9 @@ export class DashboardStaffComponent implements OnInit {
       this.houseService.countTotalAvailableHouse().subscribe((data) => {
         this.availableHouseNum = data;
 
-        console.log("total: " + this.totalHouses + " avai: " + this.availableHouseNum);
+        console.log(
+          'total: ' + this.totalHouses + ' avai: ' + this.availableHouseNum
+        );
 
         //Create house chart
         var houseChart = new Chart('houseChart', {
@@ -223,32 +256,6 @@ export class DashboardStaffComponent implements OnInit {
           },
         });
 
-        var roomChart = new Chart('roomChart', {
-          type: 'pie',
-          data: {
-            labels: ['Hết chỗ', 'Còn trống'],
-            datasets: [
-              {
-                data: [
-                  this.totalRooms - this.availabelRoomsNum,
-                  this.availabelRoomsNum,
-                ],
-                backgroundColor: ['#ff9020', '#2fcaca'],
-              },
-            ],
-          },
-          options: {
-            plugins: {
-              title: {
-                display: true,
-                text: 'Thống kê số phòng trọ',
-                font: {
-                  size: 15,
-                },
-              },
-            },
-          },
-        });
         //End chart
       });
     });
@@ -358,5 +365,69 @@ export class DashboardStaffComponent implements OnInit {
       this.totalDistrict = data;
       console.log(this.totalDistrict);
     });
+
+    //Call API to creat burn up chart
+    this.orderService.countTotalOrderByMonth().subscribe((data) => {
+      this.orderByMonthForBurnUp = data;
+      console.log(this.orderByMonthForBurnUp);
+
+      this.orderService.countSolvedOrderByMonth().subscribe((data) => {
+        this.orderSolvedByMonthForBurnUp = data;
+        console.log(this.orderSolvedByMonthForBurnUp);
+
+        //Create burn up chart for order
+        var orderBurnUpChart = new Chart('orderBurnUpChart', {
+          type: 'line',
+          data: {
+            labels: [
+              'Tháng 1',
+              'Tháng 2',
+              'Tháng 3',
+              'Tháng 4',
+              'Tháng 5',
+              'Tháng 6',
+              'Tháng 7',
+              'Tháng 8',
+              'Tháng 9',
+              'Tháng 10',
+              'Tháng 11',
+              'Tháng 12',
+            ],
+            datasets: [
+              {
+                label: 'Tổng số đơn đăng ký',
+                data: this.orderByMonthForBurnUp,
+                backgroundColor: ['#ff6384'],
+                borderColor: ['#ff6384'],
+                borderWidth: 1,
+              },
+              {
+                label: 'Tổng số đơn đã giải quyết',
+                data: this.orderSolvedByMonthForBurnUp,
+                backgroundColor: ['#069bff'],
+                borderColor: ['#069bff'],
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            scales: {
+              y: {
+                beginAtZero: true,
+              },
+            },
+            plugins: {
+              title: {
+                display: true,
+                text: 'Thống kê tổng số lượng đơn đăng ký nhà trọ năm ' + this.currentYear,
+                font: {
+                  size: 15,
+                },
+              },
+            },
+          },
+        });
+      })
+    })
   }
 }

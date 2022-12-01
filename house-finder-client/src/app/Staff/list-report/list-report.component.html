@@ -62,13 +62,24 @@
                     <!-- Press enter to search  -->
                     <input
                       type="text"
-                      class="form-control"
+                      class="form-control border border-end-0"
                       placeholder="Nhập nội dung báo cáo tìm kiếm"
                       aria-label="search_house_by_name"
                       aria-describedby="button-addon2"
                       #searchReportContent
-                      (keydown.enter)="searchReportByContent(searchReportContent.value)"
+                      (keydown.enter)="
+                        searchReportByContent(searchReportContent.value)
+                      "
                     />
+                    <!-- Click button to clear search -->
+                    <button
+                      *ngIf="searchName != undefined"
+                      class="clearSearchBtn"
+                      type="button"
+                      (click)="handleClear()" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Xóa"
+                    >
+                      <span class="material-symbols-outlined"> close </span>
+                    </button>
                     <!-- Click button to search -->
                     <button
                       class="btn btn-outline-secondary"
@@ -146,27 +157,38 @@
                   <td>{{ report.student.displayName }}</td>
                   <td>{{ report.house.houseName }}</td>
                   <td>{{ report.reportedDate | date: "dd/MM/yyyy" }}</td>
-                  <td>{{ report.solvedDate| date: "dd/MM/yyyy" }}</td>
-                  <td id="md"><div *ngIf="report.solvedByNavigation">{{ report.solvedByNavigation.displayName }}</div></td>
+                  <td>{{ report.solvedDate | date: "dd/MM/yyyy" }}</td>
+                  <td id="md">
+                    <div *ngIf="report.solvedByNavigation">
+                      {{ report.solvedByNavigation.displayName }}
+                    </div>
+                  </td>
                   <td
-                *ngIf="report.status.statusName === 'Unsolved'"
-                style="color: red"
-              >
-                Chưa giải quyết
-              </td>
-              <td
-                *ngIf="report.status.statusName === 'Processing'"
-                style="color: orange"
-              >
-                Đang giải quyết
-              </td>
-              <td
-                *ngIf="report.status.statusName === 'Solved'"
-                style="color: green"
-              >
-                Đã giải quyết
-              </td>
-                  <td><div class="d-inline-block text-truncate" style="max-width: 350px;">{{ report.reportContent }}</div></td>
+                    *ngIf="report.status.statusName === 'Unsolved'"
+                    style="color: red"
+                  >
+                    Chưa giải quyết
+                  </td>
+                  <td
+                    *ngIf="report.status.statusName === 'Processing'"
+                    style="color: orange"
+                  >
+                    Đang giải quyết
+                  </td>
+                  <td
+                    *ngIf="report.status.statusName === 'Solved'"
+                    style="color: green"
+                  >
+                    Đã giải quyết
+                  </td>
+                  <td>
+                    <div
+                      class="d-inline-block text-truncate"
+                      style="max-width: 350px"
+                    >
+                      {{ report.reportContent }}
+                    </div>
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -244,20 +266,29 @@
                     <!-- Press enter to search  -->
                     <input
                       type="text"
-                      class="form-control"
+                      class="form-control border border-end-0"
                       placeholder="Nhập từ khóa tìm kiếm"
                       aria-label="search_house_by_name"
                       aria-describedby="button-addon2"
                       placeholder="Nhập tên nhà tìm kiếm"
-                      #searchValue
-                      (keydown.enter)="search(searchValue.value)"
+                      #searchHouseName
+                      (keydown.enter)="searchReportedHouse(searchHouseName.value)"
                     />
+                    <!-- Click button to clear search -->
+                    <button
+                      *ngIf="searchHouse != undefined"
+                      class="clearSearchBtn"
+                      type="button"
+                      (click)="handleClearHouse()" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Xóa"
+                    >
+                      <span class="material-symbols-outlined"> close </span>
+                    </button>
                     <!-- Click button to search -->
                     <button
                       class="btn btn-outline-secondary"
                       type="button"
                       id="button-addon2"
-                      (click)="search(searchValue.value)"
+                      (click)="searchReportedHouse(searchHouseName.value)"
                     >
                       <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
@@ -275,8 +306,9 @@
                 <select
                   #selectedActiveStatus
                   class="form-select"
-                  (change)="onActiveStatusSelected(selectedActiveStatus.value)">
-                  <option>Chọn sắp xếp</option>
+                  (change)="onActiveStatusSelected(selectedActiveStatus.value)"
+                >
+                  <option>Tất cả</option>
                   <option value="1">Đang hoạt động</option>
                   <option value="0">Dừng hoạt động</option>
                 </select>
@@ -289,7 +321,7 @@
                   class="form-select"
                   (change)="onHouseOrderBySelected(selectedHouseOrderBy.value)"
                 >
-                  <option>Chọn sắp xếp</option>
+                  <option disabled>Chọn sắp xếp</option>
                   <option value="desc">Báo cáo nhiều nhất</option>
                   <option value="asc">Báo cáo ít nhất</option>
                 </select>
@@ -308,7 +340,13 @@
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let house of houses; let i = index" (click)="changeSelectedHouse(house.houseId)" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#listReportModal">
+                <tr
+                  *ngFor="let house of houses; let i = index"
+                  (click)="changeSelectedHouse(house.houseId)"
+                  style="cursor: pointer"
+                  data-bs-toggle="modal"
+                  data-bs-target="#listReportModal"
+                >
                   <td id="md">
                     <b>{{ (housePageNumber - 1) * housePageSize + i + 1 }}</b>
                   </td>

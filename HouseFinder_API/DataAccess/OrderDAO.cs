@@ -76,7 +76,7 @@ namespace DataAccess
             return total;
         }
 
-        public static int[] GetTotalOrderByMonth()
+        public static int[] CountTotalOrderOrderedInMonth()
         {
             int[] totals = new int[12];
             try
@@ -117,7 +117,7 @@ namespace DataAccess
         }
 
         //Calculate number of solved order by month
-        public static int[] GetSolvedOrderByMonth()
+        public static int[] CountTotalOrderSolvedInMonth()
         {
             int[] totals = new int[12];
             try
@@ -209,15 +209,20 @@ namespace DataAccess
                         throw new Exception();
                     }
                     //Check status id
-                    if(statusId == 3) //Add solved date and solved by for order if status change to solved
-                    {
-                        updateOrder.SolvedDate = DateTime.Today;
-                        updateOrder.SolvedBy = account;
-                    }
-                    else if(statusId == 1 || statusId == 2)
+                    if(statusId == 1)
                     {
                         updateOrder.SolvedDate = null;
                         updateOrder.SolvedBy = null;
+                    }
+                    else if(statusId == 2)
+                    {
+                        updateOrder.SolvedDate = null;
+                        updateOrder.SolvedBy = account;
+                    }
+                    else if (statusId == 3) //Add solved date and solved by for order if status change to solved
+                    {
+                        updateOrder.SolvedDate = DateTime.Today;
+                        updateOrder.SolvedBy = account;
                     }
                     //Update order's status
                     updateOrder.StatusId = statusId;
@@ -283,6 +288,62 @@ namespace DataAccess
             }
             return totals;
         }
+
+        public static int[] CountTotalOrderByMonth()
+        {
+            int[] totals = new int[12];
+            int[] orderEachMonth = CountTotalOrderOrderedInMonth();
+            try
+            {
+                totals[0] = orderEachMonth[0];
+                for (int i = 1; i < totals.Length; i++)
+                {
+                    totals[i] = totals[i - 1] + orderEachMonth[i];
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return totals;
+        }
+
+        public static int[] CountSolvedOrderByMonth()
+        {
+            int[] totals = new int[12];
+            int[] orderEachMonth = CountTotalOrderSolvedInMonth();
+            try
+            {
+                totals[0] = orderEachMonth[0];
+                for (int i = 1; i < totals.Length; i++)
+                {
+                    totals[i] = totals[i - 1] + orderEachMonth[i];
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return totals;
+        }
+
+        public static int CountOrderSolvedByStaffInADay(DateTime date, string account)
+        {
+            int total;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    total = context.Orders.Where(o => o.SolvedBy.Equals(account)).Where(o => o.SolvedDate == date).Count();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return total;
+        }
+
     }
    
 }

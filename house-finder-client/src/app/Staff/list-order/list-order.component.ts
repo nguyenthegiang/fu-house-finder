@@ -1,3 +1,4 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Chart } from 'chart.js';
@@ -10,6 +11,7 @@ import { OrderStatusService } from 'src/app/services/orderStatus.service';
   selector: 'app-list-order',
   templateUrl: './list-order.component.html',
   styleUrls: ['./list-order.component.scss'],
+  providers: [DatePipe],
 })
 export class ListOrderComponent implements OnInit {
   //List of orders
@@ -47,18 +49,38 @@ export class ListOrderComponent implements OnInit {
 
   //Bar chart
   totalofSolvedOrderInYear: number[] | undefined;
+  totalofSolvedOrderInDay: number = 0;
+  totalofSolvedOrderInMonth: number = 0;
+  totalofSolvedOrderInCurrentYear: number = 0;
+
+  //Statistic
   //Get current year
   currentYear: number = new Date().getFullYear();
+  //Get current month
+  currentMonth: number = new Date().getMonth();
 
   constructor(
     private orderService: OrderService,
     private orderStatusService: OrderStatusService,
-    private router: Router
-  ) {}
+    private router: Router,
+    private datePipe: DatePipe,
+  ) {
+
+  }
 
   ngOnInit(): void {
     this.selectedOrderBy = 'desc';
     this.filterOrder(true);
+
+    let currentDate = this.datePipe.transform((new Date), 'yyyy-MM-dd') + "";
+
+    //let yesterday = new Date()
+    // yesterday.setDate(yesterday.getDate() - 1)
+    // let previousDate = yesterday.getFullYear() + "-" + (yesterday.getMonth() + 1) + "-" + yesterday.getDate();
+
+    this.orderService.countOrderSolvedByStaffInADay(currentDate).subscribe((data) =>{
+      this.totalofSolvedOrderInDay = data;
+    })
 
     // (Paging) Count available Houses for total number of pages
     this.orderService.countTotalOrder().subscribe((data) => {
@@ -84,8 +106,20 @@ export class ListOrderComponent implements OnInit {
     });
 
     //Call API: create a bar chart show number of solved orders by this staff in a year
-    this.orderService.CountSolvedOrderByStaffInAYear().subscribe((data) =>{
+    this.orderService.countSolvedOrderByStaffInAYear().subscribe((data) =>{
       this.totalofSolvedOrderInYear = data;
+
+      //
+      this.totalofSolvedOrderInMonth = this.totalofSolvedOrderInYear[this.currentMonth];
+
+      //
+      var num = 0;
+      this.totalofSolvedOrderInYear.forEach(function(value){
+        console.log(value);
+        num += value;
+      })
+      this.totalofSolvedOrderInCurrentYear = num;
+
       //Create order chart
       var solvedOrderChart = new Chart('solvedOrderChart', {
         type: 'bar',
@@ -124,7 +158,7 @@ export class ListOrderComponent implements OnInit {
             title: {
               display: true,
               text:
-                'Thống kê số lượng đăng ký đã giải quyết năm ' + this.currentYear,
+                'Thống kê số lượng đăng ký bạn đã giải quyết trong năm ' + this.currentYear,
             },
           },
         },

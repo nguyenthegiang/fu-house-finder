@@ -113,7 +113,7 @@ namespace HouseFinder_API.Controllers
         [HttpGet("test")]
         public IActionResult TestAuthorize()
         {
-            return Ok();
+            return Ok(new { UID = HttpContext.Session.GetString("User") });
         }
 
         [HttpGet("generate_password")]
@@ -163,20 +163,9 @@ namespace HouseFinder_API.Controllers
             return userReposiotry.CountInactiveLandlord();
         }
 
-        //[Head][Dashboard] Get list of all landlords
-        //[HttpGet("staff")]
-        //public IActionResult GetStaffs()
-        //{
-        //    List<UserDTO> staffs = userReposiotry.GetStaffs();
-        //    if (staffs == null)
-        //    {
-        //        return NotFound();
-        //    }
-        //    else
-        //    {
-        //        return Ok(staffs);
-        //    }
-        //}
+        [HttpGet("LandlordSignupRequest")]
+        public ActionResult<IEnumerable<UserDTO>> GetLandlordSignupRequest() => userReposiotry.GetLandlordSignupRequest();
+
 
     }
 }

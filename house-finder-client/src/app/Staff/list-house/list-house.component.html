@@ -17,9 +17,19 @@
             <div class="text-center my-4">
               <div class="input-group">
                 <!-- Press enter to search  -->
-                <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm" aria-label="search_house_by_name"
+                <input type="text" class="form-control border border-end-0" placeholder="Nhập từ khóa tìm kiếm" aria-label="search_house_by_name"
                   aria-describedby="button-addon2" #searchValue
                   (keydown.enter)="search(searchValue.value)">
+                  <!-- Click button to clear search -->
+                <button
+                *ngIf="searchName"
+                class="clearSearchBtn"
+                type="button"
+                (click)="handleClear()"
+                data-bs-toggle="tooltip" data-bs-placement="bottom" title="Xóa"
+              >
+                <span class="material-symbols-outlined"> close </span>
+              </button>
                 <!-- Click button to search -->
                 <button class="btn btn-outline-secondary" type="button" id="button-addon2"
                   (click)="search(searchValue.value)">

@@ -275,5 +275,19 @@ namespace DataAccess
             return total;
         }
 
+        public static List<UserDTO> GetLandlordSignupRequest()
+        {
+            List<UserDTO> listLandlords;
+            try
+            {
+                listLandlords = GetLandlords().Where(landlord => landlord.StatusId == 2).ToList();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return listLandlords;
+        }
+
     }
 }

@@ -17,6 +17,9 @@ namespace Repositories.Repositories
 
         //Get list of landlords
         public List<UserDTO> GetLandlords() => UserDAO.GetLandlords();
+
+        public List<UserDTO> GetLandlordSignupRequest() => UserDAO.GetLandlordSignupRequest();
+
         //Get list of staffs
         //public List<UserDTO> GetStaffs() => UserDAO.GetStaffs();
 

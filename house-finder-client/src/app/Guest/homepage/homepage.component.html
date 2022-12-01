@@ -433,19 +433,11 @@
     <!-- End Filter Column -->
 
     <!-- Main Content -->
-    <div class="col-12 col-md-8 bg-primary">
+    <div class="col-12 col-md-8">
       <!-- Filter Row -->
       <div class="row d-flex justify-content-between">
-        <!-- Button Trigger Offcanvas (only display in small screen) -->
-        <div id="buttonTriggerOffcanvas" class="col-3">
-          <button id="buttonTriggerOffcanvas" class="btn btn-primary w-100" type="button" data-bs-toggle="offcanvas"
-            data-bs-target="#offcanvasFilterColumn" aria-controls="offcanvasFilterColumn">
-            Lọc phòng trọ
-          </button>
-        </div>
-
         <!-- Search bar -->
-        <div class="col-5">
+        <div class="col-12 col-md-5 mb-3">
           <div class="input-group w-100">
             <!-- Press enter to search  -->
             <input type="text" class="form-control" placeholder="Nhập tên trọ" aria-label="search_house_by_name"
@@ -460,22 +452,30 @@
         </div>
         <!-- End Search bar -->
 
+        <!-- Button Trigger Offcanvas (only display in small screen) -->
+        <div class="col-6 col-md-3 mb-3" id="buttonTriggerOffcanvas">
+          <button id="buttonTriggerOffcanvas" class="btn btn-primary w-100" type="button" data-bs-toggle="offcanvas"
+            data-bs-target="#offcanvasFilterColumn" aria-controls="offcanvasFilterColumn">
+            Lọc phòng trọ
+          </button>
+        </div>
+
         <!-- [Order by] -->
-        <div class="col-3">
-            <!-- When select 1 Order -> call API to update list House -->
-            <select #selectOrder class="form-select" aria-label="select-order" (change)="onOrderBy(selectOrder.value)">
-              <option class="disableOption" disabled selected>Sắp xếp theo</option>
-              <!-- List of Order to choose -->
-              <option *ngFor=" let orderValue of orderValues" value="{{orderValue}}">
-                {{orderValue}}</option>
-            </select>
+        <div class="col-6 col-md-3 mb-3">
+          <!-- When select 1 Order -> call API to update list House -->
+          <select #selectOrder class="form-select" aria-label="select-order" (change)="onOrderBy(selectOrder.value)">
+            <option class="disableOption" disabled selected>Sắp xếp theo</option>
+            <!-- List of Order to choose -->
+            <option *ngFor=" let orderValue of orderValues" value="{{orderValue}}">
+              {{orderValue}}</option>
+          </select>
         </div>
         <!-- End [Order by] -->
       </div>
       <!-- End Rooms Count Available -->
 
       <!-- Statistics -->
-      <div class="d-flex justify-content-between border shadow-sm my-3 p-2 bg-body rounded">
+      <div class="d-flex justify-content-between border shadow-sm mb-3 p-2 bg-body rounded">
         <div class="row w-100">
           <!-- House available count -->
           <div class="col-12 col-md-4">
@@ -524,6 +524,13 @@
         </div>
       </div>
       <!-- End Statistics -->
+
+      <!-- List House Count -->
+      <div class="d-flex justify-content-end">
+        <div>
+          Tìm thấy {{countFilterHouses}} nhà trọ
+        </div>
+      </div>
 
       <!-- Placeholder: Display when List House is Loading -->
       <div class="row" *ngIf="!houses">

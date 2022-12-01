@@ -44,6 +44,7 @@ export class HouseDetailComponent implements OnInit {
 
   inputReportContent: string = '';
   @ViewChild('reportSuccessAlert') private reportSuccessAlert: SwalComponent | undefined;
+  @ViewChild('orderErrorAlert') private orderErrorAlert: SwalComponent | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -102,7 +103,7 @@ export class HouseDetailComponent implements OnInit {
     var user = null;
     user = localStorage.getItem("user");
     if (user === null) {
-      this.alertUserNotLoggedIn();
+      this.orderErrorAlert?.fire();
       return;
     } else {
       this.inputReportContent = this.inputReportContent.trim();
@@ -119,7 +120,7 @@ export class HouseDetailComponent implements OnInit {
       this.reportService.addReport(report).subscribe(
         data => {
           if (data.status == 403) {
-            this.alertUserNotLoggedIn();
+            this.orderErrorAlert?.fire();
           } else if (data.status == 200) {
             this.reportSuccessAlert?.fire();
           }
@@ -129,10 +130,6 @@ export class HouseDetailComponent implements OnInit {
     }
   }
 
-  //Alert when create order failed
-  alertUserNotLoggedIn() {
-    alert("Vui lòng đăng nhập để xử dụng tính năng này!");
-  }
 
   goBack(): void {
     window.location.reload();

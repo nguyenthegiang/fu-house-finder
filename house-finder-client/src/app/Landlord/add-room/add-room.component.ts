@@ -1,4 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { MultipleComponent } from './multiple/multiple.component';
 import { SingleComponent } from './single/single.component';
 
@@ -11,10 +13,29 @@ export class AddRoomComponent implements OnInit {
   @ViewChild(MultipleComponent) childMultiple: MultipleComponent | any;
   @ViewChild(SingleComponent) childSingle: SingleComponent | any;
   selected: string = "single";
+  houseId: any;
 
-  constructor() { }
+  houseForm = this.formBuilder.group({
+    houseName: ['', Validators.required],
+    information: [''],
+    campus: ['', Validators.required],
+    village: ['', Validators.required],
+    powerPrice: ['', Validators.required],
+    waterPrice: ['', Validators.required],
+    fingerprint: [false],
+    camera: [false],
+    parking: [false],
+    address: ['', Validators.required],
+    googleAddress: ['', Validators.required],
+  });
+
+  constructor(
+    private elementRef: ElementRef,
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.houseId = Number(this.route.snapshot.queryParamMap.get('houseId'));
   }
 
   updateForm(tab: string){
@@ -22,13 +43,13 @@ export class AddRoomComponent implements OnInit {
     console.log(this.selected);
   }
 
-  submitForm(){
+  async submitForm(){
     if (this.selected === "single"){
 
     }
     else if (this.selected === "multiple"){
-      this.childMultiple.uploadDataFile();
+      await this.childMultiple.uploadDataFile(this.houseId);
+      this.childMultiple.uploadImageFiles(this.houseId);
     }
   }
-
 }

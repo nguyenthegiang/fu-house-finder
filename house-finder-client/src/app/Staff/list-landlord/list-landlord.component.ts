@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
 import { LandlordInformationService } from 'src/app/services/landlord-information.service';
@@ -17,10 +17,13 @@ export class ListLandlordComponent implements OnInit
   roomAvailableCount: number = 0;
 
   //{Search} input value
-  searchValue: string | undefined;
+  searchName: string | undefined;
 
   //List of landlords
   landlords: User[] = [];
+
+  @ViewChild('searchValue') searchValue: any;
+
 
   constructor(
     private userService: UserService,
@@ -31,7 +34,6 @@ export class ListLandlordComponent implements OnInit
 
   ngOnInit(): void
   {
-    //Call API: get available rooms of this house
     this.userService.getLandlords().subscribe(data => {
       this.landlords = data;
     });
@@ -41,6 +43,7 @@ export class ListLandlordComponent implements OnInit
       this.roomCount = data.roomCount;
       this.roomAvailableCount = data.roomAvailableCount;
     });
+    console.log(this.searchName);
   }
 
   viewHouse(id: string)
@@ -51,5 +54,15 @@ export class ListLandlordComponent implements OnInit
   }
 
   search(searchValue: string)
-  {}
+  {
+    this.searchName = searchValue;
+  }
+
+  handleClear(){
+    this.searchValue.nativeElement.value = ' ';
+    this.searchName = undefined;
+    this.userService.getLandlords().subscribe(data => {
+      this.landlords = data;
+    });
+  }
 }

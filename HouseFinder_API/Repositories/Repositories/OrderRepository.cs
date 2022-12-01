@@ -14,8 +14,8 @@ namespace Repositories.Repositories
     {
         public int CountTotalOrder() => OrderDAO.CountTotalOrder();
         public List<OrderDTO> GetAllOrder() => OrderDAO.GetAllOrders();
-        public int[] GetSolvedlOrderByMonth() => OrderDAO.GetSolvedOrderByMonth();
-        public int[] GetTotalOrderByMonth() => OrderDAO.GetTotalOrderByMonth();
+        public int[] CountTotalOrderSolvedInMonth() => OrderDAO.CountTotalOrderSolvedInMonth();
+        public int[] CountTotalOrderOrderedInMonth() => OrderDAO.CountTotalOrderOrderedInMonth();
 
         public void UpdateOrderStatus(int orderId, int statusId, string account) => OrderDAO.UpdateOrderStatus(orderId, statusId, account);
 
@@ -24,5 +24,11 @@ namespace Repositories.Repositories
         public int CountTotalOrderSolvedByAccount(string account) => OrderDAO.CountTotalOrderSolvedByAccount(account);
 
         public int[] CountSolvedOrderByStaffInAYear(string account) => OrderDAO.CountSolvedOrderByStaffInAYear(account);
+
+        public int[] CountTotalOrderByMonth() => OrderDAO.CountTotalOrderByMonth();
+
+        public int[] CountSolvedOrderByMonth() => OrderDAO.CountSolvedOrderByMonth();
+
+        public int CountOrderSolvedByStaffInADay(DateTime date, string account) => OrderDAO.CountOrderSolvedByStaffInADay(date, account);
     }
 }
