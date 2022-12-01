@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-header',
@@ -7,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor() { }
+  logged_in = false;
+
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.checkLoggedIn();
   }
   //Home button -> go back to /home
   backHome() {
@@ -19,6 +23,20 @@ export class HeaderComponent implements OnInit {
 
   login(){
     window.location.href = "/login";
+  }
+
+  logout(){
+    this.userService.logout().subscribe(resp => {
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.reload();
+    });
+  }
+
+  checkLoggedIn(){
+    if (localStorage.getItem("user") != null){
+      this.logged_in = true;
+    }
   }
 
 }

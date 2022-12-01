@@ -104,7 +104,7 @@ export class UserService {
     return this.http.get<number>(this.APIUrl + "/CountInactiveLandlord");
   }
 
-  getLandlordSignUpRequest():Observable<User[]>{
-    return this.http.get<User[]>(this.APIUrl + "/LandlordSignupRequest");
+  logout(): Observable<any>{
+    return this.http.get<any>(this.APIUrl + "/logout", {withCredentials: true});
   }
 }

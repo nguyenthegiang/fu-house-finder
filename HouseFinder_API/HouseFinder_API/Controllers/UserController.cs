@@ -125,10 +125,14 @@ namespace HouseFinder_API.Controllers
             return Ok(result);
         }
 
-        [HttpPost("logout")]
+        [HttpGet("logout")]
         public IActionResult Logout()
         {
             HttpContext.Session.Clear();
+            foreach (var cookies in HttpContext.Request.Cookies.Keys)
+            {
+                HttpContext.Response.Cookies.Delete(cookies);
+            }
             return Ok();
         }
 
