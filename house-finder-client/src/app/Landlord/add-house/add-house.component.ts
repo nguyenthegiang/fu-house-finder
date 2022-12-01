@@ -214,7 +214,7 @@ export class AddHouseComponent implements OnInit {
     if (this.houseId == undefined){
       return;
     }
-    this.router.navigate(['/Landlord/add-room', {queryParams: {houseId: this.houseId}}]);
+    this.router.navigate(['/Landlord/add-room'], {queryParams: {houseId: this.houseId}});
   }
 
   logout()
