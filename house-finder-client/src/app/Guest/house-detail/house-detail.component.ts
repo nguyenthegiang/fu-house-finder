@@ -44,6 +44,8 @@ export class HouseDetailComponent implements OnInit {
   partiallyAvailableRoom: number = 0;
   availableSlot: number = 0;
 
+  rates: Rate[] = [];
+
   houseId: number = 0;
   star: number = 0;
   comment: string = "";
@@ -100,6 +102,10 @@ export class HouseDetailComponent implements OnInit {
 
     this.roomService.countAvailableCapacityByHouseId(id).subscribe(data => {
       this.availableSlot = data;
+    });
+
+    this.rateService.getListRatesByHouseId(this.houseId).subscribe(data => {
+      this.rates = data;
     });
 
     //(Paging) Count available Houses for total number of pages
@@ -191,7 +197,7 @@ export class HouseDetailComponent implements OnInit {
       this.rateService.addRate(this.houseId, this.star, this.comment).subscribe(
         data => {
           if (data.status == 403) {
-            this.orderErrorAlert?.fire();
+            this.rateErrorAlert?.fire();
           } else if (data.status == 200) {
             this.rateSuccessAlert?.fire();
           }

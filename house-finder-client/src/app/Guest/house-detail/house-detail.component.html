@@ -113,10 +113,50 @@
       <div class="my-5 border border-secondary rounded p-2">
         <h3 class="text-center">Người dùng đánh giá</h3>
         Bình luận:
-        <div class="bg-light border border-secondary rounded mb-2 p-2">
-          Nguyễn Văn A: Đẹp, gần trường (<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+        <div class="bg-light border border-secondary rounded mb-2 p-2" style="overflow: auto;">
+          <div *ngFor="let rate of rates">
+            <!-- <div *ngIf="rates.length === 0">
+              Chưa có đánh giá
+            </div> -->
+            <div class="d-flex">
+              <span>{{rate.studentId}}: {{rate.comment}}</span>
+              <span class="ms-2">(</span>
+              <span *ngIf="rate.star === 1">
+                <i class="star fa-solid fa-star text-warning"></i>
+              </span>
+              <span *ngIf="rate.star === 2">
+                <i class="star fa-solid fa-star text-warning"></i>
+                <i class="star fa-solid fa-star text-warning"></i>
+              </span>
+              <span *ngIf="rate.star === 3">
+                <i class="star fa-solid fa-star text-warning"></i>
+                <i class="star fa-solid fa-star text-warning"></i>
+                <i class="star fa-solid fa-star text-warning"></i>
+              </span>
+              <span *ngIf="rate.star === 4">
+                <i class="star fa-solid fa-star text-warning"></i>
+                <i class="star fa-solid fa-star text-warning"></i>
+                <i class="star fa-solid fa-star text-warning"></i>
+                <i class="star fa-solid fa-star text-warning"></i>
+              </span>
+              <span *ngIf="rate.star === 5">
+                <i class="star fa-solid fa-star text-warning"></i>
+                <i class="star fa-solid fa-star text-warning"></i>
+                <i class="star fa-solid fa-star text-warning"></i>
+                <i class="star fa-solid fa-star text-warning"></i>
+                <i class="star fa-solid fa-star text-warning"></i>
+              </span>
+              <span>)</span>
+            </div>
+
+            <div *ngIf="rate.landlordReply !== ''">
+              <i class="fa-solid fa-arrow-right"></i> Chủ trọ trả lời: {{rate.landlordReply}}
+            </div>
+          </div>
+
+          <!-- Nguyễn Văn A: Đẹp, gần trường (<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
             class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>)
-          <br> <i class="fa-solid fa-arrow-right"></i> Chủ trọ trả lời: Cảm ơn bạn nhiều
+          <br> <i class="fa-solid fa-arrow-right"></i> Chủ trọ trả lời: Cảm ơn bạn nhiều -->
         </div>
         Viết bình luận:
         <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">

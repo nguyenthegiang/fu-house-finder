@@ -23,4 +23,12 @@ export class RateService {
   addRate(houseId: number, star: number, comment: string): Observable<any> {
     return this.http.post<any>(this.APIUrl + "?houseId=" + houseId + "&star=" + star + "&comment=" + comment, this.httpOptions);
   }
+
+  /**
+   * [House Detail] Get list Rate by House id
+   */
+  getListRatesByHouseId(houseId: number)
+  {
+    return this.http.get<any>(this.APIUrl + "/GetListRatesByHouseId?HouseId=" + houseId);
+  }
 }
