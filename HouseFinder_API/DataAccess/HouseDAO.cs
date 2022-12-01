@@ -43,7 +43,7 @@ namespace DataAccess
          Add a new House into the Database
          */
         public static HouseDTO CreateHouse(string houseName, string information, int addressId, int villageId, string landlordId, int campusId,
-            decimal powerPrice, decimal waterPrice, bool fingerprintLock, bool camera, bool parking)
+            decimal powerPrice, decimal waterPrice, bool fingerprintLock, bool camera, bool parking, double distanceToCampus)
         {
             try
             {
@@ -54,6 +54,7 @@ namespace DataAccess
                     house.Information = information;
                     house.AddressId = addressId;
                     house.CampusId = campusId;
+                    house.DistanceToCampus = distanceToCampus;
                     house.VillageId = villageId;
                     house.LandlordId = landlordId;
                     house.PowerPrice = powerPrice;
@@ -72,7 +73,8 @@ namespace DataAccess
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
                     var mapper = config.CreateMapper();
-                    return mapper.Map<HouseDTO>(house);
+
+                    return context.Houses.Where(h => h.HouseId == house.HouseId).ProjectTo<HouseDTO>(config).FirstOrDefault();
                 }
             }
             catch (Exception e)
