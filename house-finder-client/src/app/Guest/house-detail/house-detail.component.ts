@@ -200,6 +200,7 @@ export class HouseDetailComponent implements OnInit {
             this.rateErrorAlert?.fire();
           } else if (data.status == 200) {
             this.rateSuccessAlert?.fire();
+            window.location.reload();
           }
         },
         error => { }

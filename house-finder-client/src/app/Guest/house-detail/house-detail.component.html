@@ -119,37 +119,37 @@
           </div>
           <div *ngFor="let rate of rates">
             <div class="d-flex">
-              <span>{{rate.studentId}}: {{rate.comment}}</span>
-              <span class="ms-2">(</span>
-              <span *ngIf="rate.star === 1">
-                <i class="star fa-solid fa-star text-warning"></i>
+              <span>
+                {{rate.studentId}}: {{rate.comment}}
+                  <span *ngIf="rate.star === 1">
+                    (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
+                  </span>
+                  <span *ngIf="rate.star === 2">
+                    (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                    <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
+                  </span>
+                  <span *ngIf="rate.star === 3">
+                    (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                    <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                    <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
+                  </span>
+                  <span *ngIf="rate.star === 4">
+                    (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                    <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                    <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                    <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
+                  </span>
+                  <span *ngIf="rate.star === 5">
+                    (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                    <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                    <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                    <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                    <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
+                  </span>
               </span>
-              <span *ngIf="rate.star === 2">
-                <i class="star fa-solid fa-star text-warning"></i>
-                <i class="star fa-solid fa-star text-warning"></i>
-              </span>
-              <span *ngIf="rate.star === 3">
-                <i class="star fa-solid fa-star text-warning"></i>
-                <i class="star fa-solid fa-star text-warning"></i>
-                <i class="star fa-solid fa-star text-warning"></i>
-              </span>
-              <span *ngIf="rate.star === 4">
-                <i class="star fa-solid fa-star text-warning"></i>
-                <i class="star fa-solid fa-star text-warning"></i>
-                <i class="star fa-solid fa-star text-warning"></i>
-                <i class="star fa-solid fa-star text-warning"></i>
-              </span>
-              <span *ngIf="rate.star === 5">
-                <i class="star fa-solid fa-star text-warning"></i>
-                <i class="star fa-solid fa-star text-warning"></i>
-                <i class="star fa-solid fa-star text-warning"></i>
-                <i class="star fa-solid fa-star text-warning"></i>
-                <i class="star fa-solid fa-star text-warning"></i>
-              </span>
-              <span>)</span>
             </div>
 
-            <div *ngIf="rate.landlordReply !== ''">
+            <div *ngIf="rate.landlordReply !== null">
               <i class="fa-solid fa-arrow-right"></i> Chủ trọ trả lời: {{rate.landlordReply}}
             </div>
           </div>

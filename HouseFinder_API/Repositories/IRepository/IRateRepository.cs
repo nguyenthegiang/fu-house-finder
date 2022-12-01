@@ -12,5 +12,7 @@ namespace Repositories
     {
         void CreateRate(Rate rate);
         public List<RateDTO> GetListRatesByHouseId(int HouseId);
+        public RateDTO GetRateById(int rateId);
+        public void ReplyComment(int rateId, string reply);
     }
 }
