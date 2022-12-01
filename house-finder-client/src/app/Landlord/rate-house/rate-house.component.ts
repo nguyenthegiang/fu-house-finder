@@ -12,10 +12,12 @@ import { RateService } from 'src/app/services/rate.service';
 export class RateHouseComponent implements OnInit {
   replyOn = false;
   rates: Rate[] = [];
+  rateDetail: Rate | undefined;
   reply: string = "";
   houseId: number = 0;
   isReply: boolean = false;
   indexReply: number = -1;
+  rateId: number = -1;
 
   @ViewChild('rateSuccessAlert') private rateSuccessAlert: SwalComponent | undefined;
   @ViewChild('rateErrorAlert') private rateErrorAlert: SwalComponent | undefined;
@@ -52,8 +54,13 @@ export class RateHouseComponent implements OnInit {
     this.indexReply = -1;
   }
 
-  addReply()
+  addReply(rateId: number)
   {
+    this.rateService.updateRate(rateId, this.reply).subscribe(() => this.goBack());
+  }
 
+  goBack(): void
+  {
+    window.location.reload();
   }
 }

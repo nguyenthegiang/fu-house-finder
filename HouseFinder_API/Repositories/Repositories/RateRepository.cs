@@ -13,5 +13,7 @@ namespace Repositories
     {
         public void CreateRate(Rate rate) => RateDAO.CreateRate(rate);
         public List<RateDTO> GetListRatesByHouseId(int HouseId) => RateDAO.GetListRatesByHouseId(HouseId);
+        public RateDTO GetRateById(int rateId) => RateDAO.GetRateById(rateId);
+        public void ReplyComment(int rateId, string reply) => RateDAO.ReplyComment(rateId, reply);
     }
 }

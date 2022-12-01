@@ -80,5 +80,35 @@ namespace HouseFinder_API.Controllers
                 return BadRequest();
             }
         }
+
+        //GET: api/Rate/GetRateById?RateId=
+        [HttpGet("GetRateById")]
+        public IActionResult GetRateById(int RateId)
+        {
+            RateDTO rateDTO = rateRepository.GetRateById(RateId);
+            if (rateDTO == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(rateDTO);
+            }
+        }
+
+        //PUT: api/Rate
+        [HttpPut]
+        public IActionResult ReplyComment(int rateId, string reply)
+        {
+            try
+            {
+                rateRepository.ReplyComment(rateId, reply);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

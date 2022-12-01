@@ -54,5 +54,61 @@ namespace DataAccess
             }
             return rateDTOs;
         }
+
+        /**
+         * Get rate detail
+         */
+        public static RateDTO GetRateById(int rateId)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    RateDTO rate = context.Rates.Where(r => r.Deleted == false)
+                        .Where(r => r.RateId == rateId && r.Deleted == false)
+                        .ProjectTo<RateDTO>(config).FirstOrDefault();
+                    if (rate == null)
+                    {
+                        throw new Exception();
+                    }
+                    return rate;
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        /**
+         * [Rate House] Landlord replies the comment
+         */
+        public static void ReplyComment(int rateId, string reply)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Find rooms of this house
+                    Rate replyRate = context.Rates.FirstOrDefault(r => r.RateId == rateId);
+                    if (replyRate == null)
+                    {
+                        throw new Exception();
+                    }
+
+                    //Update
+                    replyRate.LandlordReply = reply;
+                    context.Rates.Update(replyRate);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

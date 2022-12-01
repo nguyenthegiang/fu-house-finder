@@ -31,4 +31,15 @@ export class RateService {
   {
     return this.http.get<any>(this.APIUrl + "/GetListRatesByHouseId?HouseId=" + houseId);
   }
+
+  //Get rate by id
+  getRateById(rateId: number)
+  {
+    return this.http.get<any>(this.APIUrl + "/GetRateById?RateId=" + rateId);
+  }
+
+  //[Landlord: Update Rate]
+  updateRate(rateId: number, replyContent: string): Observable<any> {
+    return this.http.put<any>(this.APIUrl + "?rateId=" + rateId + "&reply=" + replyContent, "", this.httpOptions);
+  }
 }
