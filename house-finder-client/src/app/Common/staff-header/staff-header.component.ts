@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HouseService } from 'src/app/services/house.service';
 import { RoomService } from 'src/app/services/room.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-staff-header',
@@ -19,7 +20,8 @@ export class StaffHeaderComponent implements OnInit
 
   constructor(private houseService: HouseService,
     private roomService: RoomService,
-    private router: Router)
+    private router: Router,
+    private userService: UserService)
   { }
 
   ngOnInit(): void
@@ -55,8 +57,12 @@ export class StaffHeaderComponent implements OnInit
     window.location.href = "/home";
   }
 
-  login(){
-    window.location.href = "/login";
+  logout(){
+    this.userService.logout().subscribe(resp => {
+      localStorage.clear();
+      sessionStorage.clear();
+      window.location.href = "/login";
+    });
   }
 
   isDashboardRoute()
