@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { FileService } from 'src/app/services/file.service';
 import { HouseService } from 'src/app/services/house.service';
@@ -35,6 +36,7 @@ export class AddHouseComponent implements OnInit {
   img1: File | any;
   img2: File | any;
   img3: File | any;
+  houseId: number | undefined;
 
   houseForm = this.formBuilder.group({
     houseName: ['', Validators.required],
@@ -58,7 +60,8 @@ export class AddHouseComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder, 
     private houseService: HouseService,
-    private fileService: FileService) { }
+    private fileService: FileService,
+    private router: Router,) { }
 
   ngOnInit(): void {
     this.initMap();
@@ -196,6 +199,7 @@ export class AddHouseComponent implements OnInit {
       this.houseForm.controls['camera'].value,
       this.houseForm.controls['parking'].value,
     ).subscribe(resp => {
+      this.houseId = resp.houseId;
       this.fileService.uploadHouseImageFile(this.img1, this.img2, this.img3, resp.houseId).subscribe(
         resp => this.addRoom?.fire(),
         err => this.serverErrorAlert?.fire()
@@ -207,7 +211,10 @@ export class AddHouseComponent implements OnInit {
   }
 
   navAddRoom(){
-
+    if (this.houseId == undefined){
+      return;
+    }
+    this.router.navigate(['/Landlord/add-room', {queryParams: {houseId: this.houseId}}]);
   }
 
   logout()
