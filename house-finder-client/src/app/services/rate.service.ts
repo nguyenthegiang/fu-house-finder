@@ -21,8 +21,7 @@ export class RateService {
    * [House Detail] Create Rate
    */
   addRate(houseId: number, star: number, comment: string): Observable<any> {
-    console.log("?houseId=" + houseId + "&star=" + star + "&comment=" + comment);
-    return this.http.post<any>(this.APIUrl + "?houseId=" + houseId + "&star=" + star + "&comment=" + comment, this.httpOptions);
+    return this.http.post<any>(this.APIUrl + "?houseId=" + houseId + "&star=" + star + "&comment=" + comment, "", this.httpOptions);
   }
 
   /**
