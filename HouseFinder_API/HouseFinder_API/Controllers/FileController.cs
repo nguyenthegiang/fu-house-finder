@@ -51,8 +51,8 @@ namespace HouseFinder_API.Controllers
         }
 
         [Authorize]
-        [HttpPost("upload")]
-        public IActionResult UploadFile(IFormFile File, [ModelBinder(typeof(JsonModelBinder))] int HouseId)
+        [HttpPost("upload/{HouseId:int}")]
+        public IActionResult UploadFile(IFormFile File, [FromRoute] int HouseId)
         {
             var uid = HttpContext.Session.GetString("User");
             if (String.IsNullOrEmpty(uid))
@@ -71,7 +71,7 @@ namespace HouseFinder_API.Controllers
         private void LoadData(XSSFWorkbook wb, int HouseId, string LandlordId)
         {
             List<string> errors = new List<string>();
-            int row = 3;
+            int row = 2;
 
             // CREATE ROOM RECORDS
             ISheet roomSheet = wb.GetSheetAt(0);
@@ -81,25 +81,27 @@ namespace HouseFinder_API.Controllers
                 try
                 {
                     var record = roomSheet.GetRow(row);
-                    row++;
                     if (record == null)
                     {
                         break;
                     }
                     var _buildingNumber = record.GetCell(0).NumericCellValue;
                     var _floorNumber = record.GetCell(1).NumericCellValue;
-                    var _roomName = record.GetCell(2).StringCellValue;
+                    var _roomName = record.GetCell(2).ToString();
                     var _roomPrice = record.GetCell(3).NumericCellValue;
                     var _roomArea = record.GetCell(4).NumericCellValue;
                     var _roomCapacity = record.GetCell(5).NumericCellValue;
-                    var _information = record.GetCell(6).StringCellValue;
-                    var _fridge = record.GetCell(7).StringCellValue;
-                    var _kitchen = record.GetCell(8).StringCellValue;
-                    var _washingMachine = record.GetCell(9).StringCellValue;
-                    var _desk = record.GetCell(10).StringCellValue;
-                    var _bed = record.GetCell(11).StringCellValue;
-                    var _closedToilet = record.GetCell(12).StringCellValue;
-                    var _withHost = record.GetCell(13).StringCellValue;
+                    var _currentPeople = record.GetCell(6).NumericCellValue;
+                    var _roomType = record.GetCell(7).ToString();
+                    var _information = record.GetCell(8).ToString();
+                    var _fridge = record.GetCell(9).ToString();
+                    var _kitchen = record.GetCell(10).ToString();
+                    var _washingMachine = record.GetCell(11).ToString();
+                    var _desk = record.GetCell(12).ToString();
+                    var _bed = record.GetCell(13).ToString();
+                    var _closedToilet = record.GetCell(14).ToString();
+                    var _withHost = record.GetCell(15).ToString();
+
                     var fridge = _fridge.Equals("YES");
                     var kitchen = _kitchen.Equals("YES");
                     var washingMachine = _kitchen.Equals("YES");
@@ -107,6 +109,20 @@ namespace HouseFinder_API.Controllers
                     var bed = _bed.Equals("YES");
                     var closedToilet = _closedToilet.Equals("YES");
                     var withHost = _withHost.Equals("YES");
+                    int roomType;
+                    if (_roomType.Equals("Chung cư mini"))
+                    {
+                        roomType = 3;
+                    }
+                    else if (_roomType.Equals("Không khép kín")) 
+                    {
+                        roomType = 2;
+                    }
+                    else
+                    {
+                        roomType = 1;
+                    }
+
                     Room room = new Room();
                     room.BuildingNumber = (int)_buildingNumber;
                     room.FloorNumber = (int)_floorNumber;
@@ -114,6 +130,7 @@ namespace HouseFinder_API.Controllers
                     room.AreaByMeters = _roomArea;
                     room.PricePerMonth = (decimal)_roomPrice;
                     room.MaxAmountOfPeople = (int)_roomCapacity;
+                    room.CurrentAmountOfPeople = (int)_currentPeople;
                     room.Fridge = fridge;
                     room.Kitchen = kitchen;
                     room.WashingMachine = washingMachine;
@@ -123,17 +140,22 @@ namespace HouseFinder_API.Controllers
                     room.NoLiveWithHost = withHost;
                     room.Information = _information;
                     room.HouseId = HouseId;
-                    room.CreatedDate = DateTime.UtcNow;
+                    room.CreatedDate = DateTime.Now;
                     room.CreatedBy = LandlordId;
                     room.LastModifiedBy = LandlordId;
-                    room.LastModifiedDate = DateTime.UtcNow;
+                    room.LastModifiedDate = DateTime.Now;
                     room.Deleted = false;
+                    room.StatusId = _roomCapacity == _currentPeople ? 1 : 2;
+                    room.RoomTypeId = roomType;
                     roomList.Add(room);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
                     errors.Add($"Error at line {row}");
+                    Console.WriteLine($"Error at line {row} --- {e.Message}");
                 }
+
+                row++;
             }
             roomsRepository.CreateRooms(roomList);
         }

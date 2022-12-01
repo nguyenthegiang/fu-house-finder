@@ -21,12 +21,6 @@ namespace Repositories.Repositories
         public void CreateRoom(Room room) => RoomDAO.CreateRoom(room);
         public void CreateRooms(List<Room> rooms)
         {
-            foreach (var room in rooms)
-            {
-                room.Deleted = false;
-                room.CreatedDate = DateTime.UtcNow;
-                room.LastModifiedDate = DateTime.UtcNow;
-            }
             RoomDAO.CreateRooms(rooms);
         }
 
