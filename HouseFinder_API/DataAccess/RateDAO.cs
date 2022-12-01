@@ -30,5 +30,29 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
         }
+
+        /**
+         * [House Detail] Guest view Rate & Comment
+         */
+        public static List<RateDTO> GetListRatesByHouseId(int HouseId)
+        {
+            List<RateDTO> rateDTOs;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //include address
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    //Get by LandlordId
+                    rateDTOs = context.Rates.Where(r => r.Deleted == false).ProjectTo<RateDTO>(config).Where(r => r.HouseId == HouseId).ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return rateDTOs;
+        }
     }
 }
