@@ -114,10 +114,10 @@
         <h3 class="text-center">Người dùng đánh giá</h3>
         Bình luận:
         <div class="bg-light border border-secondary rounded mb-2 p-2" style="overflow: auto;">
+          <div *ngIf="rates.length === 0">
+            Chưa có đánh giá
+          </div>
           <div *ngFor="let rate of rates">
-            <!-- <div *ngIf="rates.length === 0">
-              Chưa có đánh giá
-            </div> -->
             <div class="d-flex">
               <span>{{rate.studentId}}: {{rate.comment}}</span>
               <span class="ms-2">(</span>
@@ -159,7 +159,7 @@
           <br> <i class="fa-solid fa-arrow-right"></i> Chủ trọ trả lời: Cảm ơn bạn nhiều -->
         </div>
         Viết bình luận:
-        <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
+        <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" [(ngModel)]="comment">
         <div class="my-2 d-flex">
           Đánh giá:
           <div class="ms-2" *ngIf="star === 0">
@@ -211,7 +211,7 @@
           </div>
         </div>
 
-        <button type="button" class="btn btn-secondary w-100" (click)="addRate()">Đăng</button>
+        <button type="button" class="btn btn-secondary w-100" (click)="addRate()" [disabled]="comment === '' || star === 0">Đăng</button>
       </div>
     </div>
 
