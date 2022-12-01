@@ -102,4 +102,9 @@ export class DashboardComponent implements OnInit {
 
   search(searchValue: string)
   {}
+
+  logout()
+  {
+    window.location.href = "/login";
+  }
 }

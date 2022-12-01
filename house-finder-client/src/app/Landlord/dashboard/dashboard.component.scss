@@ -33,3 +33,24 @@
   background-color: rgb(147, 147, 147);
   border-radius: 5px;
 }
+
+#link:hover
+{
+  text-decoration: underline !important;
+}
+
+@media only screen and (max-width: 768px) {
+  #header1
+  {
+    width: 100% !important;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 20px;
+  }
+
+  #header2
+  {
+    width: 100% !important;
+    margin-bottom: 5px;
+  }
+}

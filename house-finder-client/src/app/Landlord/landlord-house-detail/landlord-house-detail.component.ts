@@ -111,4 +111,9 @@ export class LandlordHouseDetailComponent implements OnInit {
 
   search(searchValue: string)
   {}
+
+  logout()
+  {
+    window.location.href = "/login";
+  }
 }

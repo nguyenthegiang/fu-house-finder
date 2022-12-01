@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ImportComponent } from './import.component';
+import { LandlordHeaderComponent } from './landlord-header.component';
 
-describe('ImportComponent', () => {
-  let component: ImportComponent;
-  let fixture: ComponentFixture<ImportComponent>;
+describe('LandlordHeaderComponent', () => {
+  let component: LandlordHeaderComponent;
+  let fixture: ComponentFixture<LandlordHeaderComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ImportComponent ]
+      declarations: [ LandlordHeaderComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ImportComponent);
+    fixture = TestBed.createComponent(LandlordHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

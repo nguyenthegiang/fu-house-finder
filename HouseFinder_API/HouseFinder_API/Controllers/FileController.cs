@@ -28,6 +28,7 @@ namespace HouseFinder_API.Controllers
         private IRoomRepository roomsRepository = new RoomRepository();
         private IUserReposiotry userReposiotry = new UserRepository();
         private IRoomImageRepository roomImageRepository = new RoomImageRepository();
+        private IHouseImageRepository houseImageRepository = new HouseImageRepository();
 
         //Used for Upload file to Amazon S3 Server
         private readonly IStorageRepository storageRepository;
@@ -38,7 +39,7 @@ namespace HouseFinder_API.Controllers
             Environment = _environment;
             this.storageRepository = storageRepository;
         }
-        
+
         [HttpGet("download")]
         public IActionResult DownloadFile()
         {
@@ -51,44 +52,26 @@ namespace HouseFinder_API.Controllers
 
         [Authorize]
         [HttpPost("upload")]
-        public IActionResult UploadFile(IFormFile File)
+        public IActionResult UploadFile(IFormFile File, [ModelBinder(typeof(JsonModelBinder))] int HouseId)
         {
-            Console.WriteLine($"called");
+            var uid = HttpContext.Session.GetString("User");
+            if (String.IsNullOrEmpty(uid))
+            {
+                return Forbid();
+            }
+
             Stream fs = File.OpenReadStream();
             if (!checkXlsxMimeType(File))
                 return BadRequest("Invalid File Type");
             XSSFWorkbook wb = new XSSFWorkbook(fs);
-            LoadData(wb);
+            LoadData(wb, HouseId, uid);
             return Ok();
         }
 
-        private HouseDTO LoadData(XSSFWorkbook wb)
+        private void LoadData(XSSFWorkbook wb, int HouseId, string LandlordId)
         {
             List<string> errors = new List<string>();
-            ISheet houseSheet = wb.GetSheetAt(0);
             int row = 3;
-            HouseDTO house = null;
-            // CREATE HOUSE RECORD
-            var houseRecord = houseSheet.GetRow(row);
-            if (houseRecord != null)
-            {
-                var _campus = houseRecord.GetCell(0).StringCellValue;
-                var _district = houseRecord.GetCell(1).StringCellValue;
-                var _commune = houseRecord.GetCell(2).StringCellValue;
-                var _village = houseRecord.GetCell(3).StringCellValue;
-                var _address = houseRecord.GetCell(4).StringCellValue;
-                var _googleAddress = houseRecord.GetCell(5).StringCellValue;
-                var _houseName = houseRecord.GetCell(6).StringCellValue;
-                var _houseInfo = houseRecord.GetCell(7).StringCellValue;
-                var _powerPrice = houseRecord.GetCell(8).NumericCellValue;
-                var _waterPrice = houseRecord.GetCell(9).NumericCellValue;
-                var _fingerprint = houseRecord.GetCell(10).StringCellValue.Equals("YES");
-                var _camera = houseRecord.GetCell(11).StringCellValue.Equals("YES");
-                var _parking = houseRecord.GetCell(12).StringCellValue.Equals("YES");
-                var _landlord = HttpContext.Session.GetString("User");
-                house = housesRepository.CreateHouse(_houseName, _houseInfo, _address, _googleAddress, _village,
-                    _landlord, _campus, (decimal)_powerPrice, (decimal)_waterPrice, _fingerprint, _camera, _parking);
-            }
 
             // CREATE ROOM RECORDS
             ISheet roomSheet = wb.GetSheetAt(0);
@@ -139,10 +122,10 @@ namespace HouseFinder_API.Controllers
                     room.ClosedToilet = closedToilet;
                     room.NoLiveWithHost = withHost;
                     room.Information = _information;
-                    room.HouseId = house.HouseId;
+                    room.HouseId = HouseId;
                     room.CreatedDate = DateTime.UtcNow;
-                    room.CreatedBy = house.LandlordId;
-                    room.LastModifiedBy = house.LandlordId;
+                    room.CreatedBy = LandlordId;
+                    room.LastModifiedBy = LandlordId;
                     room.LastModifiedDate = DateTime.UtcNow;
                     room.Deleted = false;
                     roomList.Add(room);
@@ -153,15 +136,12 @@ namespace HouseFinder_API.Controllers
                 }
             }
             roomsRepository.CreateRooms(roomList);
-            return house;
         }
-        
+
         //[Authorize]
         [HttpPost("room/image")]
         public async Task<IActionResult> UploadRoomImage(IFormFile File, [ModelBinder(typeof(JsonModelBinder))] RoomImageInfoDTO Room)
         {
-            Console.WriteLine(File.FileName);
-            Console.WriteLine(Room.RoomName);
             string uid = HttpContext.Session.GetString("User");
             RoomDTO roomDTO = roomsRepository.GetRoomByHouseIdAndBuildingAndFloorAndRoomName(
                 Room.HouseId,
@@ -221,7 +201,7 @@ namespace HouseFinder_API.Controllers
             var backImg = "";
 
             //Upload identity card images (front & back) to Server
-            for (int i=0; i<2; i++)
+            for (int i = 0; i < 2; i++)
             {
                 //Path to file in Server
                 var path = $"{dir}/{files[i].FileName}";
@@ -244,10 +224,28 @@ namespace HouseFinder_API.Controllers
 
             return Ok();
         }
-    }
-    public class FileUpload
-    {
-        public IFormFile File { get; set; }
-        public String Room { get; set; }
+
+        [Authorize]
+        [HttpPost("house/image/{HouseId:int}")]
+        public async Task<IActionResult> UploadHouseImage(List<IFormFile> files, [FromRoute] int HouseId)
+        {
+            string uid = HttpContext.Session.GetString("User");
+            if (String.IsNullOrWhiteSpace(uid))
+            {
+                return Forbid();
+            }
+            string dir = $"user/{uid}/House/{HouseId}";
+            foreach (var file in files)
+            {
+                var path = $"{dir}/{file.FileName}";
+                Stream fs = file.OpenReadStream();
+                // await storageRepository.UploadFileAsync(path, fs);
+                ImagesOfHouseDTO img = new ImagesOfHouseDTO();
+                img.HouseId = HouseId;
+                img.ImageLink = path;
+                houseImageRepository.CreateHouseImage(img, uid);
+            }
+            return Ok();
+        }
     }
 }
