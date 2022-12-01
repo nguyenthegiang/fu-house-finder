@@ -1,22 +1,5 @@
 <!--Header-->
-<div>
-  <div class="navbar nav d-flex justify-content-between text-white orangeBackround">
-    <div class="d-flex justify-content-center align-items-center" id="header1">
-      <button class="btn btn-light mx-3" data-bs-toggle="modal" data-bs-target="#updateModal"
-        data-whatever="@getbootstrap" (click)="editRoom(0)" style="cursor: pointer;">
-        + Thêm mới
-      </button>
-      <a href="/Landlord/dashboard" class="text-white text-decoration-none" id="link">Dashboard</a>
-      <span class="mx-2">></span>
-      <span>Chi tiết nhà trọ</span>
-    </div>
-
-    <div class="d-flex justify-content-center align-items-center" id="header2">
-      <div>Chủ trọ</div>
-      <button class="btn btn-light mx-3" id="loginButton" (click)="logout()">Đăng xuất</button>
-    </div>
-  </div>
-</div>
+<app-landlord-header></app-landlord-header>
 
 <!-- Display Loading Spinner when House Detail is not yet loaded -->
 <div class="container-fluid" *ngIf="rooms === undefined">
@@ -73,6 +56,11 @@
       <h3 class="text-center">Chưa có phòng trọ</h3>
     </div>
     <div class="my-4" *ngIf="rooms.length != 0">
+      <div class="mb-4">
+        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#updateModal"
+        data-whatever="@getbootstrap" (click)="editRoom(0)">+ Thêm mới</button>
+      </div>
+
       <h3 class="text-center">Danh sách phòng</h3>
 
       <table class="table table-hover mt-4">
