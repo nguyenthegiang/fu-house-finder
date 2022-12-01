@@ -12,5 +12,6 @@ namespace Repositories
     public class RateRepository : IRateRepository
     {
         public void CreateRate(Rate rate) => RateDAO.CreateRate(rate);
+        public List<RateDTO> GetListRatesByHouseId(int HouseId) => RateDAO.GetListRatesByHouseId(HouseId);
     }
 }

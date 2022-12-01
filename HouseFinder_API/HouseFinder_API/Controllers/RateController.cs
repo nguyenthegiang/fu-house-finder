@@ -56,5 +56,29 @@ namespace HouseFinder_API.Controllers
                 return BadRequest();
             }
         }
+
+        /**
+         * GET: api/Rate/GetListRatesByHouseId?HouseId=
+         */
+        [HttpGet("GetListRatesByHouseId")]
+        public IActionResult GetListRatesByHouseId(int HouseId)
+        {
+            try
+            {
+                List<RateDTO> rateDTOs = rateRepository.GetListRatesByHouseId(HouseId);
+                if (rateDTOs == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(rateDTOs);
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }

@@ -11,5 +11,6 @@ namespace Repositories
     public interface IRateRepository
     {
         void CreateRate(Rate rate);
+        public List<RateDTO> GetListRatesByHouseId(int HouseId);
     }
 }
