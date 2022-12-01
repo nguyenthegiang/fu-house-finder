@@ -41,8 +41,6 @@ import { StaffLandlordDetailComponent } from './Staff/staff-landlord-detail/staf
 import { StaffHouseDetailComponent } from './Staff/staff-house-detail/staff-house-detail.component';
 import { StaffRoomDetailComponent } from './Staff/staff-room-detail/staff-room-detail.component';
 import { DeleteHouseComponent } from './Landlord/delete-house/delete-house.component';
-import { RegisterComponent } from './Guest/login/register/register.component';
-import { ImportComponent } from './Landlord/import/import.component';
 import { LandlordDetailInfoComponent } from './Staff/list-landlord/landlord-detail-info/landlord-detail-info.component';
 import { StaffLandlordDetailInfoComponent } from './Staff/staff-landlord-detail/staff-landlord-detail-info/staff-landlord-detail-info.component';
 import { DashboardInfoComponent } from './Landlord/dashboard/dashboard-info/dashboard-info.component';
@@ -90,8 +88,6 @@ import { LandlordHeaderComponent } from './Common/landlord-header/landlord-heade
     StaffHouseDetailComponent,
     StaffRoomDetailComponent,
     DeleteHouseComponent,
-    RegisterComponent,
-    ImportComponent,
     LandlordDetailInfoComponent,
     StaffLandlordDetailInfoComponent,
     DashboardInfoComponent,
