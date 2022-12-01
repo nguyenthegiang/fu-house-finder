@@ -122,16 +122,56 @@
         <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1">
         <div class="my-2 d-flex">
           Đánh giá:
-          <div class="ms-2">
-            <i class="star fa-regular fa-star"></i>
-            <i class="star fa-regular fa-star"></i>
-            <i class="star fa-regular fa-star"></i>
-            <i class="star fa-regular fa-star"></i>
-            <i class="star fa-regular fa-star"></i>
+          <div class="ms-2" *ngIf="star === 0">
+            <i class="star fa-regular fa-star" (click)="star1()"></i>
+            <i class="star fa-regular fa-star" (click)="star2()"></i>
+            <i class="star fa-regular fa-star" (click)="star3()"></i>
+            <i class="star fa-regular fa-star" (click)="star4()"></i>
+            <i class="star fa-regular fa-star" (click)="star5()"></i>
+          </div>
+
+          <div class="ms-2" *ngIf="star === 1">
+            <i class="star fa-solid fa-star text-warning" (click)="star1()"></i>
+            <i class="star fa-regular fa-star" (click)="star2()"></i>
+            <i class="star fa-regular fa-star" (click)="star3()"></i>
+            <i class="star fa-regular fa-star" (click)="star4()"></i>
+            <i class="star fa-regular fa-star" (click)="star5()"></i>
+          </div>
+
+          <div class="ms-2" *ngIf="star === 2">
+            <i class="star fa-solid fa-star text-warning" (click)="star1()"></i>
+            <i class="star fa-solid fa-star text-warning" (click)="star2()"></i>
+            <i class="star fa-regular fa-star" (click)="star3()"></i>
+            <i class="star fa-regular fa-star" (click)="star4()"></i>
+            <i class="star fa-regular fa-star" (click)="star5()"></i>
+          </div>
+
+          <div class="ms-2" *ngIf="star === 3">
+            <i class="star fa-solid fa-star text-warning" (click)="star1()"></i>
+            <i class="star fa-solid fa-star text-warning" (click)="star2()"></i>
+            <i class="star fa-solid fa-star text-warning" (click)="star3()"></i>
+            <i class="star fa-regular fa-star" (click)="star4()"></i>
+            <i class="star fa-regular fa-star" (click)="star5()"></i>
+          </div>
+
+          <div class="ms-2" *ngIf="star === 4">
+            <i class="star fa-solid fa-star text-warning" (click)="star1()"></i>
+            <i class="star fa-solid fa-star text-warning" (click)="star2()"></i>
+            <i class="star fa-solid fa-star text-warning" (click)="star3()"></i>
+            <i class="star fa-solid fa-star text-warning" (click)="star4()"></i>
+            <i class="star fa-regular fa-star" (click)="star5()"></i>
+          </div>
+
+          <div class="ms-2" *ngIf="star === 5">
+            <i class="star fa-solid fa-star text-warning" (click)="star1()"></i>
+            <i class="star fa-solid fa-star text-warning" (click)="star2()"></i>
+            <i class="star fa-solid fa-star text-warning" (click)="star3()"></i>
+            <i class="star fa-solid fa-star text-warning" (click)="star4()"></i>
+            <i class="star fa-solid fa-star text-warning" (click)="star5()"></i>
           </div>
         </div>
 
-        <button type="button" class="btn btn-secondary w-100">Đăng</button>
+        <button type="button" class="btn btn-secondary w-100" (click)="addRate()">Đăng</button>
       </div>
     </div>
 
@@ -320,3 +360,9 @@
     <swal #reportSuccessAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
       title="Gửi báo cáo thành công" icon="success">
     </swal>
+    <swal #rateSuccessAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
+  title="Bình luận thành công" icon="success">
+</swal>
+<swal #rateErrorAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
+  title="Vui lòng đăng nhập để xử dụng tính năng này!" icon="error">
+</swal>

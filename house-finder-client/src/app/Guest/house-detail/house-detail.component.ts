@@ -1,3 +1,5 @@
+import { RateService } from './../../services/rate.service';
+import { Rate } from './../../models/rate';
 import { User } from '../../models/user';
 import { CampusService } from '../../services/campus.service';
 import { UserService } from '../../services/user.service';
@@ -42,9 +44,15 @@ export class HouseDetailComponent implements OnInit {
   partiallyAvailableRoom: number = 0;
   availableSlot: number = 0;
 
+  houseId: number = 0;
+  star: number = 0;
+  comment: string = "";
+
   inputReportContent: string = '';
   @ViewChild('reportSuccessAlert') private reportSuccessAlert: SwalComponent | undefined;
   @ViewChild('orderErrorAlert') private orderErrorAlert: SwalComponent | undefined;
+  @ViewChild('rateSuccessAlert') private rateSuccessAlert: SwalComponent | undefined;
+  @ViewChild('rateErrorAlert') private rateErrorAlert: SwalComponent | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -52,12 +60,14 @@ export class HouseDetailComponent implements OnInit {
     private userService: UserService,
     private roomService: RoomService,
     private reportService: ReportService,
+    private rateService: RateService,
     private router: Router
   ) { }
 
   ngOnInit(): void {
     //Get id of House from Route
     const id = Number(this.route.snapshot.paramMap.get('id'));
+    this.houseId = id;
 
     //Call API: Increase view of this House by 1
     this.houseService.increaseView(id).subscribe();
@@ -142,5 +152,52 @@ export class HouseDetailComponent implements OnInit {
   //for displaying 'Amount of People'
   peopleCounter(i: number) {
     return new Array(i);
+  }
+
+  star1()
+  {
+    this.star = 1;
+  }
+
+  star2()
+  {
+    this.star = 2;
+  }
+
+  star3()
+  {
+    this.star = 3;
+  }
+
+  star4()
+  {
+    this.star = 4;
+  }
+
+  star5()
+  {
+    this.star = 5;
+  }
+
+  addRate() {
+    //Check if user has logged in
+    var user = null;
+    user = localStorage.getItem("user");
+    if (user === null) {
+      //user not logged in => Alert
+      this.rateErrorAlert?.fire();
+    } else {
+      //Check user logged in from Server => if not => alert
+      this.rateService.addRate(this.houseId, this.star, this.comment).subscribe(
+        data => {
+          if (data.status == 403) {
+            this.orderErrorAlert?.fire();
+          } else if (data.status == 200) {
+            this.rateSuccessAlert?.fire();
+          }
+        },
+        error => { }
+      );
+    }
   }
 }
