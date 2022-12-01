@@ -20,10 +20,10 @@ export class ListLandlordSignupRequestComponent implements OnInit {
 
   ngOnInit(): void
   {
-      this.userService.getLandlordSignUpRequest().subscribe((data) =>{
-        this.landlordSignupRequest = data
-      }
-      )
+    this.userService.getLandlordSignUpRequest().subscribe((data) =>{
+      this.landlordSignupRequest = data
+    }
+    )
   }
 
   search(searchValue: string)

@@ -107,4 +107,8 @@ export class UserService {
   logout(): Observable<any>{
     return this.http.get<any>(this.APIUrl + "/logout", {withCredentials: true});
   }
+
+  getLandlordSignUpRequest():Observable<User[]>{
+    return this.http.get<User[]>(this.APIUrl + "/LandlordSignupRequest");
+  }
 }
