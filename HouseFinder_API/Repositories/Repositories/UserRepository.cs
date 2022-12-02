@@ -24,9 +24,11 @@ namespace Repositories.Repositories
         //public List<UserDTO> GetStaffs() => UserDAO.GetStaffs();
 
         public UserDTO GetUserByID(string UserId) => UserDAO.GetUserById(UserId);
+
         public ResponseDTO Login(LoginDTO login)
         {
             ResponseDTO user;
+            //Choosing method to login
             if (login.FacebookUserId != null)
             {
                 user = UserDAO.LoginFacebook(login.FacebookUserId);
@@ -41,6 +43,7 @@ namespace Repositories.Repositories
             }
             return user;
         }
+
         public ResponseDTO Register(RegisterDTO register)
         {
             try
