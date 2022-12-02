@@ -43,8 +43,8 @@
                 >
                   <i class="fa-brands fa-facebook fs-4"></i>
                 </a>
-                <button type="button" class="btn btn-success me-2">Chấp Nhận</button>
-                <button type="button" class="btn btn-danger">Từ Chối</button>
+                <button type="button" class="btn btn-success me-2" (click)="UpdateUserStatus(landlord.userId, 1)">Chấp Nhận</button>
+                <button type="button" class="btn btn-danger" (click)="UpdateUserStatus(landlord.userId, 0)">Từ Chối</button>
               </td>
             </tr>
           </tbody>

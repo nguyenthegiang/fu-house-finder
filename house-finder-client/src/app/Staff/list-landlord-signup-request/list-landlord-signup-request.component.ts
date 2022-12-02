@@ -28,4 +28,9 @@ export class ListLandlordSignupRequestComponent implements OnInit {
 
   search(searchValue: string)
   {}
+
+  UpdateUserStatus(userId: string, statusId: number){
+    console.log("UserID: " + userId + ", statusId: " + statusId);
+    this.userService.updateUserStatus(userId, statusId).subscribe();
+  }
 }
