@@ -76,7 +76,7 @@ namespace HouseFinder_API.Controllers
                     return Ok(new { Status = 403 });
                 }
 
-                //Response: Null input data
+                //Create token
                 string token = this.auth.Authenticate(user);
                 if (token == null)
                     return Ok(new { Status = 404 });
