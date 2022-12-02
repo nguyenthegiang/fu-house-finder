@@ -19,5 +19,7 @@ namespace Repositories.IRepository
         public int CountActiveLandlord();
         public int CountInactiveLandlord();
         public List<UserDTO> GetLandlordSignupRequest();
+        public void UpdateUserStatus(string userId, int statusId, string staffId);
+
     }
 }

@@ -75,5 +75,7 @@ namespace Repositories.Repositories
         {
             UserDAO.UpdateUserIdCardImage(user.UserId, user.IdentityCardFrontSideImageLink, user.IdentityCardBackSideImageLink);
         }
+        public void UpdateUserStatus(string userId, int statusId, string staffId) => UserDAO.UpdateUserStatus(userId, statusId, staffId);
+
     }
 }
