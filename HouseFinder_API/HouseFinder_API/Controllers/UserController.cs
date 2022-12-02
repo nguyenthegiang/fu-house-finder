@@ -170,6 +170,23 @@ namespace HouseFinder_API.Controllers
         [HttpGet("LandlordSignupRequest")]
         public ActionResult<IEnumerable<UserDTO>> GetLandlordSignupRequest() => userReposiotry.GetLandlordSignupRequest();
 
+     
+        [HttpPut("{userId}/{statusId}/{staffId}")]
+        public IActionResult UpdateUserStatus(string userId, int statusId, string staffId)
+        {
+            try
+            {
+                //Update to Database
+                userReposiotry.UpdateUserStatus(userId, statusId, staffId);
+
+                return Ok();
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
 
     }
 }
