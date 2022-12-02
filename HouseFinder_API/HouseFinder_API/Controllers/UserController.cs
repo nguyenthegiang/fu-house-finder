@@ -63,8 +63,24 @@ namespace HouseFinder_API.Controllers
                     login.GoogleUserId = payload.Subject;
                 }
 
-                //Call to DB
-                ResponseDTO user = userReposiotry.Login(login);
+                //Admin Login
+                ResponseDTO user;
+                //Check with account in appsettings
+                if (login.Email == Configuration.GetSection("AdminAccount").GetSection("Username").Value
+                    && login.Password == Configuration.GetSection("AdminAccount").GetSection("Password").Value)
+                {
+                    user = new ResponseDTO();
+                    user.UserId = "0";
+                    user.Email = "Admin";
+                    user.DisplayName = "Admin";
+                    user.RoleName = "Admin";
+                    user.StatusId = 1;
+                }
+                else
+                //User Login: Call to DB
+                {
+                    user = userReposiotry.Login(login);
+                }
 
                 //Response: Not found User
                 if (user == null)
@@ -85,7 +101,7 @@ namespace HouseFinder_API.Controllers
                 HttpContext.Session.SetString("Token", token);
                 HttpContext.Session.SetString("User", user.UserId);
                 HttpContext.Response.Cookies.Append("X-Access-Token", token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
-                
+
                 //Response: Landlord Signup Request pending
                 if (user.StatusId == 2)
                 {
