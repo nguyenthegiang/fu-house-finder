@@ -261,9 +261,9 @@
           [(ngModel)]="selectedStatusId"
           (change)="onSelectOrderStatus(selectOrderStatusId.value)"
         >
-          <option *ngFor="let status of statuses" [value]="status.statusId">
-            {{ status.statusName }}
-          </option>
+          <option value="1">Chưa giải quyết</option>
+          <option value="2">Đang giải quyết</option>
+          <option value="3">Đã giải quyết</option>
         </select>
       </div>
 
