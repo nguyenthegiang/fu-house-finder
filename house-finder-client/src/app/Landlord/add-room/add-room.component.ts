@@ -1,8 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { MultipleComponent } from './multiple/multiple.component';
 import { SingleComponent } from './single/single.component';
+declare const google: any;  //For Google Map
 
 @Component({
   selector: 'app-add-room',
@@ -13,8 +14,8 @@ export class AddRoomComponent implements OnInit {
   @ViewChild(MultipleComponent) childMultiple: MultipleComponent | any;
   @ViewChild(SingleComponent) childSingle: SingleComponent | any;
   selected: string = "single";
-  houseId: any;
-
+  map: any;
+  marker: any;
   houseForm = this.formBuilder.group({
     houseName: ['', Validators.required],
     information: [''],
@@ -31,11 +32,12 @@ export class AddRoomComponent implements OnInit {
 
   constructor(
     private elementRef: ElementRef,
-    private formBuilder: FormBuilder,
-    private route: ActivatedRoute) { }
+    private formBuilder: FormBuilder,) { }
 
   ngOnInit(): void {
-    this.houseId = Number(this.route.snapshot.queryParamMap.get('houseId'));
+    //this.initMap();
+    //Set URL for <iframe> Google Map
+    //this.mapUrl = `https://www.google.com/maps/embed/v1/view?key=${environment.google_maps_api_key}&center=21.01325,105.527064&zoom=15`;
   }
 
   updateForm(tab: string){
@@ -48,8 +50,30 @@ export class AddRoomComponent implements OnInit {
 
     }
     else if (this.selected === "multiple"){
-      await this.childMultiple.uploadDataFile(this.houseId);
-      this.childMultiple.uploadImageFiles(this.houseId);
+      this.childMultiple.uploadDataFile();
+      this.childMultiple.uploadImageFiles();
     }
+  }
+
+  submitHouse(){
+
+  }
+
+  initMap(){
+    //initialize google map
+    this.map = new google.maps.Map(document.getElementById("google-map") as HTMLElement, {
+      zoom: 15,
+      center: { lat: -25.363, lng: 105.527064 },
+    });
+
+    // Configure the click listener
+    this.map.addListener("click", (mapsMouseEvent: any) => {
+      this.marker.setPosition(mapsMouseEvent.latLng);
+    });
+
+    this.marker = new google.maps.Marker({
+      position: { lat: -25.363, lng: 105.527064 },
+      map: this.map
+    });
   }
 }
