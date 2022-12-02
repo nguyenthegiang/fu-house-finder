@@ -11,6 +11,11 @@ import { environment } from 'src/environments/environment';
 export class UserService {
   readonly APIUrl = `${environment.api_url}/User`;
 
+  httpOptions = {
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    withCredentials: true
+  };
+
   constructor(private http: HttpClient) { }
 
   //[House Detail] Get User by Id
@@ -110,5 +115,9 @@ export class UserService {
 
   getLandlordSignUpRequest():Observable<User[]>{
     return this.http.get<User[]>(this.APIUrl + "/LandlordSignupRequest");
+  }
+
+  updateUserStatus(userId: string, statusId: number): Observable<any> {
+    return this.http.put<any>(this.APIUrl + "/" + userId + "/" + statusId, this.httpOptions, { withCredentials: true });
   }
 }
