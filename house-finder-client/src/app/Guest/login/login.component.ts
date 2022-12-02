@@ -241,7 +241,15 @@ export class LoginComponent implements OnInit {
         if (resp.status == 200) {
           localStorage.setItem('user', resp.user.displayName);
           localStorage.setItem("role", resp.user.roleName);
-          this.navigate('/Admin/list-staff');
+
+          //Login success => navigate
+          if (resp.user.roleName == 'Admin') {
+            //Admin: List Staff
+            this.navigate('Admin/list-staff');
+          } else {
+            //Staff: Dashboard
+            this.navigate('Staff/dashboard');
+          }
         }
         else if (resp.status == 403) {
           this.landLordAccountLockedAlert?.fire();
