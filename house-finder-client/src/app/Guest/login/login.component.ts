@@ -25,6 +25,7 @@ export class LoginComponent implements OnInit {
   @ViewChild('serverErrorAlert') private serverErrorAlert: SwalComponent | undefined;
   @ViewChild('invalidEmailPasswordAlert') private invalidEmailPasswordAlert: SwalComponent | undefined;
   @ViewChild('landLordAccountConfirmAlert') private landLordAccountConfirmAlert: SwalComponent | undefined;
+  @ViewChild('landlordAccountCreatedAlert') private landlordAccountCreatedAlert: SwalComponent | undefined;
 
   login = true;
   frontImgSrc = '';
@@ -326,8 +327,8 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('user', resp.user.displayName);
           localStorage.setItem("role", resp.user.roleName);
 
-          //Landlord: go to Dashboard
-          this.navigate('Landlord/dashboard');
+          //Landlord: create account success, go back Home
+          this.landlordAccountCreatedAlert?.fire();
         }
         else if (resp.status == 500) {
           //Server error
@@ -348,8 +349,8 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('user', resp.user.displayName);
           localStorage.setItem("role", resp.user.roleName);
           
-          //Landlord: go to Dashboard
-          this.navigate('Landlord/dashboard');
+          //Landlord: create account success, go back Home
+          this.landlordAccountCreatedAlert?.fire();
         }
         else if (resp.status == 500) {
           //Server error

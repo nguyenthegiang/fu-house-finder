@@ -126,6 +126,7 @@
     </mat-step>
   </mat-stepper>
 </ng-template>
+<!-- Alerts by Template: sweetalert2 -->
 <swal
   #landLordAccountLockedAlert
   title="Khóa tài khoản"
@@ -159,5 +160,14 @@
   [timerProgressBar]="true"
   title="Lỗi Server"
   icon="error"
+>
+</swal>
+<swal
+  #landlordAccountCreatedAlert
+  title="Đăng ký thành công"
+  text="Bạn đã đăng ký thành công! Vui lòng đến cơ sở Đại học FPT gần nhất để làm thủ tục xác nhận tài khoản."
+  icon="success"
+  [focusCancel]="true"
+  (confirm)="navigate('/home')"
 >
 </swal>
