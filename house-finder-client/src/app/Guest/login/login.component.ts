@@ -1,3 +1,4 @@
+import { User } from './../../models/user';
 import { Component, ElementRef, NgZone, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { CredentialResponse } from 'google-one-tap';
@@ -130,17 +131,29 @@ export class LoginComponent implements OnInit {
               if (resp.status == 200) {
                 localStorage.setItem('user', resp.user.displayName);
                 localStorage.setItem("role", resp.user.roleName);
-                this.navigate('home');
+
+                //Login success => navigate
+                if (resp.user.roleName == 'Landlord') {
+                  //Landlord: Dashboard
+                  this.navigate('Landlord/dashboard');
+                } else {
+                  //Student: Home
+                  this.navigate('home');
+                }
               }
               else if (resp.status == 201) {
                 localStorage.setItem('user', resp.user.displayName);
                 localStorage.setItem("role", resp.user.roleName);
+
+                //Login fail: Landlord not approved
                 this.landLordAccountConfirmAlert?.fire();
               }
               else if (resp.status == 403) {
+                //Login fail: Landlord disabled
                 this.landLordAccountLockedAlert?.fire();
               }
               else if (resp.status == 404) {
+                //Login fail: Not have account => move to Register
                 this.facebookId = response.id;
                 this.name = response.name;
                 await this.triggerRoleModal();
@@ -152,6 +165,7 @@ export class LoginComponent implements OnInit {
                 }
               }
               else if (resp.status == 500) {
+                //Login fail: server error
                 this.serverErrorAlert?.fire();
               }
             });
@@ -177,17 +191,29 @@ export class LoginComponent implements OnInit {
         if (resp.status == 200) {
           localStorage.setItem('user', resp.user.displayName);
           localStorage.setItem("role", resp.user.roleName);
-          this.navigate('home');
+
+          //Login success => navigate
+          if (resp.user.roleName == 'Landlord') {
+            //Landlord: Dashboard
+            this.navigate('Landlord/dashboard');
+          } else {
+            //Student: Home
+            this.navigate('home');
+          }
         }
         else if (resp.status == 201) {
           localStorage.setItem('user', resp.user.displayName);
           localStorage.setItem("role", resp.user.roleName);
+
+          //Login fail: Landlord not approved
           this.landLordAccountConfirmAlert?.fire();
         }
         else if (resp.status == 403) {
+          //Login fail: Landlord disabled
           this.landLordAccountLockedAlert?.fire();
         }
         else if (resp.status == 404) {
+          //Login fail: Not have account => move to Register
           this.googleIdToken = response?.credential;
           await this.triggerRoleModal();
           if (this.role == 'landlord') {
@@ -198,6 +224,7 @@ export class LoginComponent implements OnInit {
           }
         }
         else if (resp.status == 500) {
+          //Login fail: server error
           this.serverErrorAlert?.fire();
         }
       }
@@ -239,27 +266,35 @@ export class LoginComponent implements OnInit {
   //Register for Student
   registerStudent(): void {
     if (this.googleIdToken != undefined) {
+      //with Google
       this.userService.registerStudentGoogle(this.googleIdToken).subscribe(resp => {
         if (resp.status == 200) {
           localStorage.setItem('user', resp.user.displayName);
           localStorage.setItem("role", resp.user.roleName);
           this.user = resp;
+
+          //Student: go to Home
           this.navigate('home');
         }
         else if (resp.status == 500) {
+          //Server error
           this.serverErrorAlert?.fire();
         }
       });
     }
+    //with Facebook
     else if (this.facebookId != undefined && this.name != undefined) {
       this.userService.registerStudentFacebook(this.facebookId, this.name).subscribe(resp => {
         if (resp.status == 200) {
           localStorage.setItem('user', resp.user.displayName);
           localStorage.setItem("role", resp.user.roleName);
           this.user = resp;
-          this.navigate('/home');
+
+          //Student: go to Home
+          this.navigate('home');
         }
         else if (resp.status == 500) {
+          //Server error
           this.serverErrorAlert?.fire();
         }
       });
@@ -271,6 +306,7 @@ export class LoginComponent implements OnInit {
     phonenumber: string,
     facebookUrl: string
   ): void {
+    //with Google
     if (this.googleIdToken != undefined) {
       this.userService.registerLandlordGoogle(
         this.googleIdToken,
@@ -281,13 +317,17 @@ export class LoginComponent implements OnInit {
           this.fileService.uploadIDC(this.frontImg, this.backImg).subscribe(resp => { });
           localStorage.setItem('user', resp.user.displayName);
           localStorage.setItem("role", resp.user.roleName);
-          this.navigate('/home');
+
+          //Landlord: go to Dashboard
+          this.navigate('Landlord/dashboard');
         }
         else if (resp.status == 500) {
+          //Server error
           this.serverErrorAlert?.fire();
         }
       });
     }
+    //with Facebook
     else if (this.facebookId != undefined && this.name != undefined) {
       this.userService.registerLandlordFacebook(
         this.facebookId,
@@ -299,9 +339,12 @@ export class LoginComponent implements OnInit {
           this.fileService.uploadIDC(this.frontImg, this.backImg).subscribe(resp => { });
           localStorage.setItem('user', resp.user.displayName);
           localStorage.setItem("role", resp.user.roleName);
-          this.navigate('/home');
+          
+          //Landlord: go to Dashboard
+          this.navigate('Landlord/dashboard');
         }
         else if (resp.status == 500) {
+          //Server error
           this.serverErrorAlert?.fire();
         }
       });
