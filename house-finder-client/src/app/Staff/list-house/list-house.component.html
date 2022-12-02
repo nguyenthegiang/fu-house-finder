@@ -45,7 +45,6 @@
           <thead>
             <tr>
               <th scope="col" id="md">STT</th>
-              <th scope="col">ID</th>
               <th scope="col">Tên nhà trọ</th>
               <th scope="col" id="md">Giá điện</th>
               <th scope="col" id="md">Giá nước</th>
@@ -76,9 +75,6 @@
           <tbody>
             <tr *ngFor="let dataItem of houses; let i=index;" (click)="viewHouse(dataItem.houseId); changeBreadcrumbStatus()" style="cursor: pointer;">
               <td id="md"><b>{{i+1}}</b></td>
-
-              <!-- House id -->
-              <td>{{dataItem.houseId}}</td>
 
               <!-- House name -->
               <td>{{dataItem.houseName}}</td>
