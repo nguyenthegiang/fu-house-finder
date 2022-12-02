@@ -314,5 +314,29 @@ namespace DataAccess
             return listLandlords;
         }
 
+        public static void UpdateUserStatus(string userId, int statusId, string staffId)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Get user for update
+                    User updateUser = context.Users.FirstOrDefault(u => u.UserId == userId);
+
+                    //Update properties
+                    updateUser.StatusId = statusId;
+                    updateUser.LastModifiedBy = staffId;
+                    updateUser.LastModifiedDate = DateTime.Today;
+
+
+                    context.Entry<User>(updateUser).State = EntityState.Modified;
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

@@ -7,60 +7,49 @@
       <div class="my-4">
         <h3 class="text-center">Danh sách yêu cầu chủ trọ</h3>
 
-        <table class="table table-hover">
+        <table class="table table-hover landlordSingupRequest">
           <thead>
             <tr>
               <th scope="col">Họ Tên</th>
               <th scope="col">Email</th>
               <th scope="col">Số Điện Thoại</th>
-              <th scope="col">Facebook</th>
-              <th scope="col">Ảnh</th>
+              <th scope="col">Ảnh đại diện</th>
               <th scope="col">Ảnh Chứng Minh Thư</th>
               <th scope="col">Ngày Đăng Ký</th>
               <th scope="col">Tùy chọn</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-              <td>Larry</td>
-              <td>the Bird</td>
-              <td>@twitter</td>
-              <td>the Bird</td>
+            <tr *ngFor="let landlord of landlordSignupRequest">
+              <td>{{landlord.displayName}}</td>
+              <td>{{landlord.email}}</td>
+              <td>{{landlord.phoneNumber}}</td>
+              <td class="md">
+                <img class="mb-2 profileImage" src="../../../assets/image/{{landlord.profileImageLink}}">
+              </td>
+              <td class="md">
+                <img class="me-2 mb-2 identityCard" src="../../../assets/image/{{landlord.identityCardFrontSideImageLink}}">
+                <img class="mb-2 identityCard" src="../../../assets/image/{{landlord.identityCardBackSideImageLink}}">
+              </td>
+              <td>{{landlord.createdDate | date: "dd/MM/yyyy"}}</td>
               <td>
-                <button type="button" class="btn btn-success me-2">Chấp Nhận</button>
-                <button type="button" class="btn btn-danger">Từ Chối</button>
+                <a
+                  target="_blank"
+                  class="text-decoration-none me-3"
+                  data-bs-toggle="tooltip"
+                  data-bs-placement="top"
+                  title="Fcebook chủ trọ"
+                  href="{{ landlord.facebookUrl }}"
+                >
+                  <i class="fa-brands fa-facebook fs-4"></i>
+                </a>
+                <button type="button" class="btn btn-success me-2" (click)="UpdateUserStatus(landlord.userId, 1)">Chấp Nhận</button>
+                <button type="button" class="btn btn-danger" (click)="UpdateUserStatus(landlord.userId, 0)">Từ Chối</button>
               </td>
             </tr>
           </tbody>
         </table>
         <!-- End List of Rooms -->
-
-        <!-- Paging -->
-        <div class="d-flex justify-content-center align-items-center mt-4">
-          <nav aria-label="Page navigation example">
-            <ul class="pagination">
-              <li class="page-item">
-                <a class="page-link text-dark" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                  <span class="sr-only">Previous</span>
-                </a>
-              </li>
-              <li class="page-item"><a class="page-link text-dark" href="#">1</a></li>
-              <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
-              <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link text-dark" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                  <span class="sr-only">Next</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-        <!-- End Paging -->
       </div>
     </div>
   </div>
