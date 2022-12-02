@@ -46,8 +46,8 @@
             <tr>
               <th scope="col" id="md">STT</th>
               <th scope="col">Tên nhà trọ</th>
-              <th scope="col" id="md">Giá điện</th>
-              <th scope="col" id="md">Giá nước</th>
+              <th scope="col" id="md">Giá điện (VNĐ)</th>
+              <th scope="col" id="md">Giá nước (VNĐ)</th>
               <th scope="col" id="md">
                 <div class="row">
                   <div class="col">
@@ -79,8 +79,8 @@
               <!-- House name -->
               <td>{{dataItem.houseName}}</td>
 
-              <td id="md">{{dataItem.powerPrice | currency:'VND':'symbol':'3.0'}}</td>
-              <td id="md">{{dataItem.waterPrice | currency:'VND':'symbol':'3.0'}}</td>
+              <td id="md">{{dataItem.powerPrice | number }}</td>
+              <td id="md">{{dataItem.waterPrice | number}}</td>
 
               <!-- Statistics -->
               <td id="md">
