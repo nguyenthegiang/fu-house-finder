@@ -305,7 +305,7 @@ namespace DataAccess
             List<UserDTO> listLandlords;
             try
             {
-                listLandlords = GetLandlords().Where(landlord => landlord.StatusId == 2).ToList();
+                listLandlords = GetLandlords().Where(landlord => landlord.StatusId == 2).OrderBy(landlord => landlord.DisplayName).ToList();
             }
             catch (Exception e)
             {

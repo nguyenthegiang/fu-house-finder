@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-list-landlord-signup-request',
