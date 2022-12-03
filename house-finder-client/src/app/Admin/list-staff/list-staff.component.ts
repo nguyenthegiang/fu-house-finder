@@ -19,9 +19,9 @@ export class ListStaffComponent implements OnInit
   ngOnInit(): void
   {
     //Get List of Staffs
-    // this.userService.getListHousesByLandlordId("LA000003").subscribe(data => {
-    //   this.staffs = data;
-    // });
+    this.userService.getStaffs().subscribe(data => {
+      this.staffs = data;
+    });
   }
 
   addHouse()
