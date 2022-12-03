@@ -3,7 +3,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -27,7 +27,6 @@ import { SingleComponent } from './Landlord/add-room/single/single.component';
 import { MultipleComponent } from './Landlord/add-room/multiple/multiple.component';
 import { MaterialModule } from './materials/material.module';
 import { ListStaffComponent } from './Admin/list-staff/list-staff.component';
-import { ChangePasswordComponent } from './Admin/change-password/change-password.component';
 import { CreateAccountComponent } from './Admin/create-account/create-account.component';
 import { UpdateAccountComponent } from './Admin/update-account/update-account.component';
 import { HeaderComponent } from './Common/header/header.component';
@@ -76,7 +75,6 @@ import { LandlordChangePasswordComponent } from './Landlord/landlord-change-pass
     SingleComponent,
     MultipleComponent,
     ListStaffComponent,
-    ChangePasswordComponent,
     CreateAccountComponent,
     UpdateAccountComponent,
     HeaderComponent,
