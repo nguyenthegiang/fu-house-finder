@@ -18,7 +18,7 @@ namespace HouseFinder_API.Controllers
     public class OrderController : ControllerBase
     {
         private IOrderRepository orderRepository = new OrderRepository();
-        private IUserReposiotry userReposiotry = new UserRepository();
+        private IUserRepository userReposiotry = new UserRepository();
 
         [EnableQuery]
         [HttpGet]

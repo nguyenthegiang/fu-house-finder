@@ -18,6 +18,8 @@ export class StaffHeaderComponent implements OnInit
   totalCapacity: number = 0;
   availableCapacity: number = 0;
 
+  username: string = "";
+
   constructor(private houseService: HouseService,
     private roomService: RoomService,
     private router: Router,
@@ -49,6 +51,8 @@ export class StaffHeaderComponent implements OnInit
     this.roomService.countAvailableCapacity().subscribe(data => {
       this.availableCapacity = data;
     });
+
+    this.username = localStorage.getItem('user') || '{}';
   }
 
   //Home button -> go back to /home

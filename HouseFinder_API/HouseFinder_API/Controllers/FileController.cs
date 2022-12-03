@@ -26,7 +26,7 @@ namespace HouseFinder_API.Controllers
         private IWebHostEnvironment Environment;
         private IHouseRepository housesRepository = new HouseRepository();
         private IRoomRepository roomsRepository = new RoomRepository();
-        private IUserReposiotry userReposiotry = new UserRepository();
+        private IUserRepository userReposiotry = new UserRepository();
         private IRoomImageRepository roomImageRepository = new RoomImageRepository();
         private IHouseImageRepository houseImageRepository = new HouseImageRepository();
 

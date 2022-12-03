@@ -7,10 +7,11 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./landlord-header.component.scss']
 })
 export class LandlordHeaderComponent implements OnInit {
-
+  username: string = "";
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    this.username = localStorage.getItem('user') || '{}';
   }
 
   backHome() {

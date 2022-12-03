@@ -2,7 +2,7 @@
 <div>
   <div class="navbar nav d-flex justify-content-between text-white orangeBackround">
 
-  <div class="col-12 col-md-9">
+  <div class="col-12 col-md-10">
     <div id="link">
       <a *ngIf="!isDashboardRoute()" href="/Staff/dashboard" class="text-white text-decoration-none mx-2">Dashboard</a>
       <a *ngIf="isDashboardRoute()" href="/Staff/dashboard" class="text-white text-decoration-underline mx-2">Dashboard</a>
@@ -24,12 +24,12 @@
     </div>
   </div>
 
-  <div class="col-12 col-md-3 d-flex justify-content-center align-items-center" id="btn">
+  <div class="col-12 col-md-2 d-flex justify-content-center align-items-center" id="btn">
     <div class="dropdown">
-      <button class="btn btn-light dropdown-toggle" id="dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-        Tuyển sinh
+      <button class="btn btn-light dropdown-toggle" id="loginButton" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        {{username}}
       </button>
-      <ul class="dropdown-menu dropdown-menu">
+      <ul class="dropdown-menu dropdown-menu-end">
         <li><a class="dropdown-item" href="/Staff/staff-update-profile" id="dropdownItem">Chỉnh sửa thông tin</a></li>
         <li><a class="dropdown-item" href="/Staff/staff-change-password" id="dropdownItem">Đổi mật khẩu</a></li>
         <li><hr class="dropdown-divider"></li>
