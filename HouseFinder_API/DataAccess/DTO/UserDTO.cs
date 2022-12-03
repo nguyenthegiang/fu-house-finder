@@ -13,8 +13,10 @@ namespace DataAccess.DTO
         public string FacebookUserId { get; set; }
         public string GoogleUserId { get; set; }
         public string Email { get; set; }
+
         //Not show password when send API
         //public string Password { get; set; }
+
         public string DisplayName { get; set; }
         public int StatusId { get; set; }
         public string ProfileImageLink { get; set; }
@@ -34,6 +36,7 @@ namespace DataAccess.DTO
         public virtual RoleDTO Role { get; set; }
     }
 
+    //UserDTO used for Registering
     public class RegisterDTO
     {
         public string FacebookUserId { get; set; }
@@ -48,6 +51,8 @@ namespace DataAccess.DTO
         public int? RoleId { get; set; }
         public string RoleName { get; set; }
     }
+
+    //UserDTO used for Login
     public class LoginDTO
     {
         public string FacebookUserId { get; set; } = null;
@@ -55,6 +60,8 @@ namespace DataAccess.DTO
         public string Email { get; set; } = null;
         public string Password { get; set; } = null;
     }
+
+    //UserDTO used in Response for Login request
     public class ResponseDTO
     {
         public string AccessToken { get; set; }

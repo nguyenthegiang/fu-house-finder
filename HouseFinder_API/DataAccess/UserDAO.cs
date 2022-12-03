@@ -37,7 +37,7 @@ namespace DataAccess
         }
 
         //[Staff][Dashboard] Get list of landlords 
-         public static List<UserDTO> GetLandlords()
+        public static List<UserDTO> GetLandlords()
         {
             List<UserDTO> landlords;
             try
@@ -76,31 +76,41 @@ namespace DataAccess
         //    return staffs;
         //}
 
+        /**
+         * [Login] Login with Email & Password
+         */
         public static ResponseDTO LoginUsername(string email, string password)
         {
             ResponseDTO userDTO;
-                using (var context = new FUHouseFinderContext())
-                {
-                    //Get by Id, include Address
-                    MapperConfiguration config;
-                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    User user = context.Users.Where(u => u.Email.Equals(email))
-                        .Include(u => u.Address).Include(u => u.Role).FirstOrDefault();
+            using (var context = new FUHouseFinderContext())
+            {
+                //Get by Id, include Address
+                //Check Email
+                MapperConfiguration config;
+                config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                User user = context.Users.Where(u => u.Email.Equals(email))
+                    .Include(u => u.Address).Include(u => u.Role).FirstOrDefault();
 
-                    PasswordHasher<User> pw = new PasswordHasher<User>();
-                    var result = pw.VerifyHashedPassword(user, user.Password, password);
-                    if (result == PasswordVerificationResult.Success || result == PasswordVerificationResult.SuccessRehashNeeded)
-                    {
-                        var mapper = config.CreateMapper();
-                        userDTO = mapper.Map<ResponseDTO>(user);
-                    }
-                    else
-                    {
-                        userDTO = null;
-                    }
+                //Check Password (Hashing)
+                PasswordHasher<User> pw = new PasswordHasher<User>();
+                var result = pw.VerifyHashedPassword(user, user.Password, password);
+                if (result == PasswordVerificationResult.Success || result == PasswordVerificationResult.SuccessRehashNeeded)
+                {
+                    var mapper = config.CreateMapper();
+                    userDTO = mapper.Map<ResponseDTO>(user);
                 }
+                else
+                {
+                    userDTO = null;
+                }
+            }
+
             return userDTO;
         }
+
+        /**
+         * [Login] Login with Facebook
+         */
         public static ResponseDTO LoginFacebook(string fid)
         {
             ResponseDTO userDTO;
@@ -109,6 +119,7 @@ namespace DataAccess
                 using (var context = new FUHouseFinderContext())
                 {
                     //Get by Id, include Address
+                    //Check FacebookId equals
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
                     userDTO = context.Users.Where(u => u.FacebookUserId.Equals(fid))
@@ -121,6 +132,10 @@ namespace DataAccess
             }
             return userDTO;
         }
+
+        /**
+         * [Login] Login with Google
+         */
         public static ResponseDTO LoginGoogle(string gid)
         {
             ResponseDTO userDTO;
@@ -129,6 +144,7 @@ namespace DataAccess
                 using (var context = new FUHouseFinderContext())
                 {
                     //Get by Id, include Address
+                    //Check GoogleId equals
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
                     userDTO = context.Users.Where(u => u.GoogleUserId.Equals(gid))
@@ -141,6 +157,11 @@ namespace DataAccess
             }
             return userDTO;
         }
+
+        /**
+         * [Login] Register
+         * Create new account for Student/Landlord
+         */
         public static ResponseDTO Register(string fid, string gid, string email, string name, int role, string identityCardFrontSideImageLink, string identityCardBackSideImageLink, string phonenumber, string facebookUrl)
         {
             ResponseDTO userDTO;
@@ -148,21 +169,22 @@ namespace DataAccess
             {
                 using (var context = new FUHouseFinderContext())
                 {
-                    //Get by Id, include Address
+                    //Check if user has existed, if not => create account
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
                     userDTO = context.Users.Where(u => u.FacebookUserId.Equals(fid) && u.GoogleUserId.Equals(gid))
                         .Include(u => u.Address).Include(u => u.Role).ProjectTo<ResponseDTO>(config).FirstOrDefault();
+
                     if (userDTO == null)
                     {
+                        //Make UserId
                         var lastUser = context.Users.Where(u => u.RoleId == role).OrderBy(u => u.UserId).LastOrDefault();
                         int index = 0;
                         if (lastUser != null)
                         {
-                            index = Int32.Parse(lastUser.UserId.Substring(2)) + 1;
+                            index = Int32.Parse(lastUser.UserId.Substring(2)) + 1;  //id auto increment
                         }
-
-                        string userPrefix = role == 1 ? "HE" : "LA";
+                        string userPrefix = role == 1 ? "HE" : "LA";    //Prefix indicated by role
 
                         User user = new User();
                         user.UserId = userPrefix + index.ToString("D6");
@@ -175,15 +197,18 @@ namespace DataAccess
                         user.FacebookUrl = facebookUrl;
                         user.PhoneNumber = phonenumber;
                         user.RoleId = role;
-                        user.Password = "";
+                        user.Password = "";     //No password because login with fb/gg
                         user.CreatedBy = user.UserId;
                         user.CreatedDate = DateTime.UtcNow;
                         user.LastModifiedBy = user.UserId;
                         user.LastModifiedDate = DateTime.UtcNow;
-                        int status = role == 2 ? 2 : 1;
+                        int status = role == 2 ? 2 : 1;     //Landlord is disabled when created (Student is not)
                         user.StatusId = status;
+
                         context.Users.Add(user);
                         context.SaveChanges();
+
+                        //Get user to return
                         userDTO = context.Users.Where(u => u.UserId == user.UserId)
                             .Include(u => u.Role)
                             .ProjectTo<ResponseDTO>(config)
@@ -195,6 +220,7 @@ namespace DataAccess
             {
                 throw new Exception(e.Message);
             }
+
             return userDTO;
         }
 
@@ -236,7 +262,6 @@ namespace DataAccess
             {
                 throw new Exception(e.Message);
             }
-            
         }
 
         //[Staff/Dashboard] Count total active landlords

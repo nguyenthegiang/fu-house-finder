@@ -33,32 +33,47 @@ export class UserService {
     return this.http.get<User[]>(this.APIUrl + "/staff");
   }
 
+  /**
+   * [Login] Login with Facebook
+   */
   loginFacebook(facebookUserId: string): Observable<any> {
-    return this.http.post<any>(this.APIUrl + "/login", {"facebookUserId": facebookUserId}, {withCredentials: true});
+    return this.http.post<any>(this.APIUrl + "/login", { "facebookUserId": facebookUserId }, { withCredentials: true });
   }
 
-  loginGoogle(googleUserId: string): Observable<any>{
-    return this.http.post<any>(this.APIUrl + "/login", {"googleUserId": googleUserId}, {withCredentials: true});
+  /**
+   * [Login] Login with Google
+   */
+  loginGoogle(googleUserId: string): Observable<any> {
+    return this.http.post<any>(this.APIUrl + "/login", { "googleUserId": googleUserId }, { withCredentials: true });
   }
 
-  loginEmailPassword(email: string, password: string): Observable<any>{
-    return this.http.post<any>(this.APIUrl + "/login", {"email": email, "password": password}, {withCredentials: true});
+  /**
+   * [Login] Login with Email & Password
+   */
+  loginEmailPassword(email: string, password: string): Observable<any> {
+    return this.http.post<any>(this.APIUrl + "/login", { "email": email, "password": password }, { withCredentials: true });
   }
 
-  registerStudentGoogle(googleIdToken: string): Observable<any>{
+  /**
+   * [Login] Register with Google for Student
+   */
+  registerStudentGoogle(googleIdToken: string): Observable<any> {
     return this.http.post<any>(this.APIUrl + "/register",
-    {
-      "googleIdToken": googleIdToken,
-      "roleName": "student",
-    },
-    {withCredentials: true});
+      {
+        "googleIdToken": googleIdToken,
+        "roleName": "student",
+      },
+      { withCredentials: true });
   }
 
+  /**
+   * [Login] Register with Google for Landlord
+   */
   registerLandlordGoogle(
-      googleIdToken: string,
-      phonenumber: string,
-      facebookUrl: string
-    ): Observable<any>{
+    googleIdToken: string,
+    phonenumber: string,
+    facebookUrl: string
+  ): Observable<any> {
     return this.http.post<any>(
       this.APIUrl + "/register",
       {
@@ -67,50 +82,59 @@ export class UserService {
         "facebookUrl": facebookUrl,
         "roleName": "landlord"
       },
-      {withCredentials: true});
+      { withCredentials: true });
   }
 
-  registerStudentFacebook(facebookId: string, name: string): Observable<any>{
+  /**
+   * [Login] Register with Facebook for Student
+   */
+  registerStudentFacebook(facebookId: string, name: string): Observable<any> {
     return this.http.post<User>(this.APIUrl + "/register", {
       "facebookUserId": facebookId,
       "displayName": name,
       "roleName": "student"
     },
-    {withCredentials: true});
+      { withCredentials: true });
   }
 
+  /**
+   * [Login] Register with Facebook for Landlord
+   */
   registerLandlordFacebook(
     facebookId: string,
     name: string,
     phonenumber: string,
     facebookUrl: string
-  ): Observable<any>{
-  return this.http.post<any>(
-    this.APIUrl + "/register",
-    {
-      "facebookUserId": facebookId,
-      "displayName": name,
-      "phonenumber": phonenumber,
-      "facebookUrl": facebookUrl,
-      "roleName": "landlord"
-    },
-    {withCredentials: true});
+  ): Observable<any> {
+    return this.http.post<any>(
+      this.APIUrl + "/register",
+      {
+        "facebookUserId": facebookId,
+        "displayName": name,
+        "phonenumber": phonenumber,
+        "facebookUrl": facebookUrl,
+        "roleName": "landlord"
+      },
+      { withCredentials: true });
   }
 
-  countTotalLandlords():Observable<number>{
+  /**
+   * [Login] Logout
+   */
+  logout(): Observable<any> {
+    return this.http.get<any>(this.APIUrl + "/logout", { withCredentials: true });
+  }
+
+  countTotalLandlords(): Observable<number> {
     return this.http.get<number>(this.APIUrl + "/CountTotalLandlord");
   }
 
-  countActiveLandlords():Observable<number>{
+  countActiveLandlords(): Observable<number> {
     return this.http.get<number>(this.APIUrl + "/CountActiveLandlord");
   }
 
-  countInactiveLandlords():Observable<number>{
+  countInactiveLandlords(): Observable<number> {
     return this.http.get<number>(this.APIUrl + "/CountInactiveLandlord");
-  }
-
-  logout(): Observable<any>{
-    return this.http.get<any>(this.APIUrl + "/logout", {withCredentials: true});
   }
 
   getLandlordSignUpRequest():Observable<User[]>{

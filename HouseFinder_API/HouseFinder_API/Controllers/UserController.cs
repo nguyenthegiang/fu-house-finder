@@ -22,12 +22,13 @@ namespace HouseFinder_API.Controllers
     {
         private IAuthentication auth;
         private IConfiguration Configuration;
+        private IUserReposiotry userReposiotry = new UserRepository();
+
         public UserController(IAuthentication auth, IConfiguration configuration)
         {
             this.auth = auth;
             this.Configuration = configuration;
         }
-        private IUserReposiotry userReposiotry = new UserRepository();
 
         [HttpGet("{UserId}")]
         public IActionResult GetUserById(string UserId)
@@ -42,11 +43,16 @@ namespace HouseFinder_API.Controllers
                 return Ok(userDTO);
             }
         }
+
+        /**
+         * [Login] Login
+         */
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDTO login)
         {
             try
             {
+                //Login with Google
                 if (login.GoogleUserId != null)
                 {
                     var validationSettings = new GoogleJsonWebSignature.ValidationSettings
@@ -56,23 +62,53 @@ namespace HouseFinder_API.Controllers
                     var payload = await GoogleJsonWebSignature.ValidateAsync(login.GoogleUserId, validationSettings);
                     login.GoogleUserId = payload.Subject;
                 }
-                ResponseDTO user = userReposiotry.Login(login);
+
+                //Admin Login
+                ResponseDTO user;
+                //Check with account in appsettings
+                if (login.Email == Configuration.GetSection("AdminAccount").GetSection("Username").Value
+                    && login.Password == Configuration.GetSection("AdminAccount").GetSection("Password").Value)
+                {
+                    user = new ResponseDTO();
+                    user.UserId = "0";
+                    user.Email = "Admin";
+                    user.DisplayName = "Admin";
+                    user.RoleName = "Admin";
+                    user.StatusId = 1;
+                }
+                else
+                //User Login: Call to DB
+                {
+                    user = userReposiotry.Login(login);
+                }
+
+                //Response: Not found User
                 if (user == null)
                     return Ok(new { Status = 404 });
+
+                //Response: Disabled account
                 if (user.StatusId == 0)
                 {
                     return Ok(new { Status = 403 });
                 }
+
+                //Create token
                 string token = this.auth.Authenticate(user);
                 if (token == null)
                     return Ok(new { Status = 404 });
+
+                //Set data to Session
                 HttpContext.Session.SetString("Token", token);
                 HttpContext.Session.SetString("User", user.UserId);
                 HttpContext.Response.Cookies.Append("X-Access-Token", token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+
+                //Response: Landlord Signup Request pending
                 if (user.StatusId == 2)
                 {
                     return Ok(new { Status = 201, User = user });
                 }
+
+                //Response: Allow login
                 return Ok(new { Status = 200, User = user });
             }
             catch (Exception)
@@ -80,6 +116,10 @@ namespace HouseFinder_API.Controllers
                 return Ok(new { Status = 500, Message = "Login Error!" });
             }
         }
+
+        /**
+         * [Login] Register
+         */
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDTO register)
         {
@@ -109,6 +149,10 @@ namespace HouseFinder_API.Controllers
                 return Ok(new { Status = 500, Message = "Register Error!" });
             }
         }
+
+        /**
+         * [To be Deleted] Demo method for testing authorization
+         */
         [Authorize]
         [HttpGet("test")]
         public IActionResult TestAuthorize()
@@ -116,6 +160,9 @@ namespace HouseFinder_API.Controllers
             return Ok(new { UID = HttpContext.Session.GetString("User") });
         }
 
+        /**
+         * [To be Deleted] Demo method for generating hashed password
+         */
         [HttpGet("generate_password")]
         public IActionResult GeneratePassword(string password)
         {
@@ -125,6 +172,10 @@ namespace HouseFinder_API.Controllers
             return Ok(result);
         }
 
+        /**
+         * [Login] Logout
+         * Delete Session
+         */
         [HttpGet("logout")]
         public IActionResult Logout()
         {
@@ -156,11 +207,13 @@ namespace HouseFinder_API.Controllers
         {
             return userReposiotry.CountTotalLandlord();
         }
+
         [HttpGet("CountActiveLandlord")]
         public int? CountActiveLandlord()
         {
             return userReposiotry.CountActiveLandlord();
         }
+
         [HttpGet("CountInactiveLandlord")]
         public int? CountInactiveLandlord()
         {
