@@ -51,6 +51,8 @@ import { LandlordHeaderComponent } from './Common/landlord-header/landlord-heade
 import { AdminHeaderComponent } from './Common/admin-header/admin-header.component';
 import { StaffUpdateProfileComponent } from './Staff/staff-update-profile/staff-update-profile.component';
 import { LandlordUpdateProfileComponent } from './Landlord/landlord-update-profile/landlord-update-profile.component';
+import { StaffChangePasswordComponent } from './Staff/staff-change-password/staff-change-password.component';
+import { LandlordChangePasswordComponent } from './Landlord/landlord-change-password/landlord-change-password.component';
 
 @NgModule({
   declarations: [
@@ -100,6 +102,8 @@ import { LandlordUpdateProfileComponent } from './Landlord/landlord-update-profi
     AdminHeaderComponent,
     StaffUpdateProfileComponent,
     LandlordUpdateProfileComponent,
+    StaffChangePasswordComponent,
+    LandlordChangePasswordComponent,
   ],
   imports: [
     BrowserModule,
