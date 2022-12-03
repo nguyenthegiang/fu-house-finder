@@ -46,6 +46,7 @@ export class ListLandlordComponent implements OnInit
     console.log(this.searchName);
   }
 
+
   viewHouse(id: string)
   {
     this.landlordId = id;
