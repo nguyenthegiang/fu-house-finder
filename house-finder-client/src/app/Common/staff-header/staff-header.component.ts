@@ -94,4 +94,9 @@ export class StaffHeaderComponent implements OnInit
   {
     return this.router.url === "/Staff/list-order";
   }
+
+  isUpdateProfileRoute()
+  {
+    return this.router.url === "/Staff/staff-update-profile";
+  }
 }

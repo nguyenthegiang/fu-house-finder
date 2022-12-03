@@ -25,7 +25,16 @@
   </div>
 
   <div class="col-12 col-md-3 d-flex justify-content-center align-items-center" id="btn">
-    <div>Chủ trọ</div>
-    <button class="btn btn-light mx-3" id="loginButton" (click)="logout()">Đăng xuất</button>
+    <div class="dropdown">
+      <button class="btn btn-light dropdown-toggle" id="dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        Tuyển sinh
+      </button>
+      <ul class="dropdown-menu dropdown-menu">
+        <li><a class="dropdown-item" href="/Staff/staff-update-profile" id="dropdownItem">Chỉnh sửa thông tin</a></li>
+        <li><a class="dropdown-item" href="/Staff/staff-change-password" id="dropdownItem">Đổi mật khẩu</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#" id="dropdownItem" (click)="logout()">Đăng xuất</a></li>
+      </ul>
+    </div>
   </div>
 </div>

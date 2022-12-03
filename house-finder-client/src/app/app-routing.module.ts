@@ -1,3 +1,7 @@
+import { StaffChangePasswordComponent } from './Staff/staff-change-password/staff-change-password.component';
+import { LandlordChangePasswordComponent } from './Landlord/landlord-change-password/landlord-change-password.component';
+import { LandlordUpdateProfileComponent } from './Landlord/landlord-update-profile/landlord-update-profile.component';
+import { StaffUpdateProfileComponent } from './Staff/staff-update-profile/staff-update-profile.component';
 import { StaffHouseDetailComponent } from './Staff/staff-house-detail/staff-house-detail.component';
 import { StaffLandlordDetailComponent } from './Staff/staff-landlord-detail/staff-landlord-detail.component';
 import { UpdateAccountComponent } from './Admin/update-account/update-account.component';
@@ -40,6 +44,8 @@ const routes: Routes = [
   { path: 'Landlord/update-room/:id', component: UpdateRoomComponent},
   { path: 'Landlord/rate-house/:id', component: RateHouseComponent},
   { path: 'Landlord/add-room', component: AddRoomComponent},
+  { path: 'Landlord/landlord-update-profile', component: LandlordUpdateProfileComponent},
+  { path: 'Landlord/landlord-change-password', component: LandlordChangePasswordComponent},
   { path: 'Staff/dashboard', component: DashboardStaffComponent},
   { path: 'Staff/list-landlord', component: ListLandlordComponent},
   { path: 'Staff/list-report', component: ListReportComponent},
@@ -49,6 +55,8 @@ const routes: Routes = [
   { path: 'Staff/staff-landlord-detail/:id', component: StaffLandlordDetailComponent},
   { path: 'Staff/staff-house-detail/:id', component: StaffHouseDetailComponent},
   { path: 'Staff/staff-room-detail/:id', component: StaffRoomDetailComponent},
+  { path: 'Staff/staff-update-profile', component: StaffUpdateProfileComponent},
+  { path: 'Staff/staff-change-password', component: StaffChangePasswordComponent},
   { path: 'Admin/list-staff', component: ListStaffComponent},
   { path: 'Admin/change-password', component: ChangePasswordComponent},
   { path: 'Admin/create-account', component: CreateAccountComponent},

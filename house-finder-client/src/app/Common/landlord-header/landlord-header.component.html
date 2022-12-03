@@ -1,6 +1,6 @@
 <!--Header-->
 <div class="navbar nav d-flex justify-content-between text-center text-white orangeBackround">
-  <div class="logo col-12 col-md-2 my-2">
+  <div class="logo col-12 col-md-3 my-2">
     <!-- Link back to Home -->
     <a (click)="backHome()" id="app-name" style="cursor: pointer;">
       <img src="/assets/image/Logo.png" alt="..." width="70px">
@@ -8,7 +8,7 @@
     </a>
   </div>
 
-  <div class="col-12 col-md-8 my-2">
+  <div class="col-12 col-md-6 my-2">
     <h1>TÌM TRỌ SINH VIÊN FPT</h1>
     <div>
       <a href="/Landlord/dashboard" class="text-white text-decoration-none mx-2" id="link">Trang chủ</a>|
@@ -21,8 +21,17 @@
     </div>
   </div>
 
-  <div class="col-12 col-md-2 d-flex justify-content-center align-items-center" id="btn">
-    <div>Chủ trọ</div>
-    <button class="btn btn-light mx-3" id="loginButton" (click)="logout()">Đăng xuất</button>
+  <div class="col-12 col-md-3 d-flex justify-content-center align-items-center" id="btn">
+    <div class="dropdown">
+      <button class="btn btn-light dropdown-toggle" id="dropdown" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+       Chủ trọ
+      </button>
+      <ul class="dropdown-menu dropdown-menu">
+        <li><a class="dropdown-item" href="/Landlord/landlord-update-profile" id="dropdownItem">Chỉnh sửa thông tin</a></li>
+        <li><a class="dropdown-item" href="/Landlord/landlord-change-password" id="dropdownItem">Đổi mật khẩu</a></li>
+        <li><hr class="dropdown-divider"></li>
+        <li><a class="dropdown-item" href="#" id="dropdownItem" (click)="logout()">Đăng xuất</a></li>
+      </ul>
+    </div>
   </div>
 </div>
