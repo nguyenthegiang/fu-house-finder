@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Repositories.IRepository
 {
-    public interface IUserReposiotry
+    public interface IUserRepository
     {
         UserDTO GetUserByID(string UserId);
         public ResponseDTO Login(LoginDTO login);
@@ -20,5 +20,7 @@ namespace Repositories.IRepository
         public List<UserDTO> GetLandlordSignupRequest();
         public void UpdateUserStatus(string userId, int statusId, string staffId);
         public List<UserDTO> GetStaffs();
+        public void UpdateProfile(string userId, string name, string email);
+        public void ChangePassword(string userId, string newPassword);
     }
 }

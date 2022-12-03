@@ -358,5 +358,56 @@ namespace DataAccess
             }
             return staffs;
         }
+
+        public static void UpdateProfile(string userId, string name, string email)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Find rooms of this house
+                    User user = context.Users.FirstOrDefault(u => u.UserId.Equals(userId));
+                    if (user == null)
+                    {
+                        throw new Exception();
+                    }
+
+                    //Update
+                    user.DisplayName = name;
+                    user.Email = email;
+                    context.Users.Update(user);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public static void ChangePassword(string userId, string newPassword)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Find rooms of this house
+                    User user = context.Users.FirstOrDefault(u => u.UserId.Equals(userId));
+                    if (user == null)
+                    {
+                        throw new Exception();
+                    }
+
+                    //Update
+                    user.Password = newPassword;
+                    context.Users.Update(user);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

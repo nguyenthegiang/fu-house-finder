@@ -22,7 +22,7 @@ namespace HouseFinder_API.Controllers
     {
         private IAuthentication auth;
         private IConfiguration Configuration;
-        private IUserReposiotry userReposiotry = new UserRepository();
+        private IUserRepository userRepository = new UserRepository();
 
         public UserController(IAuthentication auth, IConfiguration configuration)
         {
@@ -33,7 +33,7 @@ namespace HouseFinder_API.Controllers
         [HttpGet("{UserId}")]
         public IActionResult GetUserById(string UserId)
         {
-            UserDTO userDTO = userReposiotry.GetUserByID(UserId);
+            UserDTO userDTO = userRepository.GetUserByID(UserId);
             if (userDTO == null)
             {
                 return NotFound();
@@ -79,7 +79,7 @@ namespace HouseFinder_API.Controllers
                 else
                 //User Login: Call to DB
                 {
-                    user = userReposiotry.Login(login);
+                    user = userRepository.Login(login);
                 }
 
                 //Response: Not found User
@@ -136,7 +136,7 @@ namespace HouseFinder_API.Controllers
                     register.Email = payload.Email;
                     register.DisplayName = payload.Name;
                 }
-                ResponseDTO user = userReposiotry.Register(register);
+                ResponseDTO user = userRepository.Register(register);
                 string token = this.auth.Authenticate(user);
                 HttpContext.Session.SetString("Token", token);
                 HttpContext.Session.SetString("User", user.UserId);
@@ -191,7 +191,7 @@ namespace HouseFinder_API.Controllers
         [HttpGet("landlord")]
         public IActionResult GetLandlords()
         {
-            List<UserDTO> landlords = userReposiotry.GetLandlords();
+            List<UserDTO> landlords = userRepository.GetLandlords();
             if (landlords == null)
             {
                 return NotFound();
@@ -205,23 +205,23 @@ namespace HouseFinder_API.Controllers
         [HttpGet("CountTotalLandlord")]
         public int? CountTotalLandlord()
         {
-            return userReposiotry.CountTotalLandlord();
+            return userRepository.CountTotalLandlord();
         }
 
         [HttpGet("CountActiveLandlord")]
         public int? CountActiveLandlord()
         {
-            return userReposiotry.CountActiveLandlord();
+            return userRepository.CountActiveLandlord();
         }
 
         [HttpGet("CountInactiveLandlord")]
         public int? CountInactiveLandlord()
         {
-            return userReposiotry.CountInactiveLandlord();
+            return userRepository.CountInactiveLandlord();
         }
 
         [HttpGet("LandlordSignupRequest")]
-        public ActionResult<IEnumerable<UserDTO>> GetLandlordSignupRequest() => userReposiotry.GetLandlordSignupRequest();
+        public ActionResult<IEnumerable<UserDTO>> GetLandlordSignupRequest() => userRepository.GetLandlordSignupRequest();
 
         [Authorize]
         [HttpPut("{userId}/{statusId}")]
@@ -237,7 +237,7 @@ namespace HouseFinder_API.Controllers
                 }
 
                 //Update to Database
-                userReposiotry.UpdateUserStatus(userId, statusId, uid);
+                userRepository.UpdateUserStatus(userId, statusId, uid);
 
                 return Ok();
             }
@@ -252,7 +252,7 @@ namespace HouseFinder_API.Controllers
         [HttpGet("staff")]
         public IActionResult GetStaffs()
         {
-            List<UserDTO> staffs = userReposiotry.GetStaffs();
+            List<UserDTO> staffs = userRepository.GetStaffs();
             if (staffs == null)
             {
                 return NotFound();
@@ -274,9 +274,56 @@ namespace HouseFinder_API.Controllers
                 return Forbid();
             }
 
-            UserDTO userDTO = userReposiotry.GetUserByID(uid);
+            //Update to Database
+            UserDTO userDTO = userRepository.GetUserByID(uid);
 
             return Ok(userDTO);
+        }
+
+        [Authorize]
+        [HttpPut("{userId}/{name}/{email}")]
+        public IActionResult UpdateProfile(string userId, string name, string email)
+        {
+            try
+            {
+                //Get user id from Session as Staff that makes this update
+                string uid = HttpContext.Session.GetString("User");
+                if (uid == null)
+                {
+                    return Forbid();
+                }
+
+                //Update to Database
+                userRepository.UpdateProfile(userId, name, email);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [Authorize]
+        [HttpPut("{userId}/{newPassword}")]
+        public IActionResult ChangePassword(string userId, string newPassword)
+        {
+            try
+            {
+                //Get user id from Session as Staff that makes this update
+                string uid = HttpContext.Session.GetString("User");
+                if (uid == null)
+                {
+                    return Forbid();
+                }
+
+                //Update to Database
+                userRepository.ChangePassword(userId, newPassword);
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
         }
     }
 }
