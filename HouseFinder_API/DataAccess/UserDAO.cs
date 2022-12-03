@@ -324,7 +324,7 @@ namespace DataAccess
                 {
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    staffs = context.Users.ProjectTo<UserDTO>(config).Where(u => u.Role.RoleName.Contains("Department")).ToList();
+                    staffs = context.Users.ProjectTo<UserDTO>(config).Where(u => !u.Role.RoleName.Equals("Landlord") && !u.Role.RoleName.Equals("Student")).ToList();
                 }
             }
             catch (Exception e)
