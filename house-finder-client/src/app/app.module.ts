@@ -49,6 +49,8 @@ import { CreateOrderComponent } from './Guest/create-order/create-order.componen
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { LandlordHeaderComponent } from './Common/landlord-header/landlord-header.component';
 import { AdminHeaderComponent } from './Common/admin-header/admin-header.component';
+import { StaffUpdateProfileComponent } from './Staff/staff-update-profile/staff-update-profile.component';
+import { LandlordUpdateProfileComponent } from './Landlord/landlord-update-profile/landlord-update-profile.component';
 
 @NgModule({
   declarations: [
@@ -96,6 +98,8 @@ import { AdminHeaderComponent } from './Common/admin-header/admin-header.compone
     CreateOrderComponent,
     LandlordHeaderComponent,
     AdminHeaderComponent,
+    StaffUpdateProfileComponent,
+    LandlordUpdateProfileComponent,
   ],
   imports: [
     BrowserModule,

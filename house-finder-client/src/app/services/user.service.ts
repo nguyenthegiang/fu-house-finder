@@ -144,4 +144,8 @@ export class UserService {
   updateUserStatus(userId: string, statusId: number): Observable<any> {
     return this.http.put<any>(this.APIUrl + "/" + userId + "/" + statusId, this.httpOptions, { withCredentials: true });
   }
+
+  getCurrentUser():Observable<User> {
+    return this.http.get<User>(this.APIUrl + "/currentUser", { withCredentials: true });
+  }
 }

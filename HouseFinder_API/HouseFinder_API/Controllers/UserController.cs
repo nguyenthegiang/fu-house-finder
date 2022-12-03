@@ -262,5 +262,21 @@ namespace HouseFinder_API.Controllers
                 return Ok(staffs);
             }
         }
+
+        //[Admin][List staffs] Get current user
+        [HttpGet("currentUser")]
+        public IActionResult GetCurrentUser()
+        {
+            //Get user id from Session as Staff that makes this update
+            string uid = HttpContext.Session.GetString("User");
+            if (uid == null)
+            {
+                return Forbid();
+            }
+
+            UserDTO userDTO = userReposiotry.GetUserByID(uid);
+
+            return Ok(userDTO);
+        }
     }
 }
