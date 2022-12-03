@@ -66,12 +66,12 @@ namespace HouseFinder_API.Controllers
                 //Admin Login
                 ResponseDTO user;
                 //Check with account in appsettings
-                if (login.Email == Configuration.GetSection("AdminAccount").GetSection("Username").Value
+                if (login.Email == Configuration.GetSection("AdminAccount").GetSection("Email").Value
                     && login.Password == Configuration.GetSection("AdminAccount").GetSection("Password").Value)
                 {
                     user = new ResponseDTO();
                     user.UserId = "0";
-                    user.Email = "Admin";
+                    user.Email = Configuration.GetSection("AdminAccount").GetSection("Email").Value;
                     user.DisplayName = "Admin";
                     user.RoleName = "Admin";
                     user.StatusId = 1;
