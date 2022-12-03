@@ -1,3 +1,4 @@
+import { User } from './../../models/user';
 import { Component, ElementRef, NgZone, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { CredentialResponse } from 'google-one-tap';
@@ -24,7 +25,8 @@ export class LoginComponent implements OnInit {
   @ViewChild('serverErrorAlert') private serverErrorAlert: SwalComponent | undefined;
   @ViewChild('invalidEmailPasswordAlert') private invalidEmailPasswordAlert: SwalComponent | undefined;
   @ViewChild('landLordAccountConfirmAlert') private landLordAccountConfirmAlert: SwalComponent | undefined;
-  
+  @ViewChild('landlordAccountCreatedAlert') private landlordAccountCreatedAlert: SwalComponent | undefined;
+
   login = true;
   frontImgSrc = '';
   backImgSrc = '';
@@ -119,6 +121,7 @@ export class LoginComponent implements OnInit {
       );
     }
 
+    //Login with Facebook
     const signInWithFB = () => {
       console.log('login fb called');
       FB.getLoginStatus((resp) => {   // Called after the JS SDK has been initialized.
@@ -126,43 +129,56 @@ export class LoginComponent implements OnInit {
           // Logged into your webpage and Facebook.
           FB.api('/me', (response: any) => {
             this.userService.loginFacebook(response.id).subscribe(async resp => {
-              if (resp.status == 200){
+              if (resp.status == 200) {
                 localStorage.setItem('user', resp.user.displayName);
                 localStorage.setItem("role", resp.user.roleName);
-                this.navigate('home');
+
+                //Login success => navigate
+                if (resp.user.roleName == 'Landlord') {
+                  //Landlord: Dashboard
+                  this.navigate('Landlord/dashboard');
+                } else {
+                  //Student: Home
+                  this.navigate('home');
+                }
               }
-              else if (resp.status == 201){
+              else if (resp.status == 201) {
                 localStorage.setItem('user', resp.user.displayName);
                 localStorage.setItem("role", resp.user.roleName);
+
+                //Login fail: Landlord not approved
                 this.landLordAccountConfirmAlert?.fire();
               }
-              else if (resp.status == 403){
+              else if (resp.status == 403) {
+                //Login fail: Landlord disabled
                 this.landLordAccountLockedAlert?.fire();
               }
-              else if (resp.status == 404){
+              else if (resp.status == 404) {
+                //Login fail: Not have account => move to Register
                 this.facebookId = response.id;
                 this.name = response.name;
                 await this.triggerRoleModal();
                 if (this.role == 'landlord') {
                   this.ngZone.run(() => { this.triggerRegister() });
                 }
-                else if (this.role == 'student'){
+                else if (this.role == 'student') {
                   this.ngZone.run(() => { this.registerStudent() });
                 }
               }
-              else if (resp.status == 500){
+              else if (resp.status == 500) {
+                //Login fail: server error
                 this.serverErrorAlert?.fire();
               }
             });
           });
-        } else {                                 // Not logged into your webpage or we are unable to tell.
-        
+        } else {
+          // Not logged into your webpage or we are unable to tell.
         }
       });
     }
-
   }
 
+  //Login with Google
   handleCredentialResponse(response: CredentialResponse) {
     // Decoding  JWT token...
     let decodedToken: any | null = null;
@@ -173,54 +189,76 @@ export class LoginComponent implements OnInit {
     }
     let user = this.userService.loginGoogle(response?.credential).subscribe(
       async resp => {
-        if (resp.status == 200){
+        if (resp.status == 200) {
           localStorage.setItem('user', resp.user.displayName);
           localStorage.setItem("role", resp.user.roleName);
-          this.navigate('home');
+
+          //Login success => navigate
+          if (resp.user.roleName == 'Landlord') {
+            //Landlord: Dashboard
+            this.navigate('Landlord/dashboard');
+          } else {
+            //Student: Home
+            this.navigate('home');
+          }
         }
-        else if (resp.status == 201){
+        else if (resp.status == 201) {
           localStorage.setItem('user', resp.user.displayName);
           localStorage.setItem("role", resp.user.roleName);
+
+          //Login fail: Landlord not approved
           this.landLordAccountConfirmAlert?.fire();
         }
-        else if (resp.status == 403){
+        else if (resp.status == 403) {
+          //Login fail: Landlord disabled
           this.landLordAccountLockedAlert?.fire();
         }
-        else if (resp.status == 404){
+        else if (resp.status == 404) {
+          //Login fail: Not have account => move to Register
           this.googleIdToken = response?.credential;
           await this.triggerRoleModal();
           if (this.role == 'landlord') {
             this.ngZone.run(() => { this.triggerRegister() });
           }
-          else if (this.role == 'student'){
+          else if (this.role == 'student') {
             this.ngZone.run(() => { this.registerStudent() });
           }
         }
-        else if (resp.status == 500){
+        else if (resp.status == 500) {
+          //Login fail: server error
           this.serverErrorAlert?.fire();
         }
       }
     );
   }
 
+  //Login with Username & Password
   loginUsernamePassword(): void {
     this.userService.loginEmailPassword(
       this.loginForm.controls['username'].value,
       this.loginForm.controls['password'].value
     ).subscribe(
       resp => {
-        if (resp.status == 200){
+        if (resp.status == 200) {
           localStorage.setItem('user', resp.user.displayName);
           localStorage.setItem("role", resp.user.roleName);
-          this.navigate('/Admin/list-staff');
+
+          //Login success => navigate
+          if (resp.user.roleName == 'Admin') {
+            //Admin: List Staff
+            this.navigate('Admin/list-staff');
+          } else {
+            //Staff: Dashboard
+            this.navigate('Staff/dashboard');
+          }
         }
-        else if (resp.status == 403){
+        else if (resp.status == 403) {
           this.landLordAccountLockedAlert?.fire();
         }
-        else if (resp.status == 404){
+        else if (resp.status == 404) {
           this.invalidEmailPasswordAlert?.fire();
         }
-        else if (resp.status == 500){
+        else if (resp.status == 500) {
           this.serverErrorAlert?.fire();
         }
       }
@@ -234,57 +272,71 @@ export class LoginComponent implements OnInit {
     );
   }
 
-
+  //Register for Student
   registerStudent(): void {
     if (this.googleIdToken != undefined) {
+      //with Google
       this.userService.registerStudentGoogle(this.googleIdToken).subscribe(resp => {
-        if (resp.status == 200){
+        if (resp.status == 200) {
           localStorage.setItem('user', resp.user.displayName);
           localStorage.setItem("role", resp.user.roleName);
           this.user = resp;
+
+          //Student: go to Home
           this.navigate('home');
         }
-        else if (resp.status == 500){
+        else if (resp.status == 500) {
+          //Server error
           this.serverErrorAlert?.fire();
         }
       });
     }
+    //with Facebook
     else if (this.facebookId != undefined && this.name != undefined) {
       this.userService.registerStudentFacebook(this.facebookId, this.name).subscribe(resp => {
-        if (resp.status == 200){
+        if (resp.status == 200) {
           localStorage.setItem('user', resp.user.displayName);
           localStorage.setItem("role", resp.user.roleName);
           this.user = resp;
-          this.navigate('/home');
+
+          //Student: go to Home
+          this.navigate('home');
         }
-        else if (resp.status == 500){
+        else if (resp.status == 500) {
+          //Server error
           this.serverErrorAlert?.fire();
         }
       });
     }
   }
 
+  //Register for Landlord
   registerLandlord(
     phonenumber: string,
     facebookUrl: string
   ): void {
+    //with Google
     if (this.googleIdToken != undefined) {
       this.userService.registerLandlordGoogle(
         this.googleIdToken,
         phonenumber,
         facebookUrl
       ).subscribe(resp => {
-        if (resp.status == 200){
-          this.fileService.uploadIDC(this.frontImg, this.backImg).subscribe(resp => {});
+        if (resp.status == 200) {
+          this.fileService.uploadIDC(this.frontImg, this.backImg).subscribe(resp => { });
           localStorage.setItem('user', resp.user.displayName);
           localStorage.setItem("role", resp.user.roleName);
-          this.navigate('/home');
+
+          //Landlord: create account success, go back Home
+          this.landlordAccountCreatedAlert?.fire();
         }
-        else if (resp.status == 500){
+        else if (resp.status == 500) {
+          //Server error
           this.serverErrorAlert?.fire();
         }
       });
     }
+    //with Facebook
     else if (this.facebookId != undefined && this.name != undefined) {
       this.userService.registerLandlordFacebook(
         this.facebookId,
@@ -292,13 +344,16 @@ export class LoginComponent implements OnInit {
         phonenumber,
         facebookUrl
       ).subscribe(resp => {
-        if (resp.status == 200){
-          this.fileService.uploadIDC(this.frontImg, this.backImg).subscribe(resp => {});
+        if (resp.status == 200) {
+          this.fileService.uploadIDC(this.frontImg, this.backImg).subscribe(resp => { });
           localStorage.setItem('user', resp.user.displayName);
           localStorage.setItem("role", resp.user.roleName);
-          this.navigate('/home');
+          
+          //Landlord: create account success, go back Home
+          this.landlordAccountCreatedAlert?.fire();
         }
-        else if (resp.status == 500){
+        else if (resp.status == 500) {
+          //Server error
           this.serverErrorAlert?.fire();
         }
       });
@@ -321,27 +376,27 @@ export class LoginComponent implements OnInit {
     this.login = false;
   }
 
-  displayImage(event: any, side: string): void{
+  displayImage(event: any, side: string): void {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
 
       const reader = new FileReader();
 
-      if (side == 'front'){
+      if (side == 'front') {
         reader.onload = e => this.frontImgSrc = reader.result!.toString();
         reader.readAsDataURL(file);
         this.frontImg = file;
       }
-      else if (side == 'back'){
+      else if (side == 'back') {
         reader.onload = e => this.backImgSrc = reader.result!.toString();
         reader.readAsDataURL(file);
         this.backImg = file;
       }
     }
   }
-  navigate(path: string){
+
+  navigate(path: string) {
     this.ngZone.run(() => { this.router.navigate([path]); });
   }
-
 }
 

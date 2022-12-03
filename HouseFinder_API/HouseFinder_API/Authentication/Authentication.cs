@@ -11,6 +11,9 @@ using System.Threading.Tasks;
 
 namespace HouseFinder_API.Authentication
 {
+    /**
+     * Support for Login & Sign up in UserController
+     */
     public class AuthenticationManager : IAuthentication
     {
         private readonly string key;
@@ -22,8 +25,11 @@ namespace HouseFinder_API.Authentication
 
         public string Authenticate(ResponseDTO user)
         {
+            //Check: user null
             if (user == null)
                 return null;
+
+            //Get email / FB id / GG id
             string email;
             if (!String.IsNullOrWhiteSpace(user.Email))
             {
@@ -35,21 +41,28 @@ namespace HouseFinder_API.Authentication
                 email = user.GoogleUserId;
             else
                 email = null;
+
+            //Check: email null
             if (String.IsNullOrWhiteSpace(email))
                 return null;
+
+            //Create & return Token
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenKey = Encoding.ASCII.GetBytes(key);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
-                    new Claim(ClaimTypes.Email,  email),
+                    new Claim(ClaimTypes.Email, email),
                     new Claim(ClaimTypes.Role, user.RoleName)
                 }),
+
                 Expires = DateTime.UtcNow.AddDays(7),
+
                 SigningCredentials = new SigningCredentials(
                     new SymmetricSecurityKey(tokenKey),
                     SecurityAlgorithms.HmacSha256Signature),
+
                 Issuer = "HOUSEFINDER",
                 Audience = "HOUSEFINDER"
             };

@@ -198,18 +198,18 @@ namespace HouseFinder_API.Controllers
          */
         [EnableQuery]
         [HttpGet("GetReportedHouses")]
-        public ActionResult<IEnumerable<ReportHouseDTO>> GetReportedHouses()
-        {
-            List<ReportHouseDTO> houses = houseRepository.GetListReportHouse();
-            if (houses == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                return Ok(houses);
-            }
-        }
+        public ActionResult<IEnumerable<ReportHouseDTO>> GetReportedHouses() => houseRepository.GetListReportHouse();
+        //{
+        //    List<ReportHouseDTO> houses = houseRepository.GetListReportHouse();
+        //    if (houses == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    else
+        //    {
+        //        return Ok(houses);
+        //    }
+        //}
 
         /**
          * GET: api/Houses/Distance
