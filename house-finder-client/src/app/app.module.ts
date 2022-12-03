@@ -10,7 +10,6 @@ import { AppComponent } from './app.component';
 import { HouseDetailComponent } from './Guest/house-detail/house-detail.component';
 import { LoginComponent } from './Guest/login/login.component';
 import { DashboardComponent } from './Landlord/dashboard/dashboard.component';
-import { ListRoomComponent } from './Landlord/list-room/list-room.component';
 import { ListReportComponent } from './Staff/list-report/list-report.component';
 import { ListHouseComponent } from './Staff/list-house/list-house.component';
 import { DashboardStaffComponent } from './Staff/dashboard/dashboard.component';
@@ -31,7 +30,6 @@ import { ListStaffComponent } from './Admin/list-staff/list-staff.component';
 import { ChangePasswordComponent } from './Admin/change-password/change-password.component';
 import { CreateAccountComponent } from './Admin/create-account/create-account.component';
 import { UpdateAccountComponent } from './Admin/update-account/update-account.component';
-import { StaffSidebarComponent } from './Common/staff-sidebar/staff-sidebar.component';
 import { HeaderComponent } from './Common/header/header.component';
 import { FooterComponent } from './Common/footer/footer.component';
 import { RoleModalComponent } from './Guest/login/role-modal/role-modal.component';
@@ -62,9 +60,7 @@ import { LandlordChangePasswordComponent } from './Landlord/landlord-change-pass
     HouseDetailComponent,
     LoginComponent,
     DashboardComponent,
-    ListRoomComponent,
     DashboardStaffComponent,
-    ListRoomComponent,
     ListReportComponent,
     ListHouseComponent,
     UpdateRoomComponent,
@@ -83,7 +79,6 @@ import { LandlordChangePasswordComponent } from './Landlord/landlord-change-pass
     ChangePasswordComponent,
     CreateAccountComponent,
     UpdateAccountComponent,
-    StaffSidebarComponent,
     HeaderComponent,
     FooterComponent,
     RoleModalComponent,

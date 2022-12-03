@@ -18,7 +18,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { HouseDetailComponent } from './Guest/house-detail/house-detail.component';
 import { LoginComponent } from './Guest/login/login.component';
 import { DashboardComponent } from './Landlord/dashboard/dashboard.component';
-import { ListRoomComponent } from './Landlord/list-room/list-room.component';
 import { DashboardStaffComponent } from './Staff/dashboard/dashboard.component';
 import { ListLandlordComponent } from './Staff/list-landlord/list-landlord.component';
 import { ListReportComponent } from './Staff/list-report/list-report.component';
@@ -37,7 +36,6 @@ const routes: Routes = [
   { path: 'house-detail/:id', component: HouseDetailComponent},
   { path: 'room-detail/:id', component: RoomDetailComponent},
   { path: 'Landlord/dashboard', component: DashboardComponent},
-  { path: 'Landlord/list-room/:id', component: ListRoomComponent},
   { path: 'Landlord/landlord-house-detail/:id', component: LandlordHouseDetailComponent},
   { path: 'Landlord/add-house', component: AddHouseComponent},
   { path: 'Landlord/update-house/:id', component: UpdateHouseComponent},
