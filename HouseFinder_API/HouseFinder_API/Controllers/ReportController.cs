@@ -17,7 +17,7 @@ namespace HouseFinder_API.Controllers
     public class ReportController : ControllerBase
     {
         private IReportRepository reportRepository = new ReportRepository();
-        private IUserReposiotry userReposiotry = new UserRepository();
+        private IUserRepository userReposiotry = new UserRepository();
 
         [EnableQuery]
         [HttpGet]

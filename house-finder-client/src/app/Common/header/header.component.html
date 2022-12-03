@@ -19,11 +19,10 @@
 </div>
 
   <div class="col-12 col-md-2 my-2" *ngIf="!logged_in">
-    <button id="loginButton" (click)="login()" >Đăng nhập</button>
+    <button class="btn btn-light" id="loginButton" (click)="login()" >Đăng nhập</button>
   </div>
-  
+
   <div class="col-12 col-md-2 my-2" *ngIf="logged_in">
-    <button id="loginButton" (click)="logout()" >Đăng xuất</button>
+    <button class="btn btn-light" id="loginButton" (click)="logout()" >Đăng xuất</button>
   </div>
-    
 </div>

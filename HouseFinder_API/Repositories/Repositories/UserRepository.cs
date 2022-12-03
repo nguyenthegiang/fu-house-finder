@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Repositories.Repositories
 {
-    public class UserRepository : IUserReposiotry
+    public class UserRepository : IUserRepository
     {
         public int CountActiveLandlord() => UserDAO.CountActiveLandlord();
 
@@ -79,5 +79,7 @@ namespace Repositories.Repositories
 
         //Get list of staffs
         public List<UserDTO> GetStaffs() => UserDAO.GetStaffs();
+        public void UpdateProfile(string userId, string name, string email) => UserDAO.UpdateProfile(userId, name, email);
+        public void ChangePassword(string userId, string newPassword) => UserDAO.ChangePassword(userId, newPassword);
     }
 }

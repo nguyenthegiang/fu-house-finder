@@ -6,7 +6,6 @@ import { StaffHouseDetailComponent } from './Staff/staff-house-detail/staff-hous
 import { StaffLandlordDetailComponent } from './Staff/staff-landlord-detail/staff-landlord-detail.component';
 import { UpdateAccountComponent } from './Admin/update-account/update-account.component';
 import { CreateAccountComponent } from './Admin/create-account/create-account.component';
-import { ChangePasswordComponent } from './Admin/change-password/change-password.component';
 import { ListStaffComponent } from './Admin/list-staff/list-staff.component';
 import { RateHouseComponent } from './Landlord/rate-house/rate-house.component';
 import { AddHouseComponent } from './Landlord/add-house/add-house.component';
@@ -56,7 +55,6 @@ const routes: Routes = [
   { path: 'Staff/staff-update-profile', component: StaffUpdateProfileComponent},
   { path: 'Staff/staff-change-password', component: StaffChangePasswordComponent},
   { path: 'Admin/list-staff', component: ListStaffComponent},
-  { path: 'Admin/change-password', component: ChangePasswordComponent},
   { path: 'Admin/create-account', component: CreateAccountComponent},
   { path: 'Admin/update-account', component: UpdateAccountComponent}
 ];
