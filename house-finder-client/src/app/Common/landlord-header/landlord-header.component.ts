@@ -8,6 +8,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class LandlordHeaderComponent implements OnInit {
   username: string = "";
+  
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {

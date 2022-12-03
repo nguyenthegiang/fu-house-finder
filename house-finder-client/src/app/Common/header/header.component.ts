@@ -10,10 +10,15 @@ export class HeaderComponent implements OnInit {
 
   logged_in = false;
 
+  userDisplayName: string = "";
+
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
     this.checkLoggedIn();
+
+    //Get displayName from localStorage
+    this.userDisplayName = localStorage.getItem('user') || '{}';
   }
   //Home button -> go back to /home
   backHome() {
