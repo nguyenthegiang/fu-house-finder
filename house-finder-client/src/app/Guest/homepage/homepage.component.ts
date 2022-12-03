@@ -9,7 +9,7 @@ import { DistrictService } from '../../services/district.service';
 import { OtherUtility } from '../../models/otherUtilities';
 import { CampusService } from '../../services/campus.service';
 import { HouseService } from '../../services/house.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { House } from '../../models/house';
 import { RoomType } from '../../models/roomType';
 import { RoomTypeService } from '../../services/room-type.service';
@@ -19,7 +19,7 @@ import { RoomTypeService } from '../../services/room-type.service';
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.scss']
 })
-export class HomepageComponent implements OnInit {
+export class HomepageComponent implements OnInit, AfterViewInit {
   //List of available houses to display in Main Content
   houses: HouseHomePage[] | undefined;
 
@@ -67,6 +67,10 @@ export class HomepageComponent implements OnInit {
 
   //For Placeholder
   placeHolderItemCount: number[] = [];
+
+  //[Responsive]
+  @ViewChild('buttonTriggerOffCanvas2') buttonTriggerOffCanvas: ElementRef | undefined;
+  enableOffCanvas = false;
 
   constructor(
     private houseService: HouseService,
@@ -135,6 +139,16 @@ export class HomepageComponent implements OnInit {
       "Đánh giá: Cao đến Thấp",
       "Đánh giá: Thấp đến Cao",
     ];
+  }
+
+  //[Responsive] Remove Offcanvas when not needed => avoid bug of repeated Filter column code
+  ngAfterViewInit() {
+    //Check if button for OffCanvas is display:none
+    if (getComputedStyle(this.buttonTriggerOffCanvas?.nativeElement).getPropertyValue('display') == 'block') {
+      //if yes => this is large screen => disable Offcanvas Filter column code
+      this.enableOffCanvas = true;
+      console.log('true')
+    }
   }
 
   // Go to top of Page: used whenever user filter/paging data -> refresh list data

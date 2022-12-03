@@ -5,8 +5,8 @@
 <div class="bg-light px-2 pt-5">
   <!-- Content -->
   <div class="row d-flex justify-content-evenly">
-    <!-- Offcanvas: For Filter column in Responsive -->
-    <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasFilterColumn"
+    <!-- Offcanvas: For Filter column in Responsive (Only display in small screen) -->
+    <div *ngIf="enableOffCanvas" class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasFilterColumn"
       aria-labelledby="offcanvasFilterColumnLabel">
       <!-- Offcanvas Header -->
       <div class="offcanvas-header text-white orangeBackround">
@@ -453,8 +453,8 @@
         <!-- End Search bar -->
 
         <!-- Button Trigger Offcanvas (only display in small screen) -->
-        <div class="col-6 col-md-3 mb-3" id="buttonTriggerOffcanvas">
-          <button id="buttonTriggerOffcanvas" class="btn btn-primary w-100" type="button" data-bs-toggle="offcanvas"
+        <div class="col-6 col-md-3 mb-3" #buttonTriggerOffCanvas2 id="buttonTriggerOffCanvas">
+          <button class="btn btn-primary w-100" type="button" data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasFilterColumn" aria-controls="offcanvasFilterColumn">
             Lọc phòng trọ
           </button>
