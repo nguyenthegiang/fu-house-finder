@@ -13,12 +13,12 @@ namespace Repositories.IRepository
         public ResponseDTO Login(LoginDTO login);
         public ResponseDTO Register(RegisterDTO register);
         public List<UserDTO> GetLandlords();
-        //public List<UserDTO> GetStaffs();
         public int CountTotalLandlord();
         public void UpdateUserIdCardImage(UserDTO user);
         public int CountActiveLandlord();
         public int CountInactiveLandlord();
         public List<UserDTO> GetLandlordSignupRequest();
         public void UpdateUserStatus(string userId, int statusId, string staffId);
+        public List<UserDTO> GetStaffs();
     }
 }

@@ -20,9 +20,6 @@ namespace Repositories.Repositories
 
         public List<UserDTO> GetLandlordSignupRequest() => UserDAO.GetLandlordSignupRequest();
 
-        //Get list of staffs
-        //public List<UserDTO> GetStaffs() => UserDAO.GetStaffs();
-
         public UserDTO GetUserByID(string UserId) => UserDAO.GetUserById(UserId);
         public ResponseDTO Login(LoginDTO login)
         {
@@ -77,5 +74,7 @@ namespace Repositories.Repositories
         }
         public void UpdateUserStatus(string userId, int statusId, string staffId) => UserDAO.UpdateUserStatus(userId, statusId, staffId);
 
+        //Get list of staffs
+        public List<UserDTO> GetStaffs() => UserDAO.GetStaffs();
     }
 }
