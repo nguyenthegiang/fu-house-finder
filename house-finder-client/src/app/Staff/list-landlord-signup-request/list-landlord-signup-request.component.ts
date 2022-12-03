@@ -20,6 +20,10 @@ export class ListLandlordSignupRequestComponent implements OnInit {
 
   ngOnInit(): void
   {
+    this.reloadListRequest();
+  }
+
+  reloadListRequest(){
     this.userService.getLandlordSignUpRequest().subscribe((data) =>{
       this.landlordSignupRequest = data
     }
@@ -29,8 +33,8 @@ export class ListLandlordSignupRequestComponent implements OnInit {
   search(searchValue: string)
   {}
 
-  UpdateUserStatus(userId: string, statusId: number){
-    console.log("UserID: " + userId + ", statusId: " + statusId);
+  updateUserStatus(userId: string, statusId: number){
     this.userService.updateUserStatus(userId, statusId).subscribe();
+    this.reloadListRequest();
   }
 }
