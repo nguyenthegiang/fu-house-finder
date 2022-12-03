@@ -1,0 +1,18 @@
+a:hover
+{
+  text-decoration: underline !important;
+}
+
+@media only screen and (max-width: 768px) {
+  #link
+  {
+    text-align: center;
+    margin-top: 5px;
+  }
+
+  #btn
+  {
+    margin-top: 20px;
+    margin-bottom: 5px;
+  }
+}

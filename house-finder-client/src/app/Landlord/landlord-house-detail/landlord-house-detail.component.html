@@ -56,14 +56,14 @@
       <h3 class="text-center">Chưa có phòng trọ</h3>
     </div>
     <div class="my-4" *ngIf="rooms.length != 0">
-      <div class="mb-4">
+      <h3 class="text-center">Danh sách phòng</h3>
+
+      <div class="my-4">
         <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#updateModal"
         data-whatever="@getbootstrap" (click)="editRoom(0)">+ Thêm mới</button>
       </div>
 
-      <h3 class="text-center">Danh sách phòng</h3>
-
-      <table class="table table-hover mt-4">
+      <table class="table table-hover">
         <thead>
           <tr>
             <th scope="col">Tên phòng</th>

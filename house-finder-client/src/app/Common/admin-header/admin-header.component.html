@@ -1,0 +1,19 @@
+<!--Header-->
+<div>
+  <div class="navbar nav d-flex justify-content-between text-white orangeBackround">
+
+  <div class="col-12 col-md-9">
+    <div id="link">
+      <a *ngIf="!isListStaffRoute()" href="/Admin/list-staff" class="text-white text-decoration-none mx-2">Danh sách tuyển sinh</a>
+      <a *ngIf="isListStaffRoute()" href="/Admin/list-staff" class="text-white text-decoration-underline mx-2">Danh sách tuyển sinh</a>
+
+      <a *ngIf="!isChangePasswordRoute()" href="/Admin/change-password" class="text-white text-decoration-none mx-2">Đổi mật khẩu</a>
+      <a *ngIf="isChangePasswordRoute()" href="/Admin/change-password" class="text-white text-decoration-underline mx-2">Đổi mật khẩu</a>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-3 d-flex justify-content-center align-items-center" id="btn">
+    <div>Admin</div>
+    <button class="btn btn-light mx-3" id="loginButton" (click)="logout()">Đăng xuất</button>
+  </div>
+</div>

@@ -247,5 +247,20 @@ namespace HouseFinder_API.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        //[Admin][List staffs] Get list of all staffs
+        [HttpGet("staff")]
+        public IActionResult GetStaffs()
+        {
+            List<UserDTO> staffs = userReposiotry.GetStaffs();
+            if (staffs == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(staffs);
+            }
+        }
     }
 }
