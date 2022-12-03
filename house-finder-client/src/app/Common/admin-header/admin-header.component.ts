@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -8,7 +9,8 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class AdminHeaderComponent implements OnInit {
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,
+    private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -24,5 +26,15 @@ export class AdminHeaderComponent implements OnInit {
       sessionStorage.clear();
       window.location.href = "/login";
     });
+  }
+
+  isListStaffRoute()
+  {
+    return this.router.url === "/Admin/list-staff";
+  }
+
+  isChangePasswordRoute()
+  {
+    return this.router.url === "/Admin/change-password";
   }
 }
