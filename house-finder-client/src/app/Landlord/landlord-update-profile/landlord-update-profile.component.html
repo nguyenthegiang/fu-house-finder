@@ -3,23 +3,30 @@
 <div class="container-fluit mx-2 my-5 d-flex flex-column align-items-center">
   <h3 class="text-center mb-5">Cập nhật thông tin chủ trọ</h3>
 
-  <form class="row w-100 d-flex flex-column align-items-center needs-validation" novalidate *ngIf="staffDetail">
+  <form class="row w-100 d-flex flex-column align-items-center needs-validation" novalidate *ngIf="landlordDetail">
     <div class="col-12 col-md-5 mb-3">
       <label for="exampleInput1" class="form-label"><b>Họ và tên</b></label>
-      <input type="text" class="form-control" value="{{staffDetail.displayName}}" placeholder="Nhập họ và tên" id="exampleInput1" required>
+      <input type="text" class="form-control" [(ngModel)]="updateName" placeholder="Nhập họ và tên" id="exampleInput1" required>
       <div class="invalid-feedback mb-3">Không được để trống</div>
     </div>
 
     <div class="col-12 col-md-5 mb-3">
       <label for="exampleInput1" class="form-label"><b>Email</b></label>
-      <input type="email" class="form-control" value="{{staffDetail.email}}" placeholder="Nhập email" id="exampleInput1" required>
+      <input type="email" class="form-control" [(ngModel)]="updateEmail" placeholder="Nhập email" id="exampleInput1" required>
       <div class="invalid-feedback mb-3">Không được để trống</div>
     </div>
 
     <div class="text-center col-12 col-md-5">
-      <button class="btn btn-success w-50 mt-4" type="submit">Thay đổi</button>
+      <button class="btn btn-success w-50 mt-4" type="button" (click)="update()">Thay đổi</button>
     </div>
   </form>
 </div>
 
 <app-footer></app-footer>
+
+<swal #updateSuccessAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
+  title="Cập nhật thành công" icon="success">
+</swal>
+<swal #updateErrorAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
+  title="Vui lòng đăng nhập để xử dụng tính năng này!" icon="error">
+</swal>
