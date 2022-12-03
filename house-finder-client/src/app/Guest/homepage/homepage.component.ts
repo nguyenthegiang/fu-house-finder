@@ -9,7 +9,7 @@ import { DistrictService } from '../../services/district.service';
 import { OtherUtility } from '../../models/otherUtilities';
 import { CampusService } from '../../services/campus.service';
 import { HouseService } from '../../services/house.service';
-import { Component, ElementRef, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { House } from '../../models/house';
 import { RoomType } from '../../models/roomType';
 import { RoomTypeService } from '../../services/room-type.service';
@@ -77,6 +77,7 @@ export class HomepageComponent implements OnInit, AfterViewInit {
     private campusService: CampusService,
     private roomTypeService: RoomTypeService,
     private roomService: RoomService,
+    private changeDetector: ChangeDetectorRef
   ) { }
 
   ngOnInit(): void {
@@ -149,6 +150,10 @@ export class HomepageComponent implements OnInit, AfterViewInit {
       this.enableOffCanvas = true;
       console.log('true')
     }
+
+    //(for avoiding console error) 
+    //call to ChangeDetector to notify Angular that a change has been made
+    this.changeDetector.detectChanges();
   }
 
   // Go to top of Page: used whenever user filter/paging data -> refresh list data
