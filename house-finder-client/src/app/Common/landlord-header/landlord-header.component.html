@@ -1,7 +1,7 @@
 <!--Header-->
 <div class="navbar nav d-flex justify-content-between text-center text-white orangeBackround">
   <div class="logo col-12 col-md-2 my-2">
-    <!-- Link back to Home -->
+    <!-- Link back to Dashboard -->
     <a (click)="backHome()" id="app-name" style="cursor: pointer;">
       <img src="/assets/image/Logo.png" alt="..." width="70px">
       <h6>FU House Finder</h6>
@@ -21,16 +21,41 @@
     </div>
   </div>
 
+  <!-- Action Dropdown -->
   <div class="col-12 col-md-2 d-flex justify-content-center align-items-center" id="btn">
     <div class="dropdown">
-      <button class="btn btn-light dropdown-toggle" id="loginButton" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-       {{username}}
+      <button class="btn btn-light dropdown-toggle" id="loginButton" type="button" data-bs-toggle="dropdown"
+        aria-expanded="false">
+        {{userDisplayName}}
       </button>
       <ul class="dropdown-menu dropdown-menu-end">
-        <li><a class="dropdown-item" href="/Landlord/landlord-update-profile" id="dropdownItem">Chỉnh sửa thông tin</a></li>
-        <li><a class="dropdown-item" href="/Landlord/landlord-change-password" id="dropdownItem">Đổi mật khẩu</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="#" id="dropdownItem" (click)="logout()">Đăng xuất</a></li>
+        <li>
+          <a class="dropdown-item fw-semibold" href="/Landlord/landlord-update-profile" id="dropdownItem">
+            <span class="me-2">
+              <i class="fa-solid fa-gear"></i>
+            </span>
+            Chỉnh sửa thông tin
+          </a>
+        </li>
+        <li>
+          <a class="dropdown-item fw-semibold" href="/Landlord/landlord-change-password" id="dropdownItem">
+            <span class="me-2">
+              <i class="fa-solid fa-key"></i>
+            </span>
+            Đổi mật khẩu
+          </a>
+        </li>
+        <li>
+          <hr class="dropdown-divider">
+        </li>
+        <li>
+          <a class="dropdown-item fw-semibold" href="#" id="dropdownItem" (click)="logout()">
+            <span class="me-2">
+              <i class="fa-solid fa-right-from-bracket"></i>
+            </span>
+            Đăng xuất
+          </a>
+        </li>
       </ul>
     </div>
   </div>
