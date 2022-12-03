@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
 import { UserService } from 'src/app/services/user.service';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-list-landlord-signup-request',
@@ -16,25 +16,22 @@ export class ListLandlordSignupRequestComponent implements OnInit {
   landlordSignupRequest: User[] = [];
 
   constructor(private userService: UserService,
-    )
-  { }
+  ) { }
 
-  ngOnInit(): void
-  {
+  ngOnInit(): void {
     this.reloadListRequest();
   }
 
-  reloadListRequest(){
-    this.userService.getLandlordSignUpRequest().subscribe((data) =>{
+  reloadListRequest() {
+    this.userService.getLandlordSignUpRequest().subscribe((data) => {
       this.landlordSignupRequest = data
     }
     )
   }
 
-  search(searchValue: string)
-  {}
+  search(searchValue: string) { }
 
-  updateUserStatus(userId: string, statusId: number){
+  updateUserStatus(userId: string, statusId: number) {
     this.userService.updateUserStatus(userId, statusId).subscribe();
     this.reloadListRequest();
   }

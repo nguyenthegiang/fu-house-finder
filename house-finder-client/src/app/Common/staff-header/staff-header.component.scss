@@ -16,3 +16,14 @@ a:hover
 {
   text-decoration: underline !important;
 }
+
+#dropdown:hover
+{
+  text-decoration: none !important;
+  opacity: 0.8 !important;
+}
+
+#dropdownItem:hover
+{
+  text-decoration: none !important;
+}
