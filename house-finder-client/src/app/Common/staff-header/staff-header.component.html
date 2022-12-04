@@ -4,7 +4,48 @@
 
     <!-- Nav bar -->
     <div class="col-12 col-md-10">
-      <div id="link">
+      <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">Navbar</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a *ngIf="!isDashboardRoute()" href="/Staff/dashboard" class="nav-link">Dashboard</a>
+                <a *ngIf="isDashboardRoute()" href="/Staff/dashboard" class="nav-link active">Dashboard</a>
+              </li>
+              <li class="nav-item">
+                <a *ngIf="!isListLandlordRoute()" href="/Staff/list-landlord" class="nav-link">Danh sách chủ trọ</a>
+                <a *ngIf="isListLandlordRoute()" href="/Staff/list-landlord" class="nav-link active">Danh sách chủ
+                  trọ</a>
+              </li>
+              <li class="nav-item">
+                <a *ngIf="!isListHouseRoute()" href="/Staff/list-house" class="nav-link">Danh sách nhà trọ</a>
+                <a *ngIf="isListHouseRoute()" href="/Staff/list-house" class="nav-link active">Danh sách nhà trọ</a>
+              </li>
+              <li class="nav-item">
+                <a *ngIf="!isListReportRoute()" href="/Staff/list-report" class="nav-link">Báo cáo</a>
+                <a *ngIf="isListReportRoute()" href="/Staff/list-report" class="nav-link active">Báo cáo</a>
+              </li>
+              <li class="nav-item">
+                <a *ngIf="!isListRequestRoute()" href="/Staff/list-landlord-signup-request" class="nav-link">Chủ trọ
+                  đăng ký</a>
+                <a *ngIf="isListRequestRoute()" href="/Staff/list-landlord-signup-request" class="nav-link active">Chủ
+                  trọ đăng ký</a>
+              </li>
+              <li class="nav-item">
+                <a *ngIf="!isListOrderRoute()" href="/Staff/list-order" class="nav-link">Nguyện vọng</a>
+                <a *ngIf="isListOrderRoute()" href="/Staff/list-order" class="nav-link active">Nguyện vọng</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- <div id="link">
         <a *ngIf="!isDashboardRoute()" href="/Staff/dashboard"
           class="text-white text-decoration-none mx-2">Dashboard</a>
         <a *ngIf="isDashboardRoute()" href="/Staff/dashboard"
@@ -34,7 +75,7 @@
           vọng</a>
         <a *ngIf="isListOrderRoute()" href="/Staff/list-order" class="text-white text-decoration-underline mx-2">Nguyện
           vọng</a>
-      </div>
+      </div> -->
     </div>
 
     <!-- Action Dropdown -->

@@ -84,7 +84,7 @@ namespace HouseFinder.Test
             Assert.AreEqual("Chung cư mini", roomTypes[1].RoomTypeName);
         }
 
-        #endregion GetAvailableHouses
+        #endregion GetRoomTypesByHouseId
 
         #region GetRoomTypes
 
@@ -130,6 +130,6 @@ namespace HouseFinder.Test
             Assert.AreEqual("Chung cư mini", roomTypes[2].RoomTypeName);
         }
 
-        #endregion GetAvailableHouses
+        #endregion GetRoomTypes
     }
 }
