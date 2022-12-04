@@ -148,4 +148,12 @@ export class UserService {
   getCurrentUser():Observable<User> {
     return this.http.get<User>(this.APIUrl + "/currentUser", { withCredentials: true });
   }
+
+  updateProfile(userId: string, name: string, email: string): Observable<any> {
+    return this.http.put<any>(this.APIUrl + "/updateProfile?userId=" + userId + "&name=" + name + "&email=" + email, this.httpOptions);
+  }
+
+  changePassword(userId: string, newPassword: string): Observable<any> {
+    return this.http.put<any>(this.APIUrl + "/changePassword?userId=" + userId + "&newPassword=" + newPassword, this.httpOptions);
+  }
 }
