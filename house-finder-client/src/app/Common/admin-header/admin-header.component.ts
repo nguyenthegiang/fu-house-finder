@@ -9,32 +9,22 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class AdminHeaderComponent implements OnInit {
 
-  constructor(private userService: UserService,
-    private router: Router) { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
   }
 
+  //back to Admin Dashboard
   backHome() {
-    //use reload() so that when user is already in home -> they will get a reload of page
     window.location.href = "/Admin/list-staff";
   }
 
-  logout(){
+  //Log out of system
+  logout() {
     this.userService.logout().subscribe(resp => {
       localStorage.clear();
       sessionStorage.clear();
       window.location.href = "/login";
     });
-  }
-
-  isListStaffRoute()
-  {
-    return this.router.url === "/Admin/list-staff";
-  }
-
-  isChangePasswordRoute()
-  {
-    return this.router.url === "/Admin/change-password";
   }
 }

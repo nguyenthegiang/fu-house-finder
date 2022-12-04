@@ -9,59 +9,58 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './staff-header.component.html',
   styleUrls: ['./staff-header.component.scss']
 })
-export class StaffHeaderComponent implements OnInit
-{
-  totalHouse: number = 0;
-  availableHouse: number = 0;
-  totalRoom: number = 0;
-  availableRoom: number = 0;
-  totalCapacity: number = 0;
-  availableCapacity: number = 0;
+export class StaffHeaderComponent implements OnInit {
+  //Display name of current user
+  userDisplayName: string = "";
 
-  username: string = "";
+  // totalHouse: number = 0;
+  // availableHouse: number = 0;
+  // totalRoom: number = 0;
+  // availableRoom: number = 0;
+  // totalCapacity: number = 0;
+  // availableCapacity: number = 0;
 
   constructor(private houseService: HouseService,
     private roomService: RoomService,
     private router: Router,
-    private userService: UserService)
-  { }
+    private userService: UserService) { }
 
-  ngOnInit(): void
-  {
-    this.houseService.getTotalHouse().subscribe(data => {
-      this.totalHouse = data;
-    });
+  ngOnInit(): void {
+    // this.houseService.getTotalHouse().subscribe(data => {
+    //   this.totalHouse = data;
+    // });
 
-    this.houseService.countTotalAvailableHouse().subscribe(data => {
-      this.availableHouse = data;
-    });
+    // this.houseService.countTotalAvailableHouse().subscribe(data => {
+    //   this.availableHouse = data;
+    // });
 
-    this.roomService.CountTotalRoom().subscribe(data => {
-      this.totalRoom = data;
-    });
+    // this.roomService.CountTotalRoom().subscribe(data => {
+    //   this.totalRoom = data;
+    // });
 
-    this.roomService.countAvailableRooms().subscribe(data => {
-      this.availableRoom = data;
-    });
+    // this.roomService.countAvailableRooms().subscribe(data => {
+    //   this.availableRoom = data;
+    // });
 
-    this.roomService.CountTotalCapacity().subscribe(data => {
-      this.totalCapacity = data;
-    });
+    // this.roomService.CountTotalCapacity().subscribe(data => {
+    //   this.totalCapacity = data;
+    // });
 
-    this.roomService.countAvailableCapacity().subscribe(data => {
-      this.availableCapacity = data;
-    });
+    // this.roomService.countAvailableCapacity().subscribe(data => {
+    //   this.availableCapacity = data;
+    // });
 
-    this.username = localStorage.getItem('user') || '{}';
+    this.userDisplayName = localStorage.getItem('user') || '{}';
   }
 
-  //Home button -> go back to /home
+  //back to Staff Dashboard
   backHome() {
     //use reload() so that when user is already in home -> they will get a reload of page
     window.location.href = "/home";
   }
 
-  logout(){
+  //Log out of systen
+  logout() {
     this.userService.logout().subscribe(resp => {
       localStorage.clear();
       sessionStorage.clear();
@@ -69,38 +68,35 @@ export class StaffHeaderComponent implements OnInit
     });
   }
 
-  isDashboardRoute()
-  {
+  /**
+   * Check Current Page to display differently in Navbar
+   */
+  
+  isDashboardRoute() {
     return this.router.url === "/Staff/dashboard";
   }
 
-  isListLandlordRoute()
-  {
+  isListLandlordRoute() {
     return this.router.url === "/Staff/list-landlord";
   }
 
-  isListHouseRoute()
-  {
+  isListHouseRoute() {
     return this.router.url === "/Staff/list-house";
   }
 
-  isListReportRoute()
-  {
+  isListReportRoute() {
     return this.router.url === "/Staff/list-report";
   }
 
-  isListRequestRoute()
-  {
+  isListRequestRoute() {
     return this.router.url === "/Staff/list-landlord-signup-request";
   }
 
-  isListOrderRoute()
-  {
+  isListOrderRoute() {
     return this.router.url === "/Staff/list-order";
   }
 
-  isUpdateProfileRoute()
-  {
+  isUpdateProfileRoute() {
     return this.router.url === "/Staff/staff-update-profile";
   }
 }
