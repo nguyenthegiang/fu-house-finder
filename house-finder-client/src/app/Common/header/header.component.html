@@ -2,7 +2,7 @@
 <div class="navbar nav d-flex justify-content-between text-center text-white orangeBackround">
   <div class="logo col-12 col-md-2 my-2">
     <!-- Link back to Home -->
-    <a (click)="backHome()" id="app-name">
+    <a (click)="backHome()" id="app-name" style="cursor: pointer;">
       <img src="/assets/image/Logo.png" alt="..." width="70px">
       <h6>FU House Finder</h6>
     </a>
@@ -10,7 +10,11 @@
 
   <!-- Title -->
   <div class="col-12 col-md-8 my-2">
-    <h1>TÌM TRỌ SINH VIÊN FPT</h1>
+    <h1>
+      <a (click)="backHome()" style="cursor: pointer;">
+        TÌM TRỌ SINH VIÊN FPT
+      </a>
+    </h1>
     <div>
       <a href="/home" class="text-white text-decoration-none mx-2" id="link">Trang chủ</a>|
       <a href="https://daihoc.fpt.edu.vn/tuyen-sinh/" target="_blank" class="text-white text-decoration-none mx-2"
