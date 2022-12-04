@@ -280,19 +280,11 @@ namespace HouseFinder_API.Controllers
             return Ok(userDTO);
         }
 
-        [Authorize]
-        [HttpPut("{userId}/{name}/{email}")]
+        [HttpPut("updateProfile")]
         public IActionResult UpdateProfile(string userId, string name, string email)
         {
             try
             {
-                //Get user id from Session as Staff that makes this update
-                string uid = HttpContext.Session.GetString("User");
-                if (uid == null)
-                {
-                    return Forbid();
-                }
-
                 //Update to Database
                 userRepository.UpdateProfile(userId, name, email);
                 return Ok();
@@ -303,19 +295,11 @@ namespace HouseFinder_API.Controllers
             }
         }
 
-        [Authorize]
-        [HttpPut("{userId}/{newPassword}")]
+        [HttpPut("changePassword")]
         public IActionResult ChangePassword(string userId, string newPassword)
         {
             try
             {
-                //Get user id from Session as Staff that makes this update
-                string uid = HttpContext.Session.GetString("User");
-                if (uid == null)
-                {
-                    return Forbid();
-                }
-
                 //Update to Database
                 userRepository.ChangePassword(userId, newPassword);
                 return Ok();
