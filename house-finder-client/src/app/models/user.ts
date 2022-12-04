@@ -7,6 +7,7 @@ export interface User {
     facebookUserId: string;
     googleUserId: string;
     email: string;
+    password: string;
     displayName: string;
     statusId: number;
     profileImageLink: string;
