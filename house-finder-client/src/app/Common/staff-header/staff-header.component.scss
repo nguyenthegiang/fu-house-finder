@@ -1,33 +1,3 @@
-@media only screen and (max-width: 768px) {
-  #link
-  {
-    text-align: center;
-    margin-top: 5px;
-    margin-bottom: 20px;
-  }
-
-  #btn
-  {
-    margin-bottom: 5px;
-  }
-}
-
-a:hover
-{
-  text-decoration: underline !important;
-}
-
-#dropdown:hover
-{
-  text-decoration: none !important;
-  opacity: 0.8 !important;
-}
-
-#dropdownItem:hover
-{
-  text-decoration: none !important;
-}
-
 #loginButton{
   // width: 120px;
   // height: 40px;
@@ -38,3 +8,33 @@ a:hover
   border: none;
   border-radius: 10px;
 }
+
+@media only screen and (max-width: 768px) {
+  #link
+  {
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 20px;
+  }
+
+  // #btn
+  // {
+  //   margin-bottom: 5px;
+  // }
+}
+
+a:hover
+{
+  text-decoration: underline !important;
+}
+
+// #dropdown:hover
+// {
+//   text-decoration: none !important;
+//   opacity: 0.8 !important;
+// }
+
+// #dropdownItem:hover
+// {
+//   text-decoration: none !important;
+// }

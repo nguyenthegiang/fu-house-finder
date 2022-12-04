@@ -18,7 +18,7 @@ export class StaffHeaderComponent implements OnInit
   totalCapacity: number = 0;
   availableCapacity: number = 0;
 
-  username: string = "";
+  userDisplayName: string = "";
 
   constructor(private houseService: HouseService,
     private roomService: RoomService,
@@ -52,7 +52,7 @@ export class StaffHeaderComponent implements OnInit
       this.availableCapacity = data;
     });
 
-    this.username = localStorage.getItem('user') || '{}';
+    this.userDisplayName = localStorage.getItem('user') || '{}';
   }
 
   //Home button -> go back to /home
