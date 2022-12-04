@@ -4,3 +4,15 @@
     display: none;
   }
 }
+
+.whiteButton{
+  width: 150px;
+  height: 40px;
+  background-color: #ffffff;
+  color: #FF6F3D;
+  font-weight: 600
+}
+
+.whiteButton:hover{
+  background-color: #ececec;
+}
