@@ -24,7 +24,6 @@ export class StaffChangePasswordComponent implements OnInit {
     this.userService.getCurrentUser().subscribe(data => {
       this.staffDetail = data;
       this.staffId = this.staffDetail.userId;
-      console.log(this.staffDetail.password);
     });
     console.log(this.oldPassword);
   }
