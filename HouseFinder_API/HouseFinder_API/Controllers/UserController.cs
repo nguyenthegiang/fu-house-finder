@@ -110,7 +110,9 @@ namespace HouseFinder_API.Controllers
 
                 //Response: Allow login
                 return Ok(new { Status = 200, User = user });
-            catch (Exception){
+            }
+            catch (Exception)
+            {
                 return Ok(new { Status = 500, Message = "Login Error!" });
             }
         }
