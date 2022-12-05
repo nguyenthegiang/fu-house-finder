@@ -54,3 +54,33 @@
     }
   }
 }
+
+.orangeButton{
+  background-color: #ee4d2d;
+  width: 100px;
+  color: white;
+}
+.orangeButton:hover{
+  background-color: #e83b19;
+}
+
+.greyButton{
+  background-color: #6c757d;
+  width: 100px;
+  color: white;
+}
+.greyButton:hover{
+  background-color: #5c636a;
+}
+
+::ng-deep .mat-step-header .mat-step-icon-selected{
+  background-color: #ee4d2d !important;
+}
+
+::ng-deep .mat-step-header .mat-step-icon-state-done{
+  background-color: #ee4d2d !important;
+}
+
+::ng-deep .mat-step-header .mat-step-icon-state-edit{
+  background-color: #ee4d2d !important;
+}
