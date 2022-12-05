@@ -5,6 +5,7 @@ FROM mcr.microsoft.com/mssql/server:2019-latest
 WORKDIR /usr/src/app
 
 # Copy initialization scripts
+USER root
 COPY . /usr/src/app
              
 # Set environment variables, not to have to write them with docker run command
@@ -18,7 +19,8 @@ ENV MSSQL_PID Express
 EXPOSE 1433
 
 # Grant permissions for the import-data script to be executable
-RUN sudo chmod +x /usr/src/app/db-init.sh
+USER 1001
+RUN chmod +x /usr/src/app/db-init.sh
 
 # Run Microsoft SQl Server and initialization script (at the same time)
 CMD /bin/bash ./entrypoint.sh
