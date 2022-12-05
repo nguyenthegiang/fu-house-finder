@@ -71,7 +71,7 @@ export class AddHouseComponent implements OnInit {
     //initialize google map
     this.map = new google.maps.Map(document.getElementById("google-map") as HTMLElement, {
       zoom: 15,
-      center: { lat: -25.363, lng: 105.527064 },
+      center: { lat: 21.018797378240844, lng: 105.52740174223347 },
     });
   
     // Configure the click listener
@@ -81,7 +81,7 @@ export class AddHouseComponent implements OnInit {
     });
   
     this.marker = new google.maps.Marker({
-      position: { lat: -25.363, lng: 105.527064 },
+      position: { lat: 21.018797378240844, lng: 105.52740174223347 },
       map: this.map
     });
     this.distanceService = new google.maps.DistanceMatrixService();
