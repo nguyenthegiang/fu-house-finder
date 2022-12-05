@@ -77,7 +77,7 @@ export class AddHouseComponent implements OnInit {
     // Configure the click listener
     this.map.addListener("click", (mapsMouseEvent: any) => {
       this.marker.setPosition(mapsMouseEvent.latLng);
-      this.houseForm.controls['googleAddress'].setValue(`${mapsMouseEvent.latLng.lat},${mapsMouseEvent.latLng.lng}`)
+      this.houseForm.controls['googleAddress'].setValue(`${mapsMouseEvent.latLng.toJSON()["lat"]},${mapsMouseEvent.latLng.toJSON()["lng"]}`);
     });
   
     this.marker = new google.maps.Marker({
@@ -171,9 +171,15 @@ export class AddHouseComponent implements OnInit {
         return;
       }
 
+    console.log(Number(this.houseForm.controls['googleAddress'].value.split(",")[0]));
+    console.log(Number(this.houseForm.controls['googleAddress'].value.split(",")[1]));
+    console.log(this.houseForm.controls['googleAddress'].value);
     var distance = 0;
-    const origin = { lat: -25.363, lng: 105.527064 };
-    const destination = { lat: 50.087, lng: 14.421 };
+    const origin = { lat: 21.0137883027051, lng: 105.52699965513666 };
+    const destination = { 
+      lat: Number(this.houseForm.controls['googleAddress'].value.split(",")[0]), 
+      lng: Number(this.houseForm.controls['googleAddress'].value.split(",")[1]) 
+    };
   
     const request = {
       origins: [origin],
@@ -182,8 +188,10 @@ export class AddHouseComponent implements OnInit {
       unitSystem: google.maps.UnitSystem.METRIC,
     };
 
+
     await this.distanceService.getDistanceMatrix(request).then((response: any) => {
       distance = response.rows[0].elements[0].distance.value;
+      console.log(distance);
     })
     this.houseService.createHouse(
       this.houseForm.controls['houseName'].value,
