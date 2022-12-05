@@ -1,0 +1,16 @@
+version: '3.4'
+
+services:
+  housefinder_api:
+    image: ${DOCKER_REGISTRY-}housefinderapi
+    build:
+      context: .
+      dockerfile: HouseFinder_API/Dockerfile
+    ports:
+      - 5000:80
+    depends_on:
+          - db
+  db:
+    ports:
+      - "1433:1433"
+    build: ./Database

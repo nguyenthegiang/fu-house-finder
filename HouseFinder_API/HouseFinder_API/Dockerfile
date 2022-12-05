@@ -1,0 +1,25 @@
+#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
+
+FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
+WORKDIR /app
+EXPOSE 80
+EXPOSE 443
+
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+WORKDIR /src
+COPY ["HouseFinder_API/HouseFinder_API.csproj", "HouseFinder_API/"]
+COPY ["Repositories/Repositories.csproj", "Repositories/"]
+COPY ["DataAccess/DataAccess.csproj", "DataAccess/"]
+COPY ["BusinessObjects/BusinessObjects.csproj", "BusinessObjects/"]
+RUN dotnet restore "HouseFinder_API/HouseFinder_API.csproj"
+COPY . .
+WORKDIR "/src/HouseFinder_API"
+RUN dotnet build "HouseFinder_API.csproj" -c Release -o /app/build
+
+FROM build AS publish
+RUN dotnet publish "HouseFinder_API.csproj" -c Release -o /app/publish
+
+FROM base AS final
+WORKDIR /app
+COPY --from=publish /app/publish .
+ENTRYPOINT ["dotnet", "HouseFinder_API.dll"]
