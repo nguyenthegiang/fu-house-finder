@@ -19,8 +19,6 @@ ENV MSSQL_PID Express
 EXPOSE 1433
 
 # Grant permissions for the import-data script to be executable
-USER 1001
-RUN chmod +x /usr/src/app/db-init.sh
 
 # Run Microsoft SQl Server and initialization script (at the same time)
 CMD /bin/bash ./entrypoint.sh
