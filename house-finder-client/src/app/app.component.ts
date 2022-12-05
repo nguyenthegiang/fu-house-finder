@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
-import { CampusService } from './services/campus.service';
 
 @Component({
   selector: 'app-root',
