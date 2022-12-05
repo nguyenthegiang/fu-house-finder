@@ -3,6 +3,7 @@ FROM mcr.microsoft.com/mssql/server:2019-latest
 USER root
 
 # Create app directory
+RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 # Copy initialization scripts
@@ -14,12 +15,13 @@ ENV SA_PASSWORD h9uHBC8h98h@3snds
 ENV ACCEPT_EULA Y
 ENV MSSQL_PID Express
 
+# Grant permissions for the import-data script to be executable
+RUN chmod +x /usr/src/app/db-init.sh
+
 # Expose port 1433 in case accessing from other container
 # Expose port externally from docker-compose.yml
 EXPOSE 1433
 
-# Grant permissions for the import-data script to be executable
-RUN chmod +X /usr/src/app/db-init.sh
-
-# Run Microsoft SQl Server and initialization script (at the same time)
+# Switch back to mssql user and run the entrypoint script
+USER mssql
 CMD /bin/bash ./entrypoint.sh
