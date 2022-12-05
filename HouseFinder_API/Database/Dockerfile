@@ -9,4 +9,4 @@ ENV MSSQL_PID Express
 
 EXPOSE 1433
 
-CMD sh ./entrypoint.sh
+ENTRYPOINT [ "bash", "-c", "./entrypoint.sh" ]
