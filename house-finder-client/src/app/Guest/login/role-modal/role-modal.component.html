@@ -1,13 +1,24 @@
-<h1 mat-dialog-title class="title">Bạn muốn đăng ký tài khoản với vai trò là:</h1>
+<!-- Title -->
+<h1 mat-dialog-title class="title">
+  Bạn muốn đăng ký tài khoản với vai trò là:
+</h1>
+
+<!-- Buttons -->
 <div mat-dialog-content>
-    <div class="container">
-        <div class="row d-flex justify-content-around align-content-center" style="height: 90px;">
-            <div class="col-4">
-                <button class="btn form-control orangeButton" (click)="studentChoose()">Học sinh</button>
-            </div>
-            <div class="col-4">
-                <button class="btn form-control blueButton" (click)="landlordChoose()">Chủ trọ</button>
-            </div>
-        </div>
+  <div class="container">
+    <div
+      class="row d-flex justify-content-around" style="height: 8vh;"
+    >
+      <div class="col-6 d-flex justify-content-center p-2">
+        <button class="btn form-control orangeButton" (click)="studentChoose()">
+          Học sinh
+        </button>
+      </div>
+      <div class="col-6 d-flex justify-content-center p-2">
+        <button class="btn form-control blueButton" (click)="landlordChoose()">
+          Chủ trọ
+        </button>
+      </div>
     </div>
+  </div>
 </div>
