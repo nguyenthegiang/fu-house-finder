@@ -59,7 +59,7 @@
 </ng-container>
 <ng-template #registerTemplate>
   <mat-stepper [linear]="true" #stepper>
-    <mat-step label="Điền Thông tin liên hệ" [stepControl]="contactForm">
+    <mat-step label="Điền thông tin liên hệ" [stepControl]="contactForm">
       <form [formGroup]="contactForm">
         <div  class="row d-flex justify-content-center">
           <div class="col-auto" style="width: 400px;">
@@ -76,7 +76,7 @@
               </mat-form-field>
             </div>
             <div class="row d-flex justify-content-end">
-              <button class="col-auto" mat-raised-button color="primary" matStepperNext style="width: 100px;">Next</button>
+              <button class="col-auto orangeButton" mat-raised-button matStepperNext>Tiếp tục</button>
             </div>
           </div>
         </div>
@@ -139,19 +139,20 @@
               <!-- End back side -->
             </div>
             <div class="row d-flex justify-content-between my-5">
-              <button mat-raised-button matStepperPrevious style="width: 100px;">Back</button>
-              <button mat-raised-button color="primary" matStepperNext style="width: 100px;">Next</button>
+              <button class="greyButton" mat-raised-button matStepperPrevious>Quay lại</button>
+              <button class="orangeButton" mat-raised-button matStepperNext>Tiếp tục</button>
             </div>
           </div>
         </div>
       </form>
     </mat-step>
     <mat-step label="Xác nhận thông tin">
-      <div class="row d-flex justify-content-between">
-        <button mat-raised-button color="primary" style="width: 100px;" (click)="onSubmit()">Đăng kí</button>
-      </div>
-      <div class="row d-flex justify-content-between">
-        <button mat-raised-button matStepperPrevious style="width: 100px;">Back</button>
+      <div class="justify-content-center">
+        <p style="text-align: center;">Hoàn tất thủ tục đăng ký</p>
+        <div class="row d-flex justify-content-around">
+          <button class="greyButton" mat-raised-button matStepperPrevious>Quay lại</button>
+          <button mat-raised-button class="orangeButton" (click)="onSubmit()">Xác nhận</button>
+        </div>
       </div>
     </mat-step>
   </mat-stepper>
