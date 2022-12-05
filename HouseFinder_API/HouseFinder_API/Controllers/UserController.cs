@@ -45,8 +45,6 @@ namespace HouseFinder_API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDTO login)
         {
-            try
-            {
                 if (login.GoogleUserId != null)
                 {
                     var validationSettings = new GoogleJsonWebSignature.ValidationSettings
@@ -74,11 +72,6 @@ namespace HouseFinder_API.Controllers
                     return Ok(new { Status = 201, User = user });
                 }
                 return Ok(new { Status = 200, User = user });
-            }
-            catch (Exception)
-            {
-                return Ok(new { Status = 500, Message = "Login Error!" });
-            }
         }
         [HttpPost("register")]
         public async Task<IActionResult> Register(RegisterDTO register)
