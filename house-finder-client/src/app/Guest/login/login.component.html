@@ -147,11 +147,12 @@
       </form>
     </mat-step>
     <mat-step label="Xác nhận thông tin">
-      <div class="row d-flex justify-content-between">
-        <button mat-raised-button class="orangeButton" (click)="onSubmit()">Đăng kí</button>
-      </div>
-      <div class="row d-flex justify-content-between">
-        <button class="greyButton" mat-raised-button matStepperPrevious>Back</button>
+      <div class="justify-content-center">
+        <p style="text-align: center;">Hoàn tất thủ tục đăng ký</p>
+        <div class="row d-flex justify-content-around">
+          <button class="greyButton" mat-raised-button matStepperPrevious>Back</button>
+          <button mat-raised-button class="orangeButton" (click)="onSubmit()">Xác nhận</button>
+        </div>
       </div>
     </mat-step>
   </mat-stepper>
