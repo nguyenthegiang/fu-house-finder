@@ -1,11 +1,11 @@
 # Choose ubuntu version
 FROM mcr.microsoft.com/mssql/server:2019-latest
+USER root
 
 # Create app directory
 WORKDIR /usr/src/app
 
 # Copy initialization scripts
-USER root
 COPY . /usr/src/app
              
 # Set environment variables, not to have to write them with docker run command
@@ -19,6 +19,7 @@ ENV MSSQL_PID Express
 EXPOSE 1433
 
 # Grant permissions for the import-data script to be executable
+RUN chmod +X /usr/src/app/db-init.sh
 
 # Run Microsoft SQl Server and initialization script (at the same time)
 CMD /bin/bash ./entrypoint.sh
