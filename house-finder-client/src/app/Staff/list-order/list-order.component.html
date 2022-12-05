@@ -261,22 +261,22 @@
           [(ngModel)]="selectedStatusId"
           (change)="onSelectOrderStatus(selectOrderStatusId.value)"
         >
-          <option *ngFor="let status of statuses" [value]="status.statusId">
-            {{ status.statusName }}
-          </option>
+          <option value="1">Chưa giải quyết</option>
+          <option value="2">Đang giải quyết</option>
+          <option value="3">Đã giải quyết</option>
         </select>
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Close
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+          Hủy
         </button>
         <button
           type="button"
-          class="btn btn-primary"
+          class="btn btn-success"
           (click)="updateOrderStatus()"
         >
-          Save changes
+          Lưu
         </button>
       </div>
     </div>

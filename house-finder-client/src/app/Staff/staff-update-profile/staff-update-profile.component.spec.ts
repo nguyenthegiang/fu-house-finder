@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StaffSidebarComponent } from './staff-sidebar.component';
+import { StaffUpdateProfileComponent } from './staff-update-profile.component';
 
-describe('StaffSidebarComponent', () => {
-  let component: StaffSidebarComponent;
-  let fixture: ComponentFixture<StaffSidebarComponent>;
+describe('StaffUpdateProfileComponent', () => {
+  let component: StaffUpdateProfileComponent;
+  let fixture: ComponentFixture<StaffUpdateProfileComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ StaffSidebarComponent ]
+      declarations: [ StaffUpdateProfileComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StaffSidebarComponent);
+    fixture = TestBed.createComponent(StaffUpdateProfileComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

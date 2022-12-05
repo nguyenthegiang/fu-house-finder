@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace Repositories.Repositories
 {
-    public class UserRepository : IUserReposiotry
+    public class UserRepository : IUserRepository
     {
         public int CountActiveLandlord() => UserDAO.CountActiveLandlord();
 
@@ -20,13 +20,12 @@ namespace Repositories.Repositories
 
         public List<UserDTO> GetLandlordSignupRequest() => UserDAO.GetLandlordSignupRequest();
 
-        //Get list of staffs
-        //public List<UserDTO> GetStaffs() => UserDAO.GetStaffs();
-
         public UserDTO GetUserByID(string UserId) => UserDAO.GetUserById(UserId);
+
         public ResponseDTO Login(LoginDTO login)
         {
             ResponseDTO user;
+            //Choosing method to login
             if (login.FacebookUserId != null)
             {
                 user = UserDAO.LoginFacebook(login.FacebookUserId);
@@ -41,6 +40,7 @@ namespace Repositories.Repositories
             }
             return user;
         }
+
         public ResponseDTO Register(RegisterDTO register)
         {
             try
@@ -75,5 +75,11 @@ namespace Repositories.Repositories
         {
             UserDAO.UpdateUserIdCardImage(user.UserId, user.IdentityCardFrontSideImageLink, user.IdentityCardBackSideImageLink);
         }
+        public void UpdateUserStatus(string userId, int statusId, string staffId) => UserDAO.UpdateUserStatus(userId, statusId, staffId);
+
+        //Get list of staffs
+        public List<UserDTO> GetStaffs() => UserDAO.GetStaffs();
+        public void UpdateProfile(string userId, string name, string email) => UserDAO.UpdateProfile(userId, name, email);
+        public void ChangePassword(string userId, string newPassword) => UserDAO.ChangePassword(userId, newPassword);
     }
 }

@@ -7,18 +7,23 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./landlord-header.component.scss']
 })
 export class LandlordHeaderComponent implements OnInit {
+  //Display name of current user
+  userDisplayName: string = "";
 
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    //Get displayName from localStorage
+    this.userDisplayName = localStorage.getItem('user') || '{}';
   }
 
+  //back to Landlord Dashboard
   backHome() {
-    //use reload() so that when user is already in home -> they will get a reload of page
-    window.location.href = "/dashboard";
+    window.location.href = "/Landlord/dashboard";
   }
 
-  logout(){
+  //Log out of systen
+  logout() {
     this.userService.logout().subscribe(resp => {
       localStorage.clear();
       sessionStorage.clear();

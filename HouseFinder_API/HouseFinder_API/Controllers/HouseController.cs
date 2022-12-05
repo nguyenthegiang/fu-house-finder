@@ -198,18 +198,18 @@ namespace HouseFinder_API.Controllers
          */
         [EnableQuery]
         [HttpGet("GetReportedHouses")]
-        public ActionResult<IEnumerable<ReportHouseDTO>> GetReportedHouses()
-        {
-            List<ReportHouseDTO> houses = houseRepository.GetListReportHouse();
-            if (houses == null)
-            {
-                return NotFound();
-            }
-            else
-            {
-                return Ok(houses);
-            }
-        }
+        public ActionResult<IEnumerable<ReportHouseDTO>> GetReportedHouses() => houseRepository.GetListReportHouse();
+        //{
+        //    List<ReportHouseDTO> houses = houseRepository.GetListReportHouse();
+        //    if (houses == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    else
+        //    {
+        //        return Ok(houses);
+        //    }
+        //}
 
         /**
          * GET: api/Houses/Distance
@@ -238,7 +238,7 @@ namespace HouseFinder_API.Controllers
                 string googleMapApiUrl = "https://maps.googleapis.com/maps/api/distancematrix/json" +
                     $"?destinations={campusLocation}" +
                     $"&origins={houseLocation}" +
-                    "&key=AIzaSyDxIHcpD2lUN_Y9MSau-_6o0hrKnbha0zo";
+                    "&key=AIzaSyAOSt-MODiWy8Tysx0NYkiZ8Ewz1PJkj_M";
 
                 // HttpClient is intended to be instantiated once per application, rather than per-use. See Remarks.
                 HttpClient client = new HttpClient();

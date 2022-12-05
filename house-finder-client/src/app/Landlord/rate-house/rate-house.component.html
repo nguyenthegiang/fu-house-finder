@@ -1,31 +1,62 @@
 <!--Header-->
-<div>
-  <div class="navbar nav d-flex justify-content-between text-white orangeBackround">
-    <div class="d-flex justify-content-center align-items-center" id="header1">
-      <a href="/Landlord/dashboard" class="text-white text-decoration-none mx-2" id="link">Dashboard</a>
-      <span class="me-2">></span>
-      <span>Đánh giá</span>
-    </div>
-
-    <div class="d-flex justify-content-center align-items-center" id="header2">
-      <div>Chủ trọ</div>
-      <button class="btn btn-light mx-3" id="loginButton" (click)="logout()">Đăng xuất</button>
-    </div>
-  </div>
-</div>
+<app-landlord-header></app-landlord-header>
 
 <!-- Rate and comment -->
-<div class="m-5">
-  <h3 class="text-center mb-4">Người dùng đánh giá</h3>
-  <div class="bg-light border border-secondary rounded mb-2 p-2">
-    <b>Nguyễn Văn A</b>: Đẹp, gần trường (<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>)
-    <div (click)="replyOn = true" style="cursor: pointer;" class="reply">Phản hồi</div>
-    <div *ngIf="replyOn == true" class="mt-2">
-      Viết phản hồi:
-      <div class="d-flex">
-        <input type="text" class="form-control me-2" aria-label="Username" aria-describedby="basic-addon1">
-        <button type="button" class="btn btn-secondary me-2">Đăng</button>
-        <button type="button" class="btn btn-danger" (click)="replyOn = false">Hủy</button>
+<div class="mx-2 mx-md-5">
+  <!-- Rate and comment -->
+  <div class="my-5 border border-secondary rounded p-2">
+    <h3 class="text-center">Người dùng đánh giá</h3>
+    Bình luận:
+    <div class="bg-light border border-secondary rounded mb-2 p-2" style="overflow: auto;">
+      <div *ngIf="rates.length === 0">
+        Chưa có đánh giá
+      </div>
+      <div *ngFor="let rate of rates; let i = index">
+        <div class="d-flex">
+          <span>
+            {{rate.studentId}}: {{rate.comment}}
+              <span *ngIf="rate.star === 1">
+                (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
+              </span>
+              <span *ngIf="rate.star === 2">
+                (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
+              </span>
+              <span *ngIf="rate.star === 3">
+                (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
+              </span>
+              <span *ngIf="rate.star === 4">
+                (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
+              </span>
+              <span *ngIf="rate.star === 5">
+                (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
+              </span>
+          </span>
+          <a class="ms-2" style="cursor: pointer;" (click)="openReply(i)" *ngIf="!isReply && rate.landlordReply === ''">phản hồi</a>
+
+        </div>
+        <div *ngIf="rate.landlordReply !== null">
+          <i class="fa-solid fa-arrow-right"></i> Chủ trọ trả lời: {{rate.landlordReply}}
+        </div>
+        <div *ngIf="isReply && indexReply === i">
+          <div class="mb-3 row d-flex">
+            <div class="col-12 col-md-4 mt-1">
+              <input type="text" class="form-control" placeholder="Viết phản hồi" [(ngModel)]="reply">
+            </div>
+
+            <button class="btn btn-secondary col-12 col-md-2 mt-1 me-2" type="button" (click)="closeReply()">Hủy</button>
+            <button class="btn btn-success col-12 col-md-2 mt-1" type="button" [disabled]="reply === ''" (click)="addReply(rate.rateId)">Đăng</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

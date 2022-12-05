@@ -1,17 +1,5 @@
-<!--Header-->
-<div>
-  <div class="navbar nav d-flex justify-content-between text-white orangeBackround">
-    <div class="d-flex justify-content-center align-items-center" id="header1">
-      <button class="btn btn-light mx-3" id="loginButton" (click)="addHouse()">+ Thêm mới</button>
-      <a href="/Landlord/dashboard" class="text-white text-decoration-none" id="link">Dashboard</a>
-    </div>
-
-    <div class="d-flex justify-content-center align-items-center" id="header2">
-      <div>Chủ trọ</div>
-      <button class="btn btn-light mx-3" id="loginButton" (click)="logout()">Đăng xuất</button>
-    </div>
-  </div>
-</div>
+<!-- Header -->
+<app-landlord-header></app-landlord-header>
 
 <!-- Body -->
 <div class="row m-2">
@@ -24,11 +12,14 @@
     <div class="my-4" *ngIf="houses.length != 0">
       <h3 class="text-center">Danh sách nhà trọ</h3>
 
-      <table class="table table-hover mt-4">
+      <div class="my-4">
+        <button class="btn btn-secondary" (click)="addHouse()">+ Thêm mới</button>
+      </div>
+
+      <table class="table table-hover">
         <thead>
           <tr>
             <th scope="col" id="md">STT</th>
-            <th scope="col">ID</th>
             <th scope="col">Tên nhà trọ</th>
             <th scope="col" id="md">Tiền chưa cho thuê</th>
             <th scope="col" id="md">
@@ -59,9 +50,6 @@
         <tbody>
           <tr *ngFor="let dataItem of houses; let i=index;" (click)="viewHouse(dataItem.houseId)" style="cursor: pointer;">
             <td id="md"><b>{{i+1}}</b></td>
-
-            <!-- House id -->
-            <td>{{dataItem.houseId}}</td>
 
             <!-- House name -->
             <td>{{dataItem.houseName}}</td>

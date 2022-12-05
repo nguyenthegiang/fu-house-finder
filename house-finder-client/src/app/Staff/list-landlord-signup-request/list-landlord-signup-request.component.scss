@@ -1,0 +1,22 @@
+.landlordSingupRequest{
+  tr{
+    td{
+      .profileImage{
+        width: 5vw;
+      }
+      .identityCard{
+        width: 6.5vw;
+      }
+      img:hover{
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .md
+  {
+    display: none;
+  }
+}

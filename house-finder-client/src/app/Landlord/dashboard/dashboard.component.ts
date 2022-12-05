@@ -28,6 +28,7 @@ export class DashboardComponent implements OnInit {
   availableRoom: number = 0;
   totalCapacity: number = 0;
   availableCapacity: number = 0;
+  stay: boolean = true;
 
   constructor(private houseService: HouseService,
     private roomService: RoomService,
@@ -74,24 +75,25 @@ export class DashboardComponent implements OnInit {
 
   viewHouse(id: number)
   {
-    console.log(id);
-    this.router.navigate(['/Landlord/landlord-house-detail/' + id]);
+    if(this.stay === true)
+    {
+      this.router.navigate(['/Landlord/landlord-house-detail/' + id]);
+    }
   }
 
   viewRate(id: number)
   {
-    console.log(id);
     this.router.navigate(['/Landlord/rate-house/' + id]);
   }
 
   updateHouse(id: number)
   {
-    console.log(id);
     this.router.navigate(['/Landlord/update-house/' + id]);
   }
 
   deleteHouse(id: number)
   {
+    this.stay = false;
     this.houseId = id;
   }
 

@@ -59,6 +59,6 @@ namespace HouseFinder.Test
             Assert.AreEqual("Solved", orders[2].StatusName);
         }
 
-        #endregion GetAvailableHouses
+        #endregion GetAllOrderStatus
     }
 }

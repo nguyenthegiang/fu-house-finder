@@ -1,36 +1,35 @@
-#loginButton{
-  width: 120px;
-  height: 40px;
-  font-size: 16px;
+#loginButton {
+  // width: 120px;
+  // height: 40px;
+  // font-size: 16px;
   font-weight: 600;
   color: #ee4d2d;
-  box-shadow: 0 8px 8px -4px rgb(0, 0, 0,0.5);
+  box-shadow: 0 8px 8px -4px rgb(0, 0, 0, 0.5);
   border: none;
   border-radius: 10px;
 }
 
-#app-name{
+#app-name {
   color: white;
   text-decoration: none;
 }
 
-#app-name:hover{
+#app-name:hover {
   cursor: pointer;
   text-decoration: none;
 }
 
-#app-name:active{
+#app-name:active {
   text-decoration: none;
 }
 
-#link:hover
-{
+#link:hover {
   text-decoration: underline !important;
 }
 
+//Responsive
 @media only screen and (max-width: 768px) {
-  .logo
-  {
+  .logo {
     display: none !important;
   }
 }

@@ -84,7 +84,7 @@ namespace HouseFinder.Test
             Assert.AreEqual("Disabled", roomStatus[1].StatusName);
         }
 
-        #endregion GetAvailableHouses
+        #endregion GetRoomStatusByHouseId
 
         #region GetAllStatus
 
@@ -130,6 +130,6 @@ namespace HouseFinder.Test
             Assert.AreEqual("Disabled", roomStatus[2].StatusName);
         }
 
-        #endregion GetAvailableHouses
+        #endregion GetAllStatus
     }
 }

@@ -1,8 +1,11 @@
+import { StaffChangePasswordComponent } from './Staff/staff-change-password/staff-change-password.component';
+import { LandlordChangePasswordComponent } from './Landlord/landlord-change-password/landlord-change-password.component';
+import { LandlordUpdateProfileComponent } from './Landlord/landlord-update-profile/landlord-update-profile.component';
+import { StaffUpdateProfileComponent } from './Staff/staff-update-profile/staff-update-profile.component';
 import { StaffHouseDetailComponent } from './Staff/staff-house-detail/staff-house-detail.component';
 import { StaffLandlordDetailComponent } from './Staff/staff-landlord-detail/staff-landlord-detail.component';
 import { UpdateAccountComponent } from './Admin/update-account/update-account.component';
 import { CreateAccountComponent } from './Admin/create-account/create-account.component';
-import { ChangePasswordComponent } from './Admin/change-password/change-password.component';
 import { ListStaffComponent } from './Admin/list-staff/list-staff.component';
 import { RateHouseComponent } from './Landlord/rate-house/rate-house.component';
 import { AddHouseComponent } from './Landlord/add-house/add-house.component';
@@ -14,7 +17,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { HouseDetailComponent } from './Guest/house-detail/house-detail.component';
 import { LoginComponent } from './Guest/login/login.component';
 import { DashboardComponent } from './Landlord/dashboard/dashboard.component';
-import { ListRoomComponent } from './Landlord/list-room/list-room.component';
 import { DashboardStaffComponent } from './Staff/dashboard/dashboard.component';
 import { ListLandlordComponent } from './Staff/list-landlord/list-landlord.component';
 import { ListReportComponent } from './Staff/list-report/list-report.component';
@@ -33,13 +35,14 @@ const routes: Routes = [
   { path: 'house-detail/:id', component: HouseDetailComponent},
   { path: 'room-detail/:id', component: RoomDetailComponent},
   { path: 'Landlord/dashboard', component: DashboardComponent},
-  { path: 'Landlord/list-room/:id', component: ListRoomComponent},
   { path: 'Landlord/landlord-house-detail/:id', component: LandlordHouseDetailComponent},
   { path: 'Landlord/add-house', component: AddHouseComponent},
   { path: 'Landlord/update-house/:id', component: UpdateHouseComponent},
   { path: 'Landlord/update-room/:id', component: UpdateRoomComponent},
   { path: 'Landlord/rate-house/:id', component: RateHouseComponent},
   { path: 'Landlord/add-room', component: AddRoomComponent},
+  { path: 'Landlord/landlord-update-profile', component: LandlordUpdateProfileComponent},
+  { path: 'Landlord/landlord-change-password', component: LandlordChangePasswordComponent},
   { path: 'Staff/dashboard', component: DashboardStaffComponent},
   { path: 'Staff/list-landlord', component: ListLandlordComponent},
   { path: 'Staff/list-report', component: ListReportComponent},
@@ -49,8 +52,9 @@ const routes: Routes = [
   { path: 'Staff/staff-landlord-detail/:id', component: StaffLandlordDetailComponent},
   { path: 'Staff/staff-house-detail/:id', component: StaffHouseDetailComponent},
   { path: 'Staff/staff-room-detail/:id', component: StaffRoomDetailComponent},
+  { path: 'Staff/staff-update-profile', component: StaffUpdateProfileComponent},
+  { path: 'Staff/staff-change-password', component: StaffChangePasswordComponent},
   { path: 'Admin/list-staff', component: ListStaffComponent},
-  { path: 'Admin/change-password', component: ChangePasswordComponent},
   { path: 'Admin/create-account', component: CreateAccountComponent},
   { path: 'Admin/update-account', component: UpdateAccountComponent}
 ];
