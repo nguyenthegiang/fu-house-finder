@@ -38,7 +38,7 @@
 /*-------------------------- Register --------------------------*/
 #contentColumn {
   // Email&Password Login
-
+  
   background-color: #FF6F3D;
 
   #loginTitle {
@@ -46,29 +46,6 @@
     text-align: center;
   }
 
-  #loginEmail {
-    mat-form-field {
-      width: 350px;
-
-      input {
-        height: 35px;
-        padding: 5px;
-        border-radius: 5px;
-      }
-    }
-
-    .whiteButton {
-      width: 150px;
-      height: 40px;
-      background-color: #ffffff;
-      color: #FF6F3D;
-      font-weight: 600
-    }
-
-    .whiteButton:hover {
-      background-color: #ececec;
-    }
-  }
 
   //Google / Facebook Login
 
@@ -83,6 +60,18 @@
   #googleLogin {
     width: fit-content;
   }
+}
+
+.whiteButton {
+  width: 150px;
+  height: 40px;
+  background-color: #ffffff;
+  color: #FF6F3D;
+  font-weight: 600
+}
+
+.whiteButton:hover {
+  background-color: #ececec;
 }
 
 .identityCard {
