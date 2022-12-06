@@ -32,7 +32,8 @@ export class ListLandlordSignupRequestComponent implements OnInit {
   search(searchValue: string) { }
 
   updateUserStatus(userId: string, statusId: number) {
-    this.userService.updateUserStatus(userId, statusId).subscribe();
-    this.reloadListRequest();
+    this.userService.updateUserStatus(userId, statusId).subscribe((data) => {
+      this.reloadListRequest();
+    });
   }
 }
