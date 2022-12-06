@@ -1,11 +1,10 @@
 @media only screen and (max-width: 768px) {
-  #logo
-  {
+  #logo {
     display: none;
   }
 }
 
-.whiteButton{
+.whiteButton {
   width: 150px;
   height: 40px;
   background-color: #ffffff;
@@ -13,43 +12,63 @@
   font-weight: 600
 }
 
-.whiteButton:hover{
+.whiteButton:hover {
   background-color: #ececec;
 }
 
-.identityCard{
+.identityCard {
   height: 270px;
   width: 360px;
 
-  .dragAndDropArea{
-    position:relative;
+  .dragAndDropArea {
+    position: relative;
     border: 2px dashed #bbbbbb;
     width: 360px;
     height: 270px;
     border-radius: 10px;
     background-color: #F7F7F7;
 
-    img:first-child{
+    img:first-child {
       width: 100%;
       max-height: 100%;
-      position:absolute;
+      position: absolute;
       z-index: 1;
       height: auto;
       justify-content: center;
       display: flex;
     }
 
-    span{
+    span {
       position: absolute;
       margin-top: 90px;
       margin-left: 110px;
       color: #868686;
     }
 
-    div{
+    div {
       position: absolute;
       margin-top: 90px;
       margin-left: 140px;
     }
   }
+}
+
+// Stepper Header Not Finished
+::ng-deep .mat-step-header .mat-step-icon-state-number {
+  background-color: #ee4d2d;
+  color: #fff;
+}
+
+// Stepper Header finished
+::ng-deep .mat-step-header .mat-step-icon-selected, 
+::ng-deep .mat-step-header .mat-step-icon-state-done, 
+::ng-deep .mat-step-header .mat-step-icon-state-edit {
+    background-color: #ee4d2d;
+    color: #fff;
+}
+
+// Button color
+.mat-orange {
+  background-color: #ee4d2d;
+  color: #fff;
 }

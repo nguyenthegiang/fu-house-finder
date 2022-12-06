@@ -1,7 +1,6 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
 
-<ng-container class="col-md-6 offset-md-3 mt-5 text-center" #loginTemplate *ngIf="!login; else registerTemplate">
-  <app-header></app-header>
+<ng-container class="col-md-6 offset-md-3 mt-5 text-center" #loginTemplate *ngIf="login; else registerTemplate">
   <div class="row d-flex justify-content-center vh-100">
     <!-- Images -->
     <div class="col-6  pt-4" id="logo">
@@ -57,7 +56,6 @@
       </div>
     </div>
   </div>
-  <app-footer></app-footer>
 </ng-container>
 <ng-template #registerTemplate>
   <app-header></app-header>
@@ -68,7 +66,7 @@
           <div  class="row d-flex justify-content-center">
             <div class="col-auto" style="width: 400px;">
               <div class="row">
-                <mat-form-field appearance="fill" style="width: 400px;" class="m-0 p-0">
+                <mat-form-field appearance="fill" color="white" style="width: 400px;" class="m-0 p-0">
                   <mat-label>Số điện thoại</mat-label>
                   <input matInput type="tel" style="width: 250px; height: 30px;" id="phonenumber" formControlName="phonenumber" required>
                 </mat-form-field>
@@ -80,13 +78,13 @@
                 </mat-form-field>
               </div>
               <div class="row d-flex justify-content-end">
-                <button class="col-auto" mat-raised-button color="primary" matStepperNext style="width: 100px;">Next</button>
+                <button class="col-auto" mat-raised-button color="orange" matStepperNext style="width: 100px;">Next</button>
               </div>
             </div>
           </div>
         </form>
       </mat-step>
-      <mat-step label="Chụp ảnh CMND" [stepControl]="imageForm" style="background-color: #ee4d2d;">
+      <mat-step label="Chụp ảnh CMND" [stepControl]="imageForm">
         <form [formGroup]="imageForm">
           <div class="row d-flex justify-content-center">
             <div class="col-auto mt-4" style="width: 800px;">
@@ -144,7 +142,7 @@
               </div>
               <div class="row d-flex justify-content-between my-5">
                 <button mat-raised-button matStepperPrevious style="width: 100px;">Back</button>
-                <button mat-raised-button color="primary" matStepperNext style="width: 100px;">Next</button>
+                <button mat-raised-button color="orange" matStepperNext style="width: 100px;">Next</button>
               </div>
             </div>
           </div>
@@ -171,7 +169,7 @@
         </div>
         <div class="row d-flex justify-content-around my-5 h-75">
           <button mat-raised-button matStepperPrevious style="width: 100px;">Back</button>
-          <button mat-raised-button color="primary" style="width: 100px;" (click)="onSubmit()">Đăng kí</button>
+          <button mat-raised-button color="orange" style="width: 100px;" (click)="onSubmit()">Đăng kí</button>
         </div>
       </mat-step>
     </mat-stepper>
