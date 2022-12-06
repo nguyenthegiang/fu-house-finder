@@ -45,3 +45,14 @@
     display: none !important;
   }
 }
+
+@media only screen and (min-width: 768px) {
+  .footer{
+    clear: both;
+    position: absolute;
+    max-height: 380px;
+    width: 100%;
+    bottom: 0;
+  }
+}
+

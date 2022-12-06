@@ -4,7 +4,8 @@
   <div class="col-12">
     <!-- Page content -->
     <div class="row">
-      <div class="my-4">
+      <span *ngIf="landlordSignupRequest.length === 0" class="emptyMesage">Hiện tại chưa có chủ trọ đăng ký</span>
+      <div class="my-4" *ngIf="landlordSignupRequest.length != 0">
         <h3 class="text-center">Danh sách yêu cầu chủ trọ</h3>
 
         <table class="table table-hover landlordSingupRequest">
