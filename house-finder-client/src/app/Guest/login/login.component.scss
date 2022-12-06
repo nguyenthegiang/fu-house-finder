@@ -35,7 +35,6 @@
   }
 }
 
-/*-------------------------- Register --------------------------*/
 #contentColumn {
   // Email&Password Login
 
@@ -82,6 +81,17 @@
 
   #googleLogin {
     width: fit-content;
+  }
+}
+
+/*-------------------------- Register --------------------------*/
+#registerTemplate {
+  #step1Column {
+    width: 400px;
+  }
+
+  #step2 {
+    background-color: #ee4d2d;
   }
 }
 
@@ -142,6 +152,17 @@
 
 .greyButton:hover {
   background-color: #021d57;
+}
+
+//Style over mat components
+
+::ng-deep input {
+  width: 250px;
+  height: 30px;
+}
+
+::ng-deep .registerStep1Input {
+  width: 400px;
 }
 
 ::ng-deep .mat-step-header .mat-step-icon-selected {

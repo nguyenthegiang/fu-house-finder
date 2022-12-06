@@ -69,26 +69,30 @@
 </ng-container>
 
 <!---------------------------- Register ---------------------------->
-<ng-template #registerTemplate>
+<ng-template #registerTemplate id="registerTemplate">
   <mat-stepper [linear]="true" #stepper>
+    <!-- Step 1 -->
     <mat-step label="Điền thông tin liên hệ" [stepControl]="contactForm">
       <form [formGroup]="contactForm">
         <div class="row d-flex justify-content-center">
-          <div class="col-auto" style="width: 400px;">
+          <div class="col-auto" id="step1Column">
+            <!-- Input phone -->
             <div class="row">
-              <mat-form-field appearance="fill" style="width: 400px;" class="m-0 p-0">
+              <mat-form-field appearance="fill" class="m-0 p-0 registerStep1Input">
                 <mat-label>Số điện thoại</mat-label>
-                <input matInput type="tel" style="width: 250px; height: 30px;" id="phonenumber"
-                  formControlName="phonenumber" required>
+                <input matInput type="tel" id="phonenumber" formControlName="phonenumber" required>
               </mat-form-field>
             </div>
+
+            <!-- Input Facebook -->
             <div class="row">
-              <mat-form-field appearance="fill" style="width: 400px;" class="m-0 p-0">
+              <mat-form-field appearance="fill" class="m-0 p-0 registerStep1Input">
                 <mat-label>Link Facebook</mat-label>
-                <input matInput type="url" style="width: 250px; height: 30px;" id="facebookUrl"
-                  formControlName="facebookUrl" required>
+                <input matInput type="url" id="facebookUrl" formControlName="facebookUrl" required>
               </mat-form-field>
             </div>
+
+            <!-- Submit -->
             <div class="row d-flex justify-content-end">
               <button class="col-auto orangeButton" mat-raised-button matStepperNext>Tiếp tục</button>
             </div>
@@ -96,7 +100,9 @@
         </div>
       </form>
     </mat-step>
-    <mat-step label="Chụp ảnh CMND" [stepControl]="imageForm" style="background-color: #ee4d2d;">
+
+    <!-- Step 2 -->
+    <mat-step label="Chụp ảnh CMND" [stepControl]="imageForm" id="step2">
       <form [formGroup]="imageForm">
         <div class="row d-flex justify-content-center">
           <div class="col-auto mt-4" style="width: 800px;">
@@ -168,6 +174,8 @@
         </div>
       </form>
     </mat-step>
+
+    <!-- Step 3 -->
     <mat-step label="Xác nhận thông tin">
       <div class="justify-content-center">
         <p style="text-align: center;">Hoàn tất thủ tục đăng ký</p>
