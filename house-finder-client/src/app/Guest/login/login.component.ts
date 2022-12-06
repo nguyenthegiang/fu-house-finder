@@ -16,22 +16,18 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  //Modals
   @ViewChild('ggDiv') ggDiv: ElementRef | undefined;
   @ViewChild('registerModal') registerModal: ElementRef | undefined;
   @ViewChild('roleModal') roleModal: ElementRef | undefined;
   @ViewChild('registerTemplate') registerTemplate: TemplateRef<any> | any;
   @ViewChild('loginTemplate') loginTemplate: TemplateRef<any> | any;
-  //Alerts
   @ViewChild('landLordAccountLockedAlert') private landLordAccountLockedAlert: SwalComponent | undefined;
   @ViewChild('serverErrorAlert') private serverErrorAlert: SwalComponent | undefined;
   @ViewChild('invalidEmailPasswordAlert') private invalidEmailPasswordAlert: SwalComponent | undefined;
   @ViewChild('landLordAccountConfirmAlert') private landLordAccountConfirmAlert: SwalComponent | undefined;
   @ViewChild('landlordAccountCreatedAlert') private landlordAccountCreatedAlert: SwalComponent | undefined;
 
-  //Flag to check whether to display the Login Template or Register Template
   login = true;
-
   frontImgSrc = '';
   backImgSrc = '';
 
@@ -376,7 +372,6 @@ export class LoginComponent implements OnInit {
       });
   }
 
-  //Change to display Register Template
   triggerRegister() {
     this.login = false;
   }
