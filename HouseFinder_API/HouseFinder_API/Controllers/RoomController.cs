@@ -137,12 +137,12 @@ namespace HouseFinder_API.Controllers
                 updatedRoom.LastModifiedDate = DateTime.Now;
 
                 roomRepository.UpdateRoom(updatedRoom);
-                return Ok();
+                return Ok(new { Status = 200 });
             }
             catch (Exception e)
             {
 
-                return BadRequest(e.Message);
+                return Ok(new { Status = 400 });
             }
         }
 
