@@ -21,29 +21,30 @@
     </div>
 
     <!-- Content Column -->
-    <div class="col-lg-6 col-sm-12 h-100 d-flex justify-content-center align-items-center"
-      id="contentColumn">
+    <div class="col-lg-6 col-sm-12 h-100 d-flex justify-content-center align-items-center" id="contentColumn">
       <div class="row">
         <h3 id="loginTitle">ĐĂNG NHẬP</h3>
 
         <!-- Sign in with email and password -->
-        <div class="row mx-1">
+        <div class="row mx-1" id="loginEmail">
           <form class="col" [formGroup]="loginForm" (ngSubmit)="loginUsernamePassword()">
+            <!-- Input Email -->
             <div class="row d-flex justify-content-center mt-4">
-              <mat-form-field appearance="legacy" style="width: 350px;">
+              <mat-form-field appearance="legacy">
                 <mat-label>Email</mat-label>
-                <input matInput type="text"
-                  style="height: 35px; padding: 5px; border-radius: 5px; background-color: white;" id="username"
-                  formControlName="username" required>
+                <input matInput type="text" id="username" formControlName="username" required>
               </mat-form-field>
             </div>
+
+            <!-- Input Password -->
             <div class="row d-flex justify-content-center">
-              <mat-form-field appearance="legacy" style="width: 350px;">
+              <mat-form-field appearance="legacy">
                 <mat-label>Mật khẩu</mat-label>
-                <input matInput type="password" style="height: 35px; padding: 5px; border-radius: 5px;" id="password"
-                  formControlName="password" required>
+                <input matInput type="password" id="password" formControlName="password" required>
               </mat-form-field>
             </div>
+
+            <!-- Submit Button -->
             <div class="row d-flex justify-content-center m-2">
               <button class="form-control rounded-pill whiteButton" type="submit">Đăng nhập</button>
             </div>
