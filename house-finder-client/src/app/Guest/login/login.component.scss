@@ -36,7 +36,31 @@
 }
 
 /*-------------------------- Register --------------------------*/
+#contentColumn {
+  // Email&Password Login
+  
+  background-color: #FF6F3D;
 
+  #loginTitle {
+    color: white;
+    text-align: center;
+  }
+
+
+  //Google / Facebook Login
+
+  #orSpan {
+    text-align: center;
+    color: #ffe6e6;
+    font-size: 12pt;
+    margin-top: 20px;
+    margin-bottom: 5px;
+  }
+
+  #googleLogin {
+    width: fit-content;
+  }
+}
 
 .whiteButton {
   width: 150px;
