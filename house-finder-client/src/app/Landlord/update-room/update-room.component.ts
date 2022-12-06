@@ -86,9 +86,8 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
   //test string
   // statusSelected: string = "";
 
-  @ViewChild('updateRoomErrorAlert') private updateRoomErrorAlert: SwalComponent | undefined;
+  @ViewChild('roomErrorAlert') private roomErrorAlert: SwalComponent | undefined;
   @ViewChild('updateRoomSuccessAlert') private updateRoomSuccessAlert: SwalComponent | undefined;
-  @ViewChild('addRoomErrorAlert') private addRoomErrorAlert: SwalComponent | undefined;
   @ViewChild('addRoomSuccessAlert') private addRoomSuccessAlert: SwalComponent | undefined;
   constructor(
     private roomService: RoomService,
@@ -136,7 +135,7 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
       this.roomService.addRoom(this.roomDetail).subscribe(
         data => {
           if (data.status == 400) {
-            this.addRoomErrorAlert?.fire();
+            this.roomErrorAlert?.fire();
           } else if (data.status == 200) {
             this.addRoomSuccessAlert?.fire();
           }
@@ -149,7 +148,7 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
           if (data.status == 200) {
             this.updateRoomSuccessAlert?.fire();
           } else if (data.status == 400) {
-            this.updateRoomErrorAlert?.fire();
+            this.roomErrorAlert?.fire();
           }
         },
         error => {
