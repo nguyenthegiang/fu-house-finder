@@ -158,7 +158,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary" (click)="updateRoom()">Lưu</button>
+                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
+                    (click)="updateRoom()">Lưu</button>
             </div>
         </div>
     </div>
@@ -172,12 +173,19 @@
                 <h5 class="modal-title" id="updateModalLabel">Xác nhận xóa phòng</h5>
             </div>
             <div class="modal-body">
-              Bạn chắc chắn muốn xóa phòng trọ này?
+                Bạn chắc chắn muốn xóa phòng trọ này?
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-secondary w-25 me-3" data-bs-dismiss="modal">Hủy</button>
-              <button type="button" class="btn btn-danger w-25" (click)="deleteRoom()">Xóa</button>
+                <button type="button" class="btn btn-secondary w-25 me-3" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-danger w-25" data-bs-dismiss="modal"
+                    (click)="deleteRoom()">Xóa</button>
             </div>
         </div>
     </div>
 </div>
+<swal #updateRoomErrorAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
+    title="Lỗi! Thử lại sau vài giây!" icon="error" (willClose)="this.goBack()">
+</swal>
+<swal #updateRoomSuccessAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
+    title="Cập nhật phòng thành công!" icon="success" (willClose)="this.goBack()">
+</swal>
