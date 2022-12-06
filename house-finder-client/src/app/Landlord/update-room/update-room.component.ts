@@ -89,6 +89,7 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
   @ViewChild('roomErrorAlert') private roomErrorAlert: SwalComponent | undefined;
   @ViewChild('updateRoomSuccessAlert') private updateRoomSuccessAlert: SwalComponent | undefined;
   @ViewChild('addRoomSuccessAlert') private addRoomSuccessAlert: SwalComponent | undefined;
+  @ViewChild('deleteRoomSuccessAlert') private deleteRoomSuccessAlert: SwalComponent | undefined;
   constructor(
     private roomService: RoomService,
     private location: Location,
@@ -159,7 +160,15 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
   }
   deleteRoom() {
     //console.log('delete');
-    this.roomService.deleteRoom(this.roomDetail.roomId).subscribe(() => this.goBack());
+    this.roomService.deleteRoom(this.roomDetail.roomId).subscribe(
+      data => {
+        if (data.status == 400) {
+          this.roomErrorAlert?.fire();
+        } else if (data.status == 200) {
+          this.deleteRoomSuccessAlert?.fire();
+        }
+      }
+    );
   }
 
   //Call API: Get Room Detail info from ID
