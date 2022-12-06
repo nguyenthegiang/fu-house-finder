@@ -94,11 +94,11 @@ namespace HouseFinder_API.Controllers
                 createRoom.CreatedBy = room.CreatedBy;
             
                 roomRepository.CreateRoom(createRoom);
-                return Ok();
+                return Ok(new { Status = 200 });
             }
             catch (Exception)
             {
-                return BadRequest();
+                return Ok(new { Status = 400 });
             }
         }
 
@@ -137,12 +137,12 @@ namespace HouseFinder_API.Controllers
                 updatedRoom.LastModifiedDate = DateTime.Now;
 
                 roomRepository.UpdateRoom(updatedRoom);
-                return Ok();
+                return Ok(new { Status = 200 });
             }
             catch (Exception e)
             {
 
-                return BadRequest(e.Message);
+                return Ok(new { Status = 400 });
             }
         }
 
@@ -153,11 +153,11 @@ namespace HouseFinder_API.Controllers
             try
             {
                 roomRepository.DeleteRoom(roomId);
-                return Ok();
+                return Ok(new { Status = 200 });
             }
             catch (Exception)
             {
-                return BadRequest();
+                return BadRequest(new { Status = 400 });
             }
         }
 

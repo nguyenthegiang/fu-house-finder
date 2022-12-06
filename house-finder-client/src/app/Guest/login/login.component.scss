@@ -2,6 +2,9 @@
   #logo {
     display: none;
   }
+  .identityCard:last-child{
+    margin-top: 2.7rem;
+  }
 }
 
 .whiteButton {
@@ -19,6 +22,7 @@
 .identityCard {
   height: 270px;
   width: 360px;
+  margin: 0.25rem;
 
   .dragAndDropArea {
     position: relative;

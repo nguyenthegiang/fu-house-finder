@@ -115,14 +115,14 @@ namespace HouseFinder_API.Controllers
                     //user not logged in => throw error for alert
                     return Ok(new { Status = 403 });
                 }
-                UserDTO user = userReposiotry.GetUserByID(uid);
+                
 
                 //Set default status
                 order.StatusId = 1;
                 //Set default date
                 order.OrderedDate = DateTime.Now;
                 //add user order
-                order.StudentId = user.UserId;
+                order.StudentId = uid;
                 //Add to DB
                 orderRepository.AddOrder(order);
 

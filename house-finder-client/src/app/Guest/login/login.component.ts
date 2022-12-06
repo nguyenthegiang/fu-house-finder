@@ -348,7 +348,7 @@ export class LoginComponent implements OnInit {
           this.fileService.uploadIDC(this.frontImg, this.backImg).subscribe(resp => { });
           localStorage.setItem('user', resp.user.displayName);
           localStorage.setItem("role", resp.user.roleName);
-          
+
           //Landlord: create account success, go back Home
           this.landlordAccountCreatedAlert?.fire();
         }
