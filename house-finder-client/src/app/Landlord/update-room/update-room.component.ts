@@ -1,11 +1,11 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Room } from 'src/app/models/room';
 import { RoomService } from 'src/app/services/room.service';
 import { Location } from '@angular/common';
 import { RoomStatus } from 'src/app/models/roomStatus';
 import RoomStatusService from 'src/app/services/roomStatus.service';
-
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
 
 
@@ -86,6 +86,10 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
   //test string
   // statusSelected: string = "";
 
+  @ViewChild('updateRoomErrorAlert') private updateRoomErrorAlert: SwalComponent | undefined;
+  @ViewChild('updateRoomSuccessAlert') private updateRoomSuccessAlert: SwalComponent | undefined;
+  @ViewChild('addRoomErrorAlert') private addRoomErrorAlert: SwalComponent | undefined;
+  @ViewChild('addRoomSuccessAlert') private addRoomSuccessAlert: SwalComponent | undefined;
   constructor(
     private roomService: RoomService,
     private location: Location,
@@ -128,10 +132,28 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
   updateRoom() {
     console.log(this.roomDetail);
     if (this.roomDetail.roomId === 0) {
-      console.log(this.roomDetail);
-      this.roomService.addRoom(this.roomDetail).subscribe(() => this.goBack());
+      //add room
+      this.roomService.addRoom(this.roomDetail).subscribe(
+        data => {
+          if (data.status == 400) {
+            this.addRoomErrorAlert?.fire();
+          } else if (data.status == 200) {
+            this.addRoomSuccessAlert?.fire();
+          }
+        }
+      );
     } else {
-      this.roomService.updateRoom(this.roomDetail).subscribe(() => this.goBack());
+      //update room
+      this.roomService.updateRoom(this.roomDetail).subscribe(
+        data => {
+          if (data.status == 200) {
+            this.updateRoomSuccessAlert?.fire();
+          } else if (data.status == 400) {
+            this.updateRoomErrorAlert?.fire();
+          }
+        },
+        error => {
+        });
 
     }
 
