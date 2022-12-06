@@ -1,6 +1,5 @@
 @media only screen and (max-width: 768px) {
-  #logo
-  {
+  #logo {
     display: none;
   }
   .identityCard:last-child{
@@ -8,7 +7,7 @@
   }
 }
 
-.whiteButton{
+.whiteButton {
   width: 150px;
   height: 40px;
   background-color: #ffffff;
@@ -16,42 +15,41 @@
   font-weight: 600
 }
 
-.whiteButton:hover{
+.whiteButton:hover {
   background-color: #ececec;
 }
 
-.identityCard{
+.identityCard {
   height: 270px;
   width: 360px;
   margin: 0.25rem;
 
-  .dragAndDropArea{
-    position:relative;
+  .dragAndDropArea {
+    position: relative;
     border: 2px dashed #bbbbbb;
     width: 360px;
     height: 270px;
     border-radius: 10px;
-    padding: 8px;
     background-color: #F7F7F7;
 
-    img:first-child{
-      width: 340px;
-      max-height: 250px;
-      position:absolute;
+    img:first-child {
+      width: 100%;
+      max-height: 100%;
+      position: absolute;
       z-index: 1;
       height: auto;
       justify-content: center;
       display: flex;
     }
 
-    span{
+    span {
       position: absolute;
-      margin-top: 160px;
+      margin-top: 90px;
       margin-left: 110px;
       color: #868686;
     }
 
-    div{
+    div {
       position: absolute;
       margin-top: 90px;
       margin-left: 140px;
@@ -59,32 +57,22 @@
   }
 }
 
-.orangeButton{
+// Stepper Header Not Finished
+::ng-deep .mat-step-header .mat-step-icon-state-number {
   background-color: #ee4d2d;
-  width: 100px;
-  color: white;
-}
-.orangeButton:hover{
-  background-color: #e83b19;
+  color: #fff;
 }
 
-.greyButton{
-  background-color: #022572;
-  width: 100px;
-  color: white;
-}
-.greyButton:hover{
-  background-color: #021d57;
-}
-
-::ng-deep .mat-step-header .mat-step-icon-selected{
-  background-color: #ee4d2d !important;
+// Stepper Header finished
+::ng-deep .mat-step-header .mat-step-icon-selected, 
+::ng-deep .mat-step-header .mat-step-icon-state-done, 
+::ng-deep .mat-step-header .mat-step-icon-state-edit {
+    background-color: #ee4d2d;
+    color: #fff;
 }
 
-::ng-deep .mat-step-header .mat-step-icon-state-done{
-  background-color: #ee4d2d !important;
-}
-
-::ng-deep .mat-step-header .mat-step-icon-state-edit{
-  background-color: #ee4d2d !important;
+// Button color
+.mat-orange {
+  background-color: #ee4d2d;
+  color: #fff;
 }
