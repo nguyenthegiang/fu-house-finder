@@ -1,14 +1,44 @@
+// Responsive
 @media only screen and (max-width: 768px) {
-  #logo
-  {
+  #imageColumn {
     display: none;
   }
-  .identityCard:last-child{
+
+  .identityCard:last-child {
     margin-top: 2.7rem;
   }
 }
 
-.whiteButton{
+/*-------------------------- Login --------------------------*/
+#imageColumn {
+  div {
+    flex-direction: column;
+  }
+
+  #imageColumnLogo1 {
+    width: 10vw;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+
+  #imageColumnLogo2 {
+    width: 30vw;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+  }
+
+  #imageColumnText {
+    color: #FF6F3D;
+    text-align: center;
+  }
+}
+
+/*-------------------------- Register --------------------------*/
+
+
+.whiteButton {
   width: 150px;
   height: 40px;
   background-color: #ffffff;
@@ -16,17 +46,17 @@
   font-weight: 600
 }
 
-.whiteButton:hover{
+.whiteButton:hover {
   background-color: #ececec;
 }
 
-.identityCard{
+.identityCard {
   height: 270px;
   width: 360px;
   margin: 0.25rem;
 
-  .dragAndDropArea{
-    position:relative;
+  .dragAndDropArea {
+    position: relative;
     border: 2px dashed #bbbbbb;
     width: 360px;
     height: 270px;
@@ -34,24 +64,24 @@
     padding: 8px;
     background-color: #F7F7F7;
 
-    img:first-child{
+    img:first-child {
       width: 340px;
       max-height: 250px;
-      position:absolute;
+      position: absolute;
       z-index: 1;
       height: auto;
       justify-content: center;
       display: flex;
     }
 
-    span{
+    span {
       position: absolute;
       margin-top: 160px;
       margin-left: 110px;
       color: #868686;
     }
 
-    div{
+    div {
       position: absolute;
       margin-top: 90px;
       margin-left: 140px;
@@ -59,32 +89,34 @@
   }
 }
 
-.orangeButton{
+.orangeButton {
   background-color: #ee4d2d;
   width: 100px;
   color: white;
 }
-.orangeButton:hover{
+
+.orangeButton:hover {
   background-color: #e83b19;
 }
 
-.greyButton{
+.greyButton {
   background-color: #022572;
   width: 100px;
   color: white;
 }
-.greyButton:hover{
+
+.greyButton:hover {
   background-color: #021d57;
 }
 
-::ng-deep .mat-step-header .mat-step-icon-selected{
+::ng-deep .mat-step-header .mat-step-icon-selected {
   background-color: #ee4d2d !important;
 }
 
-::ng-deep .mat-step-header .mat-step-icon-state-done{
+::ng-deep .mat-step-header .mat-step-icon-state-done {
   background-color: #ee4d2d !important;
 }
 
-::ng-deep .mat-step-header .mat-step-icon-state-edit{
+::ng-deep .mat-step-header .mat-step-icon-state-edit {
   background-color: #ee4d2d !important;
 }
