@@ -94,11 +94,11 @@ namespace HouseFinder_API.Controllers
                 createRoom.CreatedBy = room.CreatedBy;
             
                 roomRepository.CreateRoom(createRoom);
-                return Ok();
+                return Ok(new { Status = 200 });
             }
             catch (Exception)
             {
-                return BadRequest();
+                return Ok(new { Status = 400 });
             }
         }
 
