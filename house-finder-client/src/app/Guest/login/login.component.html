@@ -1,28 +1,23 @@
-<!-- Icon Stylesheet -->
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"rel="stylesheet">
 
-<!---------------------------- Login ---------------------------->
 <ng-container class="col-md-6 offset-md-3 mt-5 text-center" #loginTemplate *ngIf="login; else registerTemplate">
   <div class="row d-flex justify-content-center vh-100">
-    <!-- Images Column -->
-    <div class="col-6 pt-4" id="imageColumn">
-      <div>
+    <!-- Images -->
+    <div class="col-6  pt-4" id="logo">
+      <div style="flex-direction: column;">
         <div>
-          <img src="../../../assets/image/FPTU logo.png" id="imageColumnLogo1">
+          <img src="../../../assets/image/FPTU logo.png" style="width: 10vw; margin-left: auto; margin-right: auto; display: block;">
         </div>
         <div>
-          <img class="top-50 start-50" src="../../../assets/image/Logo.png" id="imageColumnLogo2">
+          <img class="top-50 start-50" src="../../../assets/image/Logo.png" style="width: 30vw; margin-left: auto; margin-right: auto; display: block;">
         </div>
-        <div id="imageColumnText">
+        <div style="color: #FF6F3D; text-align: center;">
           <h1>FU HOUSE FINDER</h1>
           <h5>Ứng dụng tìm trọ dành cho sinh viên Đại học FPT</h5>
         </div>
       </div>
     </div>
-
-    <!-- Content Column -->
-    <div class="col-lg-6 col-sm-12 h-100 d-flex justify-content-center align-items-center"
-      style="background-color: #FF6F3D">
+    <div class="col-lg-6 col-sm-12 h-100 d-flex justify-content-center align-items-center" style="background-color: #FF6F3D">
       <div class="row">
         <h3 style="color: white; text-align: center;">ĐĂNG NHẬP</h3>
 
@@ -32,16 +27,13 @@
             <div class="row d-flex justify-content-center mt-4">
               <mat-form-field appearance="legacy" style="width: 350px;">
                 <mat-label>Email</mat-label>
-                <input matInput type="text"
-                  style="height: 35px; padding: 5px; border-radius: 5px; background-color: white;" id="username"
-                  formControlName="username" required>
+                <input matInput type="text" style="height: 35px; padding: 5px; border-radius: 5px; background-color: white;" id="username" formControlName="username" required>
               </mat-form-field>
             </div>
             <div class="row d-flex justify-content-center">
               <mat-form-field appearance="legacy" style="width: 350px;">
                 <mat-label>Mật khẩu</mat-label>
-                <input matInput type="password" style="height: 35px; padding: 5px; border-radius: 5px;" id="password"
-                  formControlName="password" required>
+                <input matInput type="password" style="height: 35px; padding: 5px; border-radius: 5px;" id="password" formControlName="password" required>
               </mat-form-field>
             </div>
             <div class="row d-flex justify-content-center m-2">
@@ -65,26 +57,22 @@
     </div>
   </div>
 </ng-container>
-
-<!---------------------------- Register ---------------------------->
 <ng-template #registerTemplate>
   <mat-stepper [linear]="true" #stepper>
     <mat-step label="Điền thông tin liên hệ" [stepControl]="contactForm">
       <form [formGroup]="contactForm">
-        <div class="row d-flex justify-content-center">
+        <div  class="row d-flex justify-content-center">
           <div class="col-auto" style="width: 400px;">
             <div class="row">
               <mat-form-field appearance="fill" style="width: 400px;" class="m-0 p-0">
                 <mat-label>Số điện thoại</mat-label>
-                <input matInput type="tel" style="width: 250px; height: 30px;" id="phonenumber"
-                  formControlName="phonenumber" required>
+                <input matInput type="tel" style="width: 250px; height: 30px;" id="phonenumber" formControlName="phonenumber" required>
               </mat-form-field>
             </div>
             <div class="row">
               <mat-form-field appearance="fill" style="width: 400px;" class="m-0 p-0">
                 <mat-label>Link Facebook</mat-label>
-                <input matInput type="url" style="width: 250px; height: 30px;" id="facebookUrl"
-                  formControlName="facebookUrl" required>
+                <input matInput type="url" style="width: 250px; height: 30px;" id="facebookUrl" formControlName="facebookUrl" required>
               </mat-form-field>
             </div>
             <div class="row d-flex justify-content-end">
@@ -108,21 +96,17 @@
                   <span class="col align-self-center">Kéo thả ảnh ở đây</span>
                   <!-- Folder image -->
                   <div>
-                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"
-                      xmlns:xlink="http://www.w3.org/1999/xlink">
-                      <rect width="64" height="64" fill="url(#pattern0)" />
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <rect width="64" height="64" fill="url(#pattern0)"/>
                       <defs>
-                        <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-                          <use xlink:href="#image0_211_16" transform="scale(0.015625)" />
-                        </pattern>
-                        <image id="image0_211_16" width="64" height="64"
-                          xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABAEAQAAABQ8GUWAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAAAmJLR0QAAKqNIzIAAAAJcEhZcwAAAGAAAABgAPBrQs8AAAAHdElNRQfmCRQJLBdrkSVgAAAE4UlEQVR42u2acUyUZRzHv89zbwfcgVIeyDHEwGxlnixQmowKQigKGEaZLSHKKYGhgYJafzBqtrWmawphuWERS2ETCEpmdXJqA/GvaIyZc9hIBdIYPMBJB/c+/XFJr6YI3B0v7eHz1733/u55fr/Pnud9f3vvBeaYY47/I9XVGs3xCx4ezo5DlAe5y9esQUBmJqq02qkMwnvtdnjV1ZWEVFW5u/DT+4xG+wd5eSRi40Y+4uuLV8vLLTlZWcVElp0SkHs8KAjfXrwIjRNWE/fufSCxsHC6yUzEyceWLCHtBQVAZiYst+ZIujZvjnn90KHpjEtvfuDcZHKqeABo3L69r/HYsR0b9HpXFX5qi8nUtLKiguw/fx6WrKzbiwcAHN21q4lLknMCDBqNSzJuTE3960hzc/afixY5M0wTj45u+qqhQV7Q1oaP09NB714gLwwNRVxamlMCXErOihXSF2fPbt0aETHdwmE5cwZBSUmIJWRSPzTv3s35JGPdLgAAfgsM5DWnTr2dkpJyr9AiTqmlPTm5Kf3cufHCp4olLMxiTEiYPQIAYK1eT96qqck9vnPnnU5XV2m1JysyMmLQ0cGv1dfjzVWrnJov6s7zTMT4ktnSmpREKxsa3OWCv282E7mvDwA8kiVp2Rs6XchekwllgYGunKdlvtncvdgxz39o7e+XFxw+XPpES8uMCwAArRZ4pKGnJ9Ti40N/dd2dQsn1o93dp7VG410DEq1WfnDp0pL6q1cBd2+Bf/D0BMJLL19+IWZk5KHPAgLcVTwAGBYGBMybN0FAo07H3wsPv3noVgH6UVmOXHvp0vM/2WwPmoOCiLenpzvnAwDEErKssqdnohCi+feW6hYB8zE2Fv1NZ+ezZZwHkZAQfDi11tpZAssNBi+vycW6VIDh4Oho7NddXXH3azT+X4aGwuKi5mqqUEl69KPe3smETqt9VEIIYMyyWk3vDgzovzcageBgVYq+jcU3fH3btYDN5kYBwSkDA8vn22yef/j54R2dTu2ilZBWD4+Hv7t2rT3ez2/CuCIuSf4vp6aO3EhIGEq7dz9NDICvN6X+P0uSFOztrXahEyHLNtuFiuFh+4ucK7/XddbW6o0nTvTm1NaST1cfOcI3rF+vdrKqUF5ZSUq3DA9j2exavjNGh9VK0Ts6qnYeqvGj3U7xOGNq56EaJsYoIgUWEMEYxdMCC4hijJLnxBVA4hij/BdxBchtjFHEiCuARDFGkSyuAMQzRpEhsICXGKOkQFwBJJsxKmvFFYA9jFG8Jq4AuZkxSorEFYBNjFFiFlcAOcAYJSsFFtDHGKVpAgswM0atWeIKuC+fMdoPxlBy6zMzUfh9H2O0mMgy5KEhtZOZaUj+8HAxGRtz/DFiEm8b8GBHzQ4BEeIJQJhSQJSAAiIVAkicgAKeUgiQ28QTQBKVK0DALSD/oLwGxIsngDypEMCLBwbUTmjGBWxz1EwBgEYPDqqd0EzDVztqdmyBPQJugQLlXaBZPAH4XHkR3CSeAFm5AsgB8QRgm1JAn3gCSJ1SgIDPBckzyj6gTLw+QD6s6AMMBvGeCvnvUPQB69bZ7Wi/ckXtpGaMT7q7173ieIVy/FVZcjA/H/sF6Ag1Q0Pkel7eeN3Kc0VckhaW+fionaM76c0eHCwmY2Nq5zHHHLOEvwGfxu7++XLWQQAAACV0RVh0ZGF0ZTpjcmVhdGUAMjAyMi0wOS0yMFQwOTo0NDoyMiswMDowMMOubSwAAAAldEVYdGRhdGU6bW9kaWZ5ADIwMjItMDktMjBUMDk6NDQ6MjIrMDA6MDCy89WQAAAAKHRFWHRkYXRlOnRpbWVzdGFtcAAyMDIyLTA5LTIwVDA5OjQ0OjIyKzAwOjAw5eb0TwAAAABJRU5ErkJggg==" />
+                      <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                      <use xlink:href="#image0_211_16" transform="scale(0.015625)"/>
+                      </pattern>
+                      <image id="image0_211_16" width="64" height="64" xlink:href="data:image/png;base64,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"/>
                       </defs>
                     </svg>
                   </div>
-                  <input type="file" id="frontImg" accept="image/*"
-                    style="height: 280px; width: 280px; opacity: 0; position: absolute; z-index: 10; margin: 5px;"
-                    (change)="displayImage($event, 'front');" formControlName="identityCardFrontSideImageLink" required>
+                  <input type="file" id="frontImg" accept="image/*" style="height: 280px; width: 280px; opacity: 0; position: absolute; z-index: 10; margin: 5px;" (change)="displayImage($event, 'front');" formControlName="identityCardFrontSideImageLink" required>
                 </div>
                 <div class="row d-flex justify-content-center mt-2">
                   <div class="col-auto mb-3" style="width: fit-content;">CCCD mặt trước</div>
@@ -136,21 +120,17 @@
                   <img [src]="backImgSrc">
                   <span class="col align-self-center">Kéo thả ảnh ở đây</span>
                   <div>
-                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"
-                      xmlns:xlink="http://www.w3.org/1999/xlink">
-                      <rect width="64" height="64" fill="url(#pattern0)" />
+                    <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                      <rect width="64" height="64" fill="url(#pattern0)"/>
                       <defs>
-                        <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
-                          <use xlink:href="#image0_211_16" transform="scale(0.015625)" />
-                        </pattern>
-                        <image id="image0_211_16" width="64" height="64"
-                          xlink:href="data:image/png;base64,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" />
+                      <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                      <use xlink:href="#image0_211_16" transform="scale(0.015625)"/>
+                      </pattern>
+                      <image id="image0_211_16" width="64" height="64" xlink:href="data:image/png;base64,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"/>
                       </defs>
                     </svg>
                   </div>
-                  <input type="file" id="backImg" accept="image/*"
-                    style="height: 280px; width: 280px; opacity: 0; position: absolute; z-index: 10; margin: 5px;"
-                    (change)="displayImage($event, 'back');" formControlName="identityCardBackSideImageLink" required>
+                  <input type="file" id="backImg" accept="image/*" style="height: 280px; width: 280px; opacity: 0; position: absolute; z-index: 10; margin: 5px;" (change)="displayImage($event, 'back');" formControlName="identityCardBackSideImageLink" required>
                 </div>
                 <div class="row d-flex justify-content-center mt-2">
                   <div class="col-auto" style="width: fit-content;">CCCD mặt sau</div>
@@ -177,23 +157,48 @@
     </mat-step>
   </mat-stepper>
 </ng-template>
-
 <!-- Alerts by Template: sweetalert2 -->
-<swal #landLordAccountLockedAlert title="Khóa tài khoản"
+<swal
+  #landLordAccountLockedAlert
+  title="Khóa tài khoản"
   text="Tài khoản của bạn đã bị khóa do vi phạm điều khoản của chúng tôi. Vui lòng trình diện tại cơ sở Đại học FPT gần nhất để làm thủ tục mở khóa tài khoản"
-  icon="error" [focusCancel]="true">
+  icon="error"
+  [focusCancel]="true"
+>
 </swal>
-<swal #landLordAccountConfirmAlert title="Xác nhận tài khoản"
+<swal
+  #landLordAccountConfirmAlert
+  title="Xác nhận tài khoản"
   text="Tài khoản của bạn chưa được phép đăng ký thông tin nhà trọ. Vui lòng đến cơ sở Đại học FPT gần nhất để làm thủ tục xác nhận tài khoản"
-  icon="warning" [focusCancel]="true" (confirm)="navigate('/home')">
+  icon="warning"
+  [focusCancel]="true"
+  (confirm)="navigate('/home')"
+>
 </swal>
-<swal #invalidEmailPasswordAlert title="Đăng nhập không hợp lệ" text="Email hoặc Password không hợp lệ" icon="error"
-  [focusCancel]="true">
+<swal
+  #invalidEmailPasswordAlert
+  title="Đăng nhập không hợp lệ"
+  text="Email hoặc Password không hợp lệ"
+  icon="error"
+  [focusCancel]="true"
+>
 </swal>
-<swal #serverErrorAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true" title="Lỗi Server"
-  icon="error">
+<swal
+  #serverErrorAlert
+  [toast]="true"
+  position="top-end"
+  [timer]="3000"
+  [timerProgressBar]="true"
+  title="Lỗi Server"
+  icon="error"
+>
 </swal>
-<swal #landlordAccountCreatedAlert title="Đăng ký thành công"
+<swal
+  #landlordAccountCreatedAlert
+  title="Đăng ký thành công"
   text="Bạn đã đăng ký thành công! Vui lòng đến cơ sở Đại học FPT gần nhất để làm thủ tục xác nhận tài khoản."
-  icon="success" [focusCancel]="true" (confirm)="navigate('/home')">
+  icon="success"
+  [focusCancel]="true"
+  (confirm)="navigate('/home')"
+>
 </swal>
