@@ -328,7 +328,6 @@ namespace DataAccess
                     updateUser.LastModifiedBy = staffId;
                     updateUser.LastModifiedDate = DateTime.Today;
 
-
                     context.Entry<User>(updateUser).State = EntityState.Modified;
                     context.SaveChanges();
                 }
