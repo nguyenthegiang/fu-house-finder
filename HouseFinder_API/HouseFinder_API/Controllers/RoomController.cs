@@ -153,11 +153,11 @@ namespace HouseFinder_API.Controllers
             try
             {
                 roomRepository.DeleteRoom(roomId);
-                return Ok();
+                return Ok(new { Status = 200 });
             }
             catch (Exception)
             {
-                return BadRequest();
+                return BadRequest(new { Status = 400 });
             }
         }
 
