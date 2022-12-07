@@ -11,6 +11,47 @@
 .whiteButton:hover {
   background-color: #ececec;
 }
+
+#FPTULogo{
+  width: 10vw;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+#FUHouseFinderLogo{
+  width: 30vw;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.orangeText{
+  color: #ff6f3d;
+  text-align: center
+}
+
+.whiteText{
+  color: white;
+  text-align: center
+}
+
+#username,#password{
+  height: 35px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.loginCol{
+  background-color: #ff6f3d;
+  span{
+    text-align: center;
+    color: #ffe6e6;
+    font-size: 11pt;
+    margin-top: 20px;
+  }
+}
 // End login page
 
 // Upload identity card
