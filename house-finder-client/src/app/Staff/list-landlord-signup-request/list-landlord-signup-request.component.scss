@@ -20,3 +20,20 @@
     display: none;
   }
 }
+
+.emptyMesage{
+  font-weight: bold;
+  color: red;
+  text-align: center;
+  font-size: 15pt;
+  margin-top: 3vh;
+  margin-bottom: 3vh;
+}
+
+@media only screen and (min-width: 768px) {
+  .emptyMesage{
+    min-height: 18rem;
+  }
+}
+
+

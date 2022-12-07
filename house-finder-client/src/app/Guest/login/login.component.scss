@@ -1,90 +1,216 @@
-@media only screen and (max-width: 768px) {
-  #logo
-  {
-    display: none;
-  }
-  .identityCard:last-child{
-    margin-top: 2.7rem;
-  }
-}
-
-.whiteButton{
+// Login page
+// Login button
+.whiteButton {
   width: 150px;
   height: 40px;
   background-color: #ffffff;
-  color: #FF6F3D;
-  font-weight: 600
+  color: #ff6f3d;
+  font-weight: 600;
 }
 
-.whiteButton:hover{
+.whiteButton:hover {
   background-color: #ececec;
 }
 
-.identityCard{
+#FPTULogo{
+  width: 10vw;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+#FUHouseFinderLogo{
+  width: 30vw;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.orangeText{
+  color: #ff6f3d;
+  text-align: center
+}
+
+.whiteText{
+  color: white;
+  text-align: center
+}
+
+#username,#password{
+  height: 35px;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.loginCol{
+  background-color: #ff6f3d;
+  span{
+    text-align: center;
+    color: #ffe6e6;
+    font-size: 11pt;
+    margin-top: 20px;
+  }
+}
+// End login page
+
+// Upload identity card
+.identityCard {
   height: 270px;
   width: 360px;
   margin: 0.25rem;
 
-  .dragAndDropArea{
-    position:relative;
+  .dragAndDropArea {
+    position: relative;
     border: 2px dashed #bbbbbb;
     width: 360px;
     height: 270px;
     border-radius: 10px;
-    padding: 8px;
-    background-color: #F7F7F7;
+    background-color: #f7f7f7;
 
-    img:first-child{
-      width: 340px;
-      max-height: 250px;
-      position:absolute;
+    img:first-child {
+      width: 100%;
+      max-height: 100%;
+      position: absolute;
       z-index: 1;
       height: auto;
       justify-content: center;
       display: flex;
     }
 
-    span{
+    span {
       position: absolute;
-      margin-top: 160px;
+      margin-top: 90px;
       margin-left: 110px;
       color: #868686;
     }
 
-    div{
+    div {
       position: absolute;
       margin-top: 90px;
       margin-left: 140px;
     }
   }
 }
+// End upload identity card
 
-.orangeButton{
+// Stepper Header Not Finished
+::ng-deep .mat-step-header .mat-step-icon-state-number {
   background-color: #ee4d2d;
-  width: 100px;
-  color: white;
+  color: #fff;
 }
-.orangeButton:hover{
+
+// Stepper Header finished
+::ng-deep .mat-step-header .mat-step-icon-selected,
+::ng-deep .mat-step-header .mat-step-icon-state-done,
+::ng-deep .mat-step-header .mat-step-icon-state-edit {
+  background-color: #ee4d2d;
+  color: #fff;
+}
+
+// Button color
+.mat-orange {
+  background-color: #ee4d2d;
+  color: #fff;
+}
+
+// Back, Next buttons
+.orangeButton {
+  background-color: #ee4d2d;
+  color: white;
+  width: 100px;
+}
+
+.orangeButton:hover {
   background-color: #e83b19;
 }
 
-.greyButton{
+.blueButton {
   background-color: #022572;
-  width: 100px;
   color: white;
+  width: 100px;
 }
-.greyButton:hover{
+
+.blueButton:hover {
   background-color: #021d57;
 }
+//End buttons
 
-::ng-deep .mat-step-header .mat-step-icon-selected{
-  background-color: #ee4d2d !important;
+//Landlord register
+.regiter {
+  min-height: 57vh;
+  .step1 {
+    width: 400px;
+
+    input {
+      width: 250px;
+      height: 30px;
+    }
+  }
+
+  .step2 {
+    width: 800px;
+  }
+
+  .step3 {
+    b:first-child {
+      text-align: center;
+      text-align: center;
+      font-size: 13pt;
+    }
+    table {
+      border: none;
+    }
+    table:last-child {
+      tr {
+        td {
+          width: 15vw;
+          // .viewIdentityCard {
+          //   max-height: 75%;
+          //   max-width: 100%;
+          // }
+        }
+      }
+    }
+  }
 }
 
-::ng-deep .mat-step-header .mat-step-icon-state-done{
-  background-color: #ee4d2d !important;
+// Responsive
+// Small screen
+@media only screen and (max-width: 768px) {
+  #logo {
+    display: none;
+  }
+  .identityCard:nth-child(2) {
+    margin-top: 2.7rem;
+  }
+
+  .viewIdentityCard {
+    width: 35vw;
+  }
+  .step3 {
+    table:first-child {
+      tr {
+        td:first-child {
+          width: 30vw;
+        }
+      }
+      .viewIdentityCard {
+        width: 35vw;
+      }
+    }
+  }
 }
 
-::ng-deep .mat-step-header .mat-step-icon-state-edit{
-  background-color: #ee4d2d !important;
+// Large screen
+@media only screen and (min-width: 768px) {
+  .step3 {
+    div:first-child {
+      padding-right: 10vw;
+      padding-left: 10vw;
+    }
+    .viewIdentityCard {
+      width: 25vw;
+    }
+  }
 }

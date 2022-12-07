@@ -22,6 +22,9 @@ export class ListLandlordComponent implements OnInit
   //List of landlords
   landlords: User[] = [];
 
+  //Selected user status
+  selectedStatusId: number | undefined;
+
   @ViewChild('searchValue') searchValue: any;
 
 
@@ -65,5 +68,20 @@ export class ListLandlordComponent implements OnInit
     this.userService.getLandlords().subscribe(data => {
       this.landlords = data;
     });
+  }
+
+  updateUserStatus(event: any, userId: string){
+    //check if staff just checked or unchecked the checkbox
+    const isChecked = (<HTMLInputElement>event.target).checked;
+
+    if(isChecked){
+      this.selectedStatusId = 1;
+      console.log("Select status: active;" );
+    }
+    else{
+      this.selectedStatusId = 0;
+      console.log("Select status: inactive;" );
+    }
+    this.userService.updateUserStatus(userId, this.selectedStatusId).subscribe();
   }
 }
