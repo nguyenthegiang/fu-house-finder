@@ -4,11 +4,10 @@ services:
   housefinder_api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ASPNETCORE_URLS=https://+:443;http://+:80
-      - ASPNETCORE_Kestrel__Certificates__Default__Password=NcjiesuUNI@as@5
-      - ASPNETCORE_Kestrel__Certificates__Default__Path=/https/HouseFinder_API.pfx
+      - ASPNETCORE_URLS=http://+:80
     ports:
       - "80"
       - "443"
     volumes:
-      - ~/.aspnet/https:/https:ro
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
