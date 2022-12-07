@@ -70,25 +70,25 @@
           <tbody>
             <tr
               *ngFor="let dataItem of landlords; let i = index"
-              (click)="viewHouse(dataItem.userId)"
               style="cursor: pointer"
             >
-              <td id="md">
+              <td id="md" (click)="viewHouse(dataItem.userId)">
                 <b>{{ i + 1 }}</b>
               </td>
-              <td>{{ dataItem.displayName }}</td>
-              <td id="md">{{ dataItem.phoneNumber }}</td>
+              <td (click)="viewHouse(dataItem.userId)">{{ dataItem.displayName }}</td>
+              <td id="md" (click)="viewHouse(dataItem.userId)">{{ dataItem.phoneNumber }}</td>
               <!-- <td>{{dataItem.address.addresses}}</td> -->
 
               <!-- Statistics -->
-              <td id="md">
+              <td id="md" (click)="viewHouse(dataItem.userId)">
                 <app-landlord-detail-info
                   [landlordId]="dataItem.userId"
                 ></app-landlord-detail-info>
               </td>
 
-              <!-- Room status -->
+              <!-- Action -->
               <td class="d-flex">
+                <!-- Landlord's facebook url -->
                 <a
                   target="_blank"
                   class="text-decoration-none me-3"
@@ -100,19 +100,16 @@
                   <i class="fa-brands fa-facebook fs-4"></i>
                 </a>
 
+                <!-- User's status -->
                 <div class="form-check form-switch">
-                  <input
-                    class="form-check-input"
+                  <input class="form-check-input"
                     type="checkbox"
                     id="flexSwitchCheckChecked"
-                    checked
-                  />
-                  <label
-                    id="md"
-                    class="form-check-label"
-                    for="flexSwitchCheckChecked"
-                    >Hoạt động</label
-                  >
+                    [checked]="dataItem.statusId === 1"
+                    (change)="updateUserStatus($event, dataItem.userId)"
+                    />
+                  <span *ngIf="dataItem.statusId === 1">Hoạt động</span>
+                  <span *ngIf="dataItem.statusId === 0">Dừng hoạt động</span>
                 </div>
               </td>
             </tr>
