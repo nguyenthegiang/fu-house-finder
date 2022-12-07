@@ -2,9 +2,41 @@
   #logo {
     display: none;
   }
-  .identityCard:last-child{
+  .identityCard:nth-child(2){
     margin-top: 2.7rem;
   }
+
+  .viewIdentityCard{
+    width: 35vw;
+  }
+  .confirmInfomation{
+    table:first-child{
+      tr{
+        td:first-child{
+          width: 30vw;
+
+        }
+      }
+      .viewIdentityCard{
+        width: 35vw;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .confirmInfomation{
+    div:first-child{
+      padding-right: 10vw;
+      padding-left: 10vw;
+    }
+  }
+}
+
+
+.title{
+      text-align: center;
+      font-size: 13pt;
 }
 
 .whiteButton {
@@ -64,8 +96,8 @@
 }
 
 // Stepper Header finished
-::ng-deep .mat-step-header .mat-step-icon-selected, 
-::ng-deep .mat-step-header .mat-step-icon-state-done, 
+::ng-deep .mat-step-header .mat-step-icon-selected,
+::ng-deep .mat-step-header .mat-step-icon-state-done,
 ::ng-deep .mat-step-header .mat-step-icon-state-edit {
     background-color: #ee4d2d;
     color: #fff;
