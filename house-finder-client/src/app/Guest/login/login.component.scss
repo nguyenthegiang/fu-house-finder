@@ -1,56 +1,19 @@
-@media only screen and (max-width: 768px) {
-  #logo {
-    display: none;
-  }
-  .identityCard:nth-child(2){
-    margin-top: 2.7rem;
-  }
-
-  .viewIdentityCard{
-    width: 35vw;
-  }
-  .confirmInfomation{
-    table:first-child{
-      tr{
-        td:first-child{
-          width: 30vw;
-
-        }
-      }
-      .viewIdentityCard{
-        width: 35vw;
-      }
-    }
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  .confirmInfomation{
-    div:first-child{
-      padding-right: 10vw;
-      padding-left: 10vw;
-    }
-  }
-}
-
-
-.title{
-      text-align: center;
-      font-size: 13pt;
-}
-
+// Login page
+// Login button
 .whiteButton {
   width: 150px;
   height: 40px;
   background-color: #ffffff;
-  color: #FF6F3D;
-  font-weight: 600
+  color: #ff6f3d;
+  font-weight: 600;
 }
 
 .whiteButton:hover {
   background-color: #ececec;
 }
+// End login page
 
+// Upload identity card
 .identityCard {
   height: 270px;
   width: 360px;
@@ -62,7 +25,7 @@
     width: 360px;
     height: 270px;
     border-radius: 10px;
-    background-color: #F7F7F7;
+    background-color: #f7f7f7;
 
     img:first-child {
       width: 100%;
@@ -88,6 +51,7 @@
     }
   }
 }
+// End upload identity card
 
 // Stepper Header Not Finished
 ::ng-deep .mat-step-header .mat-step-icon-state-number {
@@ -99,12 +63,113 @@
 ::ng-deep .mat-step-header .mat-step-icon-selected,
 ::ng-deep .mat-step-header .mat-step-icon-state-done,
 ::ng-deep .mat-step-header .mat-step-icon-state-edit {
-    background-color: #ee4d2d;
-    color: #fff;
+  background-color: #ee4d2d;
+  color: #fff;
 }
 
 // Button color
 .mat-orange {
   background-color: #ee4d2d;
   color: #fff;
+}
+
+// Back, Next buttons
+.orangeButton {
+  background-color: #ee4d2d;
+  color: white;
+  width: 100px;
+}
+
+.orangeButton:hover {
+  background-color: #e83b19;
+}
+
+.blueButton {
+  background-color: #022572;
+  color: white;
+  width: 100px;
+}
+
+.blueButton:hover {
+  background-color: #021d57;
+}
+//End buttons
+
+//Landlord register
+.regiter {
+  min-height: 57vh;
+  .step1 {
+    width: 400px;
+
+    input {
+      width: 250px;
+      height: 30px;
+    }
+  }
+
+  .step2 {
+    width: 800px;
+  }
+
+  .step3 {
+    b:first-child {
+      text-align: center;
+      text-align: center;
+      font-size: 13pt;
+    }
+    table {
+      border: none;
+    }
+    table:last-child {
+      tr {
+        td {
+          width: 15vw;
+          // .viewIdentityCard {
+          //   max-height: 75%;
+          //   max-width: 100%;
+          // }
+        }
+      }
+    }
+  }
+}
+
+// Responsive
+// Small screen
+@media only screen and (max-width: 768px) {
+  #logo {
+    display: none;
+  }
+  .identityCard:nth-child(2) {
+    margin-top: 2.7rem;
+  }
+
+  .viewIdentityCard {
+    width: 35vw;
+  }
+  .step3 {
+    table:first-child {
+      tr {
+        td:first-child {
+          width: 30vw;
+        }
+      }
+      .viewIdentityCard {
+        width: 35vw;
+      }
+    }
+  }
+}
+
+// Large screen
+@media only screen and (min-width: 768px) {
+  .step3 {
+    div:first-child {
+      padding-right: 10vw;
+      padding-left: 10vw;
+    }
+    .viewIdentityCard {
+      width: 25vw;
+    }
+  }
 }
