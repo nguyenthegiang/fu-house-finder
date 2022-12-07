@@ -30,10 +30,17 @@
   margin-bottom: 3vh;
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 768px) and (max-width: 1600px){
   .emptyMesage{
-    min-height: 18rem;
+    min-height: 18rem !important;
   }
 }
+
+@media only screen and (min-width: 1600px ) {
+  .emptyMesage{
+    min-height: 29rem !important;
+  }
+}
+
 
 
