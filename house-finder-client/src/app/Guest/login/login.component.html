@@ -3,6 +3,7 @@
   rel="stylesheet"
 />
 
+<!-- Login page -->
 <ng-container
   class="col-md-6 offset-md-3 mt-5 text-center"
   #loginTemplate
@@ -13,6 +14,7 @@
     <div class="col-6 pt-4" id="logo">
       <div style="flex-direction: column">
         <div>
+          <!-- FPT University logo -->
           <img
             src="../../../assets/image/FPTU logo.png"
             style="
@@ -23,6 +25,7 @@
             "
           />
         </div>
+        <!-- FU House Finder logo -->
         <div>
           <img
             class="top-50 start-50"
@@ -35,6 +38,7 @@
             "
           />
         </div>
+        <!-- Website's name -->
         <div style="color: #ff6f3d; text-align: center">
           <h1>FU HOUSE FINDER</h1>
           <h5>Ứng dụng tìm trọ dành cho sinh viên Đại học FPT</h5>
@@ -86,6 +90,7 @@
                 />
               </mat-form-field>
             </div>
+            <!-- Log in button -->
             <div class="row d-flex justify-content-center m-2">
               <button
                 class="form-control rounded-pill whiteButton"
@@ -97,6 +102,7 @@
           </form>
         </div>
 
+        <!-- Orther methods of log in/sign up -->
         <span
           style="
             text-align: center;
@@ -125,14 +131,19 @@
     </div>
   </div>
 </ng-container>
+<!-- End login page -->
+
+<!-- Landlord register -->
 <ng-template #registerTemplate>
   <app-header></app-header>
-  <div style="min-height: 57vh">
+  <div class="register" style="min-height: 57vh">
+    <!-- Step 1: Phone number and Facebook link -->
     <mat-stepper [linear]="true" #stepper>
       <mat-step label="Điền Thông tin liên hệ" [stepControl]="contactForm">
         <form [formGroup]="contactForm">
           <div class="row d-flex justify-content-center">
-            <div class="col-auto" style="width: 400px">
+            <div class="col-auto step1">
+              <!-- Phone number -->
               <div class="row">
                 <mat-form-field
                   appearance="fill"
@@ -144,13 +155,13 @@
                   <input
                     matInput
                     type="tel"
-                    style="width: 250px; height: 30px"
                     id="phonenumber"
                     formControlName="phonenumber"
                     required
                   />
                 </mat-form-field>
               </div>
+              <!-- Link Facebook -->
               <div class="row">
                 <mat-form-field
                   appearance="fill"
@@ -161,7 +172,6 @@
                   <input
                     matInput
                     type="url"
-                    style="width: 250px; height: 30px"
                     id="facebookUrl"
                     formControlName="facebookUrl"
                     required
@@ -170,23 +180,22 @@
               </div>
               <div class="row d-flex justify-content-end">
                 <button
-                  class="col-auto"
-                  mat-raised-button
-                  color="orange"
+                  class="col-auto btn form-control orangeButton"
                   matStepperNext
-                  style="width: 100px"
                 >
-                  Next
+                  Tiếp theo
                 </button>
               </div>
             </div>
           </div>
         </form>
       </mat-step>
+
+      <!-- Step 2: Upload identity card -->
       <mat-step label="Chụp ảnh CMND" [stepControl]="imageForm">
         <form [formGroup]="imageForm">
           <div class="row d-flex justify-content-center">
-            <div class="col-auto mt-4" style="width: 800px">
+            <div class="col-auto mt-4 step2">
               <div class="row d-flex justify-content-around">
                 <!-- Identity card (front side) -->
                 <div class="col-auto p-0 identityCard">
@@ -230,14 +239,12 @@
                       type="file"
                       id="frontImg"
                       accept="image/*"
-                      style="
-                        height: 100%;
-                        width: 100%;
-                        opacity: 0;
-                        position: absolute;
-                        z-index: 10;
-                        margin: 0px;
-                      "
+                      style="height: 100%;
+                      width: 100%;
+                      opacity: 0;
+                      position: absolute;
+                      z-index: 10;
+                      margin: 0px;"
                       (change)="displayImage($event, 'front')"
                       formControlName="identityCardFrontSideImageLink"
                       required
@@ -291,14 +298,12 @@
                       type="file"
                       id="backImg"
                       accept="image/*"
-                      style="
-                        height: 100%;
-                        width: 100%;
-                        opacity: 0;
-                        position: absolute;
-                        z-index: 10;
-                        margin: 0px;
-                      "
+                      style="height: 100%;
+                      width: 100%;
+                      opacity: 0;
+                      position: absolute;
+                      z-index: 10;
+                      margin: 0px;"
                       (change)="displayImage($event, 'back')"
                       formControlName="identityCardBackSideImageLink"
                       required
@@ -313,32 +318,22 @@
                 <!-- End back side -->
               </div>
               <div class="row d-flex justify-content-between mt-5">
-                <button
-                  mat-raised-button
-                  matStepperPrevious
-                  style="width: 100px"
-                >
-                  Back
-                </button>
-                <button
-                  mat-raised-button
-                  color="orange"
-                  matStepperNext
-                  style="width: 100px"
-                >
-                  Next
-                </button>
+                <button matStepperPrevious class="btn form-control blueButton" > Quay lại </button>
+                <button matStepperNext class="btn form-control orangeButton" > Tiếp theo </button>
               </div>
             </div>
           </div>
         </form>
       </mat-step>
+
+      <!-- Step 3: Confirm information -->
       <mat-step label="Xác nhận thông tin">
-        <div class="container confirmInfomation">
-          <b class="d-flex justify-content-center title" style="text-align: center;">Xác nhận thông tin đăng ký</b>
+        <div class="container step3">
+          <b class="d-flex justify-content-center">Xác nhận thông tin đăng ký</b>
           <div class="d-flex justify-content-center">
             <div class="row mx-3">
-              <table style="border: none">
+              <!-- Phone number and Facebook -->
+              <table>
                 <tr>
                   <td class="align-top"><b>Số điện thoại:</b></td>
                   <td>{{ contactForm.controls["phonenumber"].value }}</td>
@@ -346,32 +341,30 @@
                 <tr>
                   <td class="align-top"><b>Facebook:</b></td>
                   <td>
-                    <a
+                    <a style="word-break: break-all;"
                       href="{{ contactForm.controls['facebookUrl'].value }}"
-                      style="word-break: break-all"
                       >{{ contactForm.controls["facebookUrl"].value }}</a
                     >
                   </td>
                 </tr>
               </table>
-              <table style="border: none;">
+              <!-- Identity card -->
+              <table>
                 <tr>
-                  <td class="me-2" style="width: 15vw;">
-                    <b>CMND mặt trước</b>
-                    <br>
+                  <td><b>CMND mặt trước</b></td>
+                  <td><b>CMND mặt sau</b></td>
+                </tr>
+                <tr>
+                  <td class="me-2 align-top">
                     <img
                       class="viewIdentityCard"
                       [src]="frontImgSrc"
-                      style="max-height: 75%; max-width: 100%"
                     />
                   </td>
-                  <td style="width: 15vw;">
-                    <b>CMND mặt sau</b>
-                    <br>
+                  <td class="align-top">
                     <img
                       class="viewIdentityCard"
                       [src]="backImgSrc"
-                      style="max-height: 75%; max-width: 100%"
                     />
                   </td>
                 </tr>
@@ -379,14 +372,13 @@
             </div>
           </div>
 
-          <div class="row d-flex justify-content-around my-5 h-75 viewRow">
-            <button mat-raised-button matStepperPrevious style="width: 100px">
-              Back
+          <div class="row d-flex justify-content-around my-5 h-75">
+            <button mat-raised-button matStepperPrevious class="blueButton">
+              Quay lại
             </button>
             <button
               mat-raised-button
-              color="orange"
-              style="width: 100px"
+              class="orangeButton"
               (click)="onSubmit()"
             >
               Đăng kí
@@ -398,6 +390,7 @@
   </div>
   <app-footer></app-footer>
 </ng-template>
+
 <!-- Alerts by Template: sweetalert2 -->
 <swal
   #landLordAccountLockedAlert
