@@ -15,42 +15,28 @@
       <div style="flex-direction: column">
         <div>
           <!-- FPT University logo -->
-          <img
-            src="../../../assets/image/FPTU logo.png"
-            style="
-              width: 10vw;
-              margin-left: auto;
-              margin-right: auto;
-              display: block;
-            "
+          <img id="FPTULogo"
           />
         </div>
         <!-- FU House Finder logo -->
         <div>
-          <img
+          <img id="FUHouseFinderLogo"
             class="top-50 start-50"
             src="../../../assets/image/Logo.png"
-            style="
-              width: 30vw;
-              margin-left: auto;
-              margin-right: auto;
-              display: block;
-            "
           />
         </div>
         <!-- Website's name -->
-        <div style="color: #ff6f3d; text-align: center">
+        <div class="orangeText">
           <h1>FU HOUSE FINDER</h1>
           <h5>Ứng dụng tìm trọ dành cho sinh viên Đại học FPT</h5>
         </div>
       </div>
     </div>
     <div
-      class="col-lg-6 col-sm-12 h-100 d-flex justify-content-center align-items-center"
-      style="background-color: #ff6f3d"
+      class="col-lg-6 col-sm-12 h-100 d-flex justify-content-center align-items-center loginCol"
     >
       <div class="row">
-        <h3 style="color: white; text-align: center">ĐĂNG NHẬP</h3>
+        <h3 class="whiteText">ĐĂNG NHẬP</h3>
 
         <!-- Sign in with email and password -->
         <div class="row mx-1">
@@ -65,12 +51,6 @@
                 <input
                   matInput
                   type="text"
-                  style="
-                    height: 35px;
-                    padding: 5px;
-                    border-radius: 5px;
-                    background-color: white;
-                  "
                   id="username"
                   formControlName="username"
                   required
@@ -83,7 +63,6 @@
                 <input
                   matInput
                   type="password"
-                  style="height: 35px; padding: 5px; border-radius: 5px"
                   id="password"
                   formControlName="password"
                   required
@@ -103,15 +82,7 @@
         </div>
 
         <!-- Orther methods of log in/sign up -->
-        <span
-          style="
-            text-align: center;
-            color: #ffe6e6;
-            font-size: 11pt;
-            margin-top: 20px;
-          "
-          >hoặc sử dụng</span
-        >
+        <span>hoặc sử dụng</span>
         <!-- Sign in with Facebook -->
         <div class="row d-flex justify-content-center my-2 mx-1">
           <div
@@ -136,7 +107,7 @@
 <!-- Landlord register -->
 <ng-template #registerTemplate>
   <app-header></app-header>
-  <div class="register" style="min-height: 57vh">
+  <div class="register">
     <!-- Step 1: Phone number and Facebook link -->
     <mat-stepper [linear]="true" #stepper>
       <mat-step label="Điền Thông tin liên hệ" [stepControl]="contactForm">
@@ -179,8 +150,8 @@
                 </mat-form-field>
               </div>
               <div class="row d-flex justify-content-end">
-                <button
-                  class="col-auto btn form-control orangeButton"
+                <button mat-raised-button
+                  class="orangeButton"
                   matStepperNext
                 >
                   Tiếp theo
@@ -318,8 +289,8 @@
                 <!-- End back side -->
               </div>
               <div class="row d-flex justify-content-between mt-5">
-                <button matStepperPrevious class="btn form-control blueButton" > Quay lại </button>
-                <button matStepperNext class="btn form-control orangeButton" > Tiếp theo </button>
+                <button mat-raised-button matStepperPrevious class="blueButton" > Quay lại </button>
+                <button mat-raised-button matStepperNext class="orangeButton" > Tiếp theo </button>
               </div>
             </div>
           </div>
@@ -376,11 +347,7 @@
             <button mat-raised-button matStepperPrevious class="blueButton">
               Quay lại
             </button>
-            <button
-              mat-raised-button
-              class="orangeButton"
-              (click)="onSubmit()"
-            >
+            <button mat-raised-button class="orangeButton" (click)="onSubmit()" >
               Đăng kí
             </button>
           </div>
