@@ -50,6 +50,8 @@ namespace HouseFinder_API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> Login(LoginDTO login)
         {
+            try
+            {
                 //Login with Google
                 if (login.GoogleUserId != null)
                 {
@@ -108,6 +110,11 @@ namespace HouseFinder_API.Controllers
 
                 //Response: Allow login
                 return Ok(new { Status = 200, User = user });
+            }
+            catch (Exception)
+            {
+                return Ok(new { Status = 500, Message = "Login Error!" });
+            }
         }
 
         /**
