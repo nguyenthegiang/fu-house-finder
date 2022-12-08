@@ -1,18 +1,18 @@
 {
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost:8080"
+    "BaseUrl": "http://localhost:8000"
   },
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/{everything}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/api/user/{everything}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5001
+          "Port": 80
         }
       ],
-      "UpstreamPathTemplate": "/{everything}"
+      "UpstreamPathTemplate": "/user/{everything}"
     }
   ]
 }

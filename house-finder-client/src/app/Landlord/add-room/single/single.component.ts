@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RoomService } from 'src/app/services/room.service';
 
 @Component({
   selector: 'app-single',
@@ -7,7 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SingleComponent implements OnInit {
 
-  constructor() { }
+  constructor(private roomService: RoomService) { 
+    
+  }
 
   ngOnInit(): void {
   }
