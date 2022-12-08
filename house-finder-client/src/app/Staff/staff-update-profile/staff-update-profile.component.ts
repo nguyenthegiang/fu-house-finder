@@ -45,7 +45,6 @@ export class StaffUpdateProfileComponent implements OnInit {
             this.updateErrorAlert?.fire();
           } else if (data.status == 200) {
             this.updateSuccessAlert?.fire();
-            window.location.reload();
           }
         },
         error => { }

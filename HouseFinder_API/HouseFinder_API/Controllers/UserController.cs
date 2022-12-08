@@ -243,7 +243,6 @@ namespace HouseFinder_API.Controllers
             }
             catch (Exception e)
             {
-
                 return BadRequest(e.Message);
             }
         }
@@ -287,11 +286,11 @@ namespace HouseFinder_API.Controllers
             {
                 //Update to Database
                 userRepository.UpdateProfile(userId, name, email);
-                return Ok();
+                return Ok(new { Status = 200 });
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return BadRequest(e.Message);
+                return Ok(new { Status = 400 });
             }
         }
 
