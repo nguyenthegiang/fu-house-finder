@@ -1,5 +1,5 @@
-<form>
-  <div class="container">
+<form class="border border-top-0">
+  <div class="container py-5">
     <div class="row">
       <div class="col-6">
         <div class="mb-3 row">
@@ -59,41 +59,61 @@
         <div class="mb-3 row">
           <label class="col-sm-2 form-label" for="room-type">Loại phòng</label>
           <div class="col-sm-10">
-            <select class="form-control" id="room-type">
+            <select class="form-select" id="room-type">
               <option value="1">Khép kín</option>
               <option value="2">Không khép kín</option>
               <option value="3">Chung cư mini</option>
             </select>
           </div>
         </div>
-        <div class="mb-3 row">
-          <div class="col-sm-3">
+        <div class="mb-3 row form-check">
+          <div class="form-check form-check-inline">
             <label for="fridge">Tủ lạnh</label>
-            <input id="fridge" type="checkbox" />
+            <input class="form-check-input" id="fridge" type="checkbox" />
+            <label for="kitchen">Bếp</label>
+            <input class="form-check-input" id="kitchen" type="checkbox" />
+            <label for="washing-machine">Máy giặt</label>
+            <input
+              class="form-check-input"
+              id="washing-machine"
+              type="checkbox"
+            />
+            <label for="desk">Bàn</label>
+            <input class="form-check-input" id="desk" type="checkbox" />
+          </div>
+
+          <!-- <div class="col-sm-3">
+            <label for="fridge">Tủ lạnh</label>
+            <input class="form-check-input" id="fridge" type="checkbox" />
           </div>
           <div class="col-sm-3">
             <label for="kitchen">Bếp</label>
-            <input id="kitchen" type="checkbox" />
+            <input class="form-check-input" id="kitchen" type="checkbox" />
           </div>
           <div class="col-sm-3">
             <label for="washing-machine">Máy giặt</label>
-            <input id="washing-machine" type="checkbox" />
+            <input class="form-check-input" id="washing-machine" type="checkbox" />
           </div>
           <div class="col-sm-3">
             <label for="desk">Bàn</label>
-            <input id="desk" type="checkbox" />
-          </div>
+            <input class="form-check-input" id="desk" type="checkbox" />
+          </div> -->
+
           <div class="col-sm-4">
             <label for="bed">Giường</label>
-            <input id="bed" type="checkbox" />
+            <input class="form-check-input" id="bed" type="checkbox" />
           </div>
           <div class="col-sm-4">
             <label for="without-host">Không chung chủ</label>
-            <input id="without-host" type="checkbox" />
+            <input class="form-check-input" id="without-host" type="checkbox" />
           </div>
           <div class="col-sm-4">
             <label for="closed-toilet">Vệ sinh khép kín</label>
-            <input id="closed-toilet" type="checkbox" />
+            <input
+              class="form-check-input"
+              id="closed-toilet"
+              type="checkbox"
+            />
           </div>
         </div>
         <!-- Upload image -->
