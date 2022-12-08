@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HouseFinder.Test", "HouseFi
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{04A26A33-5DB1-47AF-BB32-24EDB364A43D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIGateway", "APIGateway\APIGateway.csproj", "{1FA37231-AB23-4DFF-BAF5-CFB637110BFA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{04A26A33-5DB1-47AF-BB32-24EDB364A43D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04A26A33-5DB1-47AF-BB32-24EDB364A43D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04A26A33-5DB1-47AF-BB32-24EDB364A43D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1FA37231-AB23-4DFF-BAF5-CFB637110BFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1FA37231-AB23-4DFF-BAF5-CFB637110BFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1FA37231-AB23-4DFF-BAF5-CFB637110BFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1FA37231-AB23-4DFF-BAF5-CFB637110BFA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
