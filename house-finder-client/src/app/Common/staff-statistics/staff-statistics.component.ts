@@ -16,6 +16,9 @@ export class StaffStatisticsComponent implements OnInit {
   availableRoom: number = 0;
   totalCapacity: number = 0;
   availableCapacity: number = 0;
+  totalVillage: number = 0;
+  totalCommune: number = 0;
+  totalDistrict: number = 0;
 
   constructor(private houseService: HouseService,
     private roomService: RoomService)
@@ -45,6 +48,18 @@ export class StaffStatisticsComponent implements OnInit {
 
     this.roomService.countAvailableCapacity().subscribe(data => {
       this.availableCapacity = data;
+    });
+
+    this.houseService.countVillageHavingHouse().subscribe(data => {
+      this.totalVillage = data;
+    });
+
+    this.houseService.countCommuneHavingHouse().subscribe(data => {
+      this.totalCommune = data;
+    });
+
+    this.houseService.countDistrictHavingHouse().subscribe(data => {
+      this.totalDistrict = data;
     });
   }
 }
