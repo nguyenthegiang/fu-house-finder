@@ -29,13 +29,13 @@ export class ListStaffComponent implements OnInit
     this.router.navigate(['/Admin/create-account']);
   }
 
-  updateHouse(id: string)
+  updateStaff(id: string)
   {
     console.log(id);
     this.router.navigate(['/Admin/update-account/' + id]);
   }
 
-  deleteHouse(id: string)
+  deleteStaff(id: string)
   {
     console.log(id);
     this.router.navigate(['/Admin/landlord-house-detail/' + id]);
