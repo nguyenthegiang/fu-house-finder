@@ -5,17 +5,20 @@ import { ReportService } from 'src/app/services/report.service';
 import { RoomService } from 'src/app/services/room.service';
 
 @Component({
-  selector: 'app-staff-navbar',
-  templateUrl: './staff-navbar.component.html',
-  styleUrls: ['./staff-navbar.component.scss']
+  selector: 'app-staff-statistics',
+  templateUrl: './staff-statistics.component.html',
+  styleUrls: ['./staff-statistics.component.scss']
 })
-export class StaffNavbarComponent implements OnInit {
+export class StaffStatisticsComponent implements OnInit {
   totalHouse: number = 0;
   availableHouse: number = 0;
   totalRoom: number = 0;
   availableRoom: number = 0;
   totalCapacity: number = 0;
   availableCapacity: number = 0;
+  totalVillage: number = 0;
+  totalCommune: number = 0;
+  totalDistrict: number = 0;
 
   constructor(private houseService: HouseService,
     private roomService: RoomService)
@@ -45,6 +48,18 @@ export class StaffNavbarComponent implements OnInit {
 
     this.roomService.countAvailableCapacity().subscribe(data => {
       this.availableCapacity = data;
+    });
+
+    this.houseService.countVillageHavingHouse().subscribe(data => {
+      this.totalVillage = data;
+    });
+
+    this.houseService.countCommuneHavingHouse().subscribe(data => {
+      this.totalCommune = data;
+    });
+
+    this.houseService.countDistrictHavingHouse().subscribe(data => {
+      this.totalDistrict = data;
     });
   }
 }
