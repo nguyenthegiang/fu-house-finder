@@ -123,7 +123,7 @@ export class LoginComponent implements OnInit {
 
     //Login with Facebook
     const signInWithFB = () => {
-      console.log('login fb called');
+      // console.log('login fb called');
       FB.getLoginStatus((resp) => {   // Called after the JS SDK has been initialized.
         if (resp.status === 'connected') {  // The current login status of the person.
           // Logged into your webpage and Facebook.
@@ -235,8 +235,15 @@ export class LoginComponent implements OnInit {
   //Login with Username & Password
   loginUsernamePassword(): void {
     //Front-end validation
+    if (this.loginForm.controls['username'].value == null ||
+      this.loginForm.controls['password'].value == null ||
+      this.loginForm.controls['username'].value.trim() == "" ||
+      this.loginForm.controls['password'].value.trim() == "") {
+        this.invalidEmailPasswordAlert?.fire();
+        return;
+    }
 
-
+    //Call API
     this.userService.loginEmailPassword(
       this.loginForm.controls['username'].value,
       this.loginForm.controls['password'].value
