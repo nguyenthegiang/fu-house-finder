@@ -5,11 +5,11 @@ import { ReportService } from 'src/app/services/report.service';
 import { RoomService } from 'src/app/services/room.service';
 
 @Component({
-  selector: 'app-staff-navbar',
-  templateUrl: './staff-navbar.component.html',
-  styleUrls: ['./staff-navbar.component.scss']
+  selector: 'app-staff-statistics',
+  templateUrl: './staff-statistics.component.html',
+  styleUrls: ['./staff-statistics.component.scss']
 })
-export class StaffNavbarComponent implements OnInit {
+export class StaffStatisticsComponent implements OnInit {
   totalHouse: number = 0;
   availableHouse: number = 0;
   totalRoom: number = 0;

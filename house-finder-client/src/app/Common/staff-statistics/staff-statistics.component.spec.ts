@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StaffNavbarComponent } from './staff-navbar.component';
+import { StaffNavbarComponent } from './staff-statistics.component';
 
 describe('StaffNavbarComponent', () => {
   let component: StaffNavbarComponent;
