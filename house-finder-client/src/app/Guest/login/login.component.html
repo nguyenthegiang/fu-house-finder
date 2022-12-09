@@ -25,20 +25,34 @@
     <!-- Content Column -->
     <div class="col-lg-6 col-sm-12 h-100 d-flex justify-content-center align-items-center loginCol">
       <div class="row">
-        <h3 class="whiteText">ĐĂNG NHẬP</h3>
+        <h3 class="whiteText titleLogin">ĐĂNG NHẬP</h3>
+
+        <!-- Sign in with Facebook -->
+        <div class="row d-flex justify-content-center my-2 mx-1">
+          <div class="fb-login-button col-auto" data-width="320" data-size="large" data-button-type="continue_with"
+            data-layout="rounded"></div>
+        </div>
+
+        <!-- Sign in with Google -->
+        <div class="row d-flex justify-content-center my-2 mx-1">
+          <div clasd="col-auto" style="width: fit-content" #ggDiv></div>
+        </div>
+
+        <!-- Orther methods of log in/sign up -->
+        <span>hoặc sử dụng</span>
 
         <!-- Sign in with email and password -->
         <div class="row mx-1">
           <form class="col" [formGroup]="loginForm" (ngSubmit)="loginUsernamePassword()">
             <div class="formCover rounded-4">
               <div class="row d-flex justify-content-center mt-4">
-                <mat-form-field appearance="fill" class="loginInput">
+                <mat-form-field appearance="legacy" class="loginInput">
                   <mat-label>Email</mat-label>
                   <input matInput type="text" formControlName="username" class="loginInputField" required />
                 </mat-form-field>
               </div>
               <div class="row d-flex justify-content-center">
-                <mat-form-field appearance="fill" class="loginInput">
+                <mat-form-field appearance="legacy" class="loginInput">
                   <mat-label>Mật khẩu</mat-label>
                   <input matInput type="password" formControlName="password" class="loginInputField" required />
                 </mat-form-field>
@@ -53,19 +67,6 @@
           </form>
         </div>
 
-        <!-- Orther methods of log in/sign up -->
-        <span>hoặc sử dụng</span>
-
-        <!-- Sign in with Facebook -->
-        <div class="row d-flex justify-content-center my-2 mx-1">
-          <div class="fb-login-button col-auto" data-width="320" data-size="large" data-button-type="continue_with"
-            data-layout="rounded"></div>
-        </div>
-
-        <!-- Sign in with Google -->
-        <div class="row d-flex justify-content-center my-2 mx-1">
-          <div clasd="col-auto" style="width: fit-content" #ggDiv></div>
-        </div>
       </div>
     </div>
   </div>

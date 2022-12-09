@@ -39,19 +39,23 @@
 .loginCol {
   background-color: #ff6f3d;
 
+  .titleLogin {
+    margin-bottom: 20px;
+  }
+
   //Input in Login
 
-  .formCover {
-    background-color: white;
-    margin-left: 27%;
-    margin-right: 27%;
-    margin-top: 5%;
-    margin-bottom: 3%;
-    padding-top: 2%;
-    padding-bottom: 1%;
-    //border-radius: 30px;
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-  }
+  // .formCover {
+  // background-color: white;
+  // margin-left: 30%;
+  // margin-right: 30%;
+  // margin-top: 5%;
+  // margin-bottom: 3%;
+  // padding-top: 1%;
+  // padding-bottom: 1%;
+  // //border-radius: 30px;
+  // box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  // }
 
   .loginInput {
     width: 350px;

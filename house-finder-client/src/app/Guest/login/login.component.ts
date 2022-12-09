@@ -102,7 +102,7 @@ export class LoginComponent implements OnInit {
           text: 'signin_with',
           shape: 'pill',
           logo_alignment: 'left',
-          width: 320
+          width: 320,
         }
       );
     };
@@ -234,6 +234,9 @@ export class LoginComponent implements OnInit {
 
   //Login with Username & Password
   loginUsernamePassword(): void {
+    //Front-end validation
+
+
     this.userService.loginEmailPassword(
       this.loginForm.controls['username'].value,
       this.loginForm.controls['password'].value
