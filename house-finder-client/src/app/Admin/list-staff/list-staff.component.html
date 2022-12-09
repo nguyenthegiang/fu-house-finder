@@ -46,13 +46,13 @@
 
             <td>
               <a class="text-decoration-none text-success me-2" data-toggle="modal" data-target="#updateModal"
-                data-whatever="@getbootstrap" (click)="updateHouse(dataItem.userId)" style="cursor: pointer;">
+                data-whatever="@getbootstrap" (click)="updateStaff(dataItem.userId)" style="cursor: pointer;">
                 <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Chỉnh sửa">
                   build
                 </span>
               </a>
               <a class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
-                data-bs-whatever="@getbootstrap" (click)="deleteHouse(dataItem.userId)" style="cursor: pointer;">
+                data-bs-whatever="@getbootstrap" (click)="deleteStaff(dataItem.userId)" style="cursor: pointer;">
                 <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Xóa">
                   delete
                 </span>
@@ -71,3 +71,5 @@
   <!-- End Main content -->
 </div>
 <!-- End Body -->
+
+<app-footer></app-footer>

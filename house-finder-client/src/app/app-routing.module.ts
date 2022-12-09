@@ -56,7 +56,7 @@ const routes: Routes = [
   { path: 'Staff/staff-change-password', component: StaffChangePasswordComponent},
   { path: 'Admin/list-staff', component: ListStaffComponent},
   { path: 'Admin/create-account', component: CreateAccountComponent},
-  { path: 'Admin/update-account', component: UpdateAccountComponent}
+  { path: 'Admin/update-account/:id', component: UpdateAccountComponent}
 ];
 
 @NgModule({
