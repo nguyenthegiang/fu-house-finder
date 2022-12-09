@@ -139,9 +139,8 @@ namespace HouseFinder_API.Controllers
                 roomRepository.UpdateRoom(updatedRoom);
                 return Ok(new { Status = 200 });
             }
-            catch (Exception e)
+            catch (Exception)
             {
-
                 return Ok(new { Status = 400 });
             }
         }
