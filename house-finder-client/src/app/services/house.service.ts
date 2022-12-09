@@ -385,7 +385,7 @@ export class HouseService {
     camera: boolean,
     parking: boolean
   ): Observable<any>{
-    return this.http.post<any>(this.APIUrl, 
+    return this.http.post<any>(this.APIUrl,
       {houseName: houseName,
       information: information,
       address: address,
@@ -400,5 +400,17 @@ export class HouseService {
       parking: parking},
       {withCredentials: true}
     );
+  }
+
+  countVillageHavingHouse() : Observable<number>{
+    return this.http.get<number>("https://localhost:5001/api/Village/CountVillageHavingHouse");
+  }
+
+  countCommuneHavingHouse() : Observable<number>{
+    return this.http.get<number>("https://localhost:5001/api/Commune/CountCommuneHavingHouse");
+  }
+
+  countDistrictHavingHouse() : Observable<number>{
+    return this.http.get<number>("https://localhost:5001/api/District/CountDistrictHavingHouse");
   }
 }

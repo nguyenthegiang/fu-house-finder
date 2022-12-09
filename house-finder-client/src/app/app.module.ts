@@ -33,7 +33,7 @@ import { HeaderComponent } from './Common/header/header.component';
 import { FooterComponent } from './Common/footer/footer.component';
 import { RoleModalComponent } from './Guest/login/role-modal/role-modal.component';
 import { StaffHeaderComponent } from './Common/staff-header/staff-header.component';
-import { StaffNavbarComponent } from './Common/staff-navbar/staff-navbar.component';
+import { StaffStatisticsComponent } from './Common/staff-statistics/staff-statistics.component';
 import { StaffLandlordDetailComponent } from './Staff/staff-landlord-detail/staff-landlord-detail.component';
 import { StaffHouseDetailComponent } from './Staff/staff-house-detail/staff-house-detail.component';
 import { StaffRoomDetailComponent } from './Staff/staff-room-detail/staff-room-detail.component';
@@ -81,7 +81,7 @@ import { LandlordChangePasswordComponent } from './Landlord/landlord-change-pass
     FooterComponent,
     RoleModalComponent,
     StaffHeaderComponent,
-    StaffNavbarComponent,
+    StaffStatisticsComponent,
     StaffLandlordDetailComponent,
     StaffHouseDetailComponent,
     StaffRoomDetailComponent,
