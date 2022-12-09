@@ -49,6 +49,7 @@ export class DashboardComponent implements OnInit {
       //Check user logged in from Server => if not => alert
       this.houseService.getListHousesByLandlordId(user).subscribe(data => {
         this.houses = data;
+        console.log(data);
       });
       this.lanlord_informationService.getLandLordInfomation(user).subscribe(data => {
         this.houseCount = data.houseCount;

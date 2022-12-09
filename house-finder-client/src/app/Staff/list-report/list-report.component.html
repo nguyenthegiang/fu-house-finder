@@ -7,49 +7,23 @@
     <!-- Tab -->
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
-        <button
-          class="nav-link active"
-          id="home-tab"
-          data-bs-toggle="tab"
-          data-bs-target="#home-tab-pane"
-          type="button"
-          role="tab"
-          aria-controls="home-tab-pane"
-          aria-selected="true"
-        >
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button"
+          role="tab" aria-controls="home-tab-pane" aria-selected="true">
           Danh sách báo cáo
         </button>
       </li>
       <li class="nav-item" role="presentation">
-        <button
-          class="nav-link"
-          id="profile-tab"
-          data-bs-toggle="tab"
-          data-bs-target="#profile-tab-pane"
-          type="button"
-          role="tab"
-          aria-controls="profile-tab-pane"
-          aria-selected="false"
-        >
+        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button"
+          role="tab" aria-controls="profile-tab-pane" aria-selected="false">
           Báo cáo theo nhà
         </button>
       </li>
     </ul>
     <!-- End tab -->
 
-    <div
-      class="tab-content border-end border-bottom border-start"
-      id="myTabContent"
-      style="padding: 20px"
-    >
+    <div class="tab-content border-end border-bottom border-start" id="myTabContent" style="padding: 20px">
       <!-- List of reports -->
-      <div
-        class="tab-pane fade show active"
-        id="home-tab-pane"
-        role="tabpanel"
-        aria-labelledby="home-tab"
-        tabindex="0"
-      >
+      <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
         <div class="row">
           <div class="my-4">
             <h3 class="text-center">Danh sách báo cáo</h3>
@@ -59,8 +33,8 @@
               <div class="col-10 col-md-5">
                 <div class="text-center my-4">
                   <div class="input-group"> -->
-                    <!-- Press enter to search  -->
-                    <!-- <input
+            <!-- Press enter to search  -->
+            <!-- <input
                       type="text"
                       class="form-control border border-end-0"
                       placeholder="Nhập nội dung báo cáo tìm kiếm"
@@ -71,8 +45,8 @@
                         searchReportByContent(searchReportContent.value)
                       "
                     /> -->
-                    <!-- Click button to clear search -->
-                    <!-- <button
+            <!-- Click button to clear search -->
+            <!-- <button
                       *ngIf="searchName != undefined"
                       class="clearSearchBtn"
                       type="button"
@@ -80,8 +54,8 @@
                     >
                       <span class="material-symbols-outlined"> close </span>
                     </button> -->
-                    <!-- Click button to search -->
-                    <!-- <button
+            <!-- Click button to search -->
+            <!-- <button
                       class="btn btn-outline-secondary"
                       type="button"
                       id="button-addon2"
@@ -101,33 +75,21 @@
               <!-- Start date -->
               <div class="col-6 col-md-3 my-2">
                 <label class="form-label">Từ ngày</label>
-                <input
-                  #selectedFromDate
-                  class="form-control"
-                  type="date"
-                  (change)="onFromDateSelected(selectedFromDate.value)"
-                />
+                <input #selectedFromDate class="form-control" type="date"
+                  (change)="onFromDateSelected(selectedFromDate.value)" />
               </div>
               <!-- End date -->
               <div class="col-6 col-md-3 my-2">
                 <label class="form-label">Đến ngày</label>
-                <input
-                  #selectedToDate
-                  class="form-control"
-                  type="date"
-                  (change)="onToDateSelected(selectedToDate.value)"
-                />
+                <input #selectedToDate class="form-control" type="date"
+                  (change)="onToDateSelected(selectedToDate.value)" />
               </div>
               <!-- End date picker -->
 
               <!-- Order by -->
               <div class="col-10 col-md-4">
                 <label class="form-label">Sắp xếp</label>
-                <select
-                  #selectedOrderBy
-                  class="form-select"
-                  (change)="onOrderBySelected(selectedOrderBy.value)"
-                >
+                <select #selectedOrderBy class="form-select" (change)="onOrderBySelected(selectedOrderBy.value)">
                   <option selected disabled>Chọn sắp xếp</option>
                   <option value="desc">Ngày gần nhất</option>
                   <option value="asc">Ngày xa nhất</option>
@@ -163,29 +125,17 @@
                       {{ report.solvedByNavigation.displayName }}
                     </div>
                   </td>
-                  <td
-                    *ngIf="report.status.statusName === 'Unsolved'"
-                    style="color: red"
-                  >
+                  <td *ngIf="report.status.statusName === 'Unsolved'" style="color: red">
                     Chưa giải quyết
                   </td>
-                  <td
-                    *ngIf="report.status.statusName === 'Processing'"
-                    style="color: orange"
-                  >
+                  <td *ngIf="report.status.statusName === 'Processing'" style="color: orange">
                     Đang giải quyết
                   </td>
-                  <td
-                    *ngIf="report.status.statusName === 'Solved'"
-                    style="color: green"
-                  >
+                  <td *ngIf="report.status.statusName === 'Solved'" style="color: green">
                     Đã giải quyết
                   </td>
                   <td>
-                    <div
-                      class="d-inline-block text-truncate"
-                      style="max-width: 350px"
-                    >
+                    <div class="d-inline-block text-truncate" style="max-width: 350px">
                       {{ report.reportContent }}
                     </div>
                   </td>
@@ -199,42 +149,24 @@
               <nav aria-label="Pagination-nav">
                 <ul class="pagination">
                   <!-- Previous: Disabled if this is first page -->
-                  <li
-                    class="page-item"
-                    [ngClass]="{ disabled: reportPageNumber == 1 }"
-                  >
+                  <li class="page-item" [ngClass]="{ disabled: reportPageNumber == 1 }">
                     <!-- Go to previous page -->
-                    <a
-                      class="page-link"
-                      aria-label="Previous"
-                      (click)="goToPage(reportPageNumber - 1)"
-                    >
+                    <a class="page-link" aria-label="Previous" (click)="goToPage(reportPageNumber - 1)">
                       <span aria-hidden="true">&laquo;</span>
                     </a>
                   </li>
                   <!-- Numbers -->
                   <li *ngFor="let page of reportPageList" class="page-item">
                     <!-- Display this as active if it's the chosen page -->
-                    <a
-                      class="page-link"
-                      (click)="goToPage(page)"
-                      [ngClass]="{ active: reportPageNumber == page }"
-                      >{{ page }}</a
-                    >
+                    <a class="page-link" (click)="goToPage(page)" [ngClass]="{ active: reportPageNumber == page }">{{
+                      page }}</a>
                   </li>
                   <!-- Next: Disabled if this is last page -->
-                  <li
-                    class="page-item"
-                    [ngClass]="{
+                  <li class="page-item" [ngClass]="{
                       disabled: reportPageNumber == reportPageCount
-                    }"
-                  >
+                    }">
                     <!-- Go to next page -->
-                    <a
-                      class="page-link"
-                      aria-label="Next"
-                      (click)="goToPage(reportPageNumber + 1)"
-                    >
+                    <a class="page-link" aria-label="Next" (click)="goToPage(reportPageNumber + 1)">
                       <span aria-hidden="true">&raquo;</span>
                     </a>
                   </li>
@@ -247,13 +179,7 @@
       </div>
 
       <!-- List of reportes houses -->
-      <div
-        class="tab-pane fade"
-        id="profile-tab-pane"
-        role="tabpanel"
-        aria-labelledby="profile-tab"
-        tabindex="0"
-      >
+      <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
         <div class="row">
           <div class="my-4">
             <h3 class="text-center">Danh sách nhà bị báo cáo</h3>
@@ -264,32 +190,18 @@
                 <div class="text-center my-4">
                   <div class="input-group">
                     <!-- Press enter to search  -->
-                    <input
-                      type="text"
-                      class="form-control border border-end-0"
-                      placeholder="Nhập từ khóa tìm kiếm"
-                      aria-label="search_house_by_name"
-                      aria-describedby="button-addon2"
-                      placeholder="Nhập tên nhà tìm kiếm"
-                      #searchHouseName
-                      (keydown.enter)="searchReportedHouse(searchHouseName.value)"
-                    />
+                    <input type="text" class="form-control border border-end-0" placeholder="Nhập từ khóa tìm kiếm"
+                      aria-label="search_house_by_name" aria-describedby="button-addon2"
+                      placeholder="Nhập tên nhà tìm kiếm" #searchHouseName
+                      (keydown.enter)="searchReportedHouse(searchHouseName.value)" />
                     <!-- Click button to clear search -->
-                    <button
-                      *ngIf="searchHouse != undefined"
-                      class="clearSearchBtn"
-                      type="button"
-                      (click)="handleClearHouse()" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Xóa"
-                    >
+                    <button *ngIf="searchHouse != undefined" class="clearSearchBtn" type="button"
+                      (click)="handleClearHouse()" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Xóa">
                       <span class="material-symbols-outlined"> close </span>
                     </button>
                     <!-- Click button to search -->
-                    <button
-                      class="btn btn-outline-secondary"
-                      type="button"
-                      id="button-addon2"
-                      (click)="searchReportedHouse(searchHouseName.value)"
-                    >
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"
+                      (click)="searchReportedHouse(searchHouseName.value)">
                       <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
                   </div>
@@ -303,11 +215,8 @@
               <!-- Order by -->
               <div class="col-10 col-md-6">
                 <label class="form-label">Trạng thái</label>
-                <select
-                  #selectedActiveStatus
-                  class="form-select"
-                  (change)="onActiveStatusSelected(selectedActiveStatus.value)"
-                >
+                <select #selectedActiveStatus class="form-select"
+                  (change)="onActiveStatusSelected(selectedActiveStatus.value)">
                   <option>Tất cả</option>
                   <option value="1">Đang hoạt động</option>
                   <option value="0">Dừng hoạt động</option>
@@ -316,11 +225,8 @@
               <!-- Order by -->
               <div class="col-10 col-md-6">
                 <label class="form-label">Sắp xếp</label>
-                <select
-                  #selectedHouseOrderBy
-                  class="form-select"
-                  (change)="onHouseOrderBySelected(selectedHouseOrderBy.value)"
-                >
+                <select #selectedHouseOrderBy class="form-select"
+                  (change)="onHouseOrderBySelected(selectedHouseOrderBy.value)">
                   <option disabled>Chọn sắp xếp</option>
                   <option value="desc">Báo cáo nhiều nhất</option>
                   <option value="asc">Báo cáo ít nhất</option>
@@ -340,13 +246,8 @@
                 </tr>
               </thead>
               <tbody>
-                <tr
-                  *ngFor="let house of houses; let i = index"
-                  (click)="changeSelectedHouse(house.houseId)"
-                  style="cursor: pointer"
-                  data-bs-toggle="modal"
-                  data-bs-target="#listReportModal"
-                >
+                <tr *ngFor="let house of houses; let i = index" (click)="changeSelectedHouse(house.houseId)"
+                  style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#listReportModal">
                   <td id="md">
                     <b>{{ (housePageNumber - 1) * housePageSize + i + 1 }}</b>
                   </td>
@@ -355,12 +256,8 @@
                   <td>{{ house.numberOfReport }}</td>
                   <td>
                     <div class="form-check form-switch">
-                      <input
-                        class="form-check-input"
-                        type="checkbox"
-                        id="flexSwitchCheckChecked"
-                        [checked]="house.landlord.statusId == 1"
-                      />
+                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
+                        [checked]="house.landlord.statusId == 1" />
                     </div>
                   </td>
                 </tr>
@@ -373,40 +270,22 @@
               <nav aria-label="Pagination-nav">
                 <ul class="pagination">
                   <!-- Previous: Disabled if this is first page -->
-                  <li
-                    class="page-item"
-                    [ngClass]="{ disabled: housePageNumber == 1 }"
-                  >
+                  <li class="page-item" [ngClass]="{ disabled: housePageNumber == 1 }">
                     <!-- Go to previous page -->
-                    <a
-                      class="page-link"
-                      aria-label="Previous"
-                      (click)="goToHousePage(housePageNumber - 1)"
-                    >
+                    <a class="page-link" aria-label="Previous" (click)="goToHousePage(housePageNumber - 1)">
                       <span aria-hidden="true">&laquo;</span>
                     </a>
                   </li>
                   <!-- Numbers -->
                   <li *ngFor="let page of housePageList" class="page-item">
                     <!-- Display this as active if it's the chosen page -->
-                    <a
-                      class="page-link"
-                      (click)="goToHousePage(page)"
-                      [ngClass]="{ active: housePageNumber == page }"
-                      >{{ page }}</a
-                    >
+                    <a class="page-link" (click)="goToHousePage(page)"
+                      [ngClass]="{ active: housePageNumber == page }">{{ page }}</a>
                   </li>
                   <!-- Next: Disabled if this is last page -->
-                  <li
-                    class="page-item"
-                    [ngClass]="{ disabled: housePageNumber == housePageCount }"
-                  >
+                  <li class="page-item" [ngClass]="{ disabled: housePageNumber == housePageCount }">
                     <!-- Go to next page -->
-                    <a
-                      class="page-link"
-                      aria-label="Next"
-                      (click)="goToHousePage(housePageNumber + 1)"
-                    >
+                    <a class="page-link" aria-label="Next" (click)="goToHousePage(housePageNumber + 1)">
                       <span aria-hidden="true">&raquo;</span>
                     </a>
                   </li>
@@ -422,37 +301,23 @@
 </div>
 
 <!-- Modal to show detail of a reported house-->
-<div
-  class="modal fade"
-  id="listReportModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="listReportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">
           Thông tin chi tiết
         </h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-dialog-scrollabled">
         <div style="padding: 20px" *ngIf="landlordOfSelectedHouse">
           <h6 class="text-center">Thông tin chủ trọ</h6>
-          <b>Tên chủ trọ: </b
-          ><span>{{ landlordOfSelectedHouse.displayName }}</span>
+          <b>Tên chủ trọ: </b><span>{{ landlordOfSelectedHouse.displayName }}</span>
           <br />
-          <b>Số điện thoại: </b
-          ><span>{{ landlordOfSelectedHouse.phoneNumber }}</span>
+          <b>Số điện thoại: </b><span>{{ landlordOfSelectedHouse.phoneNumber }}</span>
           <br />
-          <b>Link facebook: </b
-          ><span>{{ landlordOfSelectedHouse.facebookUrl }}</span>
+          <b>Link facebook: </b><span>{{ landlordOfSelectedHouse.facebookUrl }}</span>
           <h6 class="text-center">Danh sách báo cáo</h6>
           <div>
             <table class="table">
@@ -466,9 +331,7 @@
                 </tr>
               </thead>
               <tbody>
-                <tr
-                  *ngFor="let report of reportsOfSelectedHouse; let j = index"
-                >
+                <tr *ngFor="let report of reportsOfSelectedHouse; let j = index">
                   <td>{{ j + 1 }}</td>
                   <td>{{ report.student.userId }}</td>
                   <td>{{ report.student.displayName }}</td>
