@@ -15,10 +15,10 @@
         <button class="btn btn-secondary" (click)="addHouse()">+ Thêm mới</button>
       </div>
 
-      <table class="table table-striped table-hover">
+      <table class="table table-hover">
         <thead>
           <tr>
-            <th scope="col" id="md">ID</th>
+            <th scope="col" id="md">STT</th>
             <th scope="col">Họ và tên</th>
             <th scope="col">Email</th>
             <th scope="col">Vị trí</th>
@@ -26,9 +26,9 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let dataItem of staffs">
+          <tr *ngFor="let dataItem of staffs; let i = index">
             <!-- Staff id -->
-            <td id="md"><b>{{dataItem.userId}}</b></td>
+            <td id="md"><b>{{ i + 1 }}</b></td>
 
             <!-- Staff name -->
             <td>{{dataItem.displayName}}</td>
