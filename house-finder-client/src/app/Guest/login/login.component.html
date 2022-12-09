@@ -1,29 +1,18 @@
-<link
-  href="https://fonts.googleapis.com/icon?family=Material+Icons"
-  rel="stylesheet"
-/>
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
 <!-- Login page -->
-<ng-container
-  class="col-md-6 offset-md-3 mt-5 text-center"
-  #loginTemplate
-  *ngIf="login; else registerTemplate"
->
+<ng-container class="col-md-6 offset-md-3 mt-5 text-center" #loginTemplate *ngIf="login; else registerTemplate">
   <div class="row d-flex justify-content-center vh-100">
     <!-- Images -->
     <div class="col-6 pt-4" id="logo">
       <div style="flex-direction: column">
         <div>
           <!-- FPT University logo -->
-          <img id="FPTULogo"
-          />
+          <img id="FPTULogo" />
         </div>
         <!-- FU House Finder logo -->
         <div>
-          <img id="FUHouseFinderLogo"
-            class="top-50 start-50"
-            src="../../../assets/image/Logo.png"
-          />
+          <img id="FUHouseFinderLogo" class="top-50 start-50" src="../../../assets/image/Logo.png" />
         </div>
         <!-- Website's name -->
         <div class="orangeText">
@@ -32,49 +21,28 @@
         </div>
       </div>
     </div>
-    <div
-      class="col-lg-6 col-sm-12 h-100 d-flex justify-content-center align-items-center loginCol"
-    >
+    <div class="col-lg-6 col-sm-12 h-100 d-flex justify-content-center align-items-center loginCol">
       <div class="row">
         <h3 class="whiteText">ĐĂNG NHẬP</h3>
 
         <!-- Sign in with email and password -->
         <div class="row mx-1">
-          <form
-            class="col"
-            [formGroup]="loginForm"
-            (ngSubmit)="loginUsernamePassword()"
-          >
+          <form class="col" [formGroup]="loginForm" (ngSubmit)="loginUsernamePassword()">
             <div class="row d-flex justify-content-center mt-4">
               <mat-form-field appearance="legacy" style="width: 350px">
                 <mat-label>Email</mat-label>
-                <input
-                  matInput
-                  type="text"
-                  id="username"
-                  formControlName="username"
-                  required
-                />
+                <input matInput type="text" id="username" formControlName="username" required />
               </mat-form-field>
             </div>
             <div class="row d-flex justify-content-center">
               <mat-form-field appearance="legacy" style="width: 350px">
                 <mat-label>Mật khẩu</mat-label>
-                <input
-                  matInput
-                  type="password"
-                  id="password"
-                  formControlName="password"
-                  required
-                />
+                <input matInput type="password" id="password" formControlName="password" required />
               </mat-form-field>
             </div>
             <!-- Log in button -->
             <div class="row d-flex justify-content-center m-2">
-              <button
-                class="form-control rounded-pill whiteButton"
-                type="submit"
-              >
+              <button class="form-control rounded-pill whiteButton" type="submit">
                 Đăng nhập
               </button>
             </div>
@@ -85,13 +53,8 @@
         <span>hoặc sử dụng</span>
         <!-- Sign in with Facebook -->
         <div class="row d-flex justify-content-center my-2 mx-1">
-          <div
-            class="fb-login-button col-auto"
-            data-width="320"
-            data-size="large"
-            data-button-type="continue_with"
-            data-layout="rounded"
-          ></div>
+          <div class="fb-login-button col-auto" data-width="320" data-size="large" data-button-type="continue_with"
+            data-layout="rounded"></div>
         </div>
 
         <!-- Sign in with Google -->
@@ -116,44 +79,20 @@
             <div class="col-auto step1">
               <!-- Phone number -->
               <div class="row">
-                <mat-form-field
-                  appearance="fill"
-                  color="white"
-                  style="width: 400px"
-                  class="m-0 p-0"
-                >
+                <mat-form-field appearance="fill" color="white" style="width: 400px" class="m-0 p-0">
                   <mat-label>Số điện thoại</mat-label>
-                  <input
-                    matInput
-                    type="tel"
-                    id="phonenumber"
-                    formControlName="phonenumber"
-                    required
-                  />
+                  <input matInput type="tel" id="phonenumber" formControlName="phonenumber" required />
                 </mat-form-field>
               </div>
               <!-- Link Facebook -->
               <div class="row">
-                <mat-form-field
-                  appearance="fill"
-                  style="width: 400px"
-                  class="m-0 p-0"
-                >
+                <mat-form-field appearance="fill" style="width: 400px" class="m-0 p-0">
                   <mat-label>Link Facebook</mat-label>
-                  <input
-                    matInput
-                    type="url"
-                    id="facebookUrl"
-                    formControlName="facebookUrl"
-                    required
-                  />
+                  <input matInput type="url" id="facebookUrl" formControlName="facebookUrl" required />
                 </mat-form-field>
               </div>
               <div class="row d-flex justify-content-end">
-                <button mat-raised-button
-                  class="orangeButton"
-                  matStepperNext
-                >
+                <button mat-raised-button class="orangeButton" matStepperNext>
                   Tiếp theo
                 </button>
               </div>
@@ -176,50 +115,25 @@
                     <span class="col align-self-center">Kéo thả ảnh ở đây</span>
                     <!-- Folder image -->
                     <div>
-                      <svg
-                        width="64"
-                        height="64"
-                        viewBox="0 0 64 64"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink"
-                      >
+                      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink">
                         <rect width="64" height="64" fill="url(#pattern0)" />
                         <defs>
-                          <pattern
-                            id="pattern0"
-                            patternContentUnits="objectBoundingBox"
-                            width="1"
-                            height="1"
-                          >
-                            <use
-                              xlink:href="#image0_211_16"
-                              transform="scale(0.015625)"
-                            />
+                          <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                            <use xlink:href="#image0_211_16" transform="scale(0.015625)" />
                           </pattern>
-                          <image
-                            id="image0_211_16"
-                            width="64"
-                            height="64"
-                            xlink:href="data:image/png;base64,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"
-                          />
+                          <image id="image0_211_16" width="64" height="64"
+                            xlink:href="data:image/png;base64,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" />
                         </defs>
                       </svg>
                     </div>
-                    <input
-                      type="file"
-                      id="frontImg"
-                      accept="image/*"
-                      style="height: 100%;
+                    <input type="file" id="frontImg" accept="image/*" style="height: 100%;
                       width: 100%;
                       opacity: 0;
                       position: absolute;
                       z-index: 10;
-                      margin: 0px;"
-                      (change)="displayImage($event, 'front')"
-                      formControlName="identityCardFrontSideImageLink"
-                      required
-                    />
+                      margin: 0px;" (change)="displayImage($event, 'front')"
+                      formControlName="identityCardFrontSideImageLink" required />
                   </div>
                   <div class="row d-flex justify-content-center mt-2">
                     <div class="col-auto" style="width: fit-content">
@@ -235,50 +149,25 @@
                     <img [src]="backImgSrc" class="p-1" />
                     <span class="col align-self-center">Kéo thả ảnh ở đây</span>
                     <div>
-                      <svg
-                        width="64"
-                        height="64"
-                        viewBox="0 0 64 64"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                        xmlns:xlink="http://www.w3.org/1999/xlink"
-                      >
+                      <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink">
                         <rect width="64" height="64" fill="url(#pattern0)" />
                         <defs>
-                          <pattern
-                            id="pattern0"
-                            patternContentUnits="objectBoundingBox"
-                            width="1"
-                            height="1"
-                          >
-                            <use
-                              xlink:href="#image0_211_16"
-                              transform="scale(0.015625)"
-                            />
+                          <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                            <use xlink:href="#image0_211_16" transform="scale(0.015625)" />
                           </pattern>
-                          <image
-                            id="image0_211_16"
-                            width="64"
-                            height="64"
-                            xlink:href="data:image/png;base64,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"
-                          />
+                          <image id="image0_211_16" width="64" height="64"
+                            xlink:href="data:image/png;base64,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" />
                         </defs>
                       </svg>
                     </div>
-                    <input
-                      type="file"
-                      id="backImg"
-                      accept="image/*"
-                      style="height: 100%;
+                    <input type="file" id="backImg" accept="image/*" style="height: 100%;
                       width: 100%;
                       opacity: 0;
                       position: absolute;
                       z-index: 10;
-                      margin: 0px;"
-                      (change)="displayImage($event, 'back')"
-                      formControlName="identityCardBackSideImageLink"
-                      required
-                    />
+                      margin: 0px;" (change)="displayImage($event, 'back')"
+                      formControlName="identityCardBackSideImageLink" required />
                   </div>
                   <div class="row d-flex justify-content-center mt-2">
                     <div class="col-auto" style="width: fit-content">
@@ -289,8 +178,8 @@
                 <!-- End back side -->
               </div>
               <div class="row d-flex justify-content-between mt-5">
-                <button mat-raised-button matStepperPrevious class="blueButton" > Quay lại </button>
-                <button mat-raised-button matStepperNext class="orangeButton" > Tiếp theo </button>
+                <button mat-raised-button matStepperPrevious class="blueButton"> Quay lại </button>
+                <button mat-raised-button matStepperNext class="orangeButton"> Tiếp theo </button>
               </div>
             </div>
           </div>
@@ -312,10 +201,8 @@
                 <tr>
                   <td class="align-top"><b>Facebook:</b></td>
                   <td>
-                    <a style="word-break: break-all;"
-                      href="{{ contactForm.controls['facebookUrl'].value }}"
-                      >{{ contactForm.controls["facebookUrl"].value }}</a
-                    >
+                    <a style="word-break: break-all;" href="{{ contactForm.controls['facebookUrl'].value }}">{{
+                      contactForm.controls["facebookUrl"].value }}</a>
                   </td>
                 </tr>
               </table>
@@ -327,16 +214,10 @@
                 </tr>
                 <tr>
                   <td class="me-2 align-top">
-                    <img
-                      class="viewIdentityCard"
-                      [src]="frontImgSrc"
-                    />
+                    <img class="viewIdentityCard" [src]="frontImgSrc" />
                   </td>
                   <td class="align-top">
-                    <img
-                      class="viewIdentityCard"
-                      [src]="backImgSrc"
-                    />
+                    <img class="viewIdentityCard" [src]="backImgSrc" />
                   </td>
                 </tr>
               </table>
@@ -347,7 +228,7 @@
             <button mat-raised-button matStepperPrevious class="blueButton">
               Quay lại
             </button>
-            <button mat-raised-button class="orangeButton" (click)="onSubmit()" >
+            <button mat-raised-button class="orangeButton" (click)="onSubmit()">
               Đăng kí
             </button>
           </div>
@@ -359,47 +240,21 @@
 </ng-template>
 
 <!-- Alerts by Template: sweetalert2 -->
-<swal
-  #landLordAccountLockedAlert
-  title="Khóa tài khoản"
+<swal #landLordAccountLockedAlert title="Khóa tài khoản"
   text="Tài khoản của bạn đã bị khóa do vi phạm điều khoản của chúng tôi. Vui lòng trình diện tại cơ sở Đại học FPT gần nhất để làm thủ tục mở khóa tài khoản"
-  icon="error"
-  [focusCancel]="true"
->
+  icon="error" [focusCancel]="true">
 </swal>
-<swal
-  #landLordAccountConfirmAlert
-  title="Xác nhận tài khoản"
+<swal #landLordAccountConfirmAlert title="Xác nhận tài khoản"
   text="Tài khoản của bạn chưa được phép đăng ký thông tin nhà trọ. Vui lòng đến cơ sở Đại học FPT gần nhất để làm thủ tục xác nhận tài khoản"
-  icon="warning"
-  [focusCancel]="true"
-  (confirm)="navigate('/home')"
->
+  icon="warning" [focusCancel]="true" (confirm)="navigate('/home')">
 </swal>
-<swal
-  #invalidEmailPasswordAlert
-  title="Đăng nhập không hợp lệ"
-  text="Email hoặc Password không hợp lệ"
-  icon="error"
-  [focusCancel]="true"
->
+<swal #invalidEmailPasswordAlert title="Đăng nhập không hợp lệ" text="Email hoặc Password không hợp lệ" icon="error"
+  [focusCancel]="true">
 </swal>
-<swal
-  #serverErrorAlert
-  [toast]="true"
-  position="top-end"
-  [timer]="3000"
-  [timerProgressBar]="true"
-  title="Lỗi Server"
-  icon="error"
->
+<swal #serverErrorAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true" title="Lỗi Server"
+  icon="error">
 </swal>
-<swal
-  #landlordAccountCreatedAlert
-  title="Đăng ký thành công"
+<swal #landlordAccountCreatedAlert title="Đăng ký thành công"
   text="Bạn đã đăng ký thành công! Vui lòng đến cơ sở Đại học FPT gần nhất để làm thủ tục xác nhận tài khoản."
-  icon="success"
-  [focusCancel]="true"
-  (confirm)="navigate('/home')"
->
+  icon="success" [focusCancel]="true" (confirm)="navigate('/home')">
 </swal>
