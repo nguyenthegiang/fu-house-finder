@@ -12,46 +12,66 @@
   background-color: #ececec;
 }
 
-#FPTULogo{
+#FPTULogo {
   width: 10vw;
   margin-left: auto;
   margin-right: auto;
   display: block;
 }
 
-#FUHouseFinderLogo{
+#FUHouseFinderLogo {
   width: 30vw;
   margin-left: auto;
   margin-right: auto;
   display: block;
 }
 
-.orangeText{
+.orangeText {
   color: #ff6f3d;
   text-align: center
 }
 
-.whiteText{
+.whiteText {
   color: white;
   text-align: center
 }
 
-#username,#password{
-  height: 35px;
-  padding: 5px;
-  border-radius: 5px;
-  background-color: white;
-}
-
-.loginCol{
+.loginCol {
   background-color: #ff6f3d;
-  span{
+
+  //Input in Login
+
+  .formCover {
+    background-color: white;
+    margin-left: 27%;
+    margin-right: 27%;
+    margin-top: 5%;
+    margin-bottom: 3%;
+    padding-top: 2%;
+    padding-bottom: 1%;
+    //border-radius: 30px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
+  }
+
+  .loginInput {
+    width: 350px;
+  }
+
+  .loginInputField {
+    height: 35px;
+    padding: 5px;
+    //border-radius: 5px;
+    //background-color: white;
+  }
+
+  span {
     text-align: center;
     color: #ffe6e6;
     font-size: 11pt;
     margin-top: 20px;
   }
 }
+
 // End login page
 
 // Upload identity card
@@ -92,6 +112,7 @@
     }
   }
 }
+
 // End upload identity card
 
 // Stepper Header Not Finished
@@ -134,11 +155,13 @@
 .blueButton:hover {
   background-color: #021d57;
 }
+
 //End buttons
 
 //Landlord register
 .regiter {
   min-height: 57vh;
+
   .step1 {
     width: 400px;
 
@@ -158,9 +181,11 @@
       text-align: center;
       font-size: 13pt;
     }
+
     table {
       border: none;
     }
+
     table:last-child {
       tr {
         td {
@@ -181,6 +206,7 @@
   #logo {
     display: none;
   }
+
   .identityCard:nth-child(2) {
     margin-top: 2.7rem;
   }
@@ -188,6 +214,7 @@
   .viewIdentityCard {
     width: 35vw;
   }
+
   .step3 {
     table:first-child {
       tr {
@@ -195,6 +222,7 @@
           width: 30vw;
         }
       }
+
       .viewIdentityCard {
         width: 35vw;
       }
@@ -209,6 +237,7 @@
       padding-right: 10vw;
       padding-left: 10vw;
     }
+
     .viewIdentityCard {
       width: 25vw;
     }

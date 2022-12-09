@@ -3,7 +3,7 @@
 <!-- Login page -->
 <ng-container class="col-md-6 offset-md-3 mt-5 text-center" #loginTemplate *ngIf="login; else registerTemplate">
   <div class="row d-flex justify-content-center vh-100">
-    <!-- Images -->
+    <!-- Images Column -->
     <div class="col-6 pt-4" id="logo">
       <div style="flex-direction: column">
         <div>
@@ -21,6 +21,8 @@
         </div>
       </div>
     </div>
+
+    <!-- Content Column -->
     <div class="col-lg-6 col-sm-12 h-100 d-flex justify-content-center align-items-center loginCol">
       <div class="row">
         <h3 class="whiteText">ĐĂNG NHẬP</h3>
@@ -28,29 +30,32 @@
         <!-- Sign in with email and password -->
         <div class="row mx-1">
           <form class="col" [formGroup]="loginForm" (ngSubmit)="loginUsernamePassword()">
-            <div class="row d-flex justify-content-center mt-4">
-              <mat-form-field appearance="legacy" style="width: 350px">
-                <mat-label>Email</mat-label>
-                <input matInput type="text" id="username" formControlName="username" required />
-              </mat-form-field>
-            </div>
-            <div class="row d-flex justify-content-center">
-              <mat-form-field appearance="legacy" style="width: 350px">
-                <mat-label>Mật khẩu</mat-label>
-                <input matInput type="password" id="password" formControlName="password" required />
-              </mat-form-field>
-            </div>
-            <!-- Log in button -->
-            <div class="row d-flex justify-content-center m-2">
-              <button class="form-control rounded-pill whiteButton" type="submit">
-                Đăng nhập
-              </button>
+            <div class="formCover rounded-4">
+              <div class="row d-flex justify-content-center mt-4">
+                <mat-form-field appearance="fill" class="loginInput">
+                  <mat-label>Email</mat-label>
+                  <input matInput type="text" formControlName="username" class="loginInputField" required />
+                </mat-form-field>
+              </div>
+              <div class="row d-flex justify-content-center">
+                <mat-form-field appearance="fill" class="loginInput">
+                  <mat-label>Mật khẩu</mat-label>
+                  <input matInput type="password" formControlName="password" class="loginInputField" required />
+                </mat-form-field>
+              </div>
+              <!-- Log in button -->
+              <div class="row d-flex justify-content-center m-2">
+                <button class="form-control rounded-pill whiteButton" type="submit">
+                  Đăng nhập
+                </button>
+              </div>
             </div>
           </form>
         </div>
 
         <!-- Orther methods of log in/sign up -->
         <span>hoặc sử dụng</span>
+
         <!-- Sign in with Facebook -->
         <div class="row d-flex justify-content-center my-2 mx-1">
           <div class="fb-login-button col-auto" data-width="320" data-size="large" data-button-type="continue_with"
