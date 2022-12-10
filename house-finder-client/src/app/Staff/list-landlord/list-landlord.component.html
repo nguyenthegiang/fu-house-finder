@@ -118,23 +118,30 @@
         </table>
         <!-- End List Landlord -->
 
-        <!-- Paging -->
-        <div class="d-flex justify-content-center align-items-center mt-4">
-          <nav aria-label="Page navigation example">
+        <!-- Paging report -->
+        <div class="d-flex justify-content-center align-items-center my-3">
+          <nav aria-label="Pagination-nav">
             <ul class="pagination">
-              <li class="page-item">
-                <a class="page-link text-dark" aria-label="Previous">
+              <!-- Previous: Disabled if this is first page -->
+              <li class="page-item" [ngClass]="{ disabled: landlordPageNumber == 1 }">
+                <!-- Go to previous page -->
+                <a class="page-link" aria-label="Previous" (click)="goToPage(landlordPageNumber - 1)">
                   <span aria-hidden="true">&laquo;</span>
-                  <span class="sr-only">Previous</span>
                 </a>
               </li>
-              <li class="page-item"><a class="page-link text-dark">1</a></li>
-              <li class="page-item"><a class="page-link text-dark">2</a></li>
-              <li class="page-item"><a class="page-link text-dark">3</a></li>
-              <li class="page-item">
-                <a class="page-link text-dark" aria-label="Next">
+              <!-- Numbers -->
+              <li *ngFor="let page of landlordPageList" class="page-item">
+                <!-- Display this as active if it's the chosen page -->
+                <a class="page-link" (click)="goToPage(page)" [ngClass]="{ active: landlordPageNumber == page }">{{
+                  page }}</a>
+              </li>
+              <!-- Next: Disabled if this is last page -->
+              <li class="page-item" [ngClass]="{
+                  disabled: landlordPageNumber == landlordPageCount
+                }">
+                <!-- Go to next page -->
+                <a class="page-link" aria-label="Next" (click)="goToPage(landlordPageNumber + 1)">
                   <span aria-hidden="true">&raquo;</span>
-                  <span class="sr-only">Next</span>
                 </a>
               </li>
             </ul>
