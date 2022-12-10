@@ -13,12 +13,19 @@ export class LandlordInformationService {
 
   constructor(private http: HttpClient) { }
 
-  //[Dashboard] Get Landlord Information
+  /**
+   * Get Landlord Information by LandlordId
+   * [Staff]
+   */
   getLandLordInfomation(landlordId: string): Observable<LandlordInfo> {
     return this.http.get<LandlordInfo>(this.APIUrl + "/LandlordInfo?LandlordId=" + landlordId);
   }
-  //[Dashboard] Get Landlord Information using session
-  getLandLordInfomationBySession(): Observable<LandlordInfo> {
-    return this.http.get<LandlordInfo>(this.APIUrl + "/LandlordInfoUseSession");
+
+  /**
+   * Get current Landlord Information using session
+   * [Landlord/dashboard]
+   */
+  getCurrentLandlordInfo(): Observable<LandlordInfo> {
+    return this.http.get<LandlordInfo>(this.APIUrl + "/GetCurrentLandlordInfo", { withCredentials: true });
   }
 }

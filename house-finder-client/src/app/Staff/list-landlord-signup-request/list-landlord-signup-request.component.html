@@ -53,7 +53,7 @@
                   </button>
 
                   <!-- Deny -->
-                  <button type="button" class="btn btn-danger btn-sm" (click)="updateUserStatus(landlord.userId, 0)">
+                  <button type="button" class="btn btn-danger btn-sm" (click)="updateUserStatus(landlord.userId, 3)">
                     Từ Chối
                   </button>
                 </div>
@@ -71,15 +71,15 @@
 
 <!-- Alerts by Template: sweetalert2 -->
 <swal #acceptLandlordAlert title="Phê duyệt tài khoản thành công."
-  icon="success" [showConfirmButton]="false" [timer]="1500" position="top-end">
+  icon="success" [showConfirmButton]="false" [toast]="true" [timer]="3000" [timerProgressBar]="true" position="top-end" background="#defad9">
 </swal>
 
 <swal #denyLandlordStatusAlert title="Từ chối tài khoản thành công."
-  icon="success" [showConfirmButton]="false" [timer]="1500" position="top-end">
+  icon="success" [showConfirmButton]="false" [toast]="true" [timer]="3000" [timerProgressBar]="true" position="top-end" background="#defad9">
 </swal>
 
 <swal #updateLandlordStatusFailAlert title="Phê duyệt tài khoản thất bại."
-  icon="error" [showConfirmButton]="false" [timer]="1500" position="top-end">
+  icon="error" [showConfirmButton]="false" [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true" background="#facfcf">
 </swal>
 
 <!-- View identity card modal -->
