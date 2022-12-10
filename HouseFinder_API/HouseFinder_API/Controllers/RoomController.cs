@@ -67,7 +67,6 @@ namespace HouseFinder_API.Controllers
         {
             try
             {
-
                 Room createRoom = new Room();
                 createRoom.RoomName = room.RoomName;
                 createRoom.PricePerMonth = (decimal)room.PricePerMonth;
