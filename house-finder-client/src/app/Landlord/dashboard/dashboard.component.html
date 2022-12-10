@@ -1,6 +1,37 @@
 <!-- Header -->
 <app-landlord-header></app-landlord-header>
 
+<!-- Statistics -->
+<div class="row" *ngIf="houses.length != 0">
+  <div class="col-12 col-md-4 border">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="fs-4 d-flex align-items-center text-danger">
+        {{houseCount}}
+      </div>
+      <h6 class="font-weight-bold text-center">Nhà</h6>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-4 border">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="fs-4 d-flex align-items-center text-danger">
+        {{roomCount}}
+      </div>
+      <h6 class="font-weight-bold text-center">Phòng</h6>
+    </div>
+  </div>
+
+  <div class="col-12 col-md-4 border">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <div class="fs-4 d-flex align-items-center text-danger">
+        {{roomAvailableCount}}
+      </div>
+      <h6 class="font-weight-bold text-center">Phòng trống</h6>
+    </div>
+  </div>
+</div>
+<!-- End Statistics -->
+
 <!-- Body -->
 <div class="row m-2">
   <!-- Main Content -->
@@ -14,36 +45,6 @@
       </div>
     </div>
     <div class="my-4" *ngIf="houses.length != 0">
-      <!-- Statistics -->
-      <div class="row">
-        <div class="col-12 col-md-4 border">
-          <div class="d-flex flex-column justify-content-center align-items-center">
-            <div class="fs-4 d-flex align-items-center text-danger">
-              {{houseCount}}
-            </div>
-            <h6 class="font-weight-bold text-center">Nhà</h6>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-4 border">
-          <div class="d-flex flex-column justify-content-center align-items-center">
-            <div class="fs-4 d-flex align-items-center text-danger">
-              {{roomCount}}
-            </div>
-            <h6 class="font-weight-bold text-center">Phòng</h6>
-          </div>
-        </div>
-
-        <div class="col-12 col-md-4 border">
-          <div class="d-flex flex-column justify-content-center align-items-center">
-            <div class="fs-4 d-flex align-items-center text-danger">
-              {{roomAvailableCount}}
-            </div>
-            <h6 class="font-weight-bold text-center">Phòng trống</h6>
-          </div>
-        </div>
-      </div>
-      <!-- End Statistics -->
 
       <h3 class="text-center">Danh sách nhà trọ</h3>
 
