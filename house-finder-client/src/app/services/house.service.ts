@@ -310,6 +310,11 @@ export class HouseService {
     return this.http.get<any>(this.APIUrl + "/GetHousesByLandlord?LandlordId=" + landlordId);
   }
 
+  //[Dashboard] Get List Houses by Landlord Id using session BE
+  getListHousesByLandlord(): Observable<any[]> {
+    return this.http.get<any>(this.APIUrl + "/GetHousesByLandlordId");
+  }
+
   //[Landlord][List room] Get total money for not rented rooms
   getMoneyForNotRentedRooms(houseId: number): Observable<any> {
     return this.http.get<any>(this.APIUrl + "/GetMoneyForNotRentedRooms?HouseId=" + houseId);
@@ -340,7 +345,7 @@ export class HouseService {
   }
 
   //[Staff/list] Count total of reported houses for paging
-  countTotalReportedHouse() : Observable<number>{
+  countTotalReportedHouse(): Observable<number> {
     return this.http.get<number>(this.APIUrl + "/CountTotalReportedHouse");
   }
 
@@ -349,8 +354,8 @@ export class HouseService {
     pageSize: number,
     pageNumber: number,
     orderBy?: string,
-    statusId? : string,
-  ): Observable<ReportHouse[]>{
+    statusId?: string,
+  ): Observable<ReportHouse[]> {
     //[Paging] count Skip and Top from pageSize & pageNumber
     const skip = pageSize * (pageNumber - 1);
     const top = pageSize;
@@ -384,33 +389,35 @@ export class HouseService {
     fingerprintLock: boolean,
     camera: boolean,
     parking: boolean
-  ): Observable<any>{
+  ): Observable<any> {
     return this.http.post<any>(this.APIUrl,
-      {houseName: houseName,
-      information: information,
-      address: address,
-      googleAddress: googleAddress,
-      villageId: villageId,
-      campusId: campusId,
-      distanceToCampus: distanceToCampus,
-      powerPrice: powerPrice,
-      waterPrice: waterPrice,
-      fingerprintLock: fingerprintLock,
-      camera: camera,
-      parking: parking},
-      {withCredentials: true}
+      {
+        houseName: houseName,
+        information: information,
+        address: address,
+        googleAddress: googleAddress,
+        villageId: villageId,
+        campusId: campusId,
+        distanceToCampus: distanceToCampus,
+        powerPrice: powerPrice,
+        waterPrice: waterPrice,
+        fingerprintLock: fingerprintLock,
+        camera: camera,
+        parking: parking
+      },
+      { withCredentials: true }
     );
   }
 
-  countVillageHavingHouse() : Observable<number>{
+  countVillageHavingHouse(): Observable<number> {
     return this.http.get<number>("https://localhost:5001/api/Village/CountVillageHavingHouse");
   }
 
-  countCommuneHavingHouse() : Observable<number>{
+  countCommuneHavingHouse(): Observable<number> {
     return this.http.get<number>("https://localhost:5001/api/Commune/CountCommuneHavingHouse");
   }
 
-  countDistrictHavingHouse() : Observable<number>{
+  countDistrictHavingHouse(): Observable<number> {
     return this.http.get<number>("https://localhost:5001/api/District/CountDistrictHavingHouse");
   }
 }
