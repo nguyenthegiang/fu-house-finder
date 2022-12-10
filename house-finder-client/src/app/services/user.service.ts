@@ -156,4 +156,38 @@ export class UserService {
   changePassword(userId: string, newPassword: string): Observable<any> {
     return this.http.put<any>(this.APIUrl + "/changePassword?userId=" + userId + "&newPassword=" + newPassword, this.httpOptions);
   }
+
+  //[Staff/list-landlord] Filter landlords
+  filterUser(
+    pageSize: number,
+    pageNumber: number,
+    searchName?: string,
+  ): Observable<User[]> {
+    //[Paging] count Skip and Top from pageSize & pageNumber
+    const skip = pageSize * (pageNumber - 1);
+    const top = pageSize;
+
+    //define API here to append query options into it later
+    var filterAPIUrl = this.APIUrl;
+    filterAPIUrl += `?$skip=${skip}&$top=${top}`;
+
+    //[Filter] flag to check if that filter is the first filter (if is first -> not have 'and')
+    var checkFirstFilter = true;
+
+    //[Filter] add filter by name if has (contains name)
+    if (searchName != undefined) {
+      //if is not the first filter -> need to add 'and' to API URL
+      if (!checkFirstFilter) {
+        filterAPIUrl += ` and `;
+      } else {
+        //if this one is the first filter -> mark it so others won't add 'and'
+        checkFirstFilter = false;
+      }
+
+      filterAPIUrl += `contains(ReportContent, '${searchName}')`;
+    }
+
+    console.log(filterAPIUrl);
+    return this.http.get<User[]>(filterAPIUrl);
+  }
 }
