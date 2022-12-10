@@ -1,41 +1,41 @@
-<form class="border border-top-0">
+<form class="border border-top-0" [formGroup]="roomForm">
   <div class="container py-5">
     <div class="row">
       <div class="col-lg-6 col-sm-12">
         <div class="mb-3 row">
           <label class="col-sm-3 form-label" for="building">Tòa nhà</label>
           <div class="col-sm-9">
-            <input class="form-control" id="building" type="number" />
+            <input class="form-control" id="building" type="number" formControlName="building"/>
           </div>
         </div>
         <div class="mb-3 row">
           <label class="col-sm-3 form-label" for="floor">Tầng</label>
           <div class="col-sm-9">
-            <input class="form-control" id="floor" type="number" />
+            <input class="form-control" id="floor" type="number" formControlName="floor"/>
           </div>
         </div>
         <div class="mb-3 row">
           <label class="col-sm-3 form-label" for="room-name">Tên phòng</label>
           <div class="col-sm-9">
-            <input class="form-control" id="room-name" />
+            <input class="form-control" id="room-name" formControlName="roomName"/>
           </div>
         </div>
         <div class="mb-3 row">
           <label class="col-sm-3 form-label" for="price">Giá</label>
           <div class="col-sm-9">
-            <input class="form-control" id="price" />
+            <input class="form-control" id="price" formControlName="price"/>
           </div>
         </div>
         <div class="mb-3 row">
           <label class="col-sm-3 form-label" for="info">Thông tin</label>
           <div class="col-sm-9">
-            <input class="form-control" id="info" />
+            <input class="form-control" id="info" formControlName="info"/>
           </div>
         </div>
         <div class="mb-3 row">
           <label class="col-sm-3 form-label" for="area">Diện tích</label>
           <div class="col-sm-9">
-            <input class="form-control" id="area" type="number" />
+            <input class="form-control" id="area" type="number" formControlName="area"/>
           </div>
         </div>
         <div class="mb-3 row">
@@ -43,7 +43,7 @@
             >Số người tối đa</label
           >
           <div class="col-sm-9">
-            <input class="form-control" id="max-people" type="number" />
+            <input class="form-control" id="max-people" type="number" formControlName="maxPeople"/>
           </div>
         </div>
         <div class="mb-3 row">
@@ -51,7 +51,7 @@
             >Số người hiện tại</label
           >
           <div class="col-sm-9">
-            <input class="form-control" id="current-people" type="number" />
+            <input class="form-control" id="current-people" type="number" formControlName="currentPeople"/>
           </div>
         </div>
       </div>
@@ -59,7 +59,7 @@
         <div class="mb-3 row">
           <label class="col-sm-3 form-label" for="room-type">Loại phòng</label>
           <div class="col-sm-9">
-            <select class="form-select" id="room-type">
+            <select class="form-select" id="room-type" formControlName="roomType">
               <option value="1">Khép kín</option>
               <option value="2">Không khép kín</option>
               <option value="3">Chung cư mini</option>
@@ -70,28 +70,28 @@
 
           <div class="col-sm-3 form-check-inline">
             <label for="fridge">Tủ lạnh</label>
-            <input class="form-check-input" id="fridge" type="checkbox" />
+            <input class="form-check-input" id="fridge" type="checkbox" formControlName="fridge"/>
           </div>
           <div class="col-sm-3 form-check-inline">
             <label for="kitchen">Bếp</label>
-            <input class="form-check-input" id="kitchen" type="checkbox" />
+            <input class="form-check-input" id="kitchen" type="checkbox" formControlName="kitchen"/>
           </div>
           <div class="col-sm-3 form-check-inline">
             <label for="washing-machine">Máy giặt</label>
-            <input class="form-check-input" id="washing-machine" type="checkbox" />
+            <input class="form-check-input" id="washing-machine" type="checkbox" formControlName="washingMachine"/>
           </div>
           <div class="col-sm-3 form-check-inline">
             <label for="desk">Bàn</label>
-            <input class="form-check-input" id="desk" type="checkbox" />
+            <input class="form-check-input" id="desk" type="checkbox" formControlName="table"/>
           </div>
 
           <div class="col-sm-3 form-check-inline">
             <label for="bed">Giường</label>
-            <input class="form-check-input" id="bed" type="checkbox" />
+            <input class="form-check-input" id="bed" type="checkbox" formControlName="bed"/>
           </div>
           <div class="col-sm-3 form-check-inline">
             <label for="without-host">Không chung chủ</label>
-            <input class="form-check-input" id="without-host" type="checkbox" />
+            <input class="form-check-input" id="without-host" type="checkbox" formControlName="withoutHost"/>
           </div>
           <div class="col-sm-3 form-check-inline">
             <label for="closed-toilet">Vệ sinh khép kín</label>
@@ -99,6 +99,7 @@
               class="form-check-input"
               id="closed-toilet"
               type="checkbox"
+              formControlName="closedToilet"
             />
           </div>
         </div>
@@ -106,19 +107,19 @@
         <div class="mb-3 row">
           <label class="col-sm-3 form-label" for="image-1">Ảnh 1</label>
           <div class="col-sm-9">
-            <input class="form-control" id="image-1" type="file" accept="image/*" />
+            <input class="form-control" id="image-1" type="file" accept="image/*" formControlName="image1"/>
           </div>
         </div>
         <div class="mb-3 row">
           <label class="col-sm-3 form-label" for="image-2">Ảnh 2</label>
           <div class="col-sm-9">
-            <input class="form-control" id="image-2" type="file" accept="image/*" />
+            <input class="form-control" id="image-2" type="file" accept="image/*" formControlName="image2"/>
           </div>
         </div>
         <div class="mb-3 row">
           <label class="col-sm-3 form-label" for="image-3">Ảnh 3</label>
           <div class="col-sm-9">
-            <input class="form-control" id="image-3" type="file" accept="image/*" />
+            <input class="form-control" id="image-3" type="file" accept="image/*" formControlName="image3"/>
           </div>
         </div>
         <!-- End upload image -->
