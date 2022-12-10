@@ -55,6 +55,7 @@ export class HouseDetailComponent implements OnInit {
   @ViewChild('orderErrorAlert') private orderErrorAlert: SwalComponent | undefined;
   @ViewChild('rateSuccessAlert') private rateSuccessAlert: SwalComponent | undefined;
   @ViewChild('rateErrorAlert') private rateErrorAlert: SwalComponent | undefined;
+  @ViewChild('orderRoleErrorAlert') private rateRoleErrorAlert: SwalComponent | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -133,16 +134,23 @@ export class HouseDetailComponent implements OnInit {
         reportedDate: new Date()
       };
 
-      this.reportService.addReport(report).subscribe(
-        data => {
-          if (data.status == 403) {
-            this.orderErrorAlert?.fire();
-          } else if (data.status == 200) {
-            this.reportSuccessAlert?.fire();
+      try {
+        this.reportService.addReport(report).subscribe(
+          data => {
+            if (data.status == 403) {
+              this.orderErrorAlert?.fire();
+            } else if (data.status == 200) {
+              this.reportSuccessAlert?.fire();
+            }
+          },
+          error => {
+
           }
-        },
-        error => { }
-      );
+        );
+      } catch {
+        this.orderErrorAlert?.fire();
+      }
+
     }
   }
 
@@ -160,28 +168,23 @@ export class HouseDetailComponent implements OnInit {
     return new Array(i);
   }
 
-  star1()
-  {
+  star1() {
     this.star = 1;
   }
 
-  star2()
-  {
+  star2() {
     this.star = 2;
   }
 
-  star3()
-  {
+  star3() {
     this.star = 3;
   }
 
-  star4()
-  {
+  star4() {
     this.star = 4;
   }
 
-  star5()
-  {
+  star5() {
     this.star = 5;
   }
 
