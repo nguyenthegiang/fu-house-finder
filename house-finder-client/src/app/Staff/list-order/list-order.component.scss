@@ -73,3 +73,20 @@
 .hoverableLink:hover {
   cursor: pointer;
 }
+
+#totalSolvedOrder{
+  font-size: 20pt;
+  font-weight: bold;
+  text-align: center;
+  color:rgb(66, 66, 66);
+
+  span{
+    color: #f5744e;
+  }
+}
+
+// .statistics{
+//   background-image: url("../../../assets/image/confetti_19619.png");
+//   background-repeat: no-repeat;
+//   background-size: 1000px;
+// }
