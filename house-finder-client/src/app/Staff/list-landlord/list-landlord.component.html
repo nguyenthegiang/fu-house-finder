@@ -11,6 +11,47 @@
       <div class="my-4" *ngIf="landlords.length != 0">
         <h3 class="text-center">Danh sách chủ trọ</h3>
 
+         <!-- Search bar -->
+         <div class="row w-100 d-flex justify-content-center">
+          <div class="col-10 col-md-5">
+            <div class="text-center my-4">
+              <div class="input-group">
+                <!-- Press enter to search  -->
+                <input
+                  type="text"
+                  class="form-control border border-end-0"
+                  placeholder="Nhập từ khóa tìm kiếm"
+                  aria-label="search_house_by_name"
+                  aria-describedby="button-addon2"
+                  #searchValue
+                  (keydown.enter)="search(searchValue.value)"
+                />
+                <!-- Click button to clear search -->
+                <button
+                  *ngIf="searchName"
+                  class="clearSearchBtn"
+                  type="button"
+                  (click)="handleClear()"
+                  data-bs-toggle="tooltip" data-bs-placement="bottom" title="Xóa"
+                >
+                  <span class="material-symbols-outlined"> close </span>
+                </button>
+                <!-- Click button to search -->
+                <button
+                  class="btn btn-outline-secondary"
+                  type="button"
+                  id="button-addon2"
+                  (click)="search(searchValue.value)"
+                >
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Search bar -->
+
+        <!-- List Landlord -->
         <table class="table table-hover">
           <thead>
             <tr>
@@ -75,7 +116,31 @@
             </tr>
           </tbody>
         </table>
-        <!-- End List of Rooms -->
+        <!-- End List Landlord -->
+
+        <!-- Paging -->
+        <div class="d-flex justify-content-center align-items-center mt-4">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <li class="page-item">
+                <a class="page-link text-dark" aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                  <span class="sr-only">Previous</span>
+                </a>
+              </li>
+              <li class="page-item"><a class="page-link text-dark">1</a></li>
+              <li class="page-item"><a class="page-link text-dark">2</a></li>
+              <li class="page-item"><a class="page-link text-dark">3</a></li>
+              <li class="page-item">
+                <a class="page-link text-dark" aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                  <span class="sr-only">Next</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+        <!-- End Paging -->
       </div>
     </div>
   </div>
