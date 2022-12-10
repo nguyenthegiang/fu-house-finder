@@ -49,11 +49,12 @@ export class DashboardComponent implements OnInit {
       this.orderErrorAlert?.fire();
     } else {
       //Check user logged in from Server => if not => alert
-      this.houseService.getListHousesByLandlord().subscribe(data => {
+      this.houseService.getListHouseOfCurrentLandlord().subscribe(data => {
         this.houses = data;
         console.log(data);
       });
-      this.lanlord_informationService.getLandLordInfomationBySession().subscribe(data => {
+
+      this.lanlord_informationService.getCurrentLandlordInfo().subscribe(data => {
         this.houseCount = data.houseCount;
         this.roomCount = data.roomCount;
         this.roomAvailableCount = data.roomAvailableCount;
