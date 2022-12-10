@@ -1,5 +1,5 @@
 <app-staff-header></app-staff-header>
-<app-staff-navbar></app-staff-navbar>
+<app-staff-statistics></app-staff-statistics>
 
 <div class="row m-2">
   <div class="col-12">
@@ -11,8 +11,8 @@
       <div class="my-4" *ngIf="landlords.length != 0">
         <h3 class="text-center">Danh sách chủ trọ</h3>
 
-        <!-- Search bar -->
-        <div class="row w-100 d-flex justify-content-center">
+         <!-- Search bar -->
+         <div class="row w-100 d-flex justify-content-center">
           <div class="col-10 col-md-5">
             <div class="text-center my-4">
               <div class="input-group">
@@ -51,6 +51,7 @@
         </div>
         <!-- End Search bar -->
 
+        <!-- List Landlord -->
         <table class="table table-hover">
           <thead>
             <tr>
@@ -115,7 +116,7 @@
             </tr>
           </tbody>
         </table>
-        <!-- End List of Rooms -->
+        <!-- End List Landlord -->
 
         <!-- Paging -->
         <div class="d-flex justify-content-center align-items-center mt-4">

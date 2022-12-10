@@ -9,7 +9,7 @@
                     <button class="nav-link" id="multiple-tab" data-bs-toggle="tab" data-bs-target="#multiple" type="button" role="tab" aria-controls="multiple" aria-selected="false" style="font-size: 20px;" (click)="updateForm('multiple')">Thêm nhiều phòng</button>
                 </li>
             </ul>
-            <div class="tab-content" id="myTabContent" style="height: 550px;">
+            <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="single" role="tabpanel" aria-labelledby="single-tab">
                     <app-single></app-single>
                 </div>
@@ -19,7 +19,7 @@
             </div>
         </div>
     </div>
-    <div class="row d-flex justify-content-end p-5">
+    <div class="row d-flex justify-content-end p-0">
         <button class="border-0 m-3 form-control" style="height: 50px; width: 300px; background-color: #BCBAB5;" (click)="submitForm()">
             Thêm mới
         </button>
