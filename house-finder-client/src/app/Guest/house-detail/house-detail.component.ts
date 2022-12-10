@@ -57,6 +57,7 @@ export class HouseDetailComponent implements OnInit {
   @ViewChild('rateErrorAlert') private rateErrorAlert: SwalComponent | undefined;
   @ViewChild('orderRoleErrorAlert') private rateRoleErrorAlert: SwalComponent | undefined;
 
+
   constructor(
     private route: ActivatedRoute,
     private houseService: HouseService,
@@ -124,7 +125,7 @@ export class HouseDetailComponent implements OnInit {
     if (user === null) {
       this.orderErrorAlert?.fire();
       return;
-    } else {
+    } else if (role === "Student") {
       this.inputReportContent = this.inputReportContent.trim();
 
       //Create Report
@@ -135,24 +136,19 @@ export class HouseDetailComponent implements OnInit {
         deleted: false,
         reportedDate: new Date()
       };
-
-      try {
-        this.reportService.addReport(report).subscribe(
-          data => {
-            if (data.status == 403) {
-              this.orderErrorAlert?.fire();
-            } else if (data.status == 200) {
-              this.reportSuccessAlert?.fire();
-            }
-          },
-          error => {
-
+      this.reportService.addReport(report).subscribe(
+        data => {
+          if (data.status == 403) {
+            this.orderErrorAlert?.fire();
+          } else if (data.status == 200) {
+            this.reportSuccessAlert?.fire();
           }
-        );
-      } catch {
-        this.orderErrorAlert?.fire();
-      }
-
+        },
+        error => {
+        }
+      );
+    } else if (role !== "Student") {
+      this.rateRoleErrorAlert?.fire();
     }
   }
 
