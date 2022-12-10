@@ -28,7 +28,7 @@
               <td class="md">
                 <img class="mb-2 profileImage" src="../../../assets/image/{{landlord.profileImageLink}}">
               </td>
-              <td class="md">
+              <td class="md" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal" (click)="changeSelectedLandlord(landlord.userId)" style="cursor: pointer">
                 <img class="me-2 mb-2 identityCard"
                   src="../../../assets/image/{{landlord.identityCardFrontSideImageLink}}">
                 <img class="mb-2 identityCard" src="../../../assets/image/{{landlord.identityCardBackSideImageLink}}">
@@ -68,3 +68,38 @@
 </div>
 
 <app-footer></app-footer>
+
+<!-- Alerts by Template: sweetalert2 -->
+<swal #acceptLandlordAlert title="Phê duyệt tài khoản thành công."
+  icon="success" [showConfirmButton]="false" [timer]="1500" position="top-end">
+</swal>
+
+<swal #denyLandlordStatusAlert title="Từ chối tài khoản thành công."
+  icon="success" [showConfirmButton]="false" [timer]="1500" position="top-end">
+</swal>
+
+<swal #updateLandlordStatusFailAlert title="Phê duyệt tài khoản thất bại."
+  icon="error" [showConfirmButton]="false" [timer]="1500" position="top-end">
+</swal>
+
+<!-- View identity card modal -->
+<!-- Modal -->
+<div class="modal fade" id="viewIdentityCardModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Ảnh căn cước công dân</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" *ngIf="selectedLandlord">
+        <img class="me-2 mb-2 viewIdentityCard" src="../../../assets/image/{{selectedLandlord.identityCardFrontSideImageLink}}">
+        <img class="mb-2 viewIdentityCard" src="../../../assets/image/{{selectedLandlord.identityCardBackSideImageLink}}">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
