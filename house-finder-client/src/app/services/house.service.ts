@@ -305,14 +305,18 @@ export class HouseService {
     return this.http.put<any>(this.APIUrl + "/IncreaseView?HouseId=" + houseId, this.httpOptions);
   }
 
-  //[Dashboard] Get List Houses by Landlord Id
+  /**
+   * [Staff] Get List Houses by Landlord Id
+   */
   getListHousesByLandlordId(landlordId: string): Observable<any[]> {
     return this.http.get<any>(this.APIUrl + "/GetHousesByLandlord?LandlordId=" + landlordId);
   }
 
-  //[Dashboard] Get List Houses by Landlord Id using session BE
-  getListHousesByLandlord(): Observable<any[]> {
-    return this.http.get<any>(this.APIUrl + "/GetHousesByLandlordId");
+  /**
+   * [Landlord/Dashboard] Get List Houses by Landlord Id using session BE
+   */
+  getListHouseOfCurrentLandlord(): Observable<any[]> {
+    return this.http.get<any>(this.APIUrl + "/GetListHouseOfCurrentLandlord", { withCredentials: true });
   }
 
   //[Landlord][List room] Get total money for not rented rooms

@@ -473,6 +473,7 @@ INSERT INTO [dbo].[UserRoles] VALUES (N'Staff of Student Service Department', GE
 INSERT INTO [dbo].[UserStatuses] VALUES (0, N'Inactive', GETDATE());
 INSERT INTO [dbo].[UserStatuses] VALUES (1, N'Active', GETDATE());
 INSERT INTO [dbo].[UserStatuses] VALUES (2, N'Landlord Signup Request', GETDATE());
+INSERT INTO [dbo].[UserStatuses] VALUES (3, N'Landlord Sign up Request Rejected', GETDATE());
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 
