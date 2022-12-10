@@ -222,14 +222,14 @@ export class DashboardStaffComponent implements OnInit {
             ],
             datasets: [
               {
-                label: 'Số đơn đăng ký',
+                label: 'Số nguyện vọng đăng ký',
                 data: this.orderByMonth,
                 backgroundColor: ['#ff6384'],
                 borderColor: ['#ff6384'],
                 borderWidth: 1,
               },
               {
-                label: 'Số đơn đã được giải quyết',
+                label: 'Số nguyện vọng đã được giải quyết',
                 data: this.solvedOrderByMonth,
                 backgroundColor: ['#069bff'],
                 borderColor: ['#069bff'],
@@ -247,7 +247,7 @@ export class DashboardStaffComponent implements OnInit {
               title: {
                 display: true,
                 text:
-                  'Thống kê số lượng đăng ký nhà trọ năm ' + this.currentYear,
+                  'Thống kê số lượng nguyện vọng đăng ký nhà trọ năm ' + this.currentYear,
                 font: {
                   size: 15,
                 },
@@ -369,11 +369,9 @@ export class DashboardStaffComponent implements OnInit {
     //Call API to creat burn up chart
     this.orderService.countTotalOrderByMonth().subscribe((data) => {
       this.orderByMonthForBurnUp = data;
-      console.log(this.orderByMonthForBurnUp);
 
       this.orderService.countSolvedOrderByMonth().subscribe((data) => {
         this.orderSolvedByMonthForBurnUp = data;
-        console.log(this.orderSolvedByMonthForBurnUp);
 
         //Create burn up chart for order
         var orderBurnUpChart = new Chart('orderBurnUpChart', {
@@ -395,14 +393,14 @@ export class DashboardStaffComponent implements OnInit {
             ],
             datasets: [
               {
-                label: 'Tổng số đơn đăng ký',
+                label: 'Tổng số nguyện vọng đăng ký',
                 data: this.orderByMonthForBurnUp,
                 backgroundColor: ['#ff6384'],
                 borderColor: ['#ff6384'],
                 borderWidth: 1,
               },
               {
-                label: 'Tổng số đơn đã giải quyết',
+                label: 'Tổng số nguyện vọng đã giải quyết',
                 data: this.orderSolvedByMonthForBurnUp,
                 backgroundColor: ['#069bff'],
                 borderColor: ['#069bff'],
@@ -419,7 +417,7 @@ export class DashboardStaffComponent implements OnInit {
             plugins: {
               title: {
                 display: true,
-                text: 'Thống kê tổng số lượng đơn đăng ký nhà trọ năm ' + this.currentYear,
+                text: 'Thống kê tổng số lượng nguyện vọng đăng ký nhà trọ năm ' + this.currentYear,
                 font: {
                   size: 15,
                 },
