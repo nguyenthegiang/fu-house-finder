@@ -118,7 +118,9 @@ export class HouseDetailComponent implements OnInit {
   //Send the Report for House
   sendReport() {
     var user = null;
+    var role = null;
     user = localStorage.getItem("user");
+    role = localStorage.getItem("role");
     if (user === null) {
       this.orderErrorAlert?.fire();
       return;
