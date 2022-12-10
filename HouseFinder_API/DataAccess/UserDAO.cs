@@ -46,7 +46,7 @@ namespace DataAccess
                 {
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    landlords = context.Users.ProjectTo<UserDTO>(config).Where(u => u.Role.RoleName.Equals("Landlord")).ToList();
+                    landlords = context.Users.ProjectTo<UserDTO>(config).Where(u => u.Role.RoleName.Equals("Landlord")).OrderBy(landlord => landlord.DisplayName).ToList();
                 }
             }
             catch (Exception e)

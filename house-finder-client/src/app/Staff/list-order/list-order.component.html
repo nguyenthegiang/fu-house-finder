@@ -3,31 +3,30 @@
 <div class="container-fluid m-0 bg-light">
   <div class="row px-3 pt-3">
     <div class="col-8">
-      <div class="row d-flex align-items-end p-4 backgroundWhite" style="height: 100%">
-        <h6>Bạn đã giải quyết tổng số:</h6>
-        <span>{{ totalOfSolvedOrder }} đơn</span>
+      <div class="row d-flex align-items-center p-3 backgroundWhite statistics" style="height: 100%">
+        <span id="totalSolvedOrder">Bạn đã giải quyết tổng số: <span>{{ totalOfSolvedOrder }} nguyện vọng</span></span>
         <div class="row">
           <div class="col-3">
             <div class="justify-content-center align-items-center year">
-              <h6>Tổng số đơn trong năm</h6>
+              <h6>Tổng số nguyện vọng trong năm</h6>
               <span>{{ totalofSolvedOrderInCurrentYear }}</span>
             </div>
           </div>
           <div class="col-3">
             <div class="justify-content-center align-items-center month">
-              <h6>Tổng số đơn trong tháng</h6>
+              <h6>Tổng số nguyện vọng trong tháng</h6>
               <span>{{ totalofSolvedOrderInMonth }}</span>
             </div>
           </div>
           <div class="col-3">
             <div class="justify-content-center align-items-center week">
-              <h6>Tổng số đơn trong tuần</h6>
+              <h6>Tổng số nguyện vọng trong tuần</h6>
               <span>{{ totalOfSolvedOrder }}</span>
             </div>
           </div>
           <div class="col-3">
             <div class="justify-content-center align-items-center day">
-              <h6>Tổng số đơn trong ngày</h6>
+              <h6>Tổng số nguyện vọng trong ngày</h6>
               <span>{{ totalofSolvedOrderInDay }}</span>
               <!-- <span class="material-symbols-outlined">
                 trending_up
@@ -55,10 +54,10 @@
       <!-- Page content -->
       <div class="row">
         <div class="my-4" *ngIf="orders.length == 0">
-          <h3 class="text-center">Chưa có đăng ký</h3>
+          <h3 class="text-center">Chưa có nguyện vọng</h3>
         </div>
         <div class="my-4" *ngIf="orders.length != 0">
-          <h3 class="text-center">Danh sách đăng ký</h3>
+          <h3 class="text-center">Danh sách nguyện vọng</h3>
 
           <!-- Filter -->
           <div class="row">

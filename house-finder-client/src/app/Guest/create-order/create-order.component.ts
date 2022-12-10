@@ -18,6 +18,7 @@ export class CreateOrderComponent implements OnInit {
   }
   @ViewChild('orderSuccessAlert') private orderSuccessAlert: SwalComponent | undefined;
   @ViewChild('orderErrorAlert') private orderErrorAlert: SwalComponent | undefined;
+  @ViewChild('orderRoleErrorAlert') private orderRoleErrorAlert: SwalComponent | undefined;
   constructor(
     private orderService: OrderService
   ) { }
@@ -27,11 +28,13 @@ export class CreateOrderComponent implements OnInit {
   addOrder() {
     //Check if user has logged in
     var user = null;
+    var role = null;
     user = localStorage.getItem("user");
+    role = localStorage.getItem("role");
     if (user === null) {
       //user not logged in => Alert
       this.orderErrorAlert?.fire();
-    } else {
+    } else if (role === "Student") {
       //Check user logged in from Server => if not => alert
       this.orderService.addOrder(this.orderDetail).subscribe(
         data => {
@@ -43,6 +46,8 @@ export class CreateOrderComponent implements OnInit {
         },
         error => { }
       );
+    } else if (role !== "Student") {
+      this.orderRoleErrorAlert?.fire();
     }
   }
   goBack(): void {
