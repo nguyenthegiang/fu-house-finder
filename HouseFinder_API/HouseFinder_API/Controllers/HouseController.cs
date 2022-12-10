@@ -263,5 +263,36 @@ namespace HouseFinder_API.Controllers
                 return BadRequest();
             }
         }
+
+        /**
+         * GET: api/Houses/GetHousesByLandlord?LandlordId=
+         */
+        [HttpGet("GetHousesByLandlordId")]
+        public IActionResult GetListHousesByLandlord()
+        {
+            try
+            {
+                //Get UserId from Session
+                string uid = HttpContext.Session.GetString("User");
+                if (uid == null)
+                {
+                    //user not logged in => throw error for alert
+                    return Ok(new { Status = 403 });
+                }
+                List<HouseDTO> houseDTOs = houseRepository.GetListHousesByLandlordId(uid);
+                if (houseDTOs == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(houseDTOs);
+                }
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }
