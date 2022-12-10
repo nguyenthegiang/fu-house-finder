@@ -30,5 +30,27 @@ namespace HouseFinder_API.Controllers
                 return Ok(landlordInfo);
             }
         }
+
+        //GET: api/Hoses/LandlordInfoUseSession
+        [HttpGet("LandlordInfoUseSession")]
+        public IActionResult LandlordInfoUseSession()
+        {
+            //Get UserId from Session
+            string uid = HttpContext.Session.GetString("User");
+            if (uid == null)
+            {
+                //user not logged in => throw error for alert
+                return Ok(new { Status = 403 });
+            }
+            LandlordDasboardInformationDTO landlordInfo = landlordInfomationRepository.GetLandLordInfomationByLandlordId(uid);
+            if (landlordInfo == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(landlordInfo);
+            }
+        }
     }
 }
