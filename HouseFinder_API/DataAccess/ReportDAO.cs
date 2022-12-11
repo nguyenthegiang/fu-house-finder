@@ -161,5 +161,25 @@ namespace DataAccess
             return total;
         }
 
+        //[Staff/list-report] Get report by id
+        public static StaffReportDTO GetReportById(int reportId)
+        {
+            StaffReportDTO report;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    report = context.Reports.Where(r => r.Deleted == false).ProjectTo<StaffReportDTO>(config)
+                        .Where(r => r.ReportId == reportId).FirstOrDefault();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return report;
+        }
     }
 }
