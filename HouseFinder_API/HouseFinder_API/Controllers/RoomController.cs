@@ -100,6 +100,50 @@ namespace HouseFinder_API.Controllers
                 return Ok(new { Status = 400 });
             }
         }
+        [HttpPost("create")]
+        public IActionResult CreateRoom(CreateRoomDTO room)
+        {
+            try
+            {
+                string uid = HttpContext.Session.GetString("User");
+                if (String.IsNullOrEmpty(uid))
+                {
+                    return Forbid();
+                }
+                Room createRoom = new Room();
+                createRoom.RoomName = room.RoomName;
+                createRoom.PricePerMonth = (decimal)room.PricePerMonth;
+                createRoom.Information = room.Information;
+                createRoom.AreaByMeters = room.AreaByMeters;
+                createRoom.Fridge = room.Fridge;
+                createRoom.Kitchen = room.Kitchen;
+                createRoom.WashingMachine = room.WashingMachine;
+                createRoom.Desk = room.Desk;
+                createRoom.NoLiveWithHost = room.NoLiveWithHost;
+                createRoom.Bed = room.Bed;
+                createRoom.ClosedToilet = room.ClosedToilet;
+                createRoom.MaxAmountOfPeople = room.MaxAmountOfPeople;
+                createRoom.CurrentAmountOfPeople = room.CurrentAmountOfPeople;
+                createRoom.BuildingNumber = room.BuildingNumber;
+                createRoom.FloorNumber = room.FloorNumber;
+                createRoom.RoomTypeId = (int)room.RoomTypeId;
+                createRoom.HouseId = (int)room.HouseId;
+                createRoom.Deleted = false;
+                createRoom.CreatedDate = DateTime.Now;
+                createRoom.LastModifiedDate = DateTime.Now;
+                createRoom.LastModifiedBy = uid;
+                createRoom.CreatedBy = uid;
+                createRoom.CreatedDate = DateTime.Now;
+                createRoom.StatusId = room.MaxAmountOfPeople == room.CurrentAmountOfPeople ? 1 : 2;
+
+                RoomDTO roomDTO = roomRepository.CreateRoom(createRoom);
+                return Ok(roomDTO);
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
 
         //PUT: api/Rooms
         [HttpPut]
