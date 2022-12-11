@@ -11,12 +11,11 @@
       <div class="my-4" *ngIf="landlords.length != 0">
         <h3 class="text-center">Danh sách chủ trọ</h3>
 
-         <!-- Search bar -->
-         <div class="row w-100 d-flex justify-content-center">
+        <!-- Search bar -->
+        <!-- <div class="row w-100 d-flex justify-content-center">
           <div class="col-10 col-md-5">
             <div class="text-center my-4">
               <div class="input-group">
-                <!-- Press enter to search  -->
                 <input
                   type="text"
                   class="form-control border border-end-0"
@@ -26,7 +25,7 @@
                   #searchValue
                   (keydown.enter)="search(searchValue.value)"
                 />
-                <!-- Click button to clear search -->
+
                 <button
                   *ngIf="searchName"
                   class="btn btn-outline-secondary d-flex justify-content-center align-items-center"
@@ -36,7 +35,7 @@
                 >
                   <span class="material-symbols-outlined"> close </span>
                 </button>
-                <!-- Click button to search -->
+
                 <button
                   class="btn btn-outline-secondary"
                   type="button"
@@ -48,106 +47,87 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- End Search bar -->
 
         <!-- List Landlord -->
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col" id="md">STT</th>
-              <th scope="col">Họ Tên</th>
-              <th scope="col" id="md">Số Điện Thoại</th>
-              <th scope="col" id="md">
-                <div class="row">
-                  <div class="col">Tổng nhà</div>
-                  <div class="col">Tổng phòng</div>
-                  <div class="col">Phòng trống</div>
-                </div>
-              </th>
-              <th scope="col">Hành động</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr
-              *ngFor="let dataItem of landlords; let i = index"
-              style="cursor: pointer"
-            >
-              <td id="md" (click)="viewHouse(dataItem.userId)">
-                <b>{{ i + 1 }}</b>
-              </td>
-              <td (click)="viewHouse(dataItem.userId)">{{ dataItem.displayName }}</td>
-              <td id="md" (click)="viewHouse(dataItem.userId)">{{ dataItem.phoneNumber }}</td>
-              <!-- <td>{{dataItem.address.addresses}}</td> -->
+        <div class="m-4">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col" id="md">STT</th>
+                <th scope="col">Họ Tên</th>
+                <th scope="col" id="md">Số Điện Thoại</th>
+                <th scope="col" id="md">
+                  <div class="row">
+                    <div class="col">Tổng nhà</div>
+                    <div class="col">Tổng phòng</div>
+                    <div class="col">Phòng trống</div>
+                  </div>
+                </th>
+                <th scope="col">Hành động</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let dataItem of landlords; let i = index" style="cursor: pointer">
+                <td id="md" (click)="viewHouse(dataItem.userId)">
+                  <b>{{ i + 1 }}</b>
+                </td>
+                <td (click)="viewHouse(dataItem.userId)">{{ dataItem.displayName }}</td>
+                <td id="md" (click)="viewHouse(dataItem.userId)">{{ dataItem.phoneNumber }}</td>
+                <!-- <td>{{dataItem.address.addresses}}</td> -->
 
-              <!-- Statistics -->
-              <td id="md" (click)="viewHouse(dataItem.userId)">
-                <app-landlord-detail-info
-                  [landlordId]="dataItem.userId"
-                ></app-landlord-detail-info>
-              </td>
+                <!-- Statistics -->
+                <td id="md" (click)="viewHouse(dataItem.userId)">
+                  <app-landlord-detail-info [landlordId]="dataItem.userId"></app-landlord-detail-info>
+                </td>
 
-              <!-- Action -->
-              <td class="d-flex">
-                <!-- Landlord's facebook url -->
-                <a
-                  target="_blank"
-                  class="text-decoration-none me-3"
-                  data-bs-toggle="tooltip"
-                  data-bs-placement="top"
-                  title="Fcebook chủ trọ"
-                  href="{{ dataItem.facebookUrl }}"
-                >
-                  <i class="fa-brands fa-facebook fs-4"></i>
-                </a>
+                <!-- Action -->
+                <td class="d-flex">
+                  <!-- Landlord's facebook url -->
+                  <a target="_blank" class="text-decoration-none me-3" data-bs-toggle="tooltip" data-bs-placement="top"
+                    title="Fcebook chủ trọ" href="{{ dataItem.facebookUrl }}">
+                    <i class="fa-brands fa-facebook fs-4"></i>
+                  </a>
 
-                <!-- User's status -->
-                <div class="form-check form-switch">
-                  <input class="form-check-input"
-                    type="checkbox"
-                    id="flexSwitchCheckChecked"
-                    [checked]="dataItem.statusId === 1"
-                    (change)="updateUserStatus($event, dataItem.userId)"
-                    />
-                  <span *ngIf="dataItem.statusId === 1">Hoạt động</span>
-                  <span *ngIf="dataItem.statusId === 0">Dừng hoạt động</span>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <!-- End List Landlord -->
+                  <!-- User's status -->
+                  <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
+                      [checked]="dataItem.statusId === 1" (change)="updateUserStatus($event, dataItem.userId)" />
+                    <span *ngIf="dataItem.statusId === 1">Hoạt động</span>
+                    <span *ngIf="dataItem.statusId === 0">Dừng hoạt động</span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- End List Landlord -->
 
-        <!-- Paging report -->
-        <div class="d-flex justify-content-center align-items-center my-3">
-          <nav aria-label="Pagination-nav">
-            <ul class="pagination">
-              <!-- Previous: Disabled if this is first page -->
-              <li class="page-item" [ngClass]="{ disabled: landlordPageNumber == 1 }">
-                <!-- Go to previous page -->
-                <a class="page-link" aria-label="Previous" (click)="goToPage(landlordPageNumber - 1)">
-                  <span aria-hidden="true">&laquo;</span>
-                </a>
-              </li>
-              <!-- Numbers -->
-              <li *ngFor="let page of landlordPageList" class="page-item">
-                <!-- Display this as active if it's the chosen page -->
-                <a class="page-link" (click)="goToPage(page)" [ngClass]="{ active: landlordPageNumber == page }">{{
-                  page }}</a>
-              </li>
-              <!-- Next: Disabled if this is last page -->
-              <li class="page-item" [ngClass]="{
-                  disabled: landlordPageNumber == landlordPageCount
-                }">
-                <!-- Go to next page -->
-                <a class="page-link" aria-label="Next" (click)="goToPage(landlordPageNumber + 1)">
-                  <span aria-hidden="true">&raquo;</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
+          <!-- Paging report -->
+          <!-- <div class="d-flex justify-content-center align-items-center my-3">
+            <nav aria-label="Pagination-nav">
+              <ul class="pagination">
+                <li class="page-item" [ngClass]="{ disabled: landlordPageNumber == 1 }">
+                  <a class="page-link" aria-label="Previous" (click)="goToPage(landlordPageNumber - 1)">
+                    <span aria-hidden="true">&laquo;</span>
+                  </a>
+                </li>
+                <li *ngFor="let page of landlordPageList" class="page-item">
+                  <a class="page-link" (click)="goToPage(page)" [ngClass]="{ active: landlordPageNumber == page }">{{
+                    page }}</a>
+                </li>
+                <li class="page-item" [ngClass]="{
+                    disabled: landlordPageNumber == landlordPageCount
+                  }">
+                  <a class="page-link" aria-label="Next" (click)="goToPage(landlordPageNumber + 1)">
+                    <span aria-hidden="true">&raquo;</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div> -->
+          <!-- End Paging -->
         </div>
-        <!-- End Paging -->
       </div>
     </div>
   </div>
