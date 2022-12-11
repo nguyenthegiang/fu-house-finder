@@ -50,6 +50,17 @@ export class ListReportComponent implements OnInit {
   housePageCount = 0; // number of pages
   housePageList: number[] = [];
 
+  selectedReportStudentName: string | undefined;
+  selectedReportHouse: string | undefined;
+  selectedReportDate: Date | undefined;
+  selectedReportSolvedDate: Date | undefined;
+  selectedReportSolvedPerson: string | undefined;
+  selectedReportContent: string | undefined;
+
+  selectedReport: StaffReport | undefined;
+  selectedStatusIdToUpdate: number | undefined;
+  selectedStatusId: number | undefined;
+
   @ViewChild('searchReportContent') searchReportContent: any;
   @ViewChild('searchHouseName') searchHouseName: any;
 
@@ -210,5 +221,37 @@ export class ListReportComponent implements OnInit {
     this.searchHouseName.nativeElement.value = ' ';
     this.searchHouse = undefined;
     this.filterReportedHouse(true);
+  }
+
+  onSelectReportStatus(selectedStatusId: string){
+    this.selectedStatusIdToUpdate = Number(selectedStatusId);
+  }
+
+  changeSelectedReport(reportId: number) {
+    //Find the order which id == orderId
+    var selectedReport = this.reports.find((report) => report.reportId == reportId);
+    this.selectedReport = this.reports.find((report) => report.reportId == reportId);
+    if (selectedReport != undefined) {
+      this.selectedReportStudentName = selectedReport.student.displayName;
+      this.selectedReportHouse = selectedReport.house.houseName;
+      this.selectedReportContent = selectedReport.reportContent;
+      if(selectedReport.solvedByNavigation != undefined)
+      {
+        this.selectedReportSolvedPerson = selectedReport.solvedByNavigation.displayName;
+      }
+      if(selectedReport.solvedByNavigation == undefined)
+      {
+        this.selectedReportSolvedPerson = "";
+      }
+      this.selectedReportDate = selectedReport.reportedDate;
+      this.selectedReportSolvedDate = selectedReport.solvedDate;
+      this.selectedStatusId = selectedReport.status.statusId;
+      console.log(selectedReport.reportContent);
+    }
+  }
+
+  updateReportStatus()
+  {
+
   }
 }

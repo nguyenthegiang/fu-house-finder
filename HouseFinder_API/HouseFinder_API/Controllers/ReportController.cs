@@ -92,5 +92,25 @@ namespace HouseFinder_API.Controllers
             return reportRepository.CounTotalReport();
         }
 
+        [HttpGet("{ReportId}")]
+        public IActionResult GetReportById(int ReportId)
+        {
+            try
+            {
+                StaffReportDTO reportDTO = reportRepository.GetReportById(ReportId);
+                if (reportDTO == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(reportDTO);
+                }
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
     }
 }

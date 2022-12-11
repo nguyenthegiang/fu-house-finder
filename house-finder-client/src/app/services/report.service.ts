@@ -131,4 +131,9 @@ export class ReportService {
     console.log(filterAPIUrl);
     return this.http.get<StaffReport[]>(filterAPIUrl);
   }
+
+  //[Report Detail] Get Report detail information
+  getReportById(reportId: number): Observable<Report> {
+    return this.http.get<Report>(this.APIUrl + "/" + reportId);
+  }
 }
