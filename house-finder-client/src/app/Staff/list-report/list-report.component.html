@@ -70,16 +70,16 @@
             <!-- End Search bar -->
 
             <!-- Filter report -->
-            <div class="row my-4">
+            <div class="row mb-4">
               <!-- Date picker -->
               <!-- Start date -->
-              <div class="col-12 col-md-4">
+              <div class="col-12 col-md-4 mt-4">
                 <label class="form-label">Từ ngày</label>
                 <input #selectedFromDate class="form-control" type="date"
                   (change)="onFromDateSelected(selectedFromDate.value)" />
               </div>
               <!-- End date -->
-              <div class="col-12 col-md-4">
+              <div class="col-12 col-md-4 mt-4">
                 <label class="form-label">Đến ngày</label>
                 <input #selectedToDate class="form-control" type="date"
                   (change)="onToDateSelected(selectedToDate.value)" />
@@ -87,7 +87,7 @@
               <!-- End date picker -->
 
               <!-- Order by -->
-              <div class="col-12 col-md-4">
+              <div class="col-12 col-md-4 mt-4">
                 <label class="form-label">Sắp xếp</label>
                 <select #selectedOrderBy class="form-select" (change)="onOrderBySelected(selectedOrderBy.value)">
                   <option selected disabled>Chọn sắp xếp</option>
@@ -184,10 +184,31 @@
           <div class="my-4">
             <h3 class="text-center">Danh sách nhà bị báo cáo</h3>
 
-            <!-- Search bar -->
-            <div class="row d-flex justify-content-center">
-              <div class="col-10 col-md-5">
-                <div class="text-center my-4">
+            <!-- Filter reported houses-->
+            <div class="row mb-4">
+              <!-- Order by -->
+              <div class="col-12 col-md-4 mt-4">
+                <label class="form-label">Trạng thái</label>
+                <select #selectedActiveStatus class="form-select"
+                  (change)="onActiveStatusSelected(selectedActiveStatus.value)">
+                  <option>Tất cả</option>
+                  <option value="1">Đang hoạt động</option>
+                  <option value="0">Dừng hoạt động</option>
+                </select>
+              </div>
+              <!-- Order by -->
+              <div class="col-12 col-md-4 mt-4">
+                <label class="form-label">Sắp xếp</label>
+                <select #selectedHouseOrderBy class="form-select"
+                  (change)="onHouseOrderBySelected(selectedHouseOrderBy.value)">
+                  <option disabled>Chọn sắp xếp</option>
+                  <option value="desc">Báo cáo nhiều nhất</option>
+                  <option value="asc">Báo cáo ít nhất</option>
+                </select>
+              </div>
+              <div class="col-12 col-md-4 mt-4">
+                <label class="form-label">Tìm kiếm</label>
+                <div class="text-center">
                   <div class="input-group">
                     <!-- Press enter to search  -->
                     <input type="text" class="form-control border border-end-0" placeholder="Nhập từ khóa tìm kiếm"
@@ -206,31 +227,6 @@
                     </button>
                   </div>
                 </div>
-              </div>
-            </div>
-            <!-- End Search bar -->
-
-            <!-- Filter reported houses-->
-            <div class="row justify-content-end">
-              <!-- Order by -->
-              <div class="col-10 col-md-6">
-                <label class="form-label">Trạng thái</label>
-                <select #selectedActiveStatus class="form-select"
-                  (change)="onActiveStatusSelected(selectedActiveStatus.value)">
-                  <option>Tất cả</option>
-                  <option value="1">Đang hoạt động</option>
-                  <option value="0">Dừng hoạt động</option>
-                </select>
-              </div>
-              <!-- Order by -->
-              <div class="col-10 col-md-6">
-                <label class="form-label">Sắp xếp</label>
-                <select #selectedHouseOrderBy class="form-select"
-                  (change)="onHouseOrderBySelected(selectedHouseOrderBy.value)">
-                  <option disabled>Chọn sắp xếp</option>
-                  <option value="desc">Báo cáo nhiều nhất</option>
-                  <option value="asc">Báo cáo ít nhất</option>
-                </select>
               </div>
             </div>
             <!-- End filter -->
