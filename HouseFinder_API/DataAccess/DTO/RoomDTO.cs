@@ -40,4 +40,25 @@ namespace DataAccess.DTO
         //RoomTypeId, for Home Page - Filter available Rooms
         public int? RoomTypeId { get; set; }
     }
+    public class CreateRoomDTO
+    {
+        public int RoomId { get; set; }
+        public string RoomName { get; set; }
+        public decimal PricePerMonth { get; set; }
+        public string Information { get; set; }
+        public double AreaByMeters { get; set; }
+        public bool Fridge { get; set; }
+        public bool Kitchen { get; set; }
+        public bool WashingMachine { get; set; }
+        public bool Desk { get; set; }
+        public bool NoLiveWithHost { get; set; }
+        public bool Bed { get; set; }
+        public bool ClosedToilet { get; set; }
+        public int MaxAmountOfPeople { get; set; }
+        public int CurrentAmountOfPeople { get; set; }
+        public int BuildingNumber { get; set; }
+        public int FloorNumber { get; set; }
+        public int HouseId { get; set; }
+        public int RoomTypeId { get; set; }
+    }
 }

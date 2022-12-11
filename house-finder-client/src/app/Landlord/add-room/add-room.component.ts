@@ -45,7 +45,7 @@ export class AddRoomComponent implements OnInit {
 
   async submitForm(){
     if (this.selected === "single"){
-
+      this.childSingle.addRoom();
     }
     else if (this.selected === "multiple"){
       await this.childMultiple.uploadDataFile(this.houseId);

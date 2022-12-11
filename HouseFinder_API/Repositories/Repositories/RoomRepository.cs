@@ -18,7 +18,7 @@ namespace Repositories.Repositories
 
         public void UpdateRoom(Room room) => RoomDAO.UpdateRoom(room);
 
-        public void CreateRoom(Room room) => RoomDAO.CreateRoom(room);
+        public RoomDTO CreateRoom(Room room) => RoomDAO.CreateRoom(room);
         public void CreateRooms(List<Room> rooms)
         {
             RoomDAO.CreateRooms(rooms);

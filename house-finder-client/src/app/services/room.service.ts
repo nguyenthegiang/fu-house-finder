@@ -13,7 +13,8 @@ export class RoomService {
   readonly APIUrl = `${environment.api_url}/Room`;
 
   httpOptions = {
-    headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
+    withCredential: true
   };
 
   constructor(private http: HttpClient) { }
@@ -31,6 +32,10 @@ export class RoomService {
   //[Landlord: Create Room]
   addRoom(room: Room): Observable<any> {
     return this.http.post<any>(this.APIUrl, room, this.httpOptions);
+  }
+
+  createRoom(room: any): Observable<any>{
+    return this.http.post<any>(this.APIUrl + "/create", room, this.httpOptions);
   }
 
   //[Landlord: Update Room]

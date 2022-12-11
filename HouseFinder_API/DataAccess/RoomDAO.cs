@@ -138,7 +138,7 @@ namespace DataAccess
          Create room
          Add a new Room to the Database
          */
-        public static void CreateRoom(Room room)
+        public static RoomDTO CreateRoom(Room room)
         {
             try
             {
@@ -146,6 +146,11 @@ namespace DataAccess
                 {
                     context.Rooms.Add(room);
                     context.SaveChanges();
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    var mapper = config.CreateMapper();
+                    RoomDTO roomDTO = mapper.Map<RoomDTO>(room);
+                    return roomDTO;
                 }
             }
             catch (Exception e)
