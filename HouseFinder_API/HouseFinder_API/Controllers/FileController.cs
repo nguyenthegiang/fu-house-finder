@@ -191,6 +191,31 @@ namespace HouseFinder_API.Controllers
             return Ok();
         }
 
+        [HttpPost("room/image/{RoomId:int}")]
+        public async Task<IActionResult> UploadRoomImage(IFormFile File, [FromRoute] int RoomId)
+        {
+            string uid = HttpContext.Session.GetString("User");
+            RoomDTO roomDTO = roomsRepository.GetRoomByRoomId(RoomId);
+            if (roomDTO == null)
+            {
+                return NotFound("Room data for this image is not found!");
+            }
+            string dir = $"user/{uid}/House/{roomDTO.HouseId}/{RoomId}";
+            List<ImagesOfRoom> images = new List<ImagesOfRoom>();
+            var path = $"{dir}/{File.FileName}";
+            Stream fs = File.OpenReadStream();
+            await storageRepository.UploadFileAsync(path, fs);
+            ImagesOfRoom image = new ImagesOfRoom();
+            image.CreatedBy = uid;
+            image.CreatedDate = DateTime.UtcNow;
+            image.LastModifiedBy = uid;
+            image.RoomId = roomDTO.RoomId;
+            image.ImageLink = path;
+            images.Add(image);
+            roomImageRepository.CreateRoomImages(images);
+            return Ok();
+        }
+
         private bool checkXlsxMimeType(IFormFile file)
         {
             string filename = file.FileName;
