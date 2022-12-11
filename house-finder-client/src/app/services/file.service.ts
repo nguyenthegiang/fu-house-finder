@@ -39,6 +39,13 @@ export class FileService {
     return this.http.post(this.APIUrl + "/room/image", formData, {withCredentials: true})
   }
 
+  uploadRoomImageFileWithRoomId(file: File, roomId: Number){
+    const formData = new FormData();
+
+    formData.append("file", file, file.name);
+    return this.http.post(this.APIUrl + `/room/image/${roomId}`, formData, {withCredentials: true})
+  }
+
   uploadIDC(frontFile: File, backFile: File){
     const formData = new FormData(); 
 
