@@ -11,24 +11,25 @@
         <table class="table table-hover landlordSingupRequest">
           <thead>
             <tr>
-              <th scope="col">Họ Tên</th>
+              <th scope="col" id="md">Họ Tên</th>
               <th scope="col">Email</th>
-              <th scope="col">Số Điện Thoại</th>
-              <th scope="col">Ảnh đại diện</th>
-              <th scope="col">Ảnh Chứng Minh Thư</th>
+              <th scope="col" id="md">Số Điện Thoại</th>
+              <th scope="col" id="md">Ảnh đại diện</th>
+              <th scope="col" id="md">Ảnh Chứng Minh Thư</th>
               <th scope="col">Ngày Đăng Ký</th>
               <th scope="col">Hành động</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let landlord of landlordSignupRequest">
-              <td>{{landlord.displayName}}</td>
+            <tr *ngFor="let landlord of landlordSignupRequest" data-bs-toggle="modal" data-bs-target="#selectedRequestModal" (click)="changeSelectedLandlord(landlord.userId)" style="cursor: pointer;">
+              <td id="md">{{landlord.displayName}}</td>
               <td>{{landlord.email}}</td>
-              <td>{{landlord.phoneNumber}}</td>
-              <td class="md">
+              <td id="md">{{landlord.phoneNumber}}</td>
+              <td class="md" id="md">
                 <img class="mb-2 profileImage" src="../../../assets/image/{{landlord.profileImageLink}}">
               </td>
-              <td class="md" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal" (click)="changeSelectedLandlord(landlord.userId)" style="cursor: pointer">
+              <td class="md" id="md" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
+                (click)="changeSelectedLandlord(landlord.userId)" style="cursor: pointer">
                 <img class="me-2 mb-2 identityCard"
                   src="../../../assets/image/{{landlord.identityCardFrontSideImageLink}}">
                 <img class="mb-2 identityCard" src="../../../assets/image/{{landlord.identityCardBackSideImageLink}}">
@@ -70,16 +71,16 @@
 <app-footer></app-footer>
 
 <!-- Alerts by Template: sweetalert2 -->
-<swal #acceptLandlordAlert title="Phê duyệt tài khoản thành công."
-  icon="success" [showConfirmButton]="false" [toast]="true" [timer]="3000" [timerProgressBar]="true" position="top-end" background="#defad9">
+<swal #acceptLandlordAlert title="Phê duyệt tài khoản thành công." icon="success" [showConfirmButton]="false"
+  [toast]="true" [timer]="3000" [timerProgressBar]="true" position="top-end" background="#defad9">
 </swal>
 
-<swal #denyLandlordStatusAlert title="Từ chối tài khoản thành công."
-  icon="success" [showConfirmButton]="false" [toast]="true" [timer]="3000" [timerProgressBar]="true" position="top-end" background="#defad9">
+<swal #denyLandlordStatusAlert title="Từ chối tài khoản thành công." icon="success" [showConfirmButton]="false"
+  [toast]="true" [timer]="3000" [timerProgressBar]="true" position="top-end" background="#defad9">
 </swal>
 
-<swal #updateLandlordStatusFailAlert title="Phê duyệt tài khoản thất bại."
-  icon="error" [showConfirmButton]="false" [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true" background="#facfcf">
+<swal #updateLandlordStatusFailAlert title="Phê duyệt tài khoản thất bại." icon="error" [showConfirmButton]="false"
+  [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true" background="#facfcf">
 </swal>
 
 <!-- View identity card modal -->
@@ -92,8 +93,10 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" *ngIf="selectedLandlord">
-        <img class="me-2 mb-2 viewIdentityCard" src="../../../assets/image/{{selectedLandlord.identityCardFrontSideImageLink}}">
-        <img class="mb-2 viewIdentityCard" src="../../../assets/image/{{selectedLandlord.identityCardBackSideImageLink}}">
+        <img class="me-2 mb-2 viewIdentityCard"
+          src="../../../assets/image/{{selectedLandlord.identityCardFrontSideImageLink}}">
+        <img class="mb-2 viewIdentityCard"
+          src="../../../assets/image/{{selectedLandlord.identityCardBackSideImageLink}}">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -102,4 +105,29 @@
   </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="selectedRequestModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Thông tin chi tiết
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
 
+      <div class="modal-body" *ngIf="selectedLandlord">
+        <span><b>Họ tên: </b>{{ selectedLandlord }}</span><br />
+        <span><b>Số điện thoại: </b>{{ selectedLandlord }}</span><br />
+        <span><b>Email: </b>{{ selectedLandlord }}</span><br />
+        <span><b>Ngày đăng ký: </b>{{ selectedLandlord.createdDate | date: "dd/MM/yyyy" }}</span><br />
+        <span><b>Ảnh đại diện: </b></span><br />
+        <img class="mb-2 profileImage" src="../../../assets/image/{{selectedLandlord.profileImageLink}}">
+        <span><b>Ảnh chứng minh thư: </b></span><br />
+        <img class="me-2 mb-2 identityCard"
+          src="../../../assets/image/{{selectedLandlord.identityCardFrontSideImageLink}}">
+        <img class="mb-2 identityCard" src="../../../assets/image/{{selectedLandlord.identityCardBackSideImageLink}}">
+      </div>
+    </div>
+  </div>
+</div>
