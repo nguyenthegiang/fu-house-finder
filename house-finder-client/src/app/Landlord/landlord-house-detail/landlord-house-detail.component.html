@@ -54,6 +54,10 @@
   <div class="col-12">
     <div class="my-4" *ngIf="rooms.length == 0">
       <h3 class="text-center">Chưa có phòng trọ</h3>
+      <div class="my-4">
+        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#updateModal"
+        data-whatever="@getbootstrap" (click)="addRoom()">+ Thêm mới</button>
+      </div>
     </div>
     <div class="my-4" *ngIf="rooms.length != 0">
       <h3 class="text-center">Danh sách phòng</h3>
