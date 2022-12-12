@@ -52,9 +52,8 @@
 <!-- List available rooms -->
 <div class="row m-2">
   <div class="col-12">
-    <div class="my-4" *ngIf="rooms.length == 0">
-      <h3 class="text-center">Chưa có phòng trọ</h3>
-    </div>
+    <span *ngIf="rooms.length == 0" class="emptyMesage text-center">Chưa có phòng trọ</span>
+
     <div class="my-4" *ngIf="rooms.length != 0">
       <h3 class="text-center">Danh sách phòng</h3>
 
