@@ -46,7 +46,14 @@ namespace DataAccess
                 {
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    landlords = context.Users.ProjectTo<UserDTO>(config).Where(u => u.Role.RoleName.Equals("Landlord")).OrderBy(landlord => landlord.DisplayName).ToList();
+
+                    //Get list of active or inactive landlords, order by name
+                    landlords = context.Users.
+                        ProjectTo<UserDTO>(config).
+                        Where(u => u.Role.RoleName.Equals("Landlord")).
+                        Where(u => u.StatusId == 0 || u.StatusId == 1).
+                        OrderBy(landlord => landlord.DisplayName).
+                        ToList();
                 }
             }
             catch (Exception e)
@@ -300,18 +307,34 @@ namespace DataAccess
             return total;
         }
 
+        /**
+         * [Staff/list-landlord-signup-request]
+         * Get List of Landlords waiting to sign up
+         */
         public static List<UserDTO> GetLandlordSignupRequest()
         {
-            List<UserDTO> listLandlords;
+            List<UserDTO> landlords;
             try
             {
-                listLandlords = GetLandlords().Where(landlord => landlord.StatusId == 2).OrderBy(landlord => landlord.DisplayName).ToList();
+                using (var context = new FUHouseFinderContext())
+                {
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+
+                    //Get list of landlord waiting to sign up, order by name
+                    landlords = context.Users.
+                        ProjectTo<UserDTO>(config).
+                        Where(u => u.Role.RoleName.Equals("Landlord")).
+                        Where(u => u.StatusId == 2).
+                        OrderBy(landlord => landlord.DisplayName).
+                        ToList();
+                }
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-            return listLandlords;
+            return landlords;
         }
 
         public static void UpdateUserStatus(string userId, int statusId, string staffId)

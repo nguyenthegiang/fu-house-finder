@@ -34,6 +34,7 @@ export class CreateOrderComponent implements OnInit {
     if (user === null) {
       //user not logged in => Alert
       this.orderErrorAlert?.fire();
+      return;
     } else if (role === "Student") {
       //Check user logged in from Server => if not => alert
       this.orderService.addOrder(this.orderDetail).subscribe(

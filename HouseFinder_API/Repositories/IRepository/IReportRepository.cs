@@ -16,5 +16,6 @@ namespace Repositories.IRepository
         public int CountReportByHouseId(int houseId);
         public List<StaffReportDTO> GetAllReports();
         public int CounTotalReport();
+        public StaffReportDTO GetReportById(int reportId);
     }
 }

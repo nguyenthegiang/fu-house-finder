@@ -27,7 +27,7 @@ export class ListHouseComponent implements OnInit {
 
   ngOnInit(): void {
     //Get List of all Houses
-    this.houseService.getAvailableHouses().subscribe(data => {
+    this.houseService.getAllHouses().subscribe(data => {
       this.houses = data;
     });
   }

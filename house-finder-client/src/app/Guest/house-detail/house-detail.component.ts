@@ -55,6 +55,8 @@ export class HouseDetailComponent implements OnInit {
   @ViewChild('orderErrorAlert') private orderErrorAlert: SwalComponent | undefined;
   @ViewChild('rateSuccessAlert') private rateSuccessAlert: SwalComponent | undefined;
   @ViewChild('rateErrorAlert') private rateErrorAlert: SwalComponent | undefined;
+  @ViewChild('orderRoleErrorAlert') private rateRoleErrorAlert: SwalComponent | undefined;
+
 
   constructor(
     private route: ActivatedRoute,
@@ -117,11 +119,13 @@ export class HouseDetailComponent implements OnInit {
   //Send the Report for House
   sendReport() {
     var user = null;
+    var role = null;
     user = localStorage.getItem("user");
+    role = localStorage.getItem("role");
     if (user === null) {
       this.orderErrorAlert?.fire();
       return;
-    } else {
+    } else if (role === "Student") {
       this.inputReportContent = this.inputReportContent.trim();
 
       //Create Report
@@ -132,7 +136,6 @@ export class HouseDetailComponent implements OnInit {
         deleted: false,
         reportedDate: new Date()
       };
-
       this.reportService.addReport(report).subscribe(
         data => {
           if (data.status == 403) {
@@ -141,8 +144,11 @@ export class HouseDetailComponent implements OnInit {
             this.reportSuccessAlert?.fire();
           }
         },
-        error => { }
+        error => {
+        }
       );
+    } else if (role !== "Student") {
+      this.rateRoleErrorAlert?.fire();
     }
   }
 
@@ -160,28 +166,23 @@ export class HouseDetailComponent implements OnInit {
     return new Array(i);
   }
 
-  star1()
-  {
+  star1() {
     this.star = 1;
   }
 
-  star2()
-  {
+  star2() {
     this.star = 2;
   }
 
-  star3()
-  {
+  star3() {
     this.star = 3;
   }
 
-  star4()
-  {
+  star4() {
     this.star = 4;
   }
 
-  star5()
-  {
+  star5() {
     this.star = 5;
   }
 

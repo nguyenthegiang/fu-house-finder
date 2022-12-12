@@ -40,18 +40,21 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     //Get List of all Houses
-    var user = null;
-    user = localStorage.getItem("user");
-    if (user === null) {
+    var userId = null;
+    //get user name not get userId
+    userId = localStorage.getItem("user");
+
+    if (userId === null) {
       //user not logged in => Alert
       this.orderErrorAlert?.fire();
     } else {
       //Check user logged in from Server => if not => alert
-      this.houseService.getListHousesByLandlordId(user).subscribe(data => {
+      this.houseService.getListHouseOfCurrentLandlord().subscribe(data => {
         this.houses = data;
         console.log(data);
       });
-      this.lanlord_informationService.getLandLordInfomation(user).subscribe(data => {
+
+      this.lanlord_informationService.getCurrentLandlordInfo().subscribe(data => {
         this.houseCount = data.houseCount;
         this.roomCount = data.roomCount;
         this.roomAvailableCount = data.roomAvailableCount;

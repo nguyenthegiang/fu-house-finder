@@ -233,13 +233,14 @@ namespace HouseFinder_API.Controllers
                 string uid = HttpContext.Session.GetString("User");
                 if (uid == null)
                 {
-                    return Forbid();
+                    //user not logged in => throw error for alert
+                    return Ok(new { Status = 403 });
                 }
 
                 //Update to Database
                 userRepository.UpdateUserStatus(userId, statusId, uid);
 
-                return Ok();
+                return Ok(new { Status = 200 });
             }
             catch (Exception e)
             {

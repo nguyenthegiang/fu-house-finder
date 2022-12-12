@@ -1,5 +1,6 @@
 ﻿using BusinessObjects;
 using DataAccess.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.OData.Query;
@@ -24,6 +25,7 @@ namespace HouseFinder_API.Controllers
         public ActionResult<IEnumerable<StaffReportDTO>> GetAllReports() => reportRepository.GetAllReports();
 
         //[Report] POST: Add Report
+        [Authorize(Roles = "Student")]
         [HttpPost]
         public IActionResult Post( Report report)
         {
@@ -48,7 +50,7 @@ namespace HouseFinder_API.Controllers
             }
             catch (Exception)
             {
-                return BadRequest();
+                return Ok(new { Status = 403 });
             }
         }
 
@@ -90,5 +92,25 @@ namespace HouseFinder_API.Controllers
             return reportRepository.CounTotalReport();
         }
 
+        [HttpGet("{ReportId}")]
+        public IActionResult GetReportById(int ReportId)
+        {
+            try
+            {
+                StaffReportDTO reportDTO = reportRepository.GetReportById(ReportId);
+                if (reportDTO == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(reportDTO);
+                }
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
     }
 }
