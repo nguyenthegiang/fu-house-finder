@@ -1,0 +1,83 @@
+<app-staff-header></app-staff-header>
+
+<div class="row m-2">
+  <div class="col-12">
+    <!-- Page content -->
+    <div class="row">
+      <div class="my-4">
+        <h3 class="text-center">Danh sách yêu cầu chủ trọ bị từ chối</h3>
+
+        <div class="m-4">
+          <table class="table table-hover landlordSingupRequest">
+            <thead>
+              <tr>
+                <th scope="col" id="md">Họ Tên</th>
+                <th scope="col">Email</th>
+                <th scope="col" id="md">Số Điện Thoại</th>
+                <th scope="col" id="md">Ảnh đại diện</th>
+                <th scope="col" id="md">Ảnh Chứng Minh Thư</th>
+                <th scope="col">Ngày Đăng Ký</th>
+                <th scope="col">Hành động</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr data-bs-toggle="modal" data-bs-target="#selectedRequestModal">
+                <td id="md"></td>
+                <td></td>
+                <td id="md"></td>
+                <td class="md" id="md">
+                  <img class="mb-2 profileImage">
+                </td>
+                <td class="md" id="md" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal" style="cursor: pointer">
+                  <img class="me-2 mb-2 identityCard">
+                  <img class="mb-2 identityCard" >
+                </td>
+                <td></td>
+
+                <!-- Action column -->
+                <td>
+                  <div class="d-flex align-content-center flex-wrap">
+                    <!-- Facebook URL -->
+                    <div>
+                      <a target="_blank" class="text-decoration-none me-2" data-bs-toggle="tooltip"
+                        data-bs-placement="top" title="Fcebook chủ trọ">
+                        <i class="fa-brands fa-facebook fs-2"></i>
+                      </a>
+                    </div>
+
+                    <!-- Accept -->
+                    <button type="button" class="btn btn-success btn-sm me-2">
+                      Chấp Nhận
+                    </button>
+
+                    <!-- Deny -->
+                    <button type="button" class="btn btn-danger btn-sm">
+                      Từ Chối
+                    </button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>
+
+<!-- Alerts by Template: sweetalert2 -->
+<swal #acceptLandlordAlert title="Phê duyệt tài khoản thành công." icon="success" [showConfirmButton]="false"
+  [toast]="true" [timer]="3000" [timerProgressBar]="true" position="top-end" background="#defad9">
+</swal>
+
+<swal #denyLandlordStatusAlert title="Từ chối tài khoản thành công." icon="success" [showConfirmButton]="false"
+  [toast]="true" [timer]="3000" [timerProgressBar]="true" position="top-end" background="#defad9">
+</swal>
+
+<swal #updateLandlordStatusFailAlert title="Phê duyệt tài khoản thất bại." icon="error" [showConfirmButton]="false"
+  [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true" background="#facfcf">
+</swal>
+
+
