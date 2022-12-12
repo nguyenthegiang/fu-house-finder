@@ -54,6 +54,8 @@
     <div class="col-12 px-4 backgroundWhite">
       <!-- Page content -->
       <div class="row">
+        <span *ngIf="orders.length == 0" class="emptyMesage text-center">Chưa có nguyện vọng</span>
+
         <div class="my-4">
           <h3 class="text-center">Danh sách nguyện vọng</h3>
 
