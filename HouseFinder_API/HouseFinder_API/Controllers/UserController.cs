@@ -66,7 +66,8 @@ namespace HouseFinder_API.Controllers
                 //Admin Login
                 ResponseDTO user;
                 //Check with account in appsettings
-                if (login.Email == Configuration.GetSection("AdminAccount").GetSection("Email").Value
+                if ((!String.IsNullOrEmpty(login.Email) || !String.IsNullOrEmpty(login.Password)) 
+                    && login.Email == Configuration.GetSection("AdminAccount").GetSection("Email").Value
                     && login.Password == Configuration.GetSection("AdminAccount").GetSection("Password").Value)
                 {
                     user = new ResponseDTO();
@@ -310,7 +311,7 @@ namespace HouseFinder_API.Controllers
             }
         }
 
-        [Authorize(Roles = "Head of Admission Department,Head of Student Service Department")]
+        [Authorize(Roles = "Admin")]
         [HttpPost("staff/create")]
         public IActionResult CreateStaffAccount(StaffAccountCreateDTO staff)
         {
