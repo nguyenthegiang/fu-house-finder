@@ -439,7 +439,7 @@ namespace DataAccess
                 using(var context = new FUHouseFinderContext())
                 {
                     User user = new User();
-                    var lastUser = context.Users.SkipWhile(u => u.RoleId == 1 || u.RoleId == 2).OrderBy(u => u.UserId).LastOrDefault();
+                    var lastUser = context.Users.Where(u => u.RoleId != 1 || u.RoleId != 2).OrderBy(u => u.UserId).LastOrDefault();
                     int index = 0;
                     if (lastUser != null)
                     {
