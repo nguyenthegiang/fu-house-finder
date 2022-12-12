@@ -22,5 +22,6 @@ namespace Repositories.IRepository
         public List<UserDTO> GetStaffs();
         public void UpdateProfile(string userId, string name, string email);
         public void ChangePassword(string userId, string newPassword);
+        public void CreateStaffAccount(StaffAccountCreateDTO staff);
     }
 }
