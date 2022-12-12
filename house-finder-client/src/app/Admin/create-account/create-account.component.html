@@ -3,31 +3,31 @@
 <div class="container-fluit m-5 d-flex flex-column align-items-center">
   <h3 class="text-center mb-5">Tạo tài khoản tuyển sinh</h3>
 
-  <form class="row w-100 d-flex flex-column align-items-center needs-validation" novalidate>
+  <form class="row w-100 d-flex flex-column align-items-center needs-validation" novalidate [formGroup]="staffForm">
     <div class="col-12 col-md-5 mb-3">
-      <label for="exampleInput1" class="form-label"><b>Họ và tên</b></label>
-      <input type="text" class="form-control" placeholder="Nhập họ và tên" id="exampleInput1" required>
-      <div class="invalid-feedback mb-3">Không được để trống</div>
+      <label for="name" class="form-label"><b>Họ và tên</b></label>
+      <input type="text" class="form-control" placeholder="Nhập họ và tên" id="name" formControlName="name">
+      <div class="invalid-feedback mb-3 d-block" *ngIf="!name">Không được để trống</div>
     </div>
 
     <div class="col-12 col-md-5 mb-3">
-      <label for="exampleInput1" class="form-label"><b>Email</b></label>
-      <input type="email" class="form-control" placeholder="Nhập email" id="exampleInput1" required>
-      <div class="invalid-feedback mb-3">Không được để trống</div>
+      <label for="email" class="form-label"><b>Email</b></label>
+      <input type="email" class="form-control" placeholder="Nhập email" id="email" formControlName="email">
+      <div class="invalid-feedback mb-3 d-block" *ngIf="!email">Không được để trống</div>
     </div>
 
     <div class="col-12 col-md-5 mb-3">
-      <label for="exampleInput1" class="form-label"><b>Mật khẩu</b></label>
-      <input type="password" class="form-control" placeholder="Nhập mật khẩu" id="exampleInput1" required>
-      <div class="invalid-feedback mb-3">Không được để trống</div>
+      <label for="password" class="form-label"><b>Mật khẩu</b></label>
+      <input type="password" class="form-control" placeholder="Nhập mật khẩu" id="password" formControlName="password">
+      <div class="invalid-feedback mb-3 d-block" *ngIf="!password">Không được để trống</div>
     </div>
 
     <div class="col-12 col-md-5 mb-3">
       <label class="form-label"><b>Vị trí</b></label>
-      <select class="form-select" aria-label="Default select example" required>
-        <option *ngFor="let role of roles" [ngValue]="role.roleId">{{role.roleName}}</option>
+      <select class="form-select" aria-label="Default select example" formControlName="role">
+        <option *ngFor="let role of roles; let i = index;" value="{{role.roleId}}">{{role.roleName}}</option>
       </select>
-      <div class="invalid-feedback mb-3">Không được để trống</div>
+      <div class="invalid-feedback mb-3 d-block" *ngIf="!role">Không được để trống</div>
     </div>
 
     <div class="text-center col-12 col-md-5">

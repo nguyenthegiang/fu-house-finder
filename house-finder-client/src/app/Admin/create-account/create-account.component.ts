@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { RoleService } from 'src/app/services/role.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -10,33 +11,68 @@ import { UserService } from 'src/app/services/user.service';
 export class CreateAccountComponent implements OnInit {
 
   staffForm = this.formBuilder.group({
-    name: ['', Validators.required],
-    email: ['', Validators.required],
-    role: ['', ],
-    password: ['', Validators.required, Validators.minLength(8)],
+    name: [, Validators.required],
+    email: [, Validators.required],
+    role: [, Validators.required],
+    password: [, [Validators.required, Validators.minLength(8)]],
   });
 
-  roles: Array<any>;
+  roles: any;
 
-  constructor(private formBuilder: FormBuilder, private userService: UserService) { 
-    this.roles = [
-      {roleId: 1, roleName: 'Staff'},
-    ]
+  name = true;
+  email = true;
+  password = true;
+  role = true;
+
+  constructor(
+    private formBuilder: FormBuilder, 
+    private userService: UserService,
+    private roleService: RoleService,
+  ) { 
+    roleService.getStaffRoles().subscribe(
+      resp => {
+        this.roles = resp;
+      },
+      error => { }
+    );
   }
 
   ngOnInit(): void {
     
   }
 
-  getStaffRoles(){
-    
-  }
-
   validate(){
-
+    if (this.staffForm.controls['name'].errors?.['required']){
+      this.name = false;
+    }
+    else {
+      this.name = true;
+    }
+    if (this.staffForm.controls['email'].errors?.['required']){
+      this.email = false;
+    }
+    else {
+      this.email = true;
+    }
+    if (this.staffForm.controls['password'].errors?.['required']){
+      this.password = false;
+    }
+    else {
+      this.password = true;
+    }
+    if (this.staffForm.controls['role'].errors?.['required']){
+      this.role = false;
+    }
+    else {
+      this.role = true;
+    }
   }
 
   addAccount(){
+    this.validate();
+    if (!(this.name && this.email && this.password && this.role)){
+      return;
+    }
     let data = {
       displayName: this.staffForm.controls['name'].value,
       email: this.staffForm.controls['email'].value,
