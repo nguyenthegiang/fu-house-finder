@@ -46,14 +46,14 @@ namespace DataAccess
                 {
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    //Get list of inactive landlords
-                    var inactveLandlords = context.Users.ProjectTo<UserDTO>(config).Where(u => u.Role.RoleName.Equals("Landlord")).Where(u => u.StatusId == 0).OrderBy(landlord => landlord.DisplayName).ToList();
-                    //Get list of active landlords
-                    var actveLandlords = context.Users.ProjectTo<UserDTO>(config).Where(u => u.Role.RoleName.Equals("Landlord")).Where(u => u.StatusId == 01).ToList();
-                    //Append the list
-                    actveLandlords.AddRange(inactveLandlords);
-                    //Order by alphabet
-                    landlords = actveLandlords.OrderBy(landlord => landlord.DisplayName).ToList();
+
+                    //Get list of active or inactive landlords, order by name
+                    landlords = context.Users.
+                        ProjectTo<UserDTO>(config).
+                        Where(u => u.Role.RoleName.Equals("Landlord")).
+                        Where(u => u.StatusId == 0 || u.StatusId == 1).
+                        OrderBy(landlord => landlord.DisplayName).
+                        ToList();
                 }
             }
             catch (Exception e)
@@ -307,18 +307,34 @@ namespace DataAccess
             return total;
         }
 
+        /**
+         * [Staff/list-landlord-signup-request]
+         * Get List of Landlords waiting to sign up
+         */
         public static List<UserDTO> GetLandlordSignupRequest()
         {
-            List<UserDTO> listLandlords;
+            List<UserDTO> landlords;
             try
             {
-                listLandlords = GetLandlords().Where(landlord => landlord.StatusId == 2).OrderBy(landlord => landlord.DisplayName).ToList();
+                using (var context = new FUHouseFinderContext())
+                {
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+
+                    //Get list of landlord waiting to sign up, order by name
+                    landlords = context.Users.
+                        ProjectTo<UserDTO>(config).
+                        Where(u => u.Role.RoleName.Equals("Landlord")).
+                        Where(u => u.StatusId == 2).
+                        OrderBy(landlord => landlord.DisplayName).
+                        ToList();
+                }
             }
             catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
-            return listLandlords;
+            return landlords;
         }
 
         public static void UpdateUserStatus(string userId, int statusId, string staffId)
@@ -415,5 +431,41 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
         }
+
+        public static void CreateStaffAccount(StaffAccountCreateDTO staff)
+        {
+            try
+            {
+                using(var context = new FUHouseFinderContext())
+                {
+                    User user = new User();
+                    var lastUser = context.Users.Where(u => u.RoleId != 1 || u.RoleId != 2).OrderBy(u => u.UserId).LastOrDefault();
+                    int index = 0;
+                    if (lastUser != null)
+                    {
+                        index = Int32.Parse(lastUser.UserId.Substring(2)) + 1;  //id auto increment
+                    }
+                    user.UserId = "SA" + index.ToString("D6");
+                    user.Email = staff.Email;
+                    user.DisplayName = staff.DisplayName;
+                    user.RoleId = staff.Role;
+                    user.CreatedBy = staff.CreatedBy;
+                    user.CreatedDate = DateTime.Now;
+                    user.LastModifiedBy = staff.CreatedBy;
+                    user.LastModifiedDate = DateTime.Now;
+                    PasswordHasher<User> pw = new PasswordHasher<User>();
+                    var password = pw.HashPassword(user, staff.Password);
+                    user.Password = password;
+                    user.StatusId = 1;
+                    context.Users.Add(user);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
     }
 }

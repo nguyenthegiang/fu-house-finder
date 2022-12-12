@@ -11,15 +11,13 @@
         <h3 class="text-center">Danh sách nhà trọ</h3>
 
         <!-- Search bar -->
-        <div class="row w-100 d-flex justify-content-center">
+        <!-- <div class="row w-100 d-flex justify-content-center">
           <div class="col-10 col-md-5">
             <div class="text-center my-4">
               <div class="input-group">
-                <!-- Press enter to search  -->
                 <input type="text" class="form-control border border-end-0" placeholder="Nhập từ khóa tìm kiếm" aria-label="search_house_by_name"
                   aria-describedby="button-addon2" #searchValue
                   (keydown.enter)="search(searchValue.value)">
-                  <!-- Click button to clear search -->
                 <button
                 *ngIf="searchName"
                 class="clearSearchBtn"
@@ -29,7 +27,6 @@
               >
                 <span class="material-symbols-outlined"> close </span>
               </button>
-                <!-- Click button to search -->
                 <button class="btn btn-outline-secondary" type="button" id="button-addon2"
                   (click)="search(searchValue.value)">
                   <i class="fa-solid fa-magnifying-glass"></i>
@@ -37,108 +34,119 @@
               </div>
             </div>
           </div>
-        </div>
+        </div> -->
         <!-- End Search bar -->
 
-        <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col" id="md">STT</th>
-              <th scope="col">Tên nhà trọ</th>
-              <th scope="col" id="md">Giá điện (VNĐ)</th>
-              <th scope="col" id="md">Giá nước (VNĐ)</th>
-              <th scope="col" id="md">
-                <div class="row">
-                  <div class="col">
-                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Phòng chưa có người thuê" style="cursor: pointer;">
-                      <i class="fa-regular fa-user me-1"></i>
-                      <i class="fa-regular fa-user"></i>
-                    </span>
+        <div class="m-4">
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col" id="md">STT</th>
+                <th scope="col">Tên nhà trọ</th>
+                <th scope="col" id="md">Giá điện (VNĐ)</th>
+                <th scope="col" id="md">Giá nước (VNĐ)</th>
+                <th scope="col" id="md">
+                  <div class="row">
+                    <div class="col">
+                      <span data-bs-toggle="tooltip" data-bs-placement="top" title="Phòng chưa có người thuê"
+                        style="cursor: pointer;">
+                        <i class="fa-regular fa-user me-1"></i>
+                        <i class="fa-regular fa-user"></i>
+                      </span>
+                    </div>
+                    <div class="col">
+                      <span data-bs-toggle="tooltip" data-bs-placement="top" title="Phòng tìm người ở ghép"
+                        style="cursor: pointer;">
+                        <i class="fa-solid fa-user me-1"></i>
+                        <i class="fa-regular fa-user"></i>
+                      </span>
+                    </div>
+                    <div class="col">
+                      <span data-bs-toggle="tooltip" data-bs-placement="top" title="Tổng chỗ trống"
+                        style="cursor: pointer;">
+                        <i class="fa-solid fa-bed"></i>
+                      </span>
+                    </div>
                   </div>
-                  <div class="col">
-                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Phòng tìm người ở ghép" style="cursor: pointer;">
-                      <i class="fa-solid fa-user me-1"></i>
-                      <i class="fa-regular fa-user"></i>
-                    </span>
-                  </div>
-                  <div class="col">
-                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Tổng chỗ trống" style="cursor: pointer;">
-                      <i class="fa-solid fa-bed"></i>
-                    </span>
-                  </div>
-                </div>
-              </th>
-              <th scope="col" id="md">Tiện ích</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let dataItem of houses; let i=index;" (click)="viewHouse(dataItem.houseId); changeBreadcrumbStatus()" style="cursor: pointer;">
-              <td id="md"><b>{{i+1}}</b></td>
+                </th>
+                <th scope="col" id="md">Tiện ích</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let dataItem of houses; let i=index;"
+                (click)="viewHouse(dataItem.houseId); changeBreadcrumbStatus()" style="cursor: pointer;">
+                <td id="md"><b>{{i+1}}</b></td>
 
-              <!-- House name -->
-              <td>{{dataItem.houseName}}</td>
+                <!-- House name -->
+                <td>{{dataItem.houseName}}</td>
 
-              <td id="md">{{dataItem.powerPrice | number }}</td>
-              <td id="md">{{dataItem.waterPrice | number}}</td>
+                <td id="md">{{dataItem.powerPrice | number }}</td>
+                <td id="md">{{dataItem.waterPrice | number}}</td>
 
-              <!-- Statistics -->
-              <td id="md">
-                <app-list-house-info [houseId]="dataItem.houseId"></app-list-house-info>
-              </td>
+                <!-- Statistics -->
+                <td id="md">
+                  <app-list-house-info [houseId]="dataItem.houseId"></app-list-house-info>
+                </td>
 
-              <!-- Utilities -->
-              <td id="md">
-                <div class="d-flex">
-                  <div *ngIf="dataItem.fingerprintLock == false && dataItem.camera == false && dataItem.parking == false">
-                    <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Không có tiện ích" style="cursor: pointer;">
-                      block
-                    </span>
+                <!-- Utilities -->
+                <td id="md">
+                  <div class="d-flex">
+                    <div
+                      *ngIf="dataItem.fingerprintLock == false && dataItem.camera == false && dataItem.parking == false">
+                      <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
+                        title="Không có tiện ích" style="cursor: pointer;">
+                        block
+                      </span>
+                    </div>
+                    <div *ngIf="dataItem.fingerprintLock == true">
+                      <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top"
+                        title="Khóa vân tay" style="cursor: pointer;">
+                        fingerprint
+                      </span>
+                    </div>
+                    <div *ngIf="dataItem.camera == true">
+                      <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top"
+                        title="Camera an ninh" style="cursor: pointer;">
+                        videocam
+                      </span>
+                    </div>
+                    <div *ngIf="dataItem.parking == true">
+                      <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
+                        title="Chỗ để xe" style="cursor: pointer;">
+                        local_parking
+                      </span>
+                    </div>
                   </div>
-                  <div *ngIf="dataItem.fingerprintLock == true">
-                    <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Khóa vân tay" style="cursor: pointer;">
-                      fingerprint
-                    </span>
-                  </div>
-                  <div *ngIf="dataItem.camera == true">
-                    <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top" title="Camera an ninh" style="cursor: pointer;">
-                      videocam
-                    </span>
-                  </div>
-                  <div *ngIf="dataItem.parking == true">
-                    <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Chỗ để xe" style="cursor: pointer;">
-                      local_parking
-                    </span>
-                  </div>
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-        <!-- End List of Rooms -->
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <!-- End List of Rooms -->
 
-        <!-- Paging -->
-        <div class="d-flex justify-content-center align-items-center mt-4">
-          <nav aria-label="Page navigation example">
-            <ul class="pagination">
-              <li class="page-item">
-                <a class="page-link text-dark" href="#" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                  <span class="sr-only">Previous</span>
-                </a>
-              </li>
-              <li class="page-item"><a class="page-link text-dark" href="#">1</a></li>
-              <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
-              <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link text-dark" href="#" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                  <span class="sr-only">Next</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
+          <!-- Paging -->
+          <!-- <div class="d-flex justify-content-center align-items-center mt-4">
+            <nav aria-label="Page navigation example">
+              <ul class="pagination">
+                <li class="page-item">
+                  <a class="page-link text-dark" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                  </a>
+                </li>
+                <li class="page-item"><a class="page-link text-dark" href="#">1</a></li>
+                <li class="page-item"><a class="page-link text-dark" href="#">2</a></li>
+                <li class="page-item"><a class="page-link text-dark" href="#">3</a></li>
+                <li class="page-item">
+                  <a class="page-link text-dark" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div> -->
+          <!-- End Paging -->
         </div>
-        <!-- End Paging -->
       </div>
     </div>
   </div>

@@ -157,6 +157,9 @@ export class UserService {
     return this.http.put<any>(this.APIUrl + "/changePassword?userId=" + userId + "&newPassword=" + newPassword, this.httpOptions);
   }
 
+  createStaff(staff: any): Observable<any> {
+    return this.http.post<any>(this.APIUrl + "/staff/create", staff, this.httpOptions);
+  }
   //[Staff/list-landlord] Filter landlords
   filterUser(
     pageSize: number,

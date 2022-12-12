@@ -66,7 +66,8 @@ namespace HouseFinder_API.Controllers
                 //Admin Login
                 ResponseDTO user;
                 //Check with account in appsettings
-                if (login.Email == Configuration.GetSection("AdminAccount").GetSection("Email").Value
+                if ((!String.IsNullOrEmpty(login.Email) || !String.IsNullOrEmpty(login.Password)) 
+                    && login.Email == Configuration.GetSection("AdminAccount").GetSection("Email").Value
                     && login.Password == Configuration.GetSection("AdminAccount").GetSection("Password").Value)
                 {
                     user = new ResponseDTO();
@@ -307,6 +308,27 @@ namespace HouseFinder_API.Controllers
             catch (Exception e)
             {
                 return BadRequest(e.Message);
+            }
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost("staff/create")]
+        public IActionResult CreateStaffAccount(StaffAccountCreateDTO staff)
+        {
+            try
+            {
+                var uid = HttpContext.Session.GetString("User");
+                if (String.IsNullOrEmpty(uid))
+                {
+                    return Forbid();
+                }
+                staff.CreatedBy = uid;
+                userRepository.CreateStaffAccount(staff);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
             }
         }
     }
