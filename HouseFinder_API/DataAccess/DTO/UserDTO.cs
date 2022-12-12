@@ -74,4 +74,14 @@ namespace DataAccess.DTO
         public string RoleName { get; set; }
         public int StatusId { get; set; }
     }
+
+    public class StaffAccountCreateDTO
+    {
+        public string DisplayName { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public int Role { get; set; }
+        [JsonIgnore]
+        public string CreatedBy {get;set;}
+    }
 }

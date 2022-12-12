@@ -408,5 +408,41 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
         }
+
+        public static void CreateStaffAccount(StaffAccountCreateDTO staff)
+        {
+            try
+            {
+                using(var context = new FUHouseFinderContext())
+                {
+                    User user = new User();
+                    var lastUser = context.Users.SkipWhile(u => u.RoleId == 1 || u.RoleId == 2).OrderBy(u => u.UserId).LastOrDefault();
+                    int index = 0;
+                    if (lastUser != null)
+                    {
+                        index = Int32.Parse(lastUser.UserId.Substring(2)) + 1;  //id auto increment
+                    }
+                    user.UserId = "SA" + index.ToString("D6");
+                    user.Email = staff.Email;
+                    user.DisplayName = staff.DisplayName;
+                    user.RoleId = staff.Role;
+                    user.CreatedBy = staff.CreatedBy;
+                    user.CreatedDate = DateTime.Now;
+                    user.LastModifiedBy = staff.CreatedBy;
+                    user.LastModifiedDate = DateTime.Now;
+                    PasswordHasher<User> pw = new PasswordHasher<User>();
+                    var password = pw.HashPassword(user, staff.Password);
+                    user.Password = password;
+                    user.StatusId = 1;
+                    context.Users.Add(user);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
     }
 }
