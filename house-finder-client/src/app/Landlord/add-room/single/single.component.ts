@@ -62,32 +62,62 @@ export class SingleComponent implements OnInit {
     if (this.roomForm.controls['building'].errors?.['required']){
       this.building = false;
     }
+    else {
+      this.building = true;
+    }
     if (this.roomForm.controls['floor'].errors?.['required']){
       this.floor = false;
+    }
+    else {
+      this.floor = true;
     }
     if (this.roomForm.controls['roomName'].errors?.['required']){
       this.roomName = false;
     }
+    else {
+      this.roomName = true;
+    }
     if (this.roomForm.controls['price'].errors?.['required']){
       this.price = false;
+    }
+    else {
+      this.price = true;
     }
     if (this.roomForm.controls['area'].errors?.['required']){
       this.area = false;
     }
+    else {
+      this.area = true;
+    }
     if (this.roomForm.controls['maxPeople'].errors?.['required']){
       this.maxPeople = false;
+    }
+    else {
+      this.maxPeople = true;
     }
     if (this.roomForm.controls['currentPeople'].errors?.['required']){
       this.currentPeople = false;
     }
+    else {
+      this.currentPeople = true;
+    }
     if (this.roomForm.controls['image1Validate'].errors?.['required']){
       this.image1Validate = false
+    }
+    else {
+      this.image1Validate = true;
     }
     if (this.roomForm.controls['image2Validate'].errors?.['required']){
       this.image2Validate = false;
     }
+    else {
+      this.image2Validate = true;
+    }
     if (this.roomForm.controls['image3Validate'].errors?.['required']){
       this.image3Validate = false;
+    }
+    else {
+      this.image3Validate = true;
     }
   }
 

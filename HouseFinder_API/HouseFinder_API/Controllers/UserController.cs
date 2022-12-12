@@ -309,5 +309,26 @@ namespace HouseFinder_API.Controllers
                 return BadRequest(e.Message);
             }
         }
+
+        [Authorize(Roles = "Head of Admission Department,Head of Student Service Department")]
+        [HttpPost("staff/create")]
+        public IActionResult CreateStaffAccount(StaffAccountCreateDTO staff)
+        {
+            try
+            {
+                var uid = HttpContext.Session.GetString("User");
+                if (String.IsNullOrEmpty(uid))
+                {
+                    return Forbid();
+                }
+                staff.CreatedBy = uid;
+                userRepository.CreateStaffAccount(staff);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }
