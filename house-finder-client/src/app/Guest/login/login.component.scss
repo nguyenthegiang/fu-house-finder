@@ -204,12 +204,20 @@
   }
 }
 
+#backHomeButton{
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  font-size: 40px;
+}
+
 // Responsive
 // Small screen
 @media only screen and (max-width: 768px) {
   #logo {
     display: none;
   }
+
 
   .identityCard:nth-child(2) {
     margin-top: 2.7rem;
@@ -245,5 +253,8 @@
     .viewIdentityCard {
       width: 25vw;
     }
+  }
+  #backHomeButton{
+    display: none;
   }
 }
