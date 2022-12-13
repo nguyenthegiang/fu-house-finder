@@ -1,12 +1,25 @@
-a:hover
-{
+a:hover {
   opacity: 0.8;
 }
 
+/*Make sure footer stays at bottom*/
+body {
+  min-height: 100vh;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+}
+
+#bodyPage {
+  flex: 1;
+}
+
+// Responsive
 @media only screen and (max-width: 768px) {
-  .logo
-  {
+  .logo {
     display: none;
   }
 }
-
