@@ -41,7 +41,7 @@
                 <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
               </span>
           </span>
-          <a class="ms-2" style="cursor: pointer;" (click)="openReply(i)" *ngIf="!isReply && rate.landlordReply === ''">phản hồi</a>
+          <a class="ms-2" style="cursor: pointer;" (click)="openReply(i)" *ngIf="!isReply && rate.landlordReply === null">phản hồi</a>
 
         </div>
         <div *ngIf="rate.landlordReply !== null">

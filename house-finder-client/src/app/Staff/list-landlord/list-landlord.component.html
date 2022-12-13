@@ -5,9 +5,13 @@
   <div class="col-12">
     <!-- Page content -->
     <div class="row">
+      <!-- Case: No landlord -->
       <div class="my-4" *ngIf="landlords.length == 0">
         <h3 class="text-center">Chưa có chủ trọ</h3>
       </div>
+      <!-- <span *ngIf="landlords.length == 0" class="emptyMesage text-center">Chưa có chủ trọ</span> -->
+
+      <!-- Case: Have landlord -->
       <div class="my-4" *ngIf="landlords.length != 0">
         <h3 class="text-center">Danh sách chủ trọ</h3>
 

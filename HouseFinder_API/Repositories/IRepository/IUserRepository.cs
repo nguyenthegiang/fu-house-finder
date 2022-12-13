@@ -24,5 +24,6 @@ namespace Repositories.IRepository
         public void ChangePassword(string userId, string newPassword);
         public void CreateStaffAccount(StaffAccountCreateDTO staff);
         public Boolean CheckOldPassword(string userId, string oldPassword);
+        public List<UserDTO> GetRejectedLandlords();
     }
 }

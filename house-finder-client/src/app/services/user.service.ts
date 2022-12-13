@@ -141,6 +141,10 @@ export class UserService {
     return this.http.get<User[]>(this.APIUrl + "/LandlordSignupRequest");
   }
 
+  getRejectedLandlord():Observable<User[]>{
+    return this.http.get<User[]>(this.APIUrl + "/RejectedLandlord");
+  }
+
   updateUserStatus(userId: string, statusId: number): Observable<any> {
     return this.http.put<any>(this.APIUrl + "/" + userId + "/" + statusId, this.httpOptions, { withCredentials: true });
   }

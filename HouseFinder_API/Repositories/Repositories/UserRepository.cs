@@ -86,5 +86,6 @@ namespace Repositories.Repositories
         public void CreateStaffAccount(StaffAccountCreateDTO staff) => UserDAO.CreateStaffAccount(staff);
 
         public Boolean CheckOldPassword(string userId, string oldPassword) => UserDAO.CheckCurrentPassword(userId, oldPassword);
+        public List<UserDTO> GetRejectedLandlords() => UserDAO.GetRejectedLandlords();
     }
 }

@@ -63,6 +63,33 @@ namespace DataAccess
             return landlords;
         }
 
+        //[Staff][Landlord Sign up Request] Get list of landlords 
+        public static List<UserDTO> GetRejectedLandlords()
+        {
+            List<UserDTO> landlords;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+
+                    //Get list of active or inactive landlords, order by name
+                    landlords = context.Users.
+                        ProjectTo<UserDTO>(config).
+                        Where(u => u.Role.RoleName.Equals("Landlord")).
+                        Where(u => u.StatusId == 3).
+                        OrderBy(landlord => landlord.DisplayName).
+                        ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return landlords;
+        }
+
         //[Head][Dashboard] Get list of staffs
         //public static List<UserDTO> GetStaffs()
         //{

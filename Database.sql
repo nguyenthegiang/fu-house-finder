@@ -561,6 +561,10 @@ INSERT INTO [dbo].[Users] VALUES (N'LA000019', null, null, N'minhanh@gmail.com',
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
 INSERT INTO [dbo].[Users] VALUES (N'LA000020', null, null, N'kimanh@gmail.com', N'kimanh', N'Kim Anh', 2, 'image_profile_1.jpg', '0365928071', 'facebook.com/minhhai', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2,  
 GETDATE(), GETDATE(), N'SA000001', N'SA000001');
+INSERT INTO [dbo].[Users] VALUES (N'LA000021', null, null, N'corbin@gmail.com', N'corbin', N'Corbin', 3, 'image_profile_1.jpg', '0365928071', 'facebook.com/corbin', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2,  
+GETDATE(), GETDATE(), N'SA000001', N'SA000001');
+INSERT INTO [dbo].[Users] VALUES (N'LA000022', null, null, N'ngocanh@gmail.com', N'ngocanh', N'Ngoc Anh', 3, 'image_profile_1.jpg', '0365928071', 'facebook.com/minhhai', 'identity_card_front.jpg', 'identity_card_back.jpg', 6, 2,  
+GETDATE(), GETDATE(), N'SA000001', N'SA000001');
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 

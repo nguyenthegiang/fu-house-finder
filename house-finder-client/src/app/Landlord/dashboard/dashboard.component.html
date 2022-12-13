@@ -36,135 +36,132 @@
 <div class="row m-2">
   <!-- Main Content -->
   <div class="col-12">
-    <!-- List available rooms -->
-    <div class="my-4" *ngIf="houses.length == 0">
-      <h3 class="text-center">Chưa có nhà trọ</h3>
-
-      <div class="my-4">
-        <button class="btn btn-secondary" (click)="addHouse()">+ Thêm mới</button>
-      </div>
-    </div>
-    <div class="my-4" *ngIf="houses.length != 0">
-
+    <div class="my-4">
       <h3 class="text-center">Danh sách nhà trọ</h3>
 
       <div class="my-4">
         <button class="btn btn-secondary" (click)="addHouse()">+ Thêm mới</button>
       </div>
 
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col" id="md">STT</th>
-            <th scope="col">Tên nhà trọ</th>
-            <th scope="col" id="md">Tiền chưa cho thuê</th>
-            <th scope="col" id="md">
-              <div class="row">
-                <div class="col">
-                  <span data-bs-toggle="tooltip" data-bs-placement="top" title="Phòng trống hoàn toàn"
-                    style="cursor: pointer;">
-                    <i class="fa-regular fa-user me-1"></i>
-                    <i class="fa-regular fa-user"></i>
-                  </span>
-                </div>
-                <div class="col">
-                  <span data-bs-toggle="tooltip" data-bs-placement="top" title="Phòng trống một phần"
-                    style="cursor: pointer;">
-                    <i class="fa-solid fa-user me-1"></i>
-                    <i class="fa-regular fa-user"></i>
-                  </span>
-                </div>
-                <div class="col">
-                  <span data-bs-toggle="tooltip" data-bs-placement="top" title="Tổng chỗ trống"
-                    style="cursor: pointer;">
-                    <i class="fa-solid fa-bed"></i>
-                  </span>
-                </div>
-              </div>
-            </th>
-            <th scope="col" id="md">Tiện ích</th>
-            <th scope="col">Tùy chọn</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let dataItem of houses; let i=index;" (click)="viewHouse(dataItem.houseId)"
-            style="cursor: pointer;">
-            <td id="md"><b>{{i+1}}</b></td>
+      <!-- Case: No data -->
+      <div *ngIf="houses.length == 0">
+        <div class="emptyMesage text-center">Chưa có nhà trọ</div>
+      </div>
 
-            <!-- House name -->
-            <td>{{dataItem.houseName}}</td>
-
-            <!-- Money not for rented rooms -->
-            <td id="md">
-              <app-dashboard-info [houseId]="dataItem.houseId"></app-dashboard-info>
-            </td>
-
-            <!-- Statistics -->
-            <td id="md">
-              <app-list-house-info [houseId]="dataItem.houseId"></app-list-house-info>
-            </td>
-
-            <!-- Utilities -->
-            <td id="md">
-              <div class="d-flex">
-                <div *ngIf="dataItem.fingerprintLock == false && dataItem.camera == false && dataItem.parking == false">
-                  <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="Không có tiện ích" style="cursor: pointer;">
-                    block
-                  </span>
+      <!-- Case: Have data -->
+      <div *ngIf="houses.length != 0">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col" id="md">STT</th>
+              <th scope="col">Tên nhà trọ</th>
+              <th scope="col" id="md">Tiền chưa cho thuê</th>
+              <th scope="col" id="md">
+                <div class="row">
+                  <div class="col">
+                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Phòng trống hoàn toàn"
+                      style="cursor: pointer;">
+                      <i class="fa-regular fa-user me-1"></i>
+                      <i class="fa-regular fa-user"></i>
+                    </span>
+                  </div>
+                  <div class="col">
+                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Phòng trống một phần"
+                      style="cursor: pointer;">
+                      <i class="fa-solid fa-user me-1"></i>
+                      <i class="fa-regular fa-user"></i>
+                    </span>
+                  </div>
+                  <div class="col">
+                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Tổng chỗ trống"
+                      style="cursor: pointer;">
+                      <i class="fa-solid fa-bed"></i>
+                    </span>
+                  </div>
                 </div>
-                <div *ngIf="dataItem.fingerprintLock == true">
-                  <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="Khóa vân tay" style="cursor: pointer;">
-                    fingerprint
-                  </span>
-                </div>
-                <div *ngIf="dataItem.camera == true">
-                  <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="Camera an ninh" style="cursor: pointer;">
-                    videocam
-                  </span>
-                </div>
-                <div *ngIf="dataItem.parking == true">
-                  <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="Chỗ để xe" style="cursor: pointer;">
-                    local_parking
-                  </span>
-                </div>
-              </div>
-            </td>
+              </th>
+              <th scope="col" id="md">Tiện ích</th>
+              <th scope="col">Tùy chọn</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let dataItem of houses; let i=index;" (click)="viewHouse(dataItem.houseId)"
+              style="cursor: pointer;">
+              <td id="md"><b>{{i+1}}</b></td>
 
-            <td>
-              <div class="d-flex">
-                <a class="text-decoration-none text-warning me-2" data-toggle="modal" data-target="#updateModal"
-                  data-whatever="@getbootstrap" (click)="viewRate(dataItem.houseId)" style="cursor: pointer;">
-                  <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="Xem đánh giá">
-                    rate_review
-                  </span>
-                </a>
-                <a class="text-decoration-none text-success me-2" data-toggle="modal" data-target="#updateModal"
-                  data-whatever="@getbootstrap" (click)="updateHouse(dataItem.houseId)" style="cursor: pointer;">
-                  <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="Chỉnh sửa">
-                    build
-                  </span>
-                </a>
-                <a class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
-                  data-bs-whatever="@getbootstrap" (click)="deleteHouse(dataItem.houseId)" style="cursor: pointer;">
-                  <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="Xóa">
-                    delete
-                  </span>
-                </a>
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <!-- End List of Rooms -->
+              <!-- House name -->
+              <td>{{dataItem.houseName}}</td>
+
+              <!-- Money not for rented rooms -->
+              <td id="md">
+                <app-dashboard-info [houseId]="dataItem.houseId"></app-dashboard-info>
+              </td>
+
+              <!-- Statistics -->
+              <td id="md">
+                <app-list-house-info [houseId]="dataItem.houseId"></app-list-house-info>
+              </td>
+
+              <!-- Utilities -->
+              <td id="md">
+                <div class="d-flex">
+                  <div *ngIf="dataItem.fingerprintLock == false && dataItem.camera == false && dataItem.parking == false">
+                    <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
+                      title="Không có tiện ích" style="cursor: pointer;">
+                      block
+                    </span>
+                  </div>
+                  <div *ngIf="dataItem.fingerprintLock == true">
+                    <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top"
+                      title="Khóa vân tay" style="cursor: pointer;">
+                      fingerprint
+                    </span>
+                  </div>
+                  <div *ngIf="dataItem.camera == true">
+                    <span class="material-symbols-outlined me-1" data-bs-toggle="tooltip" data-bs-placement="top"
+                      title="Camera an ninh" style="cursor: pointer;">
+                      videocam
+                    </span>
+                  </div>
+                  <div *ngIf="dataItem.parking == true">
+                    <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
+                      title="Chỗ để xe" style="cursor: pointer;">
+                      local_parking
+                    </span>
+                  </div>
+                </div>
+              </td>
+
+              <td>
+                <div class="d-flex">
+                  <a class="text-decoration-none text-warning me-2" data-toggle="modal" data-target="#updateModal"
+                    data-whatever="@getbootstrap" (click)="viewRate(dataItem.houseId)" style="cursor: pointer;">
+                    <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
+                      title="Xem đánh giá">
+                      rate_review
+                    </span>
+                  </a>
+                  <a class="text-decoration-none text-success me-2" data-toggle="modal" data-target="#updateModal"
+                    data-whatever="@getbootstrap" (click)="updateHouse(dataItem.houseId)" style="cursor: pointer;">
+                    <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
+                      title="Chỉnh sửa">
+                      build
+                    </span>
+                  </a>
+                  <a class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                    data-bs-whatever="@getbootstrap" (click)="deleteHouse(dataItem.houseId)" style="cursor: pointer;">
+                    <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
+                      title="Xóa">
+                      delete
+                    </span>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
-    <!-- End Display Houses -->
   </div>
   <!-- End Main content -->
 </div>
