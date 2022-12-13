@@ -157,7 +157,7 @@
                 <label class="form-label">Trạng thái</label>
                 <select #selectedActiveStatus class="form-select"
                   (change)="onActiveStatusSelected(selectedActiveStatus.value)">
-                  <option>Tất cả</option>
+                  <option value="-1">Tất cả</option>
                   <option value="1">Đang hoạt động</option>
                   <option value="0">Dừng hoạt động</option>
                 </select>

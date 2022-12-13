@@ -262,7 +262,6 @@ export class ListOrderComponent implements OnInit {
 
   updateOrderStatus() {
     var orderId = this.selectedOrder?.orderId;
-    console.log("OrderId: " + this.selectedOrder?.orderId + "; statusId: " + this.selectedStatusIdToUpdate);
     if (orderId != undefined && this.selectedStatusIdToUpdate != undefined) {
       //Call API:
       this.orderService.updateOrderStatus(orderId, this.selectedStatusIdToUpdate).subscribe();

@@ -130,7 +130,11 @@ export class ListReportComponent implements OnInit {
   }
 
   onActiveStatusSelected(selectedStatus: string) {
-    this.selectedActiveStatus = selectedStatus;
+    if (selectedStatus == "-1") {
+      this.selectedActiveStatus = undefined;
+    } else {
+      this.selectedActiveStatus = selectedStatus;
+    }
     this.filterReportedHouse(true);
   }
 
