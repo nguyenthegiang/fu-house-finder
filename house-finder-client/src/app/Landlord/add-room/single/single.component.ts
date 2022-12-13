@@ -101,19 +101,19 @@ export class SingleComponent implements OnInit {
     else {
       this.currentPeople = true;
     }
-    if (this.roomForm.controls['image1Validate'].errors?.['required']){
+    if (this.roomForm.controls['image1'].errors?.['required']){
       this.image1Validate = false
     }
     else {
       this.image1Validate = true;
     }
-    if (this.roomForm.controls['image2Validate'].errors?.['required']){
+    if (this.roomForm.controls['image2'].errors?.['required']){
       this.image2Validate = false;
     }
     else {
       this.image2Validate = true;
     }
-    if (this.roomForm.controls['image3Validate'].errors?.['required']){
+    if (this.roomForm.controls['image3'].errors?.['required']){
       this.image3Validate = false;
     }
     else {

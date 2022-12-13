@@ -157,8 +157,8 @@ export class UserService {
     return this.http.put<any>(this.APIUrl + "/updateProfile?userId=" + userId + "&name=" + name + "&email=" + email, this.httpOptions);
   }
 
-  changePassword(userId: string, newPassword: string): Observable<any> {
-    return this.http.put<any>(this.APIUrl + "/changePassword?userId=" + userId + "&newPassword=" + newPassword, this.httpOptions);
+  changePassword(oldPassword: string, newPassword: string): Observable<any> {
+    return this.http.put<any>(this.APIUrl + "/change_password", {'oldPassword': oldPassword, 'newPassword': newPassword}, this.httpOptions);
   }
 
   createStaff(staff: any): Observable<any> {

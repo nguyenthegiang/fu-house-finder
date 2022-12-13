@@ -440,7 +440,7 @@ namespace DataAccess
             {
                 using (var context = new FUHouseFinderContext())
                 {
-                    //Find rooms of this house
+                    //Find user with user id
                     User user = context.Users.FirstOrDefault(u => u.UserId.Equals(userId));
                     if (user == null)
                     {
@@ -448,7 +448,9 @@ namespace DataAccess
                     }
 
                     //Update
-                    user.Password = newPassword;
+                    PasswordHasher<User> pw = new PasswordHasher<User>();
+                    var password = pw.HashPassword(user, newPassword);
+                    user.Password = password;
                     context.Users.Update(user);
                     context.SaveChanges();
                 }
@@ -457,6 +459,36 @@ namespace DataAccess
             {
                 throw new Exception(e.Message);
             }
+        }
+
+        public static Boolean CheckCurrentPassword(string userId, string curPassword)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Find user with user id
+                    User user = context.Users.FirstOrDefault(u => u.UserId.Equals(userId));
+                    if (user == null)
+                    {
+                        throw new Exception();
+                    }
+
+                    //Update
+                    PasswordHasher<User> pw = new PasswordHasher<User>();
+                    var result = pw.VerifyHashedPassword(user, user.Password, curPassword);
+                    if (result == PasswordVerificationResult.Success || result == PasswordVerificationResult.SuccessRehashNeeded)
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
         }
 
         public static void CreateStaffAccount(StaffAccountCreateDTO staff)

@@ -35,6 +35,9 @@ export class AddRoomComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    if (this.route.snapshot.queryParamMap.get('houseId') == undefined) {
+      window.location.replace('/Landlord/dashboard');
+    }
     this.houseId = Number(this.route.snapshot.queryParamMap.get('houseId'));
   }
 

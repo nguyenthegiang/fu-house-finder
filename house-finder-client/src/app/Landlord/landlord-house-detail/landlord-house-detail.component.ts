@@ -103,7 +103,7 @@ export class LandlordHouseDetailComponent implements OnInit {
   }
 
   addRoom(){
-    window.location.href = `/Landlord/add-room?HouseId=${this.houseId}`;
+    window.location.href = `/Landlord/add-room?houseId=${this.houseId}`;
   }
 
   deleteRoom(id: number) {
