@@ -16,14 +16,8 @@ import { environment } from 'src/environments/environment';
 export class StaffLandlordDetailComponent implements OnInit {
   //List of all houses
   houses: House[] = [];
-  //(Environment) Google Map API Key, to display Google Map iframe embed
-  mapAPIkey = environment.google_maps_api_key;
   //Detail information of this House
   houseDetail: House | undefined;
-  //URL for src in <iframe> Google Map
-  mapUrl: string | undefined;
-  //Detail image of this House
-  houseImage: string[] = [];
   //Landlord of this house
   landlordDetail: User | undefined;
 

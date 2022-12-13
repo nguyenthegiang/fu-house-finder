@@ -60,7 +60,7 @@
   <div class="col-12 col-md-3 border d-flex align-items-center">
     <div class="p-2 d-flex flex-column">
       <span><b>Tổng số phòng trống:</b> {{availableRoom}} phòng</span>
-      <span><b>Tổng số chỗ trống:</b> {{availableSlot}} phòng</span>
+      <span><b>Tổng số chỗ trống:</b> {{availableSlot}} chỗ</span>
     </div>
   </div>
 </div>
@@ -74,15 +74,13 @@
     <h3 class="text-center">Danh sách phòng</h3>
 
     <!-- Search bar -->
-    <div class="row w-100 d-flex justify-content-center">
+    <!-- <div class="row w-100 d-flex justify-content-center">
       <div class="col-10 col-md-5">
         <div class="text-center my-4">
           <div class="input-group">
-            <!-- Press enter to search  -->
             <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm" aria-label="search_house_by_name"
               aria-describedby="button-addon2" #searchValue
               (keydown.enter)="search(searchValue.value)">
-            <!-- Click button to search -->
             <button class="btn btn-outline-secondary" type="button" id="button-addon2"
               (click)="search(searchValue.value)">
               <i class="fa-solid fa-magnifying-glass"></i>
@@ -90,7 +88,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
     <!-- End Search bar -->
 
     <table class="table table-hover mt-4">
@@ -98,7 +96,7 @@
         <tr>
           <th scope="col" id="md">STT</th>
           <th scope="col">Tên phòng</th>
-          <th scope="col">Giá phòng</th>
+          <th scope="col">Giá phòng (VND)</th>
           <th scope="col" id="md">Tiện ích</th>
           <th scope="col" id="md">Diện tích</th>
           <th scope="col" id="md">Số người ở</th>
@@ -113,7 +111,7 @@
           <td>{{dataItem.roomName}}</td>
 
           <!-- Price -->
-          <td>{{dataItem.pricePerMonth | currency:'VND':'symbol':'3.0'}}</td>
+          <td>{{dataItem.pricePerMonth | number}}</td>
 
           <!-- Utilities -->
           <td id="md">
@@ -192,7 +190,7 @@
     <!-- End List of Rooms -->
 
     <!-- Paging -->
-    <div class="d-flex justify-content-center align-items-center mt-4">
+    <!-- <div class="d-flex justify-content-center align-items-center mt-4">
       <nav aria-label="Page navigation example">
         <ul class="pagination">
           <li class="page-item">
@@ -212,7 +210,7 @@
           </li>
         </ul>
       </nav>
-    </div>
+    </div> -->
     <!-- End Paging -->
   </div>
 </div>
