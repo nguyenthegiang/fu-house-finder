@@ -63,7 +63,7 @@ namespace DataAccess
             return landlords;
         }
 
-        //[Staff][Dashboard] Get list of landlords 
+        //[Staff][Landlord Sign up Request] Get list of landlords 
         public static List<UserDTO> GetRejectedLandlords()
         {
             List<UserDTO> landlords;
@@ -89,6 +89,7 @@ namespace DataAccess
             }
             return landlords;
         }
+
         //[Head][Dashboard] Get list of staffs
         //public static List<UserDTO> GetStaffs()
         //{
