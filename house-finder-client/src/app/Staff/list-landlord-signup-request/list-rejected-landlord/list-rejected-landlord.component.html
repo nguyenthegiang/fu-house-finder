@@ -6,7 +6,8 @@
     <div class="row">
       <div class="my-4">
         <h3 class="text-center">Danh sách chủ trọ bị từ chối</h3>
-        <a  class="mx-4" href="Staff/list-landlord-signup-request" style="color: #ee4d2d;">Danh sách chủ trọ đăng ký</a>
+        <a class="mx-4" href="Staff/list-landlord-signup-request" style="color: #ee4d2d;">Danh sách chủ trọ đăng
+          ký</a>
 
         <!-- Case: No Data -->
         <div class="m-4" *ngIf="rejectedLandlords.length == 0">
@@ -27,7 +28,9 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let landlord of rejectedLandlords" data-bs-toggle="modal" data-bs-target="#selectedRequestModal" (click)="changeSelectedLandlord(landlord.userId)" style="cursor: pointer;">
+              <tr *ngFor="let landlord of rejectedLandlords" data-bs-toggle="modal"
+                data-bs-target="#selectedRequestModal" (click)="changeSelectedLandlord(landlord.userId)"
+                style="cursor: pointer;">
                 <td id="md">{{landlord.displayName}}</td>
                 <td>{{landlord.email}}</td>
                 <td id="md">{{landlord.phoneNumber}}</td>
@@ -66,19 +69,22 @@
   </div>
 </div>
 
-<app-footer></app-footer>
+<!-- <app-footer></app-footer> -->
 
 <!-- Alerts by Template: sweetalert2 -->
 <swal #acceptLandlordAlert title="Phê duyệt tài khoản thành công." icon="success" [showConfirmButton]="false"
-  [toast]="true" [timer]="3000" [timerProgressBar]="true" position="top-end" background="#defad9" [showCloseButton]="true">
+  [toast]="true" [timer]="3000" [timerProgressBar]="true" position="top-end" background="#defad9"
+  [showCloseButton]="true">
 </swal>
 
 <swal #denyLandlordStatusAlert title="Từ chối tài khoản thành công." icon="success" [showConfirmButton]="false"
-  [toast]="true" [timer]="3000" [timerProgressBar]="true" position="top-end" background="#defad9" [showCloseButton]="true">
+  [toast]="true" [timer]="3000" [timerProgressBar]="true" position="top-end" background="#defad9"
+  [showCloseButton]="true">
 </swal>
 
 <swal #updateLandlordStatusFailAlert title="Phê duyệt tài khoản thất bại." icon="error" [showConfirmButton]="false"
-  [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true" background="#facfcf" [showCloseButton]="true">
+  [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true" background="#facfcf"
+  [showCloseButton]="true">
 </swal>
 
 <!-- View identity card modal -->
@@ -102,5 +108,3 @@
     </div>
   </div>
 </div>
-
-

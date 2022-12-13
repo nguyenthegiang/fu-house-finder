@@ -224,21 +224,26 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let house of reportedHouses; let i = index" style="cursor: pointer">
-                    <td id="md" (click)="changeSelectedHouse(house.houseId)" data-bs-toggle="modal" data-bs-target="#listReportModal">
+                    <td id="md" (click)="changeSelectedHouse(house.houseId)" data-bs-toggle="modal"
+                      data-bs-target="#listReportModal">
                       <b>{{ (housePageNumber - 1) * housePageSize + i + 1 }}</b>
                     </td>
-                    <td (click)="changeSelectedHouse(house.houseId)" data-bs-toggle="modal" data-bs-target="#listReportModal">
+                    <td (click)="changeSelectedHouse(house.houseId)" data-bs-toggle="modal"
+                      data-bs-target="#listReportModal">
                       {{ house.houseName }}
                     </td>
-                    <td id="md" (click)="changeSelectedHouse(house.houseId)" data-bs-toggle="modal" data-bs-target="#listReportModal">
+                    <td id="md" (click)="changeSelectedHouse(house.houseId)" data-bs-toggle="modal"
+                      data-bs-target="#listReportModal">
                       {{ house.landlord.displayName }}
                     </td>
-                    <td (click)="changeSelectedHouse(house.houseId)" data-bs-toggle="modal" data-bs-target="#listReportModal">
+                    <td (click)="changeSelectedHouse(house.houseId)" data-bs-toggle="modal"
+                      data-bs-target="#listReportModal">
                       {{ house.numberOfReport }}
                     </td>
                     <td>
                       <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" (change)="updateUserStatus($event, house.landlord.userId)"
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
+                          (change)="updateUserStatus($event, house.landlord.userId)"
                           [checked]="house.landlord.statusId == 1" />
                         <span *ngIf="house.landlord.statusId === 1">Hoạt động</span>
                         <span *ngIf="house.landlord.statusId === 0">Dừng hoạt động</span>
@@ -362,4 +367,4 @@
   </div>
 </div>
 
-<app-footer></app-footer>
+<!-- <app-footer></app-footer> -->

@@ -6,13 +6,15 @@
   <div class="row w-100 d-flex flex-column align-items-center needs-validation" *ngIf="staffDetail">
     <div class="col-12 col-md-6 mb-3">
       <label for="exampleInput1" class="form-label"><b>Họ và tên</b></label>
-      <input type="text" class="form-control" [(ngModel)]="updateName" placeholder="Nhập họ và tên" id="exampleInput1" required>
+      <input type="text" class="form-control" [(ngModel)]="updateName" placeholder="Nhập họ và tên" id="exampleInput1"
+        required>
       <div class="invalid-feedback mb-3">Không được để trống</div>
     </div>
 
     <div class="col-12 col-md-6 mb-3">
       <label for="exampleInput2" class="form-label"><b>Email</b></label>
-      <input type="email" class="form-control" [(ngModel)]="updateEmail" placeholder="Nhập email" id="exampleInput2" required>
+      <input type="email" class="form-control" [(ngModel)]="updateEmail" placeholder="Nhập email" id="exampleInput2"
+        required>
       <div class="invalid-feedback mb-3">Không được để trống</div>
     </div>
 
@@ -22,7 +24,7 @@
   </div>
 </div>
 
-<app-footer></app-footer>
+<!-- <app-footer></app-footer> -->
 
 <swal #updateSuccessAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
   title="Cập nhật thành công" icon="success">
