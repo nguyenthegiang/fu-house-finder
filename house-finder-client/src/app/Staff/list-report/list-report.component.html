@@ -223,18 +223,25 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let house of reportedHouses; let i = index" (click)="changeSelectedHouse(house.houseId)"
-                    style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#listReportModal">
-                    <td id="md">
+                  <tr *ngFor="let house of reportedHouses; let i = index" style="cursor: pointer">
+                    <td id="md" (click)="changeSelectedHouse(house.houseId)" data-bs-toggle="modal" data-bs-target="#listReportModal">
                       <b>{{ (housePageNumber - 1) * housePageSize + i + 1 }}</b>
                     </td>
-                    <td>{{ house.houseName }}</td>
-                    <td id="md">{{ house.landlord.displayName }}</td>
-                    <td>{{ house.numberOfReport }}</td>
+                    <td (click)="changeSelectedHouse(house.houseId)" data-bs-toggle="modal" data-bs-target="#listReportModal">
+                      {{ house.houseName }}
+                    </td>
+                    <td id="md" (click)="changeSelectedHouse(house.houseId)" data-bs-toggle="modal" data-bs-target="#listReportModal">
+                      {{ house.landlord.displayName }}
+                    </td>
+                    <td (click)="changeSelectedHouse(house.houseId)" data-bs-toggle="modal" data-bs-target="#listReportModal">
+                      {{ house.numberOfReport }}
+                    </td>
                     <td>
                       <div class="form-check form-switch">
-                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" (change)="updateUserStatus($event, house.landlord.userId)"
                           [checked]="house.landlord.statusId == 1" />
+                        <span *ngIf="house.landlord.statusId === 1">Hoạt động</span>
+                        <span *ngIf="house.landlord.statusId === 0">Dừng hoạt động</span>
                       </div>
                     </td>
                   </tr>
