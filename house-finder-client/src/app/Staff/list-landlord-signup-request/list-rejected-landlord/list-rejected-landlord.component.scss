@@ -1,0 +1,41 @@
+.landlordSingupRequest{
+    tr{
+      td{
+        .profileImage{
+          width: 5vw;
+        }
+        .identityCard{
+          width: 6.5vw;
+        }
+        img:hover{
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .viewIdentityCard{
+    width: 30vw;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .md
+    {
+      display: none;
+    }
+  }
+
+  .emptyMesage{
+    font-weight: bold;
+    color: red;
+    text-align: center;
+    font-size: 15pt;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+  }
+
+
+
+
+
+
+
