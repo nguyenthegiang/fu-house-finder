@@ -158,7 +158,7 @@ export class ListOrderComponent implements OnInit {
             title: {
               display: true,
               text:
-                'Thống kê số lượng đăng ký bạn đã giải quyết trong năm ' + this.currentYear,
+                'Thống kê số lượng nguyện vọng bạn đã giải quyết trong năm ' + this.currentYear,
             },
           },
         },
