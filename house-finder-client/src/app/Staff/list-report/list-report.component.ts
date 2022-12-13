@@ -16,8 +16,8 @@ import { ReportService } from 'src/app/services/report.service';
 export class ListReportComponent implements OnInit {
   //{Search} input value
   searchValue: string | undefined;
-  //List all reported houses
-  houses: ReportHouse[] = [];
+  //List all reported reportedHouses
+  reportedHouses: ReportHouse[] = [];
   //List reports of selected house
   reportsOfSelectedHouse: StaffReport[] = [];
   //List all reports
@@ -32,7 +32,7 @@ export class ListReportComponent implements OnInit {
   searchName: string | undefined;
 
   //Filter house
-  selectedOrderByHouse: string | undefined;
+  selectedOrderByHouse: string = "desc";  //Default: Báo cáo nhiều nhất
   selectedActiveStatus: string | undefined;
   searchHouse: string | undefined;
 
@@ -43,9 +43,9 @@ export class ListReportComponent implements OnInit {
   reportPageCount = 0; //number of pages
   reportPageList: number[] = []; //array to loop with *ngFor in HTML Template
 
-  //(Paging) for Reported Houses
+  //(Paging) for Reported reportedHouses
   totalReportedHouse = 0; //number of items
-  housePageSize = 10; //number of items per page
+  housePageSize = 1000; //number of items per page
   housePageNumber = 1;
   housePageCount = 0; // number of pages
   housePageList: number[] = [];
@@ -69,26 +69,11 @@ export class ListReportComponent implements OnInit {
     private reportService: ReportService,
     private houseService: HouseService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.selectedOrderBy = 'desc';
     this.filterReport(true);
-
-    // (Paging for Reports) Count available Houses for total number of pages
-    this.reportService.countTotalReport().subscribe((data) => {
-      this.totalReport = data;
-
-      // (Paging) Calculate number of pages
-      this.reportPageCount = Math.ceil(this.totalReport / this.reportPageSize); //divide & round up
-
-      // (Paging) Render pageList based on pageCount
-      this.reportPageList = Array.from(
-        { length: this.reportPageCount },
-        (_, i) => i + 1
-      );
-      //pageList is now an array like {1, 2, 3, ..., n | n = pageCount}
-    });
 
     this.filterReportedHouse(false);
     //Call API: get all reports of this house
@@ -114,7 +99,7 @@ export class ListReportComponent implements OnInit {
   //Show modal
   changeSelectedHouse(houseId: number) {
     //Find the house which id == houseId
-    var selectedHouse = this.houses.find((house) => house.houseId == houseId);
+    var selectedHouse = this.reportedHouses.find((house) => house.houseId == houseId);
     if (selectedHouse?.listReports != undefined) {
       this.reportsOfSelectedHouse = selectedHouse.listReports;
       this.landlordOfSelectedHouse = selectedHouse.landlord;
@@ -133,19 +118,23 @@ export class ListReportComponent implements OnInit {
     this.filterReport(true);
   }
 
-  onOrderBySelected(selectedOrderBy: string){
+  onOrderBySelected(selectedOrderBy: string) {
     this.selectedOrderBy = selectedOrderBy;
     this.filterReport(true);
   }
 
   //Filter reported houses
-  onHouseOrderBySelected(selectedOrderBy: string){
+  onHouseOrderBySelected(selectedOrderBy: string) {
     this.selectedOrderByHouse = selectedOrderBy;
     this.filterReportedHouse(true);
   }
 
-  onActiveStatusSelected(selectedStatus: string){
-    this.selectedActiveStatus = selectedStatus;
+  onActiveStatusSelected(selectedStatus: string) {
+    if (selectedStatus == "-1") {
+      this.selectedActiveStatus = undefined;
+    } else {
+      this.selectedActiveStatus = selectedStatus;
+    }
     this.filterReportedHouse(true);
   }
 
@@ -190,11 +179,30 @@ export class ListReportComponent implements OnInit {
       this.reportPageNumber = 1;
     }
 
+    //Get data
     this.reportService
       .filterReport(this.reportPageSize, this.reportPageNumber, this.selectedFromDate, this.selectedToDate, this.selectedOrderBy, this.searchName)
       .subscribe((data) => {
         this.reports = data;
         this.scrollToTop();
+      });
+
+    //For Paging: count data
+    this.reportService
+      .filterReport(1000, 1, this.selectedFromDate, this.selectedToDate, this.selectedOrderBy, this.searchName)
+      .subscribe((data) => {
+        this.totalReport = data.length;
+
+        // (Paging) Calculate number of pages
+        this.reportPageCount = Math.ceil(this.totalReport / this.reportPageSize); //divide & round up
+
+        // (Paging) Render pageList based on pageCount
+        this.reportPageList = Array.from(
+          { length: this.reportPageCount },
+          (_, i) => i + 1
+        );
+        //pageList is now an array like {1, 2, 3, ..., n | n = pageCount}
+
       });
   }
 
@@ -207,23 +215,23 @@ export class ListReportComponent implements OnInit {
     this.houseService
       .filterReportedHouse(this.housePageSize, this.housePageNumber, this.selectedOrderByHouse, this.selectedActiveStatus)
       .subscribe((data) => {
-        this.houses = data;
+        this.reportedHouses = data;
         this.scrollToTop();
       });
   }
 
-  handleClear(){
+  handleClear() {
     this.searchReportContent.nativeElement.value = ' ';
     this.searchName = undefined;
     this.filterReport(true);
   }
-  handleClearHouse(){
+  handleClearHouse() {
     this.searchHouseName.nativeElement.value = ' ';
     this.searchHouse = undefined;
     this.filterReportedHouse(true);
   }
 
-  onSelectReportStatus(selectedStatusId: string){
+  onSelectReportStatus(selectedStatusId: string) {
     this.selectedStatusIdToUpdate = Number(selectedStatusId);
   }
 
@@ -235,12 +243,10 @@ export class ListReportComponent implements OnInit {
       this.selectedReportStudentName = selectedReport.student.displayName;
       this.selectedReportHouse = selectedReport.house.houseName;
       this.selectedReportContent = selectedReport.reportContent;
-      if(selectedReport.solvedByNavigation != undefined)
-      {
+      if (selectedReport.solvedByNavigation != undefined) {
         this.selectedReportSolvedPerson = selectedReport.solvedByNavigation.displayName;
       }
-      if(selectedReport.solvedByNavigation == undefined)
-      {
+      if (selectedReport.solvedByNavigation == undefined) {
         this.selectedReportSolvedPerson = "";
       }
       this.selectedReportDate = selectedReport.reportedDate;
@@ -250,8 +256,7 @@ export class ListReportComponent implements OnInit {
     }
   }
 
-  updateReportStatus()
-  {
+  updateReportStatus() {
 
   }
 }

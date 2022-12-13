@@ -2,84 +2,41 @@
 
 <div class="row mx-2 my-5">
   <div class="col-12">
-    <!-- Page content -->
-
     <!-- Tab -->
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button"
-          role="tab" aria-controls="home-tab-pane" aria-selected="true">
+        <button class="nav-link fw-semibold active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
+          type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
           Danh sách báo cáo
         </button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button"
-          role="tab" aria-controls="profile-tab-pane" aria-selected="false">
+        <button class="nav-link fw-semibold" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
+          type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">
           Báo cáo theo nhà
         </button>
       </li>
     </ul>
     <!-- End tab -->
 
-    <div class="tab-content border-end border-bottom border-start" id="myTabContent" style="padding: 20px">
-      <!-- List of reports -->
+    <div class="tab-content border-end border-bottom border-start" id="myTabContent">
+      <!------------------------------------------------ List of reports ------------------------------------------------>
       <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
         <div class="row">
           <div class="my-4">
             <h3 class="text-center">Danh sách báo cáo</h3>
 
-            <!-- Search bar -->
-            <!-- <div class="row d-flex justify-content-center">
-              <div class="col-10 col-md-5">
-                <div class="text-center my-4">
-                  <div class="input-group"> -->
-            <!-- Press enter to search  -->
-            <!-- <input
-                      type="text"
-                      class="form-control border border-end-0"
-                      placeholder="Nhập nội dung báo cáo tìm kiếm"
-                      aria-label="search_house_by_name"
-                      aria-describedby="button-addon2"
-                      #searchReportContent
-                      (keydown.enter)="
-                        searchReportByContent(searchReportContent.value)
-                      "
-                    /> -->
-            <!-- Click button to clear search -->
-            <!-- <button
-                      *ngIf="searchName != undefined"
-                      class="clearSearchBtn"
-                      type="button"
-                      (click)="handleClear()" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Xóa"
-                    >
-                      <span class="material-symbols-outlined"> close </span>
-                    </button> -->
-            <!-- Click button to search -->
-            <!-- <button
-                      class="btn btn-outline-secondary"
-                      type="button"
-                      id="button-addon2"
-                      (click)="searchReportByContent(searchReportContent.value)"
-                    >
-                      <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-            <!-- End Search bar -->
-
             <!-- Filter report -->
-            <div class="row mb-4">
+            <div class="row mb-4 d-flex justify-content-end">
               <!-- Date picker -->
               <!-- Start date -->
-              <div class="col-12 col-md-4 mt-4">
+              <div class="col-12 col-md-2 mt-4">
                 <label class="form-label">Từ ngày</label>
                 <input #selectedFromDate class="form-control" type="date"
                   (change)="onFromDateSelected(selectedFromDate.value)" />
               </div>
               <!-- End date -->
-              <div class="col-12 col-md-4 mt-4">
+              <div class="col-12 col-md-2 mt-4">
                 <label class="form-label">Đến ngày</label>
                 <input #selectedToDate class="form-control" type="date"
                   (change)="onToDateSelected(selectedToDate.value)" />
@@ -87,13 +44,24 @@
               <!-- End date picker -->
 
               <!-- Order by -->
-              <div class="col-12 col-md-4 mt-4">
+              <div class="col-12 col-md-2 mt-4">
                 <label class="form-label">Sắp xếp</label>
                 <select #selectedOrderBy class="form-select" (change)="onOrderBySelected(selectedOrderBy.value)">
                   <option selected disabled>Chọn sắp xếp</option>
                   <option value="desc">Ngày gần nhất</option>
                   <option value="asc">Ngày xa nhất</option>
                 </select>
+              </div>
+
+              <!-- Clear filter result -->
+              <div class="col-12 col-md-4 my-2">
+              </div>
+
+              <div class="col-12 col-md-2 my-2">
+                <label class="form-label" id="hiddenDiv">This is a hidden item used for styling</label>
+                <div class="text-end">
+                  <a href="/Staff/list-report" id="clearFilterValue">Đặt lại bộ lọc</a>
+                </div>
               </div>
             </div>
             <!-- End filter -->
@@ -187,26 +155,26 @@
         </div>
       </div>
 
-      <!-- List of reportes houses -->
+      <!------------------------------------------------ List of reported houses ------------------------------------------------>
       <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
         <div class="row">
           <div class="my-4">
             <h3 class="text-center">Danh sách nhà bị báo cáo</h3>
 
             <!-- Filter reported houses-->
-            <div class="row mb-4">
+            <div class="row mb-4 d-flex justify-content-end">
               <!-- Order by -->
-              <div class="col-12 col-md-4 mt-4">
+              <div class="col-12 col-md-2 mt-4">
                 <label class="form-label">Trạng thái</label>
                 <select #selectedActiveStatus class="form-select"
                   (change)="onActiveStatusSelected(selectedActiveStatus.value)">
-                  <option>Tất cả</option>
+                  <option value="-1">Tất cả</option>
                   <option value="1">Đang hoạt động</option>
                   <option value="0">Dừng hoạt động</option>
                 </select>
               </div>
               <!-- Order by -->
-              <div class="col-12 col-md-4 mt-4">
+              <div class="col-12 col-md-2 mt-4">
                 <label class="form-label">Sắp xếp</label>
                 <select #selectedHouseOrderBy class="form-select"
                   (change)="onHouseOrderBySelected(selectedHouseOrderBy.value)">
@@ -215,38 +183,35 @@
                   <option value="asc">Báo cáo ít nhất</option>
                 </select>
               </div>
-              <div class="col-12 col-md-4 mt-4">
+              <!-- <div class="col-12 col-md-4 mt-4">
                 <label class="form-label">Tìm kiếm</label>
                 <div class="text-center">
                   <div class="input-group">
-                    <!-- Press enter to search  -->
                     <input type="text" class="form-control border border-end-0" placeholder="Nhập từ khóa tìm kiếm"
                       aria-label="search_house_by_name" aria-describedby="button-addon2"
                       placeholder="Nhập tên nhà tìm kiếm" #searchHouseName
                       (keydown.enter)="searchReportedHouse(searchHouseName.value)" />
-                    <!-- Click button to clear search -->
                     <button *ngIf="searchHouse != undefined" class="clearSearchBtn" type="button"
                       (click)="handleClearHouse()" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Xóa">
                       <span class="material-symbols-outlined"> close </span>
                     </button>
-                    <!-- Click button to search -->
                     <button class="btn btn-outline-secondary" type="button" id="button-addon2"
                       (click)="searchReportedHouse(searchHouseName.value)">
                       <i class="fa-solid fa-magnifying-glass"></i>
                     </button>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
             <!-- End filter -->
 
             <!-- Case: No data -->
-            <div *ngIf="reports.length <= 0">
+            <div *ngIf="reportedHouses.length <= 0">
               <div class="text-center emptyMesage">Không có nhà bị báo cáo</div>
             </div>
 
             <!-- Case: Have data -->
-            <div *ngIf="houses.length > 0">
+            <div *ngIf="reportedHouses.length > 0">
               <table class="table table-hover">
                 <thead>
                   <tr>
@@ -258,7 +223,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let house of houses; let i = index" (click)="changeSelectedHouse(house.houseId)"
+                  <tr *ngFor="let house of reportedHouses; let i = index" (click)="changeSelectedHouse(house.houseId)"
                     style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#listReportModal">
                     <td id="md">
                       <b>{{ (housePageNumber - 1) * housePageSize + i + 1 }}</b>
@@ -277,32 +242,26 @@
               </table>
 
               <!-- Paging reported houses-->
-              <div class="d-flex justify-content-center align-items-center my-3">
+              <!-- <div class="d-flex justify-content-center align-items-center my-3">
                 <nav aria-label="Pagination-nav">
                   <ul class="pagination">
-                    <!-- Previous: Disabled if this is first page -->
                     <li class="page-item" [ngClass]="{ disabled: housePageNumber == 1 }">
-                      <!-- Go to previous page -->
                       <a class="page-link" aria-label="Previous" (click)="goToHousePage(housePageNumber - 1)">
                         <span aria-hidden="true">&laquo;</span>
                       </a>
                     </li>
-                    <!-- Numbers -->
                     <li *ngFor="let page of housePageList" class="page-item">
-                      <!-- Display this as active if it's the chosen page -->
                       <a class="page-link" (click)="goToHousePage(page)"
                         [ngClass]="{ active: housePageNumber == page }">{{ page }}</a>
                     </li>
-                    <!-- Next: Disabled if this is last page -->
                     <li class="page-item" [ngClass]="{ disabled: housePageNumber == housePageCount }">
-                      <!-- Go to next page -->
                       <a class="page-link" aria-label="Next" (click)="goToHousePage(housePageNumber + 1)">
                         <span aria-hidden="true">&raquo;</span>
                       </a>
                     </li>
                   </ul>
                 </nav>
-              </div>
+              </div> -->
               <!-- End Paging -->
             </div>
           </div>
