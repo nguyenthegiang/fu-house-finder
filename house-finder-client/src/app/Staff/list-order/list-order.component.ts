@@ -98,7 +98,6 @@ export class ListOrderComponent implements OnInit {
 
       var num = 0;
       this.totalofSolvedOrderInYear.forEach(function (value) {
-        console.log(value);
         num += value;
       })
       this.totalofSolvedOrderInCurrentYear = num;
@@ -213,7 +212,6 @@ export class ListOrderComponent implements OnInit {
   onStatusSelected(selectedStatusId: string) {
     // convert string to number
     var numberCampusId: number = +selectedStatusId;
-    console.log(numberCampusId);
 
     // Call API: update list houses with the campus user chose
     this.selectedStatusId = numberCampusId;
@@ -241,6 +239,7 @@ export class ListOrderComponent implements OnInit {
 
   search(searchValue: string) { }
 
+  //To show detail in modal
   changeSelectedOrder(orderId: number) {
     //Find the order which id == orderId
     var selectedOrder = this.orders.find((order) => order.orderId == orderId);
@@ -252,7 +251,6 @@ export class ListOrderComponent implements OnInit {
       this.selectedOrderCreatedDate = selectedOrder.orderedDate;
       this.selectedOrderContent = selectedOrder.orderContent;
       this.selectedStatusId = selectedOrder.status.statusId;
-      console.log('Status id: ' + this.selectedStatusId);
     }
   }
 

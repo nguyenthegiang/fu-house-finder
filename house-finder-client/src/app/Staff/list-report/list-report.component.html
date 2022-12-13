@@ -333,12 +333,6 @@
         <span><b>Tên sinh viên: </b>{{ selectedReportStudentName }}</span><br />
         <span><b>Tên nhà trọ: </b>{{ selectedReportHouse }}</span><br />
         <span><b>Nội dung: </b>{{ selectedReportContent }}</span><br />
-        <span *ngIf="selectedReportSolvedPerson !== ''"><b>Người giải quyết: </b>{{ selectedReportSolvedPerson
-          }}</span><br *ngIf="selectedReportSolvedPerson !== ''" />
-        <span><b>Ngày báo cáo: </b>{{ selectedReportDate | date }}</span><br />
-        <span *ngIf="selectedReportSolvedDate !== null"><b>Ngày giải quyết: </b>{{ selectedReportSolvedDate | date
-          }}</span><br *ngIf="selectedReportSolvedDate !== null" />
-        <br />
         <b class="form-label">Trạng thái</b>
         <!-- Set selected value for <select> by [ngModel] -->
         <select #selectReportStatusId class="form-select" [(ngModel)]="selectedStatusId"
@@ -353,7 +347,7 @@
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
           Hủy
         </button>
-        <button type="button" class="btn btn-success" (click)="updateReportStatus()">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="updateReportStatus()">
           Lưu
         </button>
       </div>

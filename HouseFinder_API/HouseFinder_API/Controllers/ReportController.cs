@@ -118,7 +118,7 @@ namespace HouseFinder_API.Controllers
          */
         [Authorize]
         [HttpPut("{reportId}/{statusId}")]
-        public IActionResult UpdateOrderStatus(int reportId, int statusId)
+        public IActionResult UpdateReportStatus(int reportId, int statusId)
         {
             try
             {

@@ -181,6 +181,7 @@ namespace DataAccess
             }
             return report;
         }
+
         //Update report status
         public static void UpdateReportStatus(int reportId, int statusId, string account)
         {
@@ -188,7 +189,7 @@ namespace DataAccess
             {
                 using (var context = new FUHouseFinderContext())
                 {
-                    Report updateReport = context.Reports.FirstOrDefault(report => report.StatusId == reportId);
+                    Report updateReport = context.Reports.FirstOrDefault(report => report.ReportId == reportId);
                     if (updateReport == null)
                     {
                         throw new Exception();
@@ -204,12 +205,12 @@ namespace DataAccess
                         updateReport.SolvedDate = null;
                         updateReport.SolvedBy = account;
                     }
-                    else if (statusId == 3) //Add solved date and solved by for order if status change to solved
+                    else if (statusId == 3) //Add solved date and solved by for report if status change to solved
                     {
                         updateReport.SolvedDate = DateTime.Today;
                         updateReport.SolvedBy = account;
                     }
-                    //Update order's status
+                    //Update report's status
                     updateReport.StatusId = statusId;
 
                     context.Entry<Report>(updateReport).State = EntityState.Modified;

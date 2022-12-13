@@ -136,4 +136,10 @@ export class ReportService {
   getReportById(reportId: number): Observable<Report> {
     return this.http.get<Report>(this.APIUrl + "/" + reportId);
   }
+
+  //[Staff/list-report] Update a report's status
+  updateReportStatus(reportId: number, statusId: number): Observable<any> {
+    console.log("reportId: " + reportId + " statusId: " + statusId)
+    return this.http.put<any>(this.APIUrl + "/" + reportId + "/" + statusId, this.httpOptions, { withCredentials: true });
+  }
 }
