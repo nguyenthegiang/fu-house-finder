@@ -1,9 +1,11 @@
 <app-staff-header></app-staff-header>
 <nav class="mt-3 ps-3 fs-6" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li *ngIf="checkBreadcrumb" class="breadcrumb-item"><a class="text-danger" onclick="history.back();history.back()" style="cursor: pointer;">Danh sách chủ trọ</a></li>
+    <li *ngIf="checkBreadcrumb" class="breadcrumb-item"><a class="text-danger" onclick="history.back();history.back()"
+        style="cursor: pointer;">Danh sách chủ trọ</a></li>
     <li *ngIf="checkBreadcrumb" class="breadcrumb-item" aria-current="page">></li>
-    <li class="breadcrumb-item"><a class="text-danger" onclick="history.back()" style="cursor: pointer;">Danh sách nhà trọ</a></li>
+    <li class="breadcrumb-item"><a class="text-danger" onclick="history.back()" style="cursor: pointer;">Danh sách nhà
+        trọ</a></li>
     <li class="breadcrumb-item" aria-current="page">></li>
     <li class="breadcrumb-item active" aria-current="page"> Danh sách phòng trọ</li>
   </ol>
@@ -16,14 +18,18 @@
     <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
       <div *ngFor="let image of houseDetail.imagesOfHouses; let i=index;">
         <div *ngIf="i > 1" class="carousel-indicators">
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+            aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+            aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+            aria-label="Slide 3"></button>
         </div>
       </div>
       <div class="carousel-inner rounded">
         <div class="carousel-item active" *ngIf="houseDetail.imagesOfHouses">
-          <img src="../../assets/image/House/{{houseDetail.imagesOfHouses[0].imageLink}}" class="d-block w-100 h-25" alt="...">
+          <img src="../../assets/image/House/{{houseDetail.imagesOfHouses[0].imageLink}}" class="d-block w-100 h-25"
+            alt="...">
         </div>
         <div *ngFor="let image of houseDetail.imagesOfHouses; let i=index;">
           <div class="carousel-item" *ngIf="i >= 1">
@@ -33,11 +39,13 @@
       </div>
       <div *ngFor="let image of houseDetail.imagesOfHouses; let i=index;">
         <div *ngIf="i > 1">
-          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
           </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+            data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>
@@ -66,12 +74,8 @@
 </div>
 
 <div class="row m-2">
-  <div class="my-4" *ngIf="rooms.length == 0">
-    <h3 class="text-center">Chưa có phòng trọ</h3>
-  </div>
-
-  <div class="my-4" *ngIf="rooms.length != 0">
-    <h3 class="text-center">Danh sách phòng</h3>
+  <div class="my-4">
+    <h3 class="text-center">Danh sách phòng trọ</h3>
 
     <!-- Search bar -->
     <!-- <div class="row w-100 d-flex justify-content-center">
@@ -91,103 +95,121 @@
     </div> -->
     <!-- End Search bar -->
 
-    <table class="table table-hover mt-4">
-      <thead>
-        <tr>
-          <th scope="col" id="md">STT</th>
-          <th scope="col">Tên phòng</th>
-          <th scope="col">Giá phòng (VND)</th>
-          <th scope="col" id="md">Tiện ích</th>
-          <th scope="col" id="md">Diện tích</th>
-          <th scope="col" id="md">Số người ở</th>
-          <th scope="col">Trạng thái</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let dataItem of rooms; let i=index;" (click)="viewRoomDetail(dataItem.roomId)" style="cursor: pointer;">
-          <td id="md"><b>{{i+1}}</b></td>
+     <!-- Case: No Data -->
+     <div *ngIf="rooms.length <= 0">
+      <div class="text-center emptyMesage">Chưa có phòng trọ</div>
+    </div>
 
-          <!-- Room name -->
-          <td>{{dataItem.roomName}}</td>
+    <!-- Case: Have data -->
+    <div *ngIf="rooms.length > 0">
+      <table class="table table-hover mt-4">
+        <thead>
+          <tr>
+            <th scope="col" id="md">STT</th>
+            <th scope="col">Tên phòng</th>
+            <th scope="col">Giá phòng (VND)</th>
+            <th scope="col" id="md">Tiện ích</th>
+            <th scope="col" id="md">Diện tích</th>
+            <th scope="col" id="md">Số người ở</th>
+            <th scope="col">Trạng thái</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let dataItem of rooms; let i=index;" (click)="viewRoomDetail(dataItem.roomId)"
+            style="cursor: pointer;">
+            <td id="md"><b>{{i+1}}</b></td>
 
-          <!-- Price -->
-          <td>{{dataItem.pricePerMonth | number}}</td>
+            <!-- Room name -->
+            <td>{{dataItem.roomName}}</td>
 
-          <!-- Utilities -->
-          <td id="md">
-            <div class="d-flex">
-              <div *ngIf="dataItem.fridge == false && dataItem.kitchen == false && dataItem.washingMachine == false
+            <!-- Price -->
+            <td>{{dataItem.pricePerMonth | number}}</td>
+
+            <!-- Utilities -->
+            <td id="md">
+              <div class="d-flex">
+                <div
+                  *ngIf="dataItem.fridge == false && dataItem.kitchen == false && dataItem.washingMachine == false
                 && dataItem.desk == false && dataItem.noLiveWithHost == false && dataItem.bed == false && dataItem.closedToilet == false">
-                <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Không có tiện ích" style="cursor: pointer;">
-                  block
-                </span>
+                  <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
+                    title="Không có tiện ích" style="cursor: pointer;">
+                    block
+                  </span>
+                </div>
+                <div *ngIf="dataItem.fridge == true">
+                  <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top"
+                    title="Tủ lạnh" style="cursor: pointer;">
+                    kitchen
+                  </span>
+                </div>
+                <div *ngIf="dataItem.kitchen == true">
+                  <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top"
+                    title="Bếp" style="cursor: pointer;">
+                    multicooker
+                  </span>
+                </div>
+                <div *ngIf="dataItem.washingMachine == true">
+                  <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top"
+                    title="Máy giặt" style="cursor: pointer;">
+                    local_laundry_service
+                  </span>
+                </div>
+                <div *ngIf="dataItem.desk == true">
+                  <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top"
+                    title="Bàn ghế" style="cursor: pointer;">
+                    desk
+                  </span>
+                </div>
+                <div *ngIf="dataItem.noLiveWithHost == true">
+                  <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top"
+                    title="Không chung chủ" style="cursor: pointer;">
+                    gite
+                  </span>
+                </div>
+                <div *ngIf="dataItem.bed == true">
+                  <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top"
+                    title="Giường" style="cursor: pointer;">
+                    bed
+                  </span>
+                </div>
+                <div *ngIf="dataItem.closedToilet == true">
+                  <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
+                    title="Vệ sinh khép kín" style="cursor: pointer;">
+                    wc
+                  </span>
+                </div>
               </div>
-              <div *ngIf="dataItem.fridge == true">
-                <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Tủ lạnh" style="cursor: pointer;">
-                  kitchen
-                </span>
-              </div>
-              <div *ngIf="dataItem.kitchen == true">
-                <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Bếp" style="cursor: pointer;">
-                  multicooker
-                </span>
-              </div>
-              <div *ngIf="dataItem.washingMachine == true">
-                <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Máy giặt" style="cursor: pointer;">
-                  local_laundry_service
-                </span>
-              </div>
-              <div *ngIf="dataItem.desk == true">
-                <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Bàn ghế" style="cursor: pointer;">
-                  desk
-                </span>
-              </div>
-              <div *ngIf="dataItem.noLiveWithHost == true">
-                <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Không chung chủ" style="cursor: pointer;">
-                  gite
-                </span>
-              </div>
-              <div *ngIf="dataItem.bed == true">
-                <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top" title="Giường" style="cursor: pointer;">
-                  bed
-                </span>
-              </div>
-              <div *ngIf="dataItem.closedToilet == true">
-                <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Vệ sinh khép kín" style="cursor: pointer;">
-                  wc
-                </span>
-              </div>
-            </div>
-          </td>
+            </td>
 
-          <!-- Area -->
-          <td id="md">{{dataItem.areaByMeters}} m<sup>2</sup></td>
+            <!-- Area -->
+            <td id="md">{{dataItem.areaByMeters}} m<sup>2</sup></td>
 
-          <!-- Amount of people -->
-          <td id="md">
-            <div class="row">
-              <div *ngFor='let in of peopleCounter(dataItem.currentAmountOfPeople); let i = index'
-                class="col-12 col-md-1">
-                <i class="fa-solid fa-user me-1"></i>
+            <!-- Amount of people -->
+            <td id="md">
+              <div class="row">
+                <div *ngFor='let in of peopleCounter(dataItem.currentAmountOfPeople); let i = index'
+                  class="col-12 col-md-1">
+                  <i class="fa-solid fa-user me-1"></i>
+                </div>
+                <div
+                  *ngFor='let in of peopleCounter(dataItem.maxAmountOfPeople - dataItem.currentAmountOfPeople); let i = index'
+                  class="col-12 col-md-1">
+                  <i class="fa-regular fa-user me-1"></i>
+                </div>
               </div>
-              <div
-                *ngFor='let in of peopleCounter(dataItem.maxAmountOfPeople - dataItem.currentAmountOfPeople); let i = index'
-                class="col-12 col-md-1">
-                <i class="fa-regular fa-user me-1"></i>
-              </div>
-            </div>
-          </td>
+            </td>
 
-          <!-- Room status -->
-          <td>
-            <span *ngIf="dataItem.status.statusName === 'Available'">Còn Trống</span>
-            <span *ngIf="dataItem.status.statusName === 'Occupied'">Đã thuê</span>
-            <span *ngIf="dataItem.status.statusName === 'Disabled'">Không dùng được</span>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <!-- End List of Rooms -->
+            <!-- Room status -->
+            <td>
+              <span *ngIf="dataItem.status.statusName === 'Available'">Còn Trống</span>
+              <span *ngIf="dataItem.status.statusName === 'Occupied'">Đã thuê</span>
+              <span *ngIf="dataItem.status.statusName === 'Disabled'">Không dùng được</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
 
     <!-- Paging -->
     <!-- <div class="d-flex justify-content-center align-items-center mt-4">
