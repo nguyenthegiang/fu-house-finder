@@ -23,5 +23,6 @@ namespace Repositories.IRepository
         public void UpdateProfile(string userId, string name, string email);
         public void ChangePassword(string userId, string newPassword);
         public void CreateStaffAccount(StaffAccountCreateDTO staff);
+        public Boolean CheckOldPassword(string userId, string oldPassword);
     }
 }

@@ -296,13 +296,23 @@ namespace HouseFinder_API.Controllers
             }
         }
 
-        [HttpPut("changePassword")]
-        public IActionResult ChangePassword(string userId, string newPassword)
+        [HttpPut("change_password")]
+        public IActionResult ChangePassword(ChangePasswordDTO pw)
         {
             try
             {
+                string uid = HttpContext.Session.GetString("User");
+                if (uid == null)
+                {
+                    return Forbid();
+                }
+                var correct_cur_password = userRepository.CheckOldPassword(uid, pw.OldPassword);
+                if (!correct_cur_password)
+                {
+                    return Conflict();
+                }
                 //Update to Database
-                userRepository.ChangePassword(userId, newPassword);
+                userRepository.ChangePassword(uid, pw.NewPassword);
                 return Ok();
             }
             catch (Exception e)
