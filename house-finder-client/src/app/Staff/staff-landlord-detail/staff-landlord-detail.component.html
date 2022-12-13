@@ -54,9 +54,6 @@
   <div class="col-12">
     <!-- Page content -->
     <div class="row">
-      <div class="my-4" *ngIf="houses.length == 0">
-        <h3 class="text-center">Chưa có nhà trọ</h3>
-      </div>
       <div class="my-4">
         <h3 class="text-center">Danh sách nhà trọ</h3>
 
@@ -77,8 +74,14 @@
           </div>
         </div> -->
         <!-- End Search bar -->
+        
+        <!-- Case: No Data -->
+        <div *ngIf="houses.length <= 0">
+          <div class="text-center emptyMesage">Chưa có nhà trọ</div>
+        </div>
 
-        <div *ngIf="houses.length != 0">
+        <!-- Case: Have data -->
+        <div *ngIf="houses.length > 0">
           <table class="table table-hover">
             <thead>
               <tr>
