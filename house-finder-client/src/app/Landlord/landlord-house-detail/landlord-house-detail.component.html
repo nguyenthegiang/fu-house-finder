@@ -52,14 +52,18 @@
 <!-- List available rooms -->
 <div class="row m-2">
   <div class="col-12">
+    <!-- Case: No room -->
     <div class="my-4" *ngIf="rooms.length == 0">
       <div>
         <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#updateModal"
         data-whatever="@getbootstrap" (click)="addRoom()">+ Thêm mới</button>
       </div>
       
-      <span *ngIf="rooms.length == 0" class="emptyMesage text-center">Chưa có phòng trọ</span>
+      <!-- <span class="emptyMesage text-center">Chưa có phòng trọ</span> -->
+      <span class="text-center">Chưa có phòng trọ</span>
     </div>
+
+    <!-- Case: Have room -->
     <div class="my-4" *ngIf="rooms.length != 0">
       <h3 class="text-center">Danh sách phòng</h3>
 
