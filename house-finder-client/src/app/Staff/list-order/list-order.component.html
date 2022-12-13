@@ -80,9 +80,9 @@
               <label class="form-label">Trạng thái</label>
               <select #selectCStatusId class="form-select" (change)="onStatusSelected(selectCStatusId.value)">
                 <option value="0">Tất cả</option>
-                <option *ngFor="let status of statuses" value="{{ status.statusId }}">
-                  {{ status.statusName }}
-                </option>
+                <option value="1">Chưa giải quyết</option>
+                <option value="2">Đang giải quyết</option>
+                <option value="3">Đã giải quyết</option>
               </select>
             </div>
 
@@ -99,12 +99,12 @@
           <!-- End filter -->
 
           <!-- If found no Orders -->
-          <div class="row mt-4" *ngIf="orders.length == 0">
-            <h3 class="text-center">Không có nguyện vọng</h3>
+          <div class="row mt-4" *ngIf="orders.length <= 0">
+            <div class="text-center emptyMesage">Không có nguyện vọng</div>
           </div>
 
           <!-- if there are Orders -->
-          <div *ngIf="orders.length != 0">
+          <div *ngIf="orders.length > 0">
             <table class="table table-hover mt-4">
               <thead>
                 <tr>
