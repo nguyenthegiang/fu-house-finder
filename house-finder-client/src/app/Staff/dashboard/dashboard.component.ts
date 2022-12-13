@@ -247,7 +247,7 @@ export class DashboardStaffComponent implements OnInit {
               title: {
                 display: true,
                 text:
-                  'Thống kê số lượng nguyện vọng đăng ký nhà trọ năm ' + this.currentYear,
+                  'Thống kê số lượng nguyện vọng đăng ký nhà trọ từng tháng trong năm ' + this.currentYear,
                 font: {
                   size: 15,
                 },
@@ -263,7 +263,7 @@ export class DashboardStaffComponent implements OnInit {
     //Call API: get total reports by month in the current year
     this.reportService.getTotalReportByMonth().subscribe((data) => {
       this.reportByMonth = data;
-      //Create order chart
+      //Create report chart
       var reportChart = new Chart('reportChart', {
         type: 'line',
         data: {
@@ -417,7 +417,7 @@ export class DashboardStaffComponent implements OnInit {
             plugins: {
               title: {
                 display: true,
-                text: 'Thống kê tổng số lượng nguyện vọng đăng ký nhà trọ năm ' + this.currentYear,
+                text: 'Thống kê tổng số lượng nguyện vọng đăng ký nhà trọ tới từng tháng trong năm ' + this.currentYear,
                 font: {
                   size: 15,
                 },

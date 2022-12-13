@@ -1,31 +1,32 @@
 <app-staff-header></app-staff-header>
 
 <div class="container-fluid m-0 bg-light">
-  <div class="row px-3 pt-3">
-    <div class="col-8">
-      <div class="row d-flex align-items-center p-3 backgroundWhite statistics" style="height: 100%">
+  <div class="row px-4 pt-3">
+    <div class="col-12 col-md-8">
+      <div class="row d-flex justify-content-center align-items-center p-3 backgroundWhite statistics"
+        style="height: 100%">
         <span id="totalSolvedOrder">Bạn đã giải quyết tổng số: <span>{{ totalOfSolvedOrder }} nguyện
             vọng</span></span>
         <div class="row">
-          <div class="col-3">
+          <div class="col-6 col-md-3 h-100 my-2">
             <div class="justify-content-center align-items-center year">
               <h6>Tổng số nguyện vọng trong năm</h6>
               <span>{{ totalofSolvedOrderInCurrentYear }}</span>
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-6 col-md-3 h-100 my-2">
             <div class="justify-content-center align-items-center month">
               <h6>Tổng số nguyện vọng trong tháng</h6>
               <span>{{ totalofSolvedOrderInMonth }}</span>
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-6 col-md-3 h-100 my-2">
             <div class="justify-content-center align-items-center week">
               <h6>Tổng số nguyện vọng trong tuần</h6>
               <span>{{ totalOfSolvedOrder }}</span>
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-6 col-md-3 h-100 my-2">
             <div class="justify-content-center align-items-center day">
               <h6>Tổng số nguyện vọng trong ngày</h6>
               <span>{{ totalofSolvedOrderInDay }}</span>
@@ -39,7 +40,7 @@
       </div>
     </div>
 
-    <div class="col-4">
+    <div class="col-12 col-md-4">
       <div class="p-4 backgroundWhite position-relative">
         <!-- <select class="btn position-absolute top-0 end-0" type="button">
           <option>This week</option>
@@ -54,8 +55,6 @@
     <div class="col-12 px-4 backgroundWhite">
       <!-- Page content -->
       <div class="row">
-        <span *ngIf="orders.length == 0" class="emptyMesage text-center">Chưa có nguyện vọng</span>
-
         <div class="my-4">
           <h3 class="text-center">Danh sách nguyện vọng</h3>
 
