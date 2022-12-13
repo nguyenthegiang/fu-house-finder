@@ -231,6 +231,7 @@
             <th scope="col">Tên phòng</th>
             <th scope="col">Giá phòng</th>
             <th scope="col" id="md">Tiện ích</th>
+            <th scope="col" id="md">Loại phòng</th>
             <th scope="col">Diện tích</th>
             <th scope="col" id="md">Số người ở</th>
           </tr>
@@ -298,6 +299,9 @@
                 </div>
               </div>
             </td>
+
+            <!-- Room types -->
+            <td id="md">{{dataItem.roomType.roomTypeName}}</td>
 
             <!-- Area -->
             <td>{{dataItem.areaByMeters}} m<sup>2</sup></td>
