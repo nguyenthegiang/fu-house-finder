@@ -16,8 +16,8 @@ import { ReportService } from 'src/app/services/report.service';
 export class ListReportComponent implements OnInit {
   //{Search} input value
   searchValue: string | undefined;
-  //List all reported houses
-  houses: ReportHouse[] = [];
+  //List all reported reportedHouses
+  reportedHouses: ReportHouse[] = [];
   //List reports of selected house
   reportsOfSelectedHouse: StaffReport[] = [];
   //List all reports
@@ -32,7 +32,7 @@ export class ListReportComponent implements OnInit {
   searchName: string | undefined;
 
   //Filter house
-  selectedOrderByHouse: string | undefined;
+  selectedOrderByHouse: string = "desc";  //Default: Báo cáo nhiều nhất
   selectedActiveStatus: string | undefined;
   searchHouse: string | undefined;
 
@@ -43,9 +43,9 @@ export class ListReportComponent implements OnInit {
   reportPageCount = 0; //number of pages
   reportPageList: number[] = []; //array to loop with *ngFor in HTML Template
 
-  //(Paging) for Reported Houses
+  //(Paging) for Reported reportedHouses
   totalReportedHouse = 0; //number of items
-  housePageSize = 10; //number of items per page
+  housePageSize = 1000; //number of items per page
   housePageNumber = 1;
   housePageCount = 0; // number of pages
   housePageList: number[] = [];
@@ -114,7 +114,7 @@ export class ListReportComponent implements OnInit {
   //Show modal
   changeSelectedHouse(houseId: number) {
     //Find the house which id == houseId
-    var selectedHouse = this.houses.find((house) => house.houseId == houseId);
+    var selectedHouse = this.reportedHouses.find((house) => house.houseId == houseId);
     if (selectedHouse?.listReports != undefined) {
       this.reportsOfSelectedHouse = selectedHouse.listReports;
       this.landlordOfSelectedHouse = selectedHouse.landlord;
@@ -207,7 +207,7 @@ export class ListReportComponent implements OnInit {
     this.houseService
       .filterReportedHouse(this.housePageSize, this.housePageNumber, this.selectedOrderByHouse, this.selectedActiveStatus)
       .subscribe((data) => {
-        this.houses = data;
+        this.reportedHouses = data;
         this.scrollToTop();
       });
   }

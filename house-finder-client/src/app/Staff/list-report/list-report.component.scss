@@ -61,11 +61,19 @@
   color: red;
   text-align: center;
   font-size: 15pt;
-  // margin-top: 3vh;
-  // margin-bottom: 3vh;
-  // height: 200px;
-  // display: flex;
-  // justify-content: center;
-  // align-items: center;
+}
+
+// Tab
+.nav-link {
+  color: #ee4d2d;
+}
+
+.nav-link.active {
+  color: black;
+}
+
+// Tab Content
+#myTabContent {
+  padding: 20px;
 }
 
