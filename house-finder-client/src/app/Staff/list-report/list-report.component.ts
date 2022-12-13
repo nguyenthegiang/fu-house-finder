@@ -7,6 +7,7 @@ import { StaffReport } from 'src/app/models/staffReport';
 import { User } from 'src/app/models/user';
 import { HouseService } from 'src/app/services/house.service';
 import { ReportService } from 'src/app/services/report.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-list-report',
@@ -68,6 +69,7 @@ export class ListReportComponent implements OnInit {
   constructor(
     private reportService: ReportService,
     private houseService: HouseService,
+    private userService: UserService,
     private router: Router
   ) { }
 
@@ -265,4 +267,19 @@ export class ListReportComponent implements OnInit {
       });
     }
   }
+  updateUserStatus(event: any, userId: string){
+    //check if staff just checked or unchecked the checkbox
+    const isChecked = (<HTMLInputElement>event.target).checked;
+
+    if(isChecked){
+      this.selectedStatusId = 1;
+    }
+    else{
+      this.selectedStatusId = 0;
+    }
+    this.userService.updateUserStatus(userId, this.selectedStatusId).subscribe((data) => {
+      this.filterReportedHouse(true);
+    });
+  }
+
 }
