@@ -4,12 +4,17 @@
   <div class="col-12">
     <!-- Page content -->
     <div class="row">
-      <span *ngIf="landlordSignupRequest.length === 0" class="emptyMesage">Hiện tại chưa có chủ trọ đăng ký</span>
-      <div class="my-4" *ngIf="landlordSignupRequest.length != 0">
+      <div class="my-4" >
         <h3 class="text-center">Danh sách yêu cầu chủ trọ</h3>
         <a  class="mx-4" href="Staff/list-rejected-landlord" style="color: #ee4d2d;">Danh sách chủ trọ bị từ chối</a>
 
-        <div class="m-4">
+        <!-- Case: No data -->
+        <div class="m-4" *ngIf="landlordSignupRequest.length == 0">
+          <div class="emptyMesage">Hiện tại chưa có chủ trọ đăng ký</div>
+        </div>
+
+        <!-- Case: Have data -->
+        <div class="m-4" *ngIf="landlordSignupRequest.length != 0">
           <table class="table table-hover landlordSingupRequest">
             <thead>
               <tr>
@@ -22,7 +27,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let landlord of landlordSignupRequest" data-bs-toggle="modal" data-bs-target="#selectedRequestModal" (click)="changeSelectedLandlord(landlord.userId)" style="cursor: pointer;">
+              <tr *ngFor="let landlord of landlordSignupRequest" style="cursor: pointer;">
                 <td id="md">{{landlord.displayName}}</td>
                 <td>{{landlord.email}}</td>
                 <td id="md">{{landlord.phoneNumber}}</td>
@@ -104,7 +109,7 @@
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="selectedRequestModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade" id="selectedRequestModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -128,4 +133,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
