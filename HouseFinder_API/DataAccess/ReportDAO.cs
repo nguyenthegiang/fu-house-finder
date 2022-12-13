@@ -181,5 +181,45 @@ namespace DataAccess
             }
             return report;
         }
+        //Update report status
+        public static void UpdateReportStatus(int reportId, int statusId, string account)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    Report updateReport = context.Reports.FirstOrDefault(report => report.StatusId == reportId);
+                    if (updateReport == null)
+                    {
+                        throw new Exception();
+                    }
+                    //Check status id
+                    if (statusId == 1)
+                    {
+                        updateReport.SolvedDate = null;
+                        updateReport.SolvedBy = null;
+                    }
+                    else if (statusId == 2)
+                    {
+                        updateReport.SolvedDate = null;
+                        updateReport.SolvedBy = account;
+                    }
+                    else if (statusId == 3) //Add solved date and solved by for order if status change to solved
+                    {
+                        updateReport.SolvedDate = DateTime.Today;
+                        updateReport.SolvedBy = account;
+                    }
+                    //Update order's status
+                    updateReport.StatusId = statusId;
+
+                    context.Entry<Report>(updateReport).State = EntityState.Modified;
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
