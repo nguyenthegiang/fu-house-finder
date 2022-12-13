@@ -203,6 +203,20 @@ namespace HouseFinder_API.Controllers
             }
         }
 
+        [HttpGet("rejectedLandlord")]
+        public IActionResult GetRejectedLandlords()
+        {
+            List<UserDTO> landlords = userRepository.GetRejectedLandlords();
+            if (landlords == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(landlords);
+            }
+        }
+
         [HttpGet("CountTotalLandlord")]
         public int? CountTotalLandlord()
         {
