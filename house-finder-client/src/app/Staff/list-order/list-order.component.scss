@@ -1,60 +1,44 @@
-.backgroundWhite{
+.backgroundWhite {
   background-color: #ffffff;
 }
 
-@media only screen and (max-width: 768px) {
-  #menu1
-  {
-    display: none;
-  }
-
-  #menu2
-  {
-    display: inline !important;
-  }
-}
-
-@media only screen and (max-width: 768px) {
-  #md
-  {
-    display: none;
-  }
-}
-
-#btn:hover
-{
+#btn:hover {
   background-color: rgb(180, 180, 180);
   border-radius: 5px;
 }
 
-#btn:active
-{
+#btn:active {
   background-color: rgb(147, 147, 147);
   border-radius: 5px;
 }
-.year, .month, .week, .day{
+
+.year,
+.month,
+.week,
+.day {
   padding: 10px;
-    border-radius: 10px;
-    color: white;
-    span{
-      font-size: 30px;
-      font-weight: 600;
-    }
+  border-radius: 10px;
+  color: white;
+
+  span {
+    font-size: 30px;
+    font-weight: 600;
+  }
 }
 
-.year{
+.year {
   background-image: linear-gradient(to bottom right, #e4417e, #b558a0);
 }
 
-.month{
+.month {
   background-image: linear-gradient(to bottom right, #8f6fb8, #5349b1);
 }
 
-.week{
+.week {
   background-image: linear-gradient(to bottom right, #4bbae0, #5f8fcf);
 }
 
-.day{
+.day {
   background-image: linear-gradient(to bottom right, #f5b22f, #f5744e);
 }
 
@@ -74,13 +58,13 @@
   cursor: pointer;
 }
 
-#totalSolvedOrder{
+#totalSolvedOrder {
   font-size: 20pt;
   font-weight: bold;
   text-align: center;
-  color:rgb(66, 66, 66);
+  color: rgb(66, 66, 66);
 
-  span{
+  span {
     color: #f5744e;
   }
 }
@@ -92,7 +76,7 @@
 // }
 
 // For display footer at bottom
-.emptyMesage{
+.emptyMesage {
   font-weight: bold;
   color: red;
   text-align: center;
@@ -103,4 +87,32 @@
   // display: flex;
   // justify-content: center;
   // align-items: center;
+}
+
+//Div for styling
+#hiddenDiv {
+  visibility: hidden;
+}
+
+#clearFilterValue {
+  color: #ee4d2d;
+}
+
+// Responsive
+@media only screen and (max-width: 768px) {
+  #menu1 {
+    display: none;
+  }
+
+  #menu2 {
+    display: inline !important;
+  }
+
+  #md {
+    display: none;
+  }
+
+  #hiddenDiv {
+    display: none;
+  }
 }

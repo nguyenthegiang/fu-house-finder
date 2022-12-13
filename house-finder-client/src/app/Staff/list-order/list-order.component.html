@@ -59,16 +59,16 @@
           <h3 class="text-center">Danh sách nguyện vọng</h3>
 
           <!-- Filter -->
-          <div class="row">
+          <div class="row d-flex justify-content-end">
             <!-- Date picker -->
             <!-- Start date -->
-            <div class="col-6 col-md-3 my-2">
+            <div class="col-6 col-md-2 my-2">
               <label class="form-label">Từ ngày</label>
               <input #selectedFromDate class="form-control" type="date"
                 (change)="onFromDateSelected(selectedFromDate.value)" />
             </div>
             <!-- End date -->
-            <div class="col-6 col-md-3 my-2">
+            <div class="col-6 col-md-2 my-2">
               <label class="form-label">Đến ngày</label>
               <input #selectedToDate class="form-control" type="date"
                 (change)="onToDateSelected(selectedToDate.value)" />
@@ -76,7 +76,7 @@
             <!-- End date picker -->
 
             <!-- Trạng thái -->
-            <div class="col-6 col-md-3 my-2">
+            <div class="col-6 col-md-2 my-2">
               <label class="form-label">Trạng thái</label>
               <select #selectCStatusId class="form-select" (change)="onStatusSelected(selectCStatusId.value)">
                 <option value="0">Tất cả</option>
@@ -87,13 +87,24 @@
             </div>
 
             <!-- Order by -->
-            <div class="col-6 col-md-3 my-2">
+            <div class="col-6 col-md-2 my-2">
               <label class="form-label">Sắp xếp</label>
               <select #selectedOrderBy class="form-select" (change)="onOrderBySelected(selectedOrderBy.value)">
                 <option selected disabled>Chọn sắp xếp</option>
                 <option value="desc">Ngày gần nhất</option>
                 <option value="asc">Ngày xa nhất</option>
               </select>
+            </div>
+
+            <!-- Clear filter result -->
+            <div class="col-6 col-md-2 my-2">
+            </div>
+
+            <div class="col-6 col-md-2 my-2">
+              <label class="form-label" id="hiddenDiv">This is a hidden item used for styling</label>
+              <div class="text-end">
+                <a href="/Staff/list-order" id="clearFilterValue">Đặt lại bộ lọc</a>
+              </div>
             </div>
           </div>
           <!-- End filter -->
