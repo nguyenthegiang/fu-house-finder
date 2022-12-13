@@ -44,12 +44,12 @@
       </div>
 
       <!-- Case: No data -->
-      <div *ngIf="houses.length == 0">
+      <div *ngIf="houses.length <= 0">
         <div class="emptyMesage text-center">Chưa có nhà trọ</div>
       </div>
 
       <!-- Case: Have data -->
-      <div *ngIf="houses.length != 0">
+      <div *ngIf="houses.length > 0">
         <table class="table table-hover">
           <thead>
             <tr>
