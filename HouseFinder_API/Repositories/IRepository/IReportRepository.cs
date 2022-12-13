@@ -17,5 +17,6 @@ namespace Repositories.IRepository
         public List<StaffReportDTO> GetAllReports();
         public int CounTotalReport();
         public StaffReportDTO GetReportById(int reportId);
+        public void UpdateReportStatus(int reportId, int statusId, string account);
     }
 }

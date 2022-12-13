@@ -252,11 +252,17 @@ export class ListReportComponent implements OnInit {
       this.selectedReportDate = selectedReport.reportedDate;
       this.selectedReportSolvedDate = selectedReport.solvedDate;
       this.selectedStatusId = selectedReport.status.statusId;
-      console.log(selectedReport.reportContent);
     }
   }
 
   updateReportStatus() {
-
+    var reportId = this.selectedReport?.reportId;
+    if (reportId != undefined && this.selectedStatusIdToUpdate != undefined) {
+      //Call API: update report status
+      this.reportService.updateReportStatus(reportId, this.selectedStatusIdToUpdate).subscribe((data) => {
+        //Reload list report
+        this.filterReport(true);
+      });
+    }
   }
 }
