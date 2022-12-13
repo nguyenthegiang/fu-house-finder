@@ -16,7 +16,6 @@
                 <th scope="col" id="md">Họ Tên</th>
                 <th scope="col">Email</th>
                 <th scope="col" id="md">Số Điện Thoại</th>
-                <th scope="col" id="md">Ảnh đại diện</th>
                 <th scope="col" id="md">Ảnh Chứng Minh Thư</th>
                 <th scope="col">Ngày Đăng Ký</th>
                 <th scope="col">Hành động</th>
@@ -27,9 +26,6 @@
                 <td id="md">{{landlord.displayName}}</td>
                 <td>{{landlord.email}}</td>
                 <td id="md">{{landlord.phoneNumber}}</td>
-                <td class="md" id="md">
-                  <img class="mb-2 profileImage" src="../../../assets/image/{{landlord.profileImageLink}}">
-                </td>
                 <td class="md" id="md" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
                   (click)="changeSelectedLandlord(landlord.userId)" style="cursor: pointer">
                   <img class="me-2 mb-2 identityCard"
