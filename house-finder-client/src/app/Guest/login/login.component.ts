@@ -408,5 +408,13 @@ export class LoginComponent implements OnInit {
   navigate(path: string) {
     this.ngZone.run(() => { this.router.navigate([path]); });
   }
+
+  //Home button -> go back to /home
+  backHome() {
+    //use reload() so that when user is already in home -> they will get a reload of page
+    window.location.href = "/home";
+  }
 }
+
+
 

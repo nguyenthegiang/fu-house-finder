@@ -49,6 +49,7 @@ import { AdminHeaderComponent } from './Common/admin-header/admin-header.compone
 import { StaffUpdateProfileComponent } from './Staff/staff-update-profile/staff-update-profile.component';
 import { LandlordUpdateProfileComponent } from './Landlord/landlord-update-profile/landlord-update-profile.component';
 import { StaffChangePasswordComponent } from './Staff/staff-change-password/staff-change-password.component';
+import { ListRejectedLandlordComponent } from './Staff/list-landlord-signup-request/list-rejected-landlord/list-rejected-landlord.component';
 
 @NgModule({
   declarations: [
@@ -95,6 +96,7 @@ import { StaffChangePasswordComponent } from './Staff/staff-change-password/staf
     StaffUpdateProfileComponent,
     LandlordUpdateProfileComponent,
     StaffChangePasswordComponent,
+    ListRejectedLandlordComponent,
   ],
   imports: [
     BrowserModule,

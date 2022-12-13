@@ -26,6 +26,7 @@ import { ListOrderComponent } from './Staff/list-order/list-order.component';
 import { AddRoomComponent } from './Landlord/add-room/add-room.component';
 import { UpdateRoomComponent } from './Landlord/update-room/update-room.component';
 import { StaffRoomDetailComponent } from './Staff/staff-room-detail/staff-room-detail.component';
+import { ListRejectedLandlordComponent } from './Staff/list-landlord-signup-request/list-rejected-landlord/list-rejected-landlord.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -46,6 +47,7 @@ const routes: Routes = [
   { path: 'Staff/list-report', component: ListReportComponent},
   { path: 'Staff/list-house', component: ListHouseComponent},
   { path: 'Staff/list-landlord-signup-request', component: ListLandlordSignupRequestComponent},
+  { path: 'Staff/list-rejected-landlord', component: ListRejectedLandlordComponent},
   { path: 'Staff/list-order', component: ListOrderComponent},
   { path: 'Staff/staff-landlord-detail/:id', component: StaffLandlordDetailComponent},
   { path: 'Staff/staff-house-detail/:id', component: StaffHouseDetailComponent},

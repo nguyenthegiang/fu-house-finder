@@ -12,7 +12,9 @@
         </div>
         <!-- FU House Finder logo -->
         <div>
-          <img id="FUHouseFinderLogo" class="top-50 start-50" src="../../../assets/image/Logo.png" />
+          <a href="" (click)="backHome()">
+            <img id="FUHouseFinderLogo" class="top-50 start-50" src="../../../assets/image/Logo.png"/>
+          </a>
         </div>
         <!-- Website's name -->
         <div class="orangeText">
@@ -24,9 +26,13 @@
 
     <!-- Content Column -->
     <div class="col-lg-6 col-sm-12 h-100 d-flex justify-content-center align-items-center loginCol">
+      <a href="" (click)="backHome()">
+        <span class="material-symbols-outlined" id="backHomeButton">
+          arrow_back
+        </span>
+      </a>
       <div class="row">
         <h3 class="whiteText titleLogin">ĐĂNG NHẬP</h3>
-
         <!-- Sign in with Facebook -->
         <div class="row d-flex justify-content-center my-2 mx-1">
           <div class="fb-login-button col-auto" data-width="320" data-size="large" data-button-type="continue_with"
