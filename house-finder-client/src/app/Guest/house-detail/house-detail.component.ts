@@ -152,10 +152,9 @@ export class HouseDetailComponent implements OnInit {
     }
   }
 
-
-  goBack(): void {
-    window.location.reload();
-  }
+  // goBack(): void {
+  //   window.location.reload();
+  // }
 
   viewRoom(id: number) {
     this.router.navigate(['/room-detail/' + id]);
@@ -201,7 +200,11 @@ export class HouseDetailComponent implements OnInit {
             this.rateErrorAlert?.fire();
           } else if (data.status == 200) {
             this.rateSuccessAlert?.fire();
-            window.location.reload();
+
+            // Refresh list Rate
+            this.rateService.getListRatesByHouseId(this.houseId).subscribe(data => {
+              this.rates = data;
+            });
           }
         },
         error => { }

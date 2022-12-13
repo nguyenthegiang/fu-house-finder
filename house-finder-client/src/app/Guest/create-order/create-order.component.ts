@@ -51,7 +51,8 @@ export class CreateOrderComponent implements OnInit {
       this.orderRoleErrorAlert?.fire();
     }
   }
-  goBack(): void {
-    window.location.reload();
-  }
+  
+  // goBack(): void {
+  //   window.location.reload();
+  // }
 }
