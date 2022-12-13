@@ -270,7 +270,6 @@ export class ListReportComponent implements OnInit {
   updateUserStatus(event: any, userId: string){
     //check if staff just checked or unchecked the checkbox
     const isChecked = (<HTMLInputElement>event.target).checked;
-    console.log("Update landlord status: userId: " + userId + " statusId: " + this.selectedStatusId);
 
     if(isChecked){
       this.selectedStatusId = 1;
