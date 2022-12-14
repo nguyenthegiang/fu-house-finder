@@ -3,8 +3,8 @@ version: '3.4'
 services:
   housefinder_api:
     volumes:
-      - ${HOME}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
-      - ${HOME}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets
+      - ${HOME}/.aspnet/https:/root/.aspnet/https/HouseFinder_API
 
   apigw:
     environment:
