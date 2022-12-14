@@ -1,8 +1,8 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
 
-USER root
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
+USER root
 WORKDIR /app
 EXPOSE 5000
 EXPOSE 5001
