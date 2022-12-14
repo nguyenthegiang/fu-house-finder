@@ -9,9 +9,15 @@ import { Location } from '@angular/common';
 })
 export class AppComponent {
   title = 'FU House Finder';
+  
+  public displayFooter: boolean = true;
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    if (window.location.pathname == '/login') {
+      this.displayFooter = false;
+    }
+  }
 
 }
