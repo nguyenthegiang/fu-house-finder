@@ -1,11 +1,6 @@
 version: '3.4'
 
 services:
-  housefinder_api:
-    volumes:
-      - ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets
-      - ~/.aspnet/https:/https:ro
-
   apigw:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
