@@ -1,8 +1,6 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-COPY ["HouseFinder_API/https/ca_bundle.crt", "/usr/local/share/ca-certificates/ca_bundle.crt"]
-COPY ["HouseFinder_API/https/fuhousefinder.com.pfx", "/https/fuhousefinder.com.pfx"]
-RUN update-ca-certificates
+
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
 WORKDIR /app
@@ -25,7 +23,10 @@ RUN dotnet publish "HouseFinder_API.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
-COPY --from=publish /app/publish .
 
+COPY ["HouseFinder_API/https/ca_bundle.crt", "/usr/local/share/ca-certificates/ca_bundle.crt"]
+COPY ["HouseFinder_API/https/fuhousefinder.com.pfx", "/https/fuhousefinder.com.pfx"]
+RUN update-ca-certificates
+COPY --from=publish /app/publish .
 
 ENTRYPOINT ["dotnet", "HouseFinder_API.dll"]
