@@ -20,8 +20,4 @@ FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
 
-COPY ["https/fuhousefinder.com.pfx", "/https/fuhousefinder.com.pfx"]
-COPY ["https/ca_bundle.crt", "/usr/local/share/ca-certificates/ca_bundle.crt"]
-RUN update-ca-certificates
-
 ENTRYPOINT ["dotnet", "APIGateway.dll"]
