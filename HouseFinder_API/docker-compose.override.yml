@@ -4,7 +4,7 @@ services:
   housefinder_api:
     volumes:
       - ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets
-      - ${HOME}/.aspnet/https:/root/.aspnet/https/HouseFinder_API
+      - ${HOME}/.aspnet/https:/root/.aspnet/https/housefinder_api
 
   apigw:
     environment:
