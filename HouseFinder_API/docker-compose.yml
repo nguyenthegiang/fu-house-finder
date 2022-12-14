@@ -17,7 +17,8 @@ services:
     working_dir: /app
     user: root
     volumes:
-      - ${HOME}/.aspnet/https/:/https/:rw
+      - ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets/
+      - ${HOME}/.aspnet/https/:/https/:ro
   
   apigw:
     image: ${DOCKER_REGISTRY-}api_gateway
