@@ -25,9 +25,4 @@ WORKDIR /app
 
 COPY --from=publish /app/publish .
 
-USER root
-RUN chown -R $APP_USER:$APP_USER /https/fuhousefinder.com.pfx
-
-USER $APP_USER
-
 ENTRYPOINT ["dotnet", "HouseFinder_API.dll"]
