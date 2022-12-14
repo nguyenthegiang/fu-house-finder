@@ -24,9 +24,6 @@ RUN dotnet publish "HouseFinder_API.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 
-COPY ["HouseFinder_API/https/ca_bundle.crt", "/usr/local/share/ca-certificates/ca_bundle.crt"]
-COPY ["HouseFinder_API/https/fuhousefinder.com.pfx", "/https/fuhousefinder.com.pfx"]
-RUN update-ca-certificates
 COPY --from=publish /app/publish .
 
 ENTRYPOINT ["dotnet", "HouseFinder_API.dll"]
