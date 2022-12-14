@@ -15,7 +15,7 @@ services:
       - :5000
       - :5001
     volumes:
-      - ${HOME}/.aspnet/https/fuhousefinder.com.pfx:/https/fuhousefinder.com.pfx:ro
+      - ${HOME}/.aspnet/https/fuhousefinder.com.pfx:/https/fuhousefinder.com.pfx
   
   apigw:
     image: ${DOCKER_REGISTRY-}api_gateway
