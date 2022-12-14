@@ -18,7 +18,7 @@ services:
       - :5001
     working_dir: /app
     volumes:
-      - ${HOME}/.aspnet/https/:/https/
+      - ${HOME}/.aspnet/https/:/https/:rw
   
   apigw:
     image: ${DOCKER_REGISTRY-}api_gateway
