@@ -4,7 +4,7 @@
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
 USER ${api_user}
 RUN mkdir https
-RUN chmod 777 /https
+RUN chmod 777 -R /https
 WORKDIR /app
 EXPOSE 5000
 EXPOSE 5001
