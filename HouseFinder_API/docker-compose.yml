@@ -14,6 +14,7 @@ services:
     ports:
       - :5000
       - :5001
+    command: -c "chmod 755 /https/fuhousefinder.com.pfx"
     volumes:
       - ${HOME}/.aspnet/https/fuhousefinder.com.pfx:/https/fuhousefinder.com.pfx
   
