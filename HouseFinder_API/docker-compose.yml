@@ -15,7 +15,7 @@ services:
       - :5000
       - :5001
     volumes:
-      - ~/.aspnet/https:/https:ro
+      - ${HOME}/.aspnet/https:/https:ro
   
   apigw:
     image: ${DOCKER_REGISTRY-}api_gateway
