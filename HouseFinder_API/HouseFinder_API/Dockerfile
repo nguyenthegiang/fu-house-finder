@@ -2,7 +2,6 @@
 
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
-USER root
 WORKDIR /app
 EXPOSE 5000
 EXPOSE 5001
@@ -25,5 +24,10 @@ FROM base AS final
 WORKDIR /app
 
 COPY --from=publish /app/publish .
+
+USER root
+RUN chown -R $APP_USER:$APP_USER /https/fuhousefinder.com.pfx
+
+USER $APP_USER
 
 ENTRYPOINT ["dotnet", "HouseFinder_API.dll"]
