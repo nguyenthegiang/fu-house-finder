@@ -2,7 +2,7 @@
 
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
-USER api_user
+USER ${api_user}
 RUN mkdir https
 RUN sudo chmod 777 /https
 WORKDIR /app
