@@ -16,7 +16,7 @@ services:
     ports:
       - :5000
       - :5001
-    command: -c "sudo chmod -R api_user:api_user /https/"
+    working_dir: /app
     volumes:
       - ${HOME}/.aspnet/https/:/https/
   
