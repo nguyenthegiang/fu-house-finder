@@ -24,6 +24,10 @@ RUN dotnet publish "HouseFinder_API.csproj" -c Release -o /app/publish
 FROM base AS final
 WORKDIR /app
 
+RUN chmod 600 /https/fuhousefinder.com.pfx
+
 COPY --from=publish /app/publish .
+
+
 
 ENTRYPOINT ["dotnet", "HouseFinder_API.dll"]
