@@ -1,6 +1,6 @@
 {
   "GlobalConfiguration": {
-    "BaseUrl": "https://localhost"
+    "BaseUrl": "https://52.74.199.215:443"
   },
   "Routes": [
     {
@@ -12,7 +12,8 @@
           "Port": 5001
         }
       ],
-      "UpstreamPathTemplate": "/user/{everything}"
+      "UpstreamPathTemplate": "/user/{everything}",
+      "UpstreamHost": "api.fuhousefinder.com:443"
     }
   ]
 }
