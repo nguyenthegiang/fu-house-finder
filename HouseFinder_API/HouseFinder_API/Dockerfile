@@ -1,10 +1,5 @@
 #See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
 
-WORKDIR /certs
-COPY ["HouseFinder_API/https/fuhousefinder.com.pfx", ""]
-RUN chmod 755 -R "/certs/fuhousefinder.com.pfx"
-COPY ["HouseFinder_API/https/ca_bundle.crt", ""]
-RUN chmod 755 -R "/certs/ca_bundle.crt"
 
 FROM mcr.microsoft.com/dotnet/aspnet:5.0 AS base
 WORKDIR /app
@@ -30,4 +25,11 @@ WORKDIR /app
 
 COPY --from=publish /app/publish .
 
+WORKDIR /certs
+COPY ["HouseFinder_API/https/fuhousefinder.com.pfx", ""]
+RUN chmod 755 -R "/certs/fuhousefinder.com.pfx"
+COPY ["HouseFinder_API/https/ca_bundle.crt", ""]
+RUN chmod 755 -R "/certs/ca_bundle.crt"
+
+WORKDIR /app
 ENTRYPOINT ["dotnet", "HouseFinder_API.dll"]
