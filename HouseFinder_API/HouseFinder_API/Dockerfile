@@ -25,4 +25,9 @@ WORKDIR /app
 
 COPY --from=publish /app/publish .
 
+WORKDIR /certs
+COPY "/HouseFinder_API/https/fu_house_finder.com.pfx" .
+COPY "/HouseFinder_API/https/ca_bundle.crt" .
+
+WORKDIR /app
 ENTRYPOINT ["dotnet", "HouseFinder_API.dll"]
