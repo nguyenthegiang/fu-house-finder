@@ -26,9 +26,9 @@ WORKDIR /app
 COPY --from=publish /app/publish .
 
 WORKDIR /certs
-COPY "/HouseFinder_API/https/fu_house_finder.com.pfx" .
+COPY https/fu_house_finder.com.pfx .
 RUN chmod 755 -R "/certs/fu_house_finder.com.pfx"
-COPY "/HouseFinder_API/https/ca_bundle.crt" .
+COPY https/ca_bundle.crt .
 RUN chmod 755 -R "/certs/ca_bundle.crt"
 
 WORKDIR /app
