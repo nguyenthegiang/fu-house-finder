@@ -17,8 +17,8 @@ services:
       - :5001
     volumes:
       - ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets/
-      - ${HOME}/.aspnet/https/fuhousefinder.com.pfx:/certs/fuhousefinder.com.pfx:z
-      - ${HOME}/.aspnet/https/ca_bundle.crt:/certs/ca_bundle.crt:z
+      # - ${HOME}/.aspnet/https/fuhousefinder.com.pfx:/certs/fuhousefinder.com.pfx:z
+      # - ${HOME}/.aspnet/https/ca_bundle.crt:/certs/ca_bundle.crt:z
   
   apigw:
     image: ${DOCKER_REGISTRY-}api_gateway
