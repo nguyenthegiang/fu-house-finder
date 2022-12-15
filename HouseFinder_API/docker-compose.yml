@@ -2,6 +2,7 @@ version: '3.4'
 
 services:
   housefinder_api:
+    user: root
     image: ${DOCKER_REGISTRY-}housefinderapi
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
