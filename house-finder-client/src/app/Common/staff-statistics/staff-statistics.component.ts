@@ -1,3 +1,4 @@
+import { UserService } from 'src/app/services/user.service';
 import { Component, OnInit } from '@angular/core';
 import { HouseService } from 'src/app/services/house.service';
 import { OrderService } from 'src/app/services/order.service';
@@ -10,6 +11,7 @@ import { RoomService } from 'src/app/services/room.service';
   styleUrls: ['./staff-statistics.component.scss']
 })
 export class StaffStatisticsComponent implements OnInit {
+  totalLandlord: number = 0;
   totalHouse: number = 0;
   availableHouse: number = 0;
   totalRoom: number = 0;
@@ -20,12 +22,17 @@ export class StaffStatisticsComponent implements OnInit {
   totalCommune: number = 0;
   totalDistrict: number = 0;
 
-  constructor(private houseService: HouseService,
+  constructor(private userservice: UserService,
+    private houseService: HouseService,
     private roomService: RoomService)
   { }
 
   ngOnInit(): void
   {
+    this.userservice.countTotalLandlords().subscribe(data => {
+      this.totalLandlord = data;
+    });
+
     this.houseService.getTotalHouse().subscribe(data => {
       this.totalHouse = data;
     });
