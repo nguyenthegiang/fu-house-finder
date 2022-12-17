@@ -36,12 +36,12 @@
 <div class="card">
 <div class="card-header">Line coverage</div>
 <div class="card-body">
-<div class="large cardpercentagebar cardpercentagebar100">0%</div>
+<div class="large cardpercentagebar cardpercentagebar75">25%</div>
 <div class="table">
 <table>
 <tr>
 <th>Covered lines:</th>
-<td class="limit-width right" title="0">0</td>
+<td class="limit-width right" title="2">2</td>
 </tr>
 <tr>
 <th>Uncovered lines:</th>
@@ -49,15 +49,15 @@
 </tr>
 <tr>
 <th>Coverable lines:</th>
-<td class="limit-width right" title="6">6</td>
+<td class="limit-width right" title="8">8</td>
 </tr>
 <tr>
 <th>Total lines:</th>
-<td class="limit-width right" title="27">27</td>
+<td class="limit-width right" title="31">31</td>
 </tr>
 <tr>
 <th>Line coverage:</th>
-<td class="limit-width right" title="0 of 6">0%</td>
+<td class="limit-width right" title="2 of 8">25%</td>
 </tr>
 </table>
 </div>
@@ -101,11 +101,13 @@
 <thead><tr><th>Method</th><th>Branch coverage <a href="https://en.wikipedia.org/wiki/Code_coverage"><i class="icon-info-circled"></i></a></th><th>Cyclomatic complexity <a href="https://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon-info-circled"></i></a></th><th>Line coverage <a href="https://en.wikipedia.org/wiki/Code_coverage"><i class="icon-info-circled"></i></a></th></tr></thead>
 <tbody>
 <tr><td title="AddReport(BusinessObjects.Report)"><a href="#file0_line15" class="navigatetohash">AddReport(...)</a></td><td>100%</td><td>1</td><td>0%</td></tr>
-<tr><td title="CounTotalReport()"><a href="#file0_line17" class="navigatetohash">CounTotalReport()</a></td><td>100%</td><td>1</td><td>0%</td></tr>
+<tr><td title="CounTotalReport()"><a href="#file0_line17" class="navigatetohash">CounTotalReport()</a></td><td>100%</td><td>1</td><td>100%</td></tr>
 <tr><td title="CountReportByHouseId(System.Int32)"><a href="#file0_line19" class="navigatetohash">CountReportByHouseId(...)</a></td><td>100%</td><td>1</td><td>0%</td></tr>
-<tr><td title="GetAllReports()"><a href="#file0_line21" class="navigatetohash">GetAllReports()</a></td><td>100%</td><td>1</td><td>0%</td></tr>
+<tr><td title="GetAllReports()"><a href="#file0_line21" class="navigatetohash">GetAllReports()</a></td><td>100%</td><td>1</td><td>100%</td></tr>
 <tr><td title="GetTotalReportByMonth()"><a href="#file0_line23" class="navigatetohash">GetTotalReportByMonth()</a></td><td>100%</td><td>1</td><td>0%</td></tr>
 <tr><td title="SearchReportByName(System.String)"><a href="#file0_line25" class="navigatetohash">SearchReportByName(...)</a></td><td>100%</td><td>1</td><td>0%</td></tr>
+<tr><td title="GetReportById(System.Int32)"><a href="#file0_line27" class="navigatetohash">GetReportById(...)</a></td><td>100%</td><td>1</td><td>0%</td></tr>
+<tr><td title="UpdateReportStatus(System.Int32,System.Int32,System.String)"><a href="#file0_line29" class="navigatetohash">UpdateReportStatus(...)</a></td><td>100%</td><td>1</td><td>0%</td></tr>
 </tbody>
 </table>
 </div>
@@ -131,30 +133,36 @@
 <tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line14"></a><code>14</code></td><td></td><td class="lightgray"><code>&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
 <tr class="coverableline" title="Not covered (0 visits)" data-coverage="{'AllTestMethods': {'VC': '0', 'LVS': 'red'}}"><td class="red">&nbsp;</td><td class="leftmargin rightmargin right">0</td><td class="rightmargin right"><a id="file0_line15"></a><code>15</code></td><td></td><td class="lightred"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;AddReport(Report&nbsp;report)&nbsp;=&gt;&nbsp;ReportDAO.AddReport(report);</code></td></tr>
 <tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line16"></a><code>16</code></td><td></td><td class="lightgray"><code></code></td></tr>
-<tr class="coverableline" title="Not covered (0 visits)" data-coverage="{'AllTestMethods': {'VC': '0', 'LVS': 'red'}}"><td class="red">&nbsp;</td><td class="leftmargin rightmargin right">0</td><td class="rightmargin right"><a id="file0_line17"></a><code>17</code></td><td></td><td class="lightred"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;int&nbsp;CounTotalReport()&nbsp;=&gt;&nbsp;ReportDAO.CountTotalReport();</code></td></tr>
+<tr class="coverableline" title="Covered (2 visits)" data-coverage="{'AllTestMethods': {'VC': '2', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">2</td><td class="rightmargin right"><a id="file0_line17"></a><code>17</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;int&nbsp;CounTotalReport()&nbsp;=&gt;&nbsp;ReportDAO.CountTotalReport();</code></td></tr>
 <tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line18"></a><code>18</code></td><td></td><td class="lightgray"><code></code></td></tr>
 <tr class="coverableline" title="Not covered (0 visits)" data-coverage="{'AllTestMethods': {'VC': '0', 'LVS': 'red'}}"><td class="red">&nbsp;</td><td class="leftmargin rightmargin right">0</td><td class="rightmargin right"><a id="file0_line19"></a><code>19</code></td><td></td><td class="lightred"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;int&nbsp;CountReportByHouseId(int&nbsp;houseId)&nbsp;=&gt;&nbsp;ReportDAO.CountTotalReportByHouseId(houseId);</code></td></tr>
 <tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line20"></a><code>20</code></td><td></td><td class="lightgray"><code></code></td></tr>
-<tr class="coverableline" title="Not covered (0 visits)" data-coverage="{'AllTestMethods': {'VC': '0', 'LVS': 'red'}}"><td class="red">&nbsp;</td><td class="leftmargin rightmargin right">0</td><td class="rightmargin right"><a id="file0_line21"></a><code>21</code></td><td></td><td class="lightred"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;List&lt;StaffReportDTO&gt;&nbsp;GetAllReports()&nbsp;=&gt;&nbsp;ReportDAO.GetAllReports();</code></td></tr>
+<tr class="coverableline" title="Covered (2 visits)" data-coverage="{'AllTestMethods': {'VC': '2', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">2</td><td class="rightmargin right"><a id="file0_line21"></a><code>21</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;List&lt;StaffReportDTO&gt;&nbsp;GetAllReports()&nbsp;=&gt;&nbsp;ReportDAO.GetAllReports();</code></td></tr>
 <tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line22"></a><code>22</code></td><td></td><td class="lightgray"><code></code></td></tr>
 <tr class="coverableline" title="Not covered (0 visits)" data-coverage="{'AllTestMethods': {'VC': '0', 'LVS': 'red'}}"><td class="red">&nbsp;</td><td class="leftmargin rightmargin right">0</td><td class="rightmargin right"><a id="file0_line23"></a><code>23</code></td><td></td><td class="lightred"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;int[]&nbsp;GetTotalReportByMonth()&nbsp;=&gt;&nbsp;ReportDAO.GetTotalReportByMonth();</code></td></tr>
 <tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line24"></a><code>24</code></td><td></td><td class="lightgray"><code></code></td></tr>
 <tr class="coverableline" title="Not covered (0 visits)" data-coverage="{'AllTestMethods': {'VC': '0', 'LVS': 'red'}}"><td class="red">&nbsp;</td><td class="leftmargin rightmargin right">0</td><td class="rightmargin right"><a id="file0_line25"></a><code>25</code></td><td></td><td class="lightred"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;List&lt;StaffReportDTO&gt;&nbsp;SearchReportByName(string&nbsp;key)&nbsp;=&gt;&nbsp;ReportDAO.SearchReportByName(key);</code></td></tr>
-<tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line26"></a><code>26</code></td><td></td><td class="lightgray"><code>&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
-<tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line27"></a><code>27</code></td><td></td><td class="lightgray"><code>}</code></td></tr>
+<tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line26"></a><code>26</code></td><td></td><td class="lightgray"><code></code></td></tr>
+<tr class="coverableline" title="Not covered (0 visits)" data-coverage="{'AllTestMethods': {'VC': '0', 'LVS': 'red'}}"><td class="red">&nbsp;</td><td class="leftmargin rightmargin right">0</td><td class="rightmargin right"><a id="file0_line27"></a><code>27</code></td><td></td><td class="lightred"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;StaffReportDTO&nbsp;GetReportById(int&nbsp;reportId)&nbsp;=&gt;&nbsp;ReportDAO.GetReportById(reportId);</code></td></tr>
+<tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line28"></a><code>28</code></td><td></td><td class="lightgray"><code></code></td></tr>
+<tr class="coverableline" title="Not covered (0 visits)" data-coverage="{'AllTestMethods': {'VC': '0', 'LVS': 'red'}}"><td class="red">&nbsp;</td><td class="leftmargin rightmargin right">0</td><td class="rightmargin right"><a id="file0_line29"></a><code>29</code></td><td></td><td class="lightred"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;UpdateReportStatus(int&nbsp;reportId,&nbsp;int&nbsp;statusId,&nbsp;string&nbsp;account)&nbsp;=&gt;&nbsp;ReportDAO.UpdateReportStatus(repor</code></td></tr>
+<tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line30"></a><code>30</code></td><td></td><td class="lightgray"><code>&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line31"></a><code>31</code></td><td></td><td class="lightgray"><code>}</code></td></tr>
 </tbody>
 </table>
 </div>
-<div class="footer">Generated by: ReportGenerator 5.1.12.0<br />11/25/2022 - 10:23:38<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="http://www.palmmedia.de">www.palmmedia.de</a></div></div>
+<div class="footer">Generated by: ReportGenerator 5.1.12.0<br />12/18/2022 - 04:31:30<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="http://www.palmmedia.de">www.palmmedia.de</a></div></div>
 <div class="containerright">
 <div class="containerrightfixed">
 <h1>Methods/Properties</h1>
 <a href="#file0_line15" class="navigatetohash percentagebar percentagebar0" title="Line coverage: 0% - AddReport(BusinessObjects.Report)"><i class="icon-cube"></i>AddReport(BusinessObjects.Report)</a><br />
-<a href="#file0_line17" class="navigatetohash percentagebar percentagebar0" title="Line coverage: 0% - CounTotalReport()"><i class="icon-cube"></i>CounTotalReport()</a><br />
+<a href="#file0_line17" class="navigatetohash percentagebar percentagebar100" title="Line coverage: 100% - CounTotalReport()"><i class="icon-cube"></i>CounTotalReport()</a><br />
 <a href="#file0_line19" class="navigatetohash percentagebar percentagebar0" title="Line coverage: 0% - CountReportByHouseId(System.Int32)"><i class="icon-cube"></i>CountReportByHouseId(System.Int32)</a><br />
-<a href="#file0_line21" class="navigatetohash percentagebar percentagebar0" title="Line coverage: 0% - GetAllReports()"><i class="icon-cube"></i>GetAllReports()</a><br />
+<a href="#file0_line21" class="navigatetohash percentagebar percentagebar100" title="Line coverage: 100% - GetAllReports()"><i class="icon-cube"></i>GetAllReports()</a><br />
 <a href="#file0_line23" class="navigatetohash percentagebar percentagebar0" title="Line coverage: 0% - GetTotalReportByMonth()"><i class="icon-cube"></i>GetTotalReportByMonth()</a><br />
 <a href="#file0_line25" class="navigatetohash percentagebar percentagebar0" title="Line coverage: 0% - SearchReportByName(System.String)"><i class="icon-cube"></i>SearchReportByName(System.String)</a><br />
+<a href="#file0_line27" class="navigatetohash percentagebar percentagebar0" title="Line coverage: 0% - GetReportById(System.Int32)"><i class="icon-cube"></i>GetReportById(System.Int32)</a><br />
+<a href="#file0_line29" class="navigatetohash percentagebar percentagebar0" title="Line coverage: 0% - UpdateReportStatus(System.Int32,System.Int32,System.String)"><i class="icon-cube"></i>UpdateReportStatus(System.Int32,System.Int32,System.String)</a><br />
 <br/></div>
 </div></div>
 <script type="text/javascript">

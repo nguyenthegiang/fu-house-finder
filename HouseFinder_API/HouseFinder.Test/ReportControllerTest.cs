@@ -56,7 +56,7 @@ namespace HouseFinder.Test
 
             //Test matching data
             Assert.AreEqual("Chủ trọ tự ý vào phòng của bạn và tháo bóng đèn trong nhà vệ sinh của bạn", reports[1].ReportContent);
-            Assert.AreEqual("Chủ trọ xâm phạm quyền riêng tư", reports[4].ReportContent);
+            Assert.AreEqual("Chủ trọ thu tiền điện vượt quá giá niêm yết", reports[4].ReportContent);
         }
 
         #endregion GetAllReports
