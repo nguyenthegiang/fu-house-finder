@@ -13,44 +13,43 @@
 
       <div class="mb-3">
         <label class="form-label"><b>Cơ sở</b></label>
-        <select class="form-select" aria-label="Default select example" formControlName="campus" required>
-          <option selected>Chọn cơ sở</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+        <select class="form-select" aria-label="Default select example" formControlName="campus" #selectCampus (change)="onCampusSelected(selectCampus.value)">
+          <option class="disableOption" disabled selected>Chọn cơ sở</option>
+          <option *ngFor=" let campus of campuses" value="{{campus.campusId}}">
+            {{campus.campusName}}</option>
         </select>
         <div class="invalid-feedback mb-3 d-block" *ngIf="!campus">Không được để trống</div>
       </div>
 
       <div class="mb-3">
         <label class="form-label"><b>Quận/Huyện</b></label>
-        <select class="form-select" aria-label="Default select example" formControlName="district" required>
-          <option selected>Chọn quận/huyện</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+        <select class="form-select" aria-label="Default select example" formControlName="district" #selectDistrict (change)="onDistrictSelected(selectDistrict.value)" (click)="onDistrictClicked()">
+          <option class="disableOption" disabled selected>Chọn quận/huyện</option>
+                    <!-- List all Districts of selected Campus-->
+                    <option *ngFor=" let district of districtsOfSelectedCampus" value="{{district.districtId}}">
+                      {{district.districtName}}</option>
         </select>
         <div class="invalid-feedback mb-3 d-block" *ngIf="!district">Không được để trống</div>
       </div>
 
       <div class="mb-3">
         <label class="form-label"><b>Phường/Xã</b></label>
-        <select class="form-select" aria-label="Default select example" formControlName="commune" required>
-          <option selected>Chọn phường/xã</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+        <select class="form-select" aria-label="Default select example" formControlName="commune" #selectCommune (change)="onCommuneSelected(selectCommune.value)">
+          <option class="disableOption" disabled selected>Chọn phường/xã</option>
+                    <!-- List all Communes of selected District -->
+                    <option *ngFor="let commune of communesOfSelectedDistrict" value="{{commune.communeId}}">
+                      {{commune.communeName}}</option>
         </select>
         <div class="invalid-feedback mb-3 d-block" *ngIf="!commune">Không được để trống</div>
       </div>
 
       <div class="mb-3">
         <label class="form-label"><b>Thôn/Xóm</b></label>
-        <select class="form-select" aria-label="Default select example" formControlName="village" required>
-          <option selected>Chọn thôn/xóm</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+        <select class="form-select" aria-label="Default select example" formControlName="village" #selectVillage (change)="onVillageSelected(selectVillage.value)">
+          <option class="disableOption" disabled selected>Chọn thôn/xóm</option>
+                    <!-- List all Villages of selected Commune -->
+                    <option *ngFor="let village of villagesOfSelectedCommune" value="{{village.villageId}}">
+                      {{village.villageName}}</option>
         </select>
         <div class="invalid-feedback mb-3 d-block" *ngIf="!village">Không được để trống</div>
       </div>
@@ -129,6 +128,7 @@
     </div>
   </form>
 </div>
+
 <swal
   #serverErrorAlert
   [toast]="true"

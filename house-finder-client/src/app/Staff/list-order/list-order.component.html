@@ -1,30 +1,32 @@
 <app-staff-header></app-staff-header>
 
 <div class="container-fluid m-0 bg-light">
-  <div class="row px-3 pt-3">
-    <div class="col-8">
-      <div class="row d-flex align-items-center p-3 backgroundWhite statistics" style="height: 100%">
-        <span id="totalSolvedOrder">Bạn đã giải quyết tổng số: <span>{{ totalOfSolvedOrder }} nguyện vọng</span></span>
+  <div class="row px-4 pt-3">
+    <div class="col-12 col-md-8">
+      <div class="row d-flex justify-content-center align-items-center p-3 backgroundWhite statistics"
+        style="height: 100%">
+        <span id="totalSolvedOrder" class="mb-3">Bạn đã giải quyết tổng số: <span>{{ totalOfSolvedOrder }} nguyện
+            vọng</span></span>
         <div class="row">
-          <div class="col-3">
+          <div class="col-6 col-md-3 h-100 my-2">
             <div class="justify-content-center align-items-center year">
               <h6>Tổng số nguyện vọng trong năm</h6>
               <span>{{ totalofSolvedOrderInCurrentYear }}</span>
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-6 col-md-3 h-100 my-2">
             <div class="justify-content-center align-items-center month">
               <h6>Tổng số nguyện vọng trong tháng</h6>
               <span>{{ totalofSolvedOrderInMonth }}</span>
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-6 col-md-3 h-100 my-2">
             <div class="justify-content-center align-items-center week">
               <h6>Tổng số nguyện vọng trong tuần</h6>
               <span>{{ totalOfSolvedOrder }}</span>
             </div>
           </div>
-          <div class="col-3">
+          <div class="col-6 col-md-3 h-100 my-2">
             <div class="justify-content-center align-items-center day">
               <h6>Tổng số nguyện vọng trong ngày</h6>
               <span>{{ totalofSolvedOrderInDay }}</span>
@@ -38,7 +40,7 @@
       </div>
     </div>
 
-    <div class="col-4">
+    <div class="col-12 col-md-4">
       <div class="p-4 backgroundWhite position-relative">
         <!-- <select class="btn position-absolute top-0 end-0" type="button">
           <option>This week</option>
@@ -53,213 +55,167 @@
     <div class="col-12 px-4 backgroundWhite">
       <!-- Page content -->
       <div class="row">
-        <div class="my-4" *ngIf="orders.length == 0">
-          <h3 class="text-center">Chưa có nguyện vọng</h3>
-        </div>
-        <div class="my-4" *ngIf="orders.length != 0">
+        <div class="my-4">
           <h3 class="text-center">Danh sách nguyện vọng</h3>
 
           <!-- Filter -->
-          <div class="row">
+          <div class="row d-flex justify-content-end">
             <!-- Date picker -->
             <!-- Start date -->
-            <div class="col-6 col-md-3 my-2">
+            <div class="col-6 col-md-2 my-2">
               <label class="form-label">Từ ngày</label>
-              <input
-                #selectedFromDate
-                class="form-control"
-                type="date"
-                (change)="onFromDateSelected(selectedFromDate.value)"
-              />
+              <input #selectedFromDate class="form-control" type="date"
+                (change)="onFromDateSelected(selectedFromDate.value)" />
             </div>
             <!-- End date -->
-            <div class="col-6 col-md-3 my-2">
+            <div class="col-6 col-md-2 my-2">
               <label class="form-label">Đến ngày</label>
-              <input
-                #selectedToDate
-                class="form-control"
-                type="date"
-                (change)="onToDateSelected(selectedToDate.value)"
-              />
+              <input #selectedToDate class="form-control" type="date"
+                (change)="onToDateSelected(selectedToDate.value)" />
             </div>
             <!-- End date picker -->
 
             <!-- Trạng thái -->
-            <div class="col-6 col-md-3 my-2">
+            <div class="col-6 col-md-2 my-2">
               <label class="form-label">Trạng thái</label>
-              <select
-                #selectCStatusId
-                class="form-select"
-                (change)="onStatusSelected(selectCStatusId.value)"
-              >
+              <select #selectCStatusId class="form-select" (change)="onStatusSelected(selectCStatusId.value)">
                 <option value="0">Tất cả</option>
-                <option
-                  *ngFor="let status of statuses"
-                  value="{{ status.statusId }}"
-                >
-                  {{ status.statusName }}
-                </option>
+                <option value="1">Chưa giải quyết</option>
+                <option value="2">Đang giải quyết</option>
+                <option value="3">Đã giải quyết</option>
               </select>
             </div>
 
             <!-- Order by -->
-            <div class="col-6 col-md-3 my-2">
+            <div class="col-6 col-md-2 my-2">
               <label class="form-label">Sắp xếp</label>
-              <select
-                #selectedOrderBy
-                class="form-select"
-                (change)="onOrderBySelected(selectedOrderBy.value)"
-              >
+              <select #selectedOrderBy class="form-select" (change)="onOrderBySelected(selectedOrderBy.value)">
                 <option selected disabled>Chọn sắp xếp</option>
                 <option value="desc">Ngày gần nhất</option>
                 <option value="asc">Ngày xa nhất</option>
               </select>
             </div>
+
+            <!-- Clear filter result -->
+            <div class="col-6 col-md-2 my-2">
+            </div>
+
+            <div class="col-6 col-md-2 my-2">
+              <label class="form-label" id="hiddenDiv">This is a hidden item used for styling</label>
+              <div class="text-end">
+                <a href="/Staff/list-order" id="clearFilterValue">Đặt lại bộ lọc</a>
+              </div>
+            </div>
           </div>
           <!-- End filter -->
 
-          <table class="table table-hover mt-4">
-            <thead>
-              <tr>
-                <th scope="col" id="md">STT</th>
-                <th scope="col">Mã sinh viên</th>
-                <th scope="col">Tên sinh viên</th>
-                <th scope="col">Ngày tạo</th>
-                <th scope="col" id="md">Ngày giải quyết</th>
-                <th scope="col" id="md">Người giải quyết</th>
-                <th scope="col">Trạng thái</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let order of orders; let i = index" data-bs-toggle="modal" data-bs-target="#selectedOrderModal" (click)="changeSelectedOrder(order.orderId)" style="cursor: pointer">
-                <td id="md">
-                  <b>{{ (pageNumber - 1) * pageSize + i + 1 }}</b>
-                </td>
-                <td>{{ order.studentId }}</td>
-                <td>{{ order.studentName }}</td>
-                <td>{{ order.orderedDate | date: "dd/MM/yyyy" }}</td>
-                <td id="md">{{ order.solvedDate | date: "dd/MM/yyyy" }}</td>
-                <td id="md">
-                  <div *ngIf="order.solvedByNavigation">
-                    {{ order.solvedByNavigation.displayName }}
-                  </div>
-                </td>
-                <td
-                  *ngIf="order.status.statusName === 'Unsolved'"
-                  style="color: red"
-                >
-                  Chưa giải quyết
-                </td>
-                <td
-                  *ngIf="order.status.statusName === 'Processing'"
-                  style="color: orange"
-                >
-                  Đang giải quyết
-                </td>
-                <td
-                  *ngIf="order.status.statusName === 'Solved'"
-                  style="color: green"
-                >
-                  Đã giải quyết
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <!-- End List of Rooms -->
-
-          <!-- Paging -->
-          <div class="d-flex justify-content-center align-items-center my-3">
-            <nav aria-label="Pagination-nav">
-              <ul class="pagination">
-                <!-- Previous: Disabled if this is first page -->
-                <li class="page-item" [ngClass]="{ disabled: pageNumber == 1 }">
-                  <!-- Go to previous page -->
-                  <a
-                    class="page-link hoverableLink"
-                    aria-label="Previous"
-                    (click)="goToPage(pageNumber - 1)"
-                  >
-                    <span aria-hidden="true">&laquo;</span>
-                  </a>
-                </li>
-                <!-- Numbers -->
-                <li *ngFor="let page of pageList" class="page-item">
-                  <!-- Display this as active if it's the chosen page -->
-                  <a
-                    class="page-link hoverableLink"
-                    (click)="goToPage(page)"
-                    [ngClass]="{ active: pageNumber == page }"
-                    >{{ page }}</a
-                  >
-                </li>
-                <!-- Next: Disabled if this is last page -->
-                <li
-                  class="page-item"
-                  [ngClass]="{ disabled: pageNumber == pageCount }"
-                >
-                  <!-- Go to next page -->
-                  <a
-                    class="page-link hoverableLink"
-                    aria-label="Next"
-                    (click)="goToPage(pageNumber + 1)"
-                  >
-                    <span aria-hidden="true">&raquo;</span>
-                  </a>
-                </li>
-              </ul>
-            </nav>
+          <!-- If found no Orders -->
+          <div class="row mt-4" *ngIf="orders.length <= 0">
+            <div class="text-center emptyMesage">Không có nguyện vọng</div>
           </div>
-          <!-- End Paging -->
+
+          <!-- if there are Orders -->
+          <div *ngIf="orders.length > 0">
+            <table class="table table-hover mt-4">
+              <thead>
+                <tr>
+                  <th scope="col" id="md">STT</th>
+                  <th scope="col">Mã sinh viên</th>
+                  <th scope="col">Tên sinh viên</th>
+                  <th scope="col">Ngày tạo</th>
+                  <th scope="col" id="md">Ngày giải quyết</th>
+                  <th scope="col" id="md">Người giải quyết</th>
+                  <th scope="col">Trạng thái</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let order of orders; let i = index" data-bs-toggle="modal"
+                  data-bs-target="#selectedOrderModal" (click)="changeSelectedOrder(order.orderId)"
+                  style="cursor: pointer">
+                  <td id="md">
+                    <b>{{ (pageNumber - 1) * pageSize + i + 1 }}</b>
+                  </td>
+                  <td>{{ order.studentId }}</td>
+                  <td>{{ order.studentName }}</td>
+                  <td>{{ order.orderedDate | date: "dd/MM/yyyy" }}</td>
+                  <td id="md">{{ order.solvedDate | date: "dd/MM/yyyy" }}</td>
+                  <td id="md">
+                    <div *ngIf="order.solvedByNavigation">
+                      {{ order.solvedByNavigation.displayName }}
+                    </div>
+                  </td>
+                  <td *ngIf="order.status.statusName === 'Unsolved'" style="color: red">
+                    Chưa giải quyết
+                  </td>
+                  <td *ngIf="order.status.statusName === 'Processing'" style="color: orange">
+                    Đang giải quyết
+                  </td>
+                  <td *ngIf="order.status.statusName === 'Solved'" style="color: green">
+                    Đã giải quyết
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- End List of Rooms -->
+
+            <!-- Paging -->
+            <div class="d-flex justify-content-center align-items-center my-3">
+              <nav aria-label="Pagination-nav">
+                <ul class="pagination">
+                  <!-- Previous: Disabled if this is first page -->
+                  <li class="page-item" [ngClass]="{ disabled: pageNumber == 1 }">
+                    <!-- Go to previous page -->
+                    <a class="page-link hoverableLink" aria-label="Previous" (click)="goToPage(pageNumber - 1)">
+                      <span aria-hidden="true">&laquo;</span>
+                    </a>
+                  </li>
+                  <!-- Numbers -->
+                  <li *ngFor="let page of pageList" class="page-item">
+                    <!-- Display this as active if it's the chosen page -->
+                    <a class="page-link hoverableLink" (click)="goToPage(page)"
+                      [ngClass]="{ active: pageNumber == page }">{{ page }}</a>
+                  </li>
+                  <!-- Next: Disabled if this is last page -->
+                  <li class="page-item" [ngClass]="{ disabled: pageNumber == pageCount }">
+                    <!-- Go to next page -->
+                    <a class="page-link hoverableLink" aria-label="Next" (click)="goToPage(pageNumber + 1)">
+                      <span aria-hidden="true">&raquo;</span>
+                    </a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+            <!-- End Paging -->
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<app-footer></app-footer>
+<!-- <app-footer></app-footer> -->
 
 <!-- Modal -->
-<div
-  class="modal fade"
-  id="selectedOrderModal"
-  tabindex="-1"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
+<div class="modal fade" id="selectedOrderModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
         <h1 class="modal-title fs-5" id="exampleModalLabel">
           Thông tin chi tiết
         </h1>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
 
       <div class="modal-body">
-        <span><b>Tên sinh viên: </b>{{ selectedOrderName }}</span
-        ><br />
-        <span><b>Số điện thoại: </b>{{ selectedOrderPhone }}</span
-        ><br />
-        <span><b>Email: </b>{{ selectedOrderEmail }}</span
-        ><br />
-        <span><b>Ngày tạo: </b>{{ selectedOrderCreatedDate | date }}</span
-        ><br />
-        <span><b>Nội dung: </b>{{ selectedOrderContent }}</span
-        ><br />
+        <span><b>Tên sinh viên: </b>{{ selectedOrderName }}</span><br />
+        <span><b>Số điện thoại: </b>{{ selectedOrderPhone }}</span><br />
+        <span><b>Email: </b>{{ selectedOrderEmail }}</span><br />
+        <span><b>Nội dung: </b>{{ selectedOrderContent }}</span><br />
         <br />
         <b class="form-label">Trạng thái</b>
         <!-- Set selected value for <select> by [ngModel] -->
-        <select
-          #selectOrderStatusId
-          class="form-select"
-          [(ngModel)]="selectedStatusId"
-          (change)="onSelectOrderStatus(selectOrderStatusId.value)"
-        >
+        <select #selectOrderStatusId class="form-select" [(ngModel)]="selectedStatusId"
+          (change)="onSelectOrderStatus(selectOrderStatusId.value)">
           <option value="1">Chưa giải quyết</option>
           <option value="2">Đang giải quyết</option>
           <option value="3">Đã giải quyết</option>
@@ -270,11 +226,7 @@
         <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
           Hủy
         </button>
-        <button
-          type="button"
-          class="btn btn-success"
-          (click)="updateOrderStatus()"
-        >
+        <button type="button" class="btn btn-success" (click)="updateOrderStatus()">
           Lưu
         </button>
       </div>

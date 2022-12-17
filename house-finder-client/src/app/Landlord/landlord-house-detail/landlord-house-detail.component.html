@@ -52,153 +52,157 @@
 <!-- List available rooms -->
 <div class="row m-2">
   <div class="col-12">
-    <div class="my-4" *ngIf="rooms.length == 0">
-      <h3 class="text-center">Chưa có phòng trọ</h3>
-    </div>
-    <div class="my-4" *ngIf="rooms.length != 0">
+    <div class="my-4">
       <h3 class="text-center">Danh sách phòng</h3>
 
       <div class="my-4">
         <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#updateModal"
-        data-whatever="@getbootstrap" (click)="editRoom(0)">+ Thêm mới</button>
+          data-whatever="@getbootstrap" (click)="addRoom()">+ Thêm mới</button>
       </div>
 
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col">Tên phòng</th>
-            <th scope="col">Giá phòng</th>
-            <th scope="col" id="md">Tiện ích</th>
-            <th scope="col" id="md">Diện tích</th>
-            <th scope="col" id="md">Số người ở</th>
-            <th scope="col">Trạng thái</th>
-            <th scope="col">Tùy chọn</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let dataItem of rooms">
-            <!-- Room name -->
-            <td><b>{{dataItem.roomName}}</b></td>
+      <!-- Case: No data -->
+      <div *ngIf="rooms.length == 0">
+        <div class="emptyMesage text-center">Chưa có phòng trọ</div>
+      </div>
 
-            <!-- Price -->
-            <td>{{dataItem.pricePerMonth | currency:'VND':'symbol':'3.0'}}</td>
+      <!-- Case: Have data -->
+      <div *ngIf="rooms.length != 0">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Tên phòng</th>
+              <th scope="col">Giá phòng</th>
+              <th scope="col" id="md">Tiện ích</th>
+              <th scope="col" id="md">Diện tích</th>
+              <th scope="col" id="md">Số người ở</th>
+              <th scope="col">Trạng thái</th>
+              <th scope="col">Tùy chọn</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let dataItem of rooms">
+              <!-- Room name -->
+              <td><b>{{dataItem.roomName}}</b></td>
 
-            <!-- Utilities -->
-            <td id="md">
-              <div class="d-flex">
-                <div
-                  *ngIf="dataItem.fridge == false && dataItem.kitchen == false && dataItem.washingMachine == false
+              <!-- Price -->
+              <td>{{dataItem.pricePerMonth | currency:'VND':'symbol':'3.0'}}</td>
+
+              <!-- Utilities -->
+              <td id="md">
+                <div class="d-flex">
+                  <div
+                    *ngIf="dataItem.fridge == false && dataItem.kitchen == false && dataItem.washingMachine == false
                   && dataItem.desk == false && dataItem.noLiveWithHost == false && dataItem.bed == false && dataItem.closedToilet == false">
-                  <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="Không có tiện ích" style="cursor: pointer;">
-                    block
-                  </span>
+                    <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
+                      title="Không có tiện ích" style="cursor: pointer;">
+                      block
+                    </span>
+                  </div>
+                  <div *ngIf="dataItem.fridge == true">
+                    <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top"
+                      title="Tủ lạnh" style="cursor: pointer;">
+                      kitchen
+                    </span>
+                  </div>
+                  <div *ngIf="dataItem.kitchen == true">
+                    <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top"
+                      title="Bếp" style="cursor: pointer;">
+                      multicooker
+                    </span>
+                  </div>
+                  <div *ngIf="dataItem.washingMachine == true">
+                    <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top"
+                      title="Máy giặt" style="cursor: pointer;">
+                      local_laundry_service
+                    </span>
+                  </div>
+                  <div *ngIf="dataItem.desk == true">
+                    <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top"
+                      title="Bàn ghế" style="cursor: pointer;">
+                      desk
+                    </span>
+                  </div>
+                  <div *ngIf="dataItem.noLiveWithHost == true">
+                    <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top"
+                      title="Không chung chủ" style="cursor: pointer;">
+                      gite
+                    </span>
+                  </div>
+                  <div *ngIf="dataItem.bed == true">
+                    <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top"
+                      title="Giường" style="cursor: pointer;">
+                      bed
+                    </span>
+                  </div>
+                  <div *ngIf="dataItem.closedToilet == true">
+                    <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
+                      title="Vệ sinh khép kín" style="cursor: pointer;">
+                      wc
+                    </span>
+                  </div>
                 </div>
-                <div *ngIf="dataItem.fridge == true">
-                  <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="Tủ lạnh" style="cursor: pointer;">
-                    kitchen
-                  </span>
-                </div>
-                <div *ngIf="dataItem.kitchen == true">
-                  <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="Bếp" style="cursor: pointer;">
-                    multicooker
-                  </span>
-                </div>
-                <div *ngIf="dataItem.washingMachine == true">
-                  <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="Máy giặt" style="cursor: pointer;">
-                    local_laundry_service
-                  </span>
-                </div>
-                <div *ngIf="dataItem.desk == true">
-                  <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="Bàn ghế" style="cursor: pointer;">
-                    desk
-                  </span>
-                </div>
-                <div *ngIf="dataItem.noLiveWithHost == true">
-                  <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="Không chung chủ" style="cursor: pointer;">
-                    gite
-                  </span>
-                </div>
-                <div *ngIf="dataItem.bed == true">
-                  <span class="material-symbols-outlined me-2" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="Giường" style="cursor: pointer;">
-                    bed
-                  </span>
-                </div>
-                <div *ngIf="dataItem.closedToilet == true">
-                  <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="Vệ sinh khép kín" style="cursor: pointer;">
-                    wc
-                  </span>
-                </div>
-              </div>
-            </td>
+              </td>
 
-            <!-- Area -->
-            <td id="md">{{dataItem.areaByMeters}} m<sup>2</sup></td>
+              <!-- Area -->
+              <td id="md">{{dataItem.areaByMeters}} m<sup>2</sup></td>
 
-            <!-- Amount of people -->
-            <td id="md">
-              <div class="row">
-                <div *ngFor='let in of peopleCounter(dataItem.currentAmountOfPeople); let i = index'
-                  class="col-12 col-md-1">
-                  <i class="fa-solid fa-user me-1"></i>
+              <!-- Amount of people -->
+              <td id="md">
+                <div class="row">
+                  <div *ngFor='let in of peopleCounter(dataItem.currentAmountOfPeople); let i = index'
+                    class="col-12 col-md-1">
+                    <i class="fa-solid fa-user me-1"></i>
+                  </div>
+                  <div
+                    *ngFor='let in of peopleCounter(dataItem.maxAmountOfPeople - dataItem.currentAmountOfPeople); let i = index'
+                    class="col-12 col-md-1">
+                    <i class="fa-regular fa-user me-1"></i>
+                  </div>
                 </div>
-                <div
-                  *ngFor='let in of peopleCounter(dataItem.maxAmountOfPeople - dataItem.currentAmountOfPeople); let i = index'
-                  class="col-12 col-md-1">
-                  <i class="fa-regular fa-user me-1"></i>
-                </div>
-              </div>
-            </td>
+              </td>
 
-            <!-- Room status -->
-            <td>
-              <!-- <label class="switch me-2">
+              <!-- Room status -->
+              <td>
+                <!-- <label class="switch me-2">
                 <input *ngIf="dataItem.status.statusName === 'Occupied' || dataItem.status.statusName === 'Disabled'"
                   type="checkbox">
                 <input *ngIf="dataItem.status.statusName === 'Available'" type="checkbox" checked>
                 <span class="slider round"></span>
               </label> -->
-              <div class="form-check form-switch">
-                <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
-                  [checked]="dataItem.status.statusName === 'Available'"
-                  [disabled]="dataItem.status.statusName === 'Disabled'"
-                  (change)="onStatusRoomSelected($event, dataItem.roomId)">
-                <label class="form-check-label" for="flexSwitchCheckChecked">
-                  <!-- <span>{{dataItem.status.statusName}}</span> -->
-                  <span *ngIf="dataItem.status.statusName === 'Available'">Còn Trống</span>
-                  <span *ngIf="dataItem.status.statusName === 'Occupied'">Đã thuê</span>
-                  <span *ngIf="dataItem.status.statusName === 'Disabled'">Không dùng được</span>
-                </label>
-              </div>
-            </td>
-            <td>
-              <!-- Detail button -->
-              <a class="text-decoration-none text-success me-2" data-bs-toggle="modal" data-bs-target="#updateModal"
-                data-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId)" style="cursor: pointer;">
-                <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
-                  title="Chỉnh sửa">
-                  edit
-                </span>
-              </a>
-              <a class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
-                data-bs-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId)" style="cursor: pointer;">
-                <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
-                  title="Xóa">
-                  delete
-                </span>
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <!-- End List of Rooms -->
+                <div class="form-check form-switch">
+                  <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
+                    [checked]="dataItem.status.statusName === 'Available'"
+                    [disabled]="dataItem.status.statusName === 'Disabled'"
+                    (change)="onStatusRoomSelected($event, dataItem.roomId)">
+                  <label class="form-check-label" for="flexSwitchCheckChecked">
+                    <!-- <span>{{dataItem.status.statusName}}</span> -->
+                    <span *ngIf="dataItem.status.statusName === 'Available'">Còn Trống</span>
+                    <span *ngIf="dataItem.status.statusName === 'Occupied'">Đã thuê</span>
+                    <span *ngIf="dataItem.status.statusName === 'Disabled'">Không dùng được</span>
+                  </label>
+                </div>
+              </td>
+              <td>
+                <!-- Detail button -->
+                <a class="text-decoration-none text-success me-2" data-bs-toggle="modal" data-bs-target="#updateModal"
+                  data-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId)" style="cursor: pointer;">
+                  <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
+                    title="Chỉnh sửa">
+                    edit
+                  </span>
+                </a>
+                <a class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                  data-bs-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId)" style="cursor: pointer;">
+                  <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
+                    title="Xóa">
+                    delete
+                  </span>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
@@ -206,4 +210,4 @@
 <app-update-room [roomId]="updateRoomId"></app-update-room>
 
 <!-- Footer -->
-<app-footer></app-footer>
+<!-- <app-footer></app-footer> -->

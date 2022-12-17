@@ -21,7 +21,6 @@ export class ListOrderComponent implements OnInit {
   statuses: OrderStatus[] = [];
 
   //(Paging)
-  totalOrder = 0; //items count
   pageSize = 10; //number of items per page
   pageNumber = 1; //starts at page 1
   pageCount = 0; //number of pages
@@ -78,22 +77,9 @@ export class ListOrderComponent implements OnInit {
     // yesterday.setDate(yesterday.getDate() - 1)
     // let previousDate = yesterday.getFullYear() + "-" + (yesterday.getMonth() + 1) + "-" + yesterday.getDate();
 
-    this.orderService.countOrderSolvedByStaffInADay(currentDate).subscribe((data) =>{
+    this.orderService.countOrderSolvedByStaffInADay(currentDate).subscribe((data) => {
       this.totalofSolvedOrderInDay = data;
     })
-
-    // (Paging) Count available Houses for total number of pages
-    this.orderService.countTotalOrder().subscribe((data) => {
-      this.totalOrder = data;
-      console.log(data);
-
-      // (Paging) Calculate number of pages
-      this.pageCount = Math.ceil(this.totalOrder / this.pageSize); //divide & round up
-
-      // (Paging) Render pageList based on pageCount
-      this.pageList = Array.from({ length: this.pageCount }, (_, i) => i + 1);
-      //pageList is now an array like {1, 2, 3, ..., n | n = pageCount}
-    });
 
     //Call API: get list of orders' statuses
     this.orderStatusService.getAllStatus().subscribe((data) => {
@@ -102,20 +88,16 @@ export class ListOrderComponent implements OnInit {
 
     this.orderService.countTotalOrderSolvedByAccount().subscribe((data) => {
       this.totalOfSolvedOrder = data;
-      console.log("ĐÃ GIẢI QUYẾT: " + this.totalOfSolvedOrder);
     });
 
     //Call API: create a bar chart show number of solved orders by this staff in a year
-    this.orderService.countSolvedOrderByStaffInAYear().subscribe((data) =>{
+    this.orderService.countSolvedOrderByStaffInAYear().subscribe((data) => {
       this.totalofSolvedOrderInYear = data;
 
-      //
       this.totalofSolvedOrderInMonth = this.totalofSolvedOrderInYear[this.currentMonth];
 
-      //
       var num = 0;
-      this.totalofSolvedOrderInYear.forEach(function(value){
-        console.log(value);
+      this.totalofSolvedOrderInYear.forEach(function (value) {
         num += value;
       })
       this.totalofSolvedOrderInCurrentYear = num;
@@ -158,7 +140,7 @@ export class ListOrderComponent implements OnInit {
             title: {
               display: true,
               text:
-                'Thống kê số lượng đăng ký bạn đã giải quyết trong năm ' + this.currentYear,
+                'Thống kê số lượng nguyện vọng bạn đã giải quyết trong năm ' + this.currentYear,
             },
           },
         },
@@ -191,6 +173,7 @@ export class ListOrderComponent implements OnInit {
       this.pageNumber = 1;
     }
 
+    //Get data
     this.orderService
       .filterOrder(
         this.pageSize,
@@ -204,13 +187,31 @@ export class ListOrderComponent implements OnInit {
         this.orders = data;
         this.scrollToTop();
       });
+
+    //For Paging: Count Order
+    this.orderService
+      .filterOrder(
+        1000,
+        1,
+        this.selectedStatusId,
+        this.selectedFromDate,
+        this.selectedToDate,
+        this.selectedOrderBy
+      )
+      .subscribe((data) => {
+        //(Paging) calculate number of pages
+        this.pageCount = Math.ceil(data.length / this.pageSize);  //divide & round up
+
+        // (Paging) Render pageList based on pageCount
+        this.pageList = Array.from({ length: this.pageCount }, (_, i) => i + 1);
+        //pageList is now an array like {1, 2, 3, ..., n | n = pageCount}
+      });
   }
 
   //[Filter] Filter by Campus
   onStatusSelected(selectedStatusId: string) {
     // convert string to number
     var numberCampusId: number = +selectedStatusId;
-    console.log(numberCampusId);
 
     // Call API: update list houses with the campus user chose
     this.selectedStatusId = numberCampusId;
@@ -227,7 +228,7 @@ export class ListOrderComponent implements OnInit {
     this.filterOrder(true);
   }
 
-  onOrderBySelected(selectedOrderBy: string){
+  onOrderBySelected(selectedOrderBy: string) {
     this.selectedOrderBy = selectedOrderBy;
     this.filterOrder(true);
   }
@@ -236,8 +237,9 @@ export class ListOrderComponent implements OnInit {
     this.router.navigate(['/Staff/staff-landlord-detail/' + id]);
   }
 
-  search(searchValue: string) {}
+  search(searchValue: string) { }
 
+  //To show detail in modal
   changeSelectedOrder(orderId: number) {
     //Find the order which id == orderId
     var selectedOrder = this.orders.find((order) => order.orderId == orderId);
@@ -249,17 +251,15 @@ export class ListOrderComponent implements OnInit {
       this.selectedOrderCreatedDate = selectedOrder.orderedDate;
       this.selectedOrderContent = selectedOrder.orderContent;
       this.selectedStatusId = selectedOrder.status.statusId;
-      console.log('Status id: ' + this.selectedStatusId);
     }
   }
 
-  onSelectOrderStatus(selectedStatusId: string){
+  onSelectOrderStatus(selectedStatusId: string) {
     this.selectedStatusIdToUpdate = Number(selectedStatusId);
   }
 
   updateOrderStatus() {
     var orderId = this.selectedOrder?.orderId;
-    console.log("OrderId: " + this.selectedOrder?.orderId + "; statusId: " + this.selectedStatusIdToUpdate);
     if (orderId != undefined && this.selectedStatusIdToUpdate != undefined) {
       //Call API:
       this.orderService.updateOrderStatus(orderId, this.selectedStatusIdToUpdate).subscribe();

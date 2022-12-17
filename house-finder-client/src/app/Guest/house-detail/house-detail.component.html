@@ -33,12 +33,12 @@
         </div>
         <div class="carousel-inner rounded">
           <div class="carousel-item active" *ngIf="houseDetail.imagesOfHouses">
-            <img src="../../assets/image/House/{{houseDetail.imagesOfHouses[0].imageLink}}" class="d-block w-100 h-25"
+            <img id="img" src="../../assets/image/House/{{houseDetail.imagesOfHouses[0].imageLink}}" class="w-100" height="450"
               alt="...">
           </div>
           <div *ngFor="let image of houseDetail.imagesOfHouses; let i=index;">
             <div class="carousel-item" *ngIf="i >= 1">
-              <img src="../../assets/image/House/{{image.imageLink}}" class="d-block w-100 h-25" alt="...">
+              <img id="img" src="../../assets/image/House/{{image.imageLink}}" class="w-100" height="450" alt="...">
             </div>
           </div>
         </div>
@@ -231,6 +231,7 @@
             <th scope="col">Tên phòng</th>
             <th scope="col">Giá phòng</th>
             <th scope="col" id="md">Tiện ích</th>
+            <th scope="col" id="md">Loại phòng</th>
             <th scope="col">Diện tích</th>
             <th scope="col" id="md">Số người ở</th>
           </tr>
@@ -298,6 +299,9 @@
                 </div>
               </div>
             </td>
+
+            <!-- Room types -->
+            <td id="md">{{dataItem.roomType.roomTypeName}}</td>
 
             <!-- Area -->
             <td>{{dataItem.areaByMeters}} m<sup>2</sup></td>
@@ -371,7 +375,7 @@
     </div>
   </div> -->
 </div>
-<app-footer></app-footer>
+<!-- <app-footer></app-footer> -->
 
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
   <div class="modal-dialog">

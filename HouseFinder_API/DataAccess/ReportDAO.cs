@@ -161,5 +161,66 @@ namespace DataAccess
             return total;
         }
 
+        //[Staff/list-report] Get report by id
+        public static StaffReportDTO GetReportById(int reportId)
+        {
+            StaffReportDTO report;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    report = context.Reports.Where(r => r.Deleted == false).ProjectTo<StaffReportDTO>(config)
+                        .Where(r => r.ReportId == reportId).FirstOrDefault();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return report;
+        }
+
+        //Update report status
+        public static void UpdateReportStatus(int reportId, int statusId, string account)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    Report updateReport = context.Reports.FirstOrDefault(report => report.ReportId == reportId);
+                    if (updateReport == null)
+                    {
+                        throw new Exception();
+                    }
+                    //Check status id
+                    if (statusId == 1)
+                    {
+                        updateReport.SolvedDate = null;
+                        updateReport.SolvedBy = null;
+                    }
+                    else if (statusId == 2)
+                    {
+                        updateReport.SolvedDate = null;
+                        updateReport.SolvedBy = account;
+                    }
+                    else if (statusId == 3) //Add solved date and solved by for report if status change to solved
+                    {
+                        updateReport.SolvedDate = DateTime.Today;
+                        updateReport.SolvedBy = account;
+                    }
+                    //Update report's status
+                    updateReport.StatusId = statusId;
+
+                    context.Entry<Report>(updateReport).State = EntityState.Modified;
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

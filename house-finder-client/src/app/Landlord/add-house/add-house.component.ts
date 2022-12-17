@@ -2,6 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
+import { Campus } from 'src/app/models/campus';
+import { Commune } from 'src/app/models/commune';
+import { District } from 'src/app/models/district';
+import { Village } from 'src/app/models/village';
+import { CampusService } from 'src/app/services/campus.service';
 import { FileService } from 'src/app/services/file.service';
 import { HouseService } from 'src/app/services/house.service';
 declare const google: any;  //For Google Map
@@ -57,11 +62,22 @@ export class AddHouseComponent implements OnInit {
     houseImg3: [, Validators.required],
   }); 
 
+  campuses: Campus[] = [];                    //(Regions) All Campuses (and Districts, Communes, Villages)
+  districtsOfSelectedCampus: District[] = []; //(Regions) all Districts of 1 selected Campus (only display after user has selected 1 Campus)
+  communesOfSelectedDistrict: Commune[] = []; //(Regions) all Communes of 1 selected District (only display after user has selected 1 District)
+  villagesOfSelectedCommune: Village[] = [];  //(Regions) all Villages of 1 selected Commune (only display after user has selected 1 Commune)
+  
+  selectedDistrictId: number | undefined;   //(filter by Region)
+  selectedCommuneId: number | undefined;    //(filter by Region)
+  selectedVillageId: number | undefined;    //(filter by Region)
+  selectedCampusId: number | undefined;     //(filter by campus)
+
   constructor(
     private formBuilder: FormBuilder, 
     private houseService: HouseService,
     private fileService: FileService,
-    private router: Router,) { }
+    private router: Router,
+    private campusService: CampusService,) { }
 
   ngOnInit(): void {
     this.initMap();
@@ -85,6 +101,10 @@ export class AddHouseComponent implements OnInit {
       map: this.map
     });
     this.distanceService = new google.maps.DistanceMatrixService();
+
+    this.campusService.getAllCampuses().subscribe(data => {
+      this.campuses = data;
+    });
   }
 
   async addHouse(){
@@ -242,4 +262,96 @@ export class AddHouseComponent implements OnInit {
       }
     }
   }
+  onCampusSelected(selectedCampusId: string) {
+    // convert string to number
+    var numberCampusId: number = +selectedCampusId;
+
+    // find the selected campus
+    this.campuses.forEach((campus) => {
+      // assign the list of Commune as the communes of this District
+      if (campus.campusId == numberCampusId) {
+        this.districtsOfSelectedCampus = campus.districts;
+        return;
+      }
+    });
+
+    //Reset lower Region Filter
+    this.selectedDistrictId = undefined;
+    this.selectedCommuneId = undefined;
+    this.selectedVillageId = undefined;
+    this.communesOfSelectedDistrict = [];
+    this.villagesOfSelectedCommune = [];
+
+    // Call API: update list houses with the campus user chose
+    this.selectedCampusId = numberCampusId;
+  }onDistrictClicked() {
+    // check if user has chosen Campus
+    if (!this.selectedCampusId) {
+      // if not => alert that they have to choose Campus before District
+      alert('Vui lòng chọn Cơ sở bạn muốn tìm trước');
+    }
+  }
+
+  //[Filter by Region] Filter by Commune
+  //Change list of Communes after user selected District
+  onDistrictSelected(stringSelectedDistrictId: string) {
+    // convert string to number
+    var numberDistrictId: number = +stringSelectedDistrictId;
+
+    // find the selected district
+    this.districtsOfSelectedCampus.forEach((district) => {
+      // assign the list of Commune as the communes of this District
+      if (district.districtId == numberDistrictId) {
+        this.communesOfSelectedDistrict = district.communes;
+        return;
+      }
+    });
+
+    //Reset lower Region Filter
+    this.villagesOfSelectedCommune = [];
+
+    //no need for filtering by commune & village 
+    this.selectedCommuneId = undefined;
+    this.selectedVillageId = undefined;
+    // Call API to update list houses with the selected district
+    this.selectedDistrictId = numberDistrictId;
+    
+  }
+
+  //[Filter by Region] Filter by Commune
+  //Change list of Villages after user selected Commune
+  onCommuneSelected(stringSelectedCommuneId: string) {
+    // convert string to number
+    var numberCommuneId: number = +stringSelectedCommuneId;
+
+    // find the selected commune
+    this.communesOfSelectedDistrict.forEach((commune) => {
+      // assign the list of Villages as the villages of this Commune
+      if (commune.communeId == numberCommuneId) {
+        this.villagesOfSelectedCommune = commune.villages;
+        return;
+      }
+    });
+
+    //no need for filtering by district & village 
+    this.selectedDistrictId = undefined;
+    this.selectedVillageId = undefined;
+    // Call API to update list houses with the selected commune
+    this.selectedCommuneId = numberCommuneId;
+    
+  }
+
+  //[Filter by Region] Filter by Village
+  onVillageSelected(stringSelectedVillageId: string) {
+    // convert string to number
+    var numberVillageId: number = +stringSelectedVillageId;
+
+    //no need for filtering by district & commune 
+    this.selectedDistrictId = undefined;
+    this.selectedCommuneId = undefined;
+    // Call API to update list houses with the selected village
+    this.selectedVillageId = numberVillageId;
+    
+  }
+
 }

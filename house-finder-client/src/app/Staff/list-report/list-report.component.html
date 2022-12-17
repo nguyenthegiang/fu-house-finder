@@ -1,85 +1,42 @@
 <app-staff-header></app-staff-header>
 
-<div class="row m-2" style="padding: 20px">
+<div class="row mx-2 my-5">
   <div class="col-12">
-    <!-- Page content -->
-
     <!-- Tab -->
     <ul class="nav nav-tabs" id="myTab" role="tablist">
       <li class="nav-item" role="presentation">
-        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button"
-          role="tab" aria-controls="home-tab-pane" aria-selected="true">
+        <button class="nav-link fw-semibold active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane"
+          type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">
           Danh sách báo cáo
         </button>
       </li>
       <li class="nav-item" role="presentation">
-        <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button"
-          role="tab" aria-controls="profile-tab-pane" aria-selected="false">
+        <button class="nav-link fw-semibold" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane"
+          type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">
           Báo cáo theo nhà
         </button>
       </li>
     </ul>
     <!-- End tab -->
 
-    <div class="tab-content border-end border-bottom border-start" id="myTabContent" style="padding: 20px">
-      <!-- List of reports -->
+    <div class="tab-content border border-top-0" id="myTabContent">
+      <!------------------------------------------------ List of reports ------------------------------------------------>
       <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
         <div class="row">
           <div class="my-4">
             <h3 class="text-center">Danh sách báo cáo</h3>
 
-            <!-- Search bar -->
-            <!-- <div class="row d-flex justify-content-center">
-              <div class="col-10 col-md-5">
-                <div class="text-center my-4">
-                  <div class="input-group"> -->
-            <!-- Press enter to search  -->
-            <!-- <input
-                      type="text"
-                      class="form-control border border-end-0"
-                      placeholder="Nhập nội dung báo cáo tìm kiếm"
-                      aria-label="search_house_by_name"
-                      aria-describedby="button-addon2"
-                      #searchReportContent
-                      (keydown.enter)="
-                        searchReportByContent(searchReportContent.value)
-                      "
-                    /> -->
-            <!-- Click button to clear search -->
-            <!-- <button
-                      *ngIf="searchName != undefined"
-                      class="clearSearchBtn"
-                      type="button"
-                      (click)="handleClear()" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Xóa"
-                    >
-                      <span class="material-symbols-outlined"> close </span>
-                    </button> -->
-            <!-- Click button to search -->
-            <!-- <button
-                      class="btn btn-outline-secondary"
-                      type="button"
-                      id="button-addon2"
-                      (click)="searchReportByContent(searchReportContent.value)"
-                    >
-                      <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div> -->
-            <!-- End Search bar -->
-
             <!-- Filter report -->
-            <div class="row justify-content-end">
+            <div class="row mb-4 d-flex justify-content-end">
               <!-- Date picker -->
               <!-- Start date -->
-              <div class="col-6 col-md-3 my-2">
+              <div class="col-12 col-md-2 mt-4">
                 <label class="form-label">Từ ngày</label>
                 <input #selectedFromDate class="form-control" type="date"
                   (change)="onFromDateSelected(selectedFromDate.value)" />
               </div>
               <!-- End date -->
-              <div class="col-6 col-md-3 my-2">
+              <div class="col-12 col-md-2 mt-4">
                 <label class="form-label">Đến ngày</label>
                 <input #selectedToDate class="form-control" type="date"
                   (change)="onToDateSelected(selectedToDate.value)" />
@@ -87,7 +44,7 @@
               <!-- End date picker -->
 
               <!-- Order by -->
-              <div class="col-10 col-md-4">
+              <div class="col-12 col-md-2 mt-4">
                 <label class="form-label">Sắp xếp</label>
                 <select #selectedOrderBy class="form-select" (change)="onOrderBySelected(selectedOrderBy.value)">
                   <option selected disabled>Chọn sắp xếp</option>
@@ -95,135 +52,129 @@
                   <option value="asc">Ngày xa nhất</option>
                 </select>
               </div>
+
+              <!-- Clear filter result -->
+              <div class="col-12 col-md-4 my-2">
+              </div>
+
+              <div class="col-12 col-md-2 my-2">
+                <label class="form-label" id="hiddenDiv">This is a hidden item used for styling</label>
+                <div class="text-end">
+                  <a href="/Staff/list-report" id="clearFilterValue">Đặt lại bộ lọc</a>
+                </div>
+              </div>
             </div>
             <!-- End filter -->
 
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col" id="md">STT</th>
-                  <th scope="col">Tên sinh viên</th>
-                  <th scope="col">Nhà trọ</th>
-                  <th scope="col">Ngày báo cáo</th>
-                  <th scope="col">Ngày giải quyết</th>
-                  <th scope="col">Người giải quyết</th>
-                  <th scope="col">Trạng thái</th>
-                  <th scope="col">Nội dung</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let report of reports; let i = index">
-                  <td id="md">
-                    <b>{{ (reportPageNumber - 1) * reportPageSize + i + 1 }}</b>
-                  </td>
-                  <td>{{ report.student.displayName }}</td>
-                  <td>{{ report.house.houseName }}</td>
-                  <td>{{ report.reportedDate | date: "dd/MM/yyyy" }}</td>
-                  <td>{{ report.solvedDate | date: "dd/MM/yyyy" }}</td>
-                  <td id="md">
-                    <div *ngIf="report.solvedByNavigation">
-                      {{ report.solvedByNavigation.displayName }}
-                    </div>
-                  </td>
-                  <td *ngIf="report.status.statusName === 'Unsolved'" style="color: red">
-                    Chưa giải quyết
-                  </td>
-                  <td *ngIf="report.status.statusName === 'Processing'" style="color: orange">
-                    Đang giải quyết
-                  </td>
-                  <td *ngIf="report.status.statusName === 'Solved'" style="color: green">
-                    Đã giải quyết
-                  </td>
-                  <td>
-                    <div class="d-inline-block text-truncate" style="max-width: 350px">
-                      {{ report.reportContent }}
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <!-- End List of Rooms -->
-
-            <!-- Paging report -->
-            <div class="d-flex justify-content-center align-items-center my-3">
-              <nav aria-label="Pagination-nav">
-                <ul class="pagination">
-                  <!-- Previous: Disabled if this is first page -->
-                  <li class="page-item" [ngClass]="{ disabled: reportPageNumber == 1 }">
-                    <!-- Go to previous page -->
-                    <a class="page-link" aria-label="Previous" (click)="goToPage(reportPageNumber - 1)">
-                      <span aria-hidden="true">&laquo;</span>
-                    </a>
-                  </li>
-                  <!-- Numbers -->
-                  <li *ngFor="let page of reportPageList" class="page-item">
-                    <!-- Display this as active if it's the chosen page -->
-                    <a class="page-link" (click)="goToPage(page)" [ngClass]="{ active: reportPageNumber == page }">{{
-                      page }}</a>
-                  </li>
-                  <!-- Next: Disabled if this is last page -->
-                  <li class="page-item" [ngClass]="{
-                      disabled: reportPageNumber == reportPageCount
-                    }">
-                    <!-- Go to next page -->
-                    <a class="page-link" aria-label="Next" (click)="goToPage(reportPageNumber + 1)">
-                      <span aria-hidden="true">&raquo;</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
+            <!-- Case: No data -->
+            <div *ngIf="reports.length <= 0">
+              <div class="text-center emptyMesage">Không có báo cáo</div>
             </div>
-            <!-- End Paging -->
+
+            <!-- Case: Have data -->
+            <div *ngIf="reports.length > 0">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col" id="md">STT</th>
+                    <th scope="col">Tên sinh viên</th>
+                    <th scope="col">Nhà trọ</th>
+                    <th scope="col">Ngày báo cáo</th>
+                    <th scope="col" id="md">Ngày giải quyết</th>
+                    <th scope="col" id="md">Người giải quyết</th>
+                    <th scope="col">Trạng thái</th>
+                    <th scope="col" id="md">Nội dung</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let report of reports; let i = index" data-bs-toggle="modal"
+                    data-bs-target="#selectedReportModal" (click)="changeSelectedReport(report.reportId)"
+                    style="cursor: pointer">
+                    <td id="md">
+                      <b>{{ (reportPageNumber - 1) * reportPageSize + i + 1 }}</b>
+                    </td>
+                    <td>{{ report.student.displayName }}</td>
+                    <td>{{ report.house.houseName }}</td>
+                    <td>{{ report.reportedDate | date: "dd/MM/yyyy" }}</td>
+                    <td id="md">{{ report.solvedDate | date: "dd/MM/yyyy" }}</td>
+                    <td id="md">
+                      <div *ngIf="report.solvedByNavigation">
+                        {{ report.solvedByNavigation.displayName }}
+                      </div>
+                    </td>
+                    <td *ngIf="report.status.statusName === 'Unsolved'" style="color: red">
+                      Chưa giải quyết
+                    </td>
+                    <td *ngIf="report.status.statusName === 'Processing'" style="color: orange">
+                      Đang giải quyết
+                    </td>
+                    <td *ngIf="report.status.statusName === 'Solved'" style="color: green">
+                      Đã giải quyết
+                    </td>
+                    <td id="md">
+                      <div class="d-inline-block text-truncate" style="max-width: 350px">
+                        {{ report.reportContent }}
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Paging report -->
+              <div class="d-flex justify-content-center align-items-center my-3">
+                <nav aria-label="Pagination-nav">
+                  <ul class="pagination">
+                    <!-- Previous: Disabled if this is first page -->
+                    <li class="page-item" [ngClass]="{ disabled: reportPageNumber == 1 }">
+                      <!-- Go to previous page -->
+                      <a class="page-link" aria-label="Previous" (click)="goToPage(reportPageNumber - 1)">
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                    </li>
+                    <!-- Numbers -->
+                    <li *ngFor="let page of reportPageList" class="page-item">
+                      <!-- Display this as active if it's the chosen page -->
+                      <a class="page-link" (click)="goToPage(page)" [ngClass]="{ active: reportPageNumber == page }">{{
+                        page }}</a>
+                    </li>
+                    <!-- Next: Disabled if this is last page -->
+                    <li class="page-item" [ngClass]="{
+                        disabled: reportPageNumber == reportPageCount
+                      }">
+                      <!-- Go to next page -->
+                      <a class="page-link" aria-label="Next" (click)="goToPage(reportPageNumber + 1)">
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
+              <!-- End Paging -->
+            </div>
           </div>
         </div>
       </div>
 
-      <!-- List of reportes houses -->
+      <!------------------------------------------------ List of reported houses ------------------------------------------------>
       <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
         <div class="row">
           <div class="my-4">
             <h3 class="text-center">Danh sách nhà bị báo cáo</h3>
 
-            <!-- Search bar -->
-            <div class="row d-flex justify-content-center">
-              <div class="col-10 col-md-5">
-                <div class="text-center my-4">
-                  <div class="input-group">
-                    <!-- Press enter to search  -->
-                    <input type="text" class="form-control border border-end-0" placeholder="Nhập từ khóa tìm kiếm"
-                      aria-label="search_house_by_name" aria-describedby="button-addon2"
-                      placeholder="Nhập tên nhà tìm kiếm" #searchHouseName
-                      (keydown.enter)="searchReportedHouse(searchHouseName.value)" />
-                    <!-- Click button to clear search -->
-                    <button *ngIf="searchHouse != undefined" class="clearSearchBtn" type="button"
-                      (click)="handleClearHouse()" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Xóa">
-                      <span class="material-symbols-outlined"> close </span>
-                    </button>
-                    <!-- Click button to search -->
-                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"
-                      (click)="searchReportedHouse(searchHouseName.value)">
-                      <i class="fa-solid fa-magnifying-glass"></i>
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- End Search bar -->
-
             <!-- Filter reported houses-->
-            <div class="row justify-content-end">
+            <div class="row mb-4 d-flex justify-content-end">
               <!-- Order by -->
-              <div class="col-10 col-md-6">
+              <div class="col-12 col-md-2 mt-4">
                 <label class="form-label">Trạng thái</label>
                 <select #selectedActiveStatus class="form-select"
                   (change)="onActiveStatusSelected(selectedActiveStatus.value)">
-                  <option>Tất cả</option>
+                  <option value="-1">Tất cả</option>
                   <option value="1">Đang hoạt động</option>
                   <option value="0">Dừng hoạt động</option>
                 </select>
               </div>
               <!-- Order by -->
-              <div class="col-10 col-md-6">
+              <div class="col-12 col-md-2 mt-4">
                 <label class="form-label">Sắp xếp</label>
                 <select #selectedHouseOrderBy class="form-select"
                   (change)="onHouseOrderBySelected(selectedHouseOrderBy.value)">
@@ -232,67 +183,99 @@
                   <option value="asc">Báo cáo ít nhất</option>
                 </select>
               </div>
+              <!-- <div class="col-12 col-md-4 mt-4">
+                <label class="form-label">Tìm kiếm</label>
+                <div class="text-center">
+                  <div class="input-group">
+                    <input type="text" class="form-control border border-end-0" placeholder="Nhập từ khóa tìm kiếm"
+                      aria-label="search_house_by_name" aria-describedby="button-addon2"
+                      placeholder="Nhập tên nhà tìm kiếm" #searchHouseName
+                      (keydown.enter)="searchReportedHouse(searchHouseName.value)" />
+                    <button *ngIf="searchHouse != undefined" class="clearSearchBtn" type="button"
+                      (click)="handleClearHouse()" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Xóa">
+                      <span class="material-symbols-outlined"> close </span>
+                    </button>
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"
+                      (click)="searchReportedHouse(searchHouseName.value)">
+                      <i class="fa-solid fa-magnifying-glass"></i>
+                    </button>
+                  </div>
+                </div>
+              </div> -->
             </div>
             <!-- End filter -->
 
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th scope="col" id="md">STT</th>
-                  <th scope="col">Nhà trọ</th>
-                  <th scope="col" id="md">Chủ trọ</th>
-                  <th scope="col">Số lượt báo cáo</th>
-                  <th scope="col">Trạng thái chủ trọ</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let house of houses; let i = index" (click)="changeSelectedHouse(house.houseId)"
-                  style="cursor: pointer" data-bs-toggle="modal" data-bs-target="#listReportModal">
-                  <td id="md">
-                    <b>{{ (housePageNumber - 1) * housePageSize + i + 1 }}</b>
-                  </td>
-                  <td>{{ house.houseName }}</td>
-                  <td id="md">{{ house.landlord.displayName }}</td>
-                  <td>{{ house.numberOfReport }}</td>
-                  <td>
-                    <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
-                        [checked]="house.landlord.statusId == 1" />
-                    </div>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-            <!-- End List of Rooms -->
-
-            <!-- Paging reported houses-->
-            <div class="d-flex justify-content-center align-items-center my-3">
-              <nav aria-label="Pagination-nav">
-                <ul class="pagination">
-                  <!-- Previous: Disabled if this is first page -->
-                  <li class="page-item" [ngClass]="{ disabled: housePageNumber == 1 }">
-                    <!-- Go to previous page -->
-                    <a class="page-link" aria-label="Previous" (click)="goToHousePage(housePageNumber - 1)">
-                      <span aria-hidden="true">&laquo;</span>
-                    </a>
-                  </li>
-                  <!-- Numbers -->
-                  <li *ngFor="let page of housePageList" class="page-item">
-                    <!-- Display this as active if it's the chosen page -->
-                    <a class="page-link" (click)="goToHousePage(page)"
-                      [ngClass]="{ active: housePageNumber == page }">{{ page }}</a>
-                  </li>
-                  <!-- Next: Disabled if this is last page -->
-                  <li class="page-item" [ngClass]="{ disabled: housePageNumber == housePageCount }">
-                    <!-- Go to next page -->
-                    <a class="page-link" aria-label="Next" (click)="goToHousePage(housePageNumber + 1)">
-                      <span aria-hidden="true">&raquo;</span>
-                    </a>
-                  </li>
-                </ul>
-              </nav>
+            <!-- Case: No data -->
+            <div *ngIf="reportedHouses.length <= 0">
+              <div class="text-center emptyMesage">Không có nhà bị báo cáo</div>
             </div>
-            <!-- End Paging -->
+
+            <!-- Case: Have data -->
+            <div *ngIf="reportedHouses.length > 0">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col" id="md">STT</th>
+                    <th scope="col">Nhà trọ</th>
+                    <th scope="col" id="md">Chủ trọ</th>
+                    <th scope="col">Số lượt báo cáo</th>
+                    <th scope="col">Trạng thái chủ trọ</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let house of reportedHouses; let i = index" style="cursor: pointer">
+                    <td id="md" (click)="changeSelectedHouse(house.houseId)" data-bs-toggle="modal"
+                      data-bs-target="#listReportModal">
+                      <b>{{ (housePageNumber - 1) * housePageSize + i + 1 }}</b>
+                    </td>
+                    <td (click)="changeSelectedHouse(house.houseId)" data-bs-toggle="modal"
+                      data-bs-target="#listReportModal">
+                      {{ house.houseName }}
+                    </td>
+                    <td id="md" (click)="changeSelectedHouse(house.houseId)" data-bs-toggle="modal"
+                      data-bs-target="#listReportModal">
+                      {{ house.landlord.displayName }}
+                    </td>
+                    <td (click)="changeSelectedHouse(house.houseId)" data-bs-toggle="modal"
+                      data-bs-target="#listReportModal">
+                      {{ house.numberOfReport }}
+                    </td>
+                    <td>
+                      <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
+                          (change)="updateUserStatus($event, house.landlord.userId)"
+                          [checked]="house.landlord.statusId == 1" />
+                        <span *ngIf="house.landlord.statusId === 1">Hoạt động</span>
+                        <span *ngIf="house.landlord.statusId === 0">Dừng hoạt động</span>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- Paging reported houses-->
+              <!-- <div class="d-flex justify-content-center align-items-center my-3">
+                <nav aria-label="Pagination-nav">
+                  <ul class="pagination">
+                    <li class="page-item" [ngClass]="{ disabled: housePageNumber == 1 }">
+                      <a class="page-link" aria-label="Previous" (click)="goToHousePage(housePageNumber - 1)">
+                        <span aria-hidden="true">&laquo;</span>
+                      </a>
+                    </li>
+                    <li *ngFor="let page of housePageList" class="page-item">
+                      <a class="page-link" (click)="goToHousePage(page)"
+                        [ngClass]="{ active: housePageNumber == page }">{{ page }}</a>
+                    </li>
+                    <li class="page-item" [ngClass]="{ disabled: housePageNumber == housePageCount }">
+                      <a class="page-link" aria-label="Next" (click)="goToHousePage(housePageNumber + 1)">
+                        <span aria-hidden="true">&raquo;</span>
+                      </a>
+                    </li>
+                  </ul>
+                </nav>
+              </div> -->
+              <!-- End Paging -->
+            </div>
           </div>
         </div>
       </div>
@@ -300,7 +283,7 @@
   </div>
 </div>
 
-<!-- Modal to show detail of a reported house-->
+<!-- Modal to show detail of a reported house -->
 <div class="modal fade" id="listReportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -346,4 +329,42 @@
     </div>
   </div>
 </div>
-<app-footer></app-footer>
+
+<!-- Modal to show detail of a report -->
+<div class="modal fade" id="selectedReportModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">
+          Thông tin chi tiết
+        </h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <span><b>Tên sinh viên: </b>{{ selectedReportStudentName }}</span><br />
+        <span><b>Tên nhà trọ: </b>{{ selectedReportHouse }}</span><br />
+        <span><b>Nội dung: </b>{{ selectedReportContent }}</span><br />
+        <b class="form-label">Trạng thái</b>
+        <!-- Set selected value for <select> by [ngModel] -->
+        <select #selectReportStatusId class="form-select" [(ngModel)]="selectedStatusId"
+          (change)="onSelectReportStatus(selectReportStatusId.value)">
+          <option value="1">Chưa giải quyết</option>
+          <option value="2">Đang giải quyết</option>
+          <option value="3">Đã giải quyết</option>
+        </select>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-bs-dismiss="modal">
+          Hủy
+        </button>
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal" (click)="updateReportStatus()">
+          Lưu
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <app-footer></app-footer> -->

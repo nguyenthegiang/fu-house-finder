@@ -1,5 +1,4 @@
 import { StaffChangePasswordComponent } from './Staff/staff-change-password/staff-change-password.component';
-import { LandlordChangePasswordComponent } from './Landlord/landlord-change-password/landlord-change-password.component';
 import { LandlordUpdateProfileComponent } from './Landlord/landlord-update-profile/landlord-update-profile.component';
 import { StaffUpdateProfileComponent } from './Staff/staff-update-profile/staff-update-profile.component';
 import { StaffHouseDetailComponent } from './Staff/staff-house-detail/staff-house-detail.component';
@@ -27,6 +26,7 @@ import { ListOrderComponent } from './Staff/list-order/list-order.component';
 import { AddRoomComponent } from './Landlord/add-room/add-room.component';
 import { UpdateRoomComponent } from './Landlord/update-room/update-room.component';
 import { StaffRoomDetailComponent } from './Staff/staff-room-detail/staff-room-detail.component';
+import { ListRejectedLandlordComponent } from './Staff/list-landlord-signup-request/list-rejected-landlord/list-rejected-landlord.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -42,12 +42,12 @@ const routes: Routes = [
   { path: 'Landlord/rate-house/:id', component: RateHouseComponent},
   { path: 'Landlord/add-room', component: AddRoomComponent},
   { path: 'Landlord/landlord-update-profile', component: LandlordUpdateProfileComponent},
-  { path: 'Landlord/landlord-change-password', component: LandlordChangePasswordComponent},
   { path: 'Staff/dashboard', component: DashboardStaffComponent},
   { path: 'Staff/list-landlord', component: ListLandlordComponent},
   { path: 'Staff/list-report', component: ListReportComponent},
   { path: 'Staff/list-house', component: ListHouseComponent},
   { path: 'Staff/list-landlord-signup-request', component: ListLandlordSignupRequestComponent},
+  { path: 'Staff/list-rejected-landlord', component: ListRejectedLandlordComponent},
   { path: 'Staff/list-order', component: ListOrderComponent},
   { path: 'Staff/staff-landlord-detail/:id', component: StaffLandlordDetailComponent},
   { path: 'Staff/staff-house-detail/:id', component: StaffHouseDetailComponent},

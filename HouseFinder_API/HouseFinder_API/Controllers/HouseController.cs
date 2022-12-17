@@ -144,6 +144,7 @@ namespace HouseFinder_API.Controllers
 
         /**
          * GET: api/Houses/GetHousesByLandlord?LandlordId=
+         * [Staff/list-landlord]
          */
         [HttpGet("GetHousesByLandlord")]
         public IActionResult GetListHousesByLandlordId(string LandlordId)
@@ -265,10 +266,11 @@ namespace HouseFinder_API.Controllers
         }
 
         /**
-         * GET: api/Houses/GetHousesByLandlord?LandlordId=
+         * GET: api/Houses/GetListHouseOfCurrentLandlord
+         * [Landlord/dashboard]
          */
-        [HttpGet("GetHousesByLandlordId")]
-        public IActionResult GetListHousesByLandlord()
+        [HttpGet("GetListHouseOfCurrentLandlord")]
+        public IActionResult GetListHouseOfCurrentLandlord()
         {
             try
             {
@@ -279,6 +281,8 @@ namespace HouseFinder_API.Controllers
                     //user not logged in => throw error for alert
                     return Ok(new { Status = 403 });
                 }
+
+                //Get list house
                 List<HouseDTO> houseDTOs = houseRepository.GetListHousesByLandlordId(uid);
                 if (houseDTOs == null)
                 {

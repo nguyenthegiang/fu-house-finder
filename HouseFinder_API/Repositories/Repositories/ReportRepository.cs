@@ -23,5 +23,9 @@ namespace Repositories.Repositories
         public int[] GetTotalReportByMonth() => ReportDAO.GetTotalReportByMonth();
 
         public List<StaffReportDTO> SearchReportByName(string key) => ReportDAO.SearchReportByName(key);
+
+        public StaffReportDTO GetReportById(int reportId) => ReportDAO.GetReportById(reportId);
+
+        public void UpdateReportStatus(int reportId, int statusId, string account) => ReportDAO.UpdateReportStatus(reportId, statusId, account);
     }
 }

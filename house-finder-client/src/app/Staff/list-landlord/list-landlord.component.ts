@@ -16,6 +16,13 @@ export class ListLandlordComponent implements OnInit
   roomCount: number = 0;
   roomAvailableCount: number = 0;
 
+  //(Paging) for Landlords
+  totalLandlord = 0; //items count
+  landlordPageSize = 10; //number of items per page
+  landlordPageNumber = 1; //starts at page 1
+  landlordPageCount = 0; //number of pages
+  landlordPageList: number[] = []; //array to loop with *ngFor in HTML Template
+
   //{Search} input value
   searchName: string | undefined;
 
@@ -37,6 +44,8 @@ export class ListLandlordComponent implements OnInit
 
   ngOnInit(): void
   {
+    this.filterLandlord(true);
+
     this.userService.getLandlords().subscribe(data => {
       this.landlords = data;
     });
@@ -47,8 +56,8 @@ export class ListLandlordComponent implements OnInit
       this.roomAvailableCount = data.roomAvailableCount;
     });
     console.log(this.searchName);
+    this.reloadListLandlord();
   }
-
 
   viewHouse(id: string)
   {
@@ -70,18 +79,61 @@ export class ListLandlordComponent implements OnInit
     });
   }
 
+  reloadListLandlord(){
+    this.userService.getLandlords().subscribe(data => {
+      this.landlords = data;
+    });
+
+    this.lanlord_informationService.getLandLordInfomation(this.landlordId).subscribe(data => {
+      this.houseCount = data.houseCount;
+      this.roomCount = data.roomCount;
+      this.roomAvailableCount = data.roomAvailableCount;
+    });
+  }
+
   updateUserStatus(event: any, userId: string){
     //check if staff just checked or unchecked the checkbox
     const isChecked = (<HTMLInputElement>event.target).checked;
 
     if(isChecked){
       this.selectedStatusId = 1;
-      console.log("Select status: active;" );
     }
     else{
       this.selectedStatusId = 0;
-      console.log("Select status: inactive;" );
     }
-    this.userService.updateUserStatus(userId, this.selectedStatusId).subscribe();
+    this.userService.updateUserStatus(userId, this.selectedStatusId).subscribe((data) => {
+      this.reloadListLandlord();
+    });
+  }
+
+  // Go to top of Page: used whenever user filter/paging data -> refresh list data
+  scrollToTop() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth',
+    });
+  }
+
+  // Call API to update list landlord with selected Filter value & Paging
+  filterLandlord(resetPaging: boolean) {
+    //if user filter -> reset Paging (back to page 1)
+    if (resetPaging) {
+      this.landlordPageNumber = 1;
+    }
+
+    this.userService
+      .filterUser(this.landlordPageSize, this.landlordPageNumber, this.searchName)
+      .subscribe((data) => {
+        this.landlords = data;
+        this.scrollToTop();
+      });
+  }
+
+  //[Paging] User click on a Page number -> Go to that page
+  goToPage(pageNumber: number) {
+    // Call API: go to Page Number
+    this.landlordPageNumber = pageNumber;
+    this.filterLandlord(false);
   }
 }

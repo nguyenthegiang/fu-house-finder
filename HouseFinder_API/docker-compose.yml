@@ -7,10 +7,18 @@ services:
       context: .
       dockerfile: HouseFinder_API/Dockerfile
     ports:
-      - 5000:80
+      - :80
     depends_on:
-          - db
+      - db
   db:
     ports:
       - "1433:1433"
     build: ./Database
+  
+  apigw:
+    image: ${DOCKER_REGISTRY-}api_gateway
+    build:
+      context: .
+      dockerfile: APIGateway/Dockerfile
+    ports:
+      - 8000:81

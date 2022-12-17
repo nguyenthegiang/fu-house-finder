@@ -66,7 +66,8 @@ namespace HouseFinder_API.Controllers
                 //Admin Login
                 ResponseDTO user;
                 //Check with account in appsettings
-                if (login.Email == Configuration.GetSection("AdminAccount").GetSection("Email").Value
+                if ((!String.IsNullOrEmpty(login.Email) || !String.IsNullOrEmpty(login.Password)) 
+                    && login.Email == Configuration.GetSection("AdminAccount").GetSection("Email").Value
                     && login.Password == Configuration.GetSection("AdminAccount").GetSection("Password").Value)
                 {
                     user = new ResponseDTO();
@@ -202,6 +203,20 @@ namespace HouseFinder_API.Controllers
             }
         }
 
+        [HttpGet("RejectedLandlord")]
+        public IActionResult GetRejectedLandlords()
+        {
+            List<UserDTO> landlords = userRepository.GetRejectedLandlords();
+            if (landlords == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(landlords);
+            }
+        }
+
         [HttpGet("CountTotalLandlord")]
         public int? CountTotalLandlord()
         {
@@ -233,13 +248,14 @@ namespace HouseFinder_API.Controllers
                 string uid = HttpContext.Session.GetString("User");
                 if (uid == null)
                 {
-                    return Forbid();
+                    //user not logged in => throw error for alert
+                    return Ok(new { Status = 403 });
                 }
 
                 //Update to Database
                 userRepository.UpdateUserStatus(userId, statusId, uid);
 
-                return Ok();
+                return Ok(new { Status = 200 });
             }
             catch (Exception e)
             {
@@ -294,18 +310,49 @@ namespace HouseFinder_API.Controllers
             }
         }
 
-        [HttpPut("changePassword")]
-        public IActionResult ChangePassword(string userId, string newPassword)
+        [HttpPut("change_password")]
+        public IActionResult ChangePassword(ChangePasswordDTO pw)
         {
             try
             {
+                string uid = HttpContext.Session.GetString("User");
+                if (uid == null)
+                {
+                    return Forbid();
+                }
+                var correct_cur_password = userRepository.CheckOldPassword(uid, pw.OldPassword);
+                if (!correct_cur_password)
+                {
+                    return Conflict();
+                }
                 //Update to Database
-                userRepository.ChangePassword(userId, newPassword);
+                userRepository.ChangePassword(uid, pw.NewPassword);
                 return Ok();
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
+            }
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost("staff/create")]
+        public IActionResult CreateStaffAccount(StaffAccountCreateDTO staff)
+        {
+            try
+            {
+                var uid = HttpContext.Session.GetString("User");
+                if (String.IsNullOrEmpty(uid))
+                {
+                    return Forbid();
+                }
+                staff.CreatedBy = uid;
+                userRepository.CreateStaffAccount(staff);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
             }
         }
     }

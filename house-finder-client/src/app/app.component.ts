@@ -10,8 +10,20 @@ import { Location } from '@angular/common';
 export class AppComponent {
   title = 'FU House Finder';
 
-  constructor() { }
+  //to check whether to display footer or not
+  public displayFooter: boolean = true;
 
-  ngOnInit() { }
+  constructor(private router: Router) { }
+
+  ngOnInit() {
+    // Not display footer in Login page
+    this.router.events.subscribe((val) => {
+      if (this.router.url == '/login') {
+        this.displayFooter = false;
+      } else {
+        this.displayFooter = true;
+      }
+    });
+  }
 
 }

@@ -92,5 +92,53 @@ namespace HouseFinder_API.Controllers
             return reportRepository.CounTotalReport();
         }
 
+        [HttpGet("{ReportId}")]
+        public IActionResult GetReportById(int ReportId)
+        {
+            try
+            {
+                StaffReportDTO reportDTO = reportRepository.GetReportById(ReportId);
+                if (reportDTO == null)
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    return Ok(reportDTO);
+                }
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+        }
+
+        /**
+         * [Staff/list-report] Change status of 1 Report
+         */
+        [Authorize]
+        [HttpPut("{reportId}/{statusId}")]
+        public IActionResult UpdateReportStatus(int reportId, int statusId)
+        {
+            try
+            {
+                //Get user id from Session as Staff that makes this update
+                string uid = HttpContext.Session.GetString("User");
+                if (uid == null)
+                {
+                    return Forbid();
+                }
+
+                //Update to Database
+                reportRepository.UpdateReportStatus(reportId, statusId, uid);
+
+                return Ok();
+            }
+            catch (Exception e)
+            {
+
+                return BadRequest(e.Message);
+            }
+        }
     }
 }

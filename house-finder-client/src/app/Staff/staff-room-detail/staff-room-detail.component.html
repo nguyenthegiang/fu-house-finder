@@ -1,11 +1,14 @@
 <app-staff-header></app-staff-header>
 <nav class="mt-3 ps-3 fs-6" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li *ngIf="checkBreadcumb" class="breadcrumb-item"><a class="text-danger" onclick="history.back();history.back();history.back()" style="cursor: pointer;">Danh sách chủ trọ</a></li>
+    <li *ngIf="checkBreadcumb" class="breadcrumb-item"><a class="text-danger"
+        onclick="history.back();history.back();history.back()" style="cursor: pointer;">Danh sách chủ trọ</a></li>
     <li *ngIf="checkBreadcumb" class="breadcrumb-item" aria-current="page">></li>
-    <li class="breadcrumb-item"><a class="text-danger" onclick="history.back();history.back()" style="cursor: pointer;">Danh sách nhà trọ</a></li>
+    <li class="breadcrumb-item"><a class="text-danger" onclick="history.back();history.back()"
+        style="cursor: pointer;">Danh sách nhà trọ</a></li>
     <li class="breadcrumb-item" aria-current="page">></li>
-    <li class="breadcrumb-item"><a class="text-danger" onclick="history.back()" style="cursor: pointer;">Danh sách phòng trọ</a></li>
+    <li class="breadcrumb-item"><a class="text-danger" onclick="history.back()" style="cursor: pointer;">Danh sách phòng
+        trọ</a></li>
     <li class="breadcrumb-item" aria-current="page">></li>
     <li class="breadcrumb-item active" aria-current="page"> Chi tiết nhà trọ</li>
   </ol>
@@ -27,7 +30,8 @@
         </div>
         <div class="carousel-inner rounded">
           <div class="carousel-item active">
-            <img src="../assets/image/Room/{{roomDetail.imagesOfRooms[0].imageLink}}" class="d-block w-100 h-25" alt="...">
+            <img src="../assets/image/Room/{{roomDetail.imagesOfRooms[0].imageLink}}" class="d-block w-100 h-25"
+              alt="...">
           </div>
           <div *ngFor="let image of roomDetail.imagesOfRooms; let i=index;">
             <div class="carousel-item" *ngIf="i >= 1">
@@ -94,7 +98,8 @@
             </span>
 
             <div>
-              Máy giặt: <span *ngIf="roomDetail.washingMachine">Có</span><span *ngIf="!roomDetail.washingMachine">Không</span>
+              Máy giặt: <span *ngIf="roomDetail.washingMachine">Có</span><span
+                *ngIf="!roomDetail.washingMachine">Không</span>
             </div>
           </div>
 
@@ -116,7 +121,8 @@
             </span>
 
             <div>
-              Vệ sinh khép kín: <span *ngIf="roomDetail.closedToilet">Có</span><span *ngIf="!roomDetail.closedToilet">Không</span>
+              Vệ sinh khép kín: <span *ngIf="roomDetail.closedToilet">Có</span><span
+                *ngIf="!roomDetail.closedToilet">Không</span>
             </div>
           </div>
 
@@ -138,7 +144,8 @@
             </span>
 
             <div>
-              Không chung chủ: <span *ngIf="roomDetail.noLiveWithHost">Có</span><span *ngIf="!roomDetail.noLiveWithHost">Không</span>
+              Không chung chủ: <span *ngIf="roomDetail.noLiveWithHost">Có</span><span
+                *ngIf="!roomDetail.noLiveWithHost">Không</span>
             </div>
           </div>
         </div>
@@ -151,4 +158,4 @@
   </div>
 </div>
 
-<app-footer></app-footer>
+<!-- <app-footer></app-footer> -->

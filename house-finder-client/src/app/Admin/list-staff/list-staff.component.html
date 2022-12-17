@@ -5,71 +5,74 @@
   <!-- Main Content -->
   <div>
     <!-- List staff -->
-    <div class="my-5" *ngIf="staffs.length == 0">
-      <h3 class="text-center">Chưa có tuyển sinh</h3>
-    </div>
-    <div class="my-5" *ngIf="staffs.length != 0">
+    <div class="my-5">
       <h3 class="text-center">Danh sách tuyển sinh</h3>
 
       <div class="my-4">
         <button class="btn btn-secondary" (click)="addHouse()">+ Thêm mới</button>
       </div>
 
-      <table class="table table-hover">
-        <thead>
-          <tr>
-            <th scope="col" id="md">STT</th>
-            <th scope="col">Họ và tên</th>
-            <th scope="col">Email</th>
-            <th scope="col">Vị trí</th>
-            <th scope="col">Hành động</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let dataItem of staffs; let i = index">
-            <!-- Staff id -->
-            <td id="md"><b>{{ i + 1 }}</b></td>
+      <!-- Case: No data -->
+      <div *ngIf="staffs.length <= 0">
+        <div class="emptyMesage text-center">Chưa có nhân viên</div>
+      </div>
 
-            <!-- Staff name -->
-            <td>{{dataItem.displayName}}</td>
+      <!-- Case: Have data -->
+      <div *ngIf="staffs.length > 0">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col" id="md">STT</th>
+              <th scope="col">Họ và tên</th>
+              <th scope="col">Email</th>
+              <th scope="col">Vị trí</th>
+              <th scope="col">Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let dataItem of staffs; let i = index">
+              <!-- Staff id -->
+              <td id="md"><b>{{ i + 1 }}</b></td>
 
-            <!-- Email -->
-            <td>{{dataItem.email}}</td>
+              <!-- Staff name -->
+              <td>{{dataItem.displayName}}</td>
 
-            <!-- Role -->
-            <td>
-              <div *ngIf="dataItem.roleId === 3">Trưởng phòng tuyển sinh</div>
-              <div *ngIf="dataItem.roleId === 4">Trưởng phòng dịch vụ sinh viên</div>
-              <div *ngIf="dataItem.roleId === 5">Cán bộ phòng tuyển sinh</div>
-              <div *ngIf="dataItem.roleId === 6">Nhân viên phòng phục vụ sinh viên</div>
-            </td>
+              <!-- Email -->
+              <td>{{dataItem.email}}</td>
 
-            <td>
-              <a class="text-decoration-none text-success me-2" data-toggle="modal" data-target="#updateModal"
-                data-whatever="@getbootstrap" (click)="updateStaff(dataItem.userId)" style="cursor: pointer;">
-                <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Chỉnh sửa">
-                  build
-                </span>
-              </a>
-              <a class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
-                data-bs-whatever="@getbootstrap" (click)="deleteStaff(dataItem.userId)" style="cursor: pointer;">
-                <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top" title="Xóa">
-                  delete
-                </span>
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <!-- End List of Rooms -->
+              <!-- Role -->
+              <td>
+                <div *ngIf="dataItem.roleId === 3">Trưởng phòng tuyển sinh</div>
+                <div *ngIf="dataItem.roleId === 4">Trưởng phòng dịch vụ sinh viên</div>
+                <div *ngIf="dataItem.roleId === 5">Cán bộ phòng tuyển sinh</div>
+                <div *ngIf="dataItem.roleId === 6">Nhân viên phòng phục vụ sinh viên</div>
+              </td>
 
-      <!-- Paging -->
-      <!-- End Paging -->
+              <td>
+                <a class="text-decoration-none text-success me-2" data-toggle="modal" data-target="#updateModal"
+                  data-whatever="@getbootstrap" (click)="updateStaff(dataItem.userId)" style="cursor: pointer;">
+                  <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
+                    title="Chỉnh sửa">
+                    build
+                  </span>
+                </a>
+                <a class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
+                  data-bs-whatever="@getbootstrap" (click)="deleteStaff(dataItem.userId)" style="cursor: pointer;">
+                  <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
+                    title="Xóa">
+                    delete
+                  </span>
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
     </div>
-    <!-- End Display Houses -->
   </div>
   <!-- End Main content -->
 </div>
 <!-- End Body -->
 
-<app-footer></app-footer>
+<!-- <app-footer></app-footer> -->

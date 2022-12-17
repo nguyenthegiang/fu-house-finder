@@ -1,4 +1,5 @@
-﻿using DataAccess;
+﻿using BusinessObjects;
+using DataAccess;
 using DataAccess.DTO;
 using Microsoft.AspNetCore.Identity;
 using Repositories.IRepository;
@@ -81,5 +82,10 @@ namespace Repositories.Repositories
         public List<UserDTO> GetStaffs() => UserDAO.GetStaffs();
         public void UpdateProfile(string userId, string name, string email) => UserDAO.UpdateProfile(userId, name, email);
         public void ChangePassword(string userId, string newPassword) => UserDAO.ChangePassword(userId, newPassword);
+
+        public void CreateStaffAccount(StaffAccountCreateDTO staff) => UserDAO.CreateStaffAccount(staff);
+
+        public Boolean CheckOldPassword(string userId, string oldPassword) => UserDAO.CheckCurrentPassword(userId, oldPassword);
+        public List<UserDTO> GetRejectedLandlords() => UserDAO.GetRejectedLandlords();
     }
 }
