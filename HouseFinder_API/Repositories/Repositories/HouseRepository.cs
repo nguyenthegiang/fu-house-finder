@@ -13,13 +13,28 @@ namespace Repositories.Repositories
     public class HouseRepository : IHouseRepository
     {
         public List<HouseDTO> GetAllHouses() => HouseDAO.GetAllHouses();
-        public HouseDTO CreateHouse(CreateHouseDTO house)
+        public HouseDTO CreateHouse(CreateHouseDTO houseDTO)
         {
-            AddressDTO address = AddressDAO.CreateAddress(house.Address, house.GoogleAddress);
-            HouseDTO houseDTO = HouseDAO.CreateHouse(house.HouseName, house.Information, address.AddressId, (int)house.VillageId,
-                house.LandlordId, (int)house.CampusId, house.PowerPrice, house.WaterPrice, (bool)house.FingerprintLock, 
-                (bool)house.Camera, (bool)house.Parking, house.DistanceToCampus);
-            return houseDTO;
+            AddressDTO address = AddressDAO.CreateAddress(houseDTO.Address, houseDTO.GoogleAddress);
+            House house = new House();
+            house.HouseName = houseDTO.HouseName;
+            house.Information = houseDTO.Information;
+            house.AddressId = address.AddressId;
+            house.VillageId = houseDTO.VillageId;
+            house.LandlordId = houseDTO.LandlordId;
+            house.CampusId = houseDTO.CampusId;
+            house.PowerPrice = houseDTO.PowerPrice;
+            house.WaterPrice = houseDTO.WaterPrice;
+            house.FingerprintLock = houseDTO.FingerprintLock;
+            house.Parking = houseDTO.Parking;
+            house.DistanceToCampus = houseDTO.DistanceToCampus;
+            house.View = 0;
+            house.Deleted = false;
+            house.CreatedDate = DateTime.UtcNow;
+            house.LastModifiedDate = DateTime.UtcNow;
+            house.CreatedBy = houseDTO.LandlordId;
+            house.LastModifiedBy = houseDTO.LandlordId;
+            return HouseDAO.CreateHouse(house);
         }
         //public List<HouseDTO> GetAllHouses() => HouseDAO.GetAllHouses();
         //public List<HouseDTO> GetHouseByName(string HouseName) => HouseDAO.GetHouseByName(HouseName);

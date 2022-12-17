@@ -35,21 +35,21 @@ export class RoomService {
   }
 
   createRoom(room: any): Observable<any>{
-    return this.http.post<any>(this.APIUrl + "/create", room, this.httpOptions);
+    return this.http.post<any>(this.APIUrl + "/create", room, {withCredentials: true, headers: this.httpOptions.headers});
   }
 
   //[Landlord: Update Room]
   updateRoom(room: Room): Observable<any> {
-    return this.http.put<any>(this.APIUrl, room, this.httpOptions);
+    return this.http.put<any>(this.APIUrl, room, {withCredentials: true, headers: this.httpOptions.headers});
   }
 
   updateStatusRoom(statusId: number, roomId: number): Observable<any> {
-    return this.http.put<any>(this.APIUrl + "/changeStatus?statusId=" + statusId + "&roomId=" + roomId, this.httpOptions);
+    return this.http.put<any>(this.APIUrl + "/changeStatus?statusId=" + statusId + "&roomId=" + roomId, {withCredentials: true, headers: this.httpOptions.headers});
   }
 
   //[Landlord: Delete Room]
   deleteRoom(roomId: number): Observable<any> {
-    return this.http.delete<any>(this.APIUrl + "/Rooms?roomId=" + roomId, this.httpOptions);
+    return this.http.delete<any>(this.APIUrl + "/Rooms?roomId=" + roomId, {withCredentials: true, headers: this.httpOptions.headers});
   }
 
   //[Landlord: Get Room] Get room by roomId

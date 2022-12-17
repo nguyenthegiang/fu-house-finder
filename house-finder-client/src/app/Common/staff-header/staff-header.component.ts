@@ -61,9 +61,12 @@ export class StaffHeaderComponent implements OnInit {
 
   //Log out of systen
   logout() {
+    localStorage.clear();
+    sessionStorage.clear();
     this.userService.logout().subscribe(resp => {
-      localStorage.clear();
-      sessionStorage.clear();
+      window.location.href = "/login";
+    },
+    error => {
       window.location.href = "/login";
     });
   }
