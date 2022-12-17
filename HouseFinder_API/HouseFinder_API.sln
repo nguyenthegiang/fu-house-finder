@@ -13,9 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BusinessObjects", "Business
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HouseFinder.Test", "HouseFinder.Test\HouseFinder.Test.csproj", "{C20AEFAA-EFAB-4EFF-AFB4-5C802E6D9D35}"
 EndProject
-Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{04A26A33-5DB1-47AF-BB32-24EDB364A43D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIGateway", "APIGateway\APIGateway.csproj", "{1FA37231-AB23-4DFF-BAF5-CFB637110BFA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIGateway", "APIGateway\APIGateway.csproj", "{1FA37231-AB23-4DFF-BAF5-CFB637110BFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -43,10 +41,6 @@ Global
 		{C20AEFAA-EFAB-4EFF-AFB4-5C802E6D9D35}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C20AEFAA-EFAB-4EFF-AFB4-5C802E6D9D35}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C20AEFAA-EFAB-4EFF-AFB4-5C802E6D9D35}.Release|Any CPU.Build.0 = Release|Any CPU
-		{04A26A33-5DB1-47AF-BB32-24EDB364A43D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{04A26A33-5DB1-47AF-BB32-24EDB364A43D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{04A26A33-5DB1-47AF-BB32-24EDB364A43D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{04A26A33-5DB1-47AF-BB32-24EDB364A43D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1FA37231-AB23-4DFF-BAF5-CFB637110BFA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1FA37231-AB23-4DFF-BAF5-CFB637110BFA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FA37231-AB23-4DFF-BAF5-CFB637110BFA}.Release|Any CPU.ActiveCfg = Release|Any CPU
