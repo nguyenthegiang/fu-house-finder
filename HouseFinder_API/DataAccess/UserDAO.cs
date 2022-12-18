@@ -544,5 +544,23 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
         }
+
+        public static void DeleteStaffAccount(string uid)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    User user = context.Users.Where(u => u.UserId == uid).FirstOrDefault();
+                    if (user == null) return;
+                    context.Users.Remove(user);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

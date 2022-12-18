@@ -370,7 +370,25 @@ namespace HouseFinder_API.Controllers
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.Message);
+                return BadRequest();
+            }
+        }
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("staff/delete")]
+        public IActionResult DeleteStaffAccount(string staff)
+        {
+            try
+            {
+                var uid = HttpContext.Session.GetString("User");
+                if (String.IsNullOrEmpty(uid))
+                {
+                    return Forbid();
+                }
+                userRepository.DeleteStaffAccount(staff);
+                return Ok();
+            }
+            catch (Exception e)
+            {
                 return BadRequest();
             }
         }

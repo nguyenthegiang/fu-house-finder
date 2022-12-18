@@ -167,6 +167,9 @@ export class UserService {
   updateStaff(staff: any): Observable<any> {
     return this.http.put<any>(this.APIUrl + "/staff/update", staff, this.httpOptions);
   }
+  deleteStaff(staff: any): Observable<any> {
+    return this.http.delete<any>(this.APIUrl + "/staff/delete?staff="+staff, this.httpOptions);
+  }
   //[Staff/list-landlord] Filter landlords
   filterUser(
     pageSize: number,
