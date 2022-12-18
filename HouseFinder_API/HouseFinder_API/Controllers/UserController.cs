@@ -355,5 +355,25 @@ namespace HouseFinder_API.Controllers
                 return BadRequest();
             }
         }
+        [Authorize(Roles = "Admin")]
+        [HttpPut("staff/update")]
+        public IActionResult UpdateStaffAccount(StaffAccountUpdateDTO staff)
+        {
+            try
+            {
+                var uid = HttpContext.Session.GetString("User");
+                if (String.IsNullOrEmpty(uid))
+                {
+                    return Forbid();
+                }
+                staff.UpdatedBy = uid;
+                userRepository.UpdateStaffAccount(staff);
+                return Ok();
+            }
+            catch (Exception)
+            {
+                return BadRequest();
+            }
+        }
     }
 }
