@@ -38,6 +38,7 @@ namespace APIGateway
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseHttpsRedirection();
 
             app.UseRouting();
 

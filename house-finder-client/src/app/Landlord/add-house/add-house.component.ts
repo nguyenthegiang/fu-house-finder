@@ -190,10 +190,6 @@ export class AddHouseComponent implements OnInit {
       && this.houseImg2 && this.houseImg3)){
         return;
       }
-
-    console.log(Number(this.houseForm.controls['googleAddress'].value.split(",")[0]));
-    console.log(Number(this.houseForm.controls['googleAddress'].value.split(",")[1]));
-    console.log(this.houseForm.controls['googleAddress'].value);
     var distance = 0;
     const origin = { lat: 21.0137883027051, lng: 105.52699965513666 };
     const destination = { 
@@ -211,7 +207,6 @@ export class AddHouseComponent implements OnInit {
 
     await this.distanceService.getDistanceMatrix(request).then((response: any) => {
       distance = response.rows[0].elements[0].distance.value;
-      console.log(distance);
     })
     this.houseService.createHouse(
       this.houseForm.controls['houseName'].value,

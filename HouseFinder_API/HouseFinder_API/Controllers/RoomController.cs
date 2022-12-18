@@ -139,8 +139,9 @@ namespace HouseFinder_API.Controllers
                 RoomDTO roomDTO = roomRepository.CreateRoom(createRoom);
                 return Ok(roomDTO);
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return BadRequest();
             }
         }

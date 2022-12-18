@@ -154,7 +154,7 @@ namespace HouseFinder_API.Controllers
         /**
          * [To be Deleted] Demo method for testing authorization
          */
-        [Authorize]
+        //[Authorize]
         [HttpGet("test")]
         public IActionResult TestAuthorize()
         {
