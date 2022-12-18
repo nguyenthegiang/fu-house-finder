@@ -148,7 +148,6 @@ export class HomepageComponent implements OnInit, AfterViewInit {
     if (getComputedStyle(this.buttonTriggerOffCanvas?.nativeElement).getPropertyValue('display') == 'block') {
       //if yes => this is large screen => disable Offcanvas Filter column code
       this.enableOffCanvas = true;
-      console.log('true')
     }
 
     //(for avoiding console error) 

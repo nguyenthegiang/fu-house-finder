@@ -24,3 +24,7 @@ https://fptuniversity-my.sharepoint.com/:u:/g/personal/giangnthe153046_fpt_edu_v
 ### Những việc cần làm sau khi Clone Project:
  - Copy lại file appsettings.json (trên kia)
  - Chạy CMD ở Angular Project: npm install
+
+## Deployment Guide:
+### appsettings.json:
+https://fptuniversity-my.sharepoint.com/:u:/g/personal/giangnthe153046_fpt_edu_vn/EfpGvEoq7-hOtP_PAsqb4kIBZ-xKZGL0WtpawCISqMTqMw?e=3eNLKO
