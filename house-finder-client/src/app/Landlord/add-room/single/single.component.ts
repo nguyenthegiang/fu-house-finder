@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { FileService } from 'src/app/services/file.service';
 import { RoomService } from 'src/app/services/room.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-single',
@@ -167,8 +168,43 @@ export class SingleComponent implements OnInit {
   }
 
   submitImage(roomId: Number){
-    this.fileService.uploadRoomImageFileWithRoomId(this.image1, roomId).subscribe(resp => {}, error => {});
-    this.fileService.uploadRoomImageFileWithRoomId(this.image2, roomId).subscribe(resp => {}, error => {});
-    this.fileService.uploadRoomImageFileWithRoomId(this.image3, roomId).subscribe(resp => {}, error => {});
+    var err: Array<string> = [];
+    if (!this.image1.type.includes('image')) {
+      err.push(this.image1.name);
+    }
+    else {
+      this.fileService.uploadRoomImageFileWithRoomId(this.image1, roomId).subscribe(resp => {}, error => {});
+    
+    }
+    if (!this.image2.type.includes('image')) {
+      err.push(this.image2.name);
+    }
+    else {
+      this.fileService.uploadRoomImageFileWithRoomId(this.image2, roomId).subscribe(resp => {}, error => {});
+    }
+    if (!this.image3.type.includes('image')) {
+      err.push(this.image3.name);
+    }
+    else {
+      this.fileService.uploadRoomImageFileWithRoomId(this.image3, roomId).subscribe(resp => {}, error => {});
+    }
+    if (err.length > 0){
+      this.toast(true, 'error', true, 'Định dạng file ' + err.join(", ") +' không phải ảnh!')
+    }
+  }
+  async toast(toast: boolean = false, typeIcon: any = 'error', 
+      timerProgressBar: boolean = true, title: any = '', 
+      text: any = '', position: any = 'top-end',
+      confirmButton: boolean = true) {
+    await Swal.fire({
+      toast: toast,
+      position: position,
+      showConfirmButton: confirmButton,
+      icon: typeIcon,
+      timerProgressBar,
+      timer: 3000,
+      title: title,
+      text: text
+    })
   }
 }
