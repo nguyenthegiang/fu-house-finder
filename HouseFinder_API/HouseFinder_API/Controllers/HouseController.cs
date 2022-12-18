@@ -53,14 +53,14 @@ namespace HouseFinder_API.Controllers
             try
             {
                 HouseDTO houseDTO = houseRepository.GetHouseById(HouseId);
-                if (houseDTO == null)
-                {
-                    return NotFound();
-                }
-                else
-                {
+                //if (houseDTO == null)
+                //{
+                //    return NotFound();
+                //}
+                //else
+                //{
                     return Ok(houseDTO);
-                }
+                //}
             }
             catch (Exception)
             {
@@ -152,14 +152,14 @@ namespace HouseFinder_API.Controllers
             try
             {
                 List<HouseDTO> houseDTOs = houseRepository.GetListHousesByLandlordId(LandlordId);
-                if (houseDTOs == null)
-                {
-                    return NotFound();
-                }
-                else
-                {
+                //if (houseDTOs == null)
+                //{
+                //    return NotFound();
+                //}
+                //else
+                //{
                     return Ok(houseDTOs);
-                }
+                //}
             }
             catch (Exception)
             {
