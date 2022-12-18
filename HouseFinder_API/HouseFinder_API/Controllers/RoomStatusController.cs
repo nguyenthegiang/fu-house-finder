@@ -21,27 +21,27 @@ namespace HouseFinder_API.Controllers
         public IActionResult GetRoomStatusByHouseId(int HouseId)
         {
             List<RoomStatusDTO> statusDTO = statusRepository.GetStatusesByHouseId(HouseId);
-            if (statusDTO == null)
-            {
-                return NotFound();
-            }
-            else
-            {
+            //if (statusDTO == null)
+            //{
+            //    return NotFound();
+            //}
+            //else
+            //{
                 return Ok(statusDTO);
-            }
+            //}
         }
         [HttpGet]
         public IActionResult GetAllStatus()
         {
             List <RoomStatusDTO> status = statusRepository.GetAllStatus();
-            if(status == null)
-            {
-                return NotFound();
-            }
-            else
-            {
+            //if(status == null)
+            //{
+            //    return NotFound();
+            //}
+            //else
+            //{
                 return Ok(status);
-            }
+            //}
         }
     }
 }

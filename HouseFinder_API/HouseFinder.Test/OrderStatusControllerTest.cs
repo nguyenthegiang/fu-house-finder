@@ -15,6 +15,20 @@ namespace HouseFinder.Test
 {
     public class OrderStatusControllerTest
     {
+        private TransactionScope scope;         //scope using for rollback
+
+        [SetUp]
+        public void Setup()
+        {
+            scope = new TransactionScope();     //create scope
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            scope.Dispose();                    //dispose scope
+        }
+
         #region GetAllOrderStatus
 
         /**
@@ -24,6 +38,24 @@ namespace HouseFinder.Test
          */
         [Test]
         public void GetAllOrderStatus_Returns_ActionResult()
+        {
+            //ARRANGE
+            var orderStatusController = new OrderStatusController();
+
+            //ACT
+            var data = orderStatusController.GetAllOrderStatus();
+
+            //ASSERT
+            Assert.IsInstanceOf<OkObjectResult>(data);
+        }
+
+        /**
+         * Method: GetAllOrderStatus()
+         * Scenario: null data
+         * Expected behavior: Returns NotFound
+         */
+        [Test]
+        public void GetAllOrderStatus_Returns_NotFound()
         {
             //ARRANGE
             var orderStatusController = new OrderStatusController();
