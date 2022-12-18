@@ -85,6 +85,16 @@ namespace DataAccess.DTO
         public string CreatedBy {get;set;}
     }
 
+    public class StaffAccountUpdateDTO
+    {
+        public string Uid { get; set; }
+        public string DisplayName { get; set; }
+        public string Email { get; set; }
+        public int Role { get; set; }
+        [JsonIgnore]
+        public string UpdatedBy { get; set; }
+    }
+
     public class ChangePasswordDTO
     {
         public string OldPassword { get; set; }

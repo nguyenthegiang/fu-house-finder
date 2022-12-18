@@ -87,5 +87,7 @@ namespace Repositories.Repositories
 
         public Boolean CheckOldPassword(string userId, string oldPassword) => UserDAO.CheckCurrentPassword(userId, oldPassword);
         public List<UserDTO> GetRejectedLandlords() => UserDAO.GetRejectedLandlords();
+
+        public void UpdateStaffAccount(StaffAccountUpdateDTO staff) => UserDAO.UpdateStaffAccount(staff);
     }
 }

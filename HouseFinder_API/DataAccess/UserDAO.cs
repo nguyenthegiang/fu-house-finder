@@ -525,6 +525,27 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
         }
-
+        public static void UpdateStaffAccount(StaffAccountUpdateDTO staff)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    User user = context.Users.Where(u => u.UserId == staff.Uid).FirstOrDefault();
+                    if (user == null) return;
+                    user.DisplayName = staff.DisplayName;
+                    user.Email = staff.Email;
+                    user.RoleId = staff.Role;
+                    user.LastModifiedBy = staff.UpdatedBy;
+                    user.LastModifiedDate = DateTime.Now;
+                    context.Users.Update(user);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
