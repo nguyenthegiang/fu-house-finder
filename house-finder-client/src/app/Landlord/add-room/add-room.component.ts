@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { MultipleComponent } from './multiple/multiple.component';
 import { SingleComponent } from './single/single.component';
 
@@ -43,7 +44,6 @@ export class AddRoomComponent implements OnInit {
 
   updateForm(tab: string){
     this.selected = tab;
-    console.log(this.selected);
   }
 
   async submitForm(){

@@ -20,7 +20,7 @@
                     </button>
                 </div>
                 <input type="file" id="room-data-file" class="d-none" accept=".xlsx" (change)="onTemplateChange($event)"/>
-                <div class="col-6" style="height: 100px; background-color: aqua;" #templateFile></div>
+                <div class="col-6 border border-1 rounded" style="height: 100px;" #templateFile>{{file.name}}</div>
             </div>
             <div class="row m-3">
                 <div class="col-6">
@@ -31,8 +31,8 @@
                     </button>
                 </div>
                 <div class="col-6">
-                    <div class="row" style="height: 350px; background-color:coral ; overflow-y: auto;" #imageFiles>
-                        <div class="col-5 m-2" style="background-color: aquamarine; height: 40px;"></div>
+                    <div class="row border border-1 rounded" style="height: 350px; overflow-y: auto;" #imageFiles>
+                        <div class="col-5 m-2 border border-1 rounded" style="height: 35px;" *ngFor="let image of imageNames">{{image}}</div>
                     </div>
                 </div>
                 <input type="file" id="room-images" class="d-none" 
@@ -42,3 +42,13 @@
     </div>
     <div class="row"></div>
 </div>
+<swal #serverErrorAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true" title="Lỗi Server"
+  icon="error">
+</swal>
+<swal #uploadSuccess title="Upload thành công"
+  text="Bạn đã upload thành công thông tin nhà trọ!"
+  icon="success" [focusCancel]="true">
+</swal>
+<swal #dataAndImageNotFound [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true" title="Thông tin phòng của ảnh không có trong dữ liệu được upload"
+  icon="error">
+</swal>

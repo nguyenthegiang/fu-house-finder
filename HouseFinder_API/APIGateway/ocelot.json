@@ -1,10 +1,10 @@
 {
   "GlobalConfiguration": {
-    "BaseUrl": "https://52.74.199.215:443"
+    "BaseUrl": "https://fuhousefinder.com"
   },
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/user/{everything}",
+      "DownstreamPathTemplate": "/api/user/test",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -12,8 +12,7 @@
           "Port": 5001
         }
       ],
-      "UpstreamPathTemplate": "/user/{everything}",
-      "UpstreamHost": "api.fuhousefinder.com:443"
+      "UpstreamPathTemplate": "/user/test"
     }
   ]
 }
