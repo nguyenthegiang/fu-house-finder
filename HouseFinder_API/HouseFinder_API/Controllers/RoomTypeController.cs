@@ -26,14 +26,14 @@ namespace HouseFinder_API.Controllers
         public IActionResult GetRoomTypes()
         {
             List<RoomTypeDTO> roomTypesDTO = roomTypeRepository.GetRoomTypes();
-            if (roomTypesDTO == null)
-            {
-                return NotFound();
-            }
-            else
-            {
+            //if (roomTypesDTO == null)
+            //{
+            //    return NotFound();
+            //}
+            //else
+            //{
                 return Ok(roomTypesDTO);
-            }
+            //}
         }
 
         /**
@@ -44,14 +44,14 @@ namespace HouseFinder_API.Controllers
         public IActionResult GetRoomTypesByHouseId(int HouseId)
         {
             List<RoomTypeDTO> roomTypesDTO = roomTypeRepository.GetRoomTypesByHouseId(HouseId);
-            if (roomTypesDTO == null)
-            {
-                return NotFound();
-            }
-            else
-            {
+            //if (roomTypesDTO == null)
+            //{
+            //    return NotFound();
+            //}
+            //else
+            //{
                 return Ok(roomTypesDTO);
-            }
+            //}
         }
     }
 }
