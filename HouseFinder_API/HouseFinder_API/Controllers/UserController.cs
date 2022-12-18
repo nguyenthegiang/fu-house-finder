@@ -346,7 +346,6 @@ namespace HouseFinder_API.Controllers
                 {
                     return Forbid();
                 }
-                staff.CreatedBy = uid;
                 userRepository.CreateStaffAccount(staff);
                 return Ok();
             }
@@ -366,12 +365,12 @@ namespace HouseFinder_API.Controllers
                 {
                     return Forbid();
                 }
-                staff.UpdatedBy = uid;
                 userRepository.UpdateStaffAccount(staff);
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception e)
             {
+                Console.WriteLine(e.Message);
                 return BadRequest();
             }
         }

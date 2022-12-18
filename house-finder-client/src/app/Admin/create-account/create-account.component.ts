@@ -76,7 +76,7 @@ export class CreateAccountComponent implements OnInit {
     let data = {
       displayName: this.staffForm.controls['name'].value,
       email: this.staffForm.controls['email'].value,
-      role: this.staffForm.controls['role'].value,
+      role: Number(this.staffForm.controls['role'].value),
       password: this.staffForm.controls['password'].value
     }
     this.userService.createStaff(data).subscribe(resp => {}, error => {});

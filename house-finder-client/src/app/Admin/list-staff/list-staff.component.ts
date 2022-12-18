@@ -24,7 +24,7 @@ export class ListStaffComponent implements OnInit
     });
   }
 
-  addHouse()
+  addStaff()
   {
     this.router.navigate(['/Admin/create-account']);
   }
