@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { RoleService } from 'src/app/services/role.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -10,6 +11,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./update-account.component.scss']
 })
 export class UpdateAccountComponent implements OnInit {
+  @ViewChild('successAlert') private successAlert: SwalComponent | undefined;
   staffForm = this.formBuilder.group({
     name: [, Validators.required],
     email: [, Validators.required],
@@ -85,7 +87,7 @@ export class UpdateAccountComponent implements OnInit {
       email: this.staffForm.controls['email'].value,
       role: this.staffForm.controls['role'].value
     }
-    this.userService.updateStaff(data).subscribe(resp => {}, error => {});
+    this.userService.updateStaff(data).subscribe(resp => {this.successAlert?.fire()}, error => {});
   }
 
 }
