@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { RoleService } from 'src/app/services/role.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -9,7 +10,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./create-account.component.scss']
 })
 export class CreateAccountComponent implements OnInit {
-
+  @ViewChild('successAlert') private successAlert: SwalComponent | undefined;
   staffForm = this.formBuilder.group({
     name: [, Validators.required],
     email: [, Validators.required],
@@ -76,10 +77,10 @@ export class CreateAccountComponent implements OnInit {
     let data = {
       displayName: this.staffForm.controls['name'].value,
       email: this.staffForm.controls['email'].value,
-      role: this.staffForm.controls['role'].value,
+      role: Number(this.staffForm.controls['role'].value),
       password: this.staffForm.controls['password'].value
     }
-    this.userService.createStaff(data).subscribe(resp => {}, error => {});
+    this.userService.createStaff(data).subscribe(resp => {this.successAlert?.fire()}, error => {});
   }
 
 }

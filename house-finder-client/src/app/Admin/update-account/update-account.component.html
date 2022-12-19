@@ -3,34 +3,33 @@
 <div class="container-fluit m-5 d-flex flex-column align-items-center">
   <h3 class="text-center mb-5">Cập nhật tuyển sinh</h3>
 
-  <form class="row w-100 d-flex flex-column align-items-center needs-validation" novalidate>
+  <form class="row w-100 d-flex flex-column align-items-center needs-validation" [formGroup]="staffForm">
     <div class="col-12 col-md-5 mb-3">
       <label for="exampleInput1" class="form-label"><b>Họ và tên</b></label>
-      <input type="text" class="form-control" placeholder="Nhập họ và tên" id="exampleInput1" required>
-      <div class="invalid-feedback mb-3">Không được để trống</div>
+      <input type="text" class="form-control" placeholder="Nhập họ và tên" id="exampleInput1" formControlName="name">
+      <div class="invalid-feedback mb-3 d-block" *ngIf="!name">Không được để trống</div>
     </div>
 
     <div class="col-12 col-md-5 mb-3">
       <label for="exampleInput1" class="form-label"><b>Email</b></label>
-      <input type="email" class="form-control" placeholder="Nhập email" id="exampleInput1" required>
-      <div class="invalid-feedback mb-3">Không được để trống</div>
+      <input type="email" class="form-control" placeholder="Nhập email" id="exampleInput1" formControlName="email">
+      <div class="invalid-feedback mb-3 d-block" *ngIf="!email">Không được để trống</div>
     </div>
 
     <div class="col-12 col-md-5 mb-3">
       <label class="form-label"><b>Vị trí</b></label>
-      <select class="form-select" aria-label="Default select example" required>
-        <option selected>Chọn vị trí</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
+      <select class="form-select" aria-label="Default select example" formControlName="role">
+        <option *ngFor="let role of roles; let i = index;" value="{{role.roleId}}">{{role.roleName}}</option>
       </select>
-      <div class="invalid-feedback mb-3">Không được để trống</div>
+      <div class="invalid-feedback mb-3 d-block" *ngIf="!role">Không được để trống</div>
     </div>
 
     <div class="text-center col-12 col-md-5">
-      <button class="btn btn-success w-50 mt-4" type="submit">Thay đổi</button>
+      <button class="btn btn-success w-50 mt-4" type="submit" (click)="updateAccount()">Thay đổi</button>
     </div>
   </form>
 </div>
-
+<swal #successAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true" title="Update thành công"
+  icon="success">
+</swal>
 <!-- <app-footer></app-footer> -->

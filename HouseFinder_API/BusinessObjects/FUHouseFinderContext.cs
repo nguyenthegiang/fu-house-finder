@@ -551,7 +551,6 @@ namespace BusinessObjects
                     .IsFixedLength(true);
 
                 entity.Property(e => e.CreatedBy)
-                    .IsRequired()
                     .HasMaxLength(30)
                     .IsFixedLength(true);
 

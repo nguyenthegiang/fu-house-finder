@@ -82,7 +82,7 @@ CREATE TABLE [dbo].[Users] (
 	--Dành cho những Table CRUD dc -> History
 	CreatedDate datetime NOT NULL,
 	LastModifiedDate datetime,
-	CreatedBy nchar(8) NOT NULL,
+	CreatedBy nchar(8),
 	LastModifiedBy nchar(8),
 
 	CONSTRAINT RoleId_in_UserRole FOREIGN KEY(RoleId) REFERENCES UserRoles(RoleId),

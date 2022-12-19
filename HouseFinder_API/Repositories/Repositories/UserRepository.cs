@@ -89,5 +89,6 @@ namespace Repositories.Repositories
         public List<UserDTO> GetRejectedLandlords() => UserDAO.GetRejectedLandlords();
 
         public void UpdateStaffAccount(StaffAccountUpdateDTO staff) => UserDAO.UpdateStaffAccount(staff);
+        public void DeleteStaffAccount(string uid) => UserDAO.DeleteStaffAccount(uid);
     }
 }
