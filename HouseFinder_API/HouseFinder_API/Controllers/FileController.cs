@@ -284,7 +284,7 @@ namespace HouseFinder_API.Controllers
             string dir = $"user/{uid}/House/{HouseId}";
             foreach (var file in files)
             {
-                var path = $"{dir}/{file.FileName}";
+                var path = $"{dir}/{DateTime.Now}_{file.FileName}";
                 Stream fs = file.OpenReadStream();
                 await storageRepository.UploadFileAsync(path, fs);
                 ImagesOfHouseDTO img = new ImagesOfHouseDTO();
@@ -292,6 +292,25 @@ namespace HouseFinder_API.Controllers
                 img.ImageLink = path;
                 houseImageRepository.CreateHouseImage(img, uid);
             }
+            return Ok();
+        }
+        [Authorize]
+        [HttpPut("house/image/{HouseId:int}/{ImageId:int}")]
+        public async Task<IActionResult> UpdateHouseImage(IFormFile file, [FromRoute] int ImageId, [FromRoute] int HouseId)
+        {
+            string uid = HttpContext.Session.GetString("User");
+            if (String.IsNullOrWhiteSpace(uid))
+            {
+                return Forbid();
+            }
+            string dir = $"user/{uid}/House/{HouseId}";
+            var path = $"{dir}/{DateTime.Now}_{file.FileName}";
+            Stream fs = file.OpenReadStream();
+            await storageRepository.UploadFileAsync(path, fs);
+            ImagesOfHouseDTO img = new ImagesOfHouseDTO();
+            img.ImageId = ImageId;
+            img.ImageLink = path;
+            houseImageRepository.CreateHouseImage(img, uid);
             return Ok();
         }
     }

@@ -21,7 +21,12 @@ namespace HouseFinder_API.Controllers
     public class HouseController : ControllerBase
     {
         private IHouseRepository houseRepository = new HouseRepository();
+        private readonly IStorageRepository storageRepository;
 
+        public HouseController(IStorageRepository storageRepository)
+        {
+            this.storageRepository = storageRepository;
+        }
 
         /**
          * GET: api/Houses
@@ -53,6 +58,10 @@ namespace HouseFinder_API.Controllers
             try
             {
                 HouseDTO houseDTO = houseRepository.GetHouseById(HouseId);
+                foreach (var img in houseDTO.ImagesOfHouses)
+                {
+                    img.ImageLink = storageRepository.RetrieveFile(img.ImageLink);
+                }
                 //if (houseDTO == null)
                 //{
                 //    return NotFound();
