@@ -346,7 +346,6 @@ namespace HouseFinder_API.Controllers
                 {
                     return Forbid();
                 }
-                staff.CreatedBy = uid;
                 userRepository.CreateStaffAccount(staff);
                 return Ok();
             }
@@ -366,11 +365,29 @@ namespace HouseFinder_API.Controllers
                 {
                     return Forbid();
                 }
-                staff.UpdatedBy = uid;
                 userRepository.UpdateStaffAccount(staff);
                 return Ok();
             }
-            catch (Exception)
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+        [Authorize(Roles = "Admin")]
+        [HttpDelete("staff/delete")]
+        public IActionResult DeleteStaffAccount(string staff)
+        {
+            try
+            {
+                var uid = HttpContext.Session.GetString("User");
+                if (String.IsNullOrEmpty(uid))
+                {
+                    return Forbid();
+                }
+                userRepository.DeleteStaffAccount(staff);
+                return Ok();
+            }
+            catch (Exception e)
             {
                 return BadRequest();
             }

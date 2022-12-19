@@ -1,7 +1,8 @@
 import { UserService } from './../../services/user.service';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/models/user';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-list-staff',
@@ -11,7 +12,10 @@ import { User } from 'src/app/models/user';
 
 export class ListStaffComponent implements OnInit
 {
+  @ViewChild('deleteStaffAlert') private deleteStaffAlert: SwalComponent | undefined;
   staffs: User[] = []
+
+  selectedId: any;
 
   constructor(private userService: UserService,
     private router: Router) { }
@@ -24,20 +28,23 @@ export class ListStaffComponent implements OnInit
     });
   }
 
-  addHouse()
+  addStaff()
   {
     this.router.navigate(['/Admin/create-account']);
   }
 
   updateStaff(id: string)
   {
-    console.log(id);
     this.router.navigate(['/Admin/update-account/' + id]);
   }
 
-  deleteStaff(id: string)
+  async confirmDelete(id: string){
+    this.selectedId = id;
+    this.deleteStaffAlert?.fire();
+  }
+
+  deleteStaff()
   {
-    console.log(id);
-    this.router.navigate(['/Admin/landlord-house-detail/' + id]);
+    this.userService.deleteStaff(this.selectedId).subscribe(resp => {window.location.reload()});
   }
 }
