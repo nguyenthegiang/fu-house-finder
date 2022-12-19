@@ -10,5 +10,6 @@ namespace Repositories.IRepository
     public interface IHouseImageRepository
     {
         public void CreateHouseImage(ImagesOfHouseDTO img, string LandlordId);
+        public void UpdateHouseImage(ImagesOfHouseDTO img, string LandlordId);
     }
 }

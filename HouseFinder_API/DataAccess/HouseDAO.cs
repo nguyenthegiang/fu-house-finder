@@ -301,6 +301,9 @@ namespace DataAccess
                     //Get by ID
                     houseDTO = context.Houses.Where(h => h.Deleted == false).Include(h => h.Address).ProjectTo<HouseDTO>(config)
                         .Where(p => p.HouseId == houseId).FirstOrDefault();
+                    houseDTO.ImagesOfHouses = context.ImagesOfHouses
+                        .Where(img => img.ImageId == houseDTO.HouseId && img.Deleted == false)
+                        .OrderBy(img => img.ImageId).ProjectTo<ImagesOfHouseDTO>(config).ToList();
 
                     //(Commune, District)
                     /*Get CommuneId & DistrictId of the Village of this House*/
