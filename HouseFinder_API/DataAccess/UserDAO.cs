@@ -508,9 +508,7 @@ namespace DataAccess
                     user.Email = staff.Email;
                     user.DisplayName = staff.DisplayName;
                     user.RoleId = staff.Role;
-                    user.CreatedBy = staff.CreatedBy;
                     user.CreatedDate = DateTime.Now;
-                    user.LastModifiedBy = staff.CreatedBy;
                     user.LastModifiedDate = DateTime.Now;
                     PasswordHasher<User> pw = new PasswordHasher<User>();
                     var password = pw.HashPassword(user, staff.Password);
@@ -525,6 +523,44 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
         }
+        public static void UpdateStaffAccount(StaffAccountUpdateDTO staff)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    User user = context.Users.Where(u => u.UserId == staff.Uid).FirstOrDefault();
+                    if (user == null) return;
+                    user.DisplayName = staff.DisplayName;
+                    user.Email = staff.Email;
+                    user.RoleId = staff.Role;
+                    user.LastModifiedDate = DateTime.Now;
+                    context.Users.Update(user);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
 
+        public static void DeleteStaffAccount(string uid)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    User user = context.Users.Where(u => u.UserId == uid).FirstOrDefault();
+                    if (user == null) return;
+                    context.Users.Remove(user);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

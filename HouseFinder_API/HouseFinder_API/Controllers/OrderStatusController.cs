@@ -20,14 +20,14 @@ namespace HouseFinder_API.Controllers
         public IActionResult GetAllOrderStatus()
         {
             List<OrderStatusDTO> status = statusRepository.GetAllOrderStatus();
-            if (status == null)
-            {
-                return NotFound();
-            }
-            else
-            {
+            //if (status == null)
+            //{
+            //    return NotFound();
+            //}
+            //else
+            //{
                 return Ok(status);
-            }
+            //}
         }
     }
 }

@@ -42,32 +42,12 @@ namespace DataAccess
         /**
          Add a new House into the Database
          */
-        public static HouseDTO CreateHouse(string houseName, string information, int addressId, int villageId, string landlordId, int campusId,
-            decimal powerPrice, decimal waterPrice, bool fingerprintLock, bool camera, bool parking, double distanceToCampus)
+        public static HouseDTO CreateHouse(House house)
         {
             try
             {
                 using (var context = new FUHouseFinderContext())
                 {
-                    House house = new House();
-                    house.HouseName = houseName;
-                    house.Information = information;
-                    house.AddressId = addressId;
-                    house.CampusId = campusId;
-                    house.DistanceToCampus = distanceToCampus;
-                    house.VillageId = villageId;
-                    house.LandlordId = landlordId;
-                    house.PowerPrice = powerPrice;
-                    house.WaterPrice = waterPrice;
-                    house.FingerprintLock = fingerprintLock;
-                    house.Camera = camera;
-                    house.Parking = parking;
-                    house.View = 0;
-                    house.Deleted = false;
-                    house.CreatedDate = DateTime.UtcNow;
-                    house.LastModifiedDate = DateTime.UtcNow;
-                    house.CreatedBy = landlordId;
-                    house.LastModifiedBy = landlordId;
                     context.Houses.Add(house);
                     context.SaveChanges();
                     MapperConfiguration config;
@@ -321,6 +301,9 @@ namespace DataAccess
                     //Get by ID
                     houseDTO = context.Houses.Where(h => h.Deleted == false).Include(h => h.Address).ProjectTo<HouseDTO>(config)
                         .Where(p => p.HouseId == houseId).FirstOrDefault();
+                    houseDTO.ImagesOfHouses = context.ImagesOfHouses
+                        .Where(img => img.ImageId == houseDTO.HouseId && img.Deleted == false)
+                        .OrderBy(img => img.ImageId).ProjectTo<ImagesOfHouseDTO>(config).ToList();
 
                     //(Commune, District)
                     /*Get CommuneId & DistrictId of the Village of this House*/

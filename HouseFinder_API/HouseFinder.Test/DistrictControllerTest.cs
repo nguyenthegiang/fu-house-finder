@@ -15,6 +15,20 @@ namespace HouseFinder.Test
 {
     public class DistrictControllerTest
     {
+        private TransactionScope scope;         //scope using for rollback
+
+        [SetUp]
+        public void Setup()
+        {
+            scope = new TransactionScope();     //create scope
+        }
+
+        [TearDown]
+        public void TearDown()
+        {
+            scope.Dispose();                    //dispose scope
+        }
+
         #region GetAllDistricts
 
         /**

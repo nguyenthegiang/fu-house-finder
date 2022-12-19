@@ -1,3 +1,4 @@
+import { ɵparseCookieValue } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
@@ -21,9 +22,12 @@ export class AdminHeaderComponent implements OnInit {
 
   //Log out of system
   logout() {
+    localStorage.clear();
+    sessionStorage.clear();
     this.userService.logout().subscribe(resp => {
-      localStorage.clear();
-      sessionStorage.clear();
+      window.location.href = "/login";
+    },
+    error => {
       window.location.href = "/login";
     });
   }

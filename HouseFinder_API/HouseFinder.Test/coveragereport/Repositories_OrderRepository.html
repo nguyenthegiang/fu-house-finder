@@ -36,28 +36,28 @@
 <div class="card">
 <div class="card-header">Line coverage</div>
 <div class="card-body">
-<div class="large cardpercentagebar cardpercentagebar100">0%</div>
+<div class="large cardpercentagebar cardpercentagebar82">18%</div>
 <div class="table">
 <table>
 <tr>
 <th>Covered lines:</th>
-<td class="limit-width right" title="0">0</td>
+<td class="limit-width right" title="2">2</td>
 </tr>
 <tr>
 <th>Uncovered lines:</th>
-<td class="limit-width right" title="8">8</td>
+<td class="limit-width right" title="9">9</td>
 </tr>
 <tr>
 <th>Coverable lines:</th>
-<td class="limit-width right" title="8">8</td>
+<td class="limit-width right" title="11">11</td>
 </tr>
 <tr>
 <th>Total lines:</th>
-<td class="limit-width right" title="28">28</td>
+<td class="limit-width right" title="34">34</td>
 </tr>
 <tr>
 <th>Line coverage:</th>
-<td class="limit-width right" title="0 of 8">0%</td>
+<td class="limit-width right" title="2 of 11">18.1%</td>
 </tr>
 </table>
 </div>
@@ -100,14 +100,17 @@
 <table class="overview table-fixed">
 <thead><tr><th>Method</th><th>Branch coverage <a href="https://en.wikipedia.org/wiki/Code_coverage"><i class="icon-info-circled"></i></a></th><th>Cyclomatic complexity <a href="https://en.wikipedia.org/wiki/Cyclomatic_complexity"><i class="icon-info-circled"></i></a></th><th>Line coverage <a href="https://en.wikipedia.org/wiki/Code_coverage"><i class="icon-info-circled"></i></a></th></tr></thead>
 <tbody>
-<tr><td title="CountTotalOrder()"><a href="#file0_line15" class="navigatetohash">CountTotalOrder()</a></td><td>100%</td><td>1</td><td>0%</td></tr>
-<tr><td title="GetAllOrder()"><a href="#file0_line16" class="navigatetohash">GetAllOrder()</a></td><td>100%</td><td>1</td><td>0%</td></tr>
-<tr><td title="GetSolvedlOrderByMonth()"><a href="#file0_line17" class="navigatetohash">GetSolvedlOrderByMonth()</a></td><td>100%</td><td>1</td><td>0%</td></tr>
-<tr><td title="GetTotalOrderByMonth()"><a href="#file0_line18" class="navigatetohash">GetTotalOrderByMonth()</a></td><td>100%</td><td>1</td><td>0%</td></tr>
+<tr><td title="CountTotalOrder()"><a href="#file0_line15" class="navigatetohash">CountTotalOrder()</a></td><td>100%</td><td>1</td><td>100%</td></tr>
+<tr><td title="GetAllOrder()"><a href="#file0_line16" class="navigatetohash">GetAllOrder()</a></td><td>100%</td><td>1</td><td>100%</td></tr>
+<tr><td title="CountTotalOrderSolvedInMonth()"><a href="#file0_line17" class="navigatetohash">CountTotalOrderSolvedInMonth()</a></td><td>100%</td><td>1</td><td>0%</td></tr>
+<tr><td title="CountTotalOrderOrderedInMonth()"><a href="#file0_line18" class="navigatetohash">CountTotalOrderOrderedInMonth()</a></td><td>100%</td><td>1</td><td>0%</td></tr>
 <tr><td title="UpdateOrderStatus(System.Int32,System.Int32,System.String)"><a href="#file0_line20" class="navigatetohash">UpdateOrderStatus(...)</a></td><td>100%</td><td>1</td><td>0%</td></tr>
 <tr><td title="AddOrder(BusinessObjects.Order)"><a href="#file0_line22" class="navigatetohash">AddOrder(...)</a></td><td>100%</td><td>1</td><td>0%</td></tr>
 <tr><td title="CountTotalOrderSolvedByAccount(System.String)"><a href="#file0_line24" class="navigatetohash">CountTotalOrderSolvedByAccount(...)</a></td><td>100%</td><td>1</td><td>0%</td></tr>
 <tr><td title="CountSolvedOrderByStaffInAYear(System.String)"><a href="#file0_line26" class="navigatetohash">CountSolvedOrderByStaffInAYear(...)</a></td><td>100%</td><td>1</td><td>0%</td></tr>
+<tr><td title="CountTotalOrderByMonth()"><a href="#file0_line28" class="navigatetohash">CountTotalOrderByMonth()</a></td><td>100%</td><td>1</td><td>0%</td></tr>
+<tr><td title="CountSolvedOrderByMonth()"><a href="#file0_line30" class="navigatetohash">CountSolvedOrderByMonth()</a></td><td>100%</td><td>1</td><td>0%</td></tr>
+<tr><td title="CountOrderSolvedByStaffInADay(System.DateTime,System.String)"><a href="#file0_line32" class="navigatetohash">CountOrderSolvedByStaffInADay(...)</a></td><td>100%</td><td>1</td><td>0%</td></tr>
 </tbody>
 </table>
 </div>
@@ -131,10 +134,10 @@
 <tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line12"></a><code>12</code></td><td></td><td class="lightgray"><code>{</code></td></tr>
 <tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line13"></a><code>13</code></td><td></td><td class="lightgray"><code>&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;OrderRepository&nbsp;:&nbsp;IOrderRepository</code></td></tr>
 <tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line14"></a><code>14</code></td><td></td><td class="lightgray"><code>&nbsp;&nbsp;&nbsp;&nbsp;{</code></td></tr>
-<tr class="coverableline" title="Not covered (0 visits)" data-coverage="{'AllTestMethods': {'VC': '0', 'LVS': 'red'}}"><td class="red">&nbsp;</td><td class="leftmargin rightmargin right">0</td><td class="rightmargin right"><a id="file0_line15"></a><code>15</code></td><td></td><td class="lightred"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;int&nbsp;CountTotalOrder()&nbsp;=&gt;&nbsp;OrderDAO.CountTotalOrder();</code></td></tr>
-<tr class="coverableline" title="Not covered (0 visits)" data-coverage="{'AllTestMethods': {'VC': '0', 'LVS': 'red'}}"><td class="red">&nbsp;</td><td class="leftmargin rightmargin right">0</td><td class="rightmargin right"><a id="file0_line16"></a><code>16</code></td><td></td><td class="lightred"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;List&lt;OrderDTO&gt;&nbsp;GetAllOrder()&nbsp;=&gt;&nbsp;OrderDAO.GetAllOrders();</code></td></tr>
-<tr class="coverableline" title="Not covered (0 visits)" data-coverage="{'AllTestMethods': {'VC': '0', 'LVS': 'red'}}"><td class="red">&nbsp;</td><td class="leftmargin rightmargin right">0</td><td class="rightmargin right"><a id="file0_line17"></a><code>17</code></td><td></td><td class="lightred"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;int[]&nbsp;GetSolvedlOrderByMonth()&nbsp;=&gt;&nbsp;OrderDAO.GetSolvedOrderByMonth();</code></td></tr>
-<tr class="coverableline" title="Not covered (0 visits)" data-coverage="{'AllTestMethods': {'VC': '0', 'LVS': 'red'}}"><td class="red">&nbsp;</td><td class="leftmargin rightmargin right">0</td><td class="rightmargin right"><a id="file0_line18"></a><code>18</code></td><td></td><td class="lightred"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;int[]&nbsp;GetTotalOrderByMonth()&nbsp;=&gt;&nbsp;OrderDAO.GetTotalOrderByMonth();</code></td></tr>
+<tr class="coverableline" title="Covered (2 visits)" data-coverage="{'AllTestMethods': {'VC': '2', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">2</td><td class="rightmargin right"><a id="file0_line15"></a><code>15</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;int&nbsp;CountTotalOrder()&nbsp;=&gt;&nbsp;OrderDAO.CountTotalOrder();</code></td></tr>
+<tr class="coverableline" title="Covered (2 visits)" data-coverage="{'AllTestMethods': {'VC': '2', 'LVS': 'green'}}"><td class="green">&nbsp;</td><td class="leftmargin rightmargin right">2</td><td class="rightmargin right"><a id="file0_line16"></a><code>16</code></td><td></td><td class="lightgreen"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;List&lt;OrderDTO&gt;&nbsp;GetAllOrder()&nbsp;=&gt;&nbsp;OrderDAO.GetAllOrders();</code></td></tr>
+<tr class="coverableline" title="Not covered (0 visits)" data-coverage="{'AllTestMethods': {'VC': '0', 'LVS': 'red'}}"><td class="red">&nbsp;</td><td class="leftmargin rightmargin right">0</td><td class="rightmargin right"><a id="file0_line17"></a><code>17</code></td><td></td><td class="lightred"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;int[]&nbsp;CountTotalOrderSolvedInMonth()&nbsp;=&gt;&nbsp;OrderDAO.CountTotalOrderSolvedInMonth();</code></td></tr>
+<tr class="coverableline" title="Not covered (0 visits)" data-coverage="{'AllTestMethods': {'VC': '0', 'LVS': 'red'}}"><td class="red">&nbsp;</td><td class="leftmargin rightmargin right">0</td><td class="rightmargin right"><a id="file0_line18"></a><code>18</code></td><td></td><td class="lightred"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;int[]&nbsp;CountTotalOrderOrderedInMonth()&nbsp;=&gt;&nbsp;OrderDAO.CountTotalOrderOrderedInMonth();</code></td></tr>
 <tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line19"></a><code>19</code></td><td></td><td class="lightgray"><code></code></td></tr>
 <tr class="coverableline" title="Not covered (0 visits)" data-coverage="{'AllTestMethods': {'VC': '0', 'LVS': 'red'}}"><td class="red">&nbsp;</td><td class="leftmargin rightmargin right">0</td><td class="rightmargin right"><a id="file0_line20"></a><code>20</code></td><td></td><td class="lightred"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;void&nbsp;UpdateOrderStatus(int&nbsp;orderId,&nbsp;int&nbsp;statusId,&nbsp;string&nbsp;account)&nbsp;=&gt;&nbsp;OrderDAO.UpdateOrderStatus(orderId,&nbsp;</code></td></tr>
 <tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line21"></a><code>21</code></td><td></td><td class="lightgray"><code></code></td></tr>
@@ -143,23 +146,32 @@
 <tr class="coverableline" title="Not covered (0 visits)" data-coverage="{'AllTestMethods': {'VC': '0', 'LVS': 'red'}}"><td class="red">&nbsp;</td><td class="leftmargin rightmargin right">0</td><td class="rightmargin right"><a id="file0_line24"></a><code>24</code></td><td></td><td class="lightred"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;int&nbsp;CountTotalOrderSolvedByAccount(string&nbsp;account)&nbsp;=&gt;&nbsp;OrderDAO.CountTotalOrderSolvedByAccount(account);</code></td></tr>
 <tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line25"></a><code>25</code></td><td></td><td class="lightgray"><code></code></td></tr>
 <tr class="coverableline" title="Not covered (0 visits)" data-coverage="{'AllTestMethods': {'VC': '0', 'LVS': 'red'}}"><td class="red">&nbsp;</td><td class="leftmargin rightmargin right">0</td><td class="rightmargin right"><a id="file0_line26"></a><code>26</code></td><td></td><td class="lightred"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;int[]&nbsp;CountSolvedOrderByStaffInAYear(string&nbsp;account)&nbsp;=&gt;&nbsp;OrderDAO.CountSolvedOrderByStaffInAYear(account);</code></td></tr>
-<tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line27"></a><code>27</code></td><td></td><td class="lightgray"><code>&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
-<tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line28"></a><code>28</code></td><td></td><td class="lightgray"><code>}</code></td></tr>
+<tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line27"></a><code>27</code></td><td></td><td class="lightgray"><code></code></td></tr>
+<tr class="coverableline" title="Not covered (0 visits)" data-coverage="{'AllTestMethods': {'VC': '0', 'LVS': 'red'}}"><td class="red">&nbsp;</td><td class="leftmargin rightmargin right">0</td><td class="rightmargin right"><a id="file0_line28"></a><code>28</code></td><td></td><td class="lightred"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;int[]&nbsp;CountTotalOrderByMonth()&nbsp;=&gt;&nbsp;OrderDAO.CountTotalOrderByMonth();</code></td></tr>
+<tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line29"></a><code>29</code></td><td></td><td class="lightgray"><code></code></td></tr>
+<tr class="coverableline" title="Not covered (0 visits)" data-coverage="{'AllTestMethods': {'VC': '0', 'LVS': 'red'}}"><td class="red">&nbsp;</td><td class="leftmargin rightmargin right">0</td><td class="rightmargin right"><a id="file0_line30"></a><code>30</code></td><td></td><td class="lightred"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;int[]&nbsp;CountSolvedOrderByMonth()&nbsp;=&gt;&nbsp;OrderDAO.CountSolvedOrderByMonth();</code></td></tr>
+<tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line31"></a><code>31</code></td><td></td><td class="lightgray"><code></code></td></tr>
+<tr class="coverableline" title="Not covered (0 visits)" data-coverage="{'AllTestMethods': {'VC': '0', 'LVS': 'red'}}"><td class="red">&nbsp;</td><td class="leftmargin rightmargin right">0</td><td class="rightmargin right"><a id="file0_line32"></a><code>32</code></td><td></td><td class="lightred"><code>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;int&nbsp;CountOrderSolvedByStaffInADay(DateTime&nbsp;date,&nbsp;string&nbsp;account)&nbsp;=&gt;&nbsp;OrderDAO.CountOrderSolvedByStaffInADa</code></td></tr>
+<tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line33"></a><code>33</code></td><td></td><td class="lightgray"><code>&nbsp;&nbsp;&nbsp;&nbsp;}</code></td></tr>
+<tr class="" title="Not coverable" data-coverage="{'AllTestMethods': {'VC': '', 'LVS': 'gray'}}"><td class="gray">&nbsp;</td><td class="leftmargin rightmargin right"></td><td class="rightmargin right"><a id="file0_line34"></a><code>34</code></td><td></td><td class="lightgray"><code>}</code></td></tr>
 </tbody>
 </table>
 </div>
-<div class="footer">Generated by: ReportGenerator 5.1.12.0<br />11/25/2022 - 10:23:38<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="http://www.palmmedia.de">www.palmmedia.de</a></div></div>
+<div class="footer">Generated by: ReportGenerator 5.1.12.0<br />12/19/2022 - 00:05:51<br /><a href="https://github.com/danielpalme/ReportGenerator">GitHub</a> | <a href="http://www.palmmedia.de">www.palmmedia.de</a></div></div>
 <div class="containerright">
 <div class="containerrightfixed">
 <h1>Methods/Properties</h1>
-<a href="#file0_line15" class="navigatetohash percentagebar percentagebar0" title="Line coverage: 0% - CountTotalOrder()"><i class="icon-cube"></i>CountTotalOrder()</a><br />
-<a href="#file0_line16" class="navigatetohash percentagebar percentagebar0" title="Line coverage: 0% - GetAllOrder()"><i class="icon-cube"></i>GetAllOrder()</a><br />
-<a href="#file0_line17" class="navigatetohash percentagebar percentagebar0" title="Line coverage: 0% - GetSolvedlOrderByMonth()"><i class="icon-cube"></i>GetSolvedlOrderByMonth()</a><br />
-<a href="#file0_line18" class="navigatetohash percentagebar percentagebar0" title="Line coverage: 0% - GetTotalOrderByMonth()"><i class="icon-cube"></i>GetTotalOrderByMonth()</a><br />
+<a href="#file0_line15" class="navigatetohash percentagebar percentagebar100" title="Line coverage: 100% - CountTotalOrder()"><i class="icon-cube"></i>CountTotalOrder()</a><br />
+<a href="#file0_line16" class="navigatetohash percentagebar percentagebar100" title="Line coverage: 100% - GetAllOrder()"><i class="icon-cube"></i>GetAllOrder()</a><br />
+<a href="#file0_line17" class="navigatetohash percentagebar percentagebar0" title="Line coverage: 0% - CountTotalOrderSolvedInMonth()"><i class="icon-cube"></i>CountTotalOrderSolvedInMonth()</a><br />
+<a href="#file0_line18" class="navigatetohash percentagebar percentagebar0" title="Line coverage: 0% - CountTotalOrderOrderedInMonth()"><i class="icon-cube"></i>CountTotalOrderOrderedInMonth()</a><br />
 <a href="#file0_line20" class="navigatetohash percentagebar percentagebar0" title="Line coverage: 0% - UpdateOrderStatus(System.Int32,System.Int32,System.String)"><i class="icon-cube"></i>UpdateOrderStatus(System.Int32,System.Int32,System.String)</a><br />
 <a href="#file0_line22" class="navigatetohash percentagebar percentagebar0" title="Line coverage: 0% - AddOrder(BusinessObjects.Order)"><i class="icon-cube"></i>AddOrder(BusinessObjects.Order)</a><br />
 <a href="#file0_line24" class="navigatetohash percentagebar percentagebar0" title="Line coverage: 0% - CountTotalOrderSolvedByAccount(System.String)"><i class="icon-cube"></i>CountTotalOrderSolvedByAccount(System.String)</a><br />
 <a href="#file0_line26" class="navigatetohash percentagebar percentagebar0" title="Line coverage: 0% - CountSolvedOrderByStaffInAYear(System.String)"><i class="icon-cube"></i>CountSolvedOrderByStaffInAYear(System.String)</a><br />
+<a href="#file0_line28" class="navigatetohash percentagebar percentagebar0" title="Line coverage: 0% - CountTotalOrderByMonth()"><i class="icon-cube"></i>CountTotalOrderByMonth()</a><br />
+<a href="#file0_line30" class="navigatetohash percentagebar percentagebar0" title="Line coverage: 0% - CountSolvedOrderByMonth()"><i class="icon-cube"></i>CountSolvedOrderByMonth()</a><br />
+<a href="#file0_line32" class="navigatetohash percentagebar percentagebar0" title="Line coverage: 0% - CountOrderSolvedByStaffInADay(System.DateTime,System.String)"><i class="icon-cube"></i>CountOrderSolvedByStaffInADay(System.DateTime,System.String)</a><br />
 <br/></div>
 </div></div>
 <script type="text/javascript">
