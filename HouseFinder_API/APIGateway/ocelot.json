@@ -12,7 +12,15 @@
           "Port": 5001
         }
       ],
-      "UpstreamPathTemplate": "/user/test"
-    }
+      "UpstreamPathTemplate": "/api/user/test",
+      "UpstreamHttpMethod": [ "Get" ],
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "1s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      }
+    },
+
   ]
 }
