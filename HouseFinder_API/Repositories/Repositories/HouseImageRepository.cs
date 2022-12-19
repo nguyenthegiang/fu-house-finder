@@ -12,5 +12,7 @@ namespace Repositories.Repositories
     public class HouseImageRepository : IHouseImageRepository
     {
         public void CreateHouseImage(ImagesOfHouseDTO img, string LandlordId) => ImageOfHouseDAO.CreateImageOfHouse(img.HouseId, img.ImageLink, LandlordId);
+
+        public void UpdateHouseImage(ImagesOfHouseDTO img, string LandlordId) => ImageOfHouseDAO.UpdateImageOfHouse(img.ImageId, img.ImageLink, LandlordId);
     }
 }

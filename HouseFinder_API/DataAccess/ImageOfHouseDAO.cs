@@ -32,5 +32,28 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
         }
+        public static void UpdateImageOfHouse(int imageId, string ImageLink, string uid)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    ImagesOfHouse img = context.ImagesOfHouses.Where(image => image.ImageId == imageId).FirstOrDefault();
+                    if (img!= null)
+                    {
+                        img.ImageLink = ImageLink;
+                        img.Deleted = false;
+                        img.LastModifiedBy = uid;
+                        img.LastModifiedDate = DateTime.Now;
+                    }
+                    context.ImagesOfHouses.Update(img);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }
