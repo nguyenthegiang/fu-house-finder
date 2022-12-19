@@ -9,7 +9,7 @@
       <h3 class="text-center">Danh sách tuyển sinh</h3>
 
       <div class="my-4">
-        <button class="btn btn-secondary" (click)="addHouse()">+ Thêm mới</button>
+        <button class="btn btn-secondary" (click)="addStaff()">+ Thêm mới</button>
       </div>
 
       <!-- Case: No data -->
@@ -49,15 +49,13 @@
               </td>
 
               <td>
-                <a class="text-decoration-none text-success me-2" data-toggle="modal" data-target="#updateModal"
-                  data-whatever="@getbootstrap" (click)="updateStaff(dataItem.userId)" style="cursor: pointer;">
+                <a class="text-decoration-none text-success me-2" (click)="updateStaff(dataItem.userId)" style="cursor: pointer;">
                   <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
                     title="Chỉnh sửa">
                     build
                   </span>
                 </a>
-                <a class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
-                  data-bs-whatever="@getbootstrap" (click)="deleteStaff(dataItem.userId)" style="cursor: pointer;">
+                <a class="text-decoration-none text-danger" (click)="confirmDelete(dataItem.userId)" style="cursor: pointer;">
                   <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
                     title="Xóa">
                     delete
@@ -76,3 +74,12 @@
 <!-- End Body -->
 
 <!-- <app-footer></app-footer> -->
+<swal
+  #deleteStaffAlert
+  title="Xóa tài khoản nhân viên"
+  text="Bạn có muốn xóa tài khoản này?"
+  icon="warning"
+  [showCancelButton]="true"
+  [focusCancel]="true"
+  (confirm)="deleteStaff()">
+</swal>
