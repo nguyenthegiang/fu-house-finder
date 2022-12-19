@@ -5,14 +5,22 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/user/test",
-      "DownstreamScheme": "https",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5001
+          "Port": 5000
         }
       ],
-      "UpstreamPathTemplate": "/user/test"
-    }
+      "UpstreamPathTemplate": "/api/user/test",
+      "UpstreamHttpMethod": [ "Get" ],
+      "RateLimitOptions": {
+        "EnableRateLimiting": true,
+        "Period": "1s",
+        "PeriodTimespan": 1,
+        "Limit": 1
+      }
+    },
+
   ]
 }
