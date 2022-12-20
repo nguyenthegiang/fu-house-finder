@@ -32,11 +32,7 @@ namespace HouseFinder.Test
         }
         #region GetAvailableRoomsByHouseId
 
-        /**
-         * Method: GetAllCampuses()
-         * Scenario: None
-         * Expected behavior: Returns ActionResult
-         */
+        
         [Test]
         public void GetAvailableRoomsByHouseId_Returns_ActionResult()
         {
@@ -68,11 +64,6 @@ namespace HouseFinder.Test
             Assert.AreEqual(0, rooms.Count);
         }
 
-        /**
-         * Method: GetAllCampuses()
-         * Scenario: None
-         * Expected behavior: Returns matching result data
-         */
         [Test]
         public void GetAvailableRoomsByHouseId_ValidId_MatchResult()
         {
