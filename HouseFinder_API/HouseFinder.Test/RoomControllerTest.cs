@@ -42,17 +42,13 @@ namespace HouseFinder.Test
         {
             //ARRANGE
             var roomController = new RoomController();
-            int roomId = 1;
+            int houseId = 1;
             //ACT
-            var data = roomController.GetAvailableRoomsByHouseId(roomId);
+            var data = roomController.GetAvailableRoomsByHouseId(houseId);
 
             //ASSERT
             Assert.IsInstanceOf<OkObjectResult>(data);
         }
-
-
-
-          
         [TestCase(0)]
         [TestCase(-1)]
         [TestCase(1000)]
@@ -114,7 +110,7 @@ namespace HouseFinder.Test
             //ASSERT
             Assert.IsInstanceOf<OkObjectResult>(data);
         }
-        #endregion GetRoomsByHouseId
+    
         [Test]
         public void RoomsByHouseId_ValidId_MatchResult()
         {
@@ -136,5 +132,6 @@ namespace HouseFinder.Test
             Assert.AreEqual("101", results[0].RoomName);
 
         }
+        #endregion GetRoomsByHouseId
     }
 }
