@@ -101,6 +101,40 @@ namespace HouseFinder.Test
         }
 
         #endregion GetAvailableRoomsByHouseId
+        #region GetRoomsByHouseId
+        [Test]
+        public void GetRoomsByHouseId_Returns_ActionResult()
+        {
+            //ARRANGE
+            var roomController = new RoomController();
+            int roomId = 1;
+            //ACT
+            var data = roomController.GetAvailableRoomsByHouseId(roomId);
 
+            //ASSERT
+            Assert.IsInstanceOf<OkObjectResult>(data);
+        }
+        #endregion GetRoomsByHouseId
+        [Test]
+        public void RoomsByHouseId_ValidId_MatchResult()
+        {
+            //ARRANGE
+            var roomController = new RoomController();
+            int houseId = 1;
+            //ACT
+
+            var data = roomController.GetAvailableRoomsByHouseId(houseId);
+            //Using FluentAssertion to convert result data: from IActionResult to DTO/Model
+            var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
+            List<RoomDTO> results = okResult.Value.Should().BeAssignableTo<List<RoomDTO>>().Subject;
+            //List<RoomDTO> results = data.Value.ToList();
+            //ASSERT
+            //Assert.IsInstanceOf<OkObjectResult>(data);
+
+            //Assert.IsInstanceOf<NotFoundResult>(data);
+
+            Assert.AreEqual("101", results[0].RoomName);
+
+        }
     }
 }
