@@ -28,7 +28,7 @@ namespace HouseFinder.Test
         {
             scope.Dispose();                    //dispose scope
         }
-
+        #region GetListRatesByHouseId
         [Test]
         public void GetListRatesByHouseId_Returns_ActionResult()
         {
@@ -41,6 +41,7 @@ namespace HouseFinder.Test
             //ASSERT
             Assert.IsInstanceOf<OkObjectResult>(data);
         }
+       
 
         [Test]
         public void GetListRatesByHouseId_ValidId_MatchResult()
@@ -63,5 +64,6 @@ namespace HouseFinder.Test
             Assert.AreEqual("Rất tuyệt vời, gần trường nữa", results[0].Comment);
 
         }
+        #endregion GetListRatesByHouseId
     }
 }
