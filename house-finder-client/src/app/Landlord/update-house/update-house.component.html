@@ -121,7 +121,7 @@
       <div *ngFor="let image of listImage; let i=index">
         <div class="mb-3">
           <label for="exampleInput5" class="form-label"><b>Ảnh nhà {{i+1}}</b></label>
-          <img src="../../assets/image/House/{{image.imageLink}}" class="w-100 h-50 mb-2 border rounded" alt="...">
+          <img src="{{image.imageLink}}" class="w-100 h-50 mb-2 border rounded" alt="...">
           <label for="exampleInput5" class="form-label">Thay đổi ảnh</label>
           <div class="d-flex">
             <input type="file" class="form-control" id="exampleInput5"
