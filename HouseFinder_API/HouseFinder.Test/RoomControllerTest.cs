@@ -10,6 +10,7 @@ using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
 using System.Transactions;
+using FluentAssertions;
 
 namespace HouseFinder.Test
 {
@@ -41,12 +42,34 @@ namespace HouseFinder.Test
         {
             //ARRANGE
             var roomController = new RoomController();
-
+            int roomId = 1;
             //ACT
-            var data = roomController.GetAvailableRoomsByHouseId(1);
+            var data = roomController.GetAvailableRoomsByHouseId(roomId);
 
             //ASSERT
-            Assert.IsInstanceOf<ActionResult<IEnumerable<RoomDTO>>>(data);
+            Assert.IsInstanceOf<OkObjectResult>(data);
+        }
+
+
+
+          
+        [TestCase(0)]
+        [TestCase(-1)]
+        [TestCase(1000)]
+        public void GetListRoomByHouseId_InvalidId_Returns_NotFoundResult(int HouseId)
+        {
+            //ARRANGE
+            var roomController = new RoomController();
+
+            //ACT
+            var data = roomController.GetAvailableRoomsByHouseId(HouseId);
+
+            //Using FluentAssertion to convert result data: from IActionResult to DTO/Model
+            var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
+            List<RoomDTO> rooms = okResult.Value.Should().BeAssignableTo<List<RoomDTO>>().Subject;
+
+            //ASSERT
+            Assert.AreEqual(0, rooms.Count);
         }
 
         /**
@@ -55,30 +78,29 @@ namespace HouseFinder.Test
          * Expected behavior: Returns matching result data
          */
         [Test]
-        public void GetAvailableRoomsByHouseId_MatchResult()
+        public void GetAvailableRoomsByHouseId_ValidId_MatchResult()
         {
             //ARRANGE
             var roomController = new RoomController();
-
+            int houseId = 1;
             //ACT
-            var data = roomController.GetAvailableRoomsByHouseId(1);
 
+            var data = roomController.GetAvailableRoomsByHouseId(houseId);
+            //Using FluentAssertion to convert result data: from IActionResult to DTO/Model
+            var okResult = data.Should().BeOfType<OkObjectResult>().Subject;
+            List<RoomDTO> results = okResult.Value.Should().BeAssignableTo<List<RoomDTO>>().Subject;
+            //List<RoomDTO> results = data.Value.ToList();
             //ASSERT
-            Assert.IsInstanceOf<ActionResult<IEnumerable<RoomDTO>>>(data);
+            //Assert.IsInstanceOf<OkObjectResult>(data);
 
-            List<RoomDTO> results = data.Value.ToList();
+            //Assert.IsInstanceOf<NotFoundResult>(data);
 
             Assert.AreEqual("101", results[0].RoomName);
-            Assert.AreEqual("102", results[1].RoomName);
-            Assert.AreEqual("103", results[2].RoomName);
-            Assert.AreEqual("201", results[3].RoomName);
-            Assert.AreEqual("202", results[4].RoomName);
-            Assert.AreEqual("203", results[5].RoomName);
-            Assert.AreEqual("301", results[6].RoomName);
-            Assert.AreEqual("302", results[7].RoomName);
-            Assert.AreEqual("303", results[8].RoomName);
+            Assert.AreEqual("202", results[1].RoomName);
+            
         }
 
         #endregion GetAvailableRoomsByHouseId
+
     }
 }
