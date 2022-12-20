@@ -30,6 +30,7 @@ namespace HouseFinder.Test
             scope.Dispose();                    //dispose scope
         }
 
+        #region GetLandlordInfomationByLandlordId
         [Test]
         public void GetLandlordInfomationByLandlordId_Returns_ActionResult()
         {
@@ -65,5 +66,6 @@ namespace HouseFinder.Test
            
 
         }
+        #endregion GetLandlordInfomationByLandlordId
     }
 }
