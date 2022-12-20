@@ -18,9 +18,15 @@
 }
 
 @media only screen and (max-width: 768px) {
-  .md
+  #md
   {
     display: none;
+  }
+
+  #approveBtn
+  {
+    margin-top: 5px;
+    margin-bottom: 5px;
   }
 }
 
@@ -36,10 +42,3 @@
   // justify-content: center;
   // align-items: center;
 }
-
-
-
-
-
-
-
