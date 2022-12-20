@@ -10,6 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
 using System.Transactions;
 using FluentAssertions;
+using Repositories.IRepository;
+using Repositories.Repositories;
 
 namespace HouseFinder.Test
 {
@@ -20,6 +22,9 @@ namespace HouseFinder.Test
     public class HouseControllerTest
     {
         private TransactionScope scope;         //scope using for rollback
+
+        //For Injection to Controller
+        private IStorageRepository storageRepository;
 
         [SetUp]
         public void Setup()
@@ -42,6 +47,9 @@ namespace HouseFinder.Test
                   } } } );
             context.SaveChanges();
             */
+
+            //Set up for Injection to Controller
+            storageRepository = new StorageRepository("", "", "");
         }
 
         [TearDown]
@@ -61,7 +69,7 @@ namespace HouseFinder.Test
         public void GetAvailableHouses_Returns_ActionResult()
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
 
             //ACT
             var data = houseController.GetAvailableHouses();
@@ -79,7 +87,7 @@ namespace HouseFinder.Test
         public void GetAvailableHouses_MatchResult()
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
 
             //ACT
             var data = houseController.GetAvailableHouses();
@@ -110,7 +118,7 @@ namespace HouseFinder.Test
         public void GetHouseById_ValidId_Returns_OkResult()
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
             int houseId = 1;
 
             //ACT
@@ -131,7 +139,7 @@ namespace HouseFinder.Test
         public void GetHouseById_InvalidId_Returns_NotFoundResult(int HouseId)
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
 
             //ACT
             var data = houseController.GetHouseById(HouseId);
@@ -149,7 +157,7 @@ namespace HouseFinder.Test
         public void GetHouseById_ValidId_MatchResult()
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
             int houseId = 2;
 
             //ACT
@@ -177,7 +185,7 @@ namespace HouseFinder.Test
         public void UpdateHouse_ValidData_OkObjectResult()
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
             int houseId = 2;
 
             //ACT
@@ -225,7 +233,7 @@ namespace HouseFinder.Test
         public void UpdateHouse_InvalidData_BadRequestResult()
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
             int houseId = 2;
 
             //ACT
@@ -273,7 +281,7 @@ namespace HouseFinder.Test
         public void UpdateHouse_NotFoundId_BadRequestResult()
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
             int houseId = 2;
 
             //ACT
@@ -321,7 +329,7 @@ namespace HouseFinder.Test
         public void UpdateHouse_ValidData_MatchUpdatedValue()
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
             int houseId = 2;
 
             //ACT
@@ -378,7 +386,7 @@ namespace HouseFinder.Test
         public void DeleteHouse_ValidData_OkResult()
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
             int houseId = 2;
 
             //ACT
@@ -399,7 +407,7 @@ namespace HouseFinder.Test
         public void DeleteHouse_InvalidData_BadRequestResult(int houseId)
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
 
             //ACT
             var data = houseController.DeleteHouse(houseId);
@@ -421,7 +429,7 @@ namespace HouseFinder.Test
         public void IncreaseView_ValidId_Returns_OkResult()
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
             int houseId = 1;
 
             //ACT
@@ -442,7 +450,7 @@ namespace HouseFinder.Test
         public void IncreaseView_InvalidId_Returns_NotFoundResult(int houseId)
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
 
             //ACT
             var data = houseController.IncreaseView(houseId);
@@ -460,7 +468,7 @@ namespace HouseFinder.Test
         public void IncreaseView_ValidId_MatchUpdatedValue()
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
             int houseId = 2;
 
             //Store old data
@@ -495,7 +503,7 @@ namespace HouseFinder.Test
         public void GetListHousesByLandlordId_ValidId_Returns_OkObjectResult()
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
             string landlordId = "LA000001";
 
             //ACT
@@ -521,7 +529,7 @@ namespace HouseFinder.Test
         public void GetListHousesByLandlordId_InvalidId_Returns_EmptyList(string landlordId)
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
 
             //ACT
             var data = houseController.GetListHousesByLandlordId(landlordId);
@@ -543,7 +551,7 @@ namespace HouseFinder.Test
         public void GetListHousesByLandlordId_ValidId_MatchResult()
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
             string landlordId = "LA000001";
 
             //ACT
@@ -574,7 +582,7 @@ namespace HouseFinder.Test
         public void GetMoneyForNotRentedRooms_ValidId_Returns_Decimal()
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
             int houseId = 1;
 
             //ACT
@@ -596,7 +604,7 @@ namespace HouseFinder.Test
         public void GetMoneyForNotRentedRoomsInvalidId_Returns_Zero(int houseId)
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
 
             //ACT
             var data = houseController.GetMoneyForNotRentedRooms(houseId);
@@ -614,7 +622,7 @@ namespace HouseFinder.Test
         public void GetMoneyForNotRentedRooms_ValidId_MatchResult()
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
             int houseId = 1;
 
             //ACT
@@ -637,7 +645,7 @@ namespace HouseFinder.Test
         public void CountTotalHouse_Returns_Int()
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
 
             //ACT
             var data = houseController.CountTotalHouse();
@@ -655,7 +663,7 @@ namespace HouseFinder.Test
         public void CountTotalHouse_MatchResult()
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
 
             //ACT
             var data = houseController.CountTotalHouse();
@@ -677,7 +685,7 @@ namespace HouseFinder.Test
         public void CountAvailableHouse_Returns_Int()
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
 
             //ACT
             var data = houseController.CountAvailableHouse();
@@ -695,7 +703,7 @@ namespace HouseFinder.Test
         public void CountAvailableHouse_MatchResult()
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
 
             //ACT
             var data = houseController.CountAvailableHouse();
@@ -717,7 +725,7 @@ namespace HouseFinder.Test
         public void CountTotalReportedHouse_Returns_Int()
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
 
             //ACT
             var data = houseController.CountTotalReportedHouse();
@@ -735,7 +743,7 @@ namespace HouseFinder.Test
         public void CountTotalReportedHouse_MatchResult()
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
 
             //ACT
             var data = houseController.CountTotalReportedHouse();
@@ -757,7 +765,7 @@ namespace HouseFinder.Test
         public void GetReportedHouses_Returns_ActionResult()
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
 
             //ACT
             var data = houseController.GetReportedHouses();
@@ -775,7 +783,7 @@ namespace HouseFinder.Test
         public void GetReportedHouses_MatchResult()
         {
             //ARRANGE
-            var houseController = new HouseController();
+            var houseController = new HouseController(storageRepository);
 
             //ACT
             var data = houseController.GetReportedHouses();
