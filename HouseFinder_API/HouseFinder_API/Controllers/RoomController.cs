@@ -34,7 +34,7 @@ namespace HouseFinder_API.Controllers
 
         //GET: api/Rooms/getAvailableRooms?HouseId=
         [HttpGet("getAvailableRooms")]
-        public IActionResult GetAvailableRoomsByHouseId(int HouseId)
+        public ActionResult<IEnumerable<RoomDTO>> GetAvailableRoomsByHouseId(int HouseId)
         {
             List<RoomDTO> rooms = roomRepository.GetAvailableRoomsByHouseId(HouseId);
             if (rooms == null)
