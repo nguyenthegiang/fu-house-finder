@@ -16,7 +16,7 @@ declare const google: any;  //For Google Map
   templateUrl: './add-house.component.html',
   styleUrls: ['./add-house.component.scss']
 })
-export class AddHouseComponent implements OnInit {  
+export class AddHouseComponent implements OnInit {
   @ViewChild('serverErrorAlert') private serverErrorAlert: SwalComponent | undefined;
   @ViewChild('addRoom') private addRoom: SwalComponent | undefined;
   map: any;
@@ -52,50 +52,59 @@ export class AddHouseComponent implements OnInit {
     village: ['', Validators.required],
     powerPrice: ['', Validators.required],
     waterPrice: ['', Validators.required],
-    fingerprint: [false, ],
-    camera: [false, ],
-    parking: [false, ],
+    fingerprint: [false,],
+    camera: [false,],
+    parking: [false,],
     address: ['', Validators.required],
     googleAddress: ['-25.363,105.527064', Validators.required],
     houseImg1: [, Validators.required],
     houseImg2: [, Validators.required],
     houseImg3: [, Validators.required],
-  }); 
+  });
 
   campuses: Campus[] = [];                    //(Regions) All Campuses (and Districts, Communes, Villages)
   districtsOfSelectedCampus: District[] = []; //(Regions) all Districts of 1 selected Campus (only display after user has selected 1 Campus)
   communesOfSelectedDistrict: Commune[] = []; //(Regions) all Communes of 1 selected District (only display after user has selected 1 District)
   villagesOfSelectedCommune: Village[] = [];  //(Regions) all Villages of 1 selected Commune (only display after user has selected 1 Commune)
-  
+
   selectedDistrictId: number | undefined;   //(filter by Region)
   selectedCommuneId: number | undefined;    //(filter by Region)
   selectedVillageId: number | undefined;    //(filter by Region)
   selectedCampusId: number | undefined;     //(filter by campus)
 
   constructor(
-    private formBuilder: FormBuilder, 
+    private formBuilder: FormBuilder,
     private houseService: HouseService,
     private fileService: FileService,
     private router: Router,
     private campusService: CampusService,) { }
 
   ngOnInit(): void {
+    /**
+     * [Authorization]
+     * Role: Landlord
+     */
+    var userRole = localStorage.getItem("role");
+    if (userRole != 'Landlord') {
+      window.location.href = '/home';
+    }
+
     this.initMap();
   }
 
-  initMap(){
+  initMap() {
     //initialize google map
     this.map = new google.maps.Map(document.getElementById("google-map") as HTMLElement, {
       zoom: 15,
       center: { lat: 21.0137883027051, lng: 105.52699965513666 },
     });
-  
+
     // Configure the click listener
     this.map.addListener("click", (mapsMouseEvent: any) => {
       this.marker.setPosition(mapsMouseEvent.latLng);
       this.houseForm.controls['googleAddress'].setValue(`${mapsMouseEvent.latLng.toJSON()["lat"]},${mapsMouseEvent.latLng.toJSON()["lng"]}`);
     });
-  
+
     this.marker = new google.maps.Marker({
       position: { lat: 21.0137883027051, lng: 105.52699965513666 },
       map: this.map
@@ -107,7 +116,7 @@ export class AddHouseComponent implements OnInit {
     });
   }
 
-  async addHouse(){
+  async addHouse() {
     //validate form
     if (this.houseForm.controls['houseName'].errors?.['required']) {
       this.houseName = false;
@@ -124,25 +133,25 @@ export class AddHouseComponent implements OnInit {
     if (this.houseForm.controls['campus'].errors?.['required']) {
       this.campus = false;
     }
-    else  {
+    else {
       this.campus = true;
     }
     if (this.houseForm.controls['district'].errors?.['required']) {
       this.district = false;
     }
-    else  {
+    else {
       this.district = true;
     }
     if (this.houseForm.controls['commune'].errors?.['required']) {
       this.commune = false;
     }
-    else 
-    if (this.houseForm.controls['village'].errors?.['required']) {
-      this.village = false;
-    }
-    else {
-      this.village = true;
-    }
+    else
+      if (this.houseForm.controls['village'].errors?.['required']) {
+        this.village = false;
+      }
+      else {
+        this.village = true;
+      }
     if (this.houseForm.controls['powerPrice'].errors?.['required']) {
       this.powerPrice = false;
     }
@@ -187,16 +196,16 @@ export class AddHouseComponent implements OnInit {
     }
     if (!(this.houseName && this.information && this.campus && this.district && this.commune && this.village
       && this.powerPrice && this.waterPrice && this.address && this.googleAddress && this.houseImg1
-      && this.houseImg2 && this.houseImg3)){
-        return;
-      }
+      && this.houseImg2 && this.houseImg3)) {
+      return;
+    }
     var distance = 0;
     const origin = { lat: 21.0137883027051, lng: 105.52699965513666 };
-    const destination = { 
-      lat: Number(this.houseForm.controls['googleAddress'].value.split(",")[0]), 
-      lng: Number(this.houseForm.controls['googleAddress'].value.split(",")[1]) 
+    const destination = {
+      lat: Number(this.houseForm.controls['googleAddress'].value.split(",")[0]),
+      lng: Number(this.houseForm.controls['googleAddress'].value.split(",")[1])
     };
-  
+
     const request = {
       origins: [origin],
       destinations: [destination],
@@ -204,10 +213,14 @@ export class AddHouseComponent implements OnInit {
       unitSystem: google.maps.UnitSystem.METRIC,
     };
 
-
-    await this.distanceService.getDistanceMatrix(request).then((response: any) => {
-      distance = response.rows[0].elements[0].distance.value;
-    })
+    try{
+      await this.distanceService.getDistanceMatrix(request).then((response: any) => {
+        distance = response.rows[0].elements[0].distance.value;
+      })
+    }
+    catch (Exception){
+      distance = 0
+    }
     this.houseService.createHouse(
       this.houseForm.controls['houseName'].value,
       this.houseForm.controls['information'].value,
@@ -228,31 +241,30 @@ export class AddHouseComponent implements OnInit {
         err => this.serverErrorAlert?.fire()
       )
     },
-    error => {
-      this.serverErrorAlert?.fire();
-    });
+      error => {
+        this.serverErrorAlert?.fire();
+      });
   }
 
-  navAddRoom(){
-    if (this.houseId == undefined){
+  navAddRoom() {
+    if (this.houseId == undefined) {
       return;
     }
-    this.router.navigate(['/Landlord/add-room'], {queryParams: {houseId: this.houseId}});
+    this.router.navigate(['/Landlord/add-room'], { queryParams: { houseId: this.houseId } });
   }
 
-  logout()
-  {
+  logout() {
     window.location.href = "/login";
   }
-  loadImage(event: any, index: number){
+  loadImage(event: any, index: number) {
     if (event.target.files && event.target.files[0]) {
-      if (index == 1){
+      if (index == 1) {
         this.img1 = event.target.files[0];
       }
-      else if (index == 2){
+      else if (index == 2) {
         this.img2 = event.target.files[0];
       }
-      else if (index == 3){
+      else if (index == 3) {
         this.img3 = event.target.files[0];
       }
     }
@@ -279,7 +291,7 @@ export class AddHouseComponent implements OnInit {
 
     // Call API: update list houses with the campus user chose
     this.selectedCampusId = numberCampusId;
-  }onDistrictClicked() {
+  } onDistrictClicked() {
     // check if user has chosen Campus
     if (!this.selectedCampusId) {
       // if not => alert that they have to choose Campus before District
@@ -305,12 +317,12 @@ export class AddHouseComponent implements OnInit {
     //Reset lower Region Filter
     this.villagesOfSelectedCommune = [];
 
-    //no need for filtering by commune & village 
+    //no need for filtering by commune & village
     this.selectedCommuneId = undefined;
     this.selectedVillageId = undefined;
     // Call API to update list houses with the selected district
     this.selectedDistrictId = numberDistrictId;
-    
+
   }
 
   //[Filter by Region] Filter by Commune
@@ -328,12 +340,12 @@ export class AddHouseComponent implements OnInit {
       }
     });
 
-    //no need for filtering by district & village 
+    //no need for filtering by district & village
     this.selectedDistrictId = undefined;
     this.selectedVillageId = undefined;
     // Call API to update list houses with the selected commune
     this.selectedCommuneId = numberCommuneId;
-    
+
   }
 
   //[Filter by Region] Filter by Village
@@ -341,12 +353,12 @@ export class AddHouseComponent implements OnInit {
     // convert string to number
     var numberVillageId: number = +stringSelectedVillageId;
 
-    //no need for filtering by district & commune 
+    //no need for filtering by district & commune
     this.selectedDistrictId = undefined;
     this.selectedCommuneId = undefined;
     // Call API to update list houses with the selected village
     this.selectedVillageId = numberVillageId;
-    
+
   }
 
 }

@@ -37,6 +37,15 @@ export class LandlordHouseDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    /**
+     * [Authorization]
+     * Role: Landlord
+     */
+    var userRole = localStorage.getItem("role");
+    if (userRole != 'Landlord') {
+      window.location.href = '/home';
+    }
+    
     this.getListRoom();
   }
 
@@ -92,7 +101,6 @@ export class LandlordHouseDetailComponent implements OnInit {
     window.location.reload();
   }
 
-
   updateRoom(id: number) {
     this.router.navigate(['/Landlord/update-room/' + id]);
   }
@@ -102,7 +110,7 @@ export class LandlordHouseDetailComponent implements OnInit {
     this.updateRoomId = roomId;
   }
 
-  addRoom(){
+  addRoom() {
     window.location.href = `/Landlord/add-room?houseId=${this.houseId}`;
   }
 
@@ -115,11 +123,9 @@ export class LandlordHouseDetailComponent implements OnInit {
     return new Array(i);
   }
 
-  search(searchValue: string)
-  {}
+  search(searchValue: string) { }
 
-  logout()
-  {
+  logout() {
     window.location.href = "/login";
   }
 }

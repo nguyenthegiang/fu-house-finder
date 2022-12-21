@@ -102,6 +102,14 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
   @Input() roomId!: number;
 
   ngOnInit(): void {
+    /**
+     * [Authorization]
+     * Role: Landlord
+     */
+    var userRole = localStorage.getItem("role");
+    if (userRole != 'Landlord') {
+      window.location.href = '/home';
+    }
   }
 
   // When @Input() roomId changes => user has clicked on 'Update' button

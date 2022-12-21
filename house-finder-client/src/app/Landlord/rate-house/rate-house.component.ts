@@ -24,10 +24,18 @@ export class RateHouseComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private rateService: RateService,
-    private router: Router)
-  { }
+    private router: Router) { }
 
   ngOnInit(): void {
+    /**
+     * [Authorization]
+     * Role: Landlord
+     */
+    var userRole = localStorage.getItem("role");
+    if (userRole != 'Landlord') {
+      window.location.href = '/home';
+    }
+
     //Get id of House from Route
     const id = Number(this.route.snapshot.paramMap.get('id'));
     this.houseId = id;
@@ -37,30 +45,25 @@ export class RateHouseComponent implements OnInit {
     });
   }
 
-  logout()
-  {
+  logout() {
     window.location.href = "/login";
   }
 
-  openReply(index: number)
-  {
+  openReply(index: number) {
     this.isReply = true;
     this.indexReply = index;
   }
 
-  closeReply()
-  {
+  closeReply() {
     this.isReply = false;
     this.indexReply = -1;
   }
 
-  addReply(rateId: number)
-  {
+  addReply(rateId: number) {
     this.rateService.updateRate(rateId, this.reply).subscribe(() => this.goBack());
   }
 
-  goBack(): void
-  {
+  goBack(): void {
     window.location.reload();
   }
 }

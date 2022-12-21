@@ -22,33 +22,38 @@ export class ListHouseComponent implements OnInit {
   @ViewChild('searchValue') searchValue: any;
 
   constructor(private houseService: HouseService,
-    private router: Router)
-    { }
+    private router: Router) { }
 
   ngOnInit(): void {
+    /**
+     * [Authorization]
+     * Role: Staff
+     */
+    var userRole = localStorage.getItem("role");
+    if (userRole == null || userRole!.indexOf('Department') < 0) {
+      window.location.href = '/home';
+    }
+
     //Get List of all Houses
     this.houseService.getAllHouses().subscribe(data => {
       this.houses = data;
     });
   }
 
-  viewHouse(id: number)
-  {
+  viewHouse(id: number) {
     console.log(id);
     this.router.navigate(['/Staff/staff-house-detail/' + id]);
   }
 
-  search(searchValue: string)
-  {
+  search(searchValue: string) {
     this.searchName = searchValue;
   }
 
-  changeBreadcrumbStatus()
-  {
-    localStorage.setItem('breadcrumb','false');
+  changeBreadcrumbStatus() {
+    localStorage.setItem('breadcrumb', 'false');
   }
 
-  handleClear(){
+  handleClear() {
     this.searchValue.nativeElement.value = ' ';
     this.searchName = undefined;
     this.houseService.getAvailableHouses().subscribe(data => {

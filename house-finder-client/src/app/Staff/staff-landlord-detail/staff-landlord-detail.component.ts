@@ -37,10 +37,18 @@ export class StaffLandlordDetailComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private roomService: RoomService,
-    private userService: UserService)
-    { }
+    private userService: UserService) { }
 
   ngOnInit(): void {
+    /**
+     * [Authorization]
+     * Role: Staff
+     */
+    var userRole = localStorage.getItem("role");
+    if (userRole == null || userRole!.indexOf('Department') < 0) {
+      window.location.href = '/home';
+    }
+
     //Get id of House from Route
     const id = String(this.route.snapshot.paramMap.get('id'));
 
@@ -73,17 +81,14 @@ export class StaffLandlordDetailComponent implements OnInit {
     });
   }
 
-  viewRoom(id: number)
-  {
+  viewRoom(id: number) {
     console.log(id);
     this.router.navigate(['/Staff/staff-house-detail/' + id]);
   }
 
-  search(searchValue: string)
-  {}
+  search(searchValue: string) { }
 
-  changeBreadcrumbStatus()
-  {
-    localStorage.setItem('breadcrumb','true');
+  changeBreadcrumbStatus() {
+    localStorage.setItem('breadcrumb', 'true');
   }
 }

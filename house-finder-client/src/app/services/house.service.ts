@@ -86,7 +86,7 @@ export class HouseService {
         checkFirstFilter = false;
       }
 
-      filterAPIUrl += `contains(HouseName,'${searchName}')`;
+      filterAPIUrl += `contains(tolower(HouseName),tolower('${searchName}'))`;
     }
 
     //[Filter] add filter by campus if has
