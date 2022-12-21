@@ -74,6 +74,15 @@ export class ListReportComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    /**
+     * [Authorization]
+     * Role: Staff
+     */
+    var userRole = localStorage.getItem("role");
+    if (userRole == null || userRole!.indexOf('Department') < 0) {
+      window.location.href = '/home';
+    }
+
     this.selectedOrderBy = 'desc';
     this.filterReport(true);
 
@@ -267,14 +276,14 @@ export class ListReportComponent implements OnInit {
       });
     }
   }
-  updateUserStatus(event: any, userId: string){
+  updateUserStatus(event: any, userId: string) {
     //check if staff just checked or unchecked the checkbox
     const isChecked = (<HTMLInputElement>event.target).checked;
 
-    if(isChecked){
+    if (isChecked) {
       this.selectedStatusId = 1;
     }
-    else{
+    else {
       this.selectedStatusId = 0;
     }
     this.userService.updateUserStatus(userId, this.selectedStatusId).subscribe((data) => {

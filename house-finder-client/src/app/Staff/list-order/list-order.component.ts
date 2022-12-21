@@ -68,6 +68,15 @@ export class ListOrderComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    /**
+     * [Authorization]
+     * Role: Staff
+     */
+    var userRole = localStorage.getItem("role");
+    if (userRole == null || userRole!.indexOf('Department') < 0) {
+      window.location.href = '/home';
+    }
+
     this.selectedOrderBy = 'desc';
     this.filterOrder(true);
 

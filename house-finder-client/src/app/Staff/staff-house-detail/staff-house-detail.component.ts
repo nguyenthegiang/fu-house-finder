@@ -40,6 +40,15 @@ export class StaffHouseDetailComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    /**
+     * [Authorization]
+     * Role: Staff
+     */
+    var userRole = localStorage.getItem("role");
+    if (userRole == null || userRole!.indexOf('Department') < 0) {
+      window.location.href = '/home';
+    }
+
     //Get id of House from Route
     const id = Number(this.route.snapshot.paramMap.get('id'));
     //Call API: get House Detail information
@@ -48,13 +57,11 @@ export class StaffHouseDetailComponent implements OnInit {
     });
     this.getListRoom();
 
-    if(localStorage.getItem('breadcrumb') == 'true')
-    {
+    if (localStorage.getItem('breadcrumb') == 'true') {
       this.checkBreadcrumb = true;
     }
 
-    if(localStorage.getItem('breadcrumb') == 'false')
-    {
+    if (localStorage.getItem('breadcrumb') == 'false') {
       this.checkBreadcrumb = false;
     }
   }
@@ -104,11 +111,9 @@ export class StaffHouseDetailComponent implements OnInit {
     return new Array(i);
   }
 
-  viewRoomDetail(id: number)
-  {
+  viewRoomDetail(id: number) {
     this.router.navigate(['/Staff/staff-room-detail/' + id]);
   }
 
-  search(searchValue: string)
-  {}
+  search(searchValue: string) { }
 }

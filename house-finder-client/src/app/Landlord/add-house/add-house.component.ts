@@ -52,9 +52,9 @@ export class AddHouseComponent implements OnInit {
     village: ['', Validators.required],
     powerPrice: ['', Validators.required],
     waterPrice: ['', Validators.required],
-    fingerprint: [false, ],
-    camera: [false, ],
-    parking: [false, ],
+    fingerprint: [false,],
+    camera: [false,],
+    parking: [false,],
     address: ['', Validators.required],
     googleAddress: ['-25.363,105.527064', Validators.required],
     houseImg1: [, Validators.required],
@@ -80,10 +80,19 @@ export class AddHouseComponent implements OnInit {
     private campusService: CampusService,) { }
 
   ngOnInit(): void {
+    /**
+     * [Authorization]
+     * Role: Staff
+     */
+    var userRole = localStorage.getItem("role");
+    if (userRole != 'Staff') {
+      window.location.href = '/home';
+    }
+
     this.initMap();
   }
 
-  initMap(){
+  initMap() {
     //initialize google map
     this.map = new google.maps.Map(document.getElementById("google-map") as HTMLElement, {
       zoom: 15,
@@ -107,7 +116,7 @@ export class AddHouseComponent implements OnInit {
     });
   }
 
-  async addHouse(){
+  async addHouse() {
     //validate form
     if (this.houseForm.controls['houseName'].errors?.['required']) {
       this.houseName = false;
@@ -124,25 +133,25 @@ export class AddHouseComponent implements OnInit {
     if (this.houseForm.controls['campus'].errors?.['required']) {
       this.campus = false;
     }
-    else  {
+    else {
       this.campus = true;
     }
     if (this.houseForm.controls['district'].errors?.['required']) {
       this.district = false;
     }
-    else  {
+    else {
       this.district = true;
     }
     if (this.houseForm.controls['commune'].errors?.['required']) {
       this.commune = false;
     }
     else
-    if (this.houseForm.controls['village'].errors?.['required']) {
-      this.village = false;
-    }
-    else {
-      this.village = true;
-    }
+      if (this.houseForm.controls['village'].errors?.['required']) {
+        this.village = false;
+      }
+      else {
+        this.village = true;
+      }
     if (this.houseForm.controls['powerPrice'].errors?.['required']) {
       this.powerPrice = false;
     }
@@ -187,9 +196,9 @@ export class AddHouseComponent implements OnInit {
     }
     if (!(this.houseName && this.information && this.campus && this.district && this.commune && this.village
       && this.powerPrice && this.waterPrice && this.address && this.googleAddress && this.houseImg1
-      && this.houseImg2 && this.houseImg3)){
-        return;
-      }
+      && this.houseImg2 && this.houseImg3)) {
+      return;
+    }
     var distance = 0;
     const origin = { lat: 21.0137883027051, lng: 105.52699965513666 };
     const destination = {
@@ -228,31 +237,30 @@ export class AddHouseComponent implements OnInit {
         err => this.serverErrorAlert?.fire()
       )
     },
-    error => {
-      this.serverErrorAlert?.fire();
-    });
+      error => {
+        this.serverErrorAlert?.fire();
+      });
   }
 
-  navAddRoom(){
-    if (this.houseId == undefined){
+  navAddRoom() {
+    if (this.houseId == undefined) {
       return;
     }
-    this.router.navigate(['/Landlord/add-room'], {queryParams: {houseId: this.houseId}});
+    this.router.navigate(['/Landlord/add-room'], { queryParams: { houseId: this.houseId } });
   }
 
-  logout()
-  {
+  logout() {
     window.location.href = "/login";
   }
-  loadImage(event: any, index: number){
+  loadImage(event: any, index: number) {
     if (event.target.files && event.target.files[0]) {
-      if (index == 1){
+      if (index == 1) {
         this.img1 = event.target.files[0];
       }
-      else if (index == 2){
+      else if (index == 2) {
         this.img2 = event.target.files[0];
       }
-      else if (index == 3){
+      else if (index == 3) {
         this.img3 = event.target.files[0];
       }
     }
@@ -279,7 +287,7 @@ export class AddHouseComponent implements OnInit {
 
     // Call API: update list houses with the campus user chose
     this.selectedCampusId = numberCampusId;
-  }onDistrictClicked() {
+  } onDistrictClicked() {
     // check if user has chosen Campus
     if (!this.selectedCampusId) {
       // if not => alert that they have to choose Campus before District

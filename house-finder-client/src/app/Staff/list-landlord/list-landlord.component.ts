@@ -9,8 +9,7 @@ import { UserService } from 'src/app/services/user.service';
   templateUrl: './list-landlord.component.html',
   styleUrls: ['./list-landlord.component.scss']
 })
-export class ListLandlordComponent implements OnInit
-{
+export class ListLandlordComponent implements OnInit {
   landlordId: string = '';
   houseCount: number = 0;
   roomCount: number = 0;
@@ -39,11 +38,18 @@ export class ListLandlordComponent implements OnInit
     private userService: UserService,
     private lanlord_informationService: LandlordInformationService,
     private router: Router
-  )
-  { }
+  ) { }
 
-  ngOnInit(): void
-  {
+  ngOnInit(): void {
+    /**
+     * [Authorization]
+     * Role: Staff
+     */
+    var userRole = localStorage.getItem("role");
+    if (userRole == null || userRole!.indexOf('Department') < 0) {
+      window.location.href = '/home';
+    }
+
     this.filterLandlord(true);
 
     this.userService.getLandlords().subscribe(data => {
@@ -59,19 +65,17 @@ export class ListLandlordComponent implements OnInit
     this.reloadListLandlord();
   }
 
-  viewHouse(id: string)
-  {
+  viewHouse(id: string) {
     this.landlordId = id;
     console.log(id);
     this.router.navigate(['/Staff/staff-landlord-detail/' + id]);
   }
 
-  search(searchValue: string)
-  {
+  search(searchValue: string) {
     this.searchName = searchValue;
   }
 
-  handleClear(){
+  handleClear() {
     this.searchValue.nativeElement.value = ' ';
     this.searchName = undefined;
     this.userService.getLandlords().subscribe(data => {
@@ -79,7 +83,7 @@ export class ListLandlordComponent implements OnInit
     });
   }
 
-  reloadListLandlord(){
+  reloadListLandlord() {
     this.userService.getLandlords().subscribe(data => {
       this.landlords = data;
     });
@@ -91,14 +95,14 @@ export class ListLandlordComponent implements OnInit
     });
   }
 
-  updateUserStatus(event: any, userId: string){
+  updateUserStatus(event: any, userId: string) {
     //check if staff just checked or unchecked the checkbox
     const isChecked = (<HTMLInputElement>event.target).checked;
 
-    if(isChecked){
+    if (isChecked) {
       this.selectedStatusId = 1;
     }
-    else{
+    else {
       this.selectedStatusId = 0;
     }
     this.userService.updateUserStatus(userId, this.selectedStatusId).subscribe((data) => {

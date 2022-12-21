@@ -21,6 +21,14 @@ export class StaffUpdateProfileComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    /**
+     * [Authorization]
+     * Role: Staff
+     */
+    var userRole = localStorage.getItem("role");
+    if (userRole == null || userRole!.indexOf('Department') < 0) {
+      window.location.href = '/home';
+    }
     this.userService.getCurrentUser().subscribe(data => {
       this.staffDetail = data;
       this.staffId = this.staffDetail.userId;
@@ -29,8 +37,7 @@ export class StaffUpdateProfileComponent implements OnInit {
     });
   }
 
-  update()
-  {
+  update() {
     //Check if user has logged in
     var user = null;
     user = localStorage.getItem("user");
@@ -52,8 +59,7 @@ export class StaffUpdateProfileComponent implements OnInit {
     }
   }
 
-  goBack(): void
-  {
+  goBack(): void {
     window.location.reload();
   }
 }

@@ -25,9 +25,18 @@ export class ListLandlordSignupRequestComponent implements OnInit {
   landlordSignupRequest: User[] = [];
   selectedLandlord: User | undefined;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    /**
+     * [Authorization]
+     * Role: Staff
+     */
+    var userRole = localStorage.getItem("role");
+    if (userRole == null || userRole!.indexOf('Department') < 0) {
+      window.location.href = '/home';
+    }
+
     this.reloadListRequest();
   }
 
