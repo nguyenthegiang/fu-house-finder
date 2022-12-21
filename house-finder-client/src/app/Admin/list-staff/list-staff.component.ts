@@ -10,8 +10,7 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
   styleUrls: ['./list-staff.component.scss']
 })
 
-export class ListStaffComponent implements OnInit
-{
+export class ListStaffComponent implements OnInit {
   @ViewChild('deleteStaffAlert') private deleteStaffAlert: SwalComponent | undefined;
   staffs: User[] = []
 
@@ -20,31 +19,36 @@ export class ListStaffComponent implements OnInit
   constructor(private userService: UserService,
     private router: Router) { }
 
-  ngOnInit(): void
-  {
+  ngOnInit(): void {
+    /**
+     * [Authorization]
+     * Role: Admin
+     */
+    var userRole = localStorage.getItem("role");
+    if (userRole != 'Admin') {
+      window.location.href = '/home';
+    }
+
     //Get List of Staffs
     this.userService.getStaffs().subscribe(data => {
       this.staffs = data;
     });
   }
 
-  addStaff()
-  {
+  addStaff() {
     this.router.navigate(['/Admin/create-account']);
   }
 
-  updateStaff(id: string)
-  {
+  updateStaff(id: string) {
     this.router.navigate(['/Admin/update-account/' + id]);
   }
 
-  async confirmDelete(id: string){
+  async confirmDelete(id: string) {
     this.selectedId = id;
     this.deleteStaffAlert?.fire();
   }
 
-  deleteStaff()
-  {
-    this.userService.deleteStaff(this.selectedId).subscribe(resp => {window.location.reload()});
+  deleteStaff() {
+    this.userService.deleteStaff(this.selectedId).subscribe(resp => { window.location.reload() });
   }
 }

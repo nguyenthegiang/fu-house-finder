@@ -26,10 +26,10 @@ export class CreateAccountComponent implements OnInit {
   role = true;
 
   constructor(
-    private formBuilder: FormBuilder, 
+    private formBuilder: FormBuilder,
     private userService: UserService,
     private roleService: RoleService,
-  ) { 
+  ) {
     roleService.getStaffRoles().subscribe(
       resp => {
         this.roles = resp;
@@ -39,29 +39,36 @@ export class CreateAccountComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    /**
+     * [Authorization]
+     * Role: Admin
+     */
+    var userRole = localStorage.getItem("role");
+    if (userRole != 'Admin') {
+      window.location.href = '/home';
+    }
   }
 
-  validate(){
-    if (this.staffForm.controls['name'].errors?.['required']){
+  validate() {
+    if (this.staffForm.controls['name'].errors?.['required']) {
       this.name = false;
     }
     else {
       this.name = true;
     }
-    if (this.staffForm.controls['email'].errors?.['required']){
+    if (this.staffForm.controls['email'].errors?.['required']) {
       this.email = false;
     }
     else {
       this.email = true;
     }
-    if (this.staffForm.controls['password'].errors?.['required']){
+    if (this.staffForm.controls['password'].errors?.['required']) {
       this.password = false;
     }
     else {
       this.password = true;
     }
-    if (this.staffForm.controls['role'].errors?.['required']){
+    if (this.staffForm.controls['role'].errors?.['required']) {
       this.role = false;
     }
     else {
@@ -69,9 +76,9 @@ export class CreateAccountComponent implements OnInit {
     }
   }
 
-  addAccount(){
+  addAccount() {
     this.validate();
-    if (!(this.name && this.email && this.password && this.role)){
+    if (!(this.name && this.email && this.password && this.role)) {
       return;
     }
     let data = {
@@ -80,7 +87,7 @@ export class CreateAccountComponent implements OnInit {
       role: Number(this.staffForm.controls['role'].value),
       password: this.staffForm.controls['password'].value
     }
-    this.userService.createStaff(data).subscribe(resp => {this.successAlert?.fire()}, error => {});
+    this.userService.createStaff(data).subscribe(resp => { this.successAlert?.fire() }, error => { });
   }
 
 }

@@ -14,8 +14,7 @@ import { ImagesOfHouse } from 'src/app/models/imagesOfHouse';
   templateUrl: './update-house.component.html',
   styleUrls: ['./update-house.component.scss']
 })
-export class UpdateHouseComponent implements OnInit
-{
+export class UpdateHouseComponent implements OnInit {
   //Detail information of this House
   houseDetail: House | undefined;
 
@@ -37,11 +36,18 @@ export class UpdateHouseComponent implements OnInit
   constructor(private houseService: HouseService,
     private campusService: CampusService,
     private route: ActivatedRoute,
-    private router: Router)
-  { }
+    private router: Router) { }
 
-  ngOnInit(): void
-  {
+  ngOnInit(): void {
+    /**
+     * [Authorization]
+     * Role: Staff
+     */
+    var userRole = localStorage.getItem("role");
+    if (userRole != 'Staff') {
+      window.location.href = '/home';
+    }
+
     //Get id of House from Route
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
@@ -56,23 +62,20 @@ export class UpdateHouseComponent implements OnInit
         // find the campus
         this.campuses.forEach((campus) => {
           // assign the list of Commune as the communes of this District
-          if (campus.campusId == this.houseDetail?.campusId)
-          {
+          if (campus.campusId == this.houseDetail?.campusId) {
             this.districtsOfSelectedCampus = campus.districts;
 
             // find the district
             this.districtsOfSelectedCampus.forEach((district) => {
               console.log(this.houseDetail?.districtId);
               // assign the list of Commune as the communes of this District
-              if (district.districtId == this.houseDetail?.districtId)
-              {
+              if (district.districtId == this.houseDetail?.districtId) {
                 this.communesOfSelectedDistrict = district.communes;
 
                 // find the selected commune
                 this.communesOfSelectedDistrict.forEach((commune) => {
                   // assign the list of Villages as the villages of this Commune
-                  if (commune.communeId == this.houseDetail?.communeId)
-                  {
+                  if (commune.communeId == this.houseDetail?.communeId) {
                     this.villagesOfSelectedCommune = commune.villages;
                   }
                 });
@@ -158,42 +161,34 @@ export class UpdateHouseComponent implements OnInit
     this.selectedVillageId = numberVillageId;
   }
 
-  getImageId(index: number)
-  {
+  getImageId(index: number) {
     this.fileIndex = index;
 
-    if(this.houseDetail?.imagesOfHouses)
-    {
+    if (this.houseDetail?.imagesOfHouses) {
       this.imageLink = this.houseDetail.imagesOfHouses[this.fileIndex].imageLink;
     }
   }
 
-  onFilechange(event: any)
-  {
+  onFilechange(event: any) {
     //console.log(event.target.files[0].name);
     this.fileToUpload = event.target.files[0];
 
-    if(this.listImage)
-    {
+    if (this.listImage) {
       this.listImage[this.fileIndex].imageLink = event.target.files[0].name;
     }
   }
 
-  cancelChange(index: number)
-  {
-    if(this.listImage && this.houseDetail?.imagesOfHouses)
-    {
+  cancelChange(index: number) {
+    if (this.listImage && this.houseDetail?.imagesOfHouses) {
       this.listImage[index].imageLink = this.imageLink;
     }
   }
 
-  goBack(): void
-  {
+  goBack(): void {
     window.location.reload();
   }
 
-  logout()
-  {
+  logout() {
     window.location.href = "/login";
   }
 }

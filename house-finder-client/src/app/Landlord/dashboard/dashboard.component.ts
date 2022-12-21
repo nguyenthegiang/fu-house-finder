@@ -39,6 +39,15 @@ export class DashboardComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit(): void {
+    /**
+     * [Authorization]
+     * Role: Landlord
+     */
+    var userRole = localStorage.getItem("role");
+    if (userRole != 'Landlord') {
+      window.location.href = '/home';
+    }
+
     //Get List of all Houses
     var userId = null;
     //get user name not get userId
