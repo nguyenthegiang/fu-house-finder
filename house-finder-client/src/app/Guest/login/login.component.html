@@ -258,7 +258,7 @@
 </swal>
 <swal #landLordAccountConfirmAlert title="Xác nhận tài khoản"
   text="Tài khoản của bạn chưa được phép đăng ký thông tin nhà trọ. Vui lòng đến cơ sở Đại học FPT gần nhất để làm thủ tục xác nhận tài khoản"
-  icon="warning" [focusCancel]="true" (confirm)="navigate('/home')">
+  icon="warning" [focusCancel]="true" (confirm)="navigate('/Landlord/dashboard')">
 </swal>
 <swal #invalidEmailPasswordAlert title="Đăng nhập không hợp lệ" text="Email hoặc Password không hợp lệ" icon="error"
   [focusCancel]="true">
@@ -268,5 +268,5 @@
 </swal>
 <swal #landlordAccountCreatedAlert title="Đăng ký thành công"
   text="Bạn đã đăng ký thành công! Vui lòng đến cơ sở Đại học FPT gần nhất để làm thủ tục xác nhận tài khoản."
-  icon="success" [focusCancel]="true" (confirm)="navigate('/home')">
+  icon="success" [focusCancel]="true" (confirm)="navigate('/Landlord/dashboard')">
 </swal>
