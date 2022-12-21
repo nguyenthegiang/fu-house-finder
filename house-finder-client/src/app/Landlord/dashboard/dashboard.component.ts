@@ -45,8 +45,7 @@ export class DashboardComponent implements OnInit {
      */
     var userRole = localStorage.getItem("role");
     if (userRole != 'Landlord') {
-      alert(userRole);
-      //window.location.href = '/home';
+      window.location.href = '/home';
     }
 
     //Get List of all Houses
