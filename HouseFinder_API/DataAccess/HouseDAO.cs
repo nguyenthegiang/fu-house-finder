@@ -302,7 +302,7 @@ namespace DataAccess
                     houseDTO = context.Houses.Where(h => h.Deleted == false).Include(h => h.Address).ProjectTo<HouseDTO>(config)
                         .Where(p => p.HouseId == houseId).FirstOrDefault();
                     houseDTO.ImagesOfHouses = context.ImagesOfHouses
-                        .Where(img => img.ImageId == houseDTO.HouseId && img.Deleted == false)
+                        .Where(img => img.HouseId == houseId && !img.Deleted)
                         .OrderBy(img => img.ImageId).ProjectTo<ImagesOfHouseDTO>(config).ToList();
 
                     //(Commune, District)
