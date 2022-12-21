@@ -213,10 +213,14 @@ export class AddHouseComponent implements OnInit {
       unitSystem: google.maps.UnitSystem.METRIC,
     };
 
-
-    // await this.distanceService.getDistanceMatrix(request).then((response: any) => {
-    //   distance = response.rows[0].elements[0].distance.value;
-    // })
+    try{
+      await this.distanceService.getDistanceMatrix(request).then((response: any) => {
+        distance = response.rows[0].elements[0].distance.value;
+      })
+    }
+    catch (Exception){
+      distance = 0
+    }
     this.houseService.createHouse(
       this.houseForm.controls['houseName'].value,
       this.houseForm.controls['information'].value,
