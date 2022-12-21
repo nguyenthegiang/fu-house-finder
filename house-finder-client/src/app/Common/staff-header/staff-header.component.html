@@ -3,11 +3,11 @@
   <div class="navbar nav d-flex justify-content-between text-white orangeBackround">
 
     <!-- Nav bar -->
-    <div class="col-12 col-md-10">
+    <div class="col-12 col-lg-10">
       <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
           <!-- Logo: Back to Dashboard -->
-          <a class="navbar-brand" href="/Staff/dashboard">
+          <a id="logo" class="navbar-brand" href="/Staff/dashboard">
             <img src="/assets/image/Logo.png" alt="..." width="50px">
           </a>
           <!-- Toggler -->
@@ -15,6 +15,41 @@
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
+          <div class="dropdown" id="btn1">
+            <button class="btn btn-light dropdown-toggle" id="loginButton" type="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              {{userDisplayName}}
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <a class="dropdown-item fw-semibold" href="/Staff/staff-update-profile" id="dropdownItem">
+                  <span class="me-2">
+                    <i class="fa-solid fa-gear"></i>
+                  </span>
+                  Chỉnh sửa thông tin
+                </a>
+              </li>
+              <li>
+                <a class="dropdown-item fw-semibold" href="/Staff/staff-change-password" id="dropdownItem">
+                  <span class="me-2">
+                    <i class="fa-solid fa-key"></i>
+                  </span>
+                  Đổi mật khẩu
+                </a>
+              </li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+              <li>
+                <a class="dropdown-item fw-semibold" href="#" id="dropdownItem" (click)="logout()">
+                  <span class="me-2">
+                    <i class="fa-solid fa-right-from-bracket"></i>
+                  </span>
+                  Đăng xuất
+                </a>
+              </li>
+            </ul>
+          </div>
           <!-- List Pages -->
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
@@ -84,7 +119,7 @@
     </div>
 
     <!-- Action Dropdown -->
-    <div class="col-12 col-md-2 d-flex justify-content-center align-items-center" id="btn">
+    <div class="col-12 col-lg-2 d-flex justify-content-center align-items-center" id="btn">
       <div class="dropdown">
         <button class="btn btn-light dropdown-toggle" id="loginButton" type="button" data-bs-toggle="dropdown"
           aria-expanded="false">

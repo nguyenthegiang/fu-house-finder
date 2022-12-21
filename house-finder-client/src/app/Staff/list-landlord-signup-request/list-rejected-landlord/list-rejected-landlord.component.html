@@ -6,7 +6,7 @@
     <div class="row">
       <div class="my-4">
         <h3 class="text-center">Danh sách chủ trọ bị từ chối</h3>
-        <a class="mx-4" href="Staff/list-landlord-signup-request" style="color: #ee4d2d;">Danh sách chủ trọ đăng
+        <a class="mt-4" href="Staff/list-landlord-signup-request" style="color: #ee4d2d;">Danh sách chủ trọ đăng
           ký</a>
 
         <!-- Case: No Data -->
@@ -15,7 +15,7 @@
         </div>
 
         <!-- Case: Have Data -->
-        <div class="m-4" *ngIf="rejectedLandlords.length != 0">
+        <div class="my-4" *ngIf="rejectedLandlords.length != 0">
           <table class="table table-hover landlordSingupRequest">
             <thead>
               <tr>
@@ -23,24 +23,22 @@
                 <th scope="col">Email</th>
                 <th scope="col" id="md">Số Điện Thoại</th>
                 <th scope="col" id="md">Ảnh Chứng Minh Thư</th>
-                <th scope="col">Ngày Đăng Ký</th>
+                <th scope="col" id="md">Ngày Đăng Ký</th>
                 <th scope="col">Hành động</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let landlord of rejectedLandlords" data-bs-toggle="modal"
-                data-bs-target="#selectedRequestModal" (click)="changeSelectedLandlord(landlord.userId)"
-                style="cursor: pointer;">
+              <tr *ngFor="let landlord of rejectedLandlords" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
+              (click)="changeSelectedLandlord(landlord.userId)" style="cursor: pointer">
                 <td id="md">{{landlord.displayName}}</td>
                 <td>{{landlord.email}}</td>
                 <td id="md">{{landlord.phoneNumber}}</td>
-                <td class="md" id="md" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
-                  (click)="changeSelectedLandlord(landlord.userId)" style="cursor: pointer">
+                <td class="md" id="md">
                   <img class="me-2 mb-2 identityCard"
                     src="../../../assets/image/{{landlord.identityCardFrontSideImageLink}}">
                   <img class="mb-2 identityCard" src="../../../assets/image/{{landlord.identityCardBackSideImageLink}}">
                 </td>
-                <td>{{landlord.createdDate | date: "dd/MM/yyyy"}}</td>
+                <td id="md">{{landlord.createdDate | date: "dd/MM/yyyy"}}</td>
 
                 <!-- Action column -->
                 <td>
@@ -87,7 +85,6 @@
   [showCloseButton]="true">
 </swal>
 
-<!-- View identity card modal -->
 <!-- Modal -->
 <div class="modal fade" id="viewIdentityCardModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -97,9 +94,14 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" *ngIf="selectedLandlord">
-        <img class="me-2 mb-2 viewIdentityCard"
+        <span><b>Họ tên: </b>{{ selectedLandlord.displayName }}</span><br />
+        <span><b>Số điện thoại: </b>{{ selectedLandlord.phoneNumber }}</span><br />
+        <span><b>Email: </b>{{ selectedLandlord.email }}</span><br />
+        <span><b>Ngày đăng ký: </b>{{ selectedLandlord.createdDate | date: "dd/MM/yyyy" }}</span><br />
+        <span><b>Ảnh chứng minh thư: </b></span><br />
+        <img class="w-100 my-2 viewIdentityCard"
           src="../../../assets/image/{{selectedLandlord.identityCardFrontSideImageLink}}">
-        <img class="mb-2 viewIdentityCard"
+        <img class="w-100 mt-2 viewIdentityCard"
           src="../../../assets/image/{{selectedLandlord.identityCardBackSideImageLink}}">
       </div>
       <div class="modal-footer">

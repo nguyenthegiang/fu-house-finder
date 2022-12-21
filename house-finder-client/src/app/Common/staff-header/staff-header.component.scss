@@ -22,13 +22,27 @@
   font-weight: 600;
 }
 
-// @media only screen and (max-width: 768px) {
-//   #link
-//   {
-//     text-align: center;
-//     margin-top: 5px;
-//     margin-bottom: 20px;
-//   }
+#btn1
+{
+  display: none !important;
+}
+
+@media only screen and (max-width: 990px) {
+  #logo
+  {
+    display: none !important;
+  }
+
+  #btn
+  {
+    display: none !important;
+  }
+
+  #btn1
+  {
+    display: block !important;
+  }
+}
 
 //   #btn
 //   {
