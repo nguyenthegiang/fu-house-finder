@@ -82,10 +82,10 @@ export class AddHouseComponent implements OnInit {
   ngOnInit(): void {
     /**
      * [Authorization]
-     * Role: Staff
+     * Role: Landlord
      */
     var userRole = localStorage.getItem("role");
-    if (userRole != 'Staff') {
+    if (userRole != 'Landlord') {
       window.location.href = '/home';
     }
 

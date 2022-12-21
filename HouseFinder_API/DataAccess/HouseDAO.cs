@@ -156,7 +156,7 @@ namespace DataAccess
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
                     houseDTOs = context.Houses
                         //not selecting deleted house
-                        .Where(house => house.Deleted == false)
+                        .Where(house => !house.Deleted)
                         //not getting houses of Inactive Landlord
                         .Where(house => house.Landlord.Status.StatusName.Equals("Active"))
                         //include this for finding DistrictId
