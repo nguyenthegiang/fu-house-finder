@@ -13,6 +13,7 @@ import { Component, ElementRef, OnInit, ViewChild, AfterViewInit, ChangeDetector
 import { House } from '../../models/house';
 import { RoomType } from '../../models/roomType';
 import { RoomTypeService } from '../../services/room-type.service';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-homepage',
@@ -20,6 +21,10 @@ import { RoomTypeService } from '../../services/room-type.service';
   styleUrls: ['./homepage.component.scss']
 })
 export class HomepageComponent implements OnInit, AfterViewInit {
+  // Alerts
+  @ViewChild('chooseCampusAlert') private chooseCampusAlert: SwalComponent | undefined;
+  @ViewChild('inputValueInvalidAlert') private inputValueInvalidAlert: SwalComponent | undefined;
+
   //List of available houses to display in Main Content
   houses: HouseHomePage[] | undefined;
 
@@ -279,7 +284,7 @@ export class HomepageComponent implements OnInit, AfterViewInit {
     // check if user has chosen Campus
     if (!this.selectedCampusId) {
       // if not => alert that they have to choose Campus before District
-      alert('Vui lòng chọn Cơ sở bạn muốn tìm trước');
+      this.chooseCampusAlert?.fire();
     }
   }
 
@@ -353,12 +358,13 @@ export class HomepageComponent implements OnInit, AfterViewInit {
 
     // (special case) 0 or empty input -> not handle
     if (numMinDistance == 0 || numMaxDistance == 0) {
+      this.inputValueInvalidAlert?.fire();
       return;
     }
 
     /* Only allow filtering by Distance after choosing Campus */
     if (!this.selectedCampusId) {
-      alert('Vui lòng chọn Cơ sở bạn học trước!');
+      this.chooseCampusAlert?.fire();
       return;
     }
 
@@ -367,7 +373,7 @@ export class HomepageComponent implements OnInit, AfterViewInit {
         negative number
     */
     if (numMinDistance > numMaxDistance || numMinDistance < 0 || numMaxDistance < 0) {
-      alert('Giá trị nhập vào không hợp lệ!');
+      this.inputValueInvalidAlert?.fire();
       return;
     }
 
@@ -385,6 +391,7 @@ export class HomepageComponent implements OnInit, AfterViewInit {
 
     // (special case) 0 or empty input of Max -> not handle
     if (numMaxPrice == 0) {
+      this.inputValueInvalidAlert?.fire();
       return;
     }
 
@@ -393,7 +400,7 @@ export class HomepageComponent implements OnInit, AfterViewInit {
         negative number
     */
     if (numMinPrice > numMaxPrice || numMinPrice < 0 || numMaxPrice < 0) {
-      alert('Giá trị nhập vào không hợp lệ!');
+      this.inputValueInvalidAlert?.fire();
       return;
     }
 

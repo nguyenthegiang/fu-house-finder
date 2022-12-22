@@ -33,8 +33,7 @@
         </div>
         <div class="carousel-inner rounded">
           <div class="carousel-item active" *ngIf="houseDetail.imagesOfHouses">
-            <img id="img" src="{{houseDetail.imagesOfHouses[0].imageLink}}" class="w-100" height="450"
-              alt="...">
+            <img id="img" src="{{houseDetail.imagesOfHouses[0].imageLink}}" class="w-100" height="450" alt="...">
           </div>
           <div *ngFor="let image of houseDetail.imagesOfHouses; let i=index;">
             <div class="carousel-item" *ngIf="i >= 1">
@@ -121,31 +120,31 @@
             <div class="d-flex">
               <span>
                 {{rate.studentId}}: {{rate.comment}}
-                  <span *ngIf="rate.star === 1">
-                    (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
-                  </span>
-                  <span *ngIf="rate.star === 2">
-                    (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                    <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
-                  </span>
-                  <span *ngIf="rate.star === 3">
-                    (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                    <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                    <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
-                  </span>
-                  <span *ngIf="rate.star === 4">
-                    (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                    <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                    <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                    <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
-                  </span>
-                  <span *ngIf="rate.star === 5">
-                    (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                    <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                    <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                    <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                    <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
-                  </span>
+                <span *ngIf="rate.star === 1">
+                  (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
+                </span>
+                <span *ngIf="rate.star === 2">
+                  (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                  <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
+                </span>
+                <span *ngIf="rate.star === 3">
+                  (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                  <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                  <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
+                </span>
+                <span *ngIf="rate.star === 4">
+                  (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                  <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                  <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                  <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
+                </span>
+                <span *ngIf="rate.star === 5">
+                  (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                  <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                  <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                  <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                  <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
+                </span>
               </span>
             </div>
 
@@ -159,7 +158,8 @@
           <br> <i class="fa-solid fa-arrow-right"></i> Chủ trọ trả lời: Cảm ơn bạn nhiều -->
         </div>
         Viết bình luận:
-        <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1" [(ngModel)]="comment">
+        <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1"
+          [(ngModel)]="comment">
         <div class="my-2 d-flex">
           Đánh giá:
           <div class="ms-2" *ngIf="star === 0">
@@ -211,7 +211,8 @@
           </div>
         </div>
 
-        <button type="button" class="btn btn-secondary w-100" (click)="addRate()" [disabled]="comment === '' || star === 0">Đăng</button>
+        <button type="button" class="btn btn-secondary w-100" (click)="addRate()"
+          [disabled]="comment === '' || star === 0">Đăng</button>
       </div>
     </div>
 
@@ -401,10 +402,13 @@
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
       </div>
     </div>
-    <swal #reportSuccessAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
-      title="Gửi báo cáo thành công" icon="success">
-    </swal>
-    <swal #rateSuccessAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
+  </div>
+</div>
+
+<swal #reportSuccessAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
+  title="Gửi báo cáo thành công" icon="success">
+</swal>
+<swal #rateSuccessAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
   title="Bình luận thành công" icon="success">
 </swal>
 <swal #rateErrorAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
