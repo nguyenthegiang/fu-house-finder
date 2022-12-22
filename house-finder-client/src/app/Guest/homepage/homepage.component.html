@@ -775,3 +775,11 @@
 
 <!-- Footer -->
 <!-- <app-footer></app-footer> -->
+
+<!-- Alerts by SweetAlert2 -->
+<swal #chooseCampusAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
+  title="Vui lòng chọn Cơ sở bạn học trước!" icon="error">
+</swal>
+<swal #inputValueInvalidAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
+  title="Giá trị nhập vào không hợp lệ!" icon="error">
+</swal>
