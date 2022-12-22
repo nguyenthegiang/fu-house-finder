@@ -1,100 +1,86 @@
-<div class="container">
-    <div class="row m-0 p-0 d-flex justify-content-center">
-        <div class="col-10">
-            <div class="row m-3 mb-5">
-                <div class="col-6">
-                    <button class="border-0 m-0 form-control"
-                        style="height: 50px; width: 300px; background-color: #BCBAB5;" (click)="downloadTemplate()">
-                        <span class="me-3"><i class="fa-solid fa-download"></i></span> Tải xuống mẫu điền thông tin
-                        phòng trọ
-                    </button>
+<div class="container-fluid p-3">
+    <div class="row">
+        <!-- Action Buttons & Instructions -->
+        <div class="col-6">
+            <!-- Action Buttons -->
+            <div class="row">
+                <div class="col-3">
                 </div>
-                <div class="col-6 d-flex align-items-end" [ngClass]="{'d-none' : !progressDisplay}">
+                <div class="col-6">
+                    <div class="row">
+                        <!-- Download template -->
+                        <div class="row my-2">
+                            <button type="button" class="btn btn-secondary form-control p-3" (click)="downloadTemplate()">
+                                <span class="me-3"><i class="fa-solid fa-download"></i></span>
+                                Tải xuống mẫu điền thông tin phòng trọ
+                            </button>
+                        </div>
+
+                        <!-- Upload excel file -->
+                        <div class="row my-2">
+                            <button type="button" class="btn btn-secondary form-control p-3">
+                                <label for="room-data-file">
+                                    <span class="me-3"><i class="fa-solid fa-upload"></i></span>
+                                    Tải lên thông tin phòng trọ
+                                </label>
+                            </button>
+                            <input type="file" id="room-data-file" class="d-none" accept=".xlsx"
+                                (change)="onTemplateChange($event)" />
+                        </div>
+
+                        <!-- Upload image folder -->
+                        <div class="row my-2">
+                            <button type="button" class="btn btn-secondary form-control p-3">
+                                <label for="room-images">
+                                    <span class="me-3"><i class="fa-solid fa-upload"></i></span>
+                                    Tải lên thư mục ảnh phòng trọ
+                                </label>
+                            </button>
+                            <input type="file" id="room-images" class="d-none" accept="image/*"
+                                (change)="onImagesChange($event)" webkitdirectory />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3"></div>
+            </div>
+
+            <!-- Instruction -->
+            <div class="row">
+                Hướng dẫn:
+                Bước 1: Bấm nút "Tải xuống mẫu điền thông tin phòng trọ" để tải file Excel
+                Bước 2: Điền các thông tin của từng phòng trọ vào file Excel
+                    Ví dụ: (Ảnh)
+                Bước 3: Bấm nút "Tải lên thông tin phòng trọ" và chọn file Excel bạn vừa điền
+                Bước 4: Cho tất cả ảnh phòng trọ vào chung 1 thư mục (mỗi phòng trọ phải có tối thiểu 3 ảnh)
+                và đặt tên từng ảnh theo cú pháp: [Tên phòng]-[Số toà nhà]-[Số tầng]-[Số thứ tự của ảnh]
+                    Ví dụ: (Ảnh)
+                Bước 5: Bấm nút "Tải lên thư mục ảnh phòng trọ" và chọn thư mục chứa tất cả ảnh đó
+            </div>
+        </div>
+
+        <!-- Result boxes -->
+        <div class="col-6">
+            <!-- Progress bar -->
+            <div class="row">
+                <div class="col" [ngClass]="{'invisible' : !progressDisplay}">
                     <mat-progress-bar class="row mt-3" style="height: 10px;" mode="determinate"
                         [value]="matProgressBarValue"></mat-progress-bar>
                 </div>
             </div>
-            <div class="row m-3">
-                <div class="col-6">
-                    <button class="border-0 m-0 p-0 form-control"
-                        style="height: 50px; width: 300px; background-color: #BCBAB5;">
-                        <label for="room-data-file"
-                            style="height: 40px; width: 290px; background-color: #BCBAB5; text-align: center; display: flex; align-items: center; justify-content: center;">
-                            <span class="me-3"><i class="fa-solid fa-upload"></i></span> Tải lên thông tin phòng trọ
-                        </label>
-                    </button>
-                </div>
-                <input type="file" id="room-data-file" class="d-none" accept=".xlsx"
-                    (change)="onTemplateChange($event)" />
-                <div class="col-6 border border-1 rounded" style="height: 100px;" #templateFile>{{file.name}}</div>
+
+            <!-- Result: upload file -->
+            <div class="row">
+                <div class="col border border-1 rounded" style="height: 100px;" #templateFile>{{file.name}}</div>
             </div>
-            <div class="row m-3">
-                <div class="col-6">
-                    <button class="border-0 m-0 p-0 form-control"
-                        style="height: 50px; width: 300px; background-color: #BCBAB5;">
-                        <label for="room-images"
-                            style="height: 40px; width: 290px; background-color: #BCBAB5; text-align: center; display: flex; align-items: center; justify-content: center;">
-                            <span class="me-3"><i class="fa-solid fa-upload"></i></span> Tải lên thư mục ảnh phòng trọ
-                        </label>
-                    </button>
-                </div>
-                <div class="col-6">
+
+            <!-- Result: upload folder image -->
+            <div class="row">
+                <div class="col">
                     <div class="row border border-1 rounded" style="height: 350px; overflow-y: auto;" #imageFiles>
                         <div class="col-5 m-2 border border-1 rounded" style="height: 35px;"
                             *ngFor="let image of imageNames">{{image}}</div>
                     </div>
                 </div>
-                <input type="file" id="room-images" class="d-none" accept="image/*" (change)="onImagesChange($event)"
-                    webkitdirectory />
-            </div>
-        </div>
-    </div>
-    <div class="row"></div>
-</div>
-
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-</button>
-
-<!-- Modal for Instruction -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-scrollable modal-lg">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <div>lorem ipsum</div>
-                <div>lorem ipsum</div>
-                <div>lorem ipsum</div>
-                <div>lorem ipsum</div>
-                <div>lorem ipsum</div>
-                <div>lorem ipsum</div>
-                <div>lorem ipsum</div>
-                <div>lorem ipsum</div>
-                <div>lorem ipsum</div>
-                <div>lorem ipsum</div>
-                <div>lorem ipsum</div>
-                <div>lorem ipsum</div>
-                <div>lorem ipsum</div>
-                <div>lorem ipsum</div>
-                <div>lorem ipsum</div>
-                <div>lorem ipsum</div>
-                <div>lorem ipsum</div>
-                <div>lorem ipsum</div>
-                <div>lorem ipsum</div>
-                <div>lorem ipsum</div>
-                <div>lorem ipsum</div>
-                <div>lorem ipsum</div>
-                <div>lorem ipsum</div>
-                <div>lorem ipsum</div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
