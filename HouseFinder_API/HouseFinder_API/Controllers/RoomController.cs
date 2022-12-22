@@ -101,6 +101,7 @@ namespace HouseFinder_API.Controllers
                 return Ok(new { Status = 400 });
             }
         }
+
         [HttpPost("create")]
         public IActionResult CreateRoom(CreateRoomDTO room)
         {
