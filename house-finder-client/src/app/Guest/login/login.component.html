@@ -260,6 +260,10 @@
   text="Tài khoản của bạn chưa được phép đăng ký thông tin nhà trọ. Vui lòng đến cơ sở Đại học FPT gần nhất để làm thủ tục xác nhận tài khoản"
   icon="warning" [focusCancel]="true" (confirm)="navigate('/home')">
 </swal>
+<swal #landLordAccountRejectAlert title="Khóa tài khoản"
+  text="Rất tiếc, tài khoản của bạn không được phép đăng tải thông tin nhà trọ."
+  icon="warning" [focusCancel]="true" (confirm)="navigate('/home')">
+</swal>
 <swal #invalidEmailPasswordAlert title="Đăng nhập không hợp lệ" text="Email hoặc Password không hợp lệ" icon="error"
   [focusCancel]="true">
 </swal>

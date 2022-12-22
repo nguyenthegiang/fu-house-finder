@@ -109,6 +109,12 @@ namespace HouseFinder_API.Controllers
                     return Ok(new { Status = 201, User = user });
                 }
 
+                //Response: Landlord Signup Request rejected
+                if (user.StatusId == 3)
+                {
+                    return Ok(new { Status = 202, User = user });
+                }
+
                 //Response: Allow login
                 return Ok(new { Status = 200, User = user });
             }
