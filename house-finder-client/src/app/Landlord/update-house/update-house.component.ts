@@ -173,9 +173,16 @@ export class UpdateHouseComponent implements OnInit {
     //console.log(event.target.files[0].name);
     this.fileToUpload = event.target.files[0];
 
-    if (this.listImage) {
-      this.listImage[this.fileIndex].imageLink = event.target.files[0].name;
+    const reader = new FileReader();
+
+    
+    reader.onload = (e) => {
+      if (this.listImage) {
+        this.listImage[this.fileIndex].imageLink = reader.result!.toString();
+      }
     }
+    reader.readAsDataURL(event.target.files[0]);
+    
   }
 
   cancelChange(index: number) {
