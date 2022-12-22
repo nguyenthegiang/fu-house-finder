@@ -16,6 +16,12 @@ namespace HouseFinder_API.Controllers
     public class RoomController : ControllerBase
     {
         private IRoomRepository roomRepository = new RoomRepository();
+        private readonly IStorageRepository storageRepository;  //Injected from Startup
+
+        public RoomController(IStorageRepository storageRepository)
+        {
+            this.storageRepository = storageRepository;
+        }
 
         //GET: api/Rooms/getByHouseId?HouseId=
         [HttpGet("getByHouseId")]
@@ -47,18 +53,29 @@ namespace HouseFinder_API.Controllers
                 return NotFound();
             }
         }
-        //GET: api/Rooms/getByRoomId?RoomId=
+
+        /**
+         *  GET: api/Rooms/getByRoomId?RoomId=
+         *  [Guest - RoomDetail]
+         */
         [HttpGet("getByRoomId")]
-        public IActionResult GetRoomsByRoomId(int RoomId)
+        public IActionResult GetRoomById(int RoomId)
         {
-            RoomDTO roomsDTO = roomRepository.GetRoomByRoomId(RoomId);
-            if (roomsDTO == null)
+            RoomDTO roomDTO = roomRepository.GetRoomByRoomId(RoomId);
+
+            // Get imageLink from Amazon S3 Server
+            foreach (var img in roomDTO.ImagesOfRooms)
+            {
+                img.ImageLink = storageRepository.RetrieveFile(img.ImageLink);
+            }
+
+            if (roomDTO == null)
             {
                 return NotFound();
             }
             else
             {
-                return Ok(roomsDTO);
+                return Ok(roomDTO);
             }
         }
 
@@ -101,6 +118,7 @@ namespace HouseFinder_API.Controllers
                 return Ok(new { Status = 400 });
             }
         }
+
         [HttpPost("create")]
         public IActionResult CreateRoom(CreateRoomDTO room)
         {

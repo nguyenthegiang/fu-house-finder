@@ -12,23 +12,24 @@ import Swal from 'sweetalert2';
 })
 export class MultipleComponent implements OnInit {
 
-  file: File | any = {name: ""}; 
+  file: File | any = { name: "" };
   images: any;
   houseId: number | any;
   matProgressBarValue = 0;
   progressDisplay = false;
   imageNames: any;
-  @ViewChild('serverErrorAlert') private serverErrorAlert: SwalComponent | undefined;
+
+  // Alerts
+  // @ViewChild('serverErrorAlert') private serverErrorAlert: SwalComponent | undefined;
+  // @ViewChild('dataAndImageNotFound') private dataAndImageNotFound: SwalComponent | undefined;
   @ViewChild('uploadSuccess') private uploadSuccess: SwalComponent | undefined;
-  @ViewChild('dataAndImageNotFound') private dataAndImageNotFound: SwalComponent | undefined;
 
   constructor(private fileService: FileService) { }
 
   ngOnInit(): void {
-    this.serverErrorAlert?.fire;
   }
 
-  onTemplateChange(event: any){
+  onTemplateChange(event: any) {
     if (event.target.files[0].type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet') {
       this.file = event.target.files[0];
     }
@@ -36,12 +37,12 @@ export class MultipleComponent implements OnInit {
       this.toast(true, 'error', true, 'Lỗi dữ liệu', 'Không đúng định dạng file');
     }
   }
-  
-  onImagesChange(event: any){
+
+  onImagesChange(event: any) {
     this.images = event.target.files;
     this.imageNames = [];
-    for (var i=0; i<event.target.files.length; i++) {
-      if (!this.images[i].type.includes('image')){
+    for (var i = 0; i < event.target.files.length; i++) {
+      if (!this.images[i].type.includes('image')) {
         continue;
       }
       try {
@@ -63,7 +64,7 @@ export class MultipleComponent implements OnInit {
     };
   }
 
-  downloadTemplate(){
+  downloadTemplate() {
     this.fileService.downloadTemplateFile()
       .subscribe((response) => {
         const downloadLink = document.createElement('a');
@@ -76,28 +77,28 @@ export class MultipleComponent implements OnInit {
       });
   }
 
-  async uploadDataFile(houseId: number){
+  async uploadDataFile(houseId: number) {
     if (this.file instanceof File) {
       await this.fileService.uploadDataFile(this.file, houseId).toPromise()
-      .then(resp => {})
-      .catch(err => {});
+        .then(resp => { })
+        .catch(err => { });
     }
     else {
       await this.toast(true, 'error', true, 'Lỗi dữ liệu', 'Chưa chọn file data');
     }
   }
 
-  uploadImageFiles(houseId: number){
+  uploadImageFiles(houseId: number) {
     this.progressDisplay = true;
     var uploadData: Array<ImagesOfRoomUploadFileData> = [];
 
-    if (this.images == undefined){
+    if (this.images == undefined) {
       this.toast(true, 'error', true, 'Lỗi dữ liệu', 'Chưa chọn ảnh');
       return;
     }
-    
-    for (var i=0; i<this.images.length; i++) {
-      if (!this.images[i].type.includes('image')){
+
+    for (var i = 0; i < this.images.length; i++) {
+      if (!this.images[i].type.includes('image')) {
         continue;
       }
       try {
@@ -127,52 +128,54 @@ export class MultipleComponent implements OnInit {
     var error: Array<string> = [];
     var serverErr = false;
     var progress = 0;
-    uploadData.forEach((data: ImagesOfRoomUploadFileData) =>{
+    uploadData.forEach((data: ImagesOfRoomUploadFileData) => {
       this.fileService.uploadRoomImageFile(data.data, data.image).subscribe(async resp => {
         progress += 1;
         this.matProgressBarValue = progress / uploadData.length * 100;
         if (progress == uploadData.length) {
           this.progressDisplay = false;
-          if (serverErr){
+          if (serverErr) {
             await this.toast(true, 'error', true, 'Lỗi server');
           }
-          else if (error.length >0) {
+          else if (error.length > 0) {
             let errLog = error.join(', ');
             this.toast(true, 'error', true, 'Lỗi dữ liệu', 'Không tìm thấy thông tin phòng cho ảnh ' + errLog);
           }
           else {
-            this.toast(false, 'success', false, 'Thông tin trọ', 'Thông tin phòng của nhà trọ đã được upload', '');
+            // this.toast(false, 'success', false, 'Thông tin trọ', 'Thông tin phòng của nhà trọ đã được upload', '');
+            this.uploadSuccess?.fire();
           }
         }
       },
-      async err => {
-        if (err.status == 404){
-          error.push(data.image.name);
-          
-        }
-        else {
-          serverErr = true;
-        }
-        progress += 1;
-        this.matProgressBarValue = progress / uploadData.length * 100;
-        if (progress == uploadData.length) {
-          this.progressDisplay = false;
-          if (serverErr){
-            await this.toast(true, 'error', true, 'Lỗi server');
+        async err => {
+          if (err.status == 404) {
+            error.push(data.image.name);
           }
-          if (error.length >0) {
-            let errLog = error.join(', ');
-            this.toast(true, 'error', true, 'Lỗi dữ liệu', 'Không tìm thấy thông tin phòng cho ảnh ' + errLog);
+          else {
+            serverErr = true;
           }
-        }
-      });
+          progress += 1;
+          this.matProgressBarValue = progress / uploadData.length * 100;
+          if (progress == uploadData.length) {
+            this.progressDisplay = false;
+            if (serverErr) {
+              await this.toast(true, 'error', true, 'Lỗi server');
+            }
+            if (error.length > 0) {
+              let errLog = error.join(', ');
+              this.toast(true, 'error', true, 'Lỗi dữ liệu', 'Không tìm thấy thông tin phòng cho ảnh ' + errLog);
+            }
+          }
+        });
     });
     if (progress == uploadData.length) this.progressDisplay = false;
   }
-  async toast(toast: boolean = false, typeIcon: any = 'error', 
-      timerProgressBar: boolean = true, title: any = '', 
-      text: any = '', position: any = 'top-end',
-      confirmButton: boolean = true) {
+
+  // Create customized Alerts
+  async toast(toast: boolean = false, typeIcon: any = 'error',
+    timerProgressBar: boolean = true, title: any = '',
+    text: any = '', position: any = 'top-end',
+    confirmButton: boolean = true) {
     await Swal.fire({
       toast: toast,
       position: position,
@@ -185,4 +188,8 @@ export class MultipleComponent implements OnInit {
     })
   }
 
+  // Back to previous Page (House detail), used when upload successfully
+  backToPreviousPage() {
+    history.back();
+  }
 }
