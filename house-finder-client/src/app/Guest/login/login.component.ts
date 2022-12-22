@@ -26,6 +26,7 @@ export class LoginComponent implements OnInit {
   @ViewChild('invalidEmailPasswordAlert') private invalidEmailPasswordAlert: SwalComponent | undefined;
   @ViewChild('landLordAccountConfirmAlert') private landLordAccountConfirmAlert: SwalComponent | undefined;
   @ViewChild('landlordAccountCreatedAlert') private landlordAccountCreatedAlert: SwalComponent | undefined;
+  @ViewChild('landLordAccountRejectAlert') private landLordAccountRejectAlert: SwalComponent | undefined;
 
   login = true;
   frontImgSrc = '';
@@ -146,8 +147,15 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem('user', resp.user.displayName);
                 localStorage.setItem("role", resp.user.roleName);
 
-                //Login fail: Landlord not approved
+                //Login fail: Landlord sign up request pending
                 this.landLordAccountConfirmAlert?.fire();
+              }
+              else if (resp.status == 202) {
+                localStorage.setItem('user', resp.user.displayName);
+                localStorage.setItem("role", resp.user.roleName);
+
+                //Login fail: Landlord sign up request rejected
+                this.landLordAccountRejectAlert?.fire();
               }
               else if (resp.status == 403) {
                 //Login fail: Landlord disabled
@@ -209,6 +217,13 @@ export class LoginComponent implements OnInit {
           //Login fail: Landlord not approved
           this.landLordAccountConfirmAlert?.fire();
         }
+        else if (resp.status == 202) {
+          localStorage.setItem('user', resp.user.displayName);
+          localStorage.setItem("role", resp.user.roleName);
+
+          //Login fail: Landlord sign up request rejected
+          this.landLordAccountRejectAlert?.fire();
+        }
         else if (resp.status == 403) {
           //Login fail: Landlord disabled
           this.landLordAccountLockedAlert?.fire();
@@ -239,8 +254,8 @@ export class LoginComponent implements OnInit {
       this.loginForm.controls['password'].value == null ||
       this.loginForm.controls['username'].value.trim() == "" ||
       this.loginForm.controls['password'].value.trim() == "") {
-        this.invalidEmailPasswordAlert?.fire();
-        return;
+      this.invalidEmailPasswordAlert?.fire();
+      return;
     }
 
     //Call API
