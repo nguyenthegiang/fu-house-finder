@@ -27,6 +27,7 @@ namespace Repositories.Repositories
             house.WaterPrice = houseDTO.WaterPrice;
             house.FingerprintLock = houseDTO.FingerprintLock;
             house.Parking = houseDTO.Parking;
+            house.Camera = houseDTO.Camera;
             house.DistanceToCampus = houseDTO.DistanceToCampus;
             house.View = 0;
             house.Deleted = false;
@@ -49,7 +50,20 @@ namespace Repositories.Repositories
         public int CountAvailableHouse() => HouseDAO.CountAvailableHouse();
         public List<AvailableHouseDTO> GetAvailableHouses() => HouseDAO.GetAvailableHouses();
 
-        public void UpdateHouseByHouseId(House house) => HouseDAO.UpdateHouseByHouseId(house);
+        public void UpdateHouseByHouseId(UpdateHouseDTO houseDTO) {
+            House house = new House();
+            house.HouseName = houseDTO.HouseName;
+            house.Information = houseDTO.Information;
+            house.VillageId = houseDTO.VillageId;
+            house.CampusId = houseDTO.CampusId;
+            house.PowerPrice = houseDTO.PowerPrice;
+            house.WaterPrice = houseDTO.WaterPrice;
+            house.FingerprintLock = houseDTO.FingerprintLock;
+            house.Parking = houseDTO.Parking;
+            house.LastModifiedDate = DateTime.Now;
+            house.LastModifiedBy = houseDTO.ModifiedBy;
+            HouseDAO.UpdateHouseByHouseId(house); 
+        }
 
         public void DeleteHouseByHouseId(int houseId) => HouseDAO.DeleteHouseByHouseId(houseId);
 

@@ -35,5 +35,40 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
         }
+
+        public static void UpdateAddress(Address address)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    context.Addresses.Update(address);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        public static AddressDTO GetAddressByAddressId(int AddressId)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    var mapper = config.CreateMapper();
+                    var address = context.Addresses.Where(a => a.AddressId == AddressId).FirstOrDefault();
+                    context.SaveChanges();
+                    return mapper.Map<AddressDTO>(address);
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

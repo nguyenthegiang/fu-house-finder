@@ -8,6 +8,8 @@ import { Commune } from 'src/app/models/commune';
 import { Village } from 'src/app/models/village';
 import { District } from 'src/app/models/district';
 import { ImagesOfHouse } from 'src/app/models/imagesOfHouse';
+import { FileService } from 'src/app/services/file.service';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-update-house',
@@ -28,15 +30,31 @@ export class UpdateHouseComponent implements OnInit {
   selectedCommuneId: number | undefined;    //(filter by Region)
   selectedVillageId: number | undefined;    //(filter by Region)
 
-  fileToUpload: File | null = null;
+  fileToUpload: { [imageId: string]: any} = {};
   fileIndex: number = 0;
   listImage: ImagesOfHouse[] | undefined;
   imageLink: string = '';
+  imageChangedId: Number[] = []; 
+
+  houseForm = this.formBuilder.group({
+    houseName: ['', Validators.required],
+    campus: [, Validators.required],
+    village: [, Validators.required],
+    address: ['', Validators.required],
+    powerPrice: [, Validators.required],
+    waterPrice: [, Validators.required],
+    fingerprint: [false],
+    camera: [false],
+    parking: [false],
+    info: [, Validators.required],
+  });
 
   constructor(private houseService: HouseService,
     private campusService: CampusService,
+    private fileService: FileService,
     private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router,
+    private formBuilder: FormBuilder) { }
 
   ngOnInit(): void {
     /**
@@ -51,39 +69,31 @@ export class UpdateHouseComponent implements OnInit {
     //Get id of House from Route
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
-    this.houseService.getHouseByHouseId(id).subscribe(data => {
-      this.houseDetail = data;
-      this.listImage = data.imagesOfHouses;
+    this.houseService.getHouseByHouseId(id).subscribe(resp => {
+      this.houseDetail = resp;
+      this.houseForm.controls["houseName"].setValue(resp.houseName);
+      this.houseForm.controls["address"].setValue(resp.address.addresses);
+      this.houseForm.controls["powerPrice"].setValue(resp.powerPrice);
+      this.houseForm.controls["waterPrice"].setValue(resp.waterPrice);
+      this.houseForm.controls["fingerprint"].setValue(resp.fingerprintLock);
+      this.houseForm.controls["camera"].setValue(resp.camera);
+      this.houseForm.controls["parking"].setValue(resp.parking);
+      this.houseForm.controls["info"].setValue(resp.information);
+      this.listImage = resp.imagesOfHouses;
 
       //(Filter) Get all Campuses (with their Districts, Communes, Villages)
-      this.campusService.getAllCampuses().subscribe(data => {
-        this.campuses = data;
-
-        // find the campus
-        this.campuses.forEach((campus) => {
-          // assign the list of Commune as the communes of this District
-          if (campus.campusId == this.houseDetail?.campusId) {
-            this.districtsOfSelectedCampus = campus.districts;
-
-            // find the district
-            this.districtsOfSelectedCampus.forEach((district) => {
-              console.log(this.houseDetail?.districtId);
-              // assign the list of Commune as the communes of this District
-              if (district.districtId == this.houseDetail?.districtId) {
-                this.communesOfSelectedDistrict = district.communes;
-
-                // find the selected commune
-                this.communesOfSelectedDistrict.forEach((commune) => {
-                  // assign the list of Villages as the villages of this Commune
-                  if (commune.communeId == this.houseDetail?.communeId) {
-                    this.villagesOfSelectedCommune = commune.villages;
-                  }
-                });
-              }
-            });
-          }
+      let campus_data = localStorage.getItem("campuses");
+      if (campus_data) {
+        this.campuses = JSON.parse(campus_data);
+        this.loadVillage();
+      }
+      else {
+        this.campusService.getAllCampuses().subscribe(data => {
+          this.campuses = data;
+          localStorage.campuses = JSON.stringify(data);
+          this.loadVillage();
         });
-      });
+      }      
     });
   }
 
@@ -161,6 +171,37 @@ export class UpdateHouseComponent implements OnInit {
     this.selectedVillageId = numberVillageId;
   }
 
+  loadVillage(){
+    // find the campus
+    this.campuses.forEach((campus) => {
+      // assign the list of Commune as the communes of this District
+      if (campus.campusId == this.houseDetail?.campusId) {
+        this.districtsOfSelectedCampus = campus.districts;
+        this.houseForm.controls["campus"].setValue(this.houseDetail?.campusId);
+
+        // find the district
+        this.districtsOfSelectedCampus.forEach((district) => {
+          // assign the list of Commune as the communes of this District
+          if (district.districtId == this.houseDetail?.districtId) {
+            this.communesOfSelectedDistrict = district.communes;
+
+            // find the selected commune
+            this.communesOfSelectedDistrict.forEach((commune) => {
+              // assign the list of Villages as the villages of this Commune
+              if (commune.communeId == this.houseDetail?.communeId) {
+                this.villagesOfSelectedCommune = commune.villages;
+                this.houseForm.controls["village"].setValue(this.houseDetail?.villageId);
+                return;
+              }
+            });
+            return;
+          }
+        });
+        return;
+      }
+    });
+  }
+
   getImageId(index: number) {
     this.fileIndex = index;
 
@@ -171,18 +212,23 @@ export class UpdateHouseComponent implements OnInit {
 
   onFilechange(event: any) {
     //console.log(event.target.files[0].name);
-    this.fileToUpload = event.target.files[0];
 
     const reader = new FileReader();
-
     
     reader.onload = (e) => {
       if (this.listImage) {
-        this.listImage[this.fileIndex].imageLink = reader.result!.toString();
+        let img = this.listImage[this.fileIndex];
+        img.imageLink = reader.result!.toString();
+        
+        if (this.imageChangedId.find(i => i == img.imageId) === undefined){
+          this.imageChangedId.push(img.imageId);
+        }
+
+        this.fileToUpload[`${img.imageId}`] = event.target.files[0];
+        console.log(this.fileToUpload);
       }
     }
     reader.readAsDataURL(event.target.files[0]);
-    
   }
 
   cancelChange(index: number) {
@@ -195,7 +241,20 @@ export class UpdateHouseComponent implements OnInit {
     window.location.reload();
   }
 
-  logout() {
-    window.location.href = "/login";
+  updateHouse() {
+    console.log("updated");
+    this.houseService.updateHouse(
+      Number(this.route.snapshot.paramMap.get('id')), 
+      this.houseForm.controls["houseName"].value,
+      this.houseForm.controls["info"].value,
+      this.houseForm.controls["address"].value,
+      this.houseForm.controls["village"].value,
+      this.houseForm.controls["campus"].value,
+      this.houseForm.controls["powerPrice"].value,
+      this.houseForm.controls["waterPrice"].value,
+      this.houseForm.controls["fingerprint"].value,
+      this.houseForm.controls["camera"].value,
+      this.houseForm.controls["parking"].value
+    ).subscribe(resp => {}, err => {})
   }
 }
