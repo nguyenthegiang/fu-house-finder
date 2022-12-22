@@ -1,6 +1,7 @@
 <app-landlord-header></app-landlord-header>
 
 <div class="ms-5 me-5 mt-2">
+    <!-- Tabs -->
     <div class="row">
         <div class="col-12">
             <ul class="nav nav-tabs" role="tablist">
@@ -21,10 +22,14 @@
             </div>
         </div>
     </div>
-    <div class="row d-flex justify-content-end p-0">
-        <button class="border-0 m-3 form-control" style="height: 50px; width: 300px; background-color: #BCBAB5;" (click)="submitForm()">
-            Thêm mới
-        </button>
+
+    <!-- Submit button -->
+    <div class="row d-flex justify-content-end p-0 my-2">
+        <div class="col-2">
+            <button type="button" class="btn btn-secondary btn-lg form-control" (click)="submitForm()">
+                Thêm mới
+            </button>
+        </div>
     </div>
 </div>
 <!-- <app-footer></app-footer> -->
