@@ -5,7 +5,8 @@
                 <div class="col-6">
                     <button class="border-0 m-0 form-control"
                         style="height: 50px; width: 300px; background-color: #BCBAB5;" (click)="downloadTemplate()">
-                        <span class="me-3"><i class="fa-solid fa-download"></i></span> Tải xuống mẫu điền thông tin phòng trọ
+                        <span class="me-3"><i class="fa-solid fa-download"></i></span> Tải xuống mẫu điền thông tin
+                        phòng trọ
                     </button>
                 </div>
                 <div class="col-6 d-flex align-items-end" [ngClass]="{'d-none' : !progressDisplay}">
@@ -51,6 +52,54 @@
     <div class="row"></div>
 </div>
 
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+</button>
+
+<!-- Modal for Instruction -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div>lorem ipsum</div>
+                <div>lorem ipsum</div>
+                <div>lorem ipsum</div>
+                <div>lorem ipsum</div>
+                <div>lorem ipsum</div>
+                <div>lorem ipsum</div>
+                <div>lorem ipsum</div>
+                <div>lorem ipsum</div>
+                <div>lorem ipsum</div>
+                <div>lorem ipsum</div>
+                <div>lorem ipsum</div>
+                <div>lorem ipsum</div>
+                <div>lorem ipsum</div>
+                <div>lorem ipsum</div>
+                <div>lorem ipsum</div>
+                <div>lorem ipsum</div>
+                <div>lorem ipsum</div>
+                <div>lorem ipsum</div>
+                <div>lorem ipsum</div>
+                <div>lorem ipsum</div>
+                <div>lorem ipsum</div>
+                <div>lorem ipsum</div>
+                <div>lorem ipsum</div>
+                <div>lorem ipsum</div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Alerts -->
 <!-- <swal #serverErrorAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true" title="Lỗi Server"
     icon="error">
@@ -61,7 +110,6 @@
 <swal #uploadSuccess title="Upload thành công" text="Bạn đã upload thành công thông tin nhà trọ!" icon="success"
     [focusCancel]="true">
 </swal> -->
-<swal #uploadSuccess title="Đăng tải thành công"
-  text="Bạn đã đăng tải thông tin phòng trọ thành công."
-  icon="success" [focusCancel]="true" (confirm)="backToPreviousPage()">
+<swal #uploadSuccess title="Đăng tải thành công" text="Bạn đã đăng tải thông tin phòng trọ thành công." icon="success"
+    [focusCancel]="true" (confirm)="backToPreviousPage()">
 </swal>
