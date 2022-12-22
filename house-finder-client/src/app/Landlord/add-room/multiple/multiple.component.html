@@ -1,7 +1,7 @@
 <div class="container-fluid p-3">
     <div class="row">
         <!-- Action Buttons & Instructions -->
-        <div class="col-6">
+        <div class="col-7">
             <!-- Action Buttons -->
             <div class="row">
                 <div class="col-3">
@@ -10,7 +10,7 @@
                     <div class="row">
                         <!-- Download template -->
                         <div class="row my-2">
-                            <button type="button" class="btn btn-secondary form-control p-3"
+                            <button type="button" class="btn btn-secondary btn-lg form-control"
                                 (click)="downloadTemplate()">
                                 <span class="me-3"><i class="fa-solid fa-download"></i></span>
                                 Tải xuống mẫu điền thông tin phòng trọ
@@ -19,7 +19,7 @@
 
                         <!-- Upload excel file -->
                         <div class="row my-2">
-                            <button type="button" class="btn btn-secondary form-control p-3">
+                            <button type="button" class="btn btn-secondary btn-lg form-control">
                                 <label for="room-data-file">
                                     <span class="me-3"><i class="fa-solid fa-upload"></i></span>
                                     Tải lên thông tin phòng trọ
@@ -31,7 +31,7 @@
 
                         <!-- Upload image folder -->
                         <div class="row my-2">
-                            <button type="button" class="btn btn-secondary form-control p-3">
+                            <button type="button" class="btn btn-secondary btn-lg form-control">
                                 <label for="room-images">
                                     <span class="me-3"><i class="fa-solid fa-upload"></i></span>
                                     Tải lên thư mục ảnh phòng trọ
@@ -85,25 +85,26 @@
         </div>
 
         <!-- Result boxes -->
-        <div class="col-6">
+        <div class="col-5">
             <!-- Progress bar -->
-            <div class="row">
+            <div class="row my-2">
                 <div class="col" [ngClass]="{'invisible' : !progressDisplay}">
-                    <mat-progress-bar class="row mt-3" style="height: 10px;" mode="determinate"
+                    <mat-progress-bar class="row mt-3" id="resultProgressBar" mode="determinate"
                         [value]="matProgressBarValue"></mat-progress-bar>
                 </div>
             </div>
 
             <!-- Result: upload file -->
-            <div class="row">
-                <div class="col border border-1 rounded" style="height: 100px;" #templateFile>{{file.name}}</div>
+            <div class="row my-2">
+                <div class="col border border-1 rounded" id="resultUploadFile" #templateFile>{{file.name}}</div>
             </div>
 
             <!-- Result: upload folder image -->
-            <div class="row">
+            <div class="row my-2">
                 <div class="col">
-                    <div class="row border border-1 rounded" style="height: 350px; overflow-y: auto;" #imageFiles>
-                        <div class="col-5 m-2 border border-1 rounded" style="height: 35px;"
+                    <div class="row border border-1 rounded" id="resultUploadFolder" #imageFiles>
+                        <!-- Image item -->
+                        <div class="col-5 m-2 border border-1 rounded" id="resultImageItem"
                             *ngFor="let image of imageNames">{{image}}</div>
                     </div>
                 </div>
