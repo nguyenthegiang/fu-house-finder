@@ -114,6 +114,16 @@ export class AddHouseComponent implements OnInit {
     this.campusService.getAllCampuses().subscribe(data => {
       this.campuses = data;
     });
+
+    let campus_data = localStorage.getItem("campuses");
+    if (campus_data) {
+      this.campuses = JSON.parse(campus_data);
+    }
+    else {
+      this.campusService.getAllCampuses().subscribe(data => {
+        this.campuses = data;
+      });
+    }
   }
 
   async addHouse() {
@@ -360,5 +370,4 @@ export class AddHouseComponent implements OnInit {
     this.selectedVillageId = numberVillageId;
 
   }
-
 }

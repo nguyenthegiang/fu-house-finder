@@ -22,7 +22,7 @@ namespace Repositories.IRepository
         public int CountAvailableHouse();
         public List<AvailableHouseDTO> GetAvailableHouses();
 
-        public void UpdateHouseByHouseId(House house);
+        public void UpdateHouseByHouseId(UpdateHouseDTO house);
 
         public void DeleteHouseByHouseId(int houseId);
         public List<ReportHouseDTO> GetListReportHouse();

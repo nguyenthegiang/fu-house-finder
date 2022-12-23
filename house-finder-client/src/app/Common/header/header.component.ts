@@ -36,8 +36,8 @@ export class HeaderComponent implements OnInit {
 
   //Log out of systen
   logout() {
-    localStorage.clear();
-    sessionStorage.clear();
+    localStorage.removeItem("user");
+    localStorage.removeItem("role");
     this.userService.logout().subscribe(resp => {
       window.location.reload();
     },
