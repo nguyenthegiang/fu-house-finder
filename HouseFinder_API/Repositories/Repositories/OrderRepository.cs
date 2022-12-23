@@ -30,5 +30,7 @@ namespace Repositories.Repositories
         public int[] CountSolvedOrderByMonth() => OrderDAO.CountSolvedOrderByMonth();
 
         public int CountOrderSolvedByStaffInADay(DateTime date, string account) => OrderDAO.CountOrderSolvedByStaffInADay(date, account);
+
+        public List<Order> getListOrderNotconfirm(string uId) => OrderDAO.getListOrderNotconfirm(uId); 
     }
 }
