@@ -1,5 +1,5 @@
 import { HouseService } from 'src/app/services/house.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { House } from 'src/app/models/house';
 import { Campus } from 'src/app/models/campus';
@@ -10,6 +10,7 @@ import { District } from 'src/app/models/district';
 import { ImagesOfHouse } from 'src/app/models/imagesOfHouse';
 import { FileService } from 'src/app/services/file.service';
 import { FormBuilder, Validators } from '@angular/forms';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
 @Component({
   selector: 'app-update-house',
@@ -17,6 +18,9 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./update-house.component.scss']
 })
 export class UpdateHouseComponent implements OnInit {
+  @ViewChild('successAlert') private successAlert: SwalComponent | undefined;
+  @ViewChild('serverErrorAlert') private serverErrorAlert: SwalComponent | undefined;
+  @ViewChild('forbiddenAlert') private forbiddenAlert: SwalComponent | undefined;
   //Detail information of this House
   houseDetail: House | undefined;
 
@@ -225,7 +229,6 @@ export class UpdateHouseComponent implements OnInit {
         }
 
         this.fileToUpload[`${img.imageId}`] = event.target.files[0];
-        console.log(this.fileToUpload);
       }
     }
     reader.readAsDataURL(event.target.files[0]);
@@ -242,9 +245,9 @@ export class UpdateHouseComponent implements OnInit {
   }
 
   updateHouse() {
-    console.log("updated");
+    let houseId = Number(this.route.snapshot.paramMap.get('id'))
     this.houseService.updateHouse(
-      Number(this.route.snapshot.paramMap.get('id')), 
+      houseId, 
       this.houseForm.controls["houseName"].value,
       this.houseForm.controls["info"].value,
       this.houseForm.controls["address"].value,
@@ -255,6 +258,41 @@ export class UpdateHouseComponent implements OnInit {
       this.houseForm.controls["fingerprint"].value,
       this.houseForm.controls["camera"].value,
       this.houseForm.controls["parking"].value
-    ).subscribe(resp => {}, err => {})
+    ).subscribe(
+      resp => {
+        let count = 0;
+        if (Object.keys(this.fileToUpload).length == 0) {
+          this.successAlert?.fire();
+        }
+        for (let key in this.fileToUpload){
+          this.fileService.updateHouseImageFile(this.fileToUpload[key], houseId, Number(key)).subscribe(
+            resp => {
+              count++;
+              if (count == Object.keys(this.fileToUpload).length){
+                this.successAlert?.fire();
+              }
+            },
+            err => {
+              count++;
+              if (count == Object.keys(this.fileToUpload).length){
+                this.serverErrorAlert?.fire();
+              }
+            }
+          );
+        }
+      }, 
+      err => {
+        if (err.status == 401 || err.status == 403){
+          this.forbiddenAlert?.fire();
+        }
+        else {
+          this.serverErrorAlert?.fire();
+        }
+      }
+    )
+  }
+  
+  backDashboard(){
+    this.router.navigate(["/Landlord/dashboard"]);
   }
 }
