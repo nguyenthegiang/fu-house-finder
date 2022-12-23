@@ -6,13 +6,15 @@
   <form class="row w-100 d-flex flex-column align-items-center needs-validation" novalidate *ngIf="landlordDetail">
     <div class="col-12 col-md-5 mb-3">
       <label for="exampleInput1" class="form-label"><b>Họ và tên</b></label>
-      <input type="text" class="form-control" [(ngModel)]="updateName" placeholder="Nhập họ và tên" id="exampleInput1" required>
+      <input type="text" class="form-control" name="name" [(ngModel)]="updateName" placeholder="Nhập họ và tên"
+        id="exampleInput1" required>
       <div class="invalid-feedback mb-3">Không được để trống</div>
     </div>
 
     <div class="col-12 col-md-5 mb-3">
       <label for="exampleInput1" class="form-label"><b>Email</b></label>
-      <input type="email" class="form-control" [(ngModel)]="updateEmail" placeholder="Nhập email" id="exampleInput1" required>
+      <input type="email" class="form-control" name="email" [(ngModel)]="updateEmail" placeholder="Nhập email"
+        id="exampleInput1" required>
       <div class="invalid-feedback mb-3">Không được để trống</div>
     </div>
 
