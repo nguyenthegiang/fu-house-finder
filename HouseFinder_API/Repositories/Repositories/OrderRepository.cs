@@ -31,6 +31,6 @@ namespace Repositories.Repositories
 
         public int CountOrderSolvedByStaffInADay(DateTime date, string account) => OrderDAO.CountOrderSolvedByStaffInADay(date, account);
 
-        public List<Order> getListOrderNotconfirm(string uId) => OrderDAO.getListOrderNotconfirm(uId); 
+        public List<OrderDTO> GetListOrderNotConfirm(string studentId) => OrderDAO.GetListOrderNotConfirm(studentId); 
     }
 }

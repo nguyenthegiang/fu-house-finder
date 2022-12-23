@@ -196,25 +196,25 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
         }
-        
+
         public static void UpdateOrderStatus(int orderId, int statusId, string account)
         {
             try
             {
-                using(var context = new FUHouseFinderContext())
+                using (var context = new FUHouseFinderContext())
                 {
                     Order updateOrder = context.Orders.FirstOrDefault(o => o.OrderId == orderId);
-                    if(updateOrder == null)
+                    if (updateOrder == null)
                     {
                         throw new Exception();
                     }
                     //Check status id
-                    if(statusId == 1)
+                    if (statusId == 1)
                     {
                         updateOrder.SolvedDate = null;
                         updateOrder.SolvedBy = null;
                     }
-                    else if(statusId == 2)
+                    else if (statusId == 2)
                     {
                         updateOrder.SolvedDate = null;
                         updateOrder.SolvedBy = account;
@@ -343,16 +343,26 @@ namespace DataAccess
             }
             return total;
         }
-        public static List<Order> getListOrderNotConfirm(string uId)
+
+        /**
+         * [Student - Home Page]
+         * Get list of orders of this student for him to confirm it's been resolved
+         */
+        public static List<OrderDTO> GetListOrderNotConfirm(string studentId)
         {
-            List<Order> orders;
+            List<OrderDTO> orders = new List<OrderDTO>();
             try
             {
                 using (var context = new FUHouseFinderContext())
                 {
-                    orders = context.Orders.Where(o => o.Status.StatusId == 2).ToList();
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    orders = context.Orders
+                        .Where(o => o.Status.StatusId == 2 && o.StudentId == studentId)
+                        .ProjectTo<OrderDTO>(config).ToList();
                 }
-            }catch(Exception e)
+            }
+            catch (Exception e)
             {
                 throw new Exception(e.Message);
             }
@@ -360,5 +370,5 @@ namespace DataAccess
         }
 
     }
-   
+
 }
