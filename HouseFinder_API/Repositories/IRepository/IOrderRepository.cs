@@ -21,7 +21,7 @@ namespace Repositories.IRepository
         public int[] CountTotalOrderByMonth();
         public int[] CountSolvedOrderByMonth();
         public int CountOrderSolvedByStaffInADay(DateTime date, string account);
-        public List<Order> getListOrderNotConfirm(string uId);
+        public List<OrderDTO> GetListOrderNotConfirm(string studentId);
 
     }
 }
