@@ -51,6 +51,7 @@ export class LandlordUpdateProfileComponent implements OnInit {
           if (data.status == 403) {
             this.updateErrorAlert?.fire();
           } else if (data.status == 200) {
+            localStorage.setItem('user', this.updateName);
             this.updateSuccessAlert?.fire();
             window.location.reload();
           }

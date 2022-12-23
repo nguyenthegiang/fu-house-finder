@@ -158,5 +158,24 @@ namespace HouseFinder_API.Controllers
             }
             return Ok(orderRepository.CountOrderSolvedByStaffInADay(date, uid));
         }
+        [HttpGet("getListOrderNotConfirm")]
+        public IActionResult GetListOrderNotconfirm()
+        {
+            try
+            {
+                //Get UserId
+                string uid = HttpContext.Session.GetString("User");
+                if (uid == null)
+                {
+                    //user not logged in => throw error for alert
+                    return Ok(new { Status = 403 });
+                }
+                return Ok(orderRepository.getListOrderNotConfirm(uid));
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
     }
 }
