@@ -136,3 +136,17 @@
     </div>
   </form>
 </div>
+<swal #successAlert title="Cập nhật thành công"
+text="Bạn có muốn trở về dashboard?"
+icon="question"
+[showCancelButton]="true"
+[focusCancel]="true"
+(confirm)="backDashboard()"
+>
+</swal>
+<swal #serverErrorAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true" title="Lỗi Server"
+  icon="error">
+</swal>
+<swal #forbiddenAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true" title="Không có quyền chỉnh sửa"
+  icon="error">
+</swal>

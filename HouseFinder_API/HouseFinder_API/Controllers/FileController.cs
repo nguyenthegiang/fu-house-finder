@@ -177,7 +177,7 @@ namespace HouseFinder_API.Controllers
             }
             string dir = $"user/{uid}/House/{Room.HouseId}/{roomDTO.RoomId}";
             List<ImagesOfRoom> images = new List<ImagesOfRoom>();
-            var path = $"{dir}/{File.FileName}";
+            var path = $"{dir}/{DateTime.Now}_{File.FileName}";
             Stream fs = File.OpenReadStream();
             await storageRepository.UploadFileAsync(path, fs);
             ImagesOfRoom image = new ImagesOfRoom();
@@ -202,7 +202,7 @@ namespace HouseFinder_API.Controllers
             }
             string dir = $"user/{uid}/House/{roomDTO.HouseId}/{RoomId}";
             List<ImagesOfRoom> images = new List<ImagesOfRoom>();
-            var path = $"{dir}/{File.FileName}";
+            var path = $"{dir}/{DateTime.Now}_{File.FileName}";
             Stream fs = File.OpenReadStream();
             await storageRepository.UploadFileAsync(path, fs);
             ImagesOfRoom image = new ImagesOfRoom();
@@ -310,7 +310,7 @@ namespace HouseFinder_API.Controllers
             ImagesOfHouseDTO img = new ImagesOfHouseDTO();
             img.ImageId = ImageId;
             img.ImageLink = path;
-            houseImageRepository.CreateHouseImage(img, uid);
+            houseImageRepository.UpdateHouseImage(img, uid);
             return Ok();
         }
     }
