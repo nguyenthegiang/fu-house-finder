@@ -343,6 +343,21 @@ namespace DataAccess
             }
             return total;
         }
+        public static List<Order> getListOrderNotConfirm(string uId)
+        {
+            List<Order> orders;
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    orders = context.Orders.Where(o => o.Status.StatusId == 1).ToList();
+                }
+            }catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+            return orders;
+        }
 
     }
    
