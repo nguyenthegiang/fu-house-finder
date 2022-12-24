@@ -7,22 +7,28 @@ using DataAccess.DTO;
 using HouseFinder_API.Controllers;
 using Microsoft.AspNetCore.Mvc;
 using NUnit.Framework;
-using System.Collections.Generic;
-using System.Linq;
 using System.Transactions;
 using FluentAssertions;
+using Repositories.IRepository;
+using Repositories.Repositories;
 
 namespace HouseFinder.Test
 {
     [TestFixture]
     public class RoomControllerTest
     {
-       
         private TransactionScope scope;
+
+        //For Injection to Controller
+        private IStorageRepository storageRepository;
+
         [SetUp]
         public void Setup()
         {
             scope = new TransactionScope();     //create scope
+
+            //Set up for Injection to Controller
+            storageRepository = new StorageRepository("", "", "");
         }
 
         [TearDown]
@@ -30,14 +36,13 @@ namespace HouseFinder.Test
         {
             scope.Dispose();                    //dispose scope
         }
-        #region GetAvailableRoomsByHouseId
 
-        
+        #region GetAvailableRoomsByHouseId
         [Test]
         public void GetAvailableRoomsByHouseId_Returns_ActionResult()
         {
             //ARRANGE
-            var roomController = new RoomController();
+            var roomController = new RoomController(storageRepository);
             int houseId = 1;
             //ACT
             var data = roomController.GetAvailableRoomsByHouseId(houseId);
@@ -51,7 +56,7 @@ namespace HouseFinder.Test
         public void GetListRoomByHouseId_InvalidId_Returns_NotFoundResult(int HouseId)
         {
             //ARRANGE
-            var roomController = new RoomController();
+            var roomController = new RoomController(storageRepository);
 
             //ACT
             var data = roomController.GetAvailableRoomsByHouseId(HouseId);
@@ -68,7 +73,7 @@ namespace HouseFinder.Test
         public void GetAvailableRoomsByHouseId_ValidId_MatchResult()
         {
             //ARRANGE
-            var roomController = new RoomController();
+            var roomController = new RoomController(storageRepository);
             int houseId = 1;
             //ACT
 
@@ -88,12 +93,14 @@ namespace HouseFinder.Test
         }
 
         #endregion GetAvailableRoomsByHouseId
+
         #region GetRoomsByHouseId
+
         [Test]
         public void GetRoomsByHouseId_Returns_ActionResult()
         {
             //ARRANGE
-            var roomController = new RoomController();
+            var roomController = new RoomController(storageRepository);
             int roomId = 1;
             //ACT
             var data = roomController.GetAvailableRoomsByHouseId(roomId);
@@ -106,7 +113,7 @@ namespace HouseFinder.Test
         public void RoomsByHouseId_ValidId_MatchResult()
         {
             //ARRANGE
-            var roomController = new RoomController();
+            var roomController = new RoomController(storageRepository);
             int houseId = 1;
             //ACT
 
@@ -123,6 +130,7 @@ namespace HouseFinder.Test
             Assert.AreEqual("101", results[0].RoomName);
 
         }
+
         #endregion GetRoomsByHouseId
     }
 }
