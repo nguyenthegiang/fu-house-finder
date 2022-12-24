@@ -91,25 +91,24 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let dataItem of houses; let i=index;" (click)="viewHouse(dataItem.houseId)"
-              style="cursor: pointer;">
-              <td id="md"><b>{{i+1}}</b></td>
+            <tr *ngFor="let dataItem of houses; let i=index;" style="cursor: pointer;">
+              <td id="md" (click)="viewHouse(dataItem.houseId)"><b>{{i+1}}</b></td>
 
               <!-- House name -->
-              <td>{{dataItem.houseName}}</td>
+              <td (click)="viewHouse(dataItem.houseId)">{{dataItem.houseName}}</td>
 
               <!-- Money not for rented rooms -->
-              <td id="md">
+              <td id="md" (click)="viewHouse(dataItem.houseId)">
                 <app-dashboard-info [houseId]="dataItem.houseId"></app-dashboard-info>
               </td>
 
               <!-- Statistics -->
-              <td id="md">
+              <td id="md" (click)="viewHouse(dataItem.houseId)">
                 <app-list-house-info [houseId]="dataItem.houseId"></app-list-house-info>
               </td>
 
               <!-- Utilities -->
-              <td id="md">
+              <td id="md" (click)="viewHouse(dataItem.houseId)">
                 <div class="d-flex">
                   <div
                     *ngIf="dataItem.fingerprintLock == false && dataItem.camera == false && dataItem.parking == false">
