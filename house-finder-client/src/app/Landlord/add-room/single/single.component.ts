@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { FileService } from 'src/app/services/file.service';
 import { RoomService } from 'src/app/services/room.service';
@@ -59,6 +59,7 @@ export class SingleComponent implements OnInit {
     private fileService: FileService,
     private formBuilder: FormBuilder,
     private router: Router,
+    private route: ActivatedRoute,
   ){ 
     
   }
@@ -225,6 +226,7 @@ export class SingleComponent implements OnInit {
     })
   }
   navDashboard() {
-    this.router.navigate(['/Landlord/dashboard']);
+    var houseId = Number(this.route.snapshot.queryParamMap.get('houseId'));
+    this.router.navigate(['/Landlord/landlord-house-detail/' + houseId]);
   }
 }
