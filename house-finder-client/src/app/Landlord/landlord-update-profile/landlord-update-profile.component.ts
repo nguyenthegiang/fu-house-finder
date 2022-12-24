@@ -12,7 +12,8 @@ export class LandlordUpdateProfileComponent implements OnInit {
   landlordDetail: User | undefined;
   landlordId: string = "";
   updateName: string = "";
-  updateEmail: string = "";
+  updatePhoneNumber: string = "";
+  updateFacebookUrl: string = "";
 
   @ViewChild('updateSuccessAlert') private updateSuccessAlert: SwalComponent | undefined;
   @ViewChild('updateErrorAlert') private updateErrorAlert: SwalComponent | undefined;
@@ -33,7 +34,8 @@ export class LandlordUpdateProfileComponent implements OnInit {
       this.landlordDetail = data;
       this.landlordId = this.landlordDetail.userId;
       this.updateName = this.landlordDetail.displayName;
-      this.updateEmail = this.landlordDetail.email;
+      this.updatePhoneNumber = this.landlordDetail.phoneNumber;
+      this.updateFacebookUrl = this.landlordDetail.facebookUrl;
     });
   }
 
@@ -46,14 +48,13 @@ export class LandlordUpdateProfileComponent implements OnInit {
       this.updateErrorAlert?.fire();
     } else {
       //Check user logged in from Server => if not => alert
-      this.userService.updateProfile(this.landlordId, this.updateName, this.updateEmail).subscribe(
+      this.userService.landlordUpdateProfile(this.landlordId, this.updateName, this.updatePhoneNumber, this.updateFacebookUrl).subscribe(
         data => {
           if (data.status == 403) {
             this.updateErrorAlert?.fire();
           } else if (data.status == 200) {
             localStorage.setItem('user', this.updateName);
             this.updateSuccessAlert?.fire();
-            window.location.reload();
           }
         },
         error => { }
