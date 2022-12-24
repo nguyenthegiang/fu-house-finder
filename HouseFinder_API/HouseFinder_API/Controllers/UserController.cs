@@ -23,11 +23,14 @@ namespace HouseFinder_API.Controllers
         private IAuthentication auth;
         private IConfiguration Configuration;
         private IUserRepository userRepository = new UserRepository();
+        //Used for Upload file to Amazon S3 Server
+        private readonly IStorageRepository storageRepository;
 
-        public UserController(IAuthentication auth, IConfiguration configuration)
+        public UserController(IAuthentication auth, IConfiguration configuration, IStorageRepository storageRepository)
         {
             this.auth = auth;
             this.Configuration = configuration;
+            this.storageRepository = storageRepository;
         }
 
         [HttpGet("{UserId}")]
@@ -297,6 +300,8 @@ namespace HouseFinder_API.Controllers
 
             //Update to Database
             UserDTO userDTO = userRepository.GetUserByID(uid);
+            userDTO.IdentityCardFrontSideImageLink = storageRepository.RetrieveFile(userDTO.IdentityCardFrontSideImageLink);
+            userDTO.IdentityCardBackSideImageLink = storageRepository.RetrieveFile(userDTO.IdentityCardBackSideImageLink);
 
             return Ok(userDTO);
         }
