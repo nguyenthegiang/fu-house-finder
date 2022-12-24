@@ -52,7 +52,7 @@ export class UpdateHouseComponent implements OnInit {
     fingerprint: [false],
     camera: [false],
     parking: [false],
-    info: [, Validators.required],
+    info: [],
   });
 
   constructor(private houseService: HouseService,
