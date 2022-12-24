@@ -54,4 +54,21 @@ namespace DataAccess.DTO
         public bool Camera { get; set; }
         public bool Parking { get; set; }
     }
+
+    public class UpdateHouseDTO
+    {
+        public int HouseId { get; set; }
+        public string HouseName { get; set; }
+        public string Information { get; set; }
+        public string Address { get; set; }
+        public int VillageId { get; set; }
+        public int CampusId { get; set; }
+        public decimal PowerPrice { get; set; }
+        public decimal WaterPrice { get; set; }
+        public bool FingerprintLock { get; set; }
+        public bool Camera { get; set; }
+        public bool Parking { get; set; }
+        [JsonIgnore]
+        public string ModifiedBy { get; set; }
+    }
 }

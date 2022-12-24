@@ -20,6 +20,15 @@ export class LandlordUpdateProfileComponent implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    /**
+     * [Authorization]
+     * Role: Landlord
+     */
+    var userRole = localStorage.getItem("role");
+    if (userRole != 'Landlord') {
+      window.location.href = '/home';
+    }
+
     this.userService.getCurrentUser().subscribe(data => {
       this.landlordDetail = data;
       this.landlordId = this.landlordDetail.userId;
@@ -28,8 +37,7 @@ export class LandlordUpdateProfileComponent implements OnInit {
     });
   }
 
-  update()
-  {
+  update() {
     //Check if user has logged in
     var user = null;
     user = localStorage.getItem("user");
@@ -43,6 +51,7 @@ export class LandlordUpdateProfileComponent implements OnInit {
           if (data.status == 403) {
             this.updateErrorAlert?.fire();
           } else if (data.status == 200) {
+            localStorage.setItem('user', this.updateName);
             this.updateSuccessAlert?.fire();
             window.location.reload();
           }
@@ -52,8 +61,7 @@ export class LandlordUpdateProfileComponent implements OnInit {
     }
   }
 
-  goBack(): void
-  {
+  goBack(): void {
     window.location.reload();
   }
 }

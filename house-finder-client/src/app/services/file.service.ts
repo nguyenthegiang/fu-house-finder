@@ -69,4 +69,11 @@ export class FileService {
 
     return this.http.post(this.APIUrl + `/house/image/${houseId}`, formData, {withCredentials: true})
   }
+
+  updateHouseImageFile(file: File, houseId: number, imageId: number){
+    const formData = new FormData();
+    formData.append("file", file, file.name);
+
+    return this.http.put(this.APIUrl + `/house/image/${houseId}/${imageId}`, formData, {withCredentials: true})
+  }
 }

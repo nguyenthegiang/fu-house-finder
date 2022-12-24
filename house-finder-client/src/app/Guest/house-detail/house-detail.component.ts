@@ -51,6 +51,8 @@ export class HouseDetailComponent implements OnInit {
   comment: string = "";
 
   inputReportContent: string = '';
+
+  // Alert
   @ViewChild('reportSuccessAlert') private reportSuccessAlert: SwalComponent | undefined;
   @ViewChild('orderErrorAlert') private orderErrorAlert: SwalComponent | undefined;
   @ViewChild('rateSuccessAlert') private rateSuccessAlert: SwalComponent | undefined;

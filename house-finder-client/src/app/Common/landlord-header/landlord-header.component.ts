@@ -24,9 +24,12 @@ export class LandlordHeaderComponent implements OnInit {
 
   //Log out of systen
   logout() {
+    localStorage.removeItem("user");
+    localStorage.removeItem("role");
     this.userService.logout().subscribe(resp => {
-      localStorage.clear();
-      sessionStorage.clear();
+      window.location.href = "/login";
+    },
+    error => {
       window.location.href = "/login";
     });
   }

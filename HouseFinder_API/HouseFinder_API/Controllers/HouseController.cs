@@ -100,18 +100,18 @@ namespace HouseFinder_API.Controllers
         /**
          * PUT: api/Houses
          */
+        [Authorize]
         [HttpPut]
-        public IActionResult UpdateHouse(House house)
+        public IActionResult UpdateHouse(UpdateHouseDTO house)
         {
-            try
-            {
+                var uid = HttpContext.Session.GetString("User");
+                if (uid == null)
+                {
+                    return Forbid();
+                }
+                house.ModifiedBy = uid;
                 houseRepository.UpdateHouseByHouseId(house);
                 return Ok();
-            }
-            catch (Exception e)
-            {
-                return BadRequest(e.Message);
-            }
         }
 
         /**

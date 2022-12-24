@@ -27,6 +27,7 @@ namespace Repositories.Repositories
             house.WaterPrice = houseDTO.WaterPrice;
             house.FingerprintLock = houseDTO.FingerprintLock;
             house.Parking = houseDTO.Parking;
+            house.Camera = houseDTO.Camera;
             house.DistanceToCampus = houseDTO.DistanceToCampus;
             house.View = 0;
             house.Deleted = false;
@@ -49,7 +50,48 @@ namespace Repositories.Repositories
         public int CountAvailableHouse() => HouseDAO.CountAvailableHouse();
         public List<AvailableHouseDTO> GetAvailableHouses() => HouseDAO.GetAvailableHouses();
 
-        public void UpdateHouseByHouseId(House house) => HouseDAO.UpdateHouseByHouseId(house);
+        public void UpdateHouseByHouseId(UpdateHouseDTO houseDTO) {
+            HouseDTO houseObj = HouseDAO.GetHouseById(houseDTO.HouseId);
+            if (houseDTO == null)
+            {
+                throw new Exception();
+            }
+            House house = new House();
+            house.HouseId = houseDTO.HouseId;
+            house.HouseName = houseDTO.HouseName;
+            house.Information = houseDTO.Information;
+            house.VillageId = houseDTO.VillageId;
+            house.CampusId = houseDTO.CampusId;
+            house.PowerPrice = houseDTO.PowerPrice;
+            house.WaterPrice = houseDTO.WaterPrice;
+            house.FingerprintLock = houseDTO.FingerprintLock;
+            house.Parking = houseDTO.Parking;
+            house.Camera = houseDTO.Camera;
+            house.LastModifiedDate = DateTime.Now;
+            house.LastModifiedBy = houseDTO.ModifiedBy;
+
+            house.AddressId = houseObj.AddressId;
+            house.CreatedBy = houseObj.CreatedBy;
+            house.LandlordId = houseObj.LandlordId;
+            house.Deleted = houseObj.Deleted;
+            house.DistanceToCampus = houseObj.DistanceToCampus;
+            house.CreatedDate = houseObj.CreatedDate;
+
+            HouseDAO.UpdateHouseByHouseId(house);
+
+            AddressDTO addressObj = houseObj.Address;
+            addressObj.Addresses = houseDTO.Address;
+
+            Address address = new Address();
+            address.Addresses = addressObj.Addresses;
+            address.AddressId = addressObj.AddressId;
+            address.Deleted = addressObj.Deleted;
+            address.CreatedDate = (DateTime)addressObj.CreatedDate;
+            address.GoogleMapLocation = addressObj.GoogleMapLocation;
+            address.LastModifiedDate = DateTime.Now;
+
+            AddressDAO.UpdateAddress(address);
+        }
 
         public void DeleteHouseByHouseId(int houseId) => HouseDAO.DeleteHouseByHouseId(houseId);
 

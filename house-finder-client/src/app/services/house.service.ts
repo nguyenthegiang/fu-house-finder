@@ -86,7 +86,7 @@ export class HouseService {
         checkFirstFilter = false;
       }
 
-      filterAPIUrl += `contains(HouseName,'${searchName}')`;
+      filterAPIUrl += `contains(tolower(HouseName),tolower('${searchName}'))`;
     }
 
     //[Filter] add filter by campus if has
@@ -411,6 +411,34 @@ export class HouseService {
       },
       { withCredentials: true }
     );
+  }
+
+  updateHouse(
+    houseId: number,
+    houseName: string,
+    information: string,
+    address: string,
+    villageId: string,
+    campusId: string,
+    powerPrice: number,
+    waterPrice: number,
+    fingerprintLock: string,
+    camera: string,
+    parking: string,
+  ): Observable<any>{
+    return this.http.put<any>(this.APIUrl, {
+      houseId: houseId,
+      houseName: houseName,
+      information: information,
+      address: address,
+      villageId: villageId,
+      campusId: campusId,
+      powerPrice: powerPrice,
+      waterPrice: waterPrice,
+      fingerprintLock: fingerprintLock,
+      camera: camera,
+      parking: parking
+    }, {withCredentials: true})
   }
 
   countVillageHavingHouse(): Observable<number> {

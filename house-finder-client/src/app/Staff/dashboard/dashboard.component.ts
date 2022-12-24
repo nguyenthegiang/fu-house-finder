@@ -46,7 +46,7 @@ export class DashboardStaffComponent implements OnInit {
   //Get current year
   currentYear: number = new Date().getFullYear();
 
-  //
+  //Statistics
   totalCapacity: number = 0;
   totallyAvailableCapacity: number = 0;
   partiallyAvailableCapacity: number = 0;
@@ -65,9 +65,18 @@ export class DashboardStaffComponent implements OnInit {
     private villageService: VillageService,
     private communeService: CommuneService,
     private districtService: DistrictService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
+    /**
+     * [Authorization]
+     * Role: Staff
+     */
+    var userRole = localStorage.getItem("role");
+    if (userRole == null || userRole.indexOf('Department') < 0) {
+      window.location.href = '/home';
+    }
+
     //Call API:
     this.userService.countTotalLandlords().subscribe((data) => {
       this.totalLandlords = data;
@@ -88,8 +97,8 @@ export class DashboardStaffComponent implements OnInit {
                     this.activeLandlordNum,
                     this.inactiveLandlordNum,
                     this.totalLandlords -
-                      this.activeLandlordNum -
-                      this.inactiveLandlordNum,
+                    this.activeLandlordNum -
+                    this.inactiveLandlordNum,
                   ],
                   backgroundColor: ['#ff9020', '#2fcaca', '#ff6384'],
                 },

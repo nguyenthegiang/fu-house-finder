@@ -35,5 +35,21 @@ namespace DataAccess
                 throw new Exception(e.Message);
             }
         }
+
+        public static void UpdateAddress(Address address)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    context.Addresses.Update(address);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
     }
 }

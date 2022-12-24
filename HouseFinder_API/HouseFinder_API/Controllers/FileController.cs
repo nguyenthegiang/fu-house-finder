@@ -72,7 +72,7 @@ namespace HouseFinder_API.Controllers
         private void LoadData(XSSFWorkbook wb, int HouseId, string LandlordId)
         {
             List<string> errors = new List<string>();
-            int row = 2;
+            int row = 3;
 
             // CREATE ROOM RECORDS
             ISheet roomSheet = wb.GetSheetAt(0);
@@ -89,6 +89,11 @@ namespace HouseFinder_API.Controllers
                     var _buildingNumber = record.GetCell(0).NumericCellValue;
                     var _floorNumber = record.GetCell(1).NumericCellValue;
                     var _roomName = record.GetCell(2).ToString();
+                    //Stop adding when no longer have data
+                    if (_roomName.Trim().Equals(""))
+                    {
+                        break;
+                    }
                     var _roomPrice = record.GetCell(3).NumericCellValue;
                     var _roomArea = record.GetCell(4).NumericCellValue;
                     var _roomCapacity = record.GetCell(5).NumericCellValue;
@@ -115,7 +120,7 @@ namespace HouseFinder_API.Controllers
                     {
                         roomType = 3;
                     }
-                    else if (_roomType.Equals("Không khép kín")) 
+                    else if (_roomType.Equals("Không khép kín"))
                     {
                         roomType = 2;
                     }
@@ -146,7 +151,8 @@ namespace HouseFinder_API.Controllers
                     room.LastModifiedBy = LandlordId;
                     room.LastModifiedDate = DateTime.Now;
                     room.Deleted = false;
-                    room.StatusId = _roomCapacity == _currentPeople ? 1 : 2;
+                    //Check for room status based on capacity
+                    room.StatusId = _roomCapacity > _currentPeople ? 1 : 2;
                     room.RoomTypeId = roomType;
                     roomList.Add(room);
                 }
@@ -178,7 +184,7 @@ namespace HouseFinder_API.Controllers
             }
             string dir = $"user/{uid}/House/{Room.HouseId}/{roomDTO.RoomId}";
             List<ImagesOfRoom> images = new List<ImagesOfRoom>();
-            var path = $"{dir}/{File.FileName}";
+            var path = $"{dir}/{DateTime.Now}_{File.FileName}";
             Stream fs = File.OpenReadStream();
             await storageRepository.UploadFileAsync(path, fs);
             ImagesOfRoom image = new ImagesOfRoom();
@@ -203,7 +209,7 @@ namespace HouseFinder_API.Controllers
             }
             string dir = $"user/{uid}/House/{roomDTO.HouseId}/{RoomId}";
             List<ImagesOfRoom> images = new List<ImagesOfRoom>();
-            var path = $"{dir}/{File.FileName}";
+            var path = $"{dir}/{DateTime.Now}_{File.FileName}";
             Stream fs = File.OpenReadStream();
             await storageRepository.UploadFileAsync(path, fs);
             ImagesOfRoom image = new ImagesOfRoom();
@@ -327,7 +333,7 @@ namespace HouseFinder_API.Controllers
             ImagesOfHouseDTO img = new ImagesOfHouseDTO();
             img.ImageId = ImageId;
             img.ImageLink = path;
-            houseImageRepository.CreateHouseImage(img, uid);
+            houseImageRepository.UpdateHouseImage(img, uid);
             return Ok();
         }
     }

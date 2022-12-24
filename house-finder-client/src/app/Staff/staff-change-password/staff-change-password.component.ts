@@ -22,15 +22,22 @@ export class StaffChangePasswordComponent implements OnInit {
   @ViewChild('updateSuccessAlert') private updateSuccessAlert: SwalComponent | undefined;
   @ViewChild('updateErrorAlert') private updateErrorAlert: SwalComponent | undefined;
   @ViewChild('notLoginErrorAlert') private notLoginErrorAlert: SwalComponent | undefined;
-  
+
   constructor(private userService: UserService) { }
 
   ngOnInit(): void {
+    /**
+     * [Authorization]
+     * Role: Staff
+     */
+    var userRole = localStorage.getItem("role");
+    if (userRole == null || userRole!.indexOf('Department') < 0) {
+      window.location.href = '/home';
+    }
   }
 
 
-  update()
-  {
+  update() {
     //Check if user has logged in
     var user = null;
     user = localStorage.getItem("user");
@@ -59,18 +66,18 @@ export class StaffChangePasswordComponent implements OnInit {
         this.notMatchNewPassword = false;
       }
 
-      if (!this.emptyNewPassword && !this.EmptyRetypePassword && !this.notMatchNewPassword){
+      if (!this.emptyNewPassword && !this.EmptyRetypePassword && !this.notMatchNewPassword) {
         // change password
         this.userService.changePassword(this.oldPassword, this.newPassword).subscribe(
           data => {
             this.updateSuccessAlert?.fire();
             window.location.reload();
           },
-          error => { 
+          error => {
             if (error.status == 409) {
               this.incorrectOldPassword = true;
             }
-            else if (error.status == 403){
+            else if (error.status == 403) {
               this.notLoginErrorAlert?.fire();
             }
             else {
@@ -82,8 +89,7 @@ export class StaffChangePasswordComponent implements OnInit {
     }
   }
 
-  goBack(): void
-  {
+  goBack(): void {
     window.location.reload();
   }
 }

@@ -1,30 +1,30 @@
 <!--Header-->
 <app-landlord-header></app-landlord-header>
 
-<div class="container-fluit mx-3 mx-md-5 mt-5" *ngIf="houseDetail">
+<div class="container-fluit mx-3 mx-md-5 mt-5" *ngIf="houseDetail" (submit)="houseForm.valid && updateHouse()">
   <h3 class="text-center my-5">Chỉnh sửa nhà trọ</h3>
 
-  <form class="row d-flex justify-content-around needs-validation" novalidate>
+  <form class="row d-flex justify-content-around needs-validation" [formGroup]="houseForm">
     <div class="col-12 col-md-5">
       <div class="mb-3">
         <label for="exampleInput1" class="form-label"><b>Tên nhà trọ</b></label>
         <input type="text" class="form-control" id="exampleInput1" placeholder="Nhập tên nhà trọ"
-          value="{{houseDetail.houseName}}" required>
-        <div class="invalid-feedback mb-3">Không được để trống</div>
+          formControlName="houseName">
+        <div class="invalid-feedback mb-3 d-block" *ngIf="this.houseForm.controls['houseName'].errors?.['required']">Không được để trống</div>
       </div>
 
       <div class="mb-3">
         <label class="form-label"><b>Cơ sở</b></label>
         <!-- When select 1 Campus -> change list of District accordingly -->
         <select #selectCampus class="form-select" aria-label="select-campus"
-          (change)="onCampusSelected(selectCampus.value)">
+          (change)="onCampusSelected(selectCampus.value)" formControlName="campus">
           <!-- List of Campuses to choose -->
           <option *ngFor=" let campus of campuses" value="{{campus.campusId}}"
-            [selected]="campus.campusId == houseDetail.campusId">
+            [selected]="campus.campusId == houseDetail.campusId" >
             {{campus.campusName}}
           </option>
         </select>
-        <div class="invalid-feedback mb-3">Không được để trống</div>
+        <div class="invalid-feedback mb-3 d-block" *ngIf="this.houseForm.controls['campus'].errors?.['required']">Không được để trống</div>
       </div>
 
       <div class="mb-3">
@@ -58,51 +58,50 @@
         <label class="form-label"><b>Thôn/Xóm</b></label>
         <!-- When select 1 Village -> call API -->
         <select #selectVillage class="form-select selectRegion" aria-label="select-village"
-          (change)="onVillageSelected(selectVillage.value)">
+          (change)="onVillageSelected(selectVillage.value)" formControlName="village">
           <!-- List all Villages of selected Commune -->
-          <option *ngFor="let village of villagesOfSelectedCommune" value="{{village.villageId}}"
-            [selected]="village.villageId == houseDetail.villageId">
+          <option *ngFor="let village of villagesOfSelectedCommune" value="{{village.villageId}}">
             {{village.villageName}}</option>
         </select>
-        <div class="invalid-feedback mb-3">Không được để trống</div>
+        <div class="invalid-feedback mb-3 d-block" *ngIf="this.houseForm.controls['village'].errors?.['required']">Không được để trống</div>
       </div>
 
       <div class="mb-3">
         <label for="exampleInput2" class="form-label"><b>Địa chỉ</b></label>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Nhập địa chỉ"
-          value="{{houseDetail.address.addresses}}" required>
+          value="{{houseDetail.address.addresses}}" formControlName="address">
         </textarea>
-        <div class="invalid-feedback mb-3">Không được để trống</div>
+        <div class="invalid-feedback mb-3 d-block" *ngIf="this.houseForm.controls['address'].errors?.['required']">Không được để trống</div>
       </div>
 
       <div class="mb-3">
         <label for="exampleInput3" class="form-label"><b>Giá điện / số (VNĐ)</b></label>
         <input type="number" class="form-control" id="exampleInput3" placeholder="Nhập giá điện"
-          value="{{houseDetail.powerPrice}}" required>
-        <div class="invalid-feedback mb-3">Không được để trống</div>
+          value="{{houseDetail.powerPrice}}" formControlName="powerPrice">
+        <div class="invalid-feedback mb-3 d-block" *ngIf="this.houseForm.controls['powerPrice'].errors?.['required']">Không được để trống</div>
       </div>
 
       <div class="mb-3">
         <label for="exampleInput4" class="form-label"><b>Giá nước / khối (VNĐ)</b></label>
         <input type="number" class="form-control" id="exampleInput4" placeholder="Nhập giá nước"
-          value="{{houseDetail.waterPrice}}" required>
-        <div class="invalid-feedback mb-3">Không được để trống</div>
+          formControlName="waterPrice">
+        <div class="invalid-feedback mb-3 d-block" *ngIf="this.houseForm.controls['waterPrice'].errors?.['required']">Không được để trống</div>
       </div>
 
       <label class="form-label"><b>Tiện ích</b></label>
       <div class="mb-3">
         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault1"
-          [checked]="houseDetail.fingerprintLock == true">
+          formControlName="fingerprint">
         <label class="form-check-label ms-2 me-3" for="flexCheckDefault1">
           Khóa vân tay
         </label>
         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault2"
-          [checked]="houseDetail.camera == true">
+          [checked]="houseDetail.camera == true" formControlName="camera">
         <label class="form-check-label ms-2 me-3" for="flexCheckDefault2">
           Camera giám sát
         </label>
         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault3"
-          [checked]="houseDetail.parking == true">
+          [checked]="houseDetail.parking == true" formControlName="parking">
         <label class="form-check-label ms-2 me-3" for="flexCheckDefault3">
           Chỗ để xe
         </label>
@@ -111,9 +110,9 @@
       <div class="mb-3">
         <label for="exampleFormControlTextarea1" class="form-label"><b>Thông tin mô tả</b></label>
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="9"
-          value="{{houseDetail.information}}" required>
+          value="{{houseDetail.information}}" formControlName="info">
         </textarea>
-        <div class="invalid-feedback mb-3">Không được để trống</div>
+        <div class="invalid-feedback mb-3 d-block" *ngIf="this.houseForm.controls['info'].errors?.['required']">Không được để trống</div>
       </div>
     </div>
 
@@ -121,15 +120,13 @@
       <div *ngFor="let image of listImage; let i=index">
         <div class="mb-3">
           <label for="exampleInput5" class="form-label"><b>Ảnh nhà {{i+1}}</b></label>
-          <img src="../../assets/image/House/{{image.imageLink}}" class="w-100 h-50 mb-2 border rounded" alt="...">
+          <img src="{{image.imageLink}}" class="w-100 h-50 mb-2 border rounded" alt="...">
           <label for="exampleInput5" class="form-label">Thay đổi ảnh</label>
           <div class="d-flex">
             <input type="file" class="form-control" id="exampleInput5"
-            (change)="getImageId(i)" (change)="this.onFilechange($event)" required>
+            (change)="getImageId(i)" (change)="this.onFilechange($event)" accept="image/*">
             <!-- <button class="btn btn-secondary ms-2" (click)="cancelChange(i)">Hủy</button> -->
           </div>
-
-          <div class="invalid-feedback mb-3">Không được để trống</div>
         </div>
       </div>
     </div>
@@ -139,3 +136,17 @@
     </div>
   </form>
 </div>
+<swal #successAlert title="Cập nhật thành công"
+text="Bạn có muốn trở về dashboard?"
+icon="question"
+[showCancelButton]="true"
+[focusCancel]="true"
+(confirm)="backDashboard()"
+>
+</swal>
+<swal #serverErrorAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true" title="Lỗi Server"
+  icon="error">
+</swal>
+<swal #forbiddenAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true" title="Không có quyền chỉnh sửa"
+  icon="error">
+</swal>

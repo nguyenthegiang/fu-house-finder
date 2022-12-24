@@ -23,14 +23,14 @@ namespace HouseFinder_API.Controllers
         [HttpGet("LandlordInfo")]
         public IActionResult GetLandlordInfomationByLandlordId(string LandlordId)
         {
-            LandlordDasboardInformationDTO landlordInfo = landlordInfomationRepository.GetLandLordInfomationByLandlordId(LandlordId);
-            if (landlordInfo == null)
+            try
+            {
+                LandlordDasboardInformationDTO landlordInfo = landlordInfomationRepository.GetLandLordInfomationByLandlordId(LandlordId);
+                return Ok(landlordInfo);
+            }
+            catch (Exception)
             {
                 return NotFound();
-            }
-            else
-            {
-                return Ok(landlordInfo);
             }
         }
 

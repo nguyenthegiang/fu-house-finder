@@ -28,6 +28,15 @@ export class StaffRoomDetailComponent implements OnInit {
     private userService: UserService) { }
 
   ngOnInit(): void {
+    /**
+     * [Authorization]
+     * Role: Staff
+     */
+    var userRole = localStorage.getItem("role");
+    if (userRole == null || userRole!.indexOf('Department') < 0) {
+      window.location.href = '/home';
+    }
+
     //Get id of Room from Route
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
@@ -46,13 +55,11 @@ export class StaffRoomDetailComponent implements OnInit {
       });
     });
 
-    if(localStorage.getItem('breadcrumb') == 'true')
-    {
+    if (localStorage.getItem('breadcrumb') == 'true') {
       this.checkBreadcumb = true;
     }
 
-    if(localStorage.getItem('breadcrumb') == 'false')
-    {
+    if (localStorage.getItem('breadcrumb') == 'false') {
       this.checkBreadcumb = false;
     }
   }

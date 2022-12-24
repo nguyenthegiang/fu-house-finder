@@ -25,20 +25,29 @@ export class UpdateAccountComponent implements OnInit {
   role = true;
 
   constructor(
-    private formBuilder: FormBuilder, 
+    private formBuilder: FormBuilder,
     private userService: UserService,
     private roleService: RoleService,
     private route: ActivatedRoute
-    ) { 
-      this.roleService.getStaffRoles().subscribe(
-        resp => {
-          this.roles = resp;
-        },
-        error => { }
-      );
-    }
+  ) {
+    this.roleService.getStaffRoles().subscribe(
+      resp => {
+        this.roles = resp;
+      },
+      error => { }
+    );
+  }
 
   ngOnInit(): void {
+    /**
+     * [Authorization]
+     * Role: Admin
+     */
+    var userRole = localStorage.getItem("role");
+    if (userRole != 'Admin') {
+      window.location.href = '/home';
+    }
+
     this.route.params.subscribe((params: Params) => {
       this.staffId = params['id'];
       if (this.staffId == undefined) {
@@ -56,29 +65,29 @@ export class UpdateAccountComponent implements OnInit {
     });
   }
 
-  validate(){
-    if (this.staffForm.controls['name'].errors?.['required']){
+  validate() {
+    if (this.staffForm.controls['name'].errors?.['required']) {
       this.name = false;
     }
     else {
       this.name = true;
     }
-    if (this.staffForm.controls['email'].errors?.['required']){
+    if (this.staffForm.controls['email'].errors?.['required']) {
       this.email = false;
     }
     else {
       this.email = true;
     }
-    if (this.staffForm.controls['role'].errors?.['required']){
+    if (this.staffForm.controls['role'].errors?.['required']) {
       this.role = false;
     }
     else {
       this.role = true;
     }
   }
-  updateAccount(){
+  updateAccount() {
     this.validate();
-    if (!(this.name && this.email && this.role)){
+    if (!(this.name && this.email && this.role)) {
       return;
     }
     let data = {
@@ -87,7 +96,7 @@ export class UpdateAccountComponent implements OnInit {
       email: this.staffForm.controls['email'].value,
       role: this.staffForm.controls['role'].value
     }
-    this.userService.updateStaff(data).subscribe(resp => {this.successAlert?.fire()}, error => {});
+    this.userService.updateStaff(data).subscribe(resp => { this.successAlert?.fire() }, error => { });
   }
 
 }

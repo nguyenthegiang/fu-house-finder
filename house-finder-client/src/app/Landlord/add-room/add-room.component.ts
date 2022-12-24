@@ -36,21 +36,30 @@ export class AddRoomComponent implements OnInit {
     private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    /**
+     * [Authorization]
+     * Role: Landlord
+     */
+    var userRole = localStorage.getItem("role");
+    if (userRole != 'Landlord') {
+      window.location.href = '/home';
+    }
+
     if (this.route.snapshot.queryParamMap.get('houseId') == undefined) {
       window.location.replace('/Landlord/dashboard');
     }
     this.houseId = Number(this.route.snapshot.queryParamMap.get('houseId'));
   }
 
-  updateForm(tab: string){
+  updateForm(tab: string) {
     this.selected = tab;
   }
 
-  async submitForm(){
-    if (this.selected === "single"){
+  async submitForm() {
+    if (this.selected === "single") {
       this.childSingle.addRoom(this.houseId);
     }
-    else if (this.selected === "multiple"){
+    else if (this.selected === "multiple") {
       await this.childMultiple.uploadDataFile(this.houseId);
       this.childMultiple.uploadImageFiles(this.houseId);
     }
