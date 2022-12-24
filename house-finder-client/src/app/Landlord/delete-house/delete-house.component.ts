@@ -27,7 +27,6 @@ export class DeleteHouseComponent implements OnInit {
   }
 
   deleteHouse() {
-    console.log(this.houseId);
     this.houseService.deleteHouse(this.houseId).subscribe(() => this.goBack());
   }
 }
