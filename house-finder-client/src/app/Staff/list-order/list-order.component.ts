@@ -64,18 +64,14 @@ export class ListOrderComponent implements OnInit {
 
 
   //Sweet alert
-  @ViewChild('filterErrorMesage') private filterErrorMesage:
-  | SwalComponent
-  | undefined;
+  @ViewChild('filterErrorMesage') private filterErrorMesage: SwalComponent | undefined;
 
   constructor(
     private orderService: OrderService,
     private orderStatusService: OrderStatusService,
     private router: Router,
     private datePipe: DatePipe,
-  ) {
-
-  }
+  ) { }
 
   ngOnInit(): void {
     /**
@@ -240,14 +236,14 @@ export class ListOrderComponent implements OnInit {
   onFromDateSelected(selectedDate: string) {
     this.selectedFromDate = selectedDate;
     this.fromDate = new Date(selectedDate);
-    if(this.toDate && this.fromDate >= this.toDate) this.filterErrorMesage?.fire();
+    if (this.toDate && this.fromDate >= this.toDate) this.filterErrorMesage?.fire();
     else this.filterOrder(true);
   }
 
   onToDateSelected(selectedDate: string) {
     this.selectedToDate = selectedDate;
     this.toDate = new Date(selectedDate);
-    if(this.fromDate && this.fromDate >= this.toDate) this.filterErrorMesage?.fire();
+    if (this.fromDate && this.fromDate >= this.toDate) this.filterErrorMesage?.fire();
     else this.filterOrder(true);
   }
 
