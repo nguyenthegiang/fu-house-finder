@@ -1,14 +1,29 @@
-@media only screen and (max-width: 768px) {
-  #md
-  {
-    display: none;
-  }
-}
-
+// Message displayed when list empty
 .emptyMesage{
   font-weight: bold;
   color: red;
   text-align: center;
   font-size: 15pt;
+}
+
+// CRUD Buttons
+#btn:hover
+{
+  background-color: rgb(180, 180, 180);
+  border-radius: 5px;
+}
+
+#btn:active
+{
+  background-color: rgb(147, 147, 147);
+  border-radius: 5px;
+}
+
+// Responsive
+@media only screen and (max-width: 768px) {
+  #md
+  {
+    display: none;
+  }
 }
 
