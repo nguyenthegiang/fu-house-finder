@@ -20,6 +20,7 @@ export interface Room {
     currentAmountOfPeople: number;
     buildingNumber: number;
     floorNumber: number;
+    statusId: number | undefined;
     status: RoomStatus;
     roomType: RoomType;
     houseId: number;

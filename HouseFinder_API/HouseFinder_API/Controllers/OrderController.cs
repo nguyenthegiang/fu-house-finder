@@ -158,23 +158,30 @@ namespace HouseFinder_API.Controllers
             }
             return Ok(orderRepository.CountOrderSolvedByStaffInADay(date, uid));
         }
+
+        /**
+         * [Student - Home Page]
+         * Get list of orders of this student for him to confirm it's been resolved
+         */
         [HttpGet("getListOrderNotConfirm")]
         public IActionResult GetListOrderNotconfirm()
         {
             try
             {
                 //Get UserId
-                string uid = HttpContext.Session.GetString("User");
-                if (uid == null)
+                string studentId = HttpContext.Session.GetString("User");
+                if (studentId == null)
                 {
                     //user not logged in => throw error for alert
                     return Ok(new { Status = 403 });
                 }
-                return Ok(orderRepository.getListOrderNotConfirm(uid));
+
+                //call to DB
+                return Ok(orderRepository.GetListOrderNotConfirm(studentId));
             }
-            catch (Exception e)
+            catch (Exception)
             {
-                return BadRequest(e.Message);
+                return Ok(new { Status = 400 });
             }
         }
     }

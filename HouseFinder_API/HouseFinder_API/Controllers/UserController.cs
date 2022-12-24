@@ -316,6 +316,21 @@ namespace HouseFinder_API.Controllers
             }
         }
 
+        [HttpPut("landLordUpdateProfile")]
+        public IActionResult LandLordUpdateProfile(string userId, string name, string phoneNumber,string facebookUrl)
+        {
+            try
+            {
+                //Update to Database
+                userRepository.LandLordUpdateProfile(userId, name, phoneNumber,facebookUrl);
+                return Ok(new { Status = 200 });
+            }
+            catch (Exception)
+            {
+                return Ok(new { Status = 400 });
+            }
+        }
+
         [HttpPut("change_password")]
         public IActionResult ChangePassword(ChangePasswordDTO pw)
         {

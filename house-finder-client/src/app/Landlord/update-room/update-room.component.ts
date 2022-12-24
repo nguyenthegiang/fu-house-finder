@@ -33,6 +33,7 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
     currentAmountOfPeople: 0,
     buildingNumber: 0,
     floorNumber: 0,
+    statusId: 1,
     status: {
       statusId: 1,
       statusName: 'Available'
@@ -66,6 +67,7 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
     currentAmountOfPeople: 0,
     buildingNumber: 0,
     floorNumber: 0,
+    statusId: 1,
     status: {
       statusId: 1,
       statusName: 'Available'
@@ -83,6 +85,7 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
     imagesOfRooms: []
   };
   listStatus: RoomStatus[] = [];
+  selectedRoomStatusId: number | undefined;
   //test string
   // statusSelected: string = "";
 
@@ -152,6 +155,7 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
       );
     } else {
       //update room
+      this.roomDetail.statusId = this.selectedRoomStatusId;
       this.roomService.updateRoom(this.roomDetail).subscribe(
         data => {
           if (data.status == 200) {
@@ -200,6 +204,15 @@ export class UpdateRoomComponent implements OnInit, OnChanges {
       // //this.statusSelected = this.roomDetail.status.statusName;
 
     });
+  }
+
+
+
+  //[Filter by Region] Filter by RoomStatus
+  onRoomStatusSelected(stringSelectedStatusId: string) {
+    // convert string to number
+    var numberRoomStatusId: number = +stringSelectedStatusId;
+    this.selectedRoomStatusId = numberRoomStatusId;
   }
 
   // getAllStatus() {

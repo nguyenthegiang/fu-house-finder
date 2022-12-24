@@ -63,14 +63,17 @@
                         <!-- floor -->
                         <div class="col-md-6 ml-auto">Trạng thái
                             <br>
-                            <select [(ngModel)]="roomDetail.status.statusId" name="statusName" class="form-select"
-                                aria-label="select-status">
+                            <select #selectRoomStatus name="statusName" class="form-select" aria-label="select-status"
+                                (change)="onRoomStatusSelected(selectRoomStatus.value)">
                                 <!-- List of Campuses to choose -->
-                                <option *ngFor=" let status of listStatus" value="{{status.statusId}}">
-                                    {{status.statusName}}</option>
+                                <option *ngFor=" let status of listStatus" value="{{status.statusId}}"
+                                    [selected]="status.statusId == roomDetail.status.statusId">
+                                    <p *ngIf="status.statusName === 'Available'">Còn Trống</p>
+                                    <p *ngIf="status.statusName === 'Occupied'">Đã thuê</p>
+                                    <p *ngIf="status.statusName === 'Disabled'">Không dùng được</p>
+                                </option>
                             </select>
-                            <!-- <input type="text" class="form-control" id="status"
-                                [(ngModel)]="roomDetail.status.statusName" name="status"> -->
+
                         </div>
                     </div>
                     <div class="row">
