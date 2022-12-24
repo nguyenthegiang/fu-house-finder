@@ -159,7 +159,6 @@ namespace HouseFinder_API.Controllers
                 catch (Exception e)
                 {
                     errors.Add($"Error at line {row}");
-                    Console.WriteLine($"Error at line {row} --- {e.Message}");
                 }
 
                 row++;
@@ -225,13 +224,13 @@ namespace HouseFinder_API.Controllers
 
         private bool checkXlsxMimeType(IFormFile file)
         {
-            //string filename = file.FileName;
-            //string[] temp = filename.Split(".");
-            //string mimeType = temp[temp.Length - 1];
-            //return (
-            //    mimeType.Equals("xlsx", StringComparison.OrdinalIgnoreCase)
-            //    || mimeType.Equals("xls", StringComparison.OrdinalIgnoreCase)
-            //);
+            string filename = file.FileName;
+            string[] temp = filename.Split(".");
+            string mimeType = temp[temp.Length - 1];
+            if (!mimeType.Equals("xlsx", StringComparison.OrdinalIgnoreCase))
+            {
+                return false;
+            }
             byte[] buffer = new byte[16];
             Stream fs = file.OpenReadStream();
             if (fs.Length > 16)
@@ -250,6 +249,112 @@ namespace HouseFinder_API.Controllers
             return false;
         }
 
+        private bool checkImageMimeType(IFormFile file)
+        {
+            string filename = file.FileName;
+            string[] temp = filename.Split(".");
+            string mimeType = temp[temp.Length - 1];
+            if (
+                !mimeType.Equals("gif", StringComparison.OrdinalIgnoreCase)
+                && !mimeType.Equals("jpg", StringComparison.OrdinalIgnoreCase)
+                && !mimeType.Equals("jpeg", StringComparison.OrdinalIgnoreCase)
+                && !mimeType.Equals("jfif", StringComparison.OrdinalIgnoreCase)
+                && !mimeType.Equals("pjp", StringComparison.OrdinalIgnoreCase)
+                && !mimeType.Equals("png", StringComparison.OrdinalIgnoreCase)
+                && !mimeType.Equals("webp", StringComparison.OrdinalIgnoreCase)
+            )
+            {
+                return false;
+            }
+            
+            if (mimeType.Equals("gif", StringComparison.OrdinalIgnoreCase))
+            {
+                byte[] buffer = new byte[32];
+                Stream fs = file.OpenReadStream();
+                if (fs.Length > 32)
+                {
+                    fs.Read(buffer, 0, 32);
+                }
+                else
+                {
+                    fs.Read(buffer, 0, (int)fs.Length);
+                }
+                string hexData = BitConverter.ToString(buffer).Substring(0, 17);
+                if (hexData.Equals("47-49-46-38-37-61")
+                    || hexData.Equals("47-49-46-38-39-61"))
+                {
+                    return true;
+                }
+                return false;
+            }
+            else if (
+                mimeType.Equals("jpg", StringComparison.OrdinalIgnoreCase)
+                || mimeType.Equals("jpeg", StringComparison.OrdinalIgnoreCase)
+                || mimeType.Equals("jfif", StringComparison.OrdinalIgnoreCase))
+            {
+                byte[] buffer = new byte[32];
+                Stream fs = file.OpenReadStream();
+                if (fs.Length > 32)
+                {
+                    fs.Read(buffer, 0, 32);
+                }
+                else
+                {
+                    fs.Read(buffer, 0, (int)fs.Length);
+                }
+                string hexDataLong = BitConverter.ToString(buffer).Substring(0, 23);
+                string hexDataShort = BitConverter.ToString(buffer).Substring(0, 11);
+                if (hexDataLong.Equals("FF-D8-FF-E0-00-10-4A-46")
+                    || hexDataShort.Equals("FF-D8-FF-DB")
+                    || hexDataShort.Equals("49-46-00-01")
+                    || hexDataShort.Equals("FF-D8-FF-EE")
+                    || hexDataShort.Equals("FF-D8-FF-E0"))
+                {
+                    return true;
+                }
+                return false;
+            }
+            else if (mimeType.Equals("png", StringComparison.OrdinalIgnoreCase))
+            {
+                byte[] buffer = new byte[32];
+                Stream fs = file.OpenReadStream();
+                if (fs.Length > 32)
+                {
+                    fs.Read(buffer, 0, 32);
+                }
+                else
+                {
+                    fs.Read(buffer, 0, (int)fs.Length);
+                }
+                string hexData = BitConverter.ToString(buffer).Substring(0, 23);
+                if (hexData.Equals("89-50-4E-47-0D-0A-1A-0A"))
+                {
+                    return true;
+                }
+                return false;
+            }
+            else if (mimeType.Equals("webp", StringComparison.OrdinalIgnoreCase))
+            {
+                byte[] buffer = new byte[16];
+                Stream fs = file.OpenReadStream();
+                if (fs.Length > 16)
+                {
+                    fs.Read(buffer, 0, 16);
+                }
+                else
+                {
+                    fs.Read(buffer, 0, (int)fs.Length);
+                }
+                string hexData = BitConverter.ToString(buffer).Substring(0, 11);
+                if (hexData.Equals("52-49-46-46") || hexData.Equals("57-45-42-50"))
+                {
+                    return true;
+                }
+                return false;
+            }
+            return false;
+        }
+
         /**
          * [Landlord] Upload images of Identity Card
          */
@@ -262,6 +367,10 @@ namespace HouseFinder_API.Controllers
             if (uid == null)
             {
                 return Forbid();
+            }
+            for (int i = 0; i < 2; i++)
+            {
+                if (!checkImageMimeType(files[i])) return BadRequest();
             }
             UserDTO user = userReposiotry.GetUserByID(uid);
 
@@ -305,6 +414,10 @@ namespace HouseFinder_API.Controllers
                 return Forbid();
             }
             string dir = $"user/{uid}/House/{HouseId}";
+            for (int i = 0; i < 2; i++)
+            {
+                if (!checkImageMimeType(files[i])) return BadRequest();
+            }
             foreach (var file in files)
             {
                 var path = $"{dir}/{DateTime.Now}_{file.FileName}";
@@ -326,6 +439,7 @@ namespace HouseFinder_API.Controllers
             {
                 return Forbid();
             }
+            if (!checkImageMimeType(file)) return BadRequest();
             string dir = $"user/{uid}/House/{HouseId}";
             var path = $"{dir}/{DateTime.Now}_{file.FileName}";
             Stream fs = file.OpenReadStream();
