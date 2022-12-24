@@ -27,16 +27,21 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let landlord of landlordSignupRequest">
-                <td id="md">{{landlord.displayName}}</td>
-                <td>{{landlord.email}}</td>
-                <td id="md">{{landlord.phoneNumber}}</td>
-                <td id="md">
+              <tr *ngFor="let landlord of landlordSignupRequest" style="cursor: pointer;">
+                <td id="md" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
+                (click)="changeSelectedLandlord(landlord.userId)">{{landlord.displayName}}</td>
+                <td data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
+                (click)="changeSelectedLandlord(landlord.userId)">{{landlord.email}}</td>
+                <td id="md" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
+                (click)="changeSelectedLandlord(landlord.userId)">{{landlord.phoneNumber}}</td>
+                <td id="md" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
+                (click)="changeSelectedLandlord(landlord.userId)">
                   <img class="me-2 mb-2 identityCard"
                     src="../../../assets/image/{{landlord.identityCardFrontSideImageLink}}">
                   <img class="mb-2 identityCard" src="../../../assets/image/{{landlord.identityCardBackSideImageLink}}">
                 </td>
-                <td id="md">{{landlord.createdDate | date: "dd/MM/yyyy"}}</td>
+                <td id="md" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
+                (click)="changeSelectedLandlord(landlord.userId)">{{landlord.createdDate | date: "dd/MM/yyyy"}}</td>
 
                 <!-- Action column -->
                 <td>
@@ -46,15 +51,6 @@
                       <a target="_blank" class="text-decoration-none me-2" data-bs-toggle="tooltip"
                         data-bs-placement="top" title="Facebook chủ trọ" href="{{ landlord.facebookUrl }}">
                         <i class="fa-brands fa-facebook fs-2"></i>
-                      </a>
-                    </div>
-
-                    <!-- Landlord Detail -->
-                    <div data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
-                    (click)="changeSelectedLandlord(landlord.userId)">
-                      <a target="_blank" class="text-decoration-none me-2" data-bs-toggle="tooltip"
-                        data-bs-placement="top" title="thông tin chi tiết" style="cursor: pointer;">
-                        <i class="fa-solid fa-circle-info fs-2"></i>
                       </a>
                     </div>
 
