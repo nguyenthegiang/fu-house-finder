@@ -178,6 +178,10 @@ export class AddHouseComponent implements OnInit {
     this.router.navigate(['/Landlord/add-room'], { queryParams: { houseId: this.houseId } });
   }
 
+  navDashboard() {
+    this.router.navigate(['/Landlord/dashboard']);
+  }
+
   logout() {
     window.location.href = "/login";
   }

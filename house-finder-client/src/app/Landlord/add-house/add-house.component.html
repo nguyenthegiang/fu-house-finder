@@ -140,5 +140,7 @@
   icon="question"
   [showCancelButton]="true"
   [focusCancel]="true"
-  (confirm)="navAddRoom()">
+  (confirm)="navAddRoom()"
+  (dismiss)="navDashboard()"
+  >
 </swal>
