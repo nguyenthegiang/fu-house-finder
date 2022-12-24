@@ -50,6 +50,7 @@ import { StaffUpdateProfileComponent } from './Staff/staff-update-profile/staff-
 import { LandlordUpdateProfileComponent } from './Landlord/landlord-update-profile/landlord-update-profile.component';
 import { StaffChangePasswordComponent } from './Staff/staff-change-password/staff-change-password.component';
 import { ListRejectedLandlordComponent } from './Staff/list-landlord-signup-request/list-rejected-landlord/list-rejected-landlord.component';
+import { ConfirmOrderComponent } from './Guest/confirm-order/confirm-order.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +98,7 @@ import { ListRejectedLandlordComponent } from './Staff/list-landlord-signup-requ
     LandlordUpdateProfileComponent,
     StaffChangePasswordComponent,
     ListRejectedLandlordComponent,
+    ConfirmOrderComponent,
   ],
   imports: [
     BrowserModule,
