@@ -141,8 +141,8 @@ CREATE TABLE [dbo].[Houses] (
 	DistanceToCampus float,				--Khoảng cách đến trường
 
 	--Tiền
-	PowerPrice money NOT NULL,			--giá điện
-	WaterPrice money NOT NULL,			--giá nước
+	PowerPrice money NOT NULL,			--giá điện: VND/kWh
+	WaterPrice money NOT NULL,			--giá nước: VND/m3
 
 	--Tiện ích
 	FingerprintLock bit,				--khóa vân tay

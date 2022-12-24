@@ -75,14 +75,14 @@
       </div>
 
       <div class="mb-3">
-        <label for="exampleInput3" class="form-label"><b>Giá điện / số (VNĐ)</b></label>
+        <label for="exampleInput3" class="form-label"><b>Giá điện (VNĐ/kWh)</b></label>
         <input type="number" class="form-control" id="exampleInput3" placeholder="Nhập giá điện"
           value="{{houseDetail.powerPrice}}" formControlName="powerPrice">
         <div class="invalid-feedback mb-3 d-block" *ngIf="this.houseForm.controls['powerPrice'].errors?.['required']">Không được để trống</div>
       </div>
 
       <div class="mb-3">
-        <label for="exampleInput4" class="form-label"><b>Giá nước / khối (VNĐ)</b></label>
+        <label for="exampleInput4" class="form-label"><b>Giá nước (VNĐ/m3)</b></label>
         <input type="number" class="form-control" id="exampleInput4" placeholder="Nhập giá nước"
           formControlName="waterPrice">
         <div class="invalid-feedback mb-3 d-block" *ngIf="this.houseForm.controls['waterPrice'].errors?.['required']">Không được để trống</div>
