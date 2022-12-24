@@ -43,6 +43,8 @@ export class UpdateHouseComponent implements OnInit {
   houseForm = this.formBuilder.group({
     houseName: ['', Validators.required],
     campus: [, Validators.required],
+    district: [, Validators.required],
+    commune: [, Validators.required],
     village: [, Validators.required],
     address: ['', Validators.required],
     powerPrice: [, Validators.required],
@@ -101,7 +103,6 @@ export class UpdateHouseComponent implements OnInit {
     });
   }
 
-  //[Filter] Filter by Campus
   onCampusSelected(selectedCampusId: string) {
     // convert string to number
     var numberCampusId: number = +selectedCampusId;
@@ -115,9 +116,27 @@ export class UpdateHouseComponent implements OnInit {
       }
     });
 
-    // Call API: update list houses with the campus user chose
-    this.selectedCampusId = numberCampusId;
-  }
+    this.districtsOfSelectedCampus.forEach((district) => {
+      // assign the list of Commune as the communes of this District
+      if (district.districtId == this.districtsOfSelectedCampus[0].districtId) {
+        this.communesOfSelectedDistrict = district.communes;
+        this.houseForm.controls["district"].setValue(this.districtsOfSelectedCampus[0].districtId);
+
+        // find the selected commune
+        this.communesOfSelectedDistrict.forEach((commune) => {
+          // assign the list of Villages as the villages of this Commune
+          if (commune.communeId == this.communesOfSelectedDistrict[0].communeId) {
+            this.villagesOfSelectedCommune = commune.villages;
+            this.houseForm.controls["commune"].setValue(this.communesOfSelectedDistrict[0].communeId);
+            this.houseForm.controls["village"].setValue(this.villagesOfSelectedCommune[0].villageId);
+            return;
+          }
+        });
+        return;
+      }
+    });
+
+  } 
 
   //[Filter by Region] Filter by Commune
   //Change list of Communes after user selected District
@@ -134,11 +153,16 @@ export class UpdateHouseComponent implements OnInit {
       }
     });
 
-    //no need for filtering by commune & village
-    this.selectedCommuneId = undefined;
-    this.selectedVillageId = undefined;
-    // Call API to update list houses with the selected district
-    this.selectedDistrictId = numberDistrictId;
+    this.communesOfSelectedDistrict.forEach((commune) => {
+      // assign the list of Villages as the villages of this Commune
+      if (commune.communeId == this.communesOfSelectedDistrict[0].communeId) {
+        this.villagesOfSelectedCommune = commune.villages;
+        this.houseForm.controls["commune"].setValue(this.communesOfSelectedDistrict[0].communeId);
+        this.houseForm.controls["village"].setValue(this.villagesOfSelectedCommune[0].villageId);
+        return;
+      }
+    });
+
   }
 
   //[Filter by Region] Filter by Commune
@@ -152,27 +176,10 @@ export class UpdateHouseComponent implements OnInit {
       // assign the list of Villages as the villages of this Commune
       if (commune.communeId == numberCommuneId) {
         this.villagesOfSelectedCommune = commune.villages;
+        this.houseForm.controls["village"].setValue(this.villagesOfSelectedCommune[0].villageId);
         return;
       }
     });
-
-    //no need for filtering by district & village
-    this.selectedDistrictId = undefined;
-    this.selectedVillageId = undefined;
-    // Call API to update list houses with the selected commune
-    this.selectedCommuneId = numberCommuneId;
-  }
-
-  //[Filter by Region] Filter by Village
-  onVillageSelected(stringSelectedVillageId: string) {
-    // convert string to number
-    var numberVillageId: number = +stringSelectedVillageId;
-
-    //no need for filtering by district & commune
-    this.selectedDistrictId = undefined;
-    this.selectedCommuneId = undefined;
-    // Call API to update list houses with the selected village
-    this.selectedVillageId = numberVillageId;
   }
 
   loadVillage(){
@@ -183,17 +190,18 @@ export class UpdateHouseComponent implements OnInit {
         this.districtsOfSelectedCampus = campus.districts;
         this.houseForm.controls["campus"].setValue(this.houseDetail?.campusId);
 
-        // find the district
         this.districtsOfSelectedCampus.forEach((district) => {
           // assign the list of Commune as the communes of this District
           if (district.districtId == this.houseDetail?.districtId) {
             this.communesOfSelectedDistrict = district.communes;
-
+            this.houseForm.controls["district"].setValue(this.houseDetail?.districtId);
+    
             // find the selected commune
             this.communesOfSelectedDistrict.forEach((commune) => {
               // assign the list of Villages as the villages of this Commune
               if (commune.communeId == this.houseDetail?.communeId) {
                 this.villagesOfSelectedCommune = commune.villages;
+                this.houseForm.controls["commune"].setValue(this.houseDetail?.communeId);
                 this.houseForm.controls["village"].setValue(this.houseDetail?.villageId);
                 return;
               }

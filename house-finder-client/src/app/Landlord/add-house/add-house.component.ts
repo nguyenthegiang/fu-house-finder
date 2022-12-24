@@ -277,18 +277,6 @@ export class AddHouseComponent implements OnInit {
     });
   }
 
-  //[Filter by Region] Filter by Village
-  onVillageSelected(stringSelectedVillageId: string) {
-    // convert string to number
-    var numberVillageId: number = +stringSelectedVillageId;
-
-    //no need for filtering by district & commune
-    this.selectedDistrictId = undefined;
-    this.selectedCommuneId = undefined;
-    // Call API to update list houses with the selected village
-    this.selectedVillageId = numberVillageId;
-
-  }
   loadVillage(){
     // find the campus
     this.campuses.forEach((campus) => {
