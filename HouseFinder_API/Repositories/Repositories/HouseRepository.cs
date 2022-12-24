@@ -76,7 +76,7 @@ namespace Repositories.Repositories
             house.Deleted = houseObj.Deleted;
             house.DistanceToCampus = houseObj.DistanceToCampus;
             house.CreatedDate = houseObj.CreatedDate;
-
+            house.View = houseObj.View;
             HouseDAO.UpdateHouseByHouseId(house);
 
             AddressDTO addressObj = houseObj.Address;

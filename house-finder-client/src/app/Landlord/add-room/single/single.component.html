@@ -120,3 +120,25 @@
     </div>
   </div>
 </form>
+<swal
+  #addRoom
+  title="Thêm phòng"
+  text="Thêm phòng thành công. Bạn có muốn tiếp tục thêm phòng?"
+  icon="question"
+  [showCancelButton]="true"
+  [focusCancel]="true"
+  (dismiss)="navDashboard()"
+  >
+</swal>
+<swal #forbiddenAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true" title="Không có quyền chỉnh sửa"
+  icon="error">
+</swal>
+<swal
+  #serverErrorAlert
+  [toast]="true"
+  position="top-end"
+  [timer]="3000"
+  [timerProgressBar]="true"
+  title="Lỗi Server"
+  icon="error">
+</swal>

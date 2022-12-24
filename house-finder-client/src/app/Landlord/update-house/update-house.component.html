@@ -31,34 +31,34 @@
         <label class="form-label"><b>Quận/Huyện</b></label>
         <!-- When select 1 District -> change list of Communes accordingly -->
         <select #selectDistrict class="form-select selectRegion" aria-label="select-district"
-          (change)="onDistrictSelected(selectDistrict.value)">
+          (change)="onDistrictSelected(selectDistrict.value)" formControlName="district">
           <!-- List all Districts of selected Campus-->
           <option *ngFor=" let district of districtsOfSelectedCampus" value="{{district.districtId}}"
             [selected]="district.districtId == houseDetail.districtId">
             {{district.districtName}}
           </option>
         </select>
-        <div class="invalid-feedback mb-3">Không được để trống</div>
+        <div class="invalid-feedback mb-3 d-block" *ngIf="this.houseForm.controls['district'].errors?.['required']">Không được để trống</div>
       </div>
 
       <div class="mb-3">
         <label class="form-label"><b>Phường/Xã</b></label>
         <!-- When select 1 Communes -> change list of Villages accordingly -->
         <select #selectCommune class="form-select selectRegion" aria-label="select-commune"
-          (change)="onCommuneSelected(selectCommune.value)">
+          (change)="onCommuneSelected(selectCommune.value)" formControlName="commune">
           <!-- List all Communes of selected District -->
           <option *ngFor="let commune of communesOfSelectedDistrict" value="{{commune.communeId}}"
             [selected]="commune.communeId == houseDetail.communeId">
             {{commune.communeName}}</option>
         </select>
-        <div class="invalid-feedback mb-3">Không được để trống</div>
+        <div class="invalid-feedback mb-3 d-block" *ngIf="this.houseForm.controls['commune'].errors?.['required']">Không được để trống</div>
       </div>
 
       <div class="mb-3">
         <label class="form-label"><b>Thôn/Xóm</b></label>
         <!-- When select 1 Village -> call API -->
         <select #selectVillage class="form-select selectRegion" aria-label="select-village"
-          (change)="onVillageSelected(selectVillage.value)" formControlName="village">
+          formControlName="village">
           <!-- List all Villages of selected Commune -->
           <option *ngFor="let village of villagesOfSelectedCommune" value="{{village.villageId}}">
             {{village.villageName}}</option>
@@ -112,7 +112,6 @@
         <textarea class="form-control" id="exampleFormControlTextarea1" rows="9"
           value="{{houseDetail.information}}" formControlName="info">
         </textarea>
-        <div class="invalid-feedback mb-3 d-block" *ngIf="this.houseForm.controls['info'].errors?.['required']">Không được để trống</div>
       </div>
     </div>
 

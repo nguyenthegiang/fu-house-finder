@@ -22,22 +22,6 @@ export class AddHouseComponent implements OnInit {
   map: any;
   marker: any;
   distanceService: any;
-  houseName = true;
-  information = true;
-  campus = true;
-  district = true;
-  commune = true;
-  village = true;
-  powerPrice = true;
-  waterPrice = true;
-  fingerprint = true;
-  camera = true;
-  parking = true;
-  address = true;
-  googleAddress = true;
-  houseImg1 = true;
-  houseImg2 = true;
-  houseImg3 = true;
   img1: File | any;
   img2: File | any;
   img3: File | any;
@@ -90,6 +74,19 @@ export class AddHouseComponent implements OnInit {
     }
 
     this.initMap();
+    //(Filter) Get all Campuses (with their Districts, Communes, Villages)
+    let campus_data = localStorage.getItem("campuses");
+    if (campus_data) {
+      this.campuses = JSON.parse(campus_data);
+      this.loadVillage();
+    }
+    else {
+      this.campusService.getAllCampuses().subscribe(data => {
+        this.campuses = data;
+        localStorage.campuses = JSON.stringify(data);
+        this.loadVillage();
+      });
+    }
   }
 
   initMap() {
@@ -127,88 +124,6 @@ export class AddHouseComponent implements OnInit {
   }
 
   async addHouse() {
-    //validate form
-    if (this.houseForm.controls['houseName'].errors?.['required']) {
-      this.houseName = false;
-    }
-    else {
-      this.houseName = true;
-    }
-    if (this.houseForm.controls['information'].errors?.['required']) {
-      this.information = false;
-    }
-    else {
-      this.information = true;
-    }
-    if (this.houseForm.controls['campus'].errors?.['required']) {
-      this.campus = false;
-    }
-    else {
-      this.campus = true;
-    }
-    if (this.houseForm.controls['district'].errors?.['required']) {
-      this.district = false;
-    }
-    else {
-      this.district = true;
-    }
-    if (this.houseForm.controls['commune'].errors?.['required']) {
-      this.commune = false;
-    }
-    else
-      if (this.houseForm.controls['village'].errors?.['required']) {
-        this.village = false;
-      }
-      else {
-        this.village = true;
-      }
-    if (this.houseForm.controls['powerPrice'].errors?.['required']) {
-      this.powerPrice = false;
-    }
-    else {
-      this.powerPrice = true;
-    }
-    if (this.houseForm.controls['waterPrice'].errors?.['required']) {
-      this.waterPrice = false;
-    }
-    else {
-      this.waterPrice = true;
-    }
-    if (this.houseForm.controls['address'].errors?.['required']) {
-      this.address = false;
-    }
-    else {
-      this.address = true;
-    }
-    if (this.houseForm.controls['googleAddress'].errors?.['required']) {
-      this.googleAddress = false;
-    }
-    else {
-      this.googleAddress = true;
-    }
-    if (this.houseForm.controls['houseImg1'].errors?.['required']) {
-      this.houseImg1 = false;
-    }
-    else {
-      this.houseImg1 = true;
-    }
-    if (this.houseForm.controls['houseImg2'].errors?.['required']) {
-      this.houseImg2 = false;
-    }
-    else {
-      this.houseImg2 = true;
-    }
-    if (this.houseForm.controls['houseImg3'].errors?.['required']) {
-      this.houseImg3 = false;
-    }
-    else {
-      this.houseImg3 = true;
-    }
-    if (!(this.houseName && this.information && this.campus && this.district && this.commune && this.village
-      && this.powerPrice && this.waterPrice && this.address && this.googleAddress && this.houseImg1
-      && this.houseImg2 && this.houseImg3)) {
-      return;
-    }
     var distance = 0;
     const origin = { lat: 21.0137883027051, lng: 105.52699965513666 };
     const destination = {
@@ -263,6 +178,10 @@ export class AddHouseComponent implements OnInit {
     this.router.navigate(['/Landlord/add-room'], { queryParams: { houseId: this.houseId } });
   }
 
+  navDashboard() {
+    this.router.navigate(['/Landlord/dashboard']);
+  }
+
   logout() {
     window.location.href = "/login";
   }
@@ -292,22 +211,27 @@ export class AddHouseComponent implements OnInit {
       }
     });
 
-    //Reset lower Region Filter
-    this.selectedDistrictId = undefined;
-    this.selectedCommuneId = undefined;
-    this.selectedVillageId = undefined;
-    this.communesOfSelectedDistrict = [];
-    this.villagesOfSelectedCommune = [];
+    this.districtsOfSelectedCampus.forEach((district) => {
+      // assign the list of Commune as the communes of this District
+      if (district.districtId == this.districtsOfSelectedCampus[0].districtId) {
+        this.communesOfSelectedDistrict = district.communes;
+        this.houseForm.controls["district"].setValue(this.districtsOfSelectedCampus[0].districtId);
 
-    // Call API: update list houses with the campus user chose
-    this.selectedCampusId = numberCampusId;
-  } onDistrictClicked() {
-    // check if user has chosen Campus
-    if (!this.selectedCampusId) {
-      // if not => alert that they have to choose Campus before District
-      alert('Vui lòng chọn Cơ sở bạn muốn tìm trước');
-    }
-  }
+        // find the selected commune
+        this.communesOfSelectedDistrict.forEach((commune) => {
+          // assign the list of Villages as the villages of this Commune
+          if (commune.communeId == this.communesOfSelectedDistrict[0].communeId) {
+            this.villagesOfSelectedCommune = commune.villages;
+            this.houseForm.controls["commune"].setValue(this.communesOfSelectedDistrict[0].communeId);
+            this.houseForm.controls["village"].setValue(this.villagesOfSelectedCommune[0].villageId);
+            return;
+          }
+        });
+        return;
+      }
+    });
+
+  } 
 
   //[Filter by Region] Filter by Commune
   //Change list of Communes after user selected District
@@ -324,14 +248,15 @@ export class AddHouseComponent implements OnInit {
       }
     });
 
-    //Reset lower Region Filter
-    this.villagesOfSelectedCommune = [];
-
-    //no need for filtering by commune & village
-    this.selectedCommuneId = undefined;
-    this.selectedVillageId = undefined;
-    // Call API to update list houses with the selected district
-    this.selectedDistrictId = numberDistrictId;
+    this.communesOfSelectedDistrict.forEach((commune) => {
+      // assign the list of Villages as the villages of this Commune
+      if (commune.communeId == this.communesOfSelectedDistrict[0].communeId) {
+        this.villagesOfSelectedCommune = commune.villages;
+        this.houseForm.controls["commune"].setValue(this.communesOfSelectedDistrict[0].communeId);
+        this.houseForm.controls["village"].setValue(this.villagesOfSelectedCommune[0].villageId);
+        return;
+      }
+    });
 
   }
 
@@ -346,28 +271,42 @@ export class AddHouseComponent implements OnInit {
       // assign the list of Villages as the villages of this Commune
       if (commune.communeId == numberCommuneId) {
         this.villagesOfSelectedCommune = commune.villages;
+        this.houseForm.controls["village"].setValue(this.villagesOfSelectedCommune[0].villageId);
         return;
       }
     });
-
-    //no need for filtering by district & village
-    this.selectedDistrictId = undefined;
-    this.selectedVillageId = undefined;
-    // Call API to update list houses with the selected commune
-    this.selectedCommuneId = numberCommuneId;
-
   }
 
-  //[Filter by Region] Filter by Village
-  onVillageSelected(stringSelectedVillageId: string) {
-    // convert string to number
-    var numberVillageId: number = +stringSelectedVillageId;
+  loadVillage(){
+    // find the campus
+    this.campuses.forEach((campus) => {
+      // assign the list of Commune as the communes of this District
+      if (campus.campusId == 1) {
+        this.districtsOfSelectedCampus = campus.districts;
+        this.houseForm.controls["campus"].setValue(1);
 
-    //no need for filtering by district & commune
-    this.selectedDistrictId = undefined;
-    this.selectedCommuneId = undefined;
-    // Call API to update list houses with the selected village
-    this.selectedVillageId = numberVillageId;
+        // find the district
+        this.districtsOfSelectedCampus.forEach((district) => {
+          // assign the list of Commune as the communes of this District
+          if (district.districtId == this.districtsOfSelectedCampus[0].districtId) {
+            this.communesOfSelectedDistrict = district.communes;
+            this.houseForm.controls["district"].setValue(this.districtsOfSelectedCampus[0].districtId);
 
+            // find the selected commune
+            this.communesOfSelectedDistrict.forEach((commune) => {
+              // assign the list of Villages as the villages of this Commune
+              if (commune.communeId == this.communesOfSelectedDistrict[0].communeId) {
+                this.villagesOfSelectedCommune = commune.villages;
+                this.houseForm.controls["commune"].setValue(this.communesOfSelectedDistrict[0].communeId);
+                this.houseForm.controls["village"].setValue(this.villagesOfSelectedCommune[0].villageId);
+                return;
+              }
+            });
+            return;
+          }
+        });
+        return;
+      }
+    });
   }
 }
