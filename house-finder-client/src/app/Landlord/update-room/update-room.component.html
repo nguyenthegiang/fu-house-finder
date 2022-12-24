@@ -63,14 +63,14 @@
                         <!-- floor -->
                         <div class="col-md-6 ml-auto">Trạng thái
                             <br>
-                            <select [(ngModel)]="roomDetail.status.statusId" name="statusName" class="form-select"
-                                aria-label="select-status">
+                            <select #selectRoomStatus name="statusName" class="form-select" aria-label="select-status"
+                                (change)="onRoomStatusSelected(selectRoomStatus.value)">
                                 <!-- List of Campuses to choose -->
-                                <option *ngFor=" let status of listStatus" value="{{status.statusId}}">
+                                <option *ngFor=" let status of listStatus" value="{{status.statusId}}"
+                                    [selected]="status.statusId == roomDetail.status.statusId">
                                     {{status.statusName}}</option>
                             </select>
-                            <!-- <input type="text" class="form-control" id="status"
-                                [(ngModel)]="roomDetail.status.statusName" name="status"> -->
+
                         </div>
                     </div>
                     <div class="row">
