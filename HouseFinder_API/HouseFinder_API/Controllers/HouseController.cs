@@ -40,7 +40,29 @@ namespace HouseFinder_API.Controllers
          */
         [EnableQuery]
         [HttpGet("availableHouses")]
-        public ActionResult<IEnumerable<AvailableHouseDTO>> GetAvailableHouses() => houseRepository.GetAvailableHouses();
+        public ActionResult<IEnumerable<AvailableHouseDTO>> GetAvailableHouses()
+        {
+            try
+            {
+                List<AvailableHouseDTO> houseDTOs = houseRepository.GetAvailableHouses();
+
+                //Get Image links from Server
+                foreach (AvailableHouseDTO houseDTO in houseDTOs)
+                {
+                    foreach (var img in houseDTO.ImagesOfHouses)
+                    {
+                        img.ImageLink = storageRepository.RetrieveFile(img.ImageLink);
+                    }
+                }
+
+                return houseDTOs;
+            }
+            catch (Exception)
+            {
+                return NotFound();
+            }
+
+        }
 
         //GET: api/Houses/search?name=
         //[HttpGet("search")]
@@ -68,7 +90,7 @@ namespace HouseFinder_API.Controllers
                 //}
                 //else
                 //{
-                    return Ok(houseDTO);
+                return Ok(houseDTO);
                 //}
             }
             catch (Exception)
@@ -104,14 +126,14 @@ namespace HouseFinder_API.Controllers
         [HttpPut]
         public IActionResult UpdateHouse(UpdateHouseDTO house)
         {
-                var uid = HttpContext.Session.GetString("User");
-                if (uid == null)
-                {
-                    return Forbid();
-                }
-                house.ModifiedBy = uid;
-                houseRepository.UpdateHouseByHouseId(house);
-                return Ok();
+            var uid = HttpContext.Session.GetString("User");
+            if (uid == null)
+            {
+                return Forbid();
+            }
+            house.ModifiedBy = uid;
+            houseRepository.UpdateHouseByHouseId(house);
+            return Ok();
         }
 
         /**
@@ -167,7 +189,7 @@ namespace HouseFinder_API.Controllers
                 //}
                 //else
                 //{
-                    return Ok(houseDTOs);
+                return Ok(houseDTOs);
                 //}
             }
             catch (Exception)

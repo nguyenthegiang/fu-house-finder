@@ -39,8 +39,14 @@
     <div class="my-4">
       <h3 class="text-center">Danh sách nhà trọ</h3>
 
+      <!-- Add button -->
       <div class="my-4">
-        <button class="btn btn-secondary" (click)="addHouse()">+ Thêm mới</button>
+        <button class="btn btn-success d-flex justify-content-center align-items-center py-2" (click)="addHouse()">
+          <i class="fa-solid fa-circle-plus fs-4 me-2"></i>
+          <div>
+            Thêm mới
+          </div>
+        </button>
       </div>
 
       <!-- Case: No data -->
@@ -81,7 +87,7 @@
                 </div>
               </th>
               <th scope="col" id="md">Tiện ích</th>
-              <th scope="col">Tùy chọn</th>
+              <th scope="col">Hành động</th>
             </tr>
           </thead>
           <tbody>
@@ -105,7 +111,8 @@
               <!-- Utilities -->
               <td id="md">
                 <div class="d-flex">
-                  <div *ngIf="dataItem.fingerprintLock == false && dataItem.camera == false && dataItem.parking == false">
+                  <div
+                    *ngIf="dataItem.fingerprintLock == false && dataItem.camera == false && dataItem.parking == false">
                     <span class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
                       title="Không có tiện ích" style="cursor: pointer;">
                       block
@@ -132,28 +139,21 @@
                 </div>
               </td>
 
+              <!-- CRUD Buttons -->
               <td>
                 <div class="d-flex">
-                  <a class="text-decoration-none text-warning me-2" data-toggle="modal" data-target="#updateModal"
-                    data-whatever="@getbootstrap" (click)="viewRate(dataItem.houseId)" style="cursor: pointer;">
-                    <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
-                      title="Xem đánh giá">
-                      rate_review
-                    </span>
+                  <a class="text-decoration-none text-primary me-3" (click)="viewRate(dataItem.houseId)"
+                    style="cursor: pointer;" data-bs-toggle="tooltip" data-bs-placement="top" title="Xem đánh giá">
+                    <i class="fa-solid fa-star fs-4"></i>
                   </a>
-                  <a class="text-decoration-none text-success me-2" data-toggle="modal" data-target="#updateModal"
-                    data-whatever="@getbootstrap" (click)="updateHouse(dataItem.houseId)" style="cursor: pointer;">
-                    <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
-                      title="Chỉnh sửa">
-                      build
-                    </span>
+                  <a class="text-decoration-none text-warning me-3" (click)="updateHouse(dataItem.houseId)"
+                    style="cursor: pointer;" data-bs-toggle="tooltip" data-bs-placement="top" title="Chỉnh sửa">
+                    <i class="fa-solid fa-pen fs-4"></i>
                   </a>
-                  <a class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
-                    data-bs-whatever="@getbootstrap" (click)="deleteHouse(dataItem.houseId)" style="cursor: pointer;">
-                    <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
-                      title="Xóa">
-                      delete
-                    </span>
+                  <a class="text-decoration-none text-danger" (click)="deleteHouse(dataItem.houseId)"
+                    data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-whatever="@getbootstrap"
+                    style="cursor: pointer;">
+                    <i class="fa-solid fa-trash fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Xóa"></i>
                   </a>
                 </div>
               </td>
