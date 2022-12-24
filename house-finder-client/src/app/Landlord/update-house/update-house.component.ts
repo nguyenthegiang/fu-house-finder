@@ -97,7 +97,7 @@ export class UpdateHouseComponent implements OnInit {
           localStorage.campuses = JSON.stringify(data);
           this.loadVillage();
         });
-      }      
+      }
     });
   }
 
