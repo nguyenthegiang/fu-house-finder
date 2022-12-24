@@ -55,8 +55,14 @@
     <div class="my-4">
       <h3 class="text-center">Danh sách phòng</h3>
 
+      <!-- Add Button -->
       <div class="my-4">
-        <button class="btn btn-secondary" (click)="addRoom()">+ Thêm mới</button>
+        <button class="btn btn-success d-flex justify-content-center align-items-center py-2" (click)="addRoom()">
+          <i class="fa-solid fa-circle-plus fs-4 me-2"></i>
+          <div>
+            Thêm mới
+          </div>
+        </button>
       </div>
 
       <!-- Case: No data -->
@@ -182,20 +188,15 @@
                 </div>
               </td>
               <td>
-                <!-- Detail button -->
-                <a class="text-decoration-none text-success me-2" data-bs-toggle="modal" data-bs-target="#updateModal"
+                <!-- CRUD button -->
+                <a class="text-decoration-none text-warning me-3" data-bs-toggle="modal" data-bs-target="#updateModal"
                   data-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId)" style="cursor: pointer;">
-                  <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="Chỉnh sửa">
-                    edit
-                  </span>
+                  <i class="fa-solid fa-pen fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Chỉnh sửa">
+                  </i>
                 </a>
                 <a class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
                   data-bs-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId)" style="cursor: pointer;">
-                  <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="Xóa">
-                    delete
-                  </span>
+                  <i class="fa-solid fa-trash fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Xóa"></i>
                 </a>
               </td>
             </tr>

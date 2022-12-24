@@ -9,7 +9,12 @@
       <h3 class="text-center">Danh sách tuyển sinh</h3>
 
       <div class="my-4">
-        <button class="btn btn-secondary" (click)="addStaff()">+ Thêm mới</button>
+        <button class="btn btn-success d-flex justify-content-center align-items-center py-2" (click)="addStaff()">
+          <i class="fa-solid fa-user-plus fs-5 me-2"></i>
+          <div>
+            Thêm mới
+          </div>
+        </button>
       </div>
 
       <!-- Case: No data -->
@@ -49,17 +54,13 @@
               </td>
 
               <td>
-                <a class="text-decoration-none text-success me-2" (click)="updateStaff(dataItem.userId)" style="cursor: pointer;">
-                  <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="Chỉnh sửa">
-                    build
-                  </span>
+                <a class="text-decoration-none text-warning me-3" (click)="updateStaff(dataItem.userId)"
+                  style="cursor: pointer;">
+                  <i class="fa-solid fa-pen fs-4"></i>
                 </a>
-                <a class="text-decoration-none text-danger" (click)="confirmDelete(dataItem.userId)" style="cursor: pointer;">
-                  <span id="btn" class="material-symbols-outlined" data-bs-toggle="tooltip" data-bs-placement="top"
-                    title="Xóa">
-                    delete
-                  </span>
+                <a class="text-decoration-none text-danger" (click)="confirmDelete(dataItem.userId)"
+                  style="cursor: pointer;">
+                  <i class="fa-solid fa-trash fs-4"></i>
                 </a>
               </td>
             </tr>
@@ -74,12 +75,6 @@
 <!-- End Body -->
 
 <!-- <app-footer></app-footer> -->
-<swal
-  #deleteStaffAlert
-  title="Xóa tài khoản nhân viên"
-  text="Bạn có muốn xóa tài khoản này?"
-  icon="warning"
-  [showCancelButton]="true"
-  [focusCancel]="true"
-  (confirm)="deleteStaff()">
+<swal #deleteStaffAlert title="Xóa tài khoản nhân viên" text="Bạn có muốn xóa tài khoản này?" icon="warning"
+  [showCancelButton]="true" [focusCancel]="true" (confirm)="deleteStaff()">
 </swal>
