@@ -5,13 +5,13 @@
         <div class="mb-3 row">
           <label class="col-sm-3 form-label" for="building">Tòa nhà</label>
           <div class="col-sm-9">
-            <input class="form-control" id="building" type="number" formControlName="building" />
+            <input class="form-control" id="building" type="number" min="1" formControlName="building" />
           </div>
         </div>
         <div class="mb-3 row">
           <label class="col-sm-3 form-label" for="floor">Tầng</label>
           <div class="col-sm-9">
-            <input class="form-control" id="floor" type="number" formControlName="floor" />
+            <input class="form-control" id="floor" type="number" min="1" formControlName="floor" />
           </div>
         </div>
         <div class="mb-3 row">
@@ -20,38 +20,6 @@
             <input class="form-control" id="room-name" formControlName="roomName" />
           </div>
         </div>
-        <div class="mb-3 row">
-          <label class="col-sm-3 form-label" for="price">Giá</label>
-          <div class="col-sm-9">
-            <input class="form-control" id="price" formControlName="price" />
-          </div>
-        </div>
-        <div class="mb-3 row">
-          <label class="col-sm-3 form-label" for="info">Thông tin</label>
-          <div class="col-sm-9">
-            <input class="form-control" id="info" formControlName="info" />
-          </div>
-        </div>
-        <div class="mb-3 row">
-          <label class="col-sm-3 form-label" for="area">Diện tích</label>
-          <div class="col-sm-9">
-            <input class="form-control" id="area" type="number" formControlName="area" />
-          </div>
-        </div>
-        <div class="mb-3 row">
-          <label class="col-sm-3 form-label" for="max-people">Số người tối đa</label>
-          <div class="col-sm-9">
-            <input class="form-control" id="max-people" type="number" formControlName="maxPeople" />
-          </div>
-        </div>
-        <div class="mb-3 row">
-          <label class="col-sm-3 form-label" for="current-people">Số người hiện tại</label>
-          <div class="col-sm-9">
-            <input class="form-control" id="current-people" type="number" formControlName="currentPeople" />
-          </div>
-        </div>
-      </div>
-      <div class="col-lg-6 col-sm-12">
         <div class="mb-3 row">
           <label class="col-sm-3 form-label" for="room-type">Loại phòng</label>
           <div class="col-sm-9">
@@ -62,8 +30,39 @@
             </select>
           </div>
         </div>
+        <div class="mb-3 row">
+          <label class="col-sm-3 form-label" for="price">Giá</label>
+          <div class="col-sm-9">
+            <input class="form-control" type="number" id="price" min="0" formControlName="price" />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label class="col-sm-3 form-label" for="area">Diện tích</label>
+          <div class="col-sm-9">
+            <input class="form-control" id="area" type="number" min="0" formControlName="area" />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label class="col-sm-3 form-label" for="max-people">Số người tối đa</label>
+          <div class="col-sm-9">
+            <input class="form-control" id="max-people" type="number" min="1" formControlName="maxPeople" />
+          </div>
+        </div>
+        <div class="mb-3 row">
+          <label class="col-sm-3 form-label" for="current-people">Số người hiện tại</label>
+          <div class="col-sm-9">
+            <input class="form-control" id="current-people" type="number" min="0" formControlName="currentPeople" />
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6 col-sm-12">
+        <div class="mb-3 row">
+          <label class="col-sm-3 form-label" for="info">Thông tin</label>
+          <div class="col-sm-9">
+            <textarea class="form-control" id="info" formControlName="info"></textarea>
+          </div>
+        </div>
         <div class="mb-3 row form-check">
-
           <div class="col-sm-3 form-check-inline">
             <label for="fridge">Tủ lạnh</label>
             <input class="form-check-input" id="fridge" type="checkbox" formControlName="fridge" />
