@@ -106,9 +106,16 @@ export class HomepageComponent implements OnInit, AfterViewInit {
     });
 
     //(Filter) Get all Campuses (with their Districts, Communes, Villages)
-    this.campusService.getAllCampuses().subscribe(data => {
-      this.campuses = data;
-    });
+    let campus_data = localStorage.getItem("campuses");
+    if (campus_data) {
+      this.campuses = JSON.parse(campus_data);
+    }
+    else {
+      this.campusService.getAllCampuses().subscribe(data => {
+        this.campuses = data;
+        localStorage.campuses = JSON.stringify(data);
+      });
+    }
 
     //(Filter) Get all Room types
     this.roomTypeService.getRoomTypes().subscribe(data => {
