@@ -11,10 +11,18 @@
       <div class="invalid-feedback mb-3">Không được để trống</div>
     </div>
 
+
     <div class="col-12 col-md-5 mb-3">
-      <label for="exampleInput1" class="form-label"><b>Email</b></label>
-      <input type="email" class="form-control" name="email" [(ngModel)]="updateEmail" placeholder="Nhập email"
-        id="exampleInput1" required>
+      <label for="exampleInput1" class="form-label"><b>Số điện thoại</b></label>
+      <input type="phoneNumber" class="form-control" name="phoneNumber" [(ngModel)]="updatePhoneNumber"
+        placeholder="Nhập số điện thoại" id="exampleInput1" required>
+      <div class="invalid-feedback mb-3">Không được để trống</div>
+    </div>
+
+    <div class="col-12 col-md-5 mb-3">
+      <label for="exampleInput1" class="form-label"><b>Link Facebook</b></label>
+      <input type="facebookUrl" class="form-control" name="facebookUrl" [(ngModel)]="updateFacebookUrl"
+        placeholder="Nhập link Facebook" id="exampleInput1" required>
       <div class="invalid-feedback mb-3">Không được để trống</div>
     </div>
 
@@ -27,7 +35,7 @@
 <!-- <app-footer></app-footer> -->
 
 <swal #updateSuccessAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
-  title="Cập nhật thành công" icon="success">
+  title="Cập nhật thành công" icon="success" (willClose)="this.goBack()">
 </swal>
 <swal #updateErrorAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
   title="Vui lòng đăng nhập để xử dụng tính năng này!" icon="error">

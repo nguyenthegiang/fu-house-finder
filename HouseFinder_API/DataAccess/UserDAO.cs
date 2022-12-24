@@ -434,6 +434,33 @@ namespace DataAccess
             }
         }
 
+        public static void LandLordUpdateProfile(string userId, string name, string phoneNumber, string facebookUrl)
+        {
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    //Find rooms of this house
+                    User user = context.Users.FirstOrDefault(u => u.UserId.Equals(userId));
+                    if (user == null)
+                    {
+                        throw new Exception();
+                    }
+
+                    //Update
+                    user.DisplayName = name;
+                    user.PhoneNumber = phoneNumber;
+                    user.FacebookUrl = facebookUrl;
+                    context.Users.Update(user);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
         public static void ChangePassword(string userId, string newPassword)
         {
             try

@@ -137,11 +137,11 @@ export class UserService {
     return this.http.get<number>(this.APIUrl + "/CountInactiveLandlord");
   }
 
-  getLandlordSignUpRequest():Observable<User[]>{
+  getLandlordSignUpRequest(): Observable<User[]> {
     return this.http.get<User[]>(this.APIUrl + "/LandlordSignupRequest");
   }
 
-  getRejectedLandlord():Observable<User[]>{
+  getRejectedLandlord(): Observable<User[]> {
     return this.http.get<User[]>(this.APIUrl + "/RejectedLandlord");
   }
 
@@ -149,7 +149,7 @@ export class UserService {
     return this.http.put<any>(this.APIUrl + "/" + userId + "/" + statusId, this.httpOptions, { withCredentials: true });
   }
 
-  getCurrentUser():Observable<User> {
+  getCurrentUser(): Observable<User> {
     return this.http.get<User>(this.APIUrl + "/currentUser", { withCredentials: true });
   }
 
@@ -157,8 +157,12 @@ export class UserService {
     return this.http.put<any>(this.APIUrl + "/updateProfile?userId=" + userId + "&name=" + name + "&email=" + email, this.httpOptions);
   }
 
+  landlordUpdateProfile(userId: string, name: string, phoneNumber: string, facebookUrl: string): Observable<any> {
+    return this.http.put<any>(this.APIUrl + "/landLordUpdateProfile?userId=" + userId + "&name=" + name + "&phoneNumber=" + phoneNumber + "&facebookUrl=" + facebookUrl, this.httpOptions);
+  }
+
   changePassword(oldPassword: string, newPassword: string): Observable<any> {
-    return this.http.put<any>(this.APIUrl + "/change_password", {'oldPassword': oldPassword, 'newPassword': newPassword}, this.httpOptions);
+    return this.http.put<any>(this.APIUrl + "/change_password", { 'oldPassword': oldPassword, 'newPassword': newPassword }, this.httpOptions);
   }
 
   createStaff(staff: any): Observable<any> {
@@ -168,7 +172,7 @@ export class UserService {
     return this.http.put<any>(this.APIUrl + "/staff/update", staff, this.httpOptions);
   }
   deleteStaff(staff: any): Observable<any> {
-    return this.http.delete<any>(this.APIUrl + "/staff/delete?staff="+staff, this.httpOptions);
+    return this.http.delete<any>(this.APIUrl + "/staff/delete?staff=" + staff, this.httpOptions);
   }
   //[Staff/list-landlord] Filter landlords
   filterUser(
