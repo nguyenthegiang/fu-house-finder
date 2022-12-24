@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { FileService } from 'src/app/services/file.service';
 import { RoomService } from 'src/app/services/room.service';
 import Swal from 'sweetalert2';
@@ -11,6 +13,10 @@ import Swal from 'sweetalert2';
 })
 export class SingleComponent implements OnInit {
 
+  @ViewChild('serverErrorAlert') private serverErrorAlert: SwalComponent | undefined;
+  @ViewChild('addRoom') private addRoomAlert: SwalComponent | undefined;
+  @ViewChild('forbiddenAlert') private forbiddenAlert: SwalComponent | undefined;
+  
   roomForm = this.formBuilder.group({
     building: ['', Validators.required],
     floor: ['', Validators.required],
@@ -52,6 +58,8 @@ export class SingleComponent implements OnInit {
     private roomService: RoomService, 
     private fileService: FileService,
     private formBuilder: FormBuilder,
+    private router: Router,
+    private route: ActivatedRoute,
   ){ 
     
   }
@@ -102,23 +110,45 @@ export class SingleComponent implements OnInit {
     else {
       this.currentPeople = true;
     }
+    var err: Array<string> = [];
     if (this.roomForm.controls['image1'].errors?.['required']){
-      this.image1Validate = false
+      this.image1Validate = false;
+      err.push(this.image2.name);
+    }
+    else if (!this.image1.type.includes('image')) {
+      this.image1Validate = false;
+
     }
     else {
       this.image1Validate = true;
     }
+
     if (this.roomForm.controls['image2'].errors?.['required']){
       this.image2Validate = false;
+      err.push(this.image2.name);
+    }
+    else if (!this.image2.type.includes('image')) {
+      this.image2Validate = false;
+
     }
     else {
       this.image2Validate = true;
     }
+
     if (this.roomForm.controls['image3'].errors?.['required']){
       this.image3Validate = false;
+      err.push(this.image3.name);
+    }
+    else if (!this.image3.type.includes('image')) {
+      this.image3Validate = false;
+
     }
     else {
       this.image3Validate = true;
+    }
+
+    if (err.length > 0){
+      this.toast(true, 'error', true, 'Định dạng file ' + err.join(", ") +' không phải ảnh!')
     }
   }
 
@@ -162,35 +192,23 @@ export class SingleComponent implements OnInit {
     this.roomService.createRoom(data).subscribe(
       resp => {
         this.submitImage(resp.roomId);
+        this.addRoomAlert?.fire();
       },
-      error => {}
+      error => {
+        if (error.status == 401 || error.status == 403) {
+          this.forbiddenAlert?.fire();
+        }
+        else {
+          this.serverErrorAlert?.fire();
+        }
+      }
     )
   }
 
   submitImage(roomId: Number){
-    var err: Array<string> = [];
-    if (!this.image1.type.includes('image')) {
-      err.push(this.image1.name);
-    }
-    else {
-      this.fileService.uploadRoomImageFileWithRoomId(this.image1, roomId).subscribe(resp => {}, error => {});
-    
-    }
-    if (!this.image2.type.includes('image')) {
-      err.push(this.image2.name);
-    }
-    else {
-      this.fileService.uploadRoomImageFileWithRoomId(this.image2, roomId).subscribe(resp => {}, error => {});
-    }
-    if (!this.image3.type.includes('image')) {
-      err.push(this.image3.name);
-    }
-    else {
-      this.fileService.uploadRoomImageFileWithRoomId(this.image3, roomId).subscribe(resp => {}, error => {});
-    }
-    if (err.length > 0){
-      this.toast(true, 'error', true, 'Định dạng file ' + err.join(", ") +' không phải ảnh!')
-    }
+    this.fileService.uploadRoomImageFileWithRoomId(this.image1, roomId).subscribe(resp => {}, error => {});
+    this.fileService.uploadRoomImageFileWithRoomId(this.image2, roomId).subscribe(resp => {}, error => {});
+    this.fileService.uploadRoomImageFileWithRoomId(this.image3, roomId).subscribe(resp => {}, error => {});
   }
   async toast(toast: boolean = false, typeIcon: any = 'error', 
       timerProgressBar: boolean = true, title: any = '', 
@@ -206,5 +224,9 @@ export class SingleComponent implements OnInit {
       title: title,
       text: text
     })
+  }
+  navDashboard() {
+    var houseId = Number(this.route.snapshot.queryParamMap.get('houseId'));
+    this.router.navigate(['/Landlord/landlord-house-detail/' + houseId]);
   }
 }
