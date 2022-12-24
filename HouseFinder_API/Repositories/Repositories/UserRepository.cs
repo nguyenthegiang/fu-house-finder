@@ -81,6 +81,7 @@ namespace Repositories.Repositories
         //Get list of staffs
         public List<UserDTO> GetStaffs() => UserDAO.GetStaffs();
         public void UpdateProfile(string userId, string name, string email) => UserDAO.UpdateProfile(userId, name, email);
+        public void LandLordUpdateProfile(string userId, string name, string phoneNumber, string facebookUrl) => UserDAO.LandLordUpdateProfile(userId, name, phoneNumber, facebookUrl);
         public void ChangePassword(string userId, string newPassword) => UserDAO.ChangePassword(userId, newPassword);
 
         public void CreateStaffAccount(StaffAccountCreateDTO staff) => UserDAO.CreateStaffAccount(staff);

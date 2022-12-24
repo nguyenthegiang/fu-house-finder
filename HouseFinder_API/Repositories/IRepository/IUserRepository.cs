@@ -21,6 +21,7 @@ namespace Repositories.IRepository
         public void UpdateUserStatus(string userId, int statusId, string staffId);
         public List<UserDTO> GetStaffs();
         public void UpdateProfile(string userId, string name, string email);
+        public void LandLordUpdateProfile(string userId, string name, string phoneNumber, string facebookUrl);
         public void ChangePassword(string userId, string newPassword);
         public void CreateStaffAccount(StaffAccountCreateDTO staff);
         public void UpdateStaffAccount(StaffAccountUpdateDTO staff);
