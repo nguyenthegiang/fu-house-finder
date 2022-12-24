@@ -28,8 +28,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let landlord of rejectedLandlords" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
-              (click)="changeSelectedLandlord(landlord.userId)" style="cursor: pointer">
+              <tr *ngFor="let landlord of rejectedLandlords">
                 <td id="md">{{landlord.displayName}}</td>
                 <td>{{landlord.email}}</td>
                 <td id="md">{{landlord.phoneNumber}}</td>
@@ -48,6 +47,15 @@
                       <a target="_blank" class="text-decoration-none me-2" data-bs-toggle="tooltip"
                         data-bs-placement="top" title="Fcebook chủ trọ" href="{{ landlord.facebookUrl }}">
                         <i class="fa-brands fa-facebook fs-2"></i>
+                      </a>
+                    </div>
+
+                    <!-- Landlord Detail -->
+                    <div data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
+                    (click)="changeSelectedLandlord(landlord.userId)">
+                      <a target="_blank" class="text-decoration-none me-2" data-bs-toggle="tooltip"
+                        data-bs-placement="top" title="thông tin chi tiết" style="cursor: pointer;">
+                        <i class="fa-solid fa-circle-info fs-2"></i>
                       </a>
                     </div>
 
