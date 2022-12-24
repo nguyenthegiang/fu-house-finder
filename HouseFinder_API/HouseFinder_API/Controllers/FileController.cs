@@ -60,9 +60,10 @@ namespace HouseFinder_API.Controllers
                 return Forbid();
             }
 
-            Stream fs = File.OpenReadStream();
             if (!checkXlsxMimeType(File))
                 return BadRequest("Invalid File Type");
+
+            Stream fs = File.OpenReadStream();
             XSSFWorkbook wb = new XSSFWorkbook(fs);
             LoadData(wb, HouseId, uid);
             return Ok();
@@ -218,13 +219,29 @@ namespace HouseFinder_API.Controllers
 
         private bool checkXlsxMimeType(IFormFile file)
         {
-            string filename = file.FileName;
-            string[] temp = filename.Split(".");
-            string mimeType = temp[temp.Length - 1];
-            return (
-                mimeType.Equals("xlsx", StringComparison.OrdinalIgnoreCase)
-                || mimeType.Equals("xls", StringComparison.OrdinalIgnoreCase)
-            );
+            //string filename = file.FileName;
+            //string[] temp = filename.Split(".");
+            //string mimeType = temp[temp.Length - 1];
+            //return (
+            //    mimeType.Equals("xlsx", StringComparison.OrdinalIgnoreCase)
+            //    || mimeType.Equals("xls", StringComparison.OrdinalIgnoreCase)
+            //);
+            byte[] buffer = new byte[16];
+            Stream fs = file.OpenReadStream();
+            if (fs.Length > 16)
+            {
+                fs.Read(buffer, 0, 16);
+            }
+            else
+            {
+                fs.Read(buffer, 0, (int)fs.Length);
+            }
+            string hexData = BitConverter.ToString(buffer).Substring(0, 11);
+            if (hexData.Equals("50-4B-03-04") || hexData.Equals("50-4B-05-06") || hexData.Equals("50-4B-07-08"))
+            {
+                return true;
+            }
+            return false;
         }
 
         /**
