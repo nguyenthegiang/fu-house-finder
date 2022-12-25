@@ -28,12 +28,12 @@
       </div>
       <div class="carousel-inner rounded">
         <div class="carousel-item active" *ngIf="houseDetail.imagesOfHouses">
-          <img src="../../assets/image/House/{{houseDetail.imagesOfHouses[0].imageLink}}" class="d-block w-100 h-25"
+          <img src="{{houseDetail.imagesOfHouses[0].imageLink}}" class="d-block w-100 h-25"
             alt="...">
         </div>
         <div *ngFor="let image of houseDetail.imagesOfHouses; let i=index;">
           <div class="carousel-item" *ngIf="i >= 1">
-            <img src="../../assets/image/House/{{image.imageLink}}" class="d-block w-100 h-25" alt="...">
+            <img src="{{image.imageLink}}" class="d-block w-100 h-25" alt="...">
           </div>
         </div>
       </div>
@@ -209,7 +209,6 @@
         </tbody>
       </table>
     </div>
-
 
     <!-- Paging -->
     <!-- <div class="d-flex justify-content-center align-items-center mt-4">

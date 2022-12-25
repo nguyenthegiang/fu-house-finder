@@ -161,7 +161,7 @@ namespace HouseFinder_API.Controllers
                     room.RoomTypeId = roomType;
                     roomList.Add(room);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     errors.Add($"Error at line {row}");
                 }

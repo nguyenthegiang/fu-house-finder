@@ -1,6 +1,7 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { Chart } from 'chart.js';
 import { Order } from 'src/app/models/order';
 import { OrderStatus } from 'src/app/models/orderStatus';
@@ -58,14 +59,19 @@ export class ListOrderComponent implements OnInit {
   //Get current month
   currentMonth: number = new Date().getMonth();
 
+  fromDate: Date | undefined;
+  toDate: Date | undefined;
+
+
+  //Sweet alert
+  @ViewChild('filterErrorMesage') private filterErrorMesage: SwalComponent | undefined;
+
   constructor(
     private orderService: OrderService,
     private orderStatusService: OrderStatusService,
     private router: Router,
     private datePipe: DatePipe,
-  ) {
-
-  }
+  ) { }
 
   ngOnInit(): void {
     /**
@@ -229,12 +235,16 @@ export class ListOrderComponent implements OnInit {
 
   onFromDateSelected(selectedDate: string) {
     this.selectedFromDate = selectedDate;
-    this.filterOrder(true);
+    this.fromDate = new Date(selectedDate);
+    if (this.toDate && this.fromDate >= this.toDate) this.filterErrorMesage?.fire();
+    else this.filterOrder(true);
   }
 
   onToDateSelected(selectedDate: string) {
     this.selectedToDate = selectedDate;
-    this.filterOrder(true);
+    this.toDate = new Date(selectedDate);
+    if (this.fromDate && this.fromDate >= this.toDate) this.filterErrorMesage?.fire();
+    else this.filterOrder(true);
   }
 
   onOrderBySelected(selectedOrderBy: string) {

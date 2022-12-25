@@ -28,17 +28,21 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let landlord of rejectedLandlords" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
-              (click)="changeSelectedLandlord(landlord.userId)" style="cursor: pointer">
-                <td id="md">{{landlord.displayName}}</td>
-                <td>{{landlord.email}}</td>
-                <td id="md">{{landlord.phoneNumber}}</td>
-                <td class="md" id="md">
+              <tr *ngFor="let landlord of rejectedLandlords" style="cursor: pointer;">
+                <td id="md" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
+                (click)="changeSelectedLandlord(landlord.userId)">{{landlord.displayName}}</td>
+                <td data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
+                (click)="changeSelectedLandlord(landlord.userId)">{{landlord.email}}</td>
+                <td id="md" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
+                (click)="changeSelectedLandlord(landlord.userId)">{{landlord.phoneNumber}}</td>
+                <td class="md" id="md" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
+                (click)="changeSelectedLandlord(landlord.userId)">
                   <img class="me-2 mb-2 identityCard"
-                    src="../../../assets/image/{{landlord.identityCardFrontSideImageLink}}">
-                  <img class="mb-2 identityCard" src="../../../assets/image/{{landlord.identityCardBackSideImageLink}}">
+                    src="{{landlord.identityCardFrontSideImageLink}}">
+                  <img class="mb-2 identityCard" src="{{landlord.identityCardBackSideImageLink}}">
                 </td>
-                <td id="md">{{landlord.createdDate | date: "dd/MM/yyyy"}}</td>
+                <td id="md" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
+                (click)="changeSelectedLandlord(landlord.userId)">{{landlord.createdDate | date: "dd/MM/yyyy"}}</td>
 
                 <!-- Action column -->
                 <td>
@@ -100,9 +104,9 @@
         <span><b>Ngày đăng ký: </b>{{ selectedLandlord.createdDate | date: "dd/MM/yyyy" }}</span><br />
         <span><b>Ảnh chứng minh thư: </b></span><br />
         <img class="w-100 my-2 viewIdentityCard"
-          src="../../../assets/image/{{selectedLandlord.identityCardFrontSideImageLink}}">
+          src="{{selectedLandlord.identityCardFrontSideImageLink}}">
         <img class="w-100 mt-2 viewIdentityCard"
-          src="../../../assets/image/{{selectedLandlord.identityCardBackSideImageLink}}">
+          src="{{selectedLandlord.identityCardBackSideImageLink}}">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

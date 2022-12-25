@@ -26,6 +26,20 @@
       <div class="invalid-feedback mb-3">Không được để trống</div>
     </div>
 
+    <div class="col-12 col-md-5 mb-3">
+      <label for="exampleInput1" class="form-label"><b>Img 1</b></label>
+      <img src="{{updateIdentityCardFrontSideImageLink}}">
+      <input type="file" (change)="displayImage($event,'front')">
+      <div class="invalid-feedback mb-3">Không được để trống</div>
+    </div>
+
+    <div class="col-12 col-md-5 mb-3">
+      <label for="exampleInput1" class="form-label"><b>Img 1</b></label>
+      <img src="{{updateIdentityCardBackSideImageLink}}">
+      <input type="file" (change)="displayImage($event,'back')">
+      <div class="invalid-feedback mb-3">Không được để trống</div>
+    </div>
+
     <div class="text-center col-12 col-md-5">
       <button class="btn btn-success w-50 mt-4" type="button" (click)="update()">Thay đổi</button>
     </div>

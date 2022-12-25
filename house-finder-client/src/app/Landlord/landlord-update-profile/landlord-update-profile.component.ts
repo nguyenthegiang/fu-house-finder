@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { User } from 'src/app/models/user';
+import { FileService } from 'src/app/services/file.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -14,11 +15,17 @@ export class LandlordUpdateProfileComponent implements OnInit {
   updateName: string = "";
   updatePhoneNumber: string = "";
   updateFacebookUrl: string = "";
+  updateIdentityCardFrontSideImageLink: string = "";
+  updateIdentityCardBackSideImageLink: string = "";
+
+  frontImg: any;
+  backImg: any;
+
 
   @ViewChild('updateSuccessAlert') private updateSuccessAlert: SwalComponent | undefined;
   @ViewChild('updateErrorAlert') private updateErrorAlert: SwalComponent | undefined;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private fileService: FileService) { }
 
   ngOnInit(): void {
     /**
@@ -36,6 +43,8 @@ export class LandlordUpdateProfileComponent implements OnInit {
       this.updateName = this.landlordDetail.displayName;
       this.updatePhoneNumber = this.landlordDetail.phoneNumber;
       this.updateFacebookUrl = this.landlordDetail.facebookUrl;
+      this.updateIdentityCardFrontSideImageLink = this.landlordDetail.identityCardFrontSideImageLink;
+      this.updateIdentityCardBackSideImageLink = this.landlordDetail.identityCardBackSideImageLink;
     });
   }
 
@@ -59,6 +68,30 @@ export class LandlordUpdateProfileComponent implements OnInit {
         },
         error => { }
       );
+      this.fileService.uploadIDC(this.frontImg, this.backImg).subscribe(
+        data => {
+        },
+        error => { }
+      );
+    }
+  }
+
+  displayImage(event: any, side: string): void {
+    if (event.target.files && event.target.files[0]) {
+      const file = event.target.files[0];
+
+      const reader = new FileReader();
+
+      if (side == 'front') {
+        reader.onload = e => this.updateIdentityCardFrontSideImageLink = reader.result!.toString();
+        reader.readAsDataURL(file);
+        this.frontImg = file;
+      }
+      else if (side == 'back') {
+        reader.onload = e => this.updateIdentityCardBackSideImageLink = reader.result!.toString();
+        reader.readAsDataURL(file);
+        this.backImg = file;
+      }
     }
   }
 

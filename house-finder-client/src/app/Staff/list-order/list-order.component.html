@@ -217,8 +217,7 @@
         <select #selectOrderStatusId class="form-select" [(ngModel)]="selectedStatusId"
           (change)="onSelectOrderStatus(selectOrderStatusId.value)">
           <option value="1">Chưa giải quyết</option>
-          <option value="2">Đang giải quyết</option>
-          <option value="3">Đã giải quyết</option>
+          <option value="2">Giải quyết</option>
         </select>
       </div>
 
@@ -233,3 +232,8 @@
     </div>
   </div>
 </div>
+
+<!-- Alerts by Template: sweetalert2 -->
+<swal #filterErrorMesage [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
+  title="Ngày bắt đầu phải nhỏ hơn ngày kết thúc!" icon="error">
+</swal>
