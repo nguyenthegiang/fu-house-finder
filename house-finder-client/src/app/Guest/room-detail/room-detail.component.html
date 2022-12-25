@@ -10,6 +10,15 @@
   </ol>
 </nav>
 
+<!-- Display Loading Spinner when Room Detail is not yet loaded -->
+<div class="container-fluid d-flex justify-content-center my-5"
+  *ngIf="roomDetail === undefined || landlordDetail === undefined">
+  <div class="spinner-border text-danger" role="status">
+    <span class="sr-only">Loading...</span>
+  </div>
+</div>
+
+<!-- Only display when Room Detail is loaded -->
 <div class="mx-1 mx-md-5 mb-5 d-flex justify-content-center" *ngIf="roomDetail && landlordDetail">
   <div class="row w-100 d-flex justify-content-evenly">
     <div class="col-12 col-md-7 mt-4">
