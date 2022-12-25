@@ -23,6 +23,7 @@ namespace HouseFinder_API.Controllers
         private IAuthentication auth;
         private IConfiguration Configuration;
         private IUserRepository userRepository = new UserRepository();
+
         //Used for Upload file to Amazon S3 Server
         private readonly IStorageRepository storageRepository;
 
