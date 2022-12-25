@@ -49,12 +49,22 @@ namespace HouseFinder_API.Authentication
             //Create & return Token
             var tokenHandler = new JwtSecurityTokenHandler();
             var tokenKey = Encoding.ASCII.GetBytes(key);
+            string status;
+            if (user.StatusId == 1)
+            {
+                status = "Verified";
+            }
+            else
+            {
+                status = "NotVerified";
+            }
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Email, email),
-                    new Claim(ClaimTypes.Role, user.RoleName)
+                    new Claim(ClaimTypes.Role, user.RoleName),
+                    new Claim("Status", status)
                 }),
 
                 Expires = DateTime.UtcNow.AddDays(7),

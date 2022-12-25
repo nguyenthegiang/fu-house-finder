@@ -94,6 +94,10 @@ namespace HouseFinder_API
                     ClockSkew = TimeSpan.Zero
                 };
             });
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Verified", policy => policy.RequireClaim("Status", "Verified"));
+            });
             services.AddSingleton<IAuthentication>(new AuthenticationManager(key));
             string AwsAccessKey;
             string AwsSecretKey;

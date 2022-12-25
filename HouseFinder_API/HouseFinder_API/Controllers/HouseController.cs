@@ -77,7 +77,7 @@ namespace HouseFinder_API.Controllers
             }
         }
 
-        [Authorize]
+        [Authorize(Policy = "Verified")]
         [HttpPost]
         public IActionResult CreateHouse(CreateHouseDTO house)
         {
@@ -104,14 +104,20 @@ namespace HouseFinder_API.Controllers
         [HttpPut]
         public IActionResult UpdateHouse(UpdateHouseDTO house)
         {
-                var uid = HttpContext.Session.GetString("User");
-                if (uid == null)
-                {
-                    return Forbid();
-                }
-                house.ModifiedBy = uid;
-                houseRepository.UpdateHouseByHouseId(house);
-                return Ok();
+            var uid = HttpContext.Session.GetString("User");
+            if (uid == null)
+            {
+                return Forbid();
+            }
+            HouseDTO houseDTO = houseRepository.GetHouseById(house.HouseId);
+            if (house == null) return NotFound();
+            if (!uid.Equals(houseDTO.LandlordId))
+            {
+                return Forbid();
+            }
+            house.ModifiedBy = uid;
+            houseRepository.UpdateHouseByHouseId(house);
+            return Ok();
         }
 
         /**

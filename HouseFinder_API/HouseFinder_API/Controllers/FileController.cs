@@ -59,7 +59,12 @@ namespace HouseFinder_API.Controllers
             {
                 return Forbid();
             }
-
+            HouseDTO house = housesRepository.GetHouseById(HouseId);
+            if (house == null) return NotFound();
+            if (!uid.Equals(house.LandlordId))
+            {
+                return Forbid();
+            }
             if (!checkXlsxMimeType(File))
                 return BadRequest("Invalid File Type");
 
@@ -171,6 +176,16 @@ namespace HouseFinder_API.Controllers
         public async Task<IActionResult> UploadRoomImage(IFormFile File, [ModelBinder(typeof(JsonModelBinder))] RoomImageInfoDTO Room)
         {
             string uid = HttpContext.Session.GetString("User");
+            if (uid == null)
+            {
+                return Forbid();
+            }
+            HouseDTO house = housesRepository.GetHouseById(Room.HouseId);
+            if (house == null) return NotFound();
+            if (!uid.Equals(house.LandlordId))
+            {
+                return Forbid();
+            }
             RoomDTO roomDTO = roomsRepository.GetRoomByHouseIdAndBuildingAndFloorAndRoomName(
                 Room.HouseId,
                 Room.BuildingNumber,
@@ -413,6 +428,12 @@ namespace HouseFinder_API.Controllers
             {
                 return Forbid();
             }
+            HouseDTO house = housesRepository.GetHouseById(HouseId);
+            if (house == null) return NotFound();
+            if (!uid.Equals(house.LandlordId))
+            {
+                return Forbid();
+            }
             string dir = $"user/{uid}/House/{HouseId}";
             for (int i = 0; i < 2; i++)
             {
@@ -440,6 +461,12 @@ namespace HouseFinder_API.Controllers
                 return Forbid();
             }
             if (!checkImageMimeType(file)) return BadRequest();
+            HouseDTO house = housesRepository.GetHouseById(HouseId);
+            if (house == null) return NotFound();
+            if (!uid.Equals(house.LandlordId))
+            {
+                return Forbid();
+            }
             string dir = $"user/{uid}/House/{HouseId}";
             var path = $"{dir}/{DateTime.Now}_{file.FileName}";
             Stream fs = file.OpenReadStream();
