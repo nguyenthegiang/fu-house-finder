@@ -18,6 +18,7 @@ declare const google: any;  //For Google Map
 })
 export class AddHouseComponent implements OnInit {
   @ViewChild('serverErrorAlert') private serverErrorAlert: SwalComponent | undefined;
+  @ViewChild('forbiddenAlert') private forbiddenAlert: SwalComponent | undefined;
   @ViewChild('addRoom') private addRoom: SwalComponent | undefined;
   map: any;
   marker: any;
@@ -167,7 +168,12 @@ export class AddHouseComponent implements OnInit {
       )
     },
       error => {
-        this.serverErrorAlert?.fire();
+        if (error.status == 401 || error.status == 403) {
+          this.forbiddenAlert?.fire();
+        }
+        else {
+          this.serverErrorAlert?.fire();
+        }
       });
   }
 

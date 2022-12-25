@@ -134,6 +134,15 @@
   icon="error">
 </swal>
 <swal
+  #forbiddenAlert
+  [toast]="true"
+  position="top-end"
+  [timer]="3000"
+  [timerProgressBar]="true"
+  title="Không có quyền thêm nhà"
+  icon="error">
+</swal>
+<swal
   #addRoom
   title="Thêm phòng"
   text="Bạn có muốn thêm phòng cho nhà trọ?"
