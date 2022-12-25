@@ -37,8 +37,8 @@
                 <td id="md" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
                 (click)="changeSelectedLandlord(landlord.userId)">
                   <img class="me-2 mb-2 identityCard"
-                    src="../../../assets/image/{{landlord.identityCardFrontSideImageLink}}">
-                  <img class="mb-2 identityCard" src="../../../assets/image/{{landlord.identityCardBackSideImageLink}}">
+                    src="{{landlord.identityCardFrontSideImageLink}}">
+                  <img class="mb-2 identityCard" src="{{landlord.identityCardBackSideImageLink}}">
                 </td>
                 <td id="md" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
                 (click)="changeSelectedLandlord(landlord.userId)">{{landlord.createdDate | date: "dd/MM/yyyy"}}</td>
@@ -105,9 +105,9 @@
         <span><b>Ngày đăng ký: </b>{{ selectedLandlord.createdDate | date: "dd/MM/yyyy" }}</span><br />
         <span><b>Ảnh chứng minh thư: </b></span><br />
         <img class="w-100 my-2 viewIdentityCard"
-          src="../../../assets/image/{{selectedLandlord.identityCardFrontSideImageLink}}">
+          src="{{selectedLandlord.identityCardFrontSideImageLink}}">
         <img class="w-100 mt-2 viewIdentityCard"
-          src="../../../assets/image/{{selectedLandlord.identityCardBackSideImageLink}}">
+          src="{{selectedLandlord.identityCardBackSideImageLink}}">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
