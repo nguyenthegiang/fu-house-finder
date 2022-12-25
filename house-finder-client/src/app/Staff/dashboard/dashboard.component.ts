@@ -170,10 +170,6 @@ export class DashboardStaffComponent implements OnInit {
       this.houseService.countTotalAvailableHouse().subscribe((data) => {
         this.availableHouseNum = data;
 
-        console.log(
-          'total: ' + this.totalHouses + ' avai: ' + this.availableHouseNum
-        );
-
         //Create house chart
         var houseChart = new Chart('houseChart', {
           type: 'pie',
@@ -362,17 +358,14 @@ export class DashboardStaffComponent implements OnInit {
     //Call API: Count number of villages, communes, districts having house
     this.villageService.countVillageHavingHouse().subscribe((data) => {
       this.totalVillage = data;
-      console.log(this.totalVillage);
     });
 
     this.communeService.countCommuneHavingHouse().subscribe((data) => {
       this.totalCommune = data;
-      console.log(this.totalCommune);
     });
 
     this.districtService.countDistrictHavingHouse().subscribe((data) => {
       this.totalDistrict = data;
-      console.log(this.totalDistrict);
     });
 
     //Call API to creat burn up chart
