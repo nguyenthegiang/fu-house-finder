@@ -16,7 +16,7 @@ import { OrderStatusService } from 'src/app/services/orderStatus.service';
 })
 export class ListOrderComponent implements OnInit {
   //List of orders
-  orders: Order[] = [];
+  orders: Order[] | undefined;
 
   //List of orders' statuses
   statuses: OrderStatus[] = [];
@@ -261,8 +261,8 @@ export class ListOrderComponent implements OnInit {
   //To show detail in modal
   changeSelectedOrder(orderId: number) {
     //Find the order which id == orderId
-    var selectedOrder = this.orders.find((order) => order.orderId == orderId);
-    this.selectedOrder = this.orders.find((order) => order.orderId == orderId);
+    var selectedOrder = this.orders!.find((order) => order.orderId == orderId);
+    this.selectedOrder = this.orders!.find((order) => order.orderId == orderId);
     if (selectedOrder != undefined) {
       this.selectedOrderName = selectedOrder.studentName;
       this.selectedOrderPhone = selectedOrder.phoneNumber;

@@ -1,6 +1,7 @@
 <app-staff-header></app-staff-header>
 
 <div class="container-fluid m-0 bg-light">
+  <!-- Statistics -->
   <div class="row px-4 pt-3">
     <div class="col-12 col-md-8">
       <div class="row d-flex justify-content-center align-items-center p-3 backgroundWhite statistics"
@@ -51,6 +52,8 @@
       </div>
     </div>
   </div>
+
+  <!-- Main Content -->
   <div class="row p-4">
     <div class="col-12 px-4 backgroundWhite">
       <!-- Page content -->
@@ -109,13 +112,18 @@
           </div>
           <!-- End filter -->
 
+          <!-- Display Loading Spinner when List Orders is not yet loaded -->
+          <div class="container-fluid d-flex justify-content-center my-5" *ngIf="orders === undefined">
+            <mat-spinner color="warn"></mat-spinner>
+          </div>
+
           <!-- If found no Orders -->
-          <div class="row mt-4" *ngIf="orders.length <= 0">
+          <div class="row mt-4" *ngIf="orders && orders.length <= 0">
             <div class="text-center emptyMesage">Không có nguyện vọng</div>
           </div>
 
           <!-- if there are Orders -->
-          <div *ngIf="orders.length > 0">
+          <div *ngIf="orders && orders.length > 0">
             <table class="table table-hover mt-4">
               <thead>
                 <tr>
