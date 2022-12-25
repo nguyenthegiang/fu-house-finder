@@ -233,7 +233,7 @@ export class HomepageComponent implements OnInit, AfterViewInit {
       this.countFilterHouses = data.length;
 
       // (Paging) Calculate number of pages
-      this.pageCount = Math.ceil(data.length / this.pageSize);  //divide & round up
+      this.pageCount = Math.ceil(this.countFilterHouses / this.pageSize);  //divide & round up
 
       // (Paging) Render pageList based on pageCount
       this.pageList = Array.from({ length: this.pageCount }, (_, i) => i + 1);
