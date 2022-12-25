@@ -1,5 +1,6 @@
 ﻿using BusinessObjects;
 using DataAccess.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Repositories.IRepository;
@@ -16,6 +17,7 @@ namespace HouseFinder_API.Controllers
     public class RoomController : ControllerBase
     {
         private IRoomRepository roomRepository = new RoomRepository();
+        private IHouseRepository houseRepository = new HouseRepository();
         private readonly IStorageRepository storageRepository;  //Injected from Startup
 
         public RoomController(IStorageRepository storageRepository)
@@ -118,6 +120,7 @@ namespace HouseFinder_API.Controllers
             }
         }
 
+        [Authorize]
         [HttpPost("create")]
         public IActionResult CreateRoom(CreateRoomDTO room)
         {
@@ -125,6 +128,12 @@ namespace HouseFinder_API.Controllers
             {
                 string uid = HttpContext.Session.GetString("User");
                 if (String.IsNullOrEmpty(uid))
+                {
+                    return Forbid();
+                }
+                HouseDTO houseDTO = houseRepository.GetHouseById(room.HouseId);
+                if (houseDTO == null) return NotFound();
+                if (!uid.Equals(houseDTO.LandlordId))
                 {
                     return Forbid();
                 }
@@ -165,11 +174,23 @@ namespace HouseFinder_API.Controllers
         }
 
         //PUT: api/Rooms
+        [Authorize]
         [HttpPut]
         public IActionResult UpdateRoom(RoomDTO roomDTO)
         {
             try
             {
+                string uid = HttpContext.Session.GetString("User");
+                if (String.IsNullOrEmpty(uid))
+                {
+                    return Forbid();
+                }
+                HouseDTO houseDTO = houseRepository.GetHouseById((int)roomDTO.HouseId);
+                if (houseDTO == null) return NotFound();
+                if (!uid.Equals(houseDTO.LandlordId))
+                {
+                    return Forbid();
+                }
                 Room updatedRoom = new Room();
                 updatedRoom.RoomId = roomDTO.RoomId;
                 updatedRoom.RoomName = roomDTO.RoomName;
