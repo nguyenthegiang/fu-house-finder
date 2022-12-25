@@ -1,15 +1,8 @@
 <!--Header-->
 <app-landlord-header></app-landlord-header>
 
-<!-- Display Loading Spinner when House Detail is not yet loaded -->
-<div class="container-fluid" *ngIf="rooms === undefined">
-  <div class="spinner-border text-danger" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
-</div>
-
 <!-- Statistics -->
-<div class="row">
+<div class="row" *ngIf="rooms">
   <div class="col-6 col-md-3 border">
     <div class="d-flex flex-column justify-content-center align-items-center">
       <div class="fs-4 d-flex align-items-center text-danger">
@@ -65,13 +58,18 @@
         </button>
       </div>
 
+      <!-- Display Loading Spinner when List Rooms is not yet loaded -->
+      <div class="container-fluid d-flex justify-content-center my-5" *ngIf="rooms === undefined">
+        <mat-spinner color="warn"></mat-spinner>
+      </div>
+
       <!-- Case: No data -->
-      <div *ngIf="rooms.length == 0">
+      <div *ngIf="rooms && rooms.length == 0">
         <div class="emptyMesage text-center">Chưa có phòng trọ</div>
       </div>
 
       <!-- Case: Have data -->
-      <div *ngIf="rooms.length != 0">
+      <div *ngIf="rooms && rooms.length != 0">
         <table class="table table-hover">
           <thead>
             <tr>

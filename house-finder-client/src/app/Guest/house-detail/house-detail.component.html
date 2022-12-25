@@ -1,19 +1,19 @@
 <app-header></app-header>
-<!-- Display Loading Spinner when House Detail is not yet loaded -->
-<div class="container-fluid" *ngIf="houseDetail === undefined || landlordDetail === undefined">
-  <div class="spinner-border text-danger" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
-</div>
-
+<!-- Breadcrumb -->
 <nav class="mx-1 mx-md-5 mt-3 ps-3 fs-6" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a class="text-danger" onclick="history.back()" style="cursor: pointer;">Trang chủ</a>
+    <li class="breadcrumb-item"><a class="text-danger" href="/home">Trang chủ</a>
     </li>
     <li class="breadcrumb-item" aria-current="page">></li>
     <li class="breadcrumb-item active" aria-current="page">Chi tiết nhà trọ</li>
   </ol>
 </nav>
+
+<!-- Display Loading Spinner when House Detail is not yet loaded -->
+<div class="container-fluid d-flex justify-content-center my-5"
+  *ngIf="houseDetail === undefined || landlordDetail === undefined">
+  <mat-spinner color="warn"></mat-spinner>
+</div>
 
 <!-- Only Display when House Detail is loaded -->
 <div class="mx-1 mx-md-5 mb-5 mt-3 d-flex justify-content-center" *ngIf="houseDetail && landlordDetail">

@@ -15,7 +15,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class LandlordHouseDetailComponent implements OnInit {
   //List of available rooms
-  rooms: Room[] = [];
+  rooms: Room[] | undefined;
   isOn = false;
   replyOn = false;
   houseId = 0;
@@ -32,7 +32,6 @@ export class LandlordHouseDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private roomService: RoomService,
     private houseService: HouseService,
-    private landlordInformationService: LandlordInformationService,
     private router: Router
   ) { }
 

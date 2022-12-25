@@ -4,17 +4,23 @@
   <div class="col-12">
     <!-- Page content -->
     <div class="row">
-      <div class="my-4" >
+      <div class="my-4">
         <h3 class="text-center">Danh sách yêu cầu chủ trọ</h3>
-        <a class="mt-4" href="Staff/list-rejected-landlord" style="color: #ee4d2d;">Danh sách chủ trọ bị từ chối</a>
+        <a class="mt-4" href="Staff/list-rejected-landlord" style="color: #ee4d2d;">Danh sách chủ trọ bị từ
+          chối</a>
+
+        <!-- Display Loading Spinner when List Landlords Sign up Request is not yet loaded -->
+        <div class="container-fluid d-flex justify-content-center my-5" *ngIf="landlordSignupRequest === undefined">
+          <mat-spinner color="warn"></mat-spinner>
+        </div>
 
         <!-- Case: No data -->
-        <div class="m-4" *ngIf="landlordSignupRequest.length == 0">
+        <div class="m-4" *ngIf="landlordSignupRequest && landlordSignupRequest.length == 0">
           <div class="emptyMesage">Hiện tại chưa có chủ trọ đăng ký</div>
         </div>
 
         <!-- Case: Have data -->
-        <div class="my-4" *ngIf="landlordSignupRequest.length != 0">
+        <div class="my-4" *ngIf="landlordSignupRequest && landlordSignupRequest.length != 0">
           <table class="table table-hover landlordSingupRequest">
             <thead>
               <tr>
@@ -29,19 +35,18 @@
             <tbody>
               <tr *ngFor="let landlord of landlordSignupRequest" style="cursor: pointer;">
                 <td id="md" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
-                (click)="changeSelectedLandlord(landlord.userId)">{{landlord.displayName}}</td>
+                  (click)="changeSelectedLandlord(landlord.userId)">{{landlord.displayName}}</td>
                 <td data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
-                (click)="changeSelectedLandlord(landlord.userId)">{{landlord.email}}</td>
+                  (click)="changeSelectedLandlord(landlord.userId)">{{landlord.email}}</td>
                 <td id="md" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
-                (click)="changeSelectedLandlord(landlord.userId)">{{landlord.phoneNumber}}</td>
+                  (click)="changeSelectedLandlord(landlord.userId)">{{landlord.phoneNumber}}</td>
                 <td id="md" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
-                (click)="changeSelectedLandlord(landlord.userId)">
-                  <img class="me-2 mb-2 identityCard"
-                    src="{{landlord.identityCardFrontSideImageLink}}">
+                  (click)="changeSelectedLandlord(landlord.userId)">
+                  <img class="me-2 mb-2 identityCard" src="{{landlord.identityCardFrontSideImageLink}}">
                   <img class="mb-2 identityCard" src="{{landlord.identityCardBackSideImageLink}}">
                 </td>
                 <td id="md" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
-                (click)="changeSelectedLandlord(landlord.userId)">{{landlord.createdDate | date: "dd/MM/yyyy"}}</td>
+                  (click)="changeSelectedLandlord(landlord.userId)">{{landlord.createdDate | date: "dd/MM/yyyy"}}</td>
 
                 <!-- Action column -->
                 <td>
@@ -79,16 +84,19 @@
 
 <!-- Alerts by Template: sweetalert2 -->
 <swal #acceptLandlordAlert title="Phê duyệt tài khoản thành công." icon="success" [showConfirmButton]="false"
-  [toast]="true" [timer]="3000" [timerProgressBar]="true" position="top-end" background="#defad9" [showCloseButton]="true">
+  [toast]="true" [timer]="3000" [timerProgressBar]="true" position="top-end" background="#defad9"
+  [showCloseButton]="true">
 </swal>
 
 <swal #denyLandlordStatusAlert title="Từ chối tài khoản thành công." icon="success" [showConfirmButton]="false"
-  [toast]="true" [timer]="3000" [timerProgressBar]="true" position="top-end" background="#defad9" [showCloseButton]="true">
+  [toast]="true" [timer]="3000" [timerProgressBar]="true" position="top-end" background="#defad9"
+  [showCloseButton]="true">
 </swal>
 
-<swal #updateLandlordStatusFailAlert title="Phê duyệt tài khoản thất bại." icon="error" [showConfirmButton]="false"
-  [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true" background="#facfcf" [showCloseButton]="true">
-</swal>
+<!-- <swal #updateLandlordStatusFailAlert title="Phê duyệt tài khoản thất bại." icon="error" [showConfirmButton]="false"
+  [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true" background="#facfcf"
+  [showCloseButton]="true">
+</swal> -->
 
 <!-- Modal -->
 <div class="modal fade" id="viewIdentityCardModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -104,10 +112,8 @@
         <span><b>Email: </b>{{ selectedLandlord.email }}</span><br />
         <span><b>Ngày đăng ký: </b>{{ selectedLandlord.createdDate | date: "dd/MM/yyyy" }}</span><br />
         <span><b>Ảnh chứng minh thư: </b></span><br />
-        <img class="w-100 my-2 viewIdentityCard"
-          src="{{selectedLandlord.identityCardFrontSideImageLink}}">
-        <img class="w-100 mt-2 viewIdentityCard"
-          src="{{selectedLandlord.identityCardBackSideImageLink}}">
+        <img class="w-100 my-2 viewIdentityCard" src="{{selectedLandlord.identityCardFrontSideImageLink}}">
+        <img class="w-100 mt-2 viewIdentityCard" src="{{selectedLandlord.identityCardBackSideImageLink}}">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

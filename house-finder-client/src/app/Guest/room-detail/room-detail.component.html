@@ -2,14 +2,22 @@
 
 <nav class="mx-1 mx-md-5 mt-3 ps-3 fs-6" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a class="text-danger" onclick="history.back(); history.back()" style="cursor: pointer;">Trang chủ</a></li>
+    <li class="breadcrumb-item"><a class="text-danger" href="/home">Trang chủ</a></li>
     <li class="breadcrumb-item" aria-current="page">></li>
-    <li class="breadcrumb-item"><a class="text-danger" onclick="history.back()" style="cursor: pointer;">Chi tiết nhà trọ</a></li>
+    <li class="breadcrumb-item"><a class="text-danger" onclick="history.back()" style="cursor: pointer;">Chi tiết nhà
+        trọ</a></li>
     <li class="breadcrumb-item" aria-current="page">></li>
     <li class="breadcrumb-item active" aria-current="page">Chi tiết phòng trọ</li>
   </ol>
 </nav>
 
+<!-- Display Loading Spinner when Room Detail is not yet loaded -->
+<div class="container-fluid d-flex justify-content-center my-5"
+  *ngIf="roomDetail === undefined || landlordDetail === undefined">
+  <mat-spinner color="warn"></mat-spinner>
+</div>
+
+<!-- Only display when Room Detail is loaded -->
 <div class="mx-1 mx-md-5 mb-5 d-flex justify-content-center" *ngIf="roomDetail && landlordDetail">
   <div class="row w-100 d-flex justify-content-evenly">
     <div class="col-12 col-md-7 mt-4">
@@ -101,7 +109,8 @@
             </span>
 
             <div>
-              Máy giặt: <span *ngIf="roomDetail.washingMachine">Có</span><span *ngIf="!roomDetail.washingMachine">Không</span>
+              Máy giặt: <span *ngIf="roomDetail.washingMachine">Có</span><span
+                *ngIf="!roomDetail.washingMachine">Không</span>
             </div>
           </div>
 
@@ -123,7 +132,8 @@
             </span>
 
             <div>
-              Vệ sinh khép kín: <span *ngIf="roomDetail.closedToilet">Có</span><span *ngIf="!roomDetail.closedToilet">Không</span>
+              Vệ sinh khép kín: <span *ngIf="roomDetail.closedToilet">Có</span><span
+                *ngIf="!roomDetail.closedToilet">Không</span>
             </div>
           </div>
 
@@ -145,7 +155,8 @@
             </span>
 
             <div>
-              Không chung chủ: <span *ngIf="roomDetail.noLiveWithHost">Có</span><span *ngIf="!roomDetail.noLiveWithHost">Không</span>
+              Không chung chủ: <span *ngIf="roomDetail.noLiveWithHost">Có</span><span
+                *ngIf="!roomDetail.noLiveWithHost">Không</span>
             </div>
           </div>
         </div>

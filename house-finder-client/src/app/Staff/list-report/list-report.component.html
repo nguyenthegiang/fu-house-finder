@@ -1,5 +1,6 @@
 <app-staff-header></app-staff-header>
 
+<!-- Main Content -->
 <div class="row mx-2 my-5">
   <div class="col-12">
     <!-- Tab -->
@@ -66,13 +67,18 @@
             </div>
             <!-- End filter -->
 
+            <!-- Display Loading Spinner when List Orders is not yet loaded -->
+            <div class="container-fluid d-flex justify-content-center my-5" *ngIf="reports === undefined">
+              <mat-spinner color="warn"></mat-spinner>
+            </div>
+
             <!-- Case: No data -->
-            <div *ngIf="reports.length <= 0">
+            <div *ngIf="reports && reports.length <= 0">
               <div class="text-center emptyMesage">Không có báo cáo</div>
             </div>
 
             <!-- Case: Have data -->
-            <div *ngIf="reports.length > 0">
+            <div *ngIf="reports && reports.length > 0">
               <table class="table table-hover">
                 <thead>
                   <tr>
@@ -205,13 +211,18 @@
             </div>
             <!-- End filter -->
 
+            <!-- Display Loading Spinner when List Orders is not yet loaded -->
+            <div class="container-fluid d-flex justify-content-center my-5" *ngIf="reportedHouses === undefined">
+              <mat-spinner color="warn"></mat-spinner>
+            </div>
+
             <!-- Case: No data -->
-            <div *ngIf="reportedHouses.length <= 0">
+            <div *ngIf="reportedHouses && reportedHouses.length <= 0">
               <div class="text-center emptyMesage">Không có nhà bị báo cáo</div>
             </div>
 
             <!-- Case: Have data -->
-            <div *ngIf="reportedHouses.length > 0">
+            <div *ngIf="reportedHouses && reportedHouses.length > 0">
               <table class="table table-hover">
                 <thead>
                   <tr>

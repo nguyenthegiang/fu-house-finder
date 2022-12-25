@@ -12,7 +12,7 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 
 export class ListStaffComponent implements OnInit {
   @ViewChild('deleteStaffAlert') private deleteStaffAlert: SwalComponent | undefined;
-  staffs: User[] = []
+  staffs: User[] | undefined;
 
   selectedId: any;
 

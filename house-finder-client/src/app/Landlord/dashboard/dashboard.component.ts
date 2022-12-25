@@ -15,7 +15,7 @@ export class DashboardComponent implements OnInit {
   //Child alert
   @ViewChild('orderErrorAlert') private orderErrorAlert: SwalComponent | undefined;
   //List of all houses
-  houses: House[] = [];
+  houses: House[] | undefined;
 
   //{Search} input value
   houseCount: number = 0;

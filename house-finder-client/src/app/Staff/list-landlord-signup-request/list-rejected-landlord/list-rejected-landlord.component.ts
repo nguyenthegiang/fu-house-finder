@@ -9,16 +9,11 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./list-rejected-landlord.component.scss']
 })
 export class ListRejectedLandlordComponent implements OnInit {
-  @ViewChild('acceptLandlordAlert') private acceptLandlordAlert:
-    | SwalComponent
-    | undefined;
-  @ViewChild('denyLandlordStatusAlert') private denyLandlordStatusAlert:
-    | SwalComponent
-    | undefined;
-  @ViewChild('updateLandlordStatusFailAlert')
-  private updateLandlordStatusFailAlert: SwalComponent | undefined;
+  // Alerts
+  @ViewChild('acceptLandlordAlert') private acceptLandlordAlert: SwalComponent | undefined;
+  @ViewChild('denyLandlordStatusAlert') private denyLandlordStatusAlert: SwalComponent | undefined;
 
-  rejectedLandlords: User[] = [];
+  rejectedLandlords: User[] | undefined;
   selectedLandlord: User | undefined;
 
   constructor(private userService: UserService) { }
@@ -55,7 +50,7 @@ export class ListRejectedLandlordComponent implements OnInit {
   }
 
   changeSelectedLandlord(userId: string) {
-    this.selectedLandlord = this.rejectedLandlords.find(
+    this.selectedLandlord = this.rejectedLandlords!.find(
       (landlord) => landlord.userId == userId
     );
   }

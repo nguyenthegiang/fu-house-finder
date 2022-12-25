@@ -18,11 +18,11 @@ export class ListReportComponent implements OnInit {
   //{Search} input value
   searchValue: string | undefined;
   //List all reported reportedHouses
-  reportedHouses: ReportHouse[] = [];
+  reportedHouses: ReportHouse[] | undefined;
   //List reports of selected house
   reportsOfSelectedHouse: StaffReport[] = [];
   //List all reports
-  reports: StaffReport[] = [];
+  reports: StaffReport[] | undefined;
   //Landlord of selected house
   landlordOfSelectedHouse: User | undefined;
 
@@ -110,7 +110,7 @@ export class ListReportComponent implements OnInit {
   //Show modal
   changeSelectedHouse(houseId: number) {
     //Find the house which id == houseId
-    var selectedHouse = this.reportedHouses.find((house) => house.houseId == houseId);
+    var selectedHouse = this.reportedHouses!.find((house) => house.houseId == houseId);
     if (selectedHouse?.listReports != undefined) {
       this.reportsOfSelectedHouse = selectedHouse.listReports;
       this.landlordOfSelectedHouse = selectedHouse.landlord;
@@ -248,8 +248,8 @@ export class ListReportComponent implements OnInit {
 
   changeSelectedReport(reportId: number) {
     //Find the order which id == orderId
-    var selectedReport = this.reports.find((report) => report.reportId == reportId);
-    this.selectedReport = this.reports.find((report) => report.reportId == reportId);
+    var selectedReport = this.reports!.find((report) => report.reportId == reportId);
+    this.selectedReport = this.reports!.find((report) => report.reportId == reportId);
     if (selectedReport != undefined) {
       this.selectedReportStudentName = selectedReport.student.displayName;
       this.selectedReportHouse = selectedReport.house.houseName;
