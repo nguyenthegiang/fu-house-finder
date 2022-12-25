@@ -4,7 +4,8 @@
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a class="text-danger" href="/home">Trang chủ</a></li>
     <li class="breadcrumb-item" aria-current="page">></li>
-    <li class="breadcrumb-item"><a class="text-danger" onclick="history.back()" style="cursor: pointer;">Chi tiết nhà trọ</a></li>
+    <li class="breadcrumb-item"><a class="text-danger" onclick="history.back()" style="cursor: pointer;">Chi tiết nhà
+        trọ</a></li>
     <li class="breadcrumb-item" aria-current="page">></li>
     <li class="breadcrumb-item active" aria-current="page">Chi tiết phòng trọ</li>
   </ol>
@@ -13,9 +14,7 @@
 <!-- Display Loading Spinner when Room Detail is not yet loaded -->
 <div class="container-fluid d-flex justify-content-center my-5"
   *ngIf="roomDetail === undefined || landlordDetail === undefined">
-  <div class="spinner-border text-danger" role="status">
-    <span class="sr-only">Loading...</span>
-  </div>
+  <mat-spinner color="warn"></mat-spinner>
 </div>
 
 <!-- Only display when Room Detail is loaded -->
@@ -110,7 +109,8 @@
             </span>
 
             <div>
-              Máy giặt: <span *ngIf="roomDetail.washingMachine">Có</span><span *ngIf="!roomDetail.washingMachine">Không</span>
+              Máy giặt: <span *ngIf="roomDetail.washingMachine">Có</span><span
+                *ngIf="!roomDetail.washingMachine">Không</span>
             </div>
           </div>
 
@@ -132,7 +132,8 @@
             </span>
 
             <div>
-              Vệ sinh khép kín: <span *ngIf="roomDetail.closedToilet">Có</span><span *ngIf="!roomDetail.closedToilet">Không</span>
+              Vệ sinh khép kín: <span *ngIf="roomDetail.closedToilet">Có</span><span
+                *ngIf="!roomDetail.closedToilet">Không</span>
             </div>
           </div>
 
@@ -154,7 +155,8 @@
             </span>
 
             <div>
-              Không chung chủ: <span *ngIf="roomDetail.noLiveWithHost">Có</span><span *ngIf="!roomDetail.noLiveWithHost">Không</span>
+              Không chung chủ: <span *ngIf="roomDetail.noLiveWithHost">Có</span><span
+                *ngIf="!roomDetail.noLiveWithHost">Không</span>
             </div>
           </div>
         </div>
