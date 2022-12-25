@@ -61,7 +61,6 @@ namespace HouseFinder_API.Controllers
             {
                 return NotFound();
             }
-
         }
 
         //GET: api/Houses/search?name=
