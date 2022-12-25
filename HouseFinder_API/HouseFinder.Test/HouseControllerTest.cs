@@ -197,26 +197,18 @@ namespace HouseFinder.Test
             HouseDTO existingHouse = okResult.Value.Should().BeAssignableTo<HouseDTO>().Subject;
 
             //Update House
-            House houseToUpdate = new House();
+            UpdateHouseDTO houseToUpdate = new UpdateHouseDTO();
             houseToUpdate.HouseId = existingHouse.HouseId;
             houseToUpdate.HouseName = "Trọ Tâm Thảo Test Update";   //update name
-            houseToUpdate.View = existingHouse.View;
             houseToUpdate.Information = existingHouse.Information;
-            houseToUpdate.AddressId = existingHouse.AddressId;
-            houseToUpdate.VillageId = existingHouse.VillageId;
-            houseToUpdate.LandlordId = existingHouse.LandlordId;
-            houseToUpdate.CampusId = existingHouse.CampusId;
-            houseToUpdate.DistanceToCampus = existingHouse.DistanceToCampus;
+            houseToUpdate.Address = existingHouse.Address.Addresses;
+            houseToUpdate.VillageId = (int)existingHouse.VillageId;
+            houseToUpdate.CampusId = (int)existingHouse.CampusId;
             houseToUpdate.PowerPrice = existingHouse.PowerPrice;
             houseToUpdate.WaterPrice = existingHouse.WaterPrice;
-            houseToUpdate.FingerprintLock = existingHouse.FingerprintLock;
-            houseToUpdate.Camera = existingHouse.Camera;
-            houseToUpdate.Parking = existingHouse.Parking;
-            houseToUpdate.Deleted = existingHouse.Deleted;
-            houseToUpdate.CreatedDate = existingHouse.CreatedDate;
-            houseToUpdate.LastModifiedDate = existingHouse.LastModifiedDate;
-            houseToUpdate.CreatedBy = existingHouse.CreatedBy;
-            houseToUpdate.LastModifiedBy = existingHouse.LastModifiedBy;
+            houseToUpdate.FingerprintLock = (bool)existingHouse.FingerprintLock;
+            houseToUpdate.Camera = (bool)existingHouse.Camera;
+            houseToUpdate.Parking = (bool)existingHouse.Parking;
 
             var updatedData = houseController.UpdateHouse(houseToUpdate);
 
@@ -245,26 +237,18 @@ namespace HouseFinder.Test
             HouseDTO existingHouse = okResult.Value.Should().BeAssignableTo<HouseDTO>().Subject;
 
             //Update House
-            House houseToUpdate = new House();
+            UpdateHouseDTO houseToUpdate = new UpdateHouseDTO();
             houseToUpdate.HouseId = existingHouse.HouseId;
-            houseToUpdate.HouseName = null;   //update name
-            houseToUpdate.View = existingHouse.View;
+            houseToUpdate.HouseName = null;   //update name invalid
             houseToUpdate.Information = existingHouse.Information;
-            houseToUpdate.AddressId = existingHouse.AddressId;
-            houseToUpdate.VillageId = existingHouse.VillageId;
-            houseToUpdate.LandlordId = existingHouse.LandlordId;
-            houseToUpdate.CampusId = existingHouse.CampusId;
-            houseToUpdate.DistanceToCampus = existingHouse.DistanceToCampus;
+            houseToUpdate.Address = existingHouse.Address.Addresses;
+            houseToUpdate.VillageId = (int)existingHouse.VillageId;
+            houseToUpdate.CampusId = (int)existingHouse.CampusId;
             houseToUpdate.PowerPrice = existingHouse.PowerPrice;
             houseToUpdate.WaterPrice = existingHouse.WaterPrice;
-            houseToUpdate.FingerprintLock = existingHouse.FingerprintLock;
-            houseToUpdate.Camera = existingHouse.Camera;
-            houseToUpdate.Parking = existingHouse.Parking;
-            houseToUpdate.Deleted = existingHouse.Deleted;
-            houseToUpdate.CreatedDate = existingHouse.CreatedDate;
-            houseToUpdate.LastModifiedDate = existingHouse.LastModifiedDate;
-            houseToUpdate.CreatedBy = existingHouse.CreatedBy;
-            houseToUpdate.LastModifiedBy = existingHouse.LastModifiedBy;
+            houseToUpdate.FingerprintLock = (bool)existingHouse.FingerprintLock;
+            houseToUpdate.Camera = (bool)existingHouse.Camera;
+            houseToUpdate.Parking = (bool)existingHouse.Parking;
 
             var updatedData = houseController.UpdateHouse(houseToUpdate);
 
@@ -293,26 +277,18 @@ namespace HouseFinder.Test
             HouseDTO existingHouse = okResult.Value.Should().BeAssignableTo<HouseDTO>().Subject;
 
             //Update House
-            House houseToUpdate = new House();
-            houseToUpdate.HouseId = -1; //update id (not exist)
-            houseToUpdate.HouseName = existingHouse.HouseName;
-            houseToUpdate.View = existingHouse.View;
+            UpdateHouseDTO houseToUpdate = new UpdateHouseDTO();
+            houseToUpdate.HouseId = -1; //update id not exist
+            houseToUpdate.HouseName = "Trọ Tâm Thảo Test Update";
             houseToUpdate.Information = existingHouse.Information;
-            houseToUpdate.AddressId = existingHouse.AddressId;
-            houseToUpdate.VillageId = existingHouse.VillageId;
-            houseToUpdate.LandlordId = existingHouse.LandlordId;
-            houseToUpdate.CampusId = existingHouse.CampusId;
-            houseToUpdate.DistanceToCampus = existingHouse.DistanceToCampus;
+            houseToUpdate.Address = existingHouse.Address.Addresses;
+            houseToUpdate.VillageId = (int)existingHouse.VillageId;
+            houseToUpdate.CampusId = (int)existingHouse.CampusId;
             houseToUpdate.PowerPrice = existingHouse.PowerPrice;
             houseToUpdate.WaterPrice = existingHouse.WaterPrice;
-            houseToUpdate.FingerprintLock = existingHouse.FingerprintLock;
-            houseToUpdate.Camera = existingHouse.Camera;
-            houseToUpdate.Parking = existingHouse.Parking;
-            houseToUpdate.Deleted = existingHouse.Deleted;
-            houseToUpdate.CreatedDate = existingHouse.CreatedDate;
-            houseToUpdate.LastModifiedDate = existingHouse.LastModifiedDate;
-            houseToUpdate.CreatedBy = existingHouse.CreatedBy;
-            houseToUpdate.LastModifiedBy = existingHouse.LastModifiedBy;
+            houseToUpdate.FingerprintLock = (bool)existingHouse.FingerprintLock;
+            houseToUpdate.Camera = (bool)existingHouse.Camera;
+            houseToUpdate.Parking = (bool)existingHouse.Parking;
 
             var updatedData = houseController.UpdateHouse(houseToUpdate);
 
@@ -341,26 +317,18 @@ namespace HouseFinder.Test
             HouseDTO existingHouse = okResult.Value.Should().BeAssignableTo<HouseDTO>().Subject;
 
             //Update House
-            House houseToUpdate = new House();
+            UpdateHouseDTO houseToUpdate = new UpdateHouseDTO();
             houseToUpdate.HouseId = existingHouse.HouseId;
             houseToUpdate.HouseName = "Trọ Tâm Thảo Test Update";   //update name
-            houseToUpdate.View = existingHouse.View;
             houseToUpdate.Information = existingHouse.Information;
-            houseToUpdate.AddressId = existingHouse.AddressId;
-            houseToUpdate.VillageId = existingHouse.VillageId;
-            houseToUpdate.LandlordId = existingHouse.LandlordId;
-            houseToUpdate.CampusId = existingHouse.CampusId;
-            houseToUpdate.DistanceToCampus = existingHouse.DistanceToCampus;
+            houseToUpdate.Address = existingHouse.Address.Addresses;
+            houseToUpdate.VillageId = (int)existingHouse.VillageId;
+            houseToUpdate.CampusId = (int)existingHouse.CampusId;
             houseToUpdate.PowerPrice = existingHouse.PowerPrice;
             houseToUpdate.WaterPrice = existingHouse.WaterPrice;
-            houseToUpdate.FingerprintLock = existingHouse.FingerprintLock;
-            houseToUpdate.Camera = existingHouse.Camera;
-            houseToUpdate.Parking = existingHouse.Parking;
-            houseToUpdate.Deleted = existingHouse.Deleted;
-            houseToUpdate.CreatedDate = existingHouse.CreatedDate;
-            houseToUpdate.LastModifiedDate = existingHouse.LastModifiedDate;
-            houseToUpdate.CreatedBy = existingHouse.CreatedBy;
-            houseToUpdate.LastModifiedBy = existingHouse.LastModifiedBy;
+            houseToUpdate.FingerprintLock = (bool)existingHouse.FingerprintLock;
+            houseToUpdate.Camera = (bool)existingHouse.Camera;
+            houseToUpdate.Parking = (bool)existingHouse.Parking;
 
             houseController.UpdateHouse(houseToUpdate);
 
