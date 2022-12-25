@@ -70,7 +70,7 @@ namespace HouseFinder_API.Controllers
                 //Admin Login
                 ResponseDTO user;
                 //Check with account in appsettings
-                if ((!String.IsNullOrEmpty(login.Email) || !String.IsNullOrEmpty(login.Password)) 
+                if ((!String.IsNullOrEmpty(login.Email) || !String.IsNullOrEmpty(login.Password))
                     && login.Email == Configuration.GetSection("AdminAccount").GetSection("Email").Value
                     && login.Password == Configuration.GetSection("AdminAccount").GetSection("Password").Value)
                 {
@@ -213,18 +213,34 @@ namespace HouseFinder_API.Controllers
             }
         }
 
+        [HttpGet("LandlordSignupRequest")]
+        public IActionResult GetLandlordSignupRequest()
+        {
+            List<UserDTO> landlords = userRepository.GetLandlordSignupRequest();
+
+            //Get image link from S3 Server
+            foreach (var landlord in landlords)
+            {
+                landlord.IdentityCardFrontSideImageLink = storageRepository.RetrieveFile(landlord.IdentityCardFrontSideImageLink);
+                landlord.IdentityCardBackSideImageLink = storageRepository.RetrieveFile(landlord.IdentityCardBackSideImageLink);
+            }
+
+            return Ok(landlords);
+        }
+
         [HttpGet("RejectedLandlord")]
         public IActionResult GetRejectedLandlords()
         {
             List<UserDTO> landlords = userRepository.GetRejectedLandlords();
-            if (landlords == null)
+
+            //Get image link from S3 Server
+            foreach (var landlord in landlords)
             {
-                return NotFound();
+                landlord.IdentityCardFrontSideImageLink = storageRepository.RetrieveFile(landlord.IdentityCardFrontSideImageLink);
+                landlord.IdentityCardBackSideImageLink = storageRepository.RetrieveFile(landlord.IdentityCardBackSideImageLink);
             }
-            else
-            {
-                return Ok(landlords);
-            }
+
+            return Ok(landlords);
         }
 
         [HttpGet("CountTotalLandlord")]
@@ -244,9 +260,6 @@ namespace HouseFinder_API.Controllers
         {
             return userRepository.CountInactiveLandlord();
         }
-
-        [HttpGet("LandlordSignupRequest")]
-        public ActionResult<IEnumerable<UserDTO>> GetLandlordSignupRequest() => userRepository.GetLandlordSignupRequest();
 
         [Authorize]
         [HttpPut("{userId}/{statusId}")]
@@ -323,12 +336,12 @@ namespace HouseFinder_API.Controllers
         }
 
         [HttpPut("landLordUpdateProfile")]
-        public IActionResult LandLordUpdateProfile(string userId, string name, string phoneNumber,string facebookUrl)
+        public IActionResult LandLordUpdateProfile(string userId, string name, string phoneNumber, string facebookUrl)
         {
             try
             {
                 //Update to Database
-                userRepository.LandLordUpdateProfile(userId, name, phoneNumber,facebookUrl);
+                userRepository.LandLordUpdateProfile(userId, name, phoneNumber, facebookUrl);
                 return Ok(new { Status = 200 });
             }
             catch (Exception)
@@ -395,7 +408,7 @@ namespace HouseFinder_API.Controllers
                 userRepository.UpdateStaffAccount(staff);
                 return Ok();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return BadRequest();
             }
@@ -414,7 +427,7 @@ namespace HouseFinder_API.Controllers
                 userRepository.DeleteStaffAccount(staff);
                 return Ok();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return BadRequest();
             }
