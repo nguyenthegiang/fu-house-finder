@@ -1,7 +1,6 @@
 import { RateService } from './../../services/rate.service';
 import { Rate } from './../../models/rate';
 import { User } from '../../models/user';
-import { CampusService } from '../../services/campus.service';
 import { UserService } from '../../services/user.service';
 import { House } from '../../models/house';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -24,28 +23,31 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 export class HouseDetailComponent implements OnInit {
   //(Environment) Google Map API Key, to display Google Map iframe embed
   mapAPIkey = environment.google_maps_api_key;
-  //Detail information of this House
-  houseDetail: House | undefined;
   //URL for src in <iframe> Google Map
   mapUrl: string | undefined;
+
+  //Detail information of this House
+  houseDetail: House | undefined;
   //Detail image of this House
   houseImage: string[] = [];
   //Landlord of this house
   landlordDetail: User | undefined;
+
   //List of available rooms
   availableRooms: Room[] = [];
-  //(Paging)
-  countAvailableHouses = 0; //items count
-  pageSize = 9; //number of items per page
-  pageNumber = 1; //starts at page 1
-  isOn = false;
 
+  //For phone number
+  phoneNumDisplay = false;
+
+  // Statistics
   totallyAvailableRoom: number = 0;
   partiallyAvailableRoom: number = 0;
   availableSlot: number = 0;
 
+  // Rates
   rates: Rate[] = [];
 
+  // For creating Rates
   houseId: number = 0;
   star: number = 0;
   comment: string = "";
@@ -54,11 +56,10 @@ export class HouseDetailComponent implements OnInit {
 
   // Alert
   @ViewChild('reportSuccessAlert') private reportSuccessAlert: SwalComponent | undefined;
-  @ViewChild('orderErrorAlert') private orderErrorAlert: SwalComponent | undefined;
+  @ViewChild('reportErrorAlert') private reportErrorAlert: SwalComponent | undefined;
   @ViewChild('rateSuccessAlert') private rateSuccessAlert: SwalComponent | undefined;
   @ViewChild('rateErrorAlert') private rateErrorAlert: SwalComponent | undefined;
-  @ViewChild('orderRoleErrorAlert') private rateRoleErrorAlert: SwalComponent | undefined;
-
+  @ViewChild('rateRoleErrorAlert') private rateRoleErrorAlert: SwalComponent | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -96,6 +97,7 @@ export class HouseDetailComponent implements OnInit {
       });
     });
 
+    // Statistics
     this.roomService.countTotallyAvailableRoomByHouseId(id).subscribe(data => {
       this.totallyAvailableRoom = data;
     });
@@ -108,13 +110,9 @@ export class HouseDetailComponent implements OnInit {
       this.availableSlot = data;
     });
 
+    // Rates
     this.rateService.getListRatesByHouseId(this.houseId).subscribe(data => {
       this.rates = data;
-    });
-
-    //(Paging) Count available Houses for total number of pages
-    this.houseService.countTotalAvailableHouse().subscribe(data => {
-      this.countAvailableHouses = data;
     });
   }
 
@@ -122,10 +120,14 @@ export class HouseDetailComponent implements OnInit {
   sendReport() {
     var user = null;
     var role = null;
+
+    // get data from localStorage
     user = localStorage.getItem("user");
     role = localStorage.getItem("role");
+
     if (user === null) {
-      this.orderErrorAlert?.fire();
+      //not logged in
+      this.reportErrorAlert?.fire();
       return;
     } else if (role === "Student") {
       this.inputReportContent = this.inputReportContent.trim();
@@ -138,11 +140,14 @@ export class HouseDetailComponent implements OnInit {
         deleted: false,
         reportedDate: new Date()
       };
+
       this.reportService.addReport(report).subscribe(
         data => {
           if (data.status == 403) {
-            this.orderErrorAlert?.fire();
+            //not logged in
+            this.reportErrorAlert?.fire();
           } else if (data.status == 200) {
+            //success
             this.reportSuccessAlert?.fire();
           }
         },
@@ -150,14 +155,12 @@ export class HouseDetailComponent implements OnInit {
         }
       );
     } else if (role !== "Student") {
+      //wrong role
       this.rateRoleErrorAlert?.fire();
     }
   }
 
-  // goBack(): void {
-  //   window.location.reload();
-  // }
-
+  // Go to RoomDetail
   viewRoom(id: number) {
     this.router.navigate(['/room-detail/' + id]);
   }
@@ -167,30 +170,29 @@ export class HouseDetailComponent implements OnInit {
     return new Array(i);
   }
 
+  // For Rate
   star1() {
     this.star = 1;
   }
-
   star2() {
     this.star = 2;
   }
-
   star3() {
     this.star = 3;
   }
-
   star4() {
     this.star = 4;
   }
-
   star5() {
     this.star = 5;
   }
 
+  // Create Rate
   addRate() {
     //Check if user has logged in
     var user = null;
     user = localStorage.getItem("user");
+    
     if (user === null) {
       //user not logged in => Alert
       this.rateErrorAlert?.fire();

@@ -53,7 +53,8 @@
 //     }
 //   }
 // }
-.floating-btn{
+
+.floating-btn {
   width: 80px;
   height: 80px;
   background-color: #FF0000;
@@ -64,7 +65,7 @@
   border-radius: 50%;
   color: #ffffff;
   font-size: 40px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0,0.25);
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   position: fixed;
   right: 20px;
   bottom: 20px;
@@ -72,17 +73,16 @@
   border: none;
   z-index: 999999;
 }
-.floating-btn:active{
+
+.floating-btn:active {
   background: #990000;
 }
 
-.star
-{
+.star {
   cursor: pointer;
 }
 
-.star:hover
-{
+.star:hover {
   opacity: 0.8;
 }
 
@@ -95,96 +95,80 @@
   }
 }
 
-.phoneOn
-{
+.phoneOn {
   cursor: pointer;
   text-decoration: none;
 }
 
-.phoneOn :hover
-{
+.phoneOn :hover {
   opacity: 0.5;
 }
 
-.phoneOff
-{
+.phoneOff {
   text-decoration: none;
   color: black;
 }
 
 @media only screen and (max-width: 768px) {
-  #md
-  {
+  #md {
     display: none;
   }
 
-  #img
-  {
+  #img {
     height: 370px !important;
   }
 }
 
 @media only screen and (max-width: 576px) {
-  #md
-  {
+  #md {
     display: none;
   }
 
-  #img
-  {
+  #img {
     height: 270px !important;
   }
 }
 
 @media only screen and (max-width: 992px) {
-  #img
-  {
+  #img {
     height: 270px !important;
   }
 }
 
 @media only screen and (max-width: 1200px) {
-  #img
-  {
+  #img {
     height: 300px !important;
   }
 }
 
-#btn:hover
-{
+#btn:hover {
   background-color: rgb(180, 180, 180);
   border-radius: 5px;
 }
 
-#btn:active
-{
+#btn:active {
   background-color: rgb(147, 147, 147);
   border-radius: 5px;
 }
 
-.modal-header
-{
+.modal-header {
   background-color: #ee4d2d !important;
 }
 
-#btnAdd
-{
+#btnAdd {
   background-color: #ee4d2d !important;
   border-color: #ee4d2d !important;
 }
 
-#btnAdd:hover
-{
+#btnAdd:hover {
   background-color: #e73310 !important;
   border-color: #e73310 !important;
 }
 
-#rateStar
-{
+#rateStar {
   cursor: default;
 }
 
-#rateStar:hover
-{
+#rateStar:hover {
   opacity: 1 !important;
 }
