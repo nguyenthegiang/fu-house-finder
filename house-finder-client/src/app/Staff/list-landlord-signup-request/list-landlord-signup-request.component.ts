@@ -10,19 +10,14 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
   styleUrls: ['./list-landlord-signup-request.component.scss'],
 })
 export class ListLandlordSignupRequestComponent implements OnInit {
-  @ViewChild('acceptLandlordAlert') private acceptLandlordAlert:
-    | SwalComponent
-    | undefined;
-  @ViewChild('denyLandlordStatusAlert') private denyLandlordStatusAlert:
-    | SwalComponent
-    | undefined;
-  @ViewChild('updateLandlordStatusFailAlert')
-  private updateLandlordStatusFailAlert: SwalComponent | undefined;
+  // Alerts
+  @ViewChild('acceptLandlordAlert') private acceptLandlordAlert: SwalComponent | undefined;
+  @ViewChild('denyLandlordStatusAlert') private denyLandlordStatusAlert: SwalComponent | undefined;
 
   //{Search} input value
   searchValue: string | undefined;
 
-  landlordSignupRequest: User[] = [];
+  landlordSignupRequest: User[] | undefined;
   selectedLandlord: User | undefined;
 
   constructor(private userService: UserService) { }
@@ -59,7 +54,7 @@ export class ListLandlordSignupRequestComponent implements OnInit {
   }
 
   changeSelectedLandlord(userId: string) {
-    this.selectedLandlord = this.landlordSignupRequest.find(
+    this.selectedLandlord = this.landlordSignupRequest!.find(
       (landlord) => landlord.userId == userId
     );
   }

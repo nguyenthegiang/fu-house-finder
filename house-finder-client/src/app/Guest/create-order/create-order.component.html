@@ -57,6 +57,8 @@
     </div>
   </div>
 </div>
+
+<!-- Alerts -->
 <swal #orderSuccessAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
   title="Gửi đơn thành công" icon="success">
 </swal>
@@ -64,5 +66,5 @@
   title="Vui lòng đăng nhập để sử dụng tính năng này!" icon="error">
 </swal>
 <swal #orderRoleErrorAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
-  title="Chỉ học sinh có thể sử dụng tính năng này!" icon="error">
+  title="Chỉ sinh viên có thể sử dụng tính năng này!" icon="error">
 </swal>

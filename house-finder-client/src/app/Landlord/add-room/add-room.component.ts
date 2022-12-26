@@ -13,7 +13,7 @@ import { SingleComponent } from './single/single.component';
 export class AddRoomComponent implements OnInit {
   @ViewChild(MultipleComponent) childMultiple: MultipleComponent | any;
   @ViewChild(SingleComponent) childSingle: SingleComponent | any;
-  selected: string = "single";
+  selected: string = "multiple";
   houseId: any;
 
   houseForm = this.formBuilder.group({

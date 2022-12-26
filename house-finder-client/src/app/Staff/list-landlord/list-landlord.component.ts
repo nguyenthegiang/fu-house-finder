@@ -26,7 +26,7 @@ export class ListLandlordComponent implements OnInit {
   searchName: string | undefined;
 
   //List of landlords
-  landlords: User[] = [];
+  landlords: User[] | undefined;
 
   //Selected user status
   selectedStatusId: number | undefined;

@@ -2,13 +2,14 @@
 
 <!-- Body -->
 <div class="m-2">
+
   <!-- Main Content -->
   <div>
     <!-- List staff -->
     <div class="my-5">
       <h3 class="text-center">Danh sách tuyển sinh</h3>
 
-      <div class="my-4">
+      <div class="my-4" *ngIf="staffs">
         <button class="btn btn-success d-flex justify-content-center align-items-center py-2" (click)="addStaff()">
           <i class="fa-solid fa-user-plus fs-5 me-2"></i>
           <div>
@@ -17,13 +18,18 @@
         </button>
       </div>
 
+      <!-- Display Loading Spinner when List Staff is not yet loaded -->
+      <div class="container-fluid d-flex justify-content-center my-5" *ngIf="staffs === undefined">
+        <mat-spinner color="warn"></mat-spinner>
+      </div>
+
       <!-- Case: No data -->
-      <div *ngIf="staffs.length <= 0">
+      <div *ngIf="staffs && staffs.length <= 0">
         <div class="emptyMesage text-center">Chưa có nhân viên</div>
       </div>
 
       <!-- Case: Have data -->
-      <div *ngIf="staffs.length > 0">
+      <div *ngIf="staffs && staffs.length > 0">
         <table class="table table-hover">
           <thead>
             <tr>

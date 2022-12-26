@@ -5,14 +5,19 @@
   <div class="col-12">
     <!-- Page content -->
     <div class="row">
+      <!-- Display Loading Spinner when List Houses is not yet loaded -->
+      <div class="container-fluid d-flex justify-content-center my-5" *ngIf="houses === undefined">
+        <mat-spinner color="warn"></mat-spinner>
+      </div>
+
       <!-- Case: No House: -->
       <!-- <span *ngIf="houses.length == 0" class="emptyMesage text-center">Chưa có nhà trọ</span> -->
-      <div class="my-4" *ngIf="houses.length == 0">
+      <div class="my-4" *ngIf="houses && houses.length == 0">
         <h3 class="text-center">Chưa có nhà trọ</h3>
       </div>
 
       <!-- Case: Have House -->
-      <div class="my-4" *ngIf="houses.length != 0">
+      <div class="my-4" *ngIf="houses && houses.length != 0">
         <h3 class="text-center">Danh sách nhà trọ</h3>
 
         <!-- Search bar -->

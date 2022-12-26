@@ -9,13 +9,18 @@
         <a class="mt-4" href="Staff/list-landlord-signup-request" style="color: #ee4d2d;">Danh sách chủ trọ đăng
           ký</a>
 
+        <!-- Display Loading Spinner when List Rejected Landlords is not yet loaded -->
+        <div class="container-fluid d-flex justify-content-center my-5" *ngIf="rejectedLandlords === undefined">
+          <mat-spinner color="warn"></mat-spinner>
+        </div>
+
         <!-- Case: No Data -->
-        <div class="m-4" *ngIf="rejectedLandlords.length == 0">
+        <div class="m-4" *ngIf="rejectedLandlords && rejectedLandlords.length == 0">
           <div class="emptyMesage">Hiện tại chưa có chủ trọ bị từ chối</div>
         </div>
 
         <!-- Case: Have Data -->
-        <div class="my-4" *ngIf="rejectedLandlords.length != 0">
+        <div class="my-4" *ngIf="rejectedLandlords && rejectedLandlords.length != 0">
           <table class="table table-hover landlordSingupRequest">
             <thead>
               <tr>
@@ -30,19 +35,18 @@
             <tbody>
               <tr *ngFor="let landlord of rejectedLandlords" style="cursor: pointer;">
                 <td id="md" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
-                (click)="changeSelectedLandlord(landlord.userId)">{{landlord.displayName}}</td>
+                  (click)="changeSelectedLandlord(landlord.userId)">{{landlord.displayName}}</td>
                 <td data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
-                (click)="changeSelectedLandlord(landlord.userId)">{{landlord.email}}</td>
+                  (click)="changeSelectedLandlord(landlord.userId)">{{landlord.email}}</td>
                 <td id="md" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
-                (click)="changeSelectedLandlord(landlord.userId)">{{landlord.phoneNumber}}</td>
+                  (click)="changeSelectedLandlord(landlord.userId)">{{landlord.phoneNumber}}</td>
                 <td class="md" id="md" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
-                (click)="changeSelectedLandlord(landlord.userId)">
-                  <img class="me-2 mb-2 identityCard"
-                    src="{{landlord.identityCardFrontSideImageLink}}">
+                  (click)="changeSelectedLandlord(landlord.userId)">
+                  <img class="me-2 mb-2 identityCard" src="{{landlord.identityCardFrontSideImageLink}}">
                   <img class="mb-2 identityCard" src="{{landlord.identityCardBackSideImageLink}}">
                 </td>
                 <td id="md" data-bs-toggle="modal" data-bs-target="#viewIdentityCardModal"
-                (click)="changeSelectedLandlord(landlord.userId)">{{landlord.createdDate | date: "dd/MM/yyyy"}}</td>
+                  (click)="changeSelectedLandlord(landlord.userId)">{{landlord.createdDate | date: "dd/MM/yyyy"}}</td>
 
                 <!-- Action column -->
                 <td>
@@ -84,10 +88,10 @@
   [showCloseButton]="true">
 </swal>
 
-<swal #updateLandlordStatusFailAlert title="Phê duyệt tài khoản thất bại." icon="error" [showConfirmButton]="false"
+<!-- <swal #updateLandlordStatusFailAlert title="Phê duyệt tài khoản thất bại." icon="error" [showConfirmButton]="false"
   [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true" background="#facfcf"
   [showCloseButton]="true">
-</swal>
+</swal> -->
 
 <!-- Modal -->
 <div class="modal fade" id="viewIdentityCardModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -103,10 +107,8 @@
         <span><b>Email: </b>{{ selectedLandlord.email }}</span><br />
         <span><b>Ngày đăng ký: </b>{{ selectedLandlord.createdDate | date: "dd/MM/yyyy" }}</span><br />
         <span><b>Ảnh chứng minh thư: </b></span><br />
-        <img class="w-100 my-2 viewIdentityCard"
-          src="{{selectedLandlord.identityCardFrontSideImageLink}}">
-        <img class="w-100 mt-2 viewIdentityCard"
-          src="{{selectedLandlord.identityCardBackSideImageLink}}">
+        <img class="w-100 my-2 viewIdentityCard" src="{{selectedLandlord.identityCardFrontSideImageLink}}">
+        <img class="w-100 mt-2 viewIdentityCard" src="{{selectedLandlord.identityCardBackSideImageLink}}">
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -2,7 +2,7 @@
 <app-landlord-header></app-landlord-header>
 
 <!-- Statistics -->
-<div class="row" *ngIf="houses.length != 0">
+<div class="row" *ngIf="houses && houses.length != 0">
   <div class="col-12 col-md-4 border">
     <div class="d-flex flex-column justify-content-center align-items-center">
       <div class="fs-4 d-flex align-items-center text-danger">
@@ -40,7 +40,7 @@
       <h3 class="text-center">Danh sách nhà trọ</h3>
 
       <!-- Add button -->
-      <div class="my-4">
+      <div class="my-4" *ngIf="houses">
         <button class="btn btn-success d-flex justify-content-center align-items-center py-2" (click)="addHouse()">
           <i class="fa-solid fa-circle-plus fs-4 me-2"></i>
           <div>
@@ -49,13 +49,18 @@
         </button>
       </div>
 
+      <!-- Display Loading Spinner when List Houses is not yet loaded -->
+      <div class="container-fluid d-flex justify-content-center my-5" *ngIf="houses === undefined">
+        <mat-spinner color="warn"></mat-spinner>
+      </div>
+
       <!-- Case: No data -->
-      <div *ngIf="houses.length <= 0">
+      <div *ngIf="houses && houses.length <= 0">
         <div class="emptyMesage text-center">Chưa có nhà trọ</div>
       </div>
 
       <!-- Case: Have data -->
-      <div *ngIf="houses.length > 0">
+      <div *ngIf="houses && houses.length > 0">
         <table class="table table-hover">
           <thead>
             <tr>

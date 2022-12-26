@@ -11,7 +11,7 @@ import { LandlordInformationService } from 'src/app/services/landlord-informatio
 })
 export class ListHouseComponent implements OnInit {
   //List of all houses
-  houses: House[] = [];
+  houses: House[] | undefined;
 
   //{Search} input value
   houseCount: number = 0;

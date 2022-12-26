@@ -40,7 +40,10 @@ namespace HouseFinder_API.Controllers
             }
         }
 
-        //GET: api/Rooms/getAvailableRooms?HouseId=
+        /**
+         * GET: api/Rooms/getAvailableRooms?HouseId=
+         * [House Detail] Get list available rooms of 1 house
+         */
         [HttpGet("getAvailableRooms")]
         public IActionResult GetAvailableRoomsByHouseId(int HouseId)
         {
@@ -110,7 +113,7 @@ namespace HouseFinder_API.Controllers
                 createRoom.LastModifiedDate = DateTime.Now;
                 createRoom.LastModifiedBy = room.LastModifiedBy;
                 createRoom.CreatedBy = room.CreatedBy;
-            
+
                 roomRepository.CreateRoom(createRoom);
                 return Ok(new { Status = 200 });
             }
