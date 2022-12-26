@@ -1,15 +1,10 @@
 <app-staff-header></app-staff-header>
-<nav class="mt-3 ps-3 fs-6" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+
+<nav class="mt-3 ps-3 fs-6" aria-label="breadcrumb">
   <ol class="breadcrumb">
-    <li *ngIf="checkBreadcumb" class="breadcrumb-item"><a class="text-danger"
-        onclick="history.back();history.back();history.back()" style="cursor: pointer;">Danh sách chủ trọ</a></li>
-    <li *ngIf="checkBreadcumb" class="breadcrumb-item" aria-current="page">></li>
-    <li class="breadcrumb-item"><a class="text-danger" onclick="history.back();history.back()"
-        style="cursor: pointer;">Danh sách nhà trọ</a></li>
-    <li class="breadcrumb-item" aria-current="page">></li>
-    <li class="breadcrumb-item"><a class="text-danger" onclick="history.back()" style="cursor: pointer;">Danh sách phòng
-        trọ</a></li>
-    <li class="breadcrumb-item" aria-current="page">></li>
+    <li *ngIf="checkBreadcumb" class="breadcrumb-item"><a class="text-danger" onclick="history.back();history.back();history.back()" style="cursor: pointer;">Danh sách chủ trọ</a></li>
+    <li class="breadcrumb-item"><a class="text-danger" onclick="history.back();history.back()" style="cursor: pointer;">Danh sách nhà trọ</a></li>
+    <li class="breadcrumb-item"><a class="text-danger" onclick="history.back()" style="cursor: pointer;">Danh sách phòng trọ</a></li>
     <li class="breadcrumb-item active" aria-current="page"> Chi tiết nhà trọ</li>
   </ol>
 </nav>
