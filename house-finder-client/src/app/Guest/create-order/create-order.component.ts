@@ -16,9 +16,12 @@ export class CreateOrderComponent implements OnInit {
     orderContent: '',
     statusId: 1
   }
+
+  // Alerts
   @ViewChild('orderSuccessAlert') private orderSuccessAlert: SwalComponent | undefined;
   @ViewChild('orderErrorAlert') private orderErrorAlert: SwalComponent | undefined;
   @ViewChild('orderRoleErrorAlert') private orderRoleErrorAlert: SwalComponent | undefined;
+
   constructor(
     private orderService: OrderService
   ) { }
@@ -48,10 +51,11 @@ export class CreateOrderComponent implements OnInit {
         error => { }
       );
     } else if (role !== "Student") {
+      //Wrong role
       this.orderRoleErrorAlert?.fire();
     }
   }
-  
+
   // goBack(): void {
   //   window.location.reload();
   // }
