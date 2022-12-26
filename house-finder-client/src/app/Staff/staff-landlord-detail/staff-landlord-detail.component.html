@@ -1,21 +1,6 @@
 <app-staff-header></app-staff-header>
-<nav class="mt-3 ps-3 fs-6" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a class="text-danger" onclick="history.back()" style="cursor: pointer;">Danh sách chủ
-        trọ</a></li>
-    <li class="breadcrumb-item" aria-current="page">></li>
-    <li class="breadcrumb-item active" aria-current="page"> Danh sách nhà trọ</li>
-  </ol>
-</nav>
 
 <div class="row" *ngIf="landlordDetail">
-  <!-- Landlord's avatar -->
-  <!-- <div class="col-12 col-md-2 border d-flex justify-content-center align-items-center">
-    <div class="d-flex justify-content-center align-items-center">
-      <img src="../../assets/image/LandlordAvatar.jpg" alt="Landlord's avatar" class="rounded w-100 h-100">
-    </div>
-  </div> -->
-
   <!-- Other information -->
   <div class="col-12 col-md-8 border d-flex align-items-center">
     <div class="p-2">
@@ -50,30 +35,19 @@
   </div>
 </div>
 
+<nav class="mt-3 ps-3 fs-6" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a class="text-danger" onclick="history.back()" style="cursor: pointer;">Danh sách chủ trọ</a></li>
+    <li class="breadcrumb-item active" aria-current="page"> Danh sách nhà trọ</li>
+  </ol>
+</nav>
+
 <div class="row m-2">
   <div class="col-12">
     <!-- Page content -->
     <div class="row">
       <div class="my-4">
         <h3 class="text-center">Danh sách nhà trọ</h3>
-
-        <!-- Search bar -->
-        <!-- <div class="row w-100 d-flex justify-content-center">
-          <div class="col-10 col-md-5">
-            <div class="text-center my-4">
-              <div class="input-group">
-                <input type="text" class="form-control" placeholder="Nhập từ khóa tìm kiếm" aria-label="search_house_by_name"
-                  aria-describedby="button-addon2" #searchValue
-                  (keydown.enter)="search(searchValue.value)">
-                <button class="btn btn-outline-secondary" type="button" id="button-addon2"
-                  (click)="search(searchValue.value)">
-                  <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div> -->
-        <!-- End Search bar -->
 
         <!-- Case: No Data -->
         <div *ngIf="houses.length <= 0">
