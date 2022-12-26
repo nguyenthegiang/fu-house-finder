@@ -1,7 +1,15 @@
 <!--Header-->
 <app-landlord-header></app-landlord-header>
 
-<div class="container-fluit m-5">
+<!-- Breadcrumb -->
+<nav class="mx-2 mt-3 ps-3 fs-6" aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a class="text-danger" onclick="history.back()" style="cursor: pointer;">Trang chủ</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Thêm nhà trọ</li>
+  </ol>
+</nav>
+
+<div class="container-fluit mx-2 mx-md-5 my-5 d-flex flex-column align-items-center justify-content-center">
   <h3 class="text-center my-5">Thêm nhà trọ mới</h3>
   <form class="row w-100 d-flex justify-content-around needs-validation" [formGroup]="houseForm" (submit)="houseForm.valid && addHouse()">
     <div class="col-12 col-md-5">
@@ -55,7 +63,7 @@
         <input type="text" class="form-control" id="exampleInput2" placeholder="Nhập địa chỉ" formControlName="address" required>
         <div class="invalid-feedback mb-3 d-block" *ngIf="houseForm.controls['address'].errors?.['required']">Không được để trống</div>
       </div>
-      
+
       <div>
         <label for="google_address" class="form-label"><b>Địa điểm Google Maps</b></label>
         <div class="invalid-feedback mb-3 d-block" *ngIf="houseForm.controls['googleAddress'].errors?.['required']">Không được để trống</div>
