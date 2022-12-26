@@ -1,3 +1,4 @@
+import { CampusService } from 'src/app/services/campus.service';
 import { Campus } from 'src/app/models/campus';
 import { RateService } from './../../services/rate.service';
 import { Rate } from './../../models/rate';
@@ -77,7 +78,8 @@ export class HouseDetailComponent implements OnInit {
     private roomService: RoomService,
     private reportService: ReportService,
     private rateService: RateService,
-    private router: Router
+    private router: Router,
+    private campusService: CampusService
   ) { }
 
   ngOnInit(): void {
@@ -131,6 +133,11 @@ export class HouseDetailComponent implements OnInit {
     let campus_data = localStorage.getItem("campuses");
     if (campus_data) {
       this.campuses = JSON.parse(campus_data);
+    } else {
+      this.campusService.getAllCampuses().subscribe(data => {
+        this.campuses = data;
+        localStorage.campuses = JSON.stringify(data);
+      });
     }
   }
 
