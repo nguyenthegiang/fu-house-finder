@@ -59,10 +59,11 @@ namespace DataAccess
                     //Find rooms of this house
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
-                    var result = context.Rooms.Where(r => r.Deleted == false)
+                    var result = context.Rooms
                         .Include(p => p.Status)
                         .Where(r => r.HouseId == HouseId && r.Deleted == false)
                         .ProjectTo<RoomDTO>(config).ToList();
+
                     //Get only available rooms
                     foreach (RoomDTO r in result)
                     {
@@ -77,6 +78,7 @@ namespace DataAccess
             {
                 throw new Exception(e.Message);
             }
+
             return rooms;
         }
 
@@ -117,7 +119,7 @@ namespace DataAccess
             {
                 using (var context = new FUHouseFinderContext())
                 {
-                    MapperConfiguration config = new MapperConfiguration(cfg => 
+                    MapperConfiguration config = new MapperConfiguration(cfg =>
                         cfg.AddProfile(new MapperProfile())
                     );
                     RoomDTO room = context.Rooms.Where(r =>
@@ -165,11 +167,11 @@ namespace DataAccess
          */
         public static void CreateRooms(List<Room> rooms)
         {
-                using (var context = new FUHouseFinderContext())
-                {
-                    context.Rooms.AddRange(rooms);
-                    context.SaveChanges();
-                }
+            using (var context = new FUHouseFinderContext())
+            {
+                context.Rooms.AddRange(rooms);
+                context.SaveChanges();
+            }
         }
 
         //Update Room by id
@@ -484,7 +486,7 @@ namespace DataAccess
                 using (var context = new FUHouseFinderContext())
                 {
                     Room roomToUpdate = context.Rooms.FirstOrDefault(r => r.RoomId == roomId);
-                    if(roomToUpdate == null)
+                    if (roomToUpdate == null)
                     {
                         throw new Exception();
                     }

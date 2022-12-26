@@ -1,7 +1,6 @@
 import { RateService } from './../../services/rate.service';
 import { Rate } from './../../models/rate';
 import { User } from '../../models/user';
-import { CampusService } from '../../services/campus.service';
 import { UserService } from '../../services/user.service';
 import { House } from '../../models/house';
 import { Component, OnInit, ViewChild } from '@angular/core';
@@ -54,10 +53,10 @@ export class HouseDetailComponent implements OnInit {
 
   // Alert
   @ViewChild('reportSuccessAlert') private reportSuccessAlert: SwalComponent | undefined;
-  @ViewChild('orderErrorAlert') private orderErrorAlert: SwalComponent | undefined;
+  @ViewChild('reportErrorAlert') private reportErrorAlert: SwalComponent | undefined;
   @ViewChild('rateSuccessAlert') private rateSuccessAlert: SwalComponent | undefined;
   @ViewChild('rateErrorAlert') private rateErrorAlert: SwalComponent | undefined;
-  @ViewChild('orderRoleErrorAlert') private rateRoleErrorAlert: SwalComponent | undefined;
+  @ViewChild('rateRoleErrorAlert') private rateRoleErrorAlert: SwalComponent | undefined;
 
 
   constructor(
@@ -125,7 +124,7 @@ export class HouseDetailComponent implements OnInit {
     user = localStorage.getItem("user");
     role = localStorage.getItem("role");
     if (user === null) {
-      this.orderErrorAlert?.fire();
+      this.reportErrorAlert?.fire();
       return;
     } else if (role === "Student") {
       this.inputReportContent = this.inputReportContent.trim();
@@ -141,7 +140,7 @@ export class HouseDetailComponent implements OnInit {
       this.reportService.addReport(report).subscribe(
         data => {
           if (data.status == 403) {
-            this.orderErrorAlert?.fire();
+            this.reportErrorAlert?.fire();
           } else if (data.status == 200) {
             this.reportSuccessAlert?.fire();
           }
