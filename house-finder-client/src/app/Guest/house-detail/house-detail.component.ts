@@ -1,3 +1,4 @@
+import { Campus } from 'src/app/models/campus';
 import { RateService } from './../../services/rate.service';
 import { Rate } from './../../models/rate';
 import { User } from '../../models/user';
@@ -52,7 +53,15 @@ export class HouseDetailComponent implements OnInit {
   star: number = 0;
   comment: string = "";
 
+  // Reports
   inputReportContent: string = '';
+
+  // For dislaying Regions
+  campuses: Campus[] = [];
+  houseVillage: string = "Chi Quan 1";
+  houseCommune: string = "Thị trấn Liên Quan";
+  houseDistrict: string = "Huyện Thạch Thất";
+  houseCampus: string = "FU - Hòa Lạc";
 
   // Alert
   @ViewChild('reportSuccessAlert') private reportSuccessAlert: SwalComponent | undefined;
@@ -95,6 +104,9 @@ export class HouseDetailComponent implements OnInit {
       this.roomService.getAvailableRooms(id).subscribe(data => {
         this.availableRooms = data;
       });
+
+      //Get region info
+      this.getRegionOfHouse();
     });
 
     // Statistics
@@ -113,6 +125,45 @@ export class HouseDetailComponent implements OnInit {
     // Rates
     this.rateService.getListRatesByHouseId(this.houseId).subscribe(data => {
       this.rates = data;
+    });
+
+    // Get Regions from localStorage (if has)
+    let campus_data = localStorage.getItem("campuses");
+    if (campus_data) {
+      this.campuses = JSON.parse(campus_data);
+    }
+  }
+
+  // get data of region of this house 
+  // (based on list campuses from localStorage and ids of regions of house)
+  getRegionOfHouse() {
+    //Get Campus
+    this.campuses.forEach((campus) => {
+      if (campus.campusId == this.houseDetail?.campusId) {
+        this.houseCampus = campus.campusName;
+
+        //Get District
+        campus.districts.forEach((district) => {
+          if (district.districtId == this.houseDetail?.districtId) {
+            this.houseDistrict = district.districtName;
+
+            //Get Commune
+            district.communes.forEach((commune) => {
+              if (commune.communeId == this.houseDetail?.communeId) {
+                this.houseCommune = commune.communeName;
+
+                //Get Village
+                commune.villages.forEach((village) => {
+                  if (village.villageId == this.houseDetail?.villageId) {
+                    this.houseVillage = village.villageName;
+                  }
+                });
+              }
+            });
+          }
+        });
+        return;
+      }
     });
   }
 
@@ -192,7 +243,7 @@ export class HouseDetailComponent implements OnInit {
     //Check if user has logged in
     var user = null;
     user = localStorage.getItem("user");
-    
+
     if (user === null) {
       //user not logged in => Alert
       this.rateErrorAlert?.fire();

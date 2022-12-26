@@ -66,9 +66,10 @@
           <div>
             <b>Địa chỉ: </b>{{houseDetail.address.addresses}}
           </div>
-          <div class="ms-2">Thôn/Xóm: Thôn 1</div>
-          <div class="ms-2">Phường/Xã: Thạch Hòa</div>
-          <div class="ms-2">Huyện/Quận: Thạch Thất</div>
+          <div class="ms-2">Thôn/Xóm: {{houseVillage}}</div>
+          <div class="ms-2">Phường/Xã: {{houseCommune}}</div>
+          <div class="ms-2">Huyện/Quận: {{houseDistrict}}</div>
+          <div class="ms-2">Cơ sở: {{houseCampus}}</div>
           <div class="ms-2">Khoảng cách đến trường: {{houseDetail.distanceToCampus}} km</div>
         </div>
         <div><b>Giá điện: </b> {{houseDetail.powerPrice}} VNĐ/kWh</div>
@@ -81,7 +82,9 @@
         </div>
         <div>
           <div><b>Thông tin khác: </b></div>
-          {{houseDetail.information}}
+          <div class="ms-2">
+            {{houseDetail.information}}
+          </div>
         </div>
 
         <div>
