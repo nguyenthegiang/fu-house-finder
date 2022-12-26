@@ -28,14 +28,14 @@
 
     <div class="col-12 col-md-5 mb-3">
       <label for="exampleInput1" class="form-label"><b>Img 1</b></label>
-      <img src="{{updateIdentityCardFrontSideImageLink}}">
+      <img src="{{updateIdentityCardFrontSideImageLink}}" class="w-100 h-50 mb-2 border rounded">
       <input type="file" (change)="displayImage($event,'front')">
       <div class="invalid-feedback mb-3">Không được để trống</div>
     </div>
 
     <div class="col-12 col-md-5 mb-3">
       <label for="exampleInput1" class="form-label"><b>Img 1</b></label>
-      <img src="{{updateIdentityCardBackSideImageLink}}">
+      <img src="{{updateIdentityCardBackSideImageLink}}" class="w-100 h-50 mb-2 border rounded">
       <input type="file" (change)="displayImage($event,'back')">
       <div class="invalid-feedback mb-3">Không được để trống</div>
     </div>
