@@ -121,7 +121,7 @@ namespace DataAccess
                         context.ImagesOfHouses.Update(i);
                     }
                     List<Report> reports = context.Reports.Where(r => r.HouseId == houseId).ToList();
-                    foreach(Report r in reports)
+                    foreach (Report r in reports)
                     {
                         r.Deleted = true;
                         context.Reports.Update(r);
@@ -299,8 +299,12 @@ namespace DataAccess
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
                     //Get by ID
-                    houseDTO = context.Houses.Where(h => h.Deleted == false).Include(h => h.Address).ProjectTo<HouseDTO>(config)
-                        .Where(p => p.HouseId == houseId).FirstOrDefault();
+                    houseDTO = context.Houses
+                        .Where(h => h.Deleted == false)
+                        .Include(h => h.Address)
+                        .ProjectTo<HouseDTO>(config)
+                        .Where(p => p.HouseId == houseId)
+                        .FirstOrDefault();
                     houseDTO.ImagesOfHouses = context.ImagesOfHouses
                         .Where(img => img.HouseId == houseId && !img.Deleted)
                         .OrderBy(img => img.ImageId).ProjectTo<ImagesOfHouseDTO>(config).ToList();
@@ -464,7 +468,7 @@ namespace DataAccess
             }
             return houses;
         }
-        
+
         //[Staff/list-report] Count total of reported houses
         public static int CountTotalReportedHouse()
         {
