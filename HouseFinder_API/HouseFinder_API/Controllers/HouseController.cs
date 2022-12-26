@@ -275,7 +275,7 @@ namespace HouseFinder_API.Controllers
                 string googleMapApiUrl = "https://maps.googleapis.com/maps/api/distancematrix/json" +
                     $"?destinations={campusLocation}" +
                     $"&origins={houseLocation}" +
-                    "&key=AIzaSyAOSt-MODiWy8Tysx0NYkiZ8Ewz1PJkj_M";
+                    "&key=AIzaSyCl6lzeRzQGWWcIJnycjN6o3u5SV6nebZ4";
 
                 // HttpClient is intended to be instantiated once per application, rather than per-use. See Remarks.
                 HttpClient client = new HttpClient();

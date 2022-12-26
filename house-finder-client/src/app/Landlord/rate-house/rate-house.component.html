@@ -2,12 +2,12 @@
 <app-landlord-header></app-landlord-header>
 
 <!-- Rate and comment -->
-<div class="mx-2 mx-md-5">
+<div class="container px-5">
   <!-- Rate and comment -->
   <div class="my-5 border border-secondary rounded p-2">
     <h3 class="text-center">Người dùng đánh giá</h3>
     Bình luận:
-    <div class="bg-light border border-secondary rounded mb-2 p-2" style="overflow: auto;">
+    <div class="bg-light border border-secondary rounded mb-2 p-2" style="overflow: hidden;">
       <div *ngIf="rates.length === 0">
         Chưa có đánh giá
       </div>
@@ -15,46 +15,51 @@
         <div class="d-flex">
           <span>
             {{rate.studentId}}: {{rate.comment}}
-              <span *ngIf="rate.star === 1">
-                (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
-              </span>
-              <span *ngIf="rate.star === 2">
-                (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
-              </span>
-              <span *ngIf="rate.star === 3">
-                (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
-              </span>
-              <span *ngIf="rate.star === 4">
-                (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
-              </span>
-              <span *ngIf="rate.star === 5">
-                (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
-              </span>
+            <span *ngIf="rate.star === 1">
+              (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
+            </span>
+            <span *ngIf="rate.star === 2">
+              (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+              <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
+            </span>
+            <span *ngIf="rate.star === 3">
+              (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+              <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+              <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
+            </span>
+            <span *ngIf="rate.star === 4">
+              (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+              <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+              <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+              <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
+            </span>
+            <span *ngIf="rate.star === 5">
+              (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+              <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+              <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+              <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+              <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
+            </span>
           </span>
-          <a class="ms-2" style="cursor: pointer;" (click)="openReply(i)" *ngIf="!isReply && rate.landlordReply === null">phản hồi</a>
+          <a class="ms-2" style="cursor: pointer;" (click)="openReply(i)"
+            *ngIf="!isReply && rate.landlordReply === null">phản hồi</a>
 
         </div>
         <div *ngIf="rate.landlordReply !== null">
           <i class="fa-solid fa-arrow-right"></i> Chủ trọ trả lời: {{rate.landlordReply}}
         </div>
         <div *ngIf="isReply && indexReply === i">
-          <div class="mb-3 row d-flex">
-            <div class="col-12 col-md-4 mt-1">
-              <input type="text" class="form-control" placeholder="Viết phản hồi" [(ngModel)]="reply">
+          <div class="row d-flex">
+            <div class="col-12 mt-1">
+              <textarea type="text" class="form-control" placeholder="Viết phản hồi" [(ngModel)]="reply"></textarea>
             </div>
+          </div>
 
-            <button class="btn btn-secondary col-12 col-md-2 mt-1 me-2" type="button" (click)="closeReply()">Hủy</button>
-            <button class="btn btn-success col-12 col-md-2 mt-1" type="button" [disabled]="reply === ''" (click)="addReply(rate.rateId)">Đăng</button>
+          <div class="row mb-3 d-flex justify-content-end px-3">
+            <button class="btn btn-secondary col-12 col-md-2 mt-1 me-2" type="button"
+              (click)="closeReply()">Hủy</button>
+            <button class="btn btn-success col-12 col-md-2 mt-1" type="button" [disabled]="reply === ''"
+              (click)="addReply(rate.rateId)">Đăng</button>
           </div>
         </div>
       </div>

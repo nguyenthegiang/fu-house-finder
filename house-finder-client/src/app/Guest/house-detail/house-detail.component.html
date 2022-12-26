@@ -17,9 +17,9 @@
 </div>
 
 <!-- Only Display when House Detail is loaded -->
-<div class="mx-1 mx-md-5 mb-5 mt-3 d-flex justify-content-center" *ngIf="houseDetail && landlordDetail">
-  <div class="row w-100 d-flex justify-content-evenly">
-    <div class="col-12 col-md-7">
+<div class="mx-1 mx-md-5 mb-5 mt-3" *ngIf="houseDetail && landlordDetail">
+  <div class="row d-flex justify-content-center">
+    <div class="col-12 col-md-6 mb-2">
       <!-- House images -->
       <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
         <div *ngFor="let image of houseDetail.imagesOfHouses; let i=index;">
@@ -57,30 +57,48 @@
           </div>
         </div>
       </div>
-
-      <!-- House detail information-->
-      <div class="house-information border border-secondary rounded mt-5 p-2">
-        <h3 class="text-center">{{houseDetail!.houseName}}</h3>
-        <span><b>Giá điện: </b> {{houseDetail!.powerPrice}} VNĐ/kWh</span>
-        <br>
-        <span><b>Giá nước: </b> {{houseDetail!.waterPrice}} VNĐ/m3</span>
-        <br>
-        <span><b>Địa chỉ: </b>{{houseDetail!.address!.addresses}}</span>
-        <br>
-        <span><b>Thông tin khác: </b>{{houseDetail!.information}}</span>
-      </div>
-
-      <!-- Google Map Location -->
-      <div *ngIf="mapUrl">
-        <iframe id="googleMap" class="w-100 h-25 my-5 border border-secondary rounded" [src]="mapUrl | safe"
-          allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-      </div>
     </div>
 
-    <div class="col-12 col-md-5">
+    <div class="col-12 col-md-6">
+      <!-- House detail information-->
+      <div class="house-information border border-secondary rounded p-2">
+        <h3 class="text-center">{{houseDetail.houseName}}</h3>
+
+        <div>
+          <div>
+            <b>Địa chỉ: </b>{{houseDetail.address.addresses}}
+          </div>
+          <div class="ms-2">Thôn/Xóm: Thôn 1</div>
+          <div class="ms-2">Phường/Xã: Thạch Hòa</div>
+          <div class="ms-2">Huyện/Quận: Thạch Thất</div>
+          <div class="ms-2">Khoảng cách đến trường: {{houseDetail.distanceToCampus}} km</div>
+        </div>
+        <div><b>Giá điện: </b> {{houseDetail.powerPrice}} VNĐ/kWh</div>
+        <div><b>Giá nước: </b> {{houseDetail.waterPrice}} VNĐ/m3</div>
+        <div>
+          <div><b>Tiện ích: </b></div>
+          <div class="ms-2" *ngIf="houseDetail.fingerprintLock">Khóa vân tay</div>
+          <div class="ms-2" *ngIf="houseDetail.camera">Camera</div>
+          <div class="ms-2" *ngIf="houseDetail.parking">Chỗ để xe</div>
+        </div>
+        <div>
+          <div><b>Thông tin khác: </b></div>
+          {{houseDetail.information}}
+        </div>
+
+        <div>
+          <b>Bản đồ:</b>
+          <!-- Google Map Location -->
+          <div *ngIf="mapUrl">
+            <iframe id="googleMap" class="w-100 h-25 " [src]="mapUrl | safe" allowfullscreen="" loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade">
+            </iframe>
+          </div>
+        </div>
+      </div>
+
       <!-- Landlord information -->
-      <div class="landlordInformation border border-secondary rounded p-2">
+      <div class="landlordInformation border border-secondary rounded p-2 mt-3">
         <h3 class="text-center">Thông tin chủ trọ</h3>
         <!-- Other information -->
         <span>
@@ -95,8 +113,8 @@
         <br>
         <span>
           <b>Số điện thoại: </b>
-          <a class="phoneOn" (click)="isOn = true" *ngIf="isOn == false">Click để hiển thị</a>
-          <span class="phoneOff" *ngIf="isOn == true">{{landlordDetail!.phoneNumber}}</span>
+          <a class="phoneOn" (click)="phoneNumDisplay = true" *ngIf="phoneNumDisplay == false">Click để hiển thị</a>
+          <span class="phoneOff" *ngIf="phoneNumDisplay == true">{{landlordDetail!.phoneNumber}}</span>
         </span>
         <br>
         <span>
@@ -104,119 +122,124 @@
           {{landlordDetail!.address.addresses}}
         </span>
       </div>
-
-      <!-- Rate and comment -->
-      <div class="my-5 border border-secondary rounded p-2">
-        <h3 class="text-center">Người dùng đánh giá</h3>
-        Bình luận:
-        <div class="bg-light border border-secondary rounded mb-2 p-2" style="overflow: auto;">
-          <div *ngIf="rates.length === 0">
-            Chưa có đánh giá
-          </div>
-          <div *ngFor="let rate of rates">
-            <div class="d-flex">
-              <span>
-                {{rate.studentId}}: {{rate.comment}}
-                <span *ngIf="rate.star === 1">
-                  (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
-                </span>
-                <span *ngIf="rate.star === 2">
-                  (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                  <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
-                </span>
-                <span *ngIf="rate.star === 3">
-                  (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                  <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                  <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
-                </span>
-                <span *ngIf="rate.star === 4">
-                  (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                  <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                  <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                  <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
-                </span>
-                <span *ngIf="rate.star === 5">
-                  (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                  <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                  <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                  <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
-                  <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
-                </span>
-              </span>
-            </div>
-
-            <div *ngIf="rate.landlordReply !== null">
-              <i class="fa-solid fa-arrow-right"></i> Chủ trọ trả lời: {{rate.landlordReply}}
-            </div>
-          </div>
-
-          <!-- Nguyễn Văn A: Đẹp, gần trường (<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>)
-          <br> <i class="fa-solid fa-arrow-right"></i> Chủ trọ trả lời: Cảm ơn bạn nhiều -->
-        </div>
-        Viết bình luận:
-        <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1"
-          [(ngModel)]="comment">
-        <div class="my-2 d-flex">
-          Đánh giá:
-          <div class="ms-2" *ngIf="star === 0">
-            <i class="star fa-regular fa-star" (click)="star1()"></i>
-            <i class="star fa-regular fa-star" (click)="star2()"></i>
-            <i class="star fa-regular fa-star" (click)="star3()"></i>
-            <i class="star fa-regular fa-star" (click)="star4()"></i>
-            <i class="star fa-regular fa-star" (click)="star5()"></i>
-          </div>
-
-          <div class="ms-2" *ngIf="star === 1">
-            <i class="star fa-solid fa-star text-warning" (click)="star1()"></i>
-            <i class="star fa-regular fa-star" (click)="star2()"></i>
-            <i class="star fa-regular fa-star" (click)="star3()"></i>
-            <i class="star fa-regular fa-star" (click)="star4()"></i>
-            <i class="star fa-regular fa-star" (click)="star5()"></i>
-          </div>
-
-          <div class="ms-2" *ngIf="star === 2">
-            <i class="star fa-solid fa-star text-warning" (click)="star1()"></i>
-            <i class="star fa-solid fa-star text-warning" (click)="star2()"></i>
-            <i class="star fa-regular fa-star" (click)="star3()"></i>
-            <i class="star fa-regular fa-star" (click)="star4()"></i>
-            <i class="star fa-regular fa-star" (click)="star5()"></i>
-          </div>
-
-          <div class="ms-2" *ngIf="star === 3">
-            <i class="star fa-solid fa-star text-warning" (click)="star1()"></i>
-            <i class="star fa-solid fa-star text-warning" (click)="star2()"></i>
-            <i class="star fa-solid fa-star text-warning" (click)="star3()"></i>
-            <i class="star fa-regular fa-star" (click)="star4()"></i>
-            <i class="star fa-regular fa-star" (click)="star5()"></i>
-          </div>
-
-          <div class="ms-2" *ngIf="star === 4">
-            <i class="star fa-solid fa-star text-warning" (click)="star1()"></i>
-            <i class="star fa-solid fa-star text-warning" (click)="star2()"></i>
-            <i class="star fa-solid fa-star text-warning" (click)="star3()"></i>
-            <i class="star fa-solid fa-star text-warning" (click)="star4()"></i>
-            <i class="star fa-regular fa-star" (click)="star5()"></i>
-          </div>
-
-          <div class="ms-2" *ngIf="star === 5">
-            <i class="star fa-solid fa-star text-warning" (click)="star1()"></i>
-            <i class="star fa-solid fa-star text-warning" (click)="star2()"></i>
-            <i class="star fa-solid fa-star text-warning" (click)="star3()"></i>
-            <i class="star fa-solid fa-star text-warning" (click)="star4()"></i>
-            <i class="star fa-solid fa-star text-warning" (click)="star5()"></i>
-          </div>
-        </div>
-
-        <button type="button" class="btn btn-secondary w-100" (click)="addRate()"
-          [disabled]="comment === '' || star === 0">Đăng</button>
-      </div>
     </div>
+  </div>
 
-    <!-- List available rooms -->
+  <div class="row d-flex justify-content-center">
+    <!-- Rate and comment -->
+    <div class="my-5 border border-secondary rounded p-2">
+      <h3 class="text-center">Người dùng đánh giá</h3>
+      Bình luận:
+      <div class="bg-light border border-secondary rounded mb-2 p-2" style="overflow: auto;">
+        <div *ngIf="rates.length === 0">
+          Chưa có đánh giá
+        </div>
+        <div *ngFor="let rate of rates">
+          <div class="d-flex">
+            <span>
+              {{rate.studentId}}: {{rate.comment}}
+              <span *ngIf="rate.star === 1">
+                (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
+              </span>
+              <span *ngIf="rate.star === 2">
+                (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
+              </span>
+              <span *ngIf="rate.star === 3">
+                (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
+              </span>
+              <span *ngIf="rate.star === 4">
+                (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
+              </span>
+              <span *ngIf="rate.star === 5">
+                (<i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>
+                <i id="rateStar" class="star fa-solid fa-star text-warning"></i>)
+              </span>
+            </span>
+          </div>
+
+          <div *ngIf="rate.landlordReply !== null">
+            <i class="fa-solid fa-arrow-right"></i> Chủ trọ trả lời: {{rate.landlordReply}}
+          </div>
+        </div>
+
+        <!-- Nguyễn Văn A: Đẹp, gần trường (<i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>)
+              <br> <i class="fa-solid fa-arrow-right"></i> Chủ trọ trả lời: Cảm ơn bạn nhiều -->
+      </div>
+      Viết bình luận:
+      <input type="text" class="form-control" aria-label="Username" aria-describedby="basic-addon1"
+        [(ngModel)]="comment">
+      <div class="my-2 d-flex">
+        Đánh giá:
+        <div class="ms-2" *ngIf="star === 0">
+          <i class="star fa-regular fa-star" (click)="star1()"></i>
+          <i class="star fa-regular fa-star" (click)="star2()"></i>
+          <i class="star fa-regular fa-star" (click)="star3()"></i>
+          <i class="star fa-regular fa-star" (click)="star4()"></i>
+          <i class="star fa-regular fa-star" (click)="star5()"></i>
+        </div>
+
+        <div class="ms-2" *ngIf="star === 1">
+          <i class="star fa-solid fa-star text-warning" (click)="star1()"></i>
+          <i class="star fa-regular fa-star" (click)="star2()"></i>
+          <i class="star fa-regular fa-star" (click)="star3()"></i>
+          <i class="star fa-regular fa-star" (click)="star4()"></i>
+          <i class="star fa-regular fa-star" (click)="star5()"></i>
+        </div>
+
+        <div class="ms-2" *ngIf="star === 2">
+          <i class="star fa-solid fa-star text-warning" (click)="star1()"></i>
+          <i class="star fa-solid fa-star text-warning" (click)="star2()"></i>
+          <i class="star fa-regular fa-star" (click)="star3()"></i>
+          <i class="star fa-regular fa-star" (click)="star4()"></i>
+          <i class="star fa-regular fa-star" (click)="star5()"></i>
+        </div>
+
+        <div class="ms-2" *ngIf="star === 3">
+          <i class="star fa-solid fa-star text-warning" (click)="star1()"></i>
+          <i class="star fa-solid fa-star text-warning" (click)="star2()"></i>
+          <i class="star fa-solid fa-star text-warning" (click)="star3()"></i>
+          <i class="star fa-regular fa-star" (click)="star4()"></i>
+          <i class="star fa-regular fa-star" (click)="star5()"></i>
+        </div>
+
+        <div class="ms-2" *ngIf="star === 4">
+          <i class="star fa-solid fa-star text-warning" (click)="star1()"></i>
+          <i class="star fa-solid fa-star text-warning" (click)="star2()"></i>
+          <i class="star fa-solid fa-star text-warning" (click)="star3()"></i>
+          <i class="star fa-solid fa-star text-warning" (click)="star4()"></i>
+          <i class="star fa-regular fa-star" (click)="star5()"></i>
+        </div>
+
+        <div class="ms-2" *ngIf="star === 5">
+          <i class="star fa-solid fa-star text-warning" (click)="star1()"></i>
+          <i class="star fa-solid fa-star text-warning" (click)="star2()"></i>
+          <i class="star fa-solid fa-star text-warning" (click)="star3()"></i>
+          <i class="star fa-solid fa-star text-warning" (click)="star4()"></i>
+          <i class="star fa-solid fa-star text-warning" (click)="star5()"></i>
+        </div>
+      </div>
+
+      <button type="button" class="btn btn-secondary w-100" (click)="addRate()"
+        [disabled]="comment === '' || star === 0">Đăng</button>
+    </div>
+  </div>
+
+  <!-- List available rooms -->
+  <div class="row d-flex justify-content-center">
     <div class="container" *ngIf="availableRooms.length == 0">
       <h3 class="text-center mb-4">Chưa có phòng trống</h3>
     </div>
+
     <div class="container-fluid" *ngIf="availableRooms.length != 0">
       <h3 class="text-center mb-4">Danh sách phòng trống</h3>
       <h6>Tổng phòng trống hoàn toàn: {{totallyAvailableRoom}} phòng</h6>
@@ -325,7 +348,7 @@
     </div>
   </div>
 
-  <!-- Button open modal Report House -->
+  <!-- Floating Button: open modal Report House -->
   <button type="button" class="floating-btn" data-bs-toggle="modal" data-bs-target="#reportModal"
     data-bs-whatever="@getbootstrap">
     <i class="fa-solid fa-flag"></i>
