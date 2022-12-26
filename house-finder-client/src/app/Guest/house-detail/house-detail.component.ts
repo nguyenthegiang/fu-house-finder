@@ -70,6 +70,7 @@ export class HouseDetailComponent implements OnInit {
   @ViewChild('rateSuccessAlert') private rateSuccessAlert: SwalComponent | undefined;
   @ViewChild('rateErrorAlert') private rateErrorAlert: SwalComponent | undefined;
   @ViewChild('rateRoleErrorAlert') private rateRoleErrorAlert: SwalComponent | undefined;
+  @ViewChild('rateDuplicateErrorAlert') private rateDuplicateErrorAlert: SwalComponent | undefined;
 
   constructor(
     private route: ActivatedRoute,
@@ -260,6 +261,9 @@ export class HouseDetailComponent implements OnInit {
         data => {
           if (data.status == 403) {
             this.rateErrorAlert?.fire();
+          } else if (data.status == 400) {
+            //user already rate
+            this.rateDuplicateErrorAlert?.fire();
           } else if (data.status == 200) {
             this.rateSuccessAlert?.fire();
 
