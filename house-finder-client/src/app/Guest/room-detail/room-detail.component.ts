@@ -13,8 +13,7 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./room-detail.component.scss']
 })
 
-export class RoomDetailComponent implements OnInit
-{
+export class RoomDetailComponent implements OnInit {
   //Detail information of this House
   houseDetail: House | undefined;
   //Detail information of this Room
@@ -22,14 +21,15 @@ export class RoomDetailComponent implements OnInit
   //Landlord of this house
   landlordDetail: User | undefined;
 
+  //For phone number
+  phoneNumDisplay = false;
+
   constructor(private route: ActivatedRoute,
     private houseService: HouseService,
     private roomService: RoomService,
-    private userService: UserService)
-  { }
+    private userService: UserService) { }
 
-  ngOnInit(): void
-  {
+  ngOnInit(): void {
     //Get id of Room from Route
     const id = Number(this.route.snapshot.paramMap.get('id'));
 
