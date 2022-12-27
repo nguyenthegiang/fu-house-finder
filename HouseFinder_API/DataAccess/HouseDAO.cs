@@ -305,6 +305,8 @@ namespace DataAccess
                         .ProjectTo<HouseDTO>(config)
                         .Where(p => p.HouseId == houseId)
                         .FirstOrDefault();
+
+                    //images
                     houseDTO.ImagesOfHouses = context.ImagesOfHouses
                         .Where(img => img.HouseId == houseId && !img.Deleted)
                         .OrderBy(img => img.ImageId).ProjectTo<ImagesOfHouseDTO>(config).ToList();
@@ -387,13 +389,13 @@ namespace DataAccess
             {
                 using (var context = new FUHouseFinderContext())
                 {
-                    //Get rooms by HouseID, include Images
                     MapperConfiguration config;
                     config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
                     List<RoomDTO> rooms = context.Rooms
                         .Where(r => r.Deleted == false)
                         .Where(r => r.HouseId == HouseId)
                         .Where(r => r.Status.StatusName.Equals("Available") || r.Status.StatusName.Equals("Disabled"))
+                        .Where(r => r.CurrentAmountOfPeople == 0)
                         .ProjectTo<RoomDTO>(config).ToList();
 
                     //Count total money

@@ -1,200 +1,164 @@
-<!-- Update Modal -->
-<div class="modal fade bd-example-modal-lg" id="updateModal" tabindex="-1" aria-labelledby="updateModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 *ngIf="roomId != 0" class="modal-title" id="updateModalLabel">Chỉnh sửa phòng</h5>
-                <h5 *ngIf="roomId == 0" class="modal-title" id="updateModalLabel">Them moi</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+<!--Header-->
+<app-landlord-header></app-landlord-header>
+<form class="border border-top-0" [formGroup]="roomForm" (submit)="addRoom()">
+    <div class="container py-5">
+      <div class="row">
+        <div class="col-lg-6 col-sm-12">
+          <div class="mb-3 row">
+            <label class="col-sm-3 form-label" for="building">Tòa nhà</label>
+            <div class="col-sm-9">
+              <input class="form-control" id="building" type="number" min="1" formControlName="building" />
             </div>
-            <div class="modal-body">
-                <form>
-                    <div class="row">
-                        <!-- roomName -->
-                        <div class="col-md-6">Tên Phòng
-                            <br>
-                            <input type="text" class="form-control" id="roomName" [(ngModel)]="roomDetail.roomName"
-                                name="roomName">
-                        </div>
-                        <!-- area -->
-                        <div class="col-md-6 ml-auto">Diện tích
-                            <br>
-                            <input type="text" class="form-control" id="areaByMeters"
-                                [(ngModel)]="roomDetail.areaByMeters" name="areaByMeters">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <!-- price -->
-                        <div class="col-md-6">Giá tiền
-                            <br>
-                            <input type="text" class="form-control" id="pricePerMonth"
-                                [(ngModel)]="roomDetail.pricePerMonth" name="pricePerMonth">
-                        </div>
-                        <!-- building -->
-                        <div class="col-md-6 ml-auto">Tòa
-                            <br>
-                            <input type="text" class="form-control" id="buildingNumber"
-                                [(ngModel)]="roomDetail.buildingNumber" name="buildingNumber">
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <!-- info -->
-                        <div class="col-md-6">Thông tin
-                            <br>
-                            <input type="text" class="form-control" id="information"
-                                [(ngModel)]="roomDetail.information" name="information">
-                        </div>
-                        <!-- floor -->
-                        <div class="col-md-6 ml-auto">Tầng
-                            <br>
-                            <input type="text" class="form-control" id="floorNumber"
-                                [(ngModel)]="roomDetail.floorNumber" name="floorNumber">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <!-- info -->
-                        <div class="col-md-6">Số người ở tối đa
-                            <br>
-                            <input type="text" class="form-control" id="maxAmountOfPeople"
-                                [(ngModel)]="roomDetail.maxAmountOfPeople" name="maxAmountOfPeople">
-                        </div>
-                        <!-- floor -->
-                        <div class="col-md-6 ml-auto">Trạng thái
-                            <br>
-                            <select #selectRoomStatus name="statusName" class="form-select" aria-label="select-status"
-                                (change)="onRoomStatusSelected(selectRoomStatus.value)">
-                                <!-- List of Campuses to choose -->
-                                <option *ngFor=" let status of listStatus" value="{{status.statusId}}"
-                                    [selected]="status.statusId == roomDetail.status.statusId">
-                                    <p *ngIf="status.statusName === 'Available'">Còn Trống</p>
-                                    <p *ngIf="status.statusName === 'Occupied'">Đã thuê</p>
-                                    <p *ngIf="status.statusName === 'Disabled'">Không dùng được</p>
-                                </option>
-                            </select>
-
-                        </div>
-                    </div>
-                    <div class="row">
-                        <!-- current amount -->
-                        <div class="col-md-6">Số người ở
-                            <br>
-                            <input type="text" class="form-control" id="currentAmountOfPeople"
-                                [(ngModel)]="roomDetail.currentAmountOfPeople" name="currentAmountOfPeople">
-                        </div>
-                        <div class="col-md-6 ml-auto "> Tiện ích
-                            <div class="form-check">
-                                <div class="row">
-                                    <div class="col">
-                                        <input class="form-check-input" type="checkbox" [(ngModel)]="roomDetail.fridge"
-                                            name="fridgeChecked" id="fridgeChecked" [checked]="roomDetail.fridge">
-                                        <label class="form-check-label" for="fridgeChecked">
-                                            Tủ lạnh
-                                        </label>
-                                        <br>
-                                        <input class="form-check-input" type="checkbox" [(ngModel)]="roomDetail.kitchen"
-                                            id="kitchenChecked" name="kitchenChecked" [checked]="roomDetail.kitchen">
-                                        <label class="form-check-label" for="kitchenChecked">
-                                            Bếp
-                                        </label>
-                                        <br>
-                                    </div>
-                                    <div class="col">
-                                        <input class="form-check-input" type="checkbox"
-                                            [(ngModel)]="roomDetail.washingMachine" id="washingMachineChecked"
-                                            name="washingMachineChecked" [checked]="roomDetail.washingMachine">
-                                        <label class="form-check-label" for="washingMachineChecked">
-                                            Máy giặt
-                                        </label>
-                                        <br>
-                                        <input class="form-check-input" type="checkbox" [(ngModel)]="roomDetail.desk"
-                                            id="deskChecked" name="deskChecked" [checked]="roomDetail.desk">
-                                        <label class="form-check-label" for="deskChecked">
-                                            Bàn học
-                                        </label>
-                                        <br>
-                                    </div>
-                                    <div class="col">
-                                        <input class="form-check-input" type="checkbox"
-                                            [(ngModel)]="roomDetail.noLiveWithHost" id="liveWithHostChecked"
-                                            name="liveWithHostChecked" [checked]="roomDetail.noLiveWithHost">
-                                        <label class="form-check-label" for="liveWithHostChecked">
-                                            Chung chủ
-                                        </label>
-                                        <br>
-                                        <input class="form-check-input" type="checkbox" [(ngModel)]="roomDetail.bed"
-                                            id="bedChecked" name="bedChecked" [checked]="roomDetail.bed">
-                                        <label class="form-check-label" for="bedChecked">
-                                            Giường
-                                        </label>
-                                        <br>
-                                    </div>
-
-                                    <div class="col">
-                                        <input class="form-check-input" type="checkbox"
-                                            [(ngModel)]="roomDetail.closedToilet" id="closedToiletChecked"
-                                            name="closedToiletChecked" [checked]="roomDetail.closedToilet">
-                                        <label class="form-check-label" for="closedToiletChecked">
-                                            Vệ sinh khép kín
-                                        </label>
-                                        <br>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                        <!-- status -->
-
-                        <!-- <div class="col-md-5 ml-auto">Trạng thái
-                            <br>
-
-                            <select class="form-select" [(ngModel)]="statusSelected" name="Something">
-                                <option selected *ngFor="let status of listStatus">{{status.statusName}}
-                                </option>
-                            </select>
-
-
-                        </div> -->
-                    </div>
-                </form>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-3 form-label" for="floor">Tầng</label>
+            <div class="col-sm-9">
+              <input class="form-control" id="floor" type="number" min="1" formControlName="floor" />
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
-                <button type="button" class="btn btn-primary" data-bs-dismiss="modal"
-                    (click)="updateRoom()">Lưu</button>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-3 form-label" for="room-name">Tên phòng</label>
+            <div class="col-sm-9">
+              <input class="form-control" id="room-name" formControlName="roomName" />
             </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-3 form-label" for="room-type">Loại phòng</label>
+            <div class="col-sm-9">
+              <select class="form-select" id="room-type" formControlName="roomType">
+                <option value="1">Khép kín</option>
+                <option value="2">Không khép kín</option>
+                <option value="3">Chung cư mini</option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-3 form-label" for="price">Giá (VNĐ)</label>
+            <div class="col-sm-9">
+              <input class="form-control" type="number" id="price" min="0" formControlName="price" />
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-3 form-label" for="area">Diện tích (m&#178;)</label>
+            <div class="col-sm-9">
+              <input class="form-control" id="area" type="number" min="0" formControlName="area" />
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-3 form-label" for="max-people">Số người tối đa</label>
+            <div class="col-sm-9">
+              <input class="form-control" id="max-people" type="number" min="1" formControlName="maxPeople" />
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-3 form-label" for="current-people">Số người hiện tại</label>
+            <div class="col-sm-9">
+              <input class="form-control" id="current-people" type="number" min="0" formControlName="currentPeople" />
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-3 form-label" for="info">Thông tin</label>
+            <div class="col-sm-9">
+              <textarea class="form-control" id="info" formControlName="info"></textarea>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-3 form-label" for="room-type">Trạng thái</label>
+            <div class="col-sm-9">
+              <select class="form-select" id="room-type" formControlName="statusId">
+                <option value="1">Còn trống</option>
+                <option value="2">Đã thuê</option>
+                <option value="3">Đang bảo trì</option>
+              </select>
+            </div>
+          </div>
+          <div class="mb-3 row form-check">
+            <div class="col-sm-3 form-check-inline">
+              <label for="fridge">Tủ lạnh</label>
+              <input class="form-check-input" id="fridge" type="checkbox" formControlName="fridge" />
+            </div>
+            <div class="col-sm-3 form-check-inline">
+              <label for="kitchen">Bếp</label>
+              <input class="form-check-input" id="kitchen" type="checkbox" formControlName="kitchen" />
+            </div>
+            <div class="col-sm-3 form-check-inline">
+              <label for="washing-machine">Máy giặt</label>
+              <input class="form-check-input" id="washing-machine" type="checkbox" formControlName="washingMachine" />
+            </div>
+            <div class="col-sm-3 form-check-inline">
+              <label for="desk">Bàn</label>
+              <input class="form-check-input" id="desk" type="checkbox" formControlName="table" />
+            </div>
+  
+            <div class="col-sm-3 form-check-inline">
+              <label for="bed">Giường</label>
+              <input class="form-check-input" id="bed" type="checkbox" formControlName="bed" />
+            </div>
+            <div class="col-sm-3 form-check-inline">
+              <label for="without-host">Không chung chủ</label>
+              <input class="form-check-input" id="without-host" type="checkbox" formControlName="withoutHost" />
+            </div>
+            <div class="col-sm-3 form-check-inline">
+              <label for="closed-toilet">Vệ sinh khép kín</label>
+              <input class="form-check-input" id="closed-toilet" type="checkbox" formControlName="closedToilet" />
+            </div>
+          </div>
         </div>
-    </div>
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header d-flex justify-content-center orangeBackround text-white">
-                <h5 class="modal-title" id="updateModalLabel">Xác nhận xóa phòng</h5>
+        <div class="col-lg-6 col-sm-12">
+            <div class="mb-3 row">
+                <label for="exampleInput5" class="form-label"><b>Ảnh 1</b></label>
+                <img src="{{roomForm.controls['image1'].value}}" class="w-100 h-50 mb-2 border rounded" alt="...">
+                <label for="exampleInput5" class="form-label">Thay đổi ảnh</label>
+                <div class="d-flex">
+                    <input class="form-control" id="image-1" type="file" accept="image/*"
+                    (change)="onImage1Change($event)" />
+                <!-- <button class="btn btn-secondary ms-2" (click)="cancelChange(i)">Hủy</button> -->
+                </div>
             </div>
-            <div class="modal-body">
-                Bạn chắc chắn muốn xóa phòng trọ này?
+            <div class="mb-3 row">
+                <label for="exampleInput5" class="form-label"><b>Ảnh 2</b></label>
+                <img src="{{roomForm.controls['image2'].value}}" class="w-100 h-50 mb-2 border rounded" alt="...">
+                <label for="exampleInput5" class="form-label">Thay đổi ảnh</label>
+                <div class="d-flex">
+                    <input class="form-control" id="image-2" type="file" accept="image/*"
+                    (change)="onImage2Change($event)" />
+                <!-- <button class="btn btn-secondary ms-2" (click)="cancelChange(i)">Hủy</button> -->
+                </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary w-25 me-3" data-bs-dismiss="modal">Hủy</button>
-                <button type="button" class="btn btn-danger w-25" data-bs-dismiss="modal"
-                    (click)="deleteRoom()">Xóa</button>
+            <div class="mb-3 row">
+                <label for="exampleInput5" class="form-label"><b>Ảnh 3</b></label>
+                <img src="{{roomForm.controls['image3'].value}}" class="w-100 h-50 mb-2 border rounded" alt="...">
+                <label for="exampleInput5" class="form-label">Thay đổi ảnh</label>
+                <div class="d-flex">
+                    <input class="form-control" id="image-3" type="file" accept="image/*"
+                    (change)="onImage3Change($event)" />
+                <!-- <button class="btn btn-secondary ms-2" (click)="cancelChange(i)">Hủy</button> -->
+                </div>
             </div>
+            <div class="text-center col-12 col-md-4 mb-5">
+                <button class="btn btn-success w-100 mt-4" type="submit">Chỉnh sửa</button>
+              </div>
         </div>
+      </div>
     </div>
-</div>
-<swal #roomErrorAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
-    title="Lỗi! Thử lại sau vài giây!" icon="error" (willClose)="this.goBack()">
-</swal>
-<swal #updateRoomSuccessAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
-    title="Cập nhật phòng thành công!" icon="success" (willClose)="this.goBack()">
-</swal>
-<swal #addRoomSuccessAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
-    title="Thêm mới phòng thành công!" icon="success" (willClose)="this.goBack()">
-</swal>
-<swal #deleteRoomSuccessAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
-    title="Xóa phòng thành công!" icon="success" (willClose)="this.goBack()">
-</swal>
+  </form>
+  <swal
+    #addRoomAlert
+    title="Cập nhật phòng"
+    text="Cập nhật thông tin phòng thành công"
+    icon="success"
+    (confirm)="navDashboard()"
+    >
+  </swal>
+  <swal #forbiddenAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true" title="Không có quyền chỉnh sửa"
+    icon="error">
+  </swal>
+  <swal
+    #serverErrorAlert
+    [toast]="true"
+    position="top-end"
+    [timer]="3000"
+    [timerProgressBar]="true"
+    title="Lỗi Server"
+    icon="error">
+  </swal>

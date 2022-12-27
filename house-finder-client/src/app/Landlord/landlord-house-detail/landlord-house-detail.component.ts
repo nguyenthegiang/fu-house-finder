@@ -114,7 +114,7 @@ export class LandlordHouseDetailComponent implements OnInit {
   }
 
   deleteRoom(id: number) {
-
+    this.roomService.deleteRoom(id).subscribe(resp => {window.location.reload();}, err => {});
   }
 
   //for displaying 'Amount of People'

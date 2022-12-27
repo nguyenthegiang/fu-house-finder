@@ -1,12 +1,11 @@
 <app-header></app-header>
 
-<nav class="mx-1 mx-md-5 mt-3 ps-3 fs-6" style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
+<!-- Breadcrumb -->
+<nav class="mx-1 mx-md-5 mt-3 ps-3 fs-6" aria-label="breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a class="text-danger" href="/home">Trang chủ</a></li>
-    <li class="breadcrumb-item" aria-current="page">></li>
     <li class="breadcrumb-item"><a class="text-danger" onclick="history.back()" style="cursor: pointer;">Chi tiết nhà
         trọ</a></li>
-    <li class="breadcrumb-item" aria-current="page">></li>
     <li class="breadcrumb-item active" aria-current="page">Chi tiết phòng trọ</li>
   </ol>
 </nav>
@@ -20,8 +19,10 @@
 <!-- Only display when Room Detail is loaded -->
 <div class="mx-1 mx-md-5 mb-5 d-flex justify-content-center" *ngIf="roomDetail && landlordDetail">
   <div class="row w-100 d-flex justify-content-evenly">
-    <div class="col-12 col-md-7 mt-4">
+    <div class="col-12 col-md-6 mt-4">
+      <!-- Images -->
       <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <!-- Paging Indicator -->
         <div *ngFor="let image of roomDetail.imagesOfRooms; let i=index;">
           <div *ngIf="i > 1" class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
@@ -32,16 +33,20 @@
               aria-label="Slide 3"></button>
           </div>
         </div>
+
+        <!-- Images Carousel -->
         <div class="carousel-inner rounded">
           <div class="carousel-item active">
-            <img src="{{roomDetail.imagesOfRooms[0].imageLink}}" class="d-block w-100 h-25" alt="...">
+            <img src="{{roomDetail.imagesOfRooms[0].imageLink}}" class="d-block w-100 roomImage" alt="...">
           </div>
           <div *ngFor="let image of roomDetail.imagesOfRooms; let i=index;">
             <div class="carousel-item" *ngIf="i >= 1">
-              <img src="{{image.imageLink}}" class="d-block w-100 h-25" alt="...">
+              <img src="{{image.imageLink}}" class="d-block w-100 roomImage" alt="...">
             </div>
           </div>
         </div>
+
+        <!-- Buttons -->
         <div *ngFor="let image of roomDetail.imagesOfRooms; let i=index;">
           <div *ngIf="i > 1">
             <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
@@ -56,6 +61,8 @@
             </button>
           </div>
         </div>
+
+        <!-- Buttons -->
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
           data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -67,19 +74,32 @@
           <span class="visually-hidden">Next</span>
         </button>
       </div>
-
-      <div class="border border-dark rounded p-2 mt-4">
-        <h3 class="text-center mb-2">Thông tin chủ trọ</h3>
-        Tên: {{landlordDetail.displayName}} <br>
-        Email: {{landlordDetail.email}} <br>
-        Số điện thoại: {{landlordDetail.phoneNumber}} <br>
-        Facebook: <a href="{{landlordDetail.facebookUrl}}" target="_blank">{{landlordDetail.facebookUrl}}</a>
-      </div>
     </div>
 
-    <div class="col-12 col-md-5 mt-4">
-      <div class="border border-dark rounded p-2 h-100">
-        <h3 class="text-center mb-3">Thông tin mô tả</h3>
+    <div class="col-12 col-md-6 mt-4">
+      <!-- Room Info -->
+      <div class="border border-secondary rounded p-2">
+        <h3 class="text-center mb-3">Phòng {{roomDetail.roomName}}</h3>
+
+        <!-- Price -->
+        <div class="row">
+          <div><b>Giá phòng: </b>{{roomDetail.pricePerMonth | number}} VNĐ/tháng</div>
+        </div>
+
+        <!-- Area -->
+        <div class="row mt-1">
+          <div><b>Diện tích: </b>{{roomDetail.areaByMeters | number}} m<sup>2</sup></div>
+        </div>
+
+        <!-- RoomType -->
+        <div class="row mt-1">
+          <div><b>Loại phòng: </b>{{roomDetail.roomType.roomTypeName}}</div>
+        </div>
+
+        <!-- Room Utility -->
+        <div class="row mt-1">
+          <div><b>Tiện ích: </b></div>
+        </div>
         <div class="row">
           <div class="d-flex align-items-center col-12 col-sm-6">
             <span class="material-symbols-outlined me-1">
@@ -161,15 +181,47 @@
           </div>
         </div>
 
-        <div class="my-3">
-          Loại phòng: {{roomDetail.roomType.roomTypeName}}
+        <!-- Other info -->
+        <div class="row mt-1">
+          <div><b>Thông tin khác: </b>{{roomDetail.information}}</div>
         </div>
 
-        <div class="my-3">
-          {{roomDetail.information}}
+        <!-- Amount -->
+        <div class="row mt-1">
+          <div><b>Số người ở: </b></div>
+          <div class="ms-2">Hiện tại: {{roomDetail.currentAmountOfPeople}}</div>
+          <div class="ms-2">Tối đa: {{roomDetail.maxAmountOfPeople}}</div>
+        </div>
+      </div>
+
+      <!-- Landlord Info -->
+      <div class="border border-secondary rounded p-2 mt-2">
+        <div class="landlordInformation">
+          <h3 class="text-center">Thông tin chủ trọ</h3>
+          <span>
+            <b>Họ và tên: </b>
+            {{landlordDetail.displayName}}
+          </span>
+          <br>
+          <span>
+            <b>Facebook: </b>
+            <a href="{{landlordDetail!.facebookUrl}}">{{landlordDetail!.facebookUrl}}</a>
+          </span>
+          <br>
+          <span>
+            <b>Số điện thoại: </b>
+            <a class="phoneOn" (click)="phoneNumDisplay = true" *ngIf="phoneNumDisplay == false">Click để hiển thị</a>
+            <span class="phoneOff" *ngIf="phoneNumDisplay == true">{{landlordDetail!.phoneNumber}}</span>
+          </span>
+          <br>
+          <span>
+            <b>Địa chỉ: </b>
+            {{landlordDetail!.address.addresses}}
+          </span>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 <!-- <app-footer></app-footer> -->

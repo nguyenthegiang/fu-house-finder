@@ -47,6 +47,7 @@ export class LoginComponent implements OnInit {
   contactForm = this.formBuilder.group({
     phonenumber: ['', Validators.required],
     facebookUrl: ['', Validators.required],
+    address: ['', Validators.required]
   });
   imageForm = this.formBuilder.group({
     identityCardFrontSideImageLink: [, Validators.required],
@@ -293,7 +294,8 @@ export class LoginComponent implements OnInit {
   onSubmit(): void {
     this.registerLandlord(
       this.contactForm.controls['phonenumber'].value,
-      this.contactForm.controls['facebookUrl'].value
+      this.contactForm.controls['facebookUrl'].value,
+      this.contactForm.controls['address'].value,
     );
   }
 
@@ -338,14 +340,16 @@ export class LoginComponent implements OnInit {
   //Register for Landlord
   registerLandlord(
     phonenumber: string,
-    facebookUrl: string
+    facebookUrl: string,
+    address: string
   ): void {
     //with Google
     if (this.googleIdToken != undefined) {
       this.userService.registerLandlordGoogle(
         this.googleIdToken,
         phonenumber,
-        facebookUrl
+        facebookUrl,
+        address
       ).subscribe(resp => {
         if (resp.status == 200) {
           this.fileService.uploadIDC(this.frontImg, this.backImg).subscribe(resp => { });
@@ -367,7 +371,8 @@ export class LoginComponent implements OnInit {
         this.facebookId,
         this.name,
         phonenumber,
-        facebookUrl
+        facebookUrl,
+        address
       ).subscribe(resp => {
         if (resp.status == 200) {
           this.fileService.uploadIDC(this.frontImg, this.backImg).subscribe(resp => { });

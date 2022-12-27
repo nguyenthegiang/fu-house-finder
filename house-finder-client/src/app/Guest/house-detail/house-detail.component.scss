@@ -1,62 +1,6 @@
-// #houseImage{
-//   width: 600px;
-// }
-// #googleMap{
-//   width: 300px;
-//   margin: 30px 0;
-// }
-// .house-information{
-//   margin-top: 30px;
-//   width: 600px;
-//   h3{
-//     color: #3E4F3C;
-//     text-align: center;
-//   }
-//   span{
-//     color: #3E4F3C;
-//   }
-// }
-
-// .landlordInformation{
-//   border: solid 2px #3E4F3C;
-//   border-radius: 10px;
-//   width: 300px;
-
-//   padding: 30px;
-
-//   h4{
-//     text-align: center;
-//   }
-//   span{
-//     color: #3E4F3C;
-//   }
-// }
-// .row{
-//   margin-top: 50px;
-// }
-
-// .availableRooms{
-//   width: 600px;
-//   margin-top: 30px;
-//   color: #3E4F3C;
-//   h5{
-//     text-align: center;
-//   }
-//   table{
-//     width: 600px;
-//     thead{
-//       width: 100%;
-//       background-color: #9DB49A;
-//       th{
-//         text-align: center;
-//       }
-//     }
-//   }
-// }
-
 .floating-btn {
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   background-color: #FF0000;
   display: flex;
   align-items: center;
@@ -64,7 +8,7 @@
   text-decoration: none;
   border-radius: 50%;
   color: #ffffff;
-  font-size: 40px;
+  font-size: 30px;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.25);
   position: fixed;
   right: 20px;
@@ -74,16 +18,9 @@
   z-index: 999999;
 }
 
+// Floating button
 .floating-btn:active {
   background: #990000;
-}
-
-.star {
-  cursor: pointer;
-}
-
-.star:hover {
-  opacity: 0.8;
 }
 
 .roomCardItem {
@@ -109,6 +46,34 @@
   color: black;
 }
 
+// Rates & Comments
+
+// Orange color for components
+.colorOrange {
+  color: #ee4d2d;
+}
+
+// small text
+.smallText {
+  font-size: 10pt;
+}
+
+// landlord reploy
+.lightGrayBackground {
+  background-color: #eeeeee;
+}
+
+
+// Create Rate & Comment
+.star {
+  cursor: pointer;
+}
+
+.star:hover {
+  opacity: 0.8;
+}
+
+// Responsive
 @media only screen and (max-width: 768px) {
   #md {
     display: none;
@@ -165,10 +130,9 @@
   border-color: #e73310 !important;
 }
 
-#rateStar {
-  cursor: default;
-}
-
-#rateStar:hover {
-  opacity: 1 !important;
+.houseImage {
+  object-fit: cover; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  height: 450px;
+  width: 100%;
 }

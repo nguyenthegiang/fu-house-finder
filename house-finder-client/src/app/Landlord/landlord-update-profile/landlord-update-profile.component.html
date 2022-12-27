@@ -5,38 +5,45 @@
 
   <form class="row w-100 d-flex flex-column align-items-center needs-validation" novalidate *ngIf="landlordDetail">
     <div class="col-12 col-md-5 mb-3">
-      <label for="exampleInput1" class="form-label"><b>Họ và tên</b></label>
+      <label for="inputName" class="form-label"><b>Họ và tên</b></label>
       <input type="text" class="form-control" name="name" [(ngModel)]="updateName" placeholder="Nhập họ và tên"
-        id="exampleInput1" required>
+        id="inputName" required>
       <div class="invalid-feedback mb-3">Không được để trống</div>
     </div>
 
-
     <div class="col-12 col-md-5 mb-3">
-      <label for="exampleInput1" class="form-label"><b>Số điện thoại</b></label>
+      <label for="inputPhone" class="form-label"><b>Số điện thoại</b></label>
       <input type="phoneNumber" class="form-control" name="phoneNumber" [(ngModel)]="updatePhoneNumber"
-        placeholder="Nhập số điện thoại" id="exampleInput1" required>
+        placeholder="Nhập số điện thoại" id="inputPhone" required>
       <div class="invalid-feedback mb-3">Không được để trống</div>
     </div>
 
     <div class="col-12 col-md-5 mb-3">
-      <label for="exampleInput1" class="form-label"><b>Link Facebook</b></label>
+      <label for="inputFacebook" class="form-label"><b>Link Facebook</b></label>
       <input type="facebookUrl" class="form-control" name="facebookUrl" [(ngModel)]="updateFacebookUrl"
-        placeholder="Nhập link Facebook" id="exampleInput1" required>
+        placeholder="Nhập link Facebook" id="inputFacebook" required>
       <div class="invalid-feedback mb-3">Không được để trống</div>
     </div>
 
     <div class="col-12 col-md-5 mb-3">
-      <label for="exampleInput1" class="form-label"><b>Img 1</b></label>
-      <img src="{{updateIdentityCardFrontSideImageLink}}" class="w-100 h-50 mb-2 border rounded">
-      <input type="file" (change)="displayImage($event,'front')">
+      <div>
+        <label for="inputIDCardFront" class="form-label"><b>Ảnh CCCD mặt trước</b></label>
+      </div>
+      <div>
+        <img src="{{updateIdentityCardFrontSideImageLink}}" class="w-50 h-50 mb-2 border rounded">
+      </div>
+      <input class="form-control" id="inputIDCardFront" type="file" (change)="displayImage($event,'front')">
       <div class="invalid-feedback mb-3">Không được để trống</div>
     </div>
 
     <div class="col-12 col-md-5 mb-3">
-      <label for="exampleInput1" class="form-label"><b>Img 1</b></label>
-      <img src="{{updateIdentityCardBackSideImageLink}}" class="w-100 h-50 mb-2 border rounded">
-      <input type="file" (change)="displayImage($event,'back')">
+      <div>
+        <label for="inputIDCardBack" class="form-label"><b>Ảnh CCCD mặt sau</b></label>
+      </div>
+      <div>
+        <img src="{{updateIdentityCardBackSideImageLink}}" class="w-50 h-50 mb-2 border rounded">
+      </div>
+      <input class="form-control" id="inputIDCardBack" type="file" (change)="displayImage($event,'back')">
       <div class="invalid-feedback mb-3">Không được để trống</div>
     </div>
 

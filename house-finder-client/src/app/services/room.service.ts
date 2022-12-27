@@ -39,7 +39,7 @@ export class RoomService {
   }
 
   //[Landlord: Update Room]
-  updateRoom(room: Room): Observable<any> {
+  updateRoom(room: any): Observable<any> {
     return this.http.put<any>(this.APIUrl, room, {withCredentials: true, headers: this.httpOptions.headers});
   }
 

@@ -27,14 +27,12 @@ export class RateService {
   /**
    * [House Detail] Get list Rate by House id
    */
-  getListRatesByHouseId(houseId: number)
-  {
+  getListRatesByHouseId(houseId: number) {
     return this.http.get<any>(this.APIUrl + "/GetListRatesByHouseId?HouseId=" + houseId);
   }
 
   //Get rate by id
-  getRateById(rateId: number)
-  {
+  getRateById(rateId: number) {
     return this.http.get<any>(this.APIUrl + "/GetRateById?RateId=" + rateId);
   }
 

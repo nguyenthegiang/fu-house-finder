@@ -107,6 +107,7 @@ export class HomepageComponent implements OnInit, AfterViewInit {
 
     //(Filter) Get all Campuses (with their Districts, Communes, Villages)
     let campus_data = localStorage.getItem("campuses");
+    //Save to localStorage for later usage (no need to call API again)
     if (campus_data) {
       this.campuses = JSON.parse(campus_data);
     }
