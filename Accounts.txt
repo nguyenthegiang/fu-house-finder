@@ -1,4 +1,6 @@
-Login with Google:
+Landlords:
+
+	###Login with Google:
 
 	lehoangchiSeller@gmail.com
 	lehoangchiSeller1@
@@ -6,7 +8,7 @@ Login with Google:
 	nguyenminhhanhSeller@gmail.com (Ký túc Xanh)
 	nguyenminhhanhSeller1@
 
-Login with Facebook:
+	###Login with Facebook:
 
 	wznaqurlng_1667917017@tfbnw.net (Skyhome)
 	khoanguyen123@
@@ -23,14 +25,41 @@ Login with Facebook:
 	omlnlpeuik_1671888968@tfbnw.net	(Nhà trọ PRO)
 	thanhhoa123@
 
-	open_ejtyynj_user@tfbnw.net
-	tamle123@
+	open_ejtyynj_user@tfbnw.net	(Trọ Hà Minh)
+	haminh123@
 
-	amgbmyltrx_1667917017@tfbnw.net
-	tamnguyen123@
+	amgbmyltrx_1667917017@tfbnw.net	(Trọ Phương Quỳnh)
+	phuongquynh123@
 
-	anvqlvlana_1667917017@tfbnw.net
-	linhle123@
+	anvqlvlana_1667917017@tfbnw.net	(KTX T-Linh)
+	xuannghiem123@
 
 	hbqrktewea_1667917017@tfbnw.net
 	hoangnam123@
+
+Staff:
+	thanhle@gmail.com
+	thanhle
+
+	staff1@gmail.com
+	staff1
+
+	staff2@gmail.com
+	staff2
+
+	staff3@gmail.com
+	staff3
+
+Students:
+	###Facebook
+	nguyenthe.giang.775@gmail.com
+	
+	###Google
+	nguyenthe.giang.775@gmail.com
+	giangnthe153046@fpt.edu.vn
+	sample.mail.prn@gmail.com	
+	tissa0800@gmail.com
+	nguyenthe.giang.7752@gmail.com
+
+	
+	
