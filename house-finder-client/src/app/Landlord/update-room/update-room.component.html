@@ -66,7 +66,9 @@
             <label class="col-sm-3 form-label" for="room-type">Trạng thái</label>
             <div class="col-sm-9">
               <select class="form-select" id="room-type" formControlName="statusId">
-                <option *ngFor="let status of listStatus" value="{{status.statusId}}">{{status.statusName}}</option>
+                <option value="1">Còn trống</option>
+                <option value="2">Đã thuê</option>
+                <option value="3">Đang bảo trì</option>
               </select>
             </div>
           </div>
