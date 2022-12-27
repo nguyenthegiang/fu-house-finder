@@ -1,3 +1,4 @@
+import { Order } from './../../models/order';
 import { OrderService } from 'src/app/services/order.service';
 import { Component, OnInit, ViewChild, TemplateRef, ElementRef, AfterViewInit } from '@angular/core';
 
@@ -7,7 +8,11 @@ import { Component, OnInit, ViewChild, TemplateRef, ElementRef, AfterViewInit } 
   styleUrls: ['./confirm-order.component.scss']
 })
 export class ConfirmOrderComponent implements OnInit, AfterViewInit {
+  // button trigger modal
   @ViewChild('modalButton') modalButton: ElementRef<HTMLElement> | undefined;
+
+  //List of Order that is not confirmed of this student
+  unconfirmedOrders: Order[] | undefined;
 
   constructor(private orderService: OrderService) { }
 
@@ -21,8 +26,16 @@ export class ConfirmOrderComponent implements OnInit, AfterViewInit {
           //User not logged in: do nothing
           return;
         } else {
-          //Open modal for Confirm Orders
-          this.openModal();
+          //assign list of unconfirmed orders
+          this.unconfirmedOrders = data;
+
+          if (this.unconfirmedOrders && this.unconfirmedOrders.length > 0) {
+            //Open modal for Confirm Orders
+            this.openModal();
+          } else {
+            //User has no order: do nothing
+            return;
+          }
         }
       },
     );
