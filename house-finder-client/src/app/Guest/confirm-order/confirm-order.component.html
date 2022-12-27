@@ -10,17 +10,32 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header text-white">
-        <h1 class="modal-title fs-5" id="confirmOrderModalLabel">Modal title</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <h1 class="modal-title fs-5" id="confirmOrderModalLabel">Xác nhận Nguyện vọng đã giải quyết</h1>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
       </div>
       <div class="modal-body">
-        <div *ngIf="unconfirmedOrders && unconfirmedOrders.length > 0">
-          {{unconfirmedOrders[0].orderedDate}}
+        <div>
+          Vui lòng xác nhận trạng thái nguyện vọng
+          <br>
+          <i> (nếu nguyện vọng đã được đáp ứng, vui lòng bấm vào "Đã giải quyết"):
+          </i>
+        </div>
+        <!-- List of Orders -->
+        <div class="container-fluid" *ngIf="unconfirmedOrders && unconfirmedOrders.length > 0">
+          <div class="row" *ngFor="let order of unconfirmedOrders">
+            <div class="border border-secondary rounded p-2 mt-3">
+              <div class="text-secondary" style="font-size: 10pt;">{{order.orderedDate | date:'short'}}</div>
+              <div>{{order.orderContent}}</div>
+              <div class="mt-2">
+                <button type="button" class="btn btn-success btn-sm float-end">Đã giải quyết</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" id="btn" class="btn btn-primary">Save changes</button>
+        <button type="button" id="btn" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        <!-- <button type="button" id="btn" class="btn btn-primary">Save changes</button> -->
       </div>
     </div>
   </div>
