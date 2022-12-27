@@ -4,11 +4,11 @@
   "Routes": [
     {
       "DownstreamPathTemplate": "/api/user/test",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/user/test",
@@ -17,16 +17,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/user/{UserId}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/user/{UserId}",
@@ -35,16 +35,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/user/login",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/user/login",
@@ -53,16 +53,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/user/register",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/user/register",
@@ -71,16 +71,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/user/logout",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/user/logout",
@@ -89,16 +89,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/user/landlord",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/user/landlord",
@@ -107,16 +107,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/user/LandlordSignupRequest",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/user/LandlordSignupRequest",
@@ -125,16 +125,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/user/RejectedLandlord",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/user/RejectedLandlord",
@@ -143,16 +143,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/user/CountTotalLandlord",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/user/CountTotalLandlord",
@@ -161,16 +161,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/user/CountActiveLandlord",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/user/CountActiveLandlord",
@@ -179,16 +179,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/user/{userId}/{statusId}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/user/{userId}/{statusId}",
@@ -197,16 +197,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/user/staff",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/user/staff",
@@ -215,16 +215,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/user/currentUser",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/user/currentUser",
@@ -233,16 +233,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/user/updateProfile",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/user/updateProfile",
@@ -251,16 +251,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/user/landlordUpdateProfile",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/user/landlordUpdateProfile",
@@ -269,16 +269,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/user/change_password",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/user/change_password",
@@ -287,16 +287,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/user/staff/create",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/user/staff/create",
@@ -305,16 +305,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/user/staff/update",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/user/staff/update",
@@ -323,16 +323,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/user/staff/delete",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/user/staff/delete",
@@ -341,34 +341,34 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/campus",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
-      "UpstreamPathTemplate": "/api/user",
+      "UpstreamPathTemplate": "/api/campus",
       "UpstreamHttpMethod": [ "Get" ],
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/commune/CountCommuneHavingHouse",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/commune/CountCommuneHavingHouse",
@@ -377,16 +377,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/district/CountDistrictHavingHouse",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/district/CountDistrictHavingHouse",
@@ -395,16 +395,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/file/download",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/file/download",
@@ -413,70 +413,52 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/file/upload/{HouseId}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/file/upload/{HouseId}",
-      "UpstreamHttpMethod": [ "Post" ],
-      "RateLimitOptions": {
-        "EnableRateLimiting": true,
-        "Period": "1s",
-        "PeriodTimespan": 1,
-        "Limit": 1
-      }
+      "UpstreamHttpMethod": [ "Post" ]
     },
     {
       "DownstreamPathTemplate": "/api/file/room/image",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/file/room/image",
-      "UpstreamHttpMethod": [ "Post" ],
-      "RateLimitOptions": {
-        "EnableRateLimiting": true,
-        "Period": "1s",
-        "PeriodTimespan": 1,
-        "Limit": 1
-      }
+      "UpstreamHttpMethod": [ "Post" ]
     },
     {
       "DownstreamPathTemplate": "/api/file/room/image/{RoomId}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/file/room/image/{RoomId}",
-      "UpstreamHttpMethod": [ "Post" ],
-      "RateLimitOptions": {
-        "EnableRateLimiting": true,
-        "Period": "1s",
-        "PeriodTimespan": 1,
-        "Limit": 1
-      }
+      "UpstreamHttpMethod": [ "Post" ]
     },
     {
       "DownstreamPathTemplate": "/api/file/idc/upload",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/file/idc/upload",
@@ -485,70 +467,52 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/file/house/image/{HouseId}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/file/house/image/{HouseId}",
-      "UpstreamHttpMethod": [ "Post" ],
-      "RateLimitOptions": {
-        "EnableRateLimiting": true,
-        "Period": "1s",
-        "PeriodTimespan": 1,
-        "Limit": 1
-      }
+      "UpstreamHttpMethod": [ "Post" ]
     },
     {
       "DownstreamPathTemplate": "/api/file/house/image/{HouseId}/{ImageId}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/file/house/image/{HouseId}/{ImageId}",
-      "UpstreamHttpMethod": [ "Put" ],
-      "RateLimitOptions": {
-        "EnableRateLimiting": true,
-        "Period": "1s",
-        "PeriodTimespan": 1,
-        "Limit": 1
-      }
+      "UpstreamHttpMethod": [ "Put" ]
     },
     {
       "DownstreamPathTemplate": "/api/house",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/house",
-      "UpstreamHttpMethod": [ "Get", "Put", "Delete", "Post" ],
-      "RateLimitOptions": {
-        "EnableRateLimiting": true,
-        "Period": "1s",
-        "PeriodTimespan": 1,
-        "Limit": 1
-      }
+      "UpstreamHttpMethod": [ "Get", "Put", "Delete", "Post" ]
     },
     {
       "DownstreamPathTemplate": "/api/house/availableHouses",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/house/availableHouses",
@@ -557,16 +521,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/house/{HouseId}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/house/{HouseId}",
@@ -575,16 +539,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/house/IncreaseView",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/house/IncreaseView",
@@ -593,16 +557,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/house/GetHousesByLandlord",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/house/GetHousesByLandlord",
@@ -611,16 +575,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/house/GetMoneyForNotRentedRooms",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/house/GetMoneyForNotRentedRooms",
@@ -629,16 +593,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/house/Count{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/house/Count{everything}",
@@ -647,16 +611,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 50
       }
     },
     {
       "DownstreamPathTemplate": "/api/house/GetReportedHouses",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/house/GetReportedHouses",
@@ -665,16 +629,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/house/GetListHouseOfCurrentLandlord",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/house/GetListHouseOfCurrentLandlord",
@@ -683,16 +647,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/LandlordInformation/LandlordInfo",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/LandlordInformation/LandlordInfo",
@@ -701,16 +665,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/LandlordInformation/GetCurrentLandlordInfo",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/LandlordInformation/GetCurrentLandlordInfo",
@@ -719,16 +683,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/Order/Count{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/Order/Count{everything}",
@@ -737,16 +701,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/Order/{orderId}/{statusId}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/Order/{orderId}/{statusId}",
@@ -755,16 +719,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/Order",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/Order",
@@ -773,16 +737,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/Order/getListOrderNotConfirm",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/Order/getListOrderNotConfirm",
@@ -791,16 +755,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/Rate",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/Rate",
@@ -809,16 +773,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/Rate/Get{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/Rate/Get{everything}",
@@ -827,16 +791,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/Report",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/Report",
@@ -845,16 +809,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/Report/GetTotalReportByMonth",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/Report/GetTotalReportByMonth",
@@ -863,16 +827,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/Report/SearchReportByHouseName/{key}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/Report/SearchReportByHouseName/{key}",
@@ -881,16 +845,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/Report/CountTotalReportByHouseId/{houseId}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/Report/CountTotalReportByHouseId/{houseId}",
@@ -899,16 +863,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/Report/CountTotalReport",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/Report/CountTotalReport",
@@ -917,16 +881,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/Report/{ReportId}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/Report/{ReportId}",
@@ -935,16 +899,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/Report/{reportId}/{statusId}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/Report/{reportId}/{statusId}",
@@ -953,16 +917,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/Roles/staff",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/Roles/staff",
@@ -971,16 +935,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/Room",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/Room",
@@ -989,16 +953,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/Room/getByHouseId",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/Room/getByHouseId",
@@ -1007,16 +971,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/Room/getAvailableRooms",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/Room/getAvailableRooms",
@@ -1025,16 +989,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/Room/getByRoomId",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/Room/getByRoomId",
@@ -1043,16 +1007,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/Room/create",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/Room/create",
@@ -1061,16 +1025,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/Room/Rooms",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/Room/Rooms",
@@ -1079,16 +1043,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/Room/Count{everything}",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/Room/Count{everything}",
@@ -1097,16 +1061,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/Room/changeStatus",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/Room/changeStatus",
@@ -1115,16 +1079,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/RoomStatus",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/RoomStatus",
@@ -1133,16 +1097,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/RoomStatus/getByHouseId",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/RoomStatus/getByHouseId",
@@ -1151,16 +1115,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/RoomType",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/RoomType",
@@ -1169,16 +1133,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/RoomType/getByHouseId",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/RoomType/getByHouseId",
@@ -1187,16 +1151,16 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     },
     {
       "DownstreamPathTemplate": "/api/Village/CountVillageHavingHouse",
-      "DownstreamScheme": "http",
+      "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
           "Host": "localhost",
-          "Port": 5000
+          "Port": 8001
         }
       ],
       "UpstreamPathTemplate": "/api/Village/CountVillageHavingHouse",
@@ -1205,7 +1169,7 @@
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 1
+        "Limit": 5
       }
     }
   ]

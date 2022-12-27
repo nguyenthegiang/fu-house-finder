@@ -29,6 +29,16 @@ namespace APIGateway
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddOcelot(Configuration);
+            string[] origins = { "https://fu-house-finder.vercel.app", "https://localhost:4200" };
+            //Add CORS policy
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                    builder.WithOrigins(origins)
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,6 +51,7 @@ namespace APIGateway
             app.UseHttpsRedirection();
 
             app.UseRouting();
+            app.UseCors();
 
             await app.UseOcelot();
 

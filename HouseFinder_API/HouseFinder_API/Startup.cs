@@ -50,7 +50,7 @@ namespace HouseFinder_API
                 cfg.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
             });
 
-            string[] origins = { "https://fu-house-finder.vercel.app", "https://localhost:4200" };
+            string[] origins = { "https://fu-house-finder.vercel.app", "https://localhost:4200", "https://localhost:5001", "http://localhost:5000" };
             //Add CORS policy
             services.AddCors(options =>
             {

@@ -164,7 +164,7 @@ namespace HouseFinder_API.Controllers
                 createRoom.LastModifiedBy = uid;
                 createRoom.CreatedBy = uid;
                 createRoom.CreatedDate = DateTime.Now;
-                createRoom.StatusId = room.MaxAmountOfPeople == room.CurrentAmountOfPeople ? 1 : 2;
+                createRoom.StatusId = room.MaxAmountOfPeople == room.CurrentAmountOfPeople ? 2 : 1;
 
                 RoomDTO roomDTO = roomRepository.CreateRoom(createRoom);
                 return Ok(roomDTO);
