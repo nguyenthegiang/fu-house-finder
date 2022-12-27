@@ -196,7 +196,7 @@
               <td>
                 <!-- CRUD button -->
                 <a class="text-decoration-none text-warning me-3" data-bs-toggle="modal" data-bs-target="#updateModal"
-                  data-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId)" style="cursor: pointer;">
+                  data-whatever="@getbootstrap" (click)="updateRoom(dataItem.roomId)" style="cursor: pointer;">
                   <i class="fa-solid fa-pen fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Chỉnh sửa">
                   </i>
                 </a>
@@ -212,8 +212,6 @@
     </div>
   </div>
 </div>
-
-<app-update-room [roomId]="updateRoomId"></app-update-room>
 
 <!-- Footer -->
 <!-- <app-footer></app-footer> -->

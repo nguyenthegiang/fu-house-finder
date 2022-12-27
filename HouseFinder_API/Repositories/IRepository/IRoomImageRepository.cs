@@ -11,6 +11,8 @@ namespace Repositories.IRepository
     public interface IRoomImageRepository
     {
         public void CreateRoomImages(List<ImagesOfRoom> images);
+        public void UpdateRoomImages(ImagesOfRoomDTO images);
+        public ImagesOfRoomDTO GetImagesOfRoom(int id);
         public List<ImagesOfRoomDTO> GetRoomImages(int RoomId);
     }
 }

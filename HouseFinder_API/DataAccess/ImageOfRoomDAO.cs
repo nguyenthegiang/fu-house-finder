@@ -49,5 +49,43 @@ namespace DataAccess
 
             return roomImages;
         }
+        public static ImagesOfRoomDTO GetRoomImage(int id)
+        {
+            ImagesOfRoomDTO roomImage = new ImagesOfRoomDTO();
+
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    MapperConfiguration config;
+                    config = new MapperConfiguration(cfg => cfg.AddProfile(new MapperProfile()));
+                    roomImage = context.ImagesOfRooms.Where(image => image.ImageId == id)
+                        .ProjectTo<ImagesOfRoomDTO>(config).FirstOrDefault();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+            return roomImage;
+        }
+        public static void UpdateRoomImage(ImagesOfRoom image)
+        {
+
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    context.ImagesOfRooms.Update(image);
+                    context.SaveChanges();
+                }
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+
+        }
     }
 }

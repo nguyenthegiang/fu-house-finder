@@ -198,13 +198,14 @@ namespace HouseFinder_API.Controllers
             }
             string dir = $"user/{uid}/House/{Room.HouseId}/{roomDTO.RoomId}";
             List<ImagesOfRoom> images = new List<ImagesOfRoom>();
-            var path = $"{dir}/{DateTime.Now}_{File.FileName}";
+            var path = $"{dir}/{DateTime.Now.ToString("ddMMyyyyHHmmss")}_{File.FileName}";
             Stream fs = File.OpenReadStream();
             await storageRepository.UploadFileAsync(path, fs);
             ImagesOfRoom image = new ImagesOfRoom();
             image.CreatedBy = uid;
-            image.CreatedDate = DateTime.UtcNow;
+            image.CreatedDate = DateTime.Now;
             image.LastModifiedBy = uid;
+            image.LastModifiedDate = DateTime.Now;
             image.RoomId = roomDTO.RoomId;
             image.ImageLink = path;
             images.Add(image);
@@ -223,12 +224,12 @@ namespace HouseFinder_API.Controllers
             }
             string dir = $"user/{uid}/House/{roomDTO.HouseId}/{RoomId}";
             List<ImagesOfRoom> images = new List<ImagesOfRoom>();
-            var path = $"{dir}/{DateTime.Now}_{File.FileName}";
+            var path = $"{dir}/{DateTime.Now.ToString("ddMMyyyyHHmmss")}_{File.FileName}";
             Stream fs = File.OpenReadStream();
             await storageRepository.UploadFileAsync(path, fs);
             ImagesOfRoom image = new ImagesOfRoom();
             image.CreatedBy = uid;
-            image.CreatedDate = DateTime.UtcNow;
+            image.CreatedDate = DateTime.Now;
             image.LastModifiedBy = uid;
             image.RoomId = roomDTO.RoomId;
             image.ImageLink = path;
@@ -236,7 +237,44 @@ namespace HouseFinder_API.Controllers
             roomImageRepository.CreateRoomImages(images);
             return Ok();
         }
-
+        
+        [HttpPut("room/image/{RoomId:int}/{RoomImageId:int}")]
+        public async Task<IActionResult> UpdateRoomImage(IFormFile File, [FromRoute] int RoomImageId, [FromRoute] int RoomId)
+        {
+            string uid = HttpContext.Session.GetString("User");
+            ImagesOfRoomDTO img = roomImageRepository.GetImagesOfRoom(RoomImageId);
+            RoomDTO roomDTO = roomsRepository.GetRoomByRoomId(RoomId);
+            if (img == null)
+            {
+                string dir = $"user/{uid}/House/{roomDTO.HouseId}/{RoomId}";
+                List<ImagesOfRoom> images = new List<ImagesOfRoom>();
+                var path = $"{dir}/{DateTime.Now.ToString("ddMMyyyyHHmmss")}_{File.FileName}";
+                Stream fs = File.OpenReadStream();
+                await storageRepository.UploadFileAsync(path, fs);
+                ImagesOfRoom image = new ImagesOfRoom();
+                image.CreatedBy = uid;
+                image.CreatedDate = DateTime.Now;
+                image.LastModifiedBy = uid;
+                image.LastModifiedDate = DateTime.Now;
+                image.RoomId = roomDTO.RoomId;
+                image.ImageLink = path;
+                images.Add(image);
+                roomImageRepository.CreateRoomImages(images);
+                return Ok();
+            }
+            else
+            {
+                string dir = $"user/{uid}/House/{roomDTO.HouseId}/{RoomId}";
+                var path = $"{dir}/{DateTime.Now.ToString("ddMMyyyyHHmmss")}_{File.FileName}";
+                Stream fs = File.OpenReadStream();
+                await storageRepository.UploadFileAsync(path, fs);
+                img.LastModifiedBy = uid;
+                img.ImageLink = path;
+                roomImageRepository.UpdateRoomImages(img);
+                return Ok();
+            }
+            
+        }
         private bool checkXlsxMimeType(IFormFile file)
         {
             string filename = file.FileName;
@@ -436,7 +474,7 @@ namespace HouseFinder_API.Controllers
             }
             foreach (var file in files)
             {
-                var path = $"{dir}/{DateTime.Now}_{file.FileName}";
+                var path = $"{dir}/{DateTime.Now.ToString("ddMMyyyyHHmmss")}_{file.FileName}";
                 Stream fs = file.OpenReadStream();
                 await storageRepository.UploadFileAsync(path, fs);
                 ImagesOfHouseDTO img = new ImagesOfHouseDTO();
@@ -463,7 +501,7 @@ namespace HouseFinder_API.Controllers
                 return Forbid();
             }
             string dir = $"user/{uid}/House/{HouseId}";
-            var path = $"{dir}/{DateTime.Now}_{file.FileName}";
+            var path = $"{dir}/{DateTime.Now.ToString("ddMMyyyyHHmmss")}_{file.FileName}";
             Stream fs = file.OpenReadStream();
             await storageRepository.UploadFileAsync(path, fs);
             ImagesOfHouseDTO img = new ImagesOfHouseDTO();
