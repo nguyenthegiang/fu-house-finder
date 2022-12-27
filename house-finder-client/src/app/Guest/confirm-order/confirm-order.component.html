@@ -1,24 +1,43 @@
-<div class="modal fade" id="confirmOrderModal" tabindex="-1" aria-labelledby="orderModalLabel" aria-hidden="true">
+<!-- Button trigger modal -->
+<button #modalButton type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#confirmOrderModal"
+  style="display: none;">
+  Launch Modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="confirmOrderModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="confirmOrderModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header text-white">
-        <h5 class="modal-title" id="orderModalLabel">Đăng ký yêu cầu phòng trọ</h5>
+        <h1 class="modal-title fs-5" id="confirmOrderModalLabel">Xác nhận Nguyện vọng đã giải quyết</h1>
+        <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
       </div>
       <div class="modal-body">
+        <div>
+          Vui lòng xác nhận trạng thái nguyện vọng
+          <br>
+          <i> (nếu nguyện vọng đã được đáp ứng, vui lòng bấm vào "Đã giải quyết"):
+          </i>
+        </div>
+        <!-- List of Orders -->
+        <div class="container-fluid" *ngIf="unconfirmedOrders && unconfirmedOrders.length > 0">
+          <div class="row" *ngFor="let order of unconfirmedOrders">
+            <div class="border border-secondary rounded p-2 mt-3">
+              <div class="text-secondary" style="font-size: 10pt;">{{order.orderedDate | date:'short'}}</div>
+              <div>{{order.orderContent}}</div>
+              <div class="mt-2">
+                <!-- Confirm -->
+                <button type="button" (click)="confirmSolvedOrder(order.orderId)" class="btn btn-success btn-sm float-end">Đã giải quyết</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-
+        <button type="button" id="btn" class="btn btn-secondary" data-bs-dismiss="modal">Đóng</button>
+        <!-- <button type="button" id="btn" class="btn btn-primary">Save changes</button> -->
       </div>
     </div>
   </div>
 </div>
-<swal #orderSuccessAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
-  title="Gửi đơn thành công" icon="success">
-</swal>
-<swal #orderErrorAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
-  title="Vui lòng đăng nhập để sử dụng tính năng này!" icon="error">
-</swal>
-<swal #orderRoleErrorAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true"
-  title="Chỉ học sinh có thể sử dụng tính năng này!" icon="error">
-</swal>

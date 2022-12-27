@@ -102,7 +102,6 @@ export class OrderService {
       filterAPIUrl += `&$orderby=OrderedDate ${orderBy}`;
     }
 
-
     return this.http.get<Order[]>(filterAPIUrl);
   }
 
@@ -138,19 +137,28 @@ export class OrderService {
     return this.http.get<number>(this.APIUrl + "/CountTotalOrderSolvedBy", { withCredentials: true });
   }
 
-  countSolvedOrderByStaffInAYear() : Observable<number[]>{
-    return this.http.get<number[]>(this.APIUrl + "/CountSolvedOrderByStaffInAYear", {withCredentials: true});
+  countSolvedOrderByStaffInAYear(): Observable<number[]> {
+    return this.http.get<number[]>(this.APIUrl + "/CountSolvedOrderByStaffInAYear", { withCredentials: true });
   }
 
-  countTotalOrderByMonth() : Observable<number[]>{
-    return this.http.get<number[]>(this.APIUrl + "/CountTotalOrderByMonth", {withCredentials: true});
+  countTotalOrderByMonth(): Observable<number[]> {
+    return this.http.get<number[]>(this.APIUrl + "/CountTotalOrderByMonth", { withCredentials: true });
   }
 
-  countSolvedOrderByMonth() : Observable<number[]>{
-    return this.http.get<number[]>(this.APIUrl + "/CountSolvedOrderByMonth", {withCredentials: true});
+  countSolvedOrderByMonth(): Observable<number[]> {
+    return this.http.get<number[]>(this.APIUrl + "/CountSolvedOrderByMonth", { withCredentials: true });
   }
 
-  countOrderSolvedByStaffInADay(date: string) :Observable<number>{
-    return this.http.get<number>(this.APIUrl + "/CountOrderSolvedByStaffInADay?date=" + date, {withCredentials: true});
+  countOrderSolvedByStaffInADay(date: string): Observable<number> {
+    return this.http.get<number>(this.APIUrl + "/CountOrderSolvedByStaffInADay?date=" + date, { withCredentials: true });
   }
+
+  /**
+   * [Home Page] Confirm Order
+   * Get list of unconfirmed orders of the logged in user
+   */
+  getListOrderNotConfirm(): Observable<any> {
+    return this.http.get<any>(this.APIUrl + "/getListOrderNotConfirm", { withCredentials: true });
+  }
+
 }
