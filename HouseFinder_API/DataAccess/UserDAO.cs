@@ -196,7 +196,7 @@ namespace DataAccess
          * [Login] Register
          * Create new account for Student/Landlord
          */
-        public static ResponseDTO Register(string fid, string gid, string email, string name, int role, string identityCardFrontSideImageLink, string identityCardBackSideImageLink, string phonenumber, string facebookUrl)
+        public static ResponseDTO Register(string fid, string gid, string email, string name, int role, string identityCardFrontSideImageLink, string identityCardBackSideImageLink, string phonenumber, string facebookUrl, int addressId)
         {
             ResponseDTO userDTO;
             try
@@ -238,6 +238,7 @@ namespace DataAccess
                         user.LastModifiedDate = DateTime.UtcNow;
                         int status = role == 2 ? 2 : 1;     //Landlord is disabled when created (Student is not)
                         user.StatusId = status;
+                        user.AddressId = addressId;
 
                         context.Users.Add(user);
                         context.SaveChanges();

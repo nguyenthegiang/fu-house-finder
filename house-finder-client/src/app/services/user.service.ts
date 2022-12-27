@@ -72,7 +72,8 @@ export class UserService {
   registerLandlordGoogle(
     googleIdToken: string,
     phonenumber: string,
-    facebookUrl: string
+    facebookUrl: string,
+    address: string
   ): Observable<any> {
     return this.http.post<any>(
       this.APIUrl + "/register",
@@ -80,6 +81,7 @@ export class UserService {
         "googleIdToken": googleIdToken,
         "phonenumber": phonenumber,
         "facebookUrl": facebookUrl,
+        "address": address,
         "roleName": "landlord"
       },
       { withCredentials: true });
@@ -104,7 +106,8 @@ export class UserService {
     facebookId: string,
     name: string,
     phonenumber: string,
-    facebookUrl: string
+    facebookUrl: string,
+    address: string
   ): Observable<any> {
     return this.http.post<any>(
       this.APIUrl + "/register",
@@ -113,6 +116,7 @@ export class UserService {
         "displayName": name,
         "phonenumber": phonenumber,
         "facebookUrl": facebookUrl,
+        "address": address,
         "roleName": "landlord"
       },
       { withCredentials: true });
