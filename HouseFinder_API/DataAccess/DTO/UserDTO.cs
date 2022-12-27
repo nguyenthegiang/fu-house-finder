@@ -50,7 +50,7 @@ namespace DataAccess.DTO
         public string IdentityCardBackSideImageLink { get; set; }
         public int? RoleId { get; set; }
         public string RoleName { get; set; }
-        public string Address { get; set; }
+        public string Address { get; set; } = "";
     }
 
     //UserDTO used for Login
