@@ -141,11 +141,11 @@ export class AddHouseComponent implements OnInit {
 
     try{
       await this.distanceService.getDistanceMatrix(request).then((response: any) => {
-        distance = response.rows[0].elements[0].distance.value;
+        distance = response.rows[0].elements[0].distance.value / 1000;
       })
     }
     catch (Exception){
-      distance = 0
+      distance = 0;
     }
     this.houseService.createHouse(
       this.houseForm.controls['houseName'].value,
