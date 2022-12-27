@@ -491,7 +491,7 @@ namespace DataAccess
                         throw new Exception();
                     }
                     if (statusId == 2) roomToUpdate.CurrentAmountOfPeople = roomToUpdate.MaxAmountOfPeople;
-                    else if (statusId == 3) roomToUpdate.CurrentAmountOfPeople = 0;
+                    else if (statusId == 1) roomToUpdate.CurrentAmountOfPeople = 0;
                     roomToUpdate.LastModifiedDate = DateTime.Now;
                     roomToUpdate.StatusId = statusId;
                     context.Rooms.Update(roomToUpdate);
