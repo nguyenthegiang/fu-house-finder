@@ -309,21 +309,16 @@ namespace HouseFinder_API.Controllers
             {
                 byte[] buffer = new byte[32];
                 Stream fs = file.OpenReadStream();
-                if (fs.Length > 32)
+                if (fs.Length > 16)
                 {
-                    fs.Read(buffer, 0, 32);
+                    fs.Read(buffer, 0, 16);
                 }
                 else
                 {
                     fs.Read(buffer, 0, (int)fs.Length);
                 }
-                string hexDataLong = BitConverter.ToString(buffer).Substring(0, 23);
-                string hexDataShort = BitConverter.ToString(buffer).Substring(0, 11);
-                if (hexDataLong.Equals("FF-D8-FF-E0-00-10-4A-46")
-                    || hexDataShort.Equals("FF-D8-FF-DB")
-                    || hexDataShort.Equals("49-46-00-01")
-                    || hexDataShort.Equals("FF-D8-FF-EE")
-                    || hexDataShort.Equals("FF-D8-FF-E0"))
+                string hexData = BitConverter.ToString(buffer).Substring(0, 8);
+                if (hexData.Equals("FF-D8-FF"))
                 {
                     return true;
                 }
