@@ -1,6 +1,6 @@
 <!--Header-->
 <app-landlord-header></app-landlord-header>
-<form class="border border-top-0" [formGroup]="roomForm" (submit)="roomForm.valid && addRoom()">
+<form class="border border-top-0" [formGroup]="roomForm" (submit)="addRoom()">
     <div class="container py-5">
       <div class="row">
         <div class="col-lg-6 col-sm-12">
@@ -60,6 +60,14 @@
             <label class="col-sm-3 form-label" for="info">Thông tin</label>
             <div class="col-sm-9">
               <textarea class="form-control" id="info" formControlName="info"></textarea>
+            </div>
+          </div>
+          <div class="mb-3 row">
+            <label class="col-sm-3 form-label" for="room-type">Trạng thái</label>
+            <div class="col-sm-9">
+              <select class="form-select" id="room-type" formControlName="statusId">
+                <option *ngFor="let status of listStatus" value="{{status.statusId}}">{{status.statusName}}</option>
+              </select>
             </div>
           </div>
           <div class="mb-3 row form-check">

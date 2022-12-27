@@ -48,11 +48,11 @@ export class UpdateRoomComponent implements OnInit {
     image1: [, Validators.required],
     image2: [, Validators.required],
     image3: [, Validators.required],
-    statusId: [],
-    houseId: [],
-    deleted: [false],
-    createdDate: [],
-    createdBy: []
+    statusId: [, Validators.required],
+    houseId: [,],
+    deleted: [false,],
+    createdDate: [,],
+    createdBy: [,]
   });
 
   image1: File | any;
