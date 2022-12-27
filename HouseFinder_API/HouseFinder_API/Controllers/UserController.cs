@@ -105,7 +105,7 @@ namespace HouseFinder_API.Controllers
                 //Set data to Session
                 HttpContext.Session.SetString("Token", token);
                 HttpContext.Session.SetString("User", user.UserId);
-                HttpContext.Response.Cookies.Append("X-Access-Token", token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.Strict });
+                HttpContext.Response.Cookies.Append("X-Access-Token", token, new CookieOptions() { HttpOnly = true, SameSite = SameSiteMode.None, Secure = true });
 
                 //Response: Landlord Signup Request pending
                 if (user.StatusId == 2)

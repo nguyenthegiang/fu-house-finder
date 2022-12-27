@@ -46,6 +46,7 @@ namespace Repositories.Repositories
         {
             try
             {
+                AddressDTO address = AddressDAO.CreateAddress(register.Address, "");
                 if (register.RoleName == "student")
                 {
                     register.RoleId = 1;
@@ -63,7 +64,8 @@ namespace Repositories.Repositories
                     register.IdentityCardFrontSideImageLink,
                     register.IdentityCardBackSideImageLink,
                     register.PhoneNumber,
-                    register.FacebookUrl
+                    register.FacebookUrl,
+                    address.AddressId
                 );
                 return user;
             }

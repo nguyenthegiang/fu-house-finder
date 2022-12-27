@@ -181,8 +181,6 @@ namespace HouseFinder_API.Controllers
         [HttpPut]
         public IActionResult UpdateRoom(RoomDTO roomDTO)
         {
-            try
-            {
                 string uid = HttpContext.Session.GetString("User");
                 if (String.IsNullOrEmpty(uid))
                 {
@@ -216,19 +214,13 @@ namespace HouseFinder_API.Controllers
                 updatedRoom.HouseId = (int)roomDTO.HouseId;
                 updatedRoom.Deleted = (bool)roomDTO.Deleted;
                 updatedRoom.CreatedDate = (DateTime)roomDTO.CreatedDate;
-                updatedRoom.LastModifiedDate = roomDTO.LastModifiedDate;
-                updatedRoom.LastModifiedBy = roomDTO.LastModifiedBy;
-                updatedRoom.CreatedBy = roomDTO.CreatedBy;
-
                 updatedRoom.LastModifiedDate = DateTime.Now;
+                updatedRoom.LastModifiedBy = uid;
+                updatedRoom.CreatedBy = roomDTO.CreatedBy;
 
                 roomRepository.UpdateRoom(updatedRoom);
                 return Ok(new { Status = 200 });
-            }
-            catch (Exception)
-            {
-                return Ok(new { Status = 400 });
-            }
+
         }
 
         //DELETE: api/Rooms?roomId=

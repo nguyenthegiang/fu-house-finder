@@ -24,7 +24,7 @@ export interface Room {
     status: RoomStatus;
     roomType: RoomType;
     houseId: number;
-    delete: boolean;
+    deleted: boolean;
     createdDate: Date;
     lastModifiedDate: Date;
     createdBy: string;

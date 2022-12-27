@@ -195,13 +195,11 @@
               </td>
               <td>
                 <!-- CRUD button -->
-                <a class="text-decoration-none text-warning me-3" data-bs-toggle="modal" data-bs-target="#updateModal"
-                  data-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId)" style="cursor: pointer;">
+                <a class="text-decoration-none text-warning me-3" (click)="updateRoom(dataItem.roomId)" style="cursor: pointer;">
                   <i class="fa-solid fa-pen fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Chỉnh sửa">
                   </i>
                 </a>
-                <a class="text-decoration-none text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal"
-                  data-bs-whatever="@getbootstrap" (click)="editRoom(dataItem.roomId)" style="cursor: pointer;">
+                <a class="text-decoration-none text-danger" [swal]="{ title: 'Xác nhận xóa', text: 'Bạn muốn xóa phòng '+dataItem.roomName, showCancelButton: true }" (confirm)="deleteRoom(dataItem.roomId)" style="cursor: pointer;">
                   <i class="fa-solid fa-trash fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Xóa"></i>
                 </a>
               </td>
@@ -212,8 +210,5 @@
     </div>
   </div>
 </div>
-
-<app-update-room [roomId]="updateRoomId"></app-update-room>
-
 <!-- Footer -->
 <!-- <app-footer></app-footer> -->

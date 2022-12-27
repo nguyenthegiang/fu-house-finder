@@ -46,6 +46,13 @@ export class FileService {
     return this.http.post(this.APIUrl + `/room/image/${roomId}`, formData, {withCredentials: true})
   }
 
+  updateRoomImageFile(file: File, roomId: Number, imageId: Number){
+    const formData = new FormData();
+
+    formData.append("file", file, file.name);
+    return this.http.put(this.APIUrl + `/room/image/${roomId}/${imageId}`, formData, {withCredentials: true})
+  }
+
   uploadIDC(frontFile: File, backFile: File){
     const formData = new FormData(); 
 
