@@ -46,13 +46,16 @@ namespace HouseFinder_API
                 cfg.Cookie.IsEssential = true;
                 cfg.Cookie.Name = "HOUSEFINDER";
                 cfg.Cookie.MaxAge = TimeSpan.FromHours(3);
+                cfg.Cookie.SameSite = SameSiteMode.None;
+                cfg.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
             });
-            
+
+            string[] origins = { "https://fu-house-finder.vercel.app" };
             //Add CORS policy
             services.AddCors(options =>
             {
                 options.AddDefaultPolicy(builder =>
-                    builder.SetIsOriginAllowed(_ => true)
+                    builder.WithOrigins(origins)
                     .AllowAnyMethod()
                     .AllowAnyHeader()
                     .AllowCredentials());
