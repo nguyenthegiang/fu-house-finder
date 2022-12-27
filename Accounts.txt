@@ -47,6 +47,7 @@ Landlords:
 	buingochuyen25362@gmail.com
 	nguyenthegiang.775@gmail.com
 	buingochuyen17462@gmail.com
+	nguyenthe.giang.775@gmail.com
 
 Staff:
 	thanhle@gmail.com
@@ -62,15 +63,13 @@ Staff:
 	staff3
 
 Students:
-	###Facebook
-	nguyenthe.giang.775@gmail.com
-	
 	###Google
 	giangnthe153046@fpt.edu.vn
 	sample.mail.prn@gmail.com	
 	tissa0800@gmail.com
 	nguyenthe.giang.7752@gmail.com
 	huyenbnhe1530346@fpt.edu.vn
-
-	
+	penuya01@gmail.com
+	love.penuya@gmail.com
+	penuya123@gmail.com
 	
