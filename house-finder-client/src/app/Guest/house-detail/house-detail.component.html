@@ -107,7 +107,6 @@
       <!-- Landlord information -->
       <div class="landlordInformation border border-secondary rounded p-2">
         <h3 class="text-center">Thông tin chủ trọ</h3>
-        <!-- Other information -->
         <span>
           <b>Họ và tên: </b>
           {{landlordDetail.displayName}}
@@ -303,7 +302,7 @@
         <thead>
           <tr>
             <th scope="col">Tên phòng</th>
-            <th scope="col">Giá phòng</th>
+            <th scope="col">Giá phòng (VNĐ/tháng)</th>
             <th scope="col" id="md">Tiện ích</th>
             <th scope="col" id="md">Loại phòng</th>
             <th scope="col">Diện tích</th>
@@ -316,7 +315,7 @@
             <td><b>{{dataItem.roomName}}</b></td>
 
             <!-- Price -->
-            <td>{{dataItem.pricePerMonth | currency:'VND':'symbol':'3.0'}}</td>
+            <td>{{dataItem.pricePerMonth | number}}</td>
 
             <!-- Utilities -->
             <td id="md">
