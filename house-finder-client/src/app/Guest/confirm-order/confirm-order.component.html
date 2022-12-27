@@ -27,7 +27,8 @@
               <div class="text-secondary" style="font-size: 10pt;">{{order.orderedDate | date:'short'}}</div>
               <div>{{order.orderContent}}</div>
               <div class="mt-2">
-                <button type="button" class="btn btn-success btn-sm float-end">Đã giải quyết</button>
+                <!-- Confirm -->
+                <button type="button" (click)="confirmSolvedOrder(order.orderId)" class="btn btn-success btn-sm float-end">Đã giải quyết</button>
               </div>
             </div>
           </div>
