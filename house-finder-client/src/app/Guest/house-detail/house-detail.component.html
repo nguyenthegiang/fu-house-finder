@@ -123,9 +123,9 @@
           <span class="phoneOff" *ngIf="phoneNumDisplay == true">{{landlordDetail!.phoneNumber}}</span>
         </span>
         <br>
-        <span>
+        <span *ngIf="landlordDetail.address">
           <b>Địa chỉ: </b>
-          {{landlordDetail!.address.addresses}}
+          {{landlordDetail.address.addresses}}
         </span>
       </div>
 

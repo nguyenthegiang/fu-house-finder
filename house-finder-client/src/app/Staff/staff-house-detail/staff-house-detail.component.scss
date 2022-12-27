@@ -36,3 +36,10 @@
   font-size: 15pt;
 }
 
+.houseImage {
+  object-fit: none; /* Do not scale the image */
+  object-position: center; /* Center the image within the element */
+  height: 300px;
+  width: 500px;
+}
+
