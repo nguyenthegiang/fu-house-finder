@@ -1,14 +1,17 @@
 Landlords:
 
-	###Login with Google:
+###Login with Google:
 
-	lehoangchiSeller@gmail.com
+	lehoangchiSeller@gmail.com	(fake data - house)
 	lehoangchiSeller1@
 
 	nguyenminhhanhSeller@gmail.com (Ký túc Xanh)
 	nguyenminhhanhSeller1@
+	
+	hhai13754@gmail.com (Trọ Nhật Anh)
+	buihoanghai
 
-	###Login with Facebook:
+###Login with Facebook:
 
 	wznaqurlng_1667917017@tfbnw.net (Skyhome)
 	khoanguyen123@
@@ -34,8 +37,16 @@ Landlords:
 	anvqlvlana_1667917017@tfbnw.net	(KTX T-Linh)
 	xuannghiem123@
 
-	hbqrktewea_1667917017@tfbnw.net
+	hbqrktewea_1667917017@tfbnw.net	(fake data - many house)
 	hoangnam123@
+
+	thu_mmfxvbd_trinh@tfbnw.net	(fake data - many house)
+	thutrinh123@
+	
+###Sign up Request:
+	buingochuyen25362@gmail.com
+	nguyenthegiang.775@gmail.com
+	buingochuyen17462@gmail.com
 
 Staff:
 	thanhle@gmail.com
@@ -55,11 +66,11 @@ Students:
 	nguyenthe.giang.775@gmail.com
 	
 	###Google
-	nguyenthe.giang.775@gmail.com
 	giangnthe153046@fpt.edu.vn
 	sample.mail.prn@gmail.com	
 	tissa0800@gmail.com
 	nguyenthe.giang.7752@gmail.com
+	huyenbnhe1530346@fpt.edu.vn
 
 	
 	

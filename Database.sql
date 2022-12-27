@@ -1105,5 +1105,52 @@ INSERT INTO [dbo].[OrderStatuses] VALUES (N'Solved', GETDATE());		--đã giải
 
 -------------------------------------------------------------------------------------------------------------------------------------------
 --Orders
-
 --StudentId, StudentName, PhoneNumber, Email, OrderContent, Solved, OrderedDate, SolvedDate
+GO
+SET IDENTITY_INSERT [dbo].[Order] ON 
+INSERT [dbo].[Order] ([OrderId], [StudentId], [StudentName], [PhoneNumber], [Email], [OrderContent], [StatusId], [OrderedDate], [SolvedDate], [SolvedBy]) VALUES (1, N'HE000000', N'Bùi Quốc Khang', N'0965201891', N'khangqv7@gmail.com', N'Em cần tìm trọ khép kín ở 2 người giá <2tr, cách trường FPT <3km, chuyển vào ở cuối tháng 12. 
+Yêu cầu: Giờ giấc thoải mái, có máy giặt thì càng tốt ạ.', 1, CAST(N'2022-12-27T16:58:38.443' AS DateTime), NULL, NULL)
+INSERT [dbo].[Order] ([OrderId], [StudentId], [StudentName], [PhoneNumber], [Email], [OrderContent], [StatusId], [OrderedDate], [SolvedDate], [SolvedBy]) VALUES (2, N'HE000000', N'Nguyễn Hà My', N'0345203534', N'mynh88@gmail.com', N'Em cần tìm phòng trọ 2 người, không chung chủ, nhà vệ sinh khép kín.
+Kinh tế <= 2tr, cách ĐH FPT 3km ạ', 1, CAST(N'2022-12-27T17:00:14.720' AS DateTime), NULL, NULL)
+INSERT [dbo].[Order] ([OrderId], [StudentId], [StudentName], [PhoneNumber], [Email], [OrderContent], [StatusId], [OrderedDate], [SolvedDate], [SolvedBy]) VALUES (3, N'HE000000', N'Phạm Yến Vy', N'0375968761', N'yenvy99@gmail.com', N'Em cần tìm trọ cho 1 người, tài chính <1tr5. Thoải mái, không chung chủ, gần trường ạ', 1, CAST(N'2022-12-27T17:04:24.150' AS DateTime), NULL, NULL)
+INSERT [dbo].[Order] ([OrderId], [StudentId], [StudentName], [PhoneNumber], [Email], [OrderContent], [StatusId], [OrderedDate], [SolvedDate], [SolvedBy]) VALUES (4, N'HE000000', N'Lê Đức Anh', N'0979876552', N'ducanhle56@gmail.com', N'Em cần 2 phòng trọ gần cây xăng 39, không chung chủ, giờ giấc thoải mái, tài chính <2tr. Tháng 1 chuyển vào luôn ạ', 1, CAST(N'2022-12-27T17:05:13.617' AS DateTime), NULL, NULL)
+INSERT [dbo].[Order] ([OrderId], [StudentId], [StudentName], [PhoneNumber], [Email], [OrderContent], [StatusId], [OrderedDate], [SolvedDate], [SolvedBy]) VALUES (5, N'HE000000', N'Đỗ Thị Dung', N'0912506705', N'dungdt8@gmail.com', N'Cần tìm phòng trọ gần đại học FPT:
+- có điều hòa, nóng lạnh.
+- <=1tr8
+- em ở mình mình cũng ko cần rô gj quá ạ
+- thoáng vs sạch sẽ, an ninh tốt là đc ạ', 1, CAST(N'2022-12-27T17:05:47.600' AS DateTime), NULL, NULL)
+INSERT [dbo].[Order] ([OrderId], [StudentId], [StudentName], [PhoneNumber], [Email], [OrderContent], [StatusId], [OrderedDate], [SolvedDate], [SolvedBy]) VALUES (6, N'HE000000', N'Phạm Đức Huy', N'0394023788', N'huypham17@gmail.com', N'Kì OJT kết thúc , em muốn tìm phòng giá 2tr đổ xuống cho 2 người . Ưu tiên gần khu vực cây xăng 39 hoặc cổng phụ.
+Có cho nuôi pet.', 1, CAST(N'2022-12-27T17:06:24.477' AS DateTime), NULL, NULL)
+INSERT [dbo].[Order] ([OrderId], [StudentId], [StudentName], [PhoneNumber], [Email], [OrderContent], [StatusId], [OrderedDate], [SolvedDate], [SolvedBy]) VALUES (7, N'HE000001', N'Đỗ Quốc Hùng', N'0988838976', N'hungqd8@gmail.com', N'Mình tìm phòng trọ ở 1ng thôn 3 gần mặt đường ql <2tr.
+Y/C thoáng mát khép kín không chung chủ, điều hoà, nóng lạnh, mạng lan.
+Đầu tháng 1 chuyển vào ở', 1, CAST(N'2022-12-27T17:07:28.390' AS DateTime), NULL, NULL)
+INSERT [dbo].[Order] ([OrderId], [StudentId], [StudentName], [PhoneNumber], [Email], [OrderContent], [StatusId], [OrderedDate], [SolvedDate], [SolvedBy]) VALUES (8, N'HE000002', N'Trần Thùy Linh', N'0977873289', N'linhtt7@gmail.com', N'Em cần tìm phòng trọ dưới 2tr5 sạch sẽ không chung chủ gần cây xăng 39.', 1, CAST(N'2022-12-27T17:07:58.257' AS DateTime), NULL, NULL)
+INSERT [dbo].[Order] ([OrderId], [StudentId], [StudentName], [PhoneNumber], [Email], [OrderContent], [StatusId], [OrderedDate], [SolvedDate], [SolvedBy]) VALUES (9, N'HE000002', N'Trần Thị Hà Anh', N'0976926388', N'haanhtran@gmail.com', N'Em cần tìm phòng trọ 1 người ở, không chung chủ, nhà vệ sinh khép kín, có bếp nấu ăn.
+Kinh tế <2tr, cách đh fpt <5km', 1, CAST(N'2022-12-27T17:08:36.403' AS DateTime), NULL, NULL)
+INSERT [dbo].[Order] ([OrderId], [StudentId], [StudentName], [PhoneNumber], [Email], [OrderContent], [StatusId], [OrderedDate], [SolvedDate], [SolvedBy]) VALUES (10, N'HE000003', N'Nguyễn Bảo Ngọc', N'0911228831', N'ngocbn4@gmail.com', N'Tìm phòng trọ đơn cho nữ
+Giá<1.5tr
+Cách FPT<1km', 1, CAST(N'2022-12-27T17:09:11.310' AS DateTime), NULL, NULL)
+INSERT [dbo].[Order] ([OrderId], [StudentId], [StudentName], [PhoneNumber], [Email], [OrderContent], [StatusId], [OrderedDate], [SolvedDate], [SolvedBy]) VALUES (11, N'HE000004', N'Nguyễn Duy Anh', N'0973416924', N'anhdn3@gmail.com', N'Em cần tìm phòng trọ cho 1 người, không chung chủ và nhà vệ sinh khép kín. Kinh tế <2tr, cách ĐH FPT <3km', 1, CAST(N'2022-12-27T17:09:48.727' AS DateTime), NULL, NULL)
+INSERT [dbo].[Order] ([OrderId], [StudentId], [StudentName], [PhoneNumber], [Email], [OrderContent], [StatusId], [OrderedDate], [SolvedDate], [SolvedBy]) VALUES (12, N'HE000005', N'Nguyễn Minh Đức', N'0399361519', N'ducminhng4@gmail.com', N'Em cần tìm phòng trọ giá 1tr5 đổ lại. Em ở 1 mình nên không cần phòng to ,an ninh tốt ạ, có đồ thì càng tốt ạ. Ai có phòng cho em sđt liên lạc mai em tới xem phòng luôn ạ.', 1, CAST(N'2022-12-27T17:10:25.380' AS DateTime), NULL, NULL)
+INSERT [dbo].[Order] ([OrderId], [StudentId], [StudentName], [PhoneNumber], [Email], [OrderContent], [StatusId], [OrderedDate], [SolvedDate], [SolvedBy]) VALUES (13, N'HE000006', N'Nguyễn Kim Phi Long', N'0984938796', N'longphi@gmail.com', N'Mình cần tìm phòng cho 1 người ở gần đại học FPT, đầu tháng 1 chuyển vào ạ.', 1, CAST(N'2022-12-27T17:11:29.577' AS DateTime), NULL, NULL)
+INSERT [dbo].[Order] ([OrderId], [StudentId], [StudentName], [PhoneNumber], [Email], [OrderContent], [StatusId], [OrderedDate], [SolvedDate], [SolvedBy]) VALUES (14, N'HE000006', N'Lê Minh Ánh', N'0397344249', N'anhminh9i@gmail.com', N'Em cần tìm phòng trọ 1 người, không chung chủ, nhà vệ sinh khép kín. Kinh tế <2tr, cách ĐH FPT 3km, trọ ở khu vực Tân Xã ạ!', 1, CAST(N'2022-12-27T17:11:57.310' AS DateTime), NULL, NULL)
+INSERT [dbo].[Order] ([OrderId], [StudentId], [StudentName], [PhoneNumber], [Email], [OrderContent], [StatusId], [OrderedDate], [SolvedDate], [SolvedBy]) VALUES (15, N'HE000006', N'Phạm Minh Hiệp', N'0888888526', N'hiep888@gmail.com', N'Mình cần tìm phòng trọ gần khu Đại học Quốc gia cơ sở Hoà Lạc bán kính 5km, ko yêu cầu điều hoà và nóng lạnh, không yêu cầu vệ sinh khép kín, chỉ cần có 1 bàn để học và 1 phản để ngủ, tài chính dưới 1tr, mình ở một mình. Bạn nào biết thì giới thiệu  cho mình nhé, mình cảm ơn.', 1, CAST(N'2022-12-27T17:12:31.210' AS DateTime), NULL, NULL)
+INSERT [dbo].[Order] ([OrderId], [StudentId], [StudentName], [PhoneNumber], [Email], [OrderContent], [StatusId], [OrderedDate], [SolvedDate], [SolvedBy]) VALUES (16, N'HE000006', N'Thùy Linh', N'0966965088', N'linht7@gmail.com', N'Em cần tìm phòng chung cư mini 1 người ở, ở Tân Xã hoặc Thạch Hoà đều được ạ. Tài chính <3tr, được thì cuối tháng 12 chuyển vào luôn ạ.', 1, CAST(N'2022-12-27T17:13:05.513' AS DateTime), NULL, NULL)
+INSERT [dbo].[Order] ([OrderId], [StudentId], [StudentName], [PhoneNumber], [Email], [OrderContent], [StatusId], [OrderedDate], [SolvedDate], [SolvedBy]) VALUES (17, N'HE000002', N'Đức Tín', N'0925885688', N'tinduc81@gmail.com', N'Tìm phòng trọ đầu tháng 11 vào ở.
+Phòng trọ từ 1,5tr - 2tr hoặc thấp hơn.
+Phòng đầy đủ công năng.
+Cách trường khoảng 3km
+Ở 1 mình.
+Trọ mới xây càng tốt ạ.', 1, CAST(N'2022-12-27T17:14:22.807' AS DateTime), NULL, NULL)
+INSERT [dbo].[Order] ([OrderId], [StudentId], [StudentName], [PhoneNumber], [Email], [OrderContent], [StatusId], [OrderedDate], [SolvedDate], [SolvedBy]) VALUES (18, N'HE000002', N'Vũ Minh Long', N'0973949733', N'longvm@gmail.com', N'Em cần tìm phòng trọ Thạch Hoà 3tr đổ lại cho 4 người ở chung k giới hạn thời gian. K chung chủ. Có thể thương lượng giá cả phòng ạ.', 1, CAST(N'2022-12-27T17:14:49.957' AS DateTime), NULL, NULL)
+INSERT [dbo].[Order] ([OrderId], [StudentId], [StudentName], [PhoneNumber], [Email], [OrderContent], [StatusId], [OrderedDate], [SolvedDate], [SolvedBy]) VALUES (19, N'HE000002', N'Lê Vân Anh', N'0379650999', N'vananhle@gmail.com', N'Mình cần tìm 1 phòng rộng 22-25m2, tài chính <2tr4 ( tháng 1 dọn vào ở ) 
+YÊU CẦU: có điều hoà, nóng lạnh, bàn bếp,...
+An ninh tốt, cách FPT < 2km', 1, CAST(N'2022-12-27T17:15:13.963' AS DateTime), NULL, NULL)
+INSERT [dbo].[Order] ([OrderId], [StudentId], [StudentName], [PhoneNumber], [Email], [OrderContent], [StatusId], [OrderedDate], [SolvedDate], [SolvedBy]) VALUES (20, N'HE000002', N'Nguyễn Nhật Linh', N'0834345136', N'linhnhatmm@gmail.com', N'Em cần tìm phòng đơn cho nữ, tiêu chuẩn như sau ạ:
+- Giá: 2tr/tháng đổ xuống
+- Cách trường FPT từ 3km đổ xuống
+- Có chỗ để xe, giặt giũ, nấu nướng
+- Bảo mật tốt, giờ về thoải mái (cái này đề phòng thôi chứ em ít ra ngoài ạ)
+Em cần chuyển vào từ 9/9, và 3/9 em sẽ đi xem phòng ạ.', 1, CAST(N'2022-12-27T17:15:45.923' AS DateTime), NULL, NULL)
+SET IDENTITY_INSERT [dbo].[Order] OFF
+GO
