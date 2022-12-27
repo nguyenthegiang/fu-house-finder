@@ -305,6 +305,8 @@ namespace DataAccess
                         .ProjectTo<HouseDTO>(config)
                         .Where(p => p.HouseId == houseId)
                         .FirstOrDefault();
+
+                    //images
                     houseDTO.ImagesOfHouses = context.ImagesOfHouses
                         .Where(img => img.HouseId == houseId && !img.Deleted)
                         .OrderBy(img => img.ImageId).ProjectTo<ImagesOfHouseDTO>(config).ToList();

@@ -38,6 +38,17 @@ namespace HouseFinder_API.Controllers
                     //user not logged in => throw error for alert
                     return Ok(new { Status = 403 });
                 }
+
+                //Check if this student has already rate (if yes -> not allow)
+                List<RateDTO> rateDTOs = rateRepository.GetListRatesByHouseId(houseId);
+                foreach (RateDTO rateDTO in rateDTOs)
+                {
+                    if (rateDTO.StudentId == userId)
+                    {
+                        return Ok(new { Status = 400 });
+                    }
+                }
+
                 rate.StudentId = userId;
 
                 //Default information
