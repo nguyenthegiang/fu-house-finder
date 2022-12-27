@@ -1,5 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatProgressBar } from '@angular/material/progress-bar';
+import { ActivatedRoute, Router } from '@angular/router';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { ImagesOfRoomUploadData, ImagesOfRoomUploadFileData } from 'src/app/models/imagesOfRoom';
 import { FileService } from 'src/app/services/file.service';
@@ -24,7 +25,9 @@ export class MultipleComponent implements OnInit {
   // @ViewChild('dataAndImageNotFound') private dataAndImageNotFound: SwalComponent | undefined;
   @ViewChild('uploadSuccess') private uploadSuccess: SwalComponent | undefined;
 
-  constructor(private fileService: FileService) { }
+  constructor(private fileService: FileService,
+    private router: Router,
+    private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
   }
@@ -190,6 +193,7 @@ export class MultipleComponent implements OnInit {
 
   // Back to previous Page (House detail), used when upload successfully
   backToPreviousPage() {
-    history.back();
+    var houseId = Number(this.route.snapshot.queryParamMap.get('houseId'));
+    this.router.navigate(['/Landlord/landlord-house-detail/' + houseId]);
   }
 }
