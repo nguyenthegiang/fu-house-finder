@@ -154,8 +154,15 @@
                     style="cursor: pointer;" data-bs-toggle="tooltip" data-bs-placement="top" title="Chỉnh sửa">
                     <i class="fa-solid fa-pen fs-4"></i>
                   </a>
+                  <!--
                   <a class="text-decoration-none text-danger" (click)="deleteHouse(dataItem.houseId)"
                     data-bs-toggle="modal" data-bs-target="#deleteModal" data-bs-whatever="@getbootstrap"
+                    style="cursor: pointer;">
+                    <i class="fa-solid fa-trash fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Xóa"></i>
+                  </a>
+                  -->
+                  <a class="text-decoration-none text-danger" (confirm)="deleteHouse(dataItem.houseId)"
+                    [swal]="{ title: 'Xác nhận xóa', text: 'Bạn muốn xóa nhà trọ '+dataItem.houseName, showCancelButton: true }"
                     style="cursor: pointer;">
                     <i class="fa-solid fa-trash fs-4" data-bs-toggle="tooltip" data-bs-placement="top" title="Xóa"></i>
                   </a>
