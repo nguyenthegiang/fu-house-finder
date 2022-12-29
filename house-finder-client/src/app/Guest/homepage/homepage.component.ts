@@ -360,15 +360,14 @@ export class HomepageComponent implements OnInit, AfterViewInit {
 
   //[Filter] Filter by Distance
   onDistanceSelected(minDistance: string, maxDistance: string) {
+    // (special case) empty input -> not handle
+    if (minDistance.trim() == "" || maxDistance.trim() == "") {
+      this.inputValueInvalidAlert?.fire();
+    }
+
     // convert string to number
     var numMinDistance: number = +minDistance;
     var numMaxDistance: number = +maxDistance;
-
-    // (special case) 0 or empty input -> not handle
-    if (numMinDistance == 0 || numMaxDistance == 0) {
-      this.inputValueInvalidAlert?.fire();
-      return;
-    }
 
     /* Only allow filtering by Distance after choosing Campus */
     if (!this.selectedCampusId) {
