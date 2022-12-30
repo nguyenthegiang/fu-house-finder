@@ -1,12 +1,17 @@
-Login with Google:
+Landlords:
 
-	lehoangchiSeller@gmail.com
+###Login with Google:
+
+	lehoangchiSeller@gmail.com	(fake data - house)
 	lehoangchiSeller1@
 
 	nguyenminhhanhSeller@gmail.com (Ký túc Xanh)
 	nguyenminhhanhSeller1@
+	
+	hhai13754@gmail.com (Trọ Nhật Anh)
+	buihoanghai
 
-Login with Facebook:
+###Login with Facebook:
 
 	wznaqurlng_1667917017@tfbnw.net (Skyhome)
 	khoanguyen123@
@@ -23,14 +28,48 @@ Login with Facebook:
 	omlnlpeuik_1671888968@tfbnw.net	(Nhà trọ PRO)
 	thanhhoa123@
 
-	open_ejtyynj_user@tfbnw.net
-	tamle123@
+	open_ejtyynj_user@tfbnw.net	(Trọ Hà Minh)
+	haminh123@
 
-	amgbmyltrx_1667917017@tfbnw.net
-	tamnguyen123@
+	amgbmyltrx_1667917017@tfbnw.net	(Trọ Phương Quỳnh)
+	phuongquynh123@
 
-	anvqlvlana_1667917017@tfbnw.net
-	linhle123@
+	anvqlvlana_1667917017@tfbnw.net	(KTX T-Linh)
+	xuannghiem123@
 
-	hbqrktewea_1667917017@tfbnw.net
+	hbqrktewea_1667917017@tfbnw.net	(fake data - many house)
 	hoangnam123@
+
+	thu_mmfxvbd_trinh@tfbnw.net	(fake data - many house)
+	thutrinh123@
+	
+###Sign up Request:
+	buingochuyen25362@gmail.com
+	nguyenthegiang.775@gmail.com
+	buingochuyen17462@gmail.com
+	nguyenthe.giang.775@gmail.com
+
+Staff:
+	thanhle@gmail.com
+	thanhle
+
+	staff1@gmail.com
+	staff1
+
+	staff2@gmail.com
+	staff2
+
+	staff3@gmail.com
+	staff3
+
+Students:
+	###Google
+	giangnthe153046@fpt.edu.vn
+	sample.mail.prn@gmail.com	
+	tissa0800@gmail.com
+	nguyenthe.giang.7752@gmail.com
+	huyenbnhe1530346@fpt.edu.vn
+	penuya01@gmail.com
+	love.penuya@gmail.com
+	penuya123@gmail.com
+	
