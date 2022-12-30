@@ -1,5 +1,6 @@
 {
   "GlobalConfiguration": {
+    
   },
   "Routes": [
     {
@@ -18,7 +19,7 @@
         "Period": "1s",
         "PeriodTimespan": 1,
         "Limit": 5
-      }
+      },
     },
     {
       "DownstreamPathTemplate": "/api/user/{UserId}",
@@ -507,7 +508,7 @@
       "UpstreamHttpMethod": [ "Get", "Put", "Delete", "Post" ]
     },
     {
-      "DownstreamPathTemplate": "/api/house/availableHouses",
+      "DownstreamPathTemplate": "/api/house/availableHouses?$skip={skip}&$top={top}",
       "DownstreamScheme": "https",
       "DownstreamHostAndPorts": [
         {
@@ -515,13 +516,13 @@
           "Port": 8001
         }
       ],
-      "UpstreamPathTemplate": "/api/house/availableHouses",
+      "UpstreamPathTemplate": "/api/house/availableHouses?$skip={skip}&$top={top}",
       "UpstreamHttpMethod": [ "Get" ],
       "RateLimitOptions": {
         "EnableRateLimiting": true,
         "Period": "1s",
         "PeriodTimespan": 1,
-        "Limit": 5
+        "Limit": 10
       }
     },
     {
@@ -607,11 +608,8 @@
       ],
       "UpstreamPathTemplate": "/api/house/Count{everything}",
       "UpstreamHttpMethod": [ "Get" ],
-      "RateLimitOptions": {
-        "EnableRateLimiting": true,
-        "Period": "1s",
-        "PeriodTimespan": 1,
-        "Limit": 50
+      "QoSOptions": {
+        "TimeoutValue": 90000
       }
     },
     {

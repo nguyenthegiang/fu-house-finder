@@ -440,7 +440,18 @@ namespace DataAccess
          */
         public static int CountAvailableHouse()
         {
-            return GetAvailableHouses().Count();
+            try
+            {
+                using (var context = new FUHouseFinderContext())
+                {
+                    return context.Rooms.Where(r => r.StatusId == 1 && r.House.Landlord.StatusId == 1 && !r.House.Deleted)
+                        .Select(r => r.HouseId).Distinct().Count();
+                }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
         }
 
         //[Staff/list-report] Get list of reported houses
