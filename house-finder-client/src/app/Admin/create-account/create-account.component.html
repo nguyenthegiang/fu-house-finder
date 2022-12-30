@@ -37,6 +37,8 @@
 </div>
 
 <!-- <app-footer></app-footer> -->
-<swal #successAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true" title="Thêm thành công"
-  icon="success">
+
+<!-- Alerts -->
+<swal #successAlert [toast]="true" position="top-end" [timer]="3000" [timerProgressBar]="true" title="Thêm nhân viên thành công"
+  icon="success" (confirm)="backToDashboard()" (didClose)="backToDashboard()">
 </swal>
