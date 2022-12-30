@@ -401,3 +401,6 @@ Thumbs.db
 # mkcert files
 **/localhost.pem
 **/localhost-key.pem
+
+# Test data files
+**/Accounts.txt
