@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
@@ -29,6 +30,7 @@ export class CreateAccountComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private roleService: RoleService,
+    private router: Router,
   ) {
     roleService.getStaffRoles().subscribe(
       resp => {
@@ -88,6 +90,10 @@ export class CreateAccountComponent implements OnInit {
       password: this.staffForm.controls['password'].value
     }
     this.userService.createStaff(data).subscribe(resp => { this.successAlert?.fire() }, error => { });
+  }
+
+  backToDashboard() {
+    this.router.navigate(['/Admin/list-staff']);
   }
 
 }
