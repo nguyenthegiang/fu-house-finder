@@ -32,11 +32,11 @@
         </div>
         <div class="carousel-inner rounded">
           <div class="carousel-item active" *ngIf="houseDetail.imagesOfHouses">
-            <img id="img" src="{{houseDetail.imagesOfHouses[0].imageLink}}" class="w-100" height="450" alt="...">
+            <img id="img" src="{{houseDetail.imagesOfHouses[0].imageLink}}" class="w-100 houseImage" height="450" alt="...">
           </div>
           <div *ngFor="let image of houseDetail.imagesOfHouses; let i=index;">
             <div class="carousel-item" *ngIf="i >= 1">
-              <img id="img" src="{{image.imageLink}}" class="w-100" height="450" alt="...">
+              <img id="img" src="{{image.imageLink}}" class="w-100 houseImage" height="450" alt="...">
             </div>
           </div>
         </div>
