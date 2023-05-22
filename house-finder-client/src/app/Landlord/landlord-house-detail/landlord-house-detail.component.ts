@@ -28,6 +28,9 @@ export class LandlordHouseDetailComponent implements OnInit {
   //[Update] roomId to pass into <update-room>
   updateRoomId: number = 0;
 
+  //Detail information of this House - to get HouseName to display
+  houseDetail: House | undefined;
+
   constructor(
     private route: ActivatedRoute,
     private roomService: RoomService,
@@ -72,6 +75,11 @@ export class LandlordHouseDetailComponent implements OnInit {
 
     this.houseService.getMoneyForNotRentedRooms(id).subscribe(data => {
       this.moneyForNotRentedRooms = data;
+    });
+
+    //Get houseDetail to take HouseName
+    this.houseService.getHouseByHouseId(id).subscribe(resp => {
+      this.houseDetail = resp;
     });
   }
 
